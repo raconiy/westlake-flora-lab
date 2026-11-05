@@ -1,5 +1,5 @@
 {
-  "version": "0.5.6",
+  "version": "0.5.7",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -46,7 +46,7 @@
     "roots": "keyed axis identities and fixed material-node prefixes; proximal seed-to-collar extension",
     "foliation": "persistent fine-shoot material sites; lower-stem foliage uses an explicit renewal prior separate from retained wooden spurs",
     "ophiopogon": "fixed ramet and leaf insertion material coordinates, extending rhizome precursor before a new rooted daughter ramet",
-    "localSoilWindow": "visual window only; available depth still governs all root growth and relative-water computations",
+    "localSoilWindow": "All seven species and all ages: display footprint/depth from actual finished root and collar meshes, with margin; available depth/water/root geometry unchanged; strata illustrative, not bedrock.",
     "acer": "6 finite first-leaf pairs with declared senescence;72 later main-axis pairs at fixed material nodes reached by parent before expansion. No wooden axis retirement without an event. Adult leader leaves intentionally revised; not a preservation claim for all prior leaf geometry."
   },
   "collaborationEvidence": "collaboration-evidence.json",
@@ -61,7 +61,7 @@
     "herbRoots": "fixed Ophiopogon clone nodes and material-prefix roots; actual surface-node root starts and basal bridges",
     "ginkgo": "complete-catalogue spread of connected short-shoot modules, fixed site identities and original leaf dimensions; remaining crown gaps are not field-calibrated",
     "framing": "cached occupied geometry with bounded compound joint/blade displacement; root close-up hides soil and frames actual roots; manual camera ownership retained",
-    "soil": "shallow local herb root-zone window contains all drawn roots, independently labelled from available soil depth; reduced repetitive macrotexture contrast; illustrative strata, no campus soil measurement",
+    "soil": "Actual-root-based local window includes woody seedlings and adult trees; separately labelled clamped available soil depth; Acer.5y from1.30x2.50m to.1676x.1200m window. Root geometry, water/contact and material-node source unchanged.",
     "herbReproduction": "Iris/Oxalis stalk emergence, petal decline, drying and gradual collapse annual proxy; living vegetative axes retained; no reproductive mass, capsules or dispersal solver",
     "shortPortrait": "expanded viewer captions and root-zone depth labels avoid the central model at <=700px width/height",
     "woodySurfaces": {
@@ -90,22 +90,40 @@
   },
   "accountUsageEvidence": "account-usage.json",
   "validation": {
-    "status": "lead_frozen_source_passed; CI also required on publication",
-    "tests": 317,
-    "passed": 316,
-    "failed": 0,
-    "skipped": 1,
-    "scope": "frontend lib, local infrastructure and shared community backend",
-    "sourceFiles": 122,
-    "sourceChangesDuringTests": 0,
-    "carriedForwardMemoryAudit": {
-      "version": "0.5.5",
-      "passed": 1,
-      "ages": [
-        18,
-        45
-      ],
-      "scope": "Ginkgo indexed geometry source unchanged; not rerun as a new performance claim"
+    "status": "lead-targeted-source-pass; GitHub full tests and build gate deployment",
+    "targeted": {
+      "combinedRootScenePassed": 56,
+      "pinnedPortableRootControlPassed": 6,
+      "acerNegativeRegressionPassed": 9
+    },
+    "independentRootWindowReview": {
+      "passed": 18,
+      "additionalIndependentProbes": 11
+    },
+    "lastPublishedVersion": "0.5.6",
+    "lastPublishedCI": {
+      "passed": 317,
+      "skipped": 1,
+      "run": 42121689576
+    },
+    "previousFrozenSourceGate": {
+      "status": "lead_frozen_source_passed; CI also required on publication",
+      "tests": 317,
+      "passed": 316,
+      "failed": 0,
+      "skipped": 1,
+      "scope": "frontend lib, local infrastructure and shared community backend",
+      "sourceFiles": 122,
+      "sourceChangesDuringTests": 0,
+      "carriedForwardMemoryAudit": {
+        "version": "0.5.5",
+        "passed": 1,
+        "ages": [
+          18,
+          45
+        ],
+        "scope": "Ginkgo indexed geometry source unchanged; not rerun as a new performance claim"
+      }
     }
   }
 }

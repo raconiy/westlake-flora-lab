@@ -1,0 +1,96 @@
+{
+  "observedAt": "2026-11-05T22:35:45.395Z",
+  "since": "2026-11-05T22:28:00.000Z",
+  "accounts": [
+    {
+      "slot": 1,
+      "successfulRequests": 17,
+      "returnedOutputTokens": 31166,
+      "models": [
+        {
+          "requestedUpstream": "gpt-6.1-sol",
+          "reported": "gpt-6.1-sol",
+          "effort": "high",
+          "consistency": "match"
+        }
+      ]
+    },
+    {
+      "slot": 2,
+      "successfulRequests": 16,
+      "returnedOutputTokens": 13710,
+      "models": [
+        {
+          "requestedUpstream": "gpt-6.1-sol",
+          "reported": "gpt-6.1-sol",
+          "effort": "high",
+          "consistency": "match"
+        }
+      ]
+    },
+    {
+      "slot": 3,
+      "successfulRequests": 9,
+      "returnedOutputTokens": 9158,
+      "models": [
+        {
+          "requestedUpstream": "gpt-6.1-sol",
+          "reported": "gpt-6.1-sol",
+          "effort": "high",
+          "consistency": "match"
+        }
+      ]
+    }
+  ],
+  "allThreeReturnedSuccessfulRequests": true,
+  "gatewayRequestProcessingOverlap": {
+    "overlapMs": 34269,
+    "start": "2026-11-05T22:33:37.703Z",
+    "end": "2026-11-05T22:34:11.972Z",
+    "requests": [
+      {
+        "slot": 1,
+        "requestId": "e8678989-7fba-4280-b8a6-d1737042e5e3",
+        "http": 200,
+        "outputTokens": 1926,
+        "reportedModel": "gpt-6.1-sol",
+        "effort": "high",
+        "start": "2026-11-05T22:33:37.703Z",
+        "end": "2026-11-05T22:34:21.828Z"
+      },
+      {
+        "slot": 2,
+        "requestId": "184432b8-7ec8-40ef-a072-dc712c747504",
+        "http": 200,
+        "outputTokens": 1896,
+        "reportedModel": "gpt-6.1-sol",
+        "effort": "high",
+        "start": "2026-11-05T22:33:31.668Z",
+        "end": "2026-11-05T22:34:11.972Z"
+      },
+      {
+        "slot": 3,
+        "requestId": "e6d59888-6201-4d30-95f7-7f88881bf93f",
+        "http": 200,
+        "outputTokens": 5129,
+        "reportedModel": "gpt-6.1-sol",
+        "effort": "high",
+        "start": "2026-11-05T22:33:24.253Z",
+        "end": "2026-11-05T22:35:12.170Z"
+      }
+    ]
+  },
+  "overlapScope": "Completion minus recorded gateway duration is request-processing interval, not a newly instrumented upstream-forwarding/GPU interval. Separate older forwarding proof remains intact.",
+  "identityReference": {
+    "file": "outputs/三账号身份一致性核查.json",
+    "verifiedAt": "2026-11-05T17:10:47.025Z",
+    "distinctTokenSubjects": 3,
+    "distinctTokenAccountIds": 3,
+    "metadataMatchesToken": true
+  },
+  "taskReceipts": [
+    "outputs/鸡爪槭跨平台精确回归独立复核.json",
+    "outputs/香樟冠形细化独立复核.json"
+  ],
+  "limits": "Worker labels alone do not prove accounts; quota observation and returned output tokens are separately recorded. This report reads existing completed requests, creates no model calls."
+}

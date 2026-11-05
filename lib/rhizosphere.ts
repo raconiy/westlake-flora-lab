@@ -26,6 +26,8 @@ export interface RhizosphereModel {
   rootDepth: number; rootLength: number; rootTips: number;
   /** Visible soil window only, not the available rooting depth. */
   profileDepth: number;
+  profileScope: 'local-root-zone-window-not-bedrock';
+  availableSoilDepth: number;
   /** Relative availability / stress, 0–1, not measured water volume. */
   availableWater: number; waterStress: number;
   dispose(): void;
@@ -335,12 +337,21 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
     collar.userData={organ:'root-collar',sourceType:'engineering-prior',top:top.toArray(),bottomY,anchored:true};group.add(collar);
     group.userData.shootCollar={...params.shootCollar,geometry:'connected-root-flare-proxy',anchorage:'fixed-rest-collar-not-soil-mechanics'};
   }
-  // The available depth still constrains all roots and water availability above.
-  // A shallow-rooted herb shows a LOCAL soil window with all drawn roots, rather
-  // than a 2.5 m column that makes a 7 cm plant almost invisible. This window is
-  // not a bedrock boundary, a geological measurement or a change to the roots.
-  const profileDepth = woody ? soilDepth : Math.min(soilDepth, Math.max(.12, rootDepth * 1.25 + .025));
-  const width = Math.max(woody ? 1.3 : .42, reach * 2.45);
+  // All species/ages, including mature trees, show a LOCAL root-zone window.
+  // Measure the finished meshes, including the translated collar and tube radii;
+  // rootDepth is a centreline metric and reach is not the rendered root spread.
+  // This read-only bounds pass never feeds back into root or water generation.
+  group.updateMatrixWorld(true);
+  const rootBounds = new THREE.Box3().setFromObject(group, true);
+  const drawnDepth = rootBounds.isEmpty() ? 0 : Math.max(0, -rootBounds.min.y);
+  const halfWidth = rootBounds.isEmpty() ? 0 : Math.max(
+    Math.abs(rootBounds.min.x), Math.abs(rootBounds.max.x),
+    Math.abs(rootBounds.min.z), Math.abs(rootBounds.max.z));
+  // Bottom margin is capped at the available depth, never a new bedrock limit.
+  // Keep the existing herb minimum width; small woody specimens need no 1.3 m floor.
+  const profileDepth = Math.min(soilDepth, Math.max(.12, drawnDepth * 1.25 + .025));
+  const width = Math.max(woody ? .12 : .42, halfWidth * 2.4 + .02);
+  const profileScope = 'local-root-zone-window-not-bedrock' as const;
   const strata = [{ ratio: .12, color: '#564532', label: '有机表层 · 示意' }, { ratio: .35, color: '#8b6846', label: '根系活跃层 · 示意' }, { ratio: .53, color: '#a28b68', label: '下部土层 · 示意' }];
   let top = -.003;
   for (let i = 0; i < strata.length; i++) {
@@ -352,9 +363,9 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
   group.userData.profileWidth = width;
   group.userData.profileDepth = profileDepth;
   group.userData.availableSoilDepth = soilDepth;
-  group.userData.profileScope = woody ? 'full-available-depth-illustration' : 'local-root-zone-window-not-bedrock';
+  group.userData.profileScope = profileScope;
   let disposed = false;
-  return { group, rootDepth, rootLength, rootTips, profileDepth, availableWater, waterStress,
+  return { group, rootDepth, rootLength, rootTips, profileDepth, profileScope, availableSoilDepth: soilDepth, availableWater, waterStress,
     dispose() { if (disposed) return; disposed = true; for (const g of geometries) g.dispose(); const textures=new Set<THREE.Texture>();for(const m of allMaterials){for(const value of Object.values(m))if(value instanceof THREE.Texture)textures.add(value);m.dispose();}for(const t of textures)t.dispose(); group.clear(); }
   };
 }

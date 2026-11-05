@@ -1,5 +1,5 @@
 {
-  "version": "0.5.6",
+  "version": "0.5.7",
   "createdAt": "2026-11-05T16:19:09.961Z",
   "workflow": [
     "shared botanical constraints",
@@ -222,7 +222,7 @@
     "Reproductive stalk drying/collapse is a qualitative annual proxy with uncalibrated dates; reproductive mass/drag and organ abscission trajectories remain unsolved",
     "Opaque leaf shading and straight Osmanthus axes remain visibly procedural; no near-photoreal claim"
   ],
-  "updatedAt": "2026-11-05T19:41:21.676Z",
+  "updatedAt": "2026-11-05T22:45:43.588Z",
   "refinementTasks": [
     {
       "id": "de89c5cb-bb50-472a-bcd0-60eb9410a258",
@@ -455,6 +455,22 @@
     }
   },
   "latestLeadIntegration": {
+    "updatedAt": "2026-11-05T22:45:43.588Z",
+    "state": "lead-reviewed; full GitHub test/build/deploy gate required",
+    "tasks": [
+      {
+        "id": "eae29ed8-a0d2-43ea-af13-7e28363b8e41",
+        "role": "actual-root geometry window, no root physics changes"
+      },
+      {
+        "id": "db9afbc4-66ca-4005-b0d6-ada86279d80a",
+        "role": "independent 168 old/new geometry scenarios and11additionalprobes;18testspass"
+      }
+    ],
+    "leadWork": "Owned incremental integration; replace Git-history-dependent test controls with distributed SHA-pinned source for shallow CI; actual browser section inspection; real-instance 10micrometre negative regression; visible gateway dependency notice.",
+    "limits": "Root zone is illustrative display, no geological/anchorage calibration. Adult crown gaps remain; D123Camphor withheld, new continuations isolated. Model transport still withheld after alias/NaN/performance review; no production Worker or speedup claim."
+  },
+  "previousLeadIntegration": {
     "updatedAt": "2026-11-05T22:05:54.575Z",
     "state": "lead source accepted after frozen full checks and actual WebGL inspection; deployment outcome independently recorded by GitHub Actions",
     "tasks": [

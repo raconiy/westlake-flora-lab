@@ -187,7 +187,8 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
       <div className="fh-connection" role="status"><span className={`fh-dot ${health?.ok && health.relay.online && !healthError ? 'fh-connected' : ''}`}/><span>{serviceLabel}</span>
         <button type="button" onClick={() => setRefreshTick(n => n + 1)} aria-label="重新检测连接并刷新建议"><RefreshCw size={13}/></button></div>
       {health?.relay.online&&<div className="fh-model-evidence"><b>{health.relay.model} / {health.relay.reasoningEffort}</b><span>{health.relay.availableAccounts??'—'} 个可用账号 · {typeof health.relay.workers==='number'?health.relay.workers:'—'} 个执行器 · 云端共享记录</span></div>}
-      {proof&&<details className="fh-proof"><summary>已核验 {proof.distinctAccounts} 个账号同时调用 · {proof.model} / {proof.reasoningEffort}</summary><p>本轮上游转发区间共同重叠 {(proof.overlapMs/1000).toFixed(3)} 秒；验收时间 {new Date(proof.verifiedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})}。</p>{proof.accounts.map(a=><p key={a.slot}>匿名账号 {a.slot} · HTTP {a.httpStatus} · 请求 {a.requestId.slice(0,8)}</p>)}<p>这是已完成调用的日志验收；当前连接与可用账号数以上方健康状态为准。</p><a href={`${import.meta.env.BASE_URL}execution-evidence.json`} target="_blank" rel="noreferrer">查看可核对回执 ↗</a><p><a href={`${import.meta.env.BASE_URL}collaboration-evidence.json`} target="_blank" rel="noreferrer">查看分工、同事交接与三个账号的审查原文 ↗</a></p></details>}
+      <p className="fh-network-note">建议记录保存在云端；模型回复与代码执行需要团队本地网关和转发服务保持在线。</p>
+      {proof&&<details className="fh-proof"><summary>已核验 {proof.distinctAccounts} 个账号同时调用 · {proof.model} / {proof.reasoningEffort}</summary><p>该次验收的上游转发区间共同重叠 {(proof.overlapMs/1000).toFixed(3)} 秒；验收时间 {new Date(proof.verifiedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})}。</p>{proof.accounts.map(a=><p key={a.slot}>匿名账号 {a.slot} · HTTP {a.httpStatus} · 请求 {a.requestId.slice(0,8)}</p>)}<p>这是已完成调用的日志验收；当前连接与可用账号数以上方健康状态为准。</p><a href={`${import.meta.env.BASE_URL}execution-evidence.json`} target="_blank" rel="noreferrer">查看可核对回执 ↗</a><p><a href={`${import.meta.env.BASE_URL}collaboration-evidence.json`} target="_blank" rel="noreferrer">查看分工、同事交接与三个账号的审查原文 ↗</a></p></details>}
       {historyError&&<p className="fh-network-note">历史对话暂未恢复：{historyError}<button type="button" onClick={()=>setRefreshTick(n=>n+1)}>重新读取</button></p>}
       <AccountUsageEvidence/>
       {healthError && <p className="fh-network-note">{healthError}</p>}
@@ -198,7 +199,7 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
       <div className="fh-scroll">
         <section className="fh-conversation" aria-label={mode === 'chat' ? '助手对话' : '提交公开建议'}>
           {mode === 'chat' ? <>
-            {!turns.length && <div className="fh-intro"><span className="fh-intro-icon"><Leaf size={24}/></span><h3>从一株植物的问题开始</h3><p>询问当前场景、讨论形态与模拟。请求由云端异步处理，收到真实回复后会显示在这里。</p></div>}
+            {!turns.length && <div className="fh-intro"><span className="fh-intro-icon"><Leaf size={24}/></span><h3>从一株植物的问题开始</h3><p>询问当前场景、讨论形态与模拟。问题进入共享队列，收到助手的真实回复后会显示在这里。</p></div>}
             {turns.map(turn => <article className="fh-turn" key={turn.key}>
               <div className="fh-user"><small>你 · {speciesNames[turn.scenario.species]}</small><p>{turn.text}</p></div>
               <div className="fh-assistant">
