@@ -4,6 +4,7 @@ import {resolve,dirname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {runCodex,runProcess} from './codex.mjs';
 import {changedTestsPlan,assertSafeTestPaths} from './validation-scope.mjs';
+import {retainFullOutput} from './full-output.mjs';
 
 // Commands always go through runProcess's shell:false executor. Keep failures
 // (including spawn errors, output bounds and cancellation) in the same receipt.
@@ -25,7 +26,7 @@ export async function executeTask(task,config={},deps={}){
   const root=resolve(config.root||process.env.SWARM_ROOT||process.cwd());
   const codex=deps.runCodex||runCodex,run=deps.runProcess||runProcess;
   let worktree=null;const transportRecovery=[],validation=[];
-  let executionMetadata={},validationPlan=null;
+  let executionMetadata={},validationPlan=null,answerMetadata={};
   const validationScope=config.validationScope??'operator-defined';
   const timeoutMs=config.timeoutMs??Number(process.env.SWARM_TASK_TIMEOUT_MS||1200000);
   try{
@@ -62,8 +63,14 @@ export async function executeTask(task,config={},deps={}){
       }
     }
     executionMetadata={usage:answer.usage,modelBackend:answer.backend??'codex',model:answer.model??null,reasoningEffort:answer.reasoningEffort??null,transportRecovery};
+    // Save the unmodified model string before validation or any UI truncation.
+    // This runs in the controller, including for read-only research agents.
+    const fullOutput=retainFullOutput(task.id,answer.text,{root,stateDir:config.stateDir||process.env.SWARM_STATE_DIR,resultDir:config.resultDir||process.env.SWARM_RESULT_DIR});
+    answerMetadata={fullOutput};
+    if(typeof answer.text==='string')Object.assign(answerMetadata,{summary:answer.text.slice(-9000),summaryTruncated:answer.text.length>9000});
+    if(!fullOutput.retained)throw Object.assign(new Error(`Full model output retention failed: ${fullOutput.error}`),{code:'FULL_OUTPUT_RETENTION_FAILED'});
     const validationMetadata=()=>({validation,validationScope,validationPlan,integrationGate:'lead_full_validation_and_ci_required',releaseApproved:false});
-    const validationFailure=error=>({status:'validation_failed',result:{summary:answer.text.slice(-9000),worktree,...validationMetadata(),validationStatus:'failed',...(error?{validationError:error}:{}),...executionMetadata,merged:false}});
+    const validationFailure=error=>({status:'validation_failed',result:{...answerMetadata,worktree,...validationMetadata(),validationStatus:'failed',...(error?{validationError:error}:{}),...executionMetadata,merged:false}});
     if(task.kind==='code'&&config.autoValidate){
       try{
         if(!['operator-defined','full','changed-tests'].includes(validationScope))throw new Error('Unknown validation scope');
@@ -98,15 +105,15 @@ export async function executeTask(task,config={},deps={}){
       }
     }
     let diff=null;if(worktree){const d=await run('git',['-C',worktree,'status','--short'],{timeoutMs:10000});diff=d.stdout;}
-    return{status:'completed',result:{summary:answer.text.slice(-9000),worktree,...validationMetadata(),validationStatus:task.kind!=='code'?'not_applicable':!config.autoValidate?'not_run':validationScope==='changed-tests'?(validationPlan.noTestsSelected?'passed_checks_only':'passed_scoped'):'passed',changes:diff,merged:false,...executionMetadata}};
-  }catch(error){return{status:'failed',result:{error:error.message,transportRecovery,failureCategory:/timed out/i.test(error.message)?'timeout':/worktree/i.test(error.message)?'workspace':/validat/i.test(error.message)?'validation':'execution',worktree,partialChangesPreserved:!!worktree,modelBackend:process.env.SWARM_MODEL_BACKEND||'codex',model:process.env.SWARM_GPT_LOAD_MODEL||null,reasoningEffort:process.env.SWARM_MODEL_REASONING_EFFORT||null,...executionMetadata,validation,validationScope,validationPlan,validationStatus:'not_completed',merged:false,releaseApproved:false}};}
+    return{status:'completed',result:{...answerMetadata,worktree,...validationMetadata(),validationStatus:task.kind!=='code'?'not_applicable':!config.autoValidate?'not_run':validationScope==='changed-tests'?(validationPlan.noTestsSelected?'passed_checks_only':'passed_scoped'):'passed',changes:diff,merged:false,...executionMetadata}};
+  }catch(error){return{status:'failed',result:{error:error.message,transportRecovery,failureCategory:error.code==='FULL_OUTPUT_RETENTION_FAILED'?'full_output_retention':/timed out/i.test(error.message)?'timeout':/worktree/i.test(error.message)?'workspace':/validat/i.test(error.message)?'validation':'execution',worktree,partialChangesPreserved:!!worktree,modelBackend:process.env.SWARM_MODEL_BACKEND||'codex',model:process.env.SWARM_GPT_LOAD_MODEL||null,reasoningEffort:process.env.SWARM_MODEL_REASONING_EFFORT||null,...executionMetadata,...answerMetadata,validation,validationScope,validationPlan,validationStatus:'not_completed',merged:false,releaseApproved:false}};}
 }
 
 export async function runWorker(config={}){
   const coordinator=config.coordinator||process.env.SWARM_COORDINATOR||'http://127.0.0.1:8788';
   const token=config.token??process.env.SWARM_TOKEN??'';
   const root=resolve(config.root||process.env.SWARM_ROOT||process.cwd());
-  const stateDir=resolve(process.env.SWARM_STATE_DIR||resolve(root,'.runtime'));mkdirSync(stateDir,{recursive:true});
+  const stateDir=resolve(config.stateDir||process.env.SWARM_STATE_DIR||resolve(root,'.runtime'));mkdirSync(stateDir,{recursive:true});
   const idFile=resolve(stateDir,'worker-id');let workerId=config.id||process.env.SWARM_WORKER_ID||(existsSync(idFile)?readFileSync(idFile,'utf8').trim():randomUUID());writeFileSync(idFile,workerId,{mode:0o600});
   const request=async(path,body)=>{const response=await fetch(new URL(path,coordinator),{method:'POST',headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{})},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});const data=await response.json();if(!response.ok)throw new Error(`Coordinator ${response.status}: ${data.error}`);return data;};
   await request('/api/workers/register',{id:workerId,label:process.env.SWARM_WORKER_LABEL||workerId});

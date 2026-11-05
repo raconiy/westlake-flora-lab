@@ -1,9 +1,9 @@
 import {test} from 'node:test';
 import http from 'node:http';
 import assert from 'node:assert/strict';
-import {mkdtempSync,rmSync,writeFileSync} from 'node:fs';
+import {mkdtempSync,rmSync,writeFileSync,realpathSync} from 'node:fs';
 import {tmpdir} from 'node:os';
-import {resolve} from 'node:path';
+import {resolve,dirname} from 'node:path';
 import {createCoordinator} from '../coordinator.mjs';
 import {runCodex,runProcess} from '../codex.mjs';
 import {executeTask} from '../worker.mjs';
@@ -75,6 +75,6 @@ test('code task runs in an isolated Git worktree; failing validation is explicit
   const folder=mkdtempSync(resolve(tmpdir(),'flora-worktree-'));t.after(()=>rmSync(folder,{recursive:true,force:true}));const repo=resolve(folder,'repo');
   const run=(args)=>runProcess('git',args,{timeoutMs:10000});
   await run(['init',repo]);await run(['-C',repo,'config','user.email','test@example.invalid']);await run(['-C',repo,'config','user.name','Infra test']);writeFileSync(resolve(repo,'plant.txt'),'original');await run(['-C',repo,'add','.']);await run(['-C',repo,'commit','-m','initial']);
-  const result=await executeTask({id:'task-test',kind:'code',prompt:'change plant'},{root:repo,worktreeRoot:resolve(folder,'trees'),autoValidate:true,validationCommands:[[process.execPath,'-e','process.exit(2)']]},{runCodex:async(_prompt,opts)=>{assert.equal(opts.sandbox,'workspace-write');assert.notEqual(opts.root,repo);writeFileSync(resolve(opts.root,'plant.txt'),'modified');return{text:'changed',usage:null};}});
-  assert.equal(result.status,'validation_failed');assert.equal(result.result.merged,false);assert.equal((await run(['-C',repo,'status','--porcelain'])).stdout,'');
+  const result=await executeTask({id:'task-test',kind:'code',prompt:'change plant'},{root:repo,stateDir:resolve(folder,'controller-runtime'),resultDir:resolve(folder,'controller-runtime/task-results'),worktreeRoot:resolve(folder,'trees'),autoValidate:true,validationCommands:[[process.execPath,'-e','process.exit(2)']]},{runCodex:async(_prompt,opts)=>{assert.equal(opts.sandbox,'workspace-write');assert.notEqual(opts.root,repo);writeFileSync(resolve(opts.root,'plant.txt'),'modified');return{text:'changed',usage:null};}});
+  assert.equal(result.status,'validation_failed');assert.equal(result.result.merged,false);assert.equal(result.result.fullOutput.retained,true);assert.equal(dirname(result.result.fullOutput.path),realpathSync(resolve(folder,'controller-runtime/task-results')));assert.equal((await run(['-C',repo,'status','--porcelain'])).stdout,'');
 });

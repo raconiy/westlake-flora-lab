@@ -1,12 +1,12 @@
 {
-  "observedAt": "2026-11-05T22:45:02.204Z",
+  "observedAt": "2026-11-05T23:43:13.718Z",
   "distinctAccountEmails": 3,
-  "periodStart": "2026-11-05T20:45:02.205Z",
+  "periodStart": "2026-11-05T21:43:13.721Z",
   "accounts": [
     {
       "slot": 1,
       "status": "available",
-      "observationAt": "2026-11-05T22:44:58.431Z",
+      "observationAt": "2026-11-05T23:43:08.019Z",
       "quota": [
         {
           "source_id": "codex",
@@ -15,10 +15,10 @@
           "label_key": "session",
           "scope": "account",
           "unit": "percent",
-          "used": 1,
+          "used": 2,
           "limit": 100,
-          "remaining": 99,
-          "utilization": 0.01,
+          "remaining": 98,
+          "utilization": 0.02,
           "reset_at_ms": 1794472387000,
           "window_seconds": 604800,
           "state": "available",
@@ -27,25 +27,25 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 176,
-        "outputTokens": 173797,
-        "uncachedInputTokens": 596109,
-        "cachedInputTokens": 9777920,
-        "firstCompleted": 1793911506296,
-        "lastCompleted": 1793918187613
+        "count": 154,
+        "outputTokens": 176736,
+        "uncachedInputTokens": 695281,
+        "cachedInputTokens": 7445504,
+        "firstCompleted": 1793914996077,
+        "lastCompleted": 1793922169794
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 176
+          "count": 154
         }
       ]
     },
     {
       "slot": 2,
       "status": "available",
-      "observationAt": "2026-11-05T22:45:00.644Z",
+      "observationAt": "2026-11-05T23:43:11.435Z",
       "quota": [
         {
           "source_id": "codex",
@@ -54,10 +54,10 @@
           "label_key": "session",
           "scope": "account",
           "unit": "percent",
-          "used": 1,
+          "used": 2,
           "limit": 100,
-          "remaining": 99,
-          "utilization": 0.01,
+          "remaining": 98,
+          "utilization": 0.02,
           "reset_at_ms": 1794472391000,
           "window_seconds": 604800,
           "state": "available",
@@ -66,25 +66,25 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 166,
-        "outputTokens": 143459,
-        "uncachedInputTokens": 621955,
-        "cachedInputTokens": 9143424,
-        "firstCompleted": 1793911507635,
-        "lastCompleted": 1793918700288
+        "count": 174,
+        "outputTokens": 142270,
+        "uncachedInputTokens": 739293,
+        "cachedInputTokens": 8503040,
+        "firstCompleted": 1793915436346,
+        "lastCompleted": 1793922125640
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 166
+          "count": 174
         }
       ]
     },
     {
       "slot": 3,
       "status": "available",
-      "observationAt": "2026-11-05T22:45:01.899Z",
+      "observationAt": "2026-11-05T23:43:12.725Z",
       "quota": [
         {
           "source_id": "codex",
@@ -93,10 +93,10 @@
           "label_key": "session",
           "scope": "account",
           "unit": "percent",
-          "used": 17,
+          "used": 18,
           "limit": 100,
-          "remaining": 83,
-          "utilization": 0.17,
+          "remaining": 82,
+          "utilization": 0.18,
           "reset_at_ms": 1794472392000,
           "window_seconds": 604800,
           "state": "available",
@@ -105,25 +105,25 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 176,
-        "outputTokens": 155322,
-        "uncachedInputTokens": 689590,
-        "cachedInputTokens": 9550080,
-        "firstCompleted": 1793913146048,
-        "lastCompleted": 1793918686289
+        "count": 203,
+        "outputTokens": 171148,
+        "uncachedInputTokens": 761710,
+        "cachedInputTokens": 11686016,
+        "firstCompleted": 1793915239335,
+        "lastCompleted": 1793921403356
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 176
+          "count": 203
         }
       ]
     }
   ],
   "interpretation": "Quota windows are upstream observations, not locally inferred token use. Successful requests/token output and task receipts are separate evidence. Exact charging discrepancy remains unverified.",
   "identityConsistency": {
-    "verifiedAt": "2026-11-05T17:10:47.025Z",
+    "verifiedAt": "2026-11-05T23:27:10.790Z",
     "distinctTokenSubjects": 3,
     "distinctTokenAccountIds": 3,
     "allMetadataEmailsMatchTokens": true

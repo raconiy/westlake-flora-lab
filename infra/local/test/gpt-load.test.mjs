@@ -44,7 +44,7 @@ test('gateway provider uses process-local config and a private environment key; 
   assert.equal(answer.backend,'gpt-load');assert.equal(answer.model,'gpt-6.1-sol');
   assert.equal(answer.usage.input_tokens,10);
   const result=await executeTask({id:'gateway-test',kind:'research',prompt:'review'},
-    {root:f.folder},{runCodex:(prompt,opts)=>runCodex(prompt,{...options,...opts})});
+    {root:f.folder,stateDir:resolve(f.folder,'.runtime'),resultDir:resolve(f.folder,'.runtime/task-results')},{runCodex:(prompt,opts)=>runCodex(prompt,{...options,...opts})});
   assert.equal(result.status,'completed');assert.equal(result.result.modelBackend,'gpt-load');
   assert.equal(result.result.worktree,null);assert.equal(result.result.merged,false);
 });

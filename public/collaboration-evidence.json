@@ -222,7 +222,7 @@
     "Reproductive stalk drying/collapse is a qualitative annual proxy with uncalibrated dates; reproductive mass/drag and organ abscission trajectories remain unsolved",
     "Opaque leaf shading and straight Osmanthus axes remain visibly procedural; no near-photoreal claim"
   ],
-  "updatedAt": "2026-11-05T22:45:43.588Z",
+  "updatedAt": "2026-11-05T23:44:57.175Z",
   "refinementTasks": [
     {
       "id": "de89c5cb-bb50-472a-bcd0-60eb9410a258",
@@ -533,5 +533,20 @@
       "Leaf transmission and biological turnover not fully modeled",
       "Background model transport remains a prototype"
     ]
+  },
+  "latestInfrastructureRefinement": {
+    "task": "ced99b12-9049-49aa-8e4c-3c20c4458812",
+    "reviews": [
+      "96bb2790-1574-47ad-b19f-a090eb5f0703",
+      "a9bef972-b9f3-4d09-83c1-e0173714b692"
+    ],
+    "leadCorrections": [
+      "Isolated recovery, gateway and code-worktree fixture outputs with explicit temporary resultDir, preventing inherited SWARM_RESULT_DIR/SWARM_STATE_DIR pollution.",
+      "Canonical temporary directory comparison handles macOS /var to /private/var alias; original repository-clean assertion kept."
+    ],
+    "localPassed": 54,
+    "fullCI": "required before deployment",
+    "completeModelOutputRetention": "private local artifacts; future outputs only",
+    "geometryCandidates": "withheld; public visual code remains0.5.7"
   }
 }

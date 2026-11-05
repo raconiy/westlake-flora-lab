@@ -1,14 +1,14 @@
 {
-  "observedAt": "2026-11-05T22:35:45.395Z",
-  "since": "2026-11-05T22:28:00.000Z",
+  "observedAt": "2026-11-05T23:43:55.500Z",
+  "since": "2026-11-05T22:50:01.811Z",
   "accounts": [
     {
       "slot": 1,
-      "successfulRequests": 17,
-      "returnedOutputTokens": 31166,
+      "successfulRequests": 88,
+      "returnedOutputTokens": 97002,
       "models": [
         {
-          "requestedUpstream": "gpt-6.1-sol",
+          "requested": "gpt-6.1-sol",
           "reported": "gpt-6.1-sol",
           "effort": "high",
           "consistency": "match"
@@ -17,11 +17,11 @@
     },
     {
       "slot": 2,
-      "successfulRequests": 16,
-      "returnedOutputTokens": 13710,
+      "successfulRequests": 77,
+      "returnedOutputTokens": 69057,
       "models": [
         {
-          "requestedUpstream": "gpt-6.1-sol",
+          "requested": "gpt-6.1-sol",
           "reported": "gpt-6.1-sol",
           "effort": "high",
           "consistency": "match"
@@ -30,67 +30,139 @@
     },
     {
       "slot": 3,
-      "successfulRequests": 9,
-      "returnedOutputTokens": 9158,
+      "successfulRequests": 69,
+      "returnedOutputTokens": 53639,
       "models": [
         {
-          "requestedUpstream": "gpt-6.1-sol",
+          "requested": "gpt-6.1-sol",
           "reported": "gpt-6.1-sol",
           "effort": "high",
           "consistency": "match"
+        },
+        {
+          "requested": "gpt-6.1-sol",
+          "reported": "",
+          "effort": "high",
+          "consistency": "not_applicable"
         }
       ]
     }
   ],
   "allThreeReturnedSuccessfulRequests": true,
   "gatewayRequestProcessingOverlap": {
-    "overlapMs": 34269,
-    "start": "2026-11-05T22:33:37.703Z",
-    "end": "2026-11-05T22:34:11.972Z",
-    "requests": [
+    "overlapMs": 0,
+    "requests": []
+  },
+  "latestReviewTasks": {
+    "since": "2026-11-05T23:23:36.000Z",
+    "accounts": [
       {
         "slot": 1,
-        "requestId": "e8678989-7fba-4280-b8a6-d1737042e5e3",
-        "http": 200,
-        "outputTokens": 1926,
-        "reportedModel": "gpt-6.1-sol",
-        "effort": "high",
-        "start": "2026-11-05T22:33:37.703Z",
-        "end": "2026-11-05T22:34:21.828Z"
+        "successfulRequests": 34,
+        "returnedOutputTokens": 36343,
+        "models": [
+          {
+            "requested": "gpt-6.1-sol",
+            "reported": "gpt-6.1-sol",
+            "effort": "high",
+            "consistency": "match"
+          }
+        ]
       },
       {
         "slot": 2,
-        "requestId": "184432b8-7ec8-40ef-a072-dc712c747504",
-        "http": 200,
-        "outputTokens": 1896,
-        "reportedModel": "gpt-6.1-sol",
-        "effort": "high",
-        "start": "2026-11-05T22:33:31.668Z",
-        "end": "2026-11-05T22:34:11.972Z"
+        "successfulRequests": 14,
+        "returnedOutputTokens": 14362,
+        "models": [
+          {
+            "requested": "gpt-6.1-sol",
+            "reported": "gpt-6.1-sol",
+            "effort": "high",
+            "consistency": "match"
+          }
+        ]
       },
       {
         "slot": 3,
-        "requestId": "e6d59888-6201-4d30-95f7-7f88881bf93f",
-        "http": 200,
-        "outputTokens": 5129,
-        "reportedModel": "gpt-6.1-sol",
-        "effort": "high",
-        "start": "2026-11-05T22:33:24.253Z",
-        "end": "2026-11-05T22:35:12.170Z"
+        "successfulRequests": 42,
+        "returnedOutputTokens": 30831,
+        "models": [
+          {
+            "requested": "gpt-6.1-sol",
+            "reported": "gpt-6.1-sol",
+            "effort": "high",
+            "consistency": "match"
+          }
+        ]
       }
-    ]
+    ],
+    "allThreeReturnedSuccessfulRequests": true,
+    "gatewayRequestProcessingOverlap": {
+      "overlapMs": 0,
+      "requests": []
+    }
   },
-  "overlapScope": "Completion minus recorded gateway duration is request-processing interval, not a newly instrumented upstream-forwarding/GPU interval. Separate older forwarding proof remains intact.",
+  "afterAffinityChange": {
+    "since": "2026-11-05T23:29:59.757Z",
+    "accounts": [
+      {
+        "slot": 1,
+        "successfulRequests": 34,
+        "returnedOutputTokens": 36343,
+        "models": [
+          {
+            "requested": "gpt-6.1-sol",
+            "reported": "gpt-6.1-sol",
+            "effort": "high",
+            "consistency": "match"
+          }
+        ]
+      },
+      {
+        "slot": 2,
+        "successfulRequests": 12,
+        "returnedOutputTokens": 10792,
+        "models": [
+          {
+            "requested": "gpt-6.1-sol",
+            "reported": "gpt-6.1-sol",
+            "effort": "high",
+            "consistency": "match"
+          }
+        ]
+      },
+      {
+        "slot": 3,
+        "successfulRequests": 2,
+        "returnedOutputTokens": 1157,
+        "models": [
+          {
+            "requested": "gpt-6.1-sol",
+            "reported": "gpt-6.1-sol",
+            "effort": "high",
+            "consistency": "match"
+          }
+        ]
+      }
+    ],
+    "allThreeReturnedSuccessfulRequests": true,
+    "gatewayRequestProcessingOverlap": {
+      "overlapMs": 0,
+      "requests": []
+    }
+  },
   "identityReference": {
     "file": "outputs/三账号身份一致性核查.json",
-    "verifiedAt": "2026-11-05T17:10:47.025Z",
+    "verifiedAt": "2026-11-05T23:27:10.790Z",
     "distinctTokenSubjects": 3,
     "distinctTokenAccountIds": 3,
     "metadataMatchesToken": true
   },
-  "taskReceipts": [
-    "outputs/鸡爪槭跨平台精确回归独立复核.json",
-    "outputs/香樟冠形细化独立复核.json"
-  ],
-  "limits": "Worker labels alone do not prove accounts; quota observation and returned output tokens are separately recorded. This report reads existing completed requests, creates no model calls."
+  "overlapScope": "Read-only completed gateway request logs, no generation probes/padding. Derived completion-minus-duration overlap means gateway request-processing overlap, not new instrumented upstream-forwarding/GPU overlap. Workers are not fixed account identities. Distinct identities, successful output tokens, quota snapshots and task results are separate evidence. Do not hide zero-account intervals.",
+  "routing": {
+    "changedAt": "2026-11-05T23:29:59.757Z",
+    "affinityEnabled": false,
+    "scope": "Routing preference only. Does not guarantee simultaneous three-account calls or one-worker-one-account binding. Verify subsequent actual successful credential IDs and token returns."
+  },
+  "limits": "No simultaneous three-account processing interval established in this current window. Historical forwarding proof is kept separately. Requests/returned tokens and upstream quota percentages are independent observations."
 }

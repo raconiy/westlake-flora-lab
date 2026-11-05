@@ -125,5 +125,20 @@
         "scope": "Ginkgo indexed geometry source unchanged; not rerun as a new performance claim"
       }
     }
+  },
+  "latestVerifiedPublished": {
+    "version": "0.5.7",
+    "commit": "5cca9f5b78befb66d2bf0fa6b7a6ce8aa4a5e106",
+    "ciRun": 42124387242,
+    "passed": 324,
+    "skipped": 1
+  },
+  "infrastructureRefinement": {
+    "preparedAt": "2026-11-05T23:44:57.175Z",
+    "task": "ced99b12-9049-49aa-8e4c-3c20c4458812",
+    "localInfrastructurePassed": 54,
+    "ci": "required on this commit",
+    "visualCodeChanged": false,
+    "evidence": "final-overnight-evidence.json"
   }
 }

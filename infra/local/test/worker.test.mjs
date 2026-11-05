@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,writeFileSync,rmSync,existsSync,symlinkSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,rmSync,existsSync,symlinkSync,readFileSync,statSync,readdirSync,chmodSync,realpathSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {tmpdir} from 'node:os';
 import {dirname,resolve} from 'node:path';
 import {runProcess} from '../codex.mjs';
@@ -19,12 +20,12 @@ async function fixture(t){
   const repo=resolve(folder,'repo');mkdirSync(repo);
   const git=async(root,...args)=>{const r=await runProcess('git',['-C',root,...args],{timeoutMs:10000});assert.equal(r.code,0,r.stderr);return r;};
   const put=(root,path,text)=>{mkdirSync(dirname(resolve(root,path)),{recursive:true});writeFileSync(resolve(root,path),text);};
-  await git(repo,'init');put(repo,'.gitignore','node_modules\n');put(repo,'README.md','fixture\n');put(repo,'feature.mjs','export const value=1;\n');
+  await git(repo,'init');put(repo,'.gitignore','node_modules\n.runtime/\n');put(repo,'README.md','fixture\n');put(repo,'feature.mjs','export const value=1;\n');
   put(repo,'feature.test.mjs',"import test from 'node:test'; test('related fixture',()=>{});\n");
   put(repo,'unrelated.test.mjs',`import {writeFileSync} from 'node:fs';writeFileSync(${JSON.stringify(resolve(folder,'unrelated-ran'))},'ran');\n`);
   await git(repo,'add','.');await git(repo,'-c','user.name=Worker fixture','-c','user.email=fixture@example.invalid','commit','-m','fixture');
   const compiler=(root,code=0)=>put(root,'node_modules/typescript/bin/tsc',`if(JSON.stringify(process.argv.slice(2))!==JSON.stringify(['--noEmit']))throw Error('wrong compiler args');console.log('fixture typecheck');process.exit(${code});\n`);
-  const config={root:repo,worktreeRoot:resolve(folder,'trees'),linkDependencies:false,autoValidate:true,validationScope:'changed-tests',validationCommands:[[process.execPath,'-e','process.exit(23)']]};
+  const config={root:repo,stateDir:resolve(repo,'.runtime'),resultDir:resolve(repo,'.runtime/task-results'),worktreeRoot:resolve(folder,'trees'),linkDependencies:false,autoValidate:true,validationScope:'changed-tests',validationCommands:[[process.execPath,'-e','process.exit(23)']]};
   return{folder,repo,git,put,compiler,config};
 }
 
@@ -149,4 +150,144 @@ test('unsafe selection fails validation and retains model metadata without execu
   const output=await executeTask(task,f.config,{runCodex:async(_prompt,{root})=>{f.compiler(root);symlinkSync(resolve(root,'feature.test.mjs'),resolve(root,'unsafe.test.mjs'));return answer;}});
   const r=output.result;assert.equal(output.status,'validation_failed');assert.equal(r.validationStatus,'failed');assert.match(r.validationError,/symlink/);
   assert.equal(r.validationPlan.selectionStatus,'failed');assert.equal(r.validation.length,1);assert.deepEqual(r.usage,answer.usage);assert.equal(r.releaseApproved,false);
+});
+
+const longText=JSON.stringify({header:'完整研究报告：桂花叶姿连续性',body:('中文🌿 research\n\r\t').repeat(1800),footer:'原文结束'});
+const outputPath=(directory,id)=>resolve(directory,`task-${createHash('sha256').update(id).digest('hex')}.txt`);
+function assertFullOutput(result,text=longText){
+  const receipt=result.fullOutput,bytes=readFileSync(receipt.path);
+  assert.equal(receipt.retained,true);assert.equal(bytes.toString('utf8'),text);
+  assert.deepEqual(bytes,Buffer.from(text,'utf8'));
+  assert.equal(receipt.sha256,createHash('sha256').update(bytes).digest('hex'));
+  assert.equal(receipt.utf8Bytes,Buffer.byteLength(text,'utf8'));assert.equal(receipt.charCount,text.length);
+  assert.equal(receipt.charCountUnit,'UTF-16 code units');assert.equal(receipt.encoding,'utf8');
+  assert.equal(result.summary,text.slice(-9000));assert.equal(result.summaryTruncated,text.length>9000);
+  assert.equal(statSync(receipt.path).mode&0o777,0o600);assert.equal(statSync(dirname(receipt.path)).mode&0o777,0o700);
+}
+
+test('full Chinese JSON survives research/code completion and failing code validation before checks run',async t=>{
+  for(const mode of ['research','code','validation_failed']){
+    const f=await fixture(t),directory=resolve(f.config.stateDir,'task-results');
+    const command=[process.execPath,'-e','process.exit(9)'];let checked=false;
+    const output=await executeTask({...task,kind:mode==='research'?'research':'code'},
+      {...f.config,autoValidate:mode==='validation_failed',validationScope:'operator-defined',validationCommands:[command]},
+      {runCodex:async(_prompt,options)=>{assert.equal(options.sandbox,mode==='research'?'read-only':'workspace-write');return{...answer,text:longText};},
+        runProcess:async(binary,args,options)=>{
+          if(args[0]==='-e'){
+            // Observe disk at validation entry, rather than testing a helper in isolation.
+            assert.equal(readFileSync(outputPath(directory,task.id),'utf8'),longText);checked=true;
+          }
+          return fixtureProcess(binary,args,options);
+        }});
+    assert.equal(output.status,mode==='validation_failed'?'validation_failed':'completed');assertFullOutput(output.result);
+    assert.deepEqual(JSON.parse(readFileSync(output.result.fullOutput.path,'utf8')),JSON.parse(longText));
+    assert.equal(output.result.fullOutput.path,outputPath(realpathSync(directory),task.id));
+    assert.equal(checked,mode==='validation_failed');assert.deepEqual(output.result.usage,answer.usage);
+    if(checked){assert.equal(output.result.validation[0].code,9);assert.equal(output.result.validation[0].status,'failed');}
+  }
+});
+
+test('validation configuration errors and errors after the answer retain full output receipts',async t=>{
+  for(const mode of ['validation_config','status_error']){
+    const f=await fixture(t);
+    const output=await executeTask(task,{...f.config,autoValidate:mode==='validation_config',validationScope:'invalid-scope'},
+      {runCodex:async()=>({...answer,text:longText}),runProcess:async(binary,args,options)=>{
+        if(mode==='status_error'&&args.includes('--short'))throw Error('status inspection failed after answer');
+        return fixtureProcess(binary,args,options);
+      }});
+    assert.equal(output.status,mode==='validation_config'?'validation_failed':'failed');assertFullOutput(output.result);
+    assert.deepEqual(output.result.usage,answer.usage);
+    if(mode==='validation_config')assert.match(output.result.validationError,/Unknown validation scope/);
+    else assert.match(output.result.error,/status inspection failed/);
+  }
+});
+
+function researchFixture(t){
+  const root=mkdtempSync(resolve(tmpdir(),'flora-worker-retention-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
+  return{root,stateDir:resolve(root,'.runtime'),resultDir:resolve(root,'.runtime/task-results')};
+}
+const researchTask=id=>({id,kind:'research',prompt:'injected fixture only'});
+const modelText=text=>({runCodex:async()=>({...answer,text})});
+
+test('hashed task IDs contain traversal and avoid sanitized-ID collisions; duplicate bytes are reusable',async t=>{
+  const config=researchFixture(t),directory=resolve(config.stateDir,'task-results'),paths=[];
+  for(const id of ['../../escaped','..\\..\\escaped','../escaped','escaped','中文/任务']){
+    const first=await executeTask(researchTask(id),config,modelText(longText));assert.equal(first.status,'completed');assertFullOutput(first.result);
+    assert.equal(dirname(first.result.fullOutput.path),realpathSync(directory));assert.equal(first.result.fullOutput.reused,false);paths.push(first.result.fullOutput.path);
+    const second=await executeTask(researchTask(id),config,modelText(longText));assert.equal(second.status,'completed');assertFullOutput(second.result);
+    assert.equal(second.result.fullOutput.path,first.result.fullOutput.path);assert.equal(second.result.fullOutput.reused,true);
+  }
+  assert.equal(new Set(paths).size,paths.length);assert.equal(readdirSync(directory).length,paths.length);
+  assert.equal(existsSync(resolve(config.root,'escaped')),false);
+});
+
+test('different output on the same task ID fails explicitly without replacing the original or failure history',async t=>{
+  const config=researchFixture(t),item=researchTask('duplicate-conflict');let calls=0;
+  const first=await executeTask(item,config,modelText(longText));assertFullOutput(first.result);
+  const second=await executeTask(item,{...config,timeoutMs:60000},{runCodex:async()=>{
+    if(++calls===1)throw Error('upstream_connect_failed');return{...answer,text:longText+'different'};
+  }});
+  assert.equal(second.status,'failed');assert.equal(second.result.failureCategory,'full_output_retention');
+  assert.equal(second.result.fullOutput.retained,false);assert.equal(second.result.fullOutput.errorCode,'FULL_OUTPUT_CONFLICT');
+  assert.equal(second.result.fullOutput.path,first.result.fullOutput.path);assert.equal(readFileSync(first.result.fullOutput.path,'utf8'),longText);
+  assert.equal(second.result.transportRecovery.length,1);assert.match(second.result.transportRecovery[0].error,/upstream_connect_failed/);
+  assert.deepEqual(second.result.usage,answer.usage);assert.equal(readdirSync(dirname(first.result.fullOutput.path)).length,1);
+});
+
+test('filesystem failure after a code answer prevents validation and cannot claim full retention',async t=>{
+  const f=await fixture(t),blocked=resolve(f.folder,'not-a-directory');writeFileSync(blocked,'keep original');let validations=0;
+  const output=await executeTask(task,{...f.config,resultDir:resolve(blocked,'results')},
+    {runCodex:async()=>({...answer,text:longText}),runProcess:async(binary,args,options)=>{
+      if(args.includes('--porcelain=v1')||args[0]==='-e')validations++;
+      return fixtureProcess(binary,args,options);
+    }});
+  const r=output.result;assert.equal(output.status,'failed');assert.equal(r.failureCategory,'full_output_retention');
+  assert.equal(r.fullOutput.retained,false);assert.match(r.fullOutput.errorCode,/ENOTDIR|EEXIST/);assert.match(r.error,/retention failed/);
+  assert.equal(r.fullOutput.utf8Bytes,Buffer.byteLength(longText));assert.equal(r.fullOutput.charCount,longText.length);
+  assert.equal(validations,0);assert.deepEqual(r.validation,[]);assert.deepEqual(r.usage,answer.usage);
+  assert.equal(readFileSync(blocked,'utf8'),'keep original');assert.equal(r.partialChangesPreserved,true);
+});
+
+test('private custom directory works and public, dist, symlink, or permissive destinations fail closed',async t=>{
+  const config=researchFixture(t),id='private-path';
+  const good=await executeTask(researchTask(id),{...config,resultDir:resolve(config.root,'owned-results')},modelText(longText));
+  assert.equal(good.status,'completed');assertFullOutput(good.result);
+  const external=resolve(config.root,'external.txt');writeFileSync(external,'never replace',{mode:0o600});
+  const fileLinkDir=resolve(config.root,'file-link-results');mkdirSync(fileLinkDir,{mode:0o700});symlinkSync(external,outputPath(fileLinkDir,id));
+  const directoryLink=resolve(config.root,'directory-link');symlinkSync(dirname(good.result.fullOutput.path),directoryLink);
+  const permissive=resolve(config.root,'permissive');mkdirSync(permissive,{mode:0o700});chmodSync(permissive,0o755);
+  for(const resultDir of [resolve(config.root,'public','reports'),resolve(config.root,'dist','reports'),fileLinkDir,directoryLink,permissive]){
+    const output=await executeTask(researchTask(id),{...config,resultDir},modelText(longText));
+    assert.equal(output.status,'failed');assert.equal(output.result.failureCategory,'full_output_retention');assert.equal(output.result.fullOutput.retained,false);
+  }
+  assert.equal(readFileSync(external,'utf8'),'never replace');assertFullOutput(good.result);
+  assert.deepEqual(readdirSync(fileLinkDir),[outputPath(fileLinkDir,id).split('/').at(-1)]);
+});
+
+test('short and empty successful answers retain exact bytes with an explicit nontruncated summary',async t=>{
+  const config=researchFixture(t);
+  for(const text of ['', '桂花 short 🌿']){
+    const output=await executeTask(researchTask(`short-${text}`),config,modelText(text));
+    assert.equal(output.status,'completed');assertFullOutput(output.result,text);assert.equal(output.result.summaryTruncated,false);
+  }
+});
+
+test('same ID cannot replace the artifact from an earlier validation failure',async t=>{
+  const f=await fixture(t),config={...f.config,validationScope:'operator-defined',validationCommands:[[process.execPath,'-e','process.exit(8)']]};
+  const first=await executeTask(task,config,modelText(longText));assert.equal(first.status,'validation_failed');assertFullOutput(first.result);
+  const originalReceipt=JSON.stringify(first.result);
+  const second=await executeTask(task,config,modelText(longText+'new answer'));
+  assert.equal(second.status,'failed');assert.equal(second.result.fullOutput.errorCode,'FULL_OUTPUT_CONFLICT');
+  assert.equal(readFileSync(first.result.fullOutput.path,'utf8'),longText);assert.equal(JSON.stringify(first.result),originalReceipt);
+  assert.equal(first.result.validation[0].code,8);assert.deepEqual(second.result.validation,[]);
+});
+
+test('invalid task IDs and unrepresentable model strings fail explicitly rather than claiming exact UTF-8 retention',async t=>{
+  const config=researchFixture(t);
+  for(const [id,text,errorCode] of [[null,longText,'FULL_OUTPUT_INVALID_TASK_ID'],['',longText,'FULL_OUTPUT_INVALID_TASK_ID'],['\ud800',longText,'FULL_OUTPUT_INVALID_TASK_ID'],['bad-text','prefix\ud800suffix','FULL_OUTPUT_INVALID_TEXT'],['not-string',null,'FULL_OUTPUT_INVALID_TEXT']]){
+    const output=await executeTask(researchTask(id),config,modelText(text));
+    assert.equal(output.status,'failed');assert.equal(output.result.failureCategory,'full_output_retention');
+    assert.equal(output.result.fullOutput.retained,false);assert.equal(output.result.fullOutput.errorCode,errorCode);
+  }
+  assert.equal(existsSync(config.stateDir),false);
 });
