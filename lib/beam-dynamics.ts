@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import type { PlantModel, BranchJoint } from './plant-engine';
+import { woodSections, sectionVolume } from './wood-loads.ts';
 
 /** SI engineering priors, NOT measurements of Ginkgo/Osmanthus or a campus specimen. */
 export interface BeamDynamicsOptions {
@@ -29,12 +30,14 @@ export interface BeamDynamicsStats {
   droppedTimeSeconds: number;
   leafAreaM2: number;
   countedLeaves: number;
+  resolvedWoodSegments: number;
   priorStatus: 'engineering-assumption';
 }
 interface LeafLoad { area: number; normal: THREE.Vector3; arm: number; }
 interface BeamState {
   branch: BranchJoint; parent: number; attach: number;
   length: number; radius: number; woodMass: number; leafMass: number;
+  woodArea: number; woodWindArm2: number; woodMassArm2: number; resolvedWood: boolean;
   subtreeMass: number; worldRest: THREE.Quaternion; leaves: LeafLoad[];
   leafWind: number; woodWind: number; subtreeWind: number;
   angleX: number; angleZ: number; velocityX: number; velocityZ: number;
@@ -69,7 +72,7 @@ export function createBeamDynamics(model: PlantModel, options: BeamDynamicsOptio
   const reconfigure = options.reconfigurationSpeedMS === Infinity ? Infinity : finite(options.reconfigurationSpeedMS, 12, .01);
   const windDirection = (options.windDirection?.clone() || new THREE.Vector3(1, 0, .2)).normalize();
   const gravityDirection = (options.gravityDirection?.clone() || new THREE.Vector3(0, -1, 0)).normalize();
-  const stats: BeamDynamicsStats = { windForceN: 0, estimatedMassKg: 0, maxDeflectionRad: 0, youngModulusPa: E, dragCoefficient: Cd, outOfRange: false, clampedBranches: 0, droppedTimeSeconds: 0, leafAreaM2: 0, countedLeaves: 0, priorStatus: 'engineering-assumption' };
+  const stats: BeamDynamicsStats = { windForceN: 0, estimatedMassKg: 0, maxDeflectionRad: 0, youngModulusPa: E, dragCoefficient: Cd, outOfRange: false, clampedBranches: 0, droppedTimeSeconds: 0, leafAreaM2: 0, countedLeaves: 0, resolvedWoodSegments: 0, priorStatus: 'engineering-assumption' };
   const owner = new Map<THREE.Object3D, number>();
   model.branches.forEach((b, i) => { owner.set(b.pivot, i); b.pivot.quaternion.copy(b.rest); });
   model.group.updateMatrixWorld(true);
@@ -77,8 +80,10 @@ export function createBeamDynamics(model: PlantModel, options: BeamDynamicsOptio
     const length = Math.max(1e-5, branch.length), radius = Math.max(1e-6, branch.radius);
     // Exact conical-frustum volume using the assumed tip/base radius ratio.
     const woodMass = density * Math.PI * radius * radius * length * (1 + tip + tip * tip) / 3;
+    const axial = UP.clone().applyQuaternion(branch.pivot.getWorldQuaternion(new THREE.Quaternion())).dot(windDirection);
+    const woodArea = radius * length * (1 + tip) * Math.sqrt(Math.max(0, 1 - axial * axial));
     let parent = branch.pivot.parent; while (parent && !owner.has(parent)) parent = parent.parent;
-    return { branch, parent: parent ? owner.get(parent)! : -1, attach: 0, length, radius, woodMass, leafMass: 0, subtreeMass: woodMass, worldRest: branch.pivot.getWorldQuaternion(new THREE.Quaternion()), leaves: [], leafWind: 0, woodWind: 0, subtreeWind: 0, angleX: 0, angleZ: 0, velocityX: 0, velocityZ: 0, targetX: 0, targetZ: 0, omega: 0 };
+    return { branch, parent: parent ? owner.get(parent)! : -1, attach: 0, length, radius, woodMass, woodArea, woodWindArm2: woodArea * length ** 2 / 6, woodMassArm2: woodMass * length ** 2 / 6, resolvedWood: false, leafMass: 0, subtreeMass: woodMass, worldRest: branch.pivot.getWorldQuaternion(new THREE.Quaternion()), leaves: [], leafWind: 0, woodWind: 0, subtreeWind: 0, angleX: 0, angleZ: 0, velocityX: 0, velocityZ: 0, targetX: 0, targetZ: 0, omega: 0 };
   });
   for (const s of states) if (s.parent >= 0) {
     const parent = states[s.parent];
@@ -88,6 +93,41 @@ export function createBeamDynamics(model: PlantModel, options: BeamDynamicsOptio
   const children = states.map(() => [] as number[]);
   states.forEach((s, i) => { if (s.parent >= 0) children[s.parent].push(i); });
   const stateIndex = new Map(states.map((s, i) => [s, i]));
+  // Merged fine shoots are still real wood: collect their actual mesh sections
+  // once, assigning each to its nearest dynamic owner. Never add an equivalent
+  // primary frustum on top of resolved geometry. Arms are lumped onto the owner
+  // beam; off-axis torsion and deformation of merged twigs remain unsolved.
+  model.group.traverse(object => {
+    const mesh = object as THREE.Mesh;
+    if (!mesh.isMesh || (mesh as THREE.InstancedMesh).isInstancedMesh || !mesh.geometry) return;
+    let parent: THREE.Object3D | null = mesh;
+    while (parent && !owner.has(parent)) {
+      if (['leaf', 'root', 'rhizome', 'seed', 'bud', 'flower'].includes(parent.userData.organ)) return;
+      parent = parent.parent;
+    }
+    if (!parent || parent.userData.woody === false) return;
+    const sections = woodSections(mesh.geometry); if (!sections.length) return;
+    const state = states[owner.get(parent)!];
+    if (!state.resolvedWood) {
+      state.woodMass = state.woodArea = state.woodWindArm2 = state.woodMassArm2 = 0;
+      state.resolvedWood = true;
+    }
+    const volumeScale = Math.abs(mesh.matrixWorld.determinant());
+    for (const section of sections) {
+      const a = new THREE.Vector3(...section.a), b = new THREE.Vector3(...section.b), localLength = a.distanceTo(b);
+      a.applyMatrix4(mesh.matrixWorld); b.applyMatrix4(mesh.matrixWorld);
+      const length = a.distanceTo(b); if (!(localLength > 0 && length > 0)) continue;
+      const areaScale = volumeScale * localLength / length;
+      const mass = density * sectionVolume(section) * volumeScale;
+      const axial = b.clone().sub(a).divideScalar(length).dot(windDirection);
+      const area = (Math.sqrt(section.areaA * areaScale / Math.PI) + Math.sqrt(section.areaB * areaScale / Math.PI)) * length * Math.sqrt(Math.max(0, 1 - axial * axial));
+      const arm = THREE.MathUtils.clamp(state.branch.pivot.worldToLocal(a.add(b).multiplyScalar(.5)).y, 0, state.length);
+      state.woodMass += mass; state.woodArea += area;
+      state.woodMassArm2 += mass * arm * arm / 2; state.woodWindArm2 += area * arm * arm / 2;
+      stats.resolvedWoodSegments++;
+    }
+    state.subtreeMass = state.woodMass;
+  });
   // Precompute one-sided blade areas from actual triangles; each instance has its
   // own scale/rotation. Cylinder petioles are excluded from leaf count and mass.
   // Area-weighted mean normals approximate folded blades' projected area.
@@ -140,9 +180,7 @@ export function createBeamDynamics(model: PlantModel, options: BeamDynamicsOptio
     const pressure = .5 * air * Cd * speed * speed;
     const areaReduction = 1 / Math.sqrt(1 + (speed / reconfigure) ** 2);
     for (const s of states) {
-      const direction = UP.clone().applyQuaternion(s.worldRest), axial = direction.dot(windDirection);
-      const woodArea = 2 * s.radius * s.length * (1 + tip) / 2 * Math.sqrt(Math.max(0, 1 - axial * axial));
-      s.woodWind = pressure * woodArea; s.leafWind = 0;
+      s.woodWind = pressure * s.woodArea; s.leafWind = 0;
       for (const leaf of s.leaves) s.leafWind += pressure * leaf.area * Math.abs(leaf.normal.dot(windDirection)) * areaReduction;
       s.subtreeWind = s.woodWind + s.leafWind; stats.windForceN += s.subtreeWind;
     }
@@ -151,8 +189,8 @@ export function createBeamDynamics(model: PlantModel, options: BeamDynamicsOptio
       const inverse = s.worldRest.clone().invert(); localWind.copy(windDirection).multiplyScalar(rawWind < 0 ? -1 : 1).applyQuaternion(inverse); localGravity.copy(gravityDirection).applyQuaternion(inverse);
       const EI = E * stiffness * Math.PI * s.radius ** 4 / 4;
       // End slope: point force at a -> F a²/(2EI); distributed force -> F L²/(6EI).
-      let windSlope = s.woodWind * s.length ** 2 / (6 * EI);
-      let gravitySlope = s.woodMass * gravity * s.length ** 2 / (6 * EI);
+      let windSlope = pressure * s.woodWindArm2 / EI;
+      let gravitySlope = gravity * s.woodMassArm2 / EI;
       for (const leaf of s.leaves) { windSlope += pressure * leaf.area * Math.abs(leaf.normal.dot(windDirection)) * areaReduction * leaf.arm ** 2 / (2 * EI); gravitySlope += leaf.area * leafArealMass * gravity * leaf.arm ** 2 / (2 * EI); }
       // Direct children only: the already accumulated subtree is never counted twice.
       for (const childIndex of children[stateIndex.get(s)!]) { const child = states[childIndex]; windSlope += child.subtreeWind * child.attach ** 2 / (2 * EI); gravitySlope += child.subtreeMass * gravity * child.attach ** 2 / (2 * EI); }

@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "0.5.1",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -29,7 +29,9 @@
   "physics": {
     "branches": "lumped cantilever rotational dynamics",
     "leaves": "bounded quasi-static strip bending for explicit petiolate blades",
-    "rootSoil": "root topology and relative soil response illustration, no hydraulic or anchorage solver"
+    "rootSoil": "root topology and relative soil response illustration, no hydraulic or anchorage solver",
+    "woodLoads": "actual rendered tube sections include merged fine shoots; nearest-owner lumping, circular/polygon-frustum approximation",
+    "unsolved": "off-axis torsion, root-soil compliance, fracture and full nonlinear beam response"
   },
   "evidence": "references/species-evidence.json",
   "photoAttribution": "references/photo-attribution.json",
@@ -39,7 +41,15 @@
     "scaffold": "persistent without an explicit pruning/damage event",
     "rootJunction": "actual shoot collar joined to generated root crown",
     "phenology": "age and day clocks independent",
-    "timing": "uncalibrated engineering priors"
+    "timing": "uncalibrated engineering priors",
+    "roots": "keyed axis identities and fixed material-node prefixes; proximal seed-to-collar extension",
+    "foliation": "fixed seasonal foliation-site identities and reserved cohort slots; no age-only evictions"
   },
-  "collaborationEvidence": "collaboration-evidence.json"
+  "collaborationEvidence": "collaboration-evidence.json",
+  "visualRefinement": {
+    "osmanthus": "irregular connected dense 3D crown; straight-axis approximation",
+    "camphorAcer": "fixed curved material axes with parent-tangent-oriented descendants",
+    "iris": "ribbed fans, curved falls, white fringed crests and procedural vein pigment",
+    "herbRoots": "shared active ramets, actual surface-node root starts and basal bridges"
+  }
 }

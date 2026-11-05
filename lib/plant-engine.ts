@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
+import {irisFallSurface,irisCrestSurface,herbPigment} from "./herb-surfaces.ts";
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
 import { osmanthusLifecycle, osmanthusPriors } from "./osmanthus-lifecycle.ts";
 
@@ -44,7 +46,7 @@ function ovalGeometry() {
 }
 function heartGeometry() {
   const s = new THREE.Shape(); s.moveTo(0, 0); s.bezierCurveTo(.012, .006, .035, .025, .023, .040); s.bezierCurveTo(.014, .050, .003, .036, 0, .030); s.bezierCurveTo(-.003, .036, -.014, .050, -.023, .040); s.bezierCurveTo(-.035, .025, -.012, .006, 0, 0);
-  return new THREE.ShapeGeometry(s, 10);
+  const g=new THREE.ShapeGeometry(s,10),p=g.attributes.position,uv=g.attributes.uv;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i);p.setZ(i,.0012*Math.sin(y/.05*Math.PI)-.0005*Math.abs(x)/.025);uv.setXY(i,.5+x/.055,y/.05);}g.computeVertexNormals();return g;
 }
 function petalGeometry(length: number, width: number, bend: number) {
   const s = new THREE.Shape(); s.moveTo(0, 0); s.bezierCurveTo(width, length * .24, width, length * .96, 0, length); s.bezierCurveTo(-width, length * .96, -width, length * .24, 0, 0);
@@ -53,14 +55,14 @@ function petalGeometry(length: number, width: number, bend: number) {
   g.computeVertexNormals(); return g;
 }
 function bladeGeometry(length: number, width: number, lean: number, yaw: number) {
-  const points: number[] = [], indices: number[] = []; const n = 16;
+  const points: number[] = [], indices: number[] = [],uvs:number[]=[]; const n = 16;
   for (let i = 0; i <= n; i++) {
-    const t = i / n, w = width * Math.pow(Math.sin(Math.PI * t), .65) * .5;
+    const t = i / n, w = width * smooth(0,.08,t) * (1-smooth(.65,1,t)) * .5;
     const y = length * (t - .24 * t * t * Math.abs(lean)); const x = lean * length * t * t;
-    for (let j = 0; j < 3; j++) { const z = (j - 1) * w; points.push(x * Math.cos(yaw) + z * Math.sin(yaw), y, -x * Math.sin(yaw) + z * Math.cos(yaw)); }
+    for (let j = 0; j < 3; j++) { const z = (j - 1) * w; points.push(x * Math.cos(yaw) + z * Math.sin(yaw), y, -x * Math.sin(yaw) + z * Math.cos(yaw));uvs.push(j/2,t); }
     if (i < n) for (let j = 0; j < 2; j++) { const a = i * 3 + j; indices.push(a, a + 3, a + 1, a + 1, a + 3, a + 4); }
   }
-  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(points, 3)); g.setIndex(indices); g.computeVertexNormals(); return g;
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(points, 3)); g.setIndex(indices);g.setAttribute("uv",new THREE.Float32BufferAttribute(uvs,2)); g.computeVertexNormals(); return g;
 }
 
 export function buildPlant(species: PlantSpecies, params: PlantParams): PlantModel {
@@ -76,7 +78,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
   const stemMat = new THREE.MeshStandardMaterial({ color: "#637a3d", roughness: .9 });
   const materials: THREE.Material[] = [bark, youngBark, foliage, stemMat];
   const col = new THREE.Color();
-  const extraGeometries: THREE.BufferGeometry[] = [];
+  const extraGeometries: THREE.BufferGeometry[] = [];const extraTextures:THREE.Texture[]=[];
   const leafGeometry = species === "ginkgo" ? fanGeometry() : species === "osmanthus" ? ovalGeometry() : heartGeometry();
   const leafPresence = species === "ginkgo" ? smooth(65, 105, day) * (1 - smooth(320, 350, day)) : 1;
 
@@ -97,10 +99,15 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
   let stageLabel: string | undefined;
   if (species === "osmanthus") {
     const life = osmanthusLifecycle(age), h = life.height, r = life.radius;
+    foliage.roughness = .48; // Leathery evergreen surface; an appearance prior.
     stageLabel = life.stageLabel;
     group.userData = { stageLabel, lifecycle: life, priors: osmanthusPriors,
       architecture: { coordinates: "axis length sampled at node birth; persistent local supports", maxOrder: 3,
-        maxAxisBudget: 869, maxLeafBudget: 22880, leafTurnover: "uncalibrated; persistent foliage proxy, not a physiology solver" },
+        maxAxisBudget: 869, maxLeafBudget: 30000, leafTurnover: "uncalibrated; persistent foliage proxy, not a physiology solver",
+        habit: "dense rounded 3D evergreen crown; unequal axillary shoot vigour and angles; straight material axes",
+        calibration: "timing, angles, envelope and density are engineering priors, not measured campus data",
+        references: "NCSU Osmanthus fragrans description and two private habit photographs; no photograph redistribution",
+        pruning: "source describes pruning response; no pruning history or age-only wood removal inferred" },
       reproduction: "four-lobed axillary flowers; pollination, fruit and seed dispersal not modeled" };
     const unitCylinder = new THREE.CylinderGeometry(1, 1, 1, 5);
     const seedGeo = new THREE.SphereGeometry(1, 12, 8), flowerCenterGeo = new THREE.SphereGeometry(.0007, 6, 4);
@@ -116,6 +123,17 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     }
     const bloom = smooth(243, 263, day) * (1 - smooth(292, 310, day)) * smooth(2, 5, age);
     const phase = rng((params.seed || 1) * 211)() * Math.PI * 2;
+    // Leaf size is unchanged. Fill the crown with actual opposite leaf nodes on
+    // connected fine shoots, rather than enlarged blades or detached filler.
+    const lp = leafGeometry.getAttribute("position"), li = leafGeometry.index;
+    const va = new THREE.Vector3(), vb = new THREE.Vector3(), vc = new THREE.Vector3();
+    let bladeArea = 0, oneSidedLeafAreaM2 = 0;
+    for (let i = 0; i < (li ? li.count : lp.count); i += 3) {
+      va.fromBufferAttribute(lp, li ? li.getX(i) : i);
+      vb.fromBufferAttribute(lp, li ? li.getX(i + 1) : i + 1);
+      vc.fromBufferAttribute(lp, li ? li.getX(i + 2) : i + 2);
+      bladeArea += vb.sub(va).cross(vc.sub(va)).length() * .5;
+    }
     function segmentMatrix(start: THREE.Vector3, end: THREE.Vector3, radius: number) {
       return new THREE.Matrix4().compose(start.clone().lerp(end, .5),
         new THREE.Quaternion().setFromUnitVectors(UP, end.clone().sub(start).normalize()),
@@ -131,18 +149,22 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     function axisArchitecture(id: string, order: number, birth: number, key: number, matureLength: number): AxisPlan {
       const onsets = order === 0 ? [.10, .32, .54, .76, 1.2, 1.8, 3.2, 4.8, 7, 10, 14, 19, 25, 33, 44, 60]
         : order === 1 ? [.10, .32, .54, .76, 1.2, 2, 3.2, 4.8, 7, 10, 14, 20]
-        : order === 2 ? [.10, .32, .54, .76, 1.2, 2, 3.2, 5] : [.10, .32, .54, .76, 1.2, 2];
+        : order === 2 ? [.10, .32, .54, .76, 1.2, 2, 3.2, 5] : [.10, .22, .36, .52, .72, .96, 1.3, 1.8, 2.4, 3.2];
       // Density changes lateral node sampling, not leader height or its late cohorts.
-      const count = order === 0 ? onsets.length : Math.max(2, Math.round(onsets.length * density));
+      // Fixed maxima prove a whole-life budget of at most 28,704 leaves / 869 axes.
+      const count = order === 0 ? onsets.length : Math.max(2, Math.min(order === 1 ? 20 : order === 2 ? 14 : 17,
+        Math.round((order === 3 ? 16 : onsets.length) * density)));
+      const vigour = rng(key + 407)();
       const lengthAt = order === 0 ? (atAge: number) => osmanthusLifecycle(atAge).height : (atAge: number) => {
         const elapsed = Math.max(0, atAge - birth);
-        return matureLength * smooth(0, .25, elapsed) * (1 - Math.exp(-elapsed / (order === 1 ? 5 : order === 2 ? 2.4 : 1.3)));
+        return matureLength * smooth(0, .25, elapsed) * (1 - Math.exp(-elapsed / ((order === 1 ? 5 : order === 2 ? 2.4 : 1.3) * (.8 + .4 * vigour))));
       };
       const nodes = Array.from({ length: count }, (_, index) => {
         const sample = index * (onsets.length - 1) / (count - 1), lo = Math.floor(sample), hi = Math.ceil(sample);
         const nodeBirth = birth + onsets[lo] + (onsets[hi] - onsets[lo]) * (sample - lo);
         const lengthAtBirth = lengthAt(nodeBirth);
-        return { index, birth: nodeBirth, lengthAtBirth, attachment: [0, .96 * lengthAtBirth, 0], angle: phase + index * Math.PI / 2 };
+        return { index, birth: nodeBirth, lengthAtBirth, attachment: [0, .96 * lengthAtBirth, 0],
+          angle: phase + (order === 0 ? 0 : rng(key + 809)() * Math.PI * 2) + index * Math.PI / 2 };
       });
       return { id, birth, order, key, matureLength, lengthAt, nodes };
     }
@@ -157,18 +179,22 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         if (expansion <= 0) continue;
         const attachment = new THREE.Vector3(...node.attachment);
         const theta = node.angle;
+        // A fixed nodal elevation breaks identical comb-like blade poses while
+        // preserving the opposite pair and its 90-degree decussate azimuths.
+        const petioleRise = .12 + .50 * rng(key + n * 331 + 23)();
         const scale = (.20 + .80 * smooth(.10, 2, age)) * expansion;
         nodes.push({ ...node, scale });
         for (let side = 0; side < 2; side++) {
           // A single node, a single expansion factor, exactly opposite petioles;
           // the next node's pair rotates 90 degrees (decussate phyllotaxis).
           const angle = theta + side * Math.PI;
-          const dir = new THREE.Vector3(Math.cos(angle), .23, Math.sin(angle)).normalize();
+          const dir = new THREE.Vector3(Math.cos(angle), petioleRise, Math.sin(angle)).normalize();
           const bladeBase = attachment.clone().addScaledVector(dir, .008 * scale);
           const normal = UP.clone().addScaledVector(dir, -UP.dot(dir)).normalize();
           const widthAxis = new THREE.Vector3().crossVectors(dir, normal).normalize();
           const q = new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().makeBasis(widthAxis, dir, normal));
           matrices.push(new THREE.Matrix4().compose(bladeBase, q, new THREE.Vector3(scale, scale, scale)));
+          oneSidedLeafAreaM2 += bladeArea * scale * scale;
           petioles.push(segmentMatrix(attachment, bladeBase, .00055 * scale));
           if (bloom <= 0) continue;
           const fr = rng(key + n * 197 + side * 31);
@@ -214,7 +240,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       const leaderPlan = axisArchitecture("leader", 0, 0, params.seed || 1, osmanthusPriors.dimensions.matureHeightAsymptote);
       leader.userData = { axis: "leader", axisId: leaderPlan.id, birth: 0 };
       axisLeaves(leader, leaderPlan);
-      function branchCohort(parent: THREE.Group, plan: AxisPlan) {
+      function branchCohort(parent: THREE.Group, plan: AxisPlan, worldRest: THREE.Quaternion, worldOrigin: THREE.Vector3) {
         if (plan.order >= 3) return;
         // Branches use the SAME node records as the rendered leaf/petiole pairs.
         // Sparse supporting nodes include distal cohorts on every branching order.
@@ -222,29 +248,70 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           : [...new Set((plan.order === 1 ? [.1, .45, .9] : [.2, .8]).map(f => Math.round(f * (plan.nodes.length - 1))))].map(i => plan.nodes[i]);
         for (const node of supports) for (let side = 0; side < 2; side++) {
           const order = plan.order + 1;
-          const onset = Math.max(plan.birth + (order === 1 ? .8 : 1.2), node.birth + (order === 1 ? .45 : .65));
-          if (age <= onset) continue;
           const axisKey = Math.imul(plan.key, 1664525) + (node.index * 2 + side + 1) * 1013904223;
           const rr = rng(axisKey);
-          const matureLength = plan.matureLength * (order === 1 ? .50 : .42) * (.85 + rr() * .30)
-            * (1 - .4 * node.attachment[1] / plan.matureLength);
+          // Opposite leaves specify two axils, not twin scaffold axes. Each bud
+          // has its own fixed vigour, delay, azimuth and inclination. The keyed
+          // variation describes connected shoots; it adds no decorative organs.
+          const dominantSide = rng(plan.key + node.index * 9173 + 199)() < .5 ? 0 : 1;
+          const vigour = side === dominantSide ? .65 + .35 * rr() : .05 + .50 * rr();
+          const delay = rr() * .32;
+          const onset = Math.max(plan.birth + (order === 1 ? .8 : 1.2), node.birth + (order === 1 ? .45 : .65)) + delay;
+          if (age <= onset) continue;
+          const position = new THREE.Vector3(...node.attachment);
+          const origin = position.clone().applyQuaternion(worldRest).add(worldOrigin);
+          const angle = node.angle + side * Math.PI + (rr() - .5) * 1.25;
+          const inclination = (order === 1 ? .72 : .65) + rr() * (order === 1 ? .72 : 1.05);
+          const worldDirection = direction(angle, inclination).applyQuaternion(worldRest);
+          // Fine axes turn toward light; using the parent's fixed rest frame
+          // avoids the repeated planar fork produced by a common local angle.
+          if (order > 1) worldDirection.addScaledVector(UP, .65 + .3 * rr()).normalize();
+          // A fixed, broad ellipsoid limits *extension*, never moves an existing
+          // support or retires old wood. It is a habit prior, not a clipping mesh
+          // or an assumed measured/pruned campus specimen. Ray intersection
+          // gives upper branches shorter reach without imposing equal tiers.
+          const radii = new THREE.Vector3(2.45, 2.85, 2.45);
+          const offset = origin.clone().sub(new THREE.Vector3(0, 2.65, 0)).divide(radii);
+          const ray = worldDirection.clone().divide(radii);
+          const aa = ray.lengthSq(), bb = offset.dot(ray), cc = offset.lengthSq() - 1;
+          const reach = Math.max(.015, (-bb + Math.sqrt(Math.max(0, bb * bb - aa * cc))) / aa);
+          const potential = plan.matureLength * (order === 1 ? .68 : order === 2 ? .52 : .62) * (.68 + .65 * vigour);
+          const matureLength = Math.min(potential, reach * (.60 + .38 * vigour));
           const child = axisArchitecture(`${plan.id}/${node.index}:${side}`, order, onset, axisKey, matureLength);
           const len = child.lengthAt(age), growth = len / matureLength;
           if (growth <= 0) continue;
-          const position = new THREE.Vector3(...node.attachment);
-          const angle = node.angle + side * Math.PI;
           const radius = r * Math.pow(.32, order) * Math.sqrt(growth);
-          const axis = joint(parent, position, direction(angle, .60 + rr() * .35), len, radius, order, axisKey);
+          const localDirection = worldDirection.clone().applyQuaternion(worldRest.clone().invert());
+          const axis = joint(parent, position, localDirection, len, radius, order, axisKey);
           axis.userData = { axis: "lateral", axisId: child.id, birth: onset, node: node.index,
-            supportNode: node, supportAxisId: plan.id, side, growth };
+            supportNode: node, supportAxisId: plan.id, side, growth, matureLength, inclination, vigour };
           axisLeaves(axis, child);
-          branchCohort(axis, child);
+          branchCohort(axis, child, worldRest.clone().multiply(axis.quaternion), origin);
         }
       }
-      branchCohort(leader, leaderPlan);
+      branchCohort(leader, leaderPlan, leader.quaternion.clone(), leader.position.clone());
       const bud = new THREE.Mesh(seedGeo, stemMat); bud.name = "osmanthus-terminal-bud"; bud.userData.organ = "bud";
       bud.position.y = h; bud.scale.set(.0007, .0015, .0007).multiplyScalar(smooth(.035, .12, age)); leader.add(bud);
     }
+    // Build-time diagnostic only. Animation rotates the existing hierarchy and
+    // never regenerates axes, instances, bounds or area/projection metrics.
+    group.updateMatrixWorld(true);
+    const crown = new THREE.Box3(), instance = new THREE.Matrix4(), point = new THREE.Vector3();
+    group.traverse(object => {
+      const leaves = object as THREE.InstancedMesh;
+      if (!leaves.isInstancedMesh || leaves.userData.connectedBy !== "petiole") return;
+      for (let i = 0; i < leaves.count; i++) {
+        leaves.getMatrixAt(i, instance);
+        crown.expandByPoint(point.setFromMatrixPosition(instance).applyMatrix4(leaves.matrixWorld));
+      }
+    });
+    const span = crown.isEmpty() ? new THREE.Vector3() : crown.getSize(new THREE.Vector3());
+    const projectedCrownAreaM2 = Math.PI * span.x * span.z / 4;
+    group.userData.canopyMetrics = { oneSidedLeafAreaM2, projectedCrownAreaM2,
+      leafAreaRatio: projectedCrownAreaM2 > 0 ? oneSidedLeafAreaM2 / projectedCrownAreaM2 : 0,
+      crownSpanM: span.toArray(), maxLeafBudget: 30000,
+      projectionDefinition: "horizontal ellipse of leaf-base bounds in the fixed rest pose",
+      calibration: "actual one-sided mesh area / horizontal crown bounding ellipse; engineering density proxy, not measured stand LAI" };
   } else if (species === "iris" || species === "oxalis") {
     // Botanical constraints supplied by NCSU Plant Toolbox; geometry is in metres.
     // Durations, cohort budgets and flowering windows below are uncalibrated
@@ -260,7 +327,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     const storage = new THREE.MeshStandardMaterial({ color: "#9d885d", roughness: .95 });
     const petalMat = new THREE.MeshStandardMaterial({ color: iris ? "#7c73bf" : "#f4ce3d", side: THREE.DoubleSide, roughness: .7 });
     const light = new THREE.MeshStandardMaterial({ color: "#b3a5df", side: THREE.DoubleSide, roughness: .7 });
-    materials.push(green, storage, petalMat, light);
+    materials.push(green, storage, petalMat, light);const leafMap=herbPigment(iris?"iris-blade":"oxalis-blade");green.map=leafMap;green.bumpMap=leafMap;green.bumpScale=iris?.00018:.00008;extraTextures.push(leafMap);
     stageLabel = iris
       ? age < .025 ? "根茎分株 · 带芽繁殖体" : age < .14 ? "分株建立 · 首叶展开" : age < .5 ? "二列扇叶 · 新叶建立" : "根茎横走 · 分株扩展（繁殖结构为季节先验）"
       : age < .018 ? "带根匍匐茎节 · 营养繁殖体" : age < .10 ? "茎节建立 · 首片三出复叶" : age < .35 ? "匍匐伸长 · 新节生根" : "匍匐群落 · 连续展叶（繁殖结构为季节先验）";
@@ -297,9 +364,9 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       return pivot;
     }
     if (iris) {
-      const outerGeo = petalGeometry(.065, .024, -.045), innerGeo = petalGeometry(.055, .014, .008);
+      const outerGeo = irisFallSurface(),crestGeo=irisCrestSurface(), innerGeo = petalGeometry(.055, .014, .008);
       const styleGeo = petalGeometry(.042, .007, .004);
-      extraGeometries.push(outerGeo, innerGeo, styleGeo);
+      extraGeometries.push(outerGeo, innerGeo, styleGeo,crestGeo);const fallMap=herbPigment("iris-fall");petalMat.map=fallMap;petalMat.color.set("#ffffff");extraTextures.push(fallMap);const crestMat=new THREE.MeshStandardMaterial({color:"#f1edf8",side:THREE.DoubleSide,roughness:.82});materials.push(crestMat);
       const fanCount = Math.max(1, Math.round(4 * density));
       // One shallow, horizontal rhizome chain. Each new fan waits for its segment.
       let node = new THREE.Vector3(.015, -.003, 0);
@@ -316,7 +383,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         }
         const fanBirth = c === 0 ? 0 : birth + .22;
         const establishment = c === 0 ? 1 : smooth(fanBirth, fanBirth + .10, age);
-        const base = new THREE.Group(); base.name = `iris-fan-${c}`; base.position.copy(node); base.rotation.y = phase;
+        const base = new THREE.Group(); base.name = `iris-fan-${c}`; base.position.copy(node); base.rotation.y = phase+(keyed(150+c)-.5)*.65;
         base.userData = { role: "rhizome-node", cohort: c, birth: fanBirth }; group.add(base);
         root(base, establishment); bud(base, establishment);
         const expanded = Array.from({ length: 8 }, (_, i) => smooth(fanBirth + .025 + i * .07, fanBirth + .14 + i * .07, age));
@@ -330,7 +397,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           // instead expand and spread in the common plane of the equitant fan.
           const vertices = geometry.attributes.position;
           for (let v = 0; v < vertices.count; v++) {
-            vertices.setX(v, vertices.getX(v) + vertices.getZ(v)); vertices.setZ(v, 0);
+            vertices.setX(v, vertices.getX(v) + vertices.getZ(v)); vertices.setZ(v, (v%3===1?.0006:0)*expansion*Math.sin(vertices.getY(v)/Math.max(1e-8,length)*Math.PI));
           }
           geometry.computeVertexNormals();
           const leaf = new THREE.Mesh(geometry, green);
@@ -348,7 +415,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         flower.userData = { organ: "flower", role: "iris-flower", outerTepals: 3, innerTepals: 3, styleBranches: 3 }; fan.add(flower);
         for (let p = 0; p < 3; p++) {
           const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 3; flower.add(frame);
-          const fall = new THREE.Mesh(outerGeo, petalMat); fall.rotation.x = -Math.PI / 2; fall.userData.role = "drooping-outer-tepal"; frame.add(fall);
+          const fall = new THREE.Mesh(outerGeo, petalMat); fall.rotation.x = -Math.PI / 2; fall.userData.role = "drooping-outer-tepal"; frame.add(fall);const crest=new THREE.Mesh(crestGeo,crestMat);crest.rotation.copy(fall.rotation);crest.userData.role="fringed-white-crest";frame.add(crest);
           const style = new THREE.Mesh(styleGeo, light); style.rotation.x = -Math.PI / 2 + .22; style.userData.role = "style-branch"; frame.add(style);
           const standardFrame = new THREE.Group(); standardFrame.rotation.y = Math.PI / 3; frame.add(standardFrame);
           const standard = new THREE.Mesh(innerGeo, light); standard.rotation.x = .22; standard.userData.role = "upright-inner-tepal"; standardFrame.add(standard);
@@ -445,7 +512,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     if (disposed) return; disposed = true;
     const geometries = new Set<THREE.BufferGeometry>([leafGeometry, ...extraGeometries]); const mats = new Set<THREE.Material>(materials);
     group.traverse(obj => { const m = obj as THREE.Mesh; if (m.geometry) geometries.add(m.geometry); if (m.material) { const material = Array.isArray(m.material) ? m.material : [m.material]; material.forEach(x => mats.add(x)); } if (obj instanceof THREE.InstancedMesh) obj.dispose(); });
-    geometries.forEach(g => g.dispose()); mats.forEach(m => m.dispose()); group.clear();
+    geometries.forEach(g => g.dispose()); mats.forEach(m => m.dispose());extraTextures.forEach(t=>t.dispose()); group.clear();
   }
   return { group, branches, leafCount, height, stageLabel, update, dispose };
 }
@@ -521,14 +588,14 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     for(let i=0;i<=segments;i++) { const t=i/segments, p=curve.getPointAt(t), rr=tipR+(r-tipR)*Math.pow(1-t,.88);
       for(let j=0;j<=sides;j++) {const a=j/sides*Math.PI*2, irregular=1+.035*Math.sin(j*5.1+i*.7); const n=frames.normals[i].clone().multiplyScalar(Math.cos(a)*rr*irregular).addScaledVector(frames.binormals[i],Math.sin(a)*rr*irregular);positions.push(p.x+n.x,p.y+n.y,p.z+n.z);uv.push(j/sides,t*Math.max(.18,length)*1.8);if(i<segments&&j<sides){const v=i*(sides+1)+j;indices.push(v,v+sides+1,v+1,v+1,v+sides+1,v+sides+2);}}
     }
-    const g = new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(positions,3));g.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));g.setIndex(indices);g.computeVertexNormals();return g;
+    const g = new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(positions,3));g.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));g.setIndex(indices);g.computeVertexNormals();return tagWoodTube(g,segments,sides);
   }
   function mergeGeometries(parts: THREE.BufferGeometry[]) {
     let count=0; const flat=parts.map(g=>{const f=g.index?g.toNonIndexed():g;count+=f.attributes.position.count;return f;});
     const positions=new Float32Array(count*3),normals=new Float32Array(count*3),uv=new Float32Array(count*2);let n=0;
     for(const g of flat){positions.set(g.attributes.position.array as ArrayLike<number>,n*3);normals.set(g.attributes.normal.array as ArrayLike<number>,n*3);if(g.attributes.uv)uv.set(g.attributes.uv.array as ArrayLike<number>,n*2);n+=g.attributes.position.count;}
     const out=new THREE.BufferGeometry();out.setAttribute("position",new THREE.BufferAttribute(positions,3));out.setAttribute("normal",new THREE.BufferAttribute(normals,3));out.setAttribute("uv",new THREE.BufferAttribute(uv,2));
-    for(const g of new Set([...parts,...flat]))g.dispose(); return ownGeometry(out);
+    mergeWoodSections(parts,out);for(const g of new Set([...parts,...flat]))g.dispose(); return ownGeometry(out);
   }
   function meshParts(parent:THREE.Object3D,parts:THREE.BufferGeometry[],mat:THREE.Material) {if(!parts.length)return;const mesh=new THREE.Mesh(mergeGeometries(parts),mat);mesh.castShadow=mesh.receiveShadow=true;parent.add(mesh);}
   // An extending axis reveals more of a fixed material centreline. Scaling a
@@ -554,7 +621,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
   function recordArea(record:LeafRecord){const e=record.matrix.elements;return bladeAreaM2*Math.hypot(e[0],e[1],e[2])*Math.hypot(e[4],e[5],e[6]);}
   let visibleLeafAreaM2=0;
   function foliageBatch(parent:THREE.Object3D,records:LeafRecord[],buds:THREE.Matrix4[]) {
-    const visible=records.filter((_,i)=>rng(seed*113+i*47+records.length)()<leafPresence); if(visible.length) {
+    const visible=records.filter(record=>{let key=seed*113;for(const c of record.nodeId??'')key=Math.imul(key^c.charCodeAt(0),16777619);return rng(key)()<leafPresence;}); if(visible.length) {
       const leaves=new THREE.InstancedMesh(leafGeometry,leafMaterial,visible.length),petioles=new THREE.InstancedMesh(unitPetiole,petioleMaterial,visible.length);
       leaves.userData.organ=petioles.userData.organ="leaf";leaves.userData.connectedBy="petiole";leaves.castShadow=leaves.receiveShadow=true;
       leaves.userData.nodeIds=visible.map(l=>l.nodeId??null);
@@ -581,7 +648,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     dummy.scale.set(.00048 * Math.max(.15, scale), petioleLength, .00048 * Math.max(.15, scale)); dummy.updateMatrix();
     records.push({ matrix, petiole: dummy.matrix.clone(), tone,nodeId });
   }
-  function shortShoots(curve:THREE.CatmullRomCurve3,frame:THREE.Matrix4,wood:THREE.BufferGeometry[],records:LeafRecord[],buds:THREE.Matrix4[],key:number,n:number,leafScale:number,surfaceUp: THREE.Vector3 = UP,axisFraction=1,recordLimit=Infinity) {
+  function shortShoots(curve:THREE.CatmullRomCurve3,frame:THREE.Matrix4,wood:THREE.BufferGeometry[],records:LeafRecord[],buds:THREE.Matrix4[],key:number,n:number,leafScale:number,surfaceUp: THREE.Vector3 = UP,axisFraction=1,leafSlotBudget=Infinity) {
     const shootCount=Math.max(1,Math.round(n)), axisLength=curve.getLength();
     for(let s=0;s<shootCount;s++) {
       const rr=rng(key+s*12289);
@@ -601,11 +668,11 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
       dummy.position.copy(end);dummy.quaternion.setFromUnitVectors(UP,outward);dummy.scale.set(.0013*shootScale,.0025*shootScale,.0013*shootScale);dummy.updateMatrix();if(shootScale>.015)buds.push(dummy.matrix.clone());
       const leafN=shootScale<.015?0:Math.max(2,Math.round((5+rr()*3)*density));
       for(let l=0;l<leafN;l++) {
-        if(records.length>=recordLimit)break;
+        if(s*Math.max(2,Math.round(8*density))+l>=leafSlotBudget)break;
         const theta=az+l*2.39996+(rr()-.5)*.35;
         const direction=new THREE.Vector3(Math.cos(theta),.08+rr()*.42,Math.sin(theta)).normalize();
         const nodeT=.22+.72*(l+.5)/leafN,expansion=smooth(nodeT,nodeT+.06,shootScale),attachment=fullShoot.getPoint(nodeT);
-        appendLeaf(records,attachment,direction,(.024+rr()*.018)*shootScale*expansion,shootScale*expansion*(.82+rr()*.22),(rr()-.5)*.65,rr()-.5,surfaceUp);
+        appendLeaf(records,attachment,direction,(.024+rr()*.018)*shootScale*expansion,shootScale*expansion*(.82+rr()*.22),(rr()-.5)*2.2,rr()-.5,surfaceUp,`spur:${key}:${s}:${l}`);
       }
     }
   }
@@ -630,9 +697,11 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
       if(nodeAge<=0)break;
       const materialY=heightAt(birth)*.96,t=materialY/Math.max(.001,h), angle=initialPhase+i*2.39996;
       const attachment=axisPoint(materialY,seed*.13), expansion=smooth(0,.12,nodeAge)*trueLeaves;
+      // Older lower-stem foliage fades under an explicit renewal prior;
+      // its woody spur remains. This is not a calibrated competition solver.
       const light=1-smooth(2,5,nodeAge)*(1-smooth(.24,.56,t));
       const direction=new THREE.Vector3(Math.cos(angle),.18,Math.sin(angle)).normalize();
-      appendLeaf(records,attachment,direction,.032*expansion,leafScale*expansion*light,.12*Math.sin(i*2.1),rng(seed+i*113)()-.5);
+      appendLeaf(records,attachment,direction,.032*expansion,leafScale*expansion*light,.12*Math.sin(i*2.1),rng(seed+i*113)()-.5,UP,`stem-leaf:${i}`);
       const spurGrowth=smooth(.85,1.8,nodeAge);
       if(spurGrowth>.001) {
         const end=attachment.clone().addScaledVector(direction,.014*spurGrowth);
@@ -651,7 +720,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     pendingCanopies.push({parent:leader,wood:[],fine,records,buds,sites:[]});
     for(let i=0;i<majorCount;i++) {
       const rr=rng(seed*104729+i*8191), birth=4+i*1.10+i*i*.080, branchAge=age-birth;
-      const growth=smooth(0,12,branchAge);if(growth<1e-7)continue;
+      const growth=smooth(0,8,branchAge);if(growth<1e-7)continue;
       const anchor=axisPoint(heightAt(birth)*.96,seed*.13),attachT=anchor.y/h,az=initialPhase+i*2.39996+(rr()-.5)*.65;
       // Young pyramidal habit opens into an irregular broad ovoid; no radial tiers.
       const futureHeight=heightAt(birth+25),fixedFraction=heightAt(birth)/futureHeight;
@@ -673,15 +742,15 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
       for(let n=0;n<12;n++) {
         const t=.12+n*.077, a=az+n*2.39996, d=new THREE.Vector3(Math.cos(a),.18,Math.sin(a)).normalize();
         const expansion=smooth(t,t+.05,growth);
-        appendLeaf(records,fullPrimary.getPoint(t),d,.035*expansion,branchLeafScale*expansion,.1*Math.sin(n),0,canopyUp);
+        appendLeaf(records,fullPrimary.getPoint(t),d,.035*expansion,branchLeafScale*expansion,.1*Math.sin(n),0,canopyUp,`primary:${i}:long:${n}`);
       }
       const spurScale=branchLeafScale*smooth(.85,1.7,branchAge);
-      if(spurScale>.001)shortShoots(fullPrimary,new THREE.Matrix4(),fine,records,buds,seed+i*4049,8,spurScale,canopyUp,growth);
+      if(spurScale>.001)shortShoots(fullPrimary,new THREE.Matrix4(),fine,records,buds,seed+i*4049,16,spurScale,canopyUp,growth);
       const secondCount=9;
       for(let b=0;b<secondCount;b++) {
         const sr=rng(seed*617+i*1013+b*197), st=.15+(b+.2+sr()*.55)/secondCount*.80;
-        const secondOnset=.9+st*12,secondAge=branchAge-secondOnset, sg=smooth(0,6,secondAge);if(sg<1e-7)continue;
-        const start=fullPrimary.getPoint(smooth(0,12,secondOnset)*.85),phi=b*2.39996+(sr()-.5)*1.1;
+        const secondOnset=.9+st*8,secondAge=branchAge-secondOnset, sg=smooth(0,4,secondAge);if(sg<1e-7)continue;
+        const start=fullPrimary.getPoint(smooth(0,8,secondOnset)*.85),phi=b*2.39996+(sr()-.5)*1.1;
         const secondaryTarget=targetLength*(.22+sr()*.25)*(1-st*.40),slen=secondaryTarget*sg;
         const sdir=new THREE.Vector3(Math.cos(phi)*.85,.36+sr()*.60,Math.sin(phi)*.85).normalize(),sq=new THREE.Quaternion().setFromUnitVectors(UP,sdir),frame=new THREE.Matrix4().compose(start,sq,new THREE.Vector3(1,1,1));
         const secondary=curveFor(slen,0,phi),fullSecondary=curveFor(secondaryTarget,0,phi);
@@ -690,13 +759,13 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
         for(let n=0;n<7;n++) {
           const a=phi+n*2.39996,d=new THREE.Vector3(Math.cos(a),.2,Math.sin(a)).normalize().applyQuaternion(sq);
           const t=.30+n*.10,expansion=smooth(t,t+.06,sg);
-          appendLeaf(records,fullSecondary.getPoint(t).applyMatrix4(frame),d,.032*expansion,secondaryScale*expansion,.1*Math.sin(n),0,canopyUp);
+          appendLeaf(records,fullSecondary.getPoint(t).applyMatrix4(frame),d,.032*expansion,secondaryScale*expansion,.1*Math.sin(n),0,canopyUp,`primary:${i}/secondary:${b}:long:${n}`);
         }
-        if(secondAge>.85)shortShoots(fullSecondary,frame,fine,records,buds,seed+i*7027+b*997,7,secondaryScale*smooth(.85,1.7,secondAge),canopyUp,sg);
+        if(secondAge>.85)shortShoots(fullSecondary,frame,fine,records,buds,seed+i*7027+b*997,12,secondaryScale*smooth(.85,1.7,secondAge),canopyUp,sg);
         for(let c=0;c<4;c++) {
           const tr=rng(seed*53+i*2131+b*313+c*79),tt=.22+(c+.3+tr()*.3)/4*.70;
-          const twigOnset=.8+tt*6,twigAge=secondAge-twigOnset,tg=smooth(0,3,twigAge);if(tg<1e-7)continue;
-          const origin=fullSecondary.getPoint(smooth(0,6,twigOnset)*.85).applyMatrix4(frame),ta=phi+c*2.37+(tr()-.5)*1.2;
+          const twigOnset=.8+tt*4,twigAge=secondAge-twigOnset,tg=smooth(0,2,twigAge);if(tg<1e-7)continue;
+          const origin=fullSecondary.getPoint(smooth(0,4,twigOnset)*.85).applyMatrix4(frame),ta=phi+c*2.37+(tr()-.5)*1.2;
           const localDirection=new THREE.Vector3(Math.cos(ta)*.83,.35+tr()*.65,Math.sin(ta)*.83).normalize().applyQuaternion(sq);
           const tq=new THREE.Quaternion().setFromUnitVectors(UP,localDirection),tf=new THREE.Matrix4().compose(origin,tq,new THREE.Vector3(1,1,1));
           const twigTarget=secondaryTarget*(.30+tr()*.32),tl=twigTarget*tg,twig=curveFor(tl,0,ta),fullTwig=curveFor(twigTarget,0,ta),twigScale=secondaryScale*smooth(0,.4,twigAge);
@@ -704,9 +773,9 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
           for(let n=0;n<5;n++) {
             const a=ta+n*2.39996,d=new THREE.Vector3(Math.cos(a),.2,Math.sin(a)).normalize().applyQuaternion(tq);
             const t=.30+n*.13,expansion=smooth(t,t+.08,tg);
-            appendLeaf(records,fullTwig.getPoint(t).applyMatrix4(tf),d,.03*expansion,twigScale*expansion,.1*Math.sin(n),0,canopyUp);
+            appendLeaf(records,fullTwig.getPoint(t).applyMatrix4(tf),d,.03*expansion,twigScale*expansion,.1*Math.sin(n),0,canopyUp,`primary:${i}/secondary:${b}/twig:${c}:long:${n}`);
           }
-          if(twigAge>.85)shortShoots(fullTwig,tf,fine,records,buds,seed+i*10007+b*127+c*23,5,twigScale*smooth(.85,1.7,twigAge),canopyUp,tg);
+          if(twigAge>.85)shortShoots(fullTwig,tf,fine,records,buds,seed+i*10007+b*127+c*23,7,twigScale*smooth(.85,1.7,twigAge),canopyUp,tg);
           if(tg>.94)sites.push({curve:fullTwig,frame:tf,scale:twigScale*smooth(.94,1,tg),up:canopyUp,key:seed+i*13007+b*521+c*37});
         }
       }
@@ -734,15 +803,19 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
   // Fixed site/cohort identities preserve wood as the tree grows. A changing
   // whole-crown area target must not erase previously generated fine branches.
   const perAxisLeafBudget=Math.floor(maxLeafBudget/22);
+  // Reserve all possible original shoots before allocating fixed identity slots
+  // to fill cohorts. New earlier cohorts may not displace old later leaves.
+  const maxSpurLeaves=Math.max(2,Math.round(8*density));
+  const reservedBaseLeaves=12+16*maxSpurLeaves+9*(7+12*maxSpurLeaves)+36*(5+7*maxSpurLeaves);
+  const fillLeafSlots=Math.max(0,Math.floor((perAxisLeafBudget-reservedBaseLeaves)/(36*12)));
   for(let cohort=0;cohort<12;cohort++)for(const canopy of pendingCanopies) {
     for(const site of canopy.sites){const fillRandom=rng(site.key+cohort*65537),t=.20+(cohort+.5)/12*.70;
       const start=site.curve.getPointAt(t).applyMatrix4(site.frame),tangent=site.curve.getTangentAt(t).transformDirection(site.frame),az=fillRandom()*Math.PI*2+cohort*2.39996;
       const side=new THREE.Vector3(Math.cos(az),.12,Math.sin(az));const direction=tangent.clone().multiplyScalar(.25).addScaledVector(side,.78).addScaledVector(site.up,.38).normalize();
       const orientation=new THREE.Quaternion().setFromUnitVectors(UP,direction),frame=new THREE.Matrix4().compose(start,orientation,new THREE.Vector3(1,1,1));
       const targetLength=.075+site.curve.getLength()*(.20+fillRandom()*.14),length=targetLength*site.scale,twig=curveFor(length,0,az),fullTwig=curveFor(targetLength,0,az);
-      canopy.fine.push(tube(twig,.00115*site.scale,.00040,4,4).applyMatrix4(frame));const before=canopy.records.length;
-      shortShoots(fullTwig,frame,canopy.fine,canopy.records,canopy.buds,site.key+cohort*4231,Math.max(3,Math.round(targetLength/.045)),site.scale,site.up,site.scale,perAxisLeafBudget);
-      if(canopy.records.length>perAxisLeafBudget)canopy.records.length=Math.max(before,perAxisLeafBudget);
+      canopy.fine.push(tube(twig,.00115*site.scale,.00040*site.scale,4,4).applyMatrix4(frame));const before=canopy.records.length;
+      shortShoots(fullTwig,frame,canopy.fine,canopy.records,canopy.buds,site.key+cohort*4231,Math.max(3,Math.round(targetLength/.045)),site.scale,site.up,site.scale,fillLeafSlots);
       for(let i=before;i<canopy.records.length;i++)potentialArea+=recordArea(canopy.records[i]);potentialCount+=canopy.records.length-before;totalFineCohorts++;
     }
   }

@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import {buildPlant} from './plant-engine.ts';
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
-import { osmanthusLifecycle, osmanthusPriors, osmanthusGrowth } from './osmanthus-lifecycle.ts';
+import { osmanthusLifecycle, osmanthusPriors } from './osmanthus-lifecycle.ts';
 
 // @ts-ignore Native Node tests require the suffix.
 import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet } from './development.ts';
+import {woodyRootAxes, woodyRootGeometry} from './woody-root-development.ts';
 
 /** A botanical illustration, not a measured root reconstruction or soil-water solver. */
 export type RootSpecies = 'ginkgo' | 'osmanthus' | 'iris' | 'oxalis' | 'camphor' | 'acer' | 'ophiopogon';
@@ -128,14 +129,25 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
     calibration: 'uncalibrated-engineering-prior', intervalYears: [.55, .95],
   };
   function addRoot(points: THREE.Vector3[], radius: number, order: number, organ = 'root') {
-    // The centreline cannot cross above the soil or below the supplied profile.
     radius = Math.min(radius, soilDepth * .12);
     const surfaceAxis=organ==='rhizome'||organ==='stolon';
-    points = points.map(p => new THREE.Vector3(p.x, clamp(p.y, -soilDepth + radius + .0001, surfaceAxis?.003:osmanthus ? -.00005 : -.002 - radius), p.z));
+    // Herb attachments are actual support nodes (Oxalis is at +3 mm), not
+    // independently buried origins. Keep their proximal axes and rings intact.
+    // A shared lower centreline limit also prevents a thicker daughter root
+    // being lifted off its parent in shallow soil; clip the mesh at that boundary.
+    const herbAttachment = !woody && !surfaceAxis;
+    const axisTop = surfaceAxis ? .003 : herbAttachment ? Math.min(.003, points[0].y) : osmanthus ? -.00005 : -.002 - radius;
+    points = points.map(p => new THREE.Vector3(p.x, clamp(p.y, -soilDepth + (herbAttachment ? .0001 : radius + .0001), axisTop), p.z));
     const built = taperedTube(points, radius, order < 2 ? 8 : 5, order < 2 ? 24 : 12);
-    // Avoid spline overshoot protruding above the soil or through a shallow hard boundary.
+    // Only the few millimetres around an exposed herb origin may cross y=0.
+    // Bulk roots and spline overshoot remain inside the supplied soil profile.
     const positions = built.geometry.attributes.position;
-    for (let i = 0; i < positions.count; i++) positions.setY(i, clamp(positions.getY(i), -soilDepth + .00005, surfaceAxis?.008:-.00005));
+    const vertex = new THREE.Vector3();
+    for (let i = 0; i < positions.count; i++) {
+      const proximal = herbAttachment && vertex.fromBufferAttribute(positions, i).distanceToSquared(points[0]) <= (.006 + radius) ** 2;
+      const top = surfaceAxis ? .008 : proximal ? Math.max(-.00005, points[0].y + radius) : -.00005;
+      positions.setY(i, clamp(positions.getY(i), -soilDepth + .00005, top));
+    }
     built.geometry.computeVertexNormals();
     const material = organ === 'rhizome' ? rhizomeMat : order > 1 ? fineMat : coarseMat;
     const mesh = new THREE.Mesh(built.geometry, material);
@@ -160,6 +172,28 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
       if (order === 1 && (species !== 'ginkgo' || age > .2)) laterals(curve, 3 + Math.floor(random() * 3), len * .45, radius * .28, 2, angle + .8);
     }
   }
+  function addWoodyRoots() {
+    const axes = woodyRootAxes(species, seed, expansion, soilDepth);
+    Object.assign(group.userData, {rootPersistence: {
+      sourceType: 'engineering-prior', calibrated: false,
+      coordinates: 'fixed material nodes in metres; persistent centreline prefixes',
+      births: 'scheduled lower bounds gated by parent arrival; zero initial length and radius',
+      seedTransition: 'proximal extension; original buried radicle material retained',
+      scope: 'illustrative geometry; no root-soil mechanics or measured growth calibration',
+    }});
+    for (const axis of axes) {
+      if (age <= axis.birth || axis.lengthAt(age) <= 0) continue;
+      const built = woodyRootGeometry(axis, age, soilDepth);
+      const mesh = new THREE.Mesh(built.geometry, axis.order > 1 ? fineMat : coarseMat);
+      mesh.name = `root:order:${axis.order}`;
+      mesh.userData = {organ: 'root', order: axis.order, sourceType: 'engineering-prior',
+        axisId: axis.id, parentId: axis.parentId, materialNode: axis.node, birth: axis.birth,
+        start: axis.point(axis.startAt(age)).toArray(), end: axis.point(axis.lengthAt(age)).toArray(),
+        radius: built.radius, materialCoordinates: built.coordinates, ringSides: built.sides};
+      mesh.castShadow = axis.order < 2; group.add(mesh); geometries.push(built.geometry);
+      rootLength += built.length; rootDepth = Math.max(rootDepth, built.depth); rootTips++;
+    }
+  }
   if (species === 'iris' || species === 'oxalis') {
     // Reuse actual clonal support-axis endpoints, not an unrelated radial root proxy.
     // The small herb generator runs only on rebuild. Its geometry is disposed after extraction.
@@ -180,7 +214,9 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
       const mid=start.clone().lerp(end,.5);
       addRoot([start,mid,end],object.scale.x,organ==='root'?1:0,organ);
       supportCount++;
-      if(organ==='root')rootAnchors.push({origin:start.clone(),growth:clamp(object.scale.x/.00065),key:rootAnchors.length});
+      // Extend the actual adventitious root, rather than drawing another bundle
+      // from the surface node and exposing unnecessary parallel proximal axes.
+      if(organ==='root')rootAnchors.push({origin:end.clone(),growth:clamp(object.scale.x/.00065),key:rootAnchors.length});
     });
     source.dispose();
     for(const anchor of rootAnchors){
@@ -209,11 +245,20 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
       }
     }
     if (herb) {
-      for(let c=0;c<7;c++){const ramet=ophiopogonRamet(c,age);if(ramet.growth<=0)continue;
-        // Slender underground axis, not the thick Iris rhizome. Rosette and rhizome tips share x/z.
+      // Match buildAdditionalPlant's density clamp, cohort budget and active ramets.
+      const density=clamp(finite(params.density??1,1),.15,2),clumpCount=1+Math.round(6*density);
+      for(let c=0;c<clumpCount;c++){const ramet=ophiopogonRamet(c,age);if(ramet.growth<=0)continue;
+        // Slender underground axis, not the thick Iris rhizome. Every node is
+        // at -8 mm, with an explicit basal shoot connection from the y=0 rosette.
         const origin=new THREE.Vector3(0,-.008,0),end=new THREE.Vector3(ramet.x,-.008,ramet.z);
-        if(c===0)end.y-=.006*ramet.growth;
+        if(c===0)origin.y-=.006*ramet.growth;
         const rhizome=addRoot([origin,origin.clone().lerp(end,.5),end],.0015*ramet.growth,0,'rhizome');
+        const leafBase=new THREE.Vector3(ramet.x,0,ramet.z);
+        // The visible ribbons originate within an 8 mm square and expand on
+        // their own .6-year clock. Enclose those actual bases, including when
+        // blade expansion precedes the .9-year ramet/rhizome expansion.
+        const basalRadius=.006*organGrowth(ramet.birth,.6,age);
+        addRoot([leafBase,leafBase.clone().lerp(end,.5),end],basalRadius,0,'root-collar');
         fibers(rhizome,ramet.birth+.04,seed*617+c*997,12,.0007);
         for(let f=0;f<2;f++){const g=organGrowth(ramet.birth+.8+f*.2,1,age);if(g<=0)continue;
           const a=c*2.39996+f*1.8,start=end.clone(),len=.08*g;
@@ -223,72 +268,12 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
           void storage;
         }
       }
-    } else if(additional.radicle>0) {
-      const radius=(.001+ (species==='camphor'?.075:.035)*maturity)*additional.radicle;
-      const primary=axis(new THREE.Vector3(0,-.004,0),.7,.015*additional.radicle,depth*additional.radicle,radius,0);
-      for(let i=0;i<10;i++){const birth=.14+i*(species==='camphor'?.32:.42),g=organGrowth(birth,1.1,age);if(g<=0)continue;
-        const r=randomSource(seed*811+i*311),angle=i*2.39996+r()*.4,start=primary.getPointAt(.12+.7*(i+.5)/10);
-        const lateral=axis(start,angle,reach*(.65+r()*.35)*g,depth*.24*g,radius*.4*g,1);
-        fibers(lateral,birth+.35,seed*127+i*997,8,radius*.09*g);
-      }
+    } else if (additional.radicle > 0) {
+      addWoodyRoots();
     }
   } else if (age > .012) {
-    if (osmanthus) {
-      const radius = osmanthus.radius * .9 + .00035 * osmanthus.radicle;
-      const origin = new THREE.Vector3(0, osmanthus.rootOriginY, 0);
-      const depth = maxDepth * osmanthus.radicle;
-      const primary = addRoot([origin, origin.clone().add(new THREE.Vector3(.02 * development * osmanthus.radicle, -depth * .45, 0)), origin.clone().add(new THREE.Vector3(-.03 * development * osmanthus.radicle, -depth, .02 * development * osmanthus.radicle))], radius, 0);
-      // Fixed attachment fractions and per-cohort RNG keep existing roots stable
-      // when another cohort is born. New axes expand from zero length AND radius.
-      function cohortLaterals(parent: THREE.CatmullRomCurve3, length: number, r: number, birth: number, count: number, key: number, order: number) {
-        for (let i = 0; i < count; i++) {
-          const growth = osmanthusGrowth(birth + i * .18, birth + i * .18 + .5, age);
-          if (growth <= 0) continue;
-          const rr = randomSource(key + i * 127), angle = i * 2.39996 + rr() * .5;
-          const start = parent.getPointAt(.18 + .68 * (i + .5) / count), len = length * (.65 + rr() * .35) * growth;
-          const end = start.clone().add(new THREE.Vector3(Math.cos(angle) * len, -len * .55, Math.sin(angle) * len));
-          const mid = start.clone().lerp(end, .5).add(new THREE.Vector3(len * .06, 0, -len * .04));
-          const curve = addRoot([start, mid, end], r * Math.sqrt(growth), order);
-          if (order === 1) cohortLaterals(curve, len * .35, r * .27, birth + i * .18 + .65, 3, key + i * 311, 2);
-        }
-      }
-      cohortLaterals(primary, reach * .45, radius * .32, .12, 5, seed * 811, 1);
-      for (let i = 0; i < 10; i++) {
-        const birth = .8 + i * .5, growth = osmanthusGrowth(birth, birth + 1.6, age);
-        if (growth <= 0) continue;
-        const rr = randomSource(seed * 3253 + i * 197), angle = i * 2.39996 + (rr() - .5) * .4;
-        const length = reach * (.65 + rr() * .35) * growth;
-        // Root collar is the same coordinate as the shoot; no seven-axis mature
-        // root crown at germination. The primary remains present throughout.
-        const start = new THREE.Vector3(0, osmanthus.collarY, 0);
-        const end = start.clone().add(new THREE.Vector3(Math.cos(angle) * length, -maxDepth * (.3 + rr() * .35) * growth, Math.sin(angle) * length));
-        const curve = addRoot([start, start.clone().lerp(end, .3).add(new THREE.Vector3(0, -length * .05, 0)), end], radius * .55 * Math.sqrt(growth), 1);
-        cohortLaterals(curve, length * .29, radius * .16 * Math.sqrt(growth), birth + .3, 9, seed * 617 + i * 997, 2);
-      }
-    } else if (woody) {
-      const radius = (.0011 + development * (species === 'ginkgo' ? .065 : .044)) * Math.max(.12, germination);
-      if (species === 'ginkgo') {
-        // Embryonic radicle first; do not give an opening seed a miniature mature root crown.
-        // Onsets are illustrative priors; actual emergence depends on seed history and environment.
-        const d = Math.max(.00001, maxDepth * germination);
-        const seedLoss = clamp((age - .25) / .4), seedScale = 1 - seedLoss * seedLoss * (3 - 2 * seedLoss) * .7;
-        // The seed is centred at -18 mm with a 19 mm vertical half-axis.
-        // The radicle must emerge below its lower pole, rather than end inside the coat.
-        const collarTransition = osmanthusGrowth(.55, .95, age);
-        const originY = -.018 - .019 * seedScale * (1 - collarTransition);
-        const primary = addRoot([new THREE.Vector3(0, originY, 0), new THREE.Vector3(.04 * development * germination, originY - d * .42, -.025 * development * germination), new THREE.Vector3(-.07 * development * germination, originY - d, .04 * development * germination)], radius, 0);
-        const lateralDevelopment = clamp((age - .06) / .6);
-        if (lateralDevelopment > 0) laterals(primary, 1 + Math.floor(lateralDevelopment * (1 + development * 7)), reach * .7 * lateralDevelopment, radius * .38 * Math.sqrt(lateralDevelopment), 1, random() * 6.28);
-      }
-      const structuralDevelopment = species === 'ginkgo' ? clamp((age - .6) / 1.4) : 1;
-      const count = species === 'ginkgo' ? Math.floor((5 + Math.floor(development * 4)) * structuralDevelopment) : 7 + Math.floor(development * 5);
-      for (let i = 0; i < count; i++) {
-        const a = i / count * Math.PI * 2 + (random() - .5) * .4, r = reach * (.65 + random() * .35) * germination * structuralDevelopment;
-        const start = new THREE.Vector3(0, -.018, 0);
-        const end = new THREE.Vector3(Math.cos(a) * r, -Math.max(.023, maxDepth * (.28 + random() * .38) * germination), Math.sin(a) * r);
-        const curve = addRoot([start, new THREE.Vector3(Math.cos(a + .15) * r * .26, -Math.min(maxDepth * .22 + .018, .22), Math.sin(a + .15) * r * .26), new THREE.Vector3(Math.cos(a - .10) * r * .67, end.y * .72, Math.sin(a - .10) * r * .67), end], radius * .55 * Math.sqrt(structuralDevelopment), 1);
-        laterals(curve, 7 + Math.floor(development * 7), r * .29, radius * .16, 2, a + 1.5);
-      }
+    if (woody) {
+      addWoodyRoots();
     } else {
       const arms = species === 'iris' ? 3 : 5;
       for (let i = 0; i < arms; i++) {

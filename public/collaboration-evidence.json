@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "0.5.1",
   "createdAt": "2026-11-05T16:19:09.961Z",
   "workflow": [
     "shared botanical constraints",
@@ -178,11 +178,77 @@
     "Isolated Ophiopogon organ random streams",
     "Separated mature blade dimension checks from expanding leaves",
     "Isolated test fixtures from live model credentials",
-    "Added explicit model-rebuild failure recovery"
+    "Added explicit model-rebuild failure recovery",
+    "Fixed irregular 3D Osmanthus habit from privately viewed whole-plant references; photographs not redistributed",
+    "Integrated connected curved camphor/maple branches and Iris crests/pigment",
+    "Retained foliation sites with keyed season sampling and fixed per-cohort budgets",
+    "Recovered woody-root draft after 502, corrected the primary-root bend, and validated actual ring continuity",
+    "Preserved surface root origins and matched Ophiopogon density/ramet topology",
+    "Counted merged fine wood in mass, projected drag and owner-beam loads"
   ],
   "limits": [
     "Not a calibrated Yungu individual reconstruction",
     "Fixed root collar proxy, not a root-soil anchorage solver",
-    "No full physiology, pruning, competition or mortality solver"
+    "No full physiology, pruning, competition or mortality solver",
+    "Float32 world meshes do not resolve newborn sub-micrometre cross-section normals; continuity is still tested",
+    "Source growth curves and crown envelopes remain engineering priors; no natural self-pruning model is claimed"
+  ],
+  "updatedAt": "2026-11-05T16:57:59.777Z",
+  "refinementTasks": [
+    {
+      "id": "de89c5cb-bb50-472a-bcd0-60eb9410a258",
+      "title": "Photo-constrained Osmanthus dense 3D crown and irregular branching",
+      "workerStatus": "completed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成，仅修改指定的三个文件，保留在当前 worktree：\n\n- [plant-engine.ts]([workspace]/outputs/.flora-swarm-worktrees/task-de89c5cb-bb50-472a-bcd0-60eb9410a258-cf4cd4e9/lib/plant-engine.ts)：增加三维方位、枝角、长势和萌发差异，补充细梢叶量；保留固定附着和持久木质结构，动画复用几何。\n- [osmanthus-lifecycle.ts]([workspace]/outputs/.flora-swarm-worktrees/task-de89c5cb-bb50-472a-bcd0-60eb9410a258-cf4cd4e9/lib/osmanthus-lifecycle.ts)：明确工程先验及来源边界。\n- [osmanthus-habit.test.mjs]([workspace]/outputs/.flora-swarm-worktrees/task-de89c5cb-bb50-472a-bcd0-60eb9410a258-cf4cd4e9/lib/osmanthus-habit.test.mjs)：新增三维占据率、叶面积、角度差异、节点持久性和受载连接检查。\n\n40 年、seed 42、密度 1：19,668 片叶，内部网格占据率 93.5%，叶面积/投影代理比 3.84，主枝角跨度 35.8°；理论叶量上限 28,704。全部 **120 项测试**、类型检查及差异检查通过，种子、半岁四叶及现有连接/花测试均保留。\n\n限制：仍采用直轴近似，参数未经校园实测校准；已检查离线三视角，WebGL 因端口监听限制未验证。[NCSU 来源](https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/)及两张照片用于参考，照片未发布。未提交、合并或部署。",
+      "handoff": "Reviewed and integrated by lead",
+      "validationStatus": "passed"
+    },
+    {
+      "id": "6abeb2ae-c2a1-4ad9-a304-b66b08d02875",
+      "title": "Photo-based camphor and maple crown realism refinement",
+      "workerStatus": "completed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "仅修改两个指定文件，保留在当前 worktree，未提交、部署或修改依赖。\n\n- [additional-species.ts]([workspace]/outputs/.flora-swarm-worktrees/task-6abeb2ae-c2a1-4ad9-a304-b66b08d02875-55aedf16/lib/additional-species.ts)：减少子枝角度重复，围绕母轴实际切线三维转向，区分香樟展开冠与槭树层状枝叶；保留节点身份、木质轴、渐细、叶片尺寸和预算。\n- [additional-habit.test.mjs]([workspace]/outputs/.flora-swarm-worktrees/task-6abeb2ae-c2a1-4ad9-a304-b66b08d02875-55aedf16/lib/additional-habit.test.mjs)：新增实际几何、年龄稳定性及上冠高度检查。\n- 验证：**119/119 测试通过**，含原有连续性、几何及麦冬 RNG 测试；TypeScript、diff 检查通过。\n\n限制：指定的两张 `*-form.jpg` 均缺失，只能查看现有枝叶近景，无法完成整冠照片核对。“整冠完全平面化”未获测量证实；参数仍为未标定工程先验，来源与限制已写入代码，不代表云谷个体实测。",
+      "handoff": "Reviewed and integrated by lead",
+      "validationStatus": "passed"
+    },
+    {
+      "id": "58b449be-5bef-4511-906f-2580c79c65af",
+      "title": "Seven-species biological and mechanical cross-audit with real photo evidence",
+      "workerStatus": "completed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "任务 `58b449be-5bef-4511-906f-2580c79c65af`：**`b0be29f` 的木本骨架保留已有改善，但根茎连接、地下节点连续性及动力学覆盖仍有明确缺陷，不能据此验收“物理真实”。**\n\n本次未编辑文件。审查期间发现其他任务的未提交草本改动，因此最终测试与关键探针均从指定提交**在内存中加载源码**执行。7 个测试文件、45 项测试全部通过；以下新增探针发现的问题仍然存在。未执行浏览器渲染验收或实物标定。\n\n逐张查看了 `public/references` 的 9 张照片及两张私有桂花整株照。私图仅用于内部对照，未复制、公开或嵌入输出。\n\n**优先交叉审查的问题：**\n\n1. **酢浆草仍存在实际断根。**  \n   `buildRhizosphere → addRoot` 把原本位于匍匐节 `y=+0.003 m` 的根起点压到 `−0.00265 m`，偏移 **5.65 mm**。探针读取实际根顶点，最高仅 `−0.002475 m`；因此共享匍匐茎端点并未保证根与节相连。见 [rhizosphere.ts:130]([workspace]/outputs/westlake-flora-pages/lib/rhizosphere.ts:130) 的限位及第 163 行起的草本拓扑复制。\n\n2. **麦冬地下与地上株丛不一致，也缺少纵向连接。**  \n   地上 `clumpCount=1+round(6*density)`，地下循环固定为 7。年龄 5、密度 0.3／1／1.8 的实算结果分别为 **3/7、7/7、10/7**，前者为地上株丛数，后者为地下根茎数。对应株丛基点在 `y=0`，根茎末端在 `−0.008 m`，未生成连接轴。见 [additional-species.ts:167]([workspace]/outputs/westlake-flora-pages/lib/additional-species.ts:167)、[rhizosphere.ts:211]([workspace]/outputs/westlake-flora-pages/lib/rhizosphere.ts:211)。\n\n3. **银杏新增粗根会重新排列既有根；四种木本的地下附着点仍会随母根伸长迁移。**  \n   银杏以 `i/count` 重算方位。年龄 `2±10⁻⁷` 时，粗根数由 4 变 5，同序既有根尖最大跳变 **0.448 m**。桂花、香樟、鸡爪槭也在当前母根曲线上按比例重新取侧根起点，尚未采用地上枝条已有的固定材料节点机制。见 [rhizosphere.ts:243]([workspace]/outputs/westlake-flora-pages/lib/rhizosphere.ts:243) 的 `cohortLaterals`、第 205 行 `fibers`、第 283 行起的银杏粗根循环。\n\n4. **“浮干已消除”目前只能确认到固定根颈原点。**  \n   四种木本已有根颈连接体；已执行测试证明受载后主干 pivot 不被抬起。但测试没有检查受风后的树皮基环与固定根颈表面是否持续接合，也未检查非中心地表接触。见 [root-junction.test.mjs:3]([workspace]/outputs/westlake-flora-pages/lib/root-junction.test.mjs:3)。**这是剩余验收缺口，本次没有复现“整根主干漂浮”。**\n\n5. **桂花重复分叉模板仍明显，不能把对生叶序与机械对称混为一谈。**  \n   `axisArchitecture` 对所有枝轴复用 `phase + index*π/2`，节点均在直轴上，分枝由重复的直圆柱构成。它并非全部共面，但容易形成重复的十字分叉模板。见 [plant-engine.ts:131]([workspace]/outputs/westlake-flora-pages/lib/plant-engine.ts:131)、第 217 行 `branchCohort`。私有整株照支持低位叶冠保留、圆整且有纵深的外观约束；不能据照片推定修剪史、尺度或生长率。\n\n6. **冠形新增细枝没有完整进入木材载荷统计。**  \n   年龄 12 时，香樟记录 1061 条合并木轴，但只有 9 个动力学关节；鸡爪槭为 346 条／13 个。叶面积载荷被计入相邻关节，但 `createBeamDynamics` 只按关节的单根截锥估算木质量和木阻力，未汇总这些合并细枝。见 [additional-species.ts:135]([workspace]/outputs/westlake-flora-pages/lib/additional-species.ts:135)、[beam-dynamics.ts:76]([workspace]/outputs/westlake-flora-pages/lib/beam-dynamics.ts:76)。  \n   桂花年龄 12、seed 42、密度 1，使用场景材性先验、风速 3.2 m/s、重力 9.81 m/s²，积分 1 秒即有 **9 个关节触及 0.28 rad 上限**。这是模型饱和结果，不能解释为真实风摆吻合。\n\n七物种的生物顺序与保留结构核对如下：\n\n| 物种 | 当前成立的部分 | 仍需明确的边界或缺陷 |\n|---|---|---|\n| 银杏 | 胚根先于真叶；长短枝；冬季保留木骨架；已建立主枝未按年龄删除 | 地下粗根重排；无完整雌雄繁殖过程 |\n| 桂花 | 种子→胚根→对生真叶→侧枝；低位木枝保留；冬季留叶 | 重复枝轴模板；叶龄周转未模拟 |\n| 香樟 | 胚根先于地上枝叶；互生叶；持久木骨架、常绿冠 | 年龄 0 的地上场景为空，没有种子几何；细枝载荷遗漏 |\n| 鸡爪槭 | 对生掌裂叶；保留木骨架；冬季落叶 | 同样缺种子几何；细枝载荷遗漏；品种、砧木未知 |\n| 鸢尾 | 从根茎分株开始；二列叶扇；三外三内花被 | HEAD 花结构没有独立鸡冠几何；花茎全年保留为代理 |\n| 酢浆草 | 带根茎节→三出叶→匍匐伸长→新节；地表茎不随风脱节 | 上述断根；无蒴果、弹射及睡眠运动 |\n| 麦冬 | 营养分株→基生叶→地下扩展；根茎、须根与膨大根分开表示 | 株丛数量不匹配、8 mm 纵向缺口；非逐叶弯曲求解 |\n\n给两位冠形实现同事的**短验收清单**如下，均为待执行要求：\n\n- 固定 seed／density，逐年龄追踪稳定 axis/node ID；旧基枝及附着点保留，新枝从零连续建立。\n- 检查实际顶点和器官连接路径，包括剖面、骨架及受载状态；不能仅比较 pivot、元数据或包围盒。\n- 根颈、根、土面共用坐标基准；覆盖密度 0.3／1／1.8，以及浅土情景。\n- 桂花保持对生节点，香樟保持互生、鸡爪槭保持对生；通过稳定的轴形与枝序差异减少模板感。**鸢尾平面叶扇应保留。**\n- 冠形增密后复核木材载荷、叶面积、角度限幅及几何预算；维持 SI 单位，不用放大叶片或虚构材性“校准”外观。\n- 提交同参数多方位、骨架和根颈近景；照片只作定性约束。现有香樟、鸡爪槭本地照片是枝叶近景，不能验收整冠比例。\n\n当前场景实际调用的是**层级集中悬臂近似**：风阻、质量、重力、弹性和阻尼驱动关节；叶片另有准静态限幅弯曲。根颈固定是几何边界条件，`anchored:true` 不是根土锚固计算。土壤参数控制根形与相对水分指标，没有求解根土反力、拔根、断裂、水力输运、光合碳分配或完整生理生命周期。\n\n植物学依据沿用仓库已列的 [银杏植物志](https://efloras.org/florataxon.aspx?flora_id=2&taxon_id=200005235)、[鸢尾植物志](https://www.efloras.org/florataxon.aspx?flora_id=3&taxon_id=200028218)、[酢浆草植物志](https://efloras.org/florataxon.aspx?flora_id=2&taxon_id=200012375)、[香樟植物志](https://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200008697)、[槭属 Flora of China](https://www.iplant.cn/foc/pdf/Acer.pdf)、[麦冬植物志](https://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200027794)，及 [NC State 桂花说明](https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/)。照片归属见 [photo-attribution.json]([workspace]/outputs/westlake-flora-pages/public/references/photo-attribution.json)。这些来源不能提供校园个体的数值标定。\n\n在线植物志访问被浏览器自动权限审查拒绝，原因是未获网络外连授权；上述网页引用本次未在线复核。",
+      "handoff": "Findings led to the two root-fix tasks and lead wood-load correction",
+      "validationStatus": "not_applicable"
+    },
+    {
+      "id": "91a1010e-4009-41d1-aa82-2f28a96b982f",
+      "title": "Repair clonal herb root endpoints and Ophiopogon topology matching",
+      "workerStatus": "validation_failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "修复已保留在当前独立 worktree，仅修改指定两文件：\n\n- [rhizosphere.ts]([workspace]/outputs/.flora-swarm-worktrees/task-91a1010e-4009-41d1-aa82-2f28a96b982f-caf78581/lib/rhizosphere.ts)：保留酢浆草 `+3 mm` 近端连接；麦冬同步密度及活动分株，补齐叶基至 `−8 mm` 根茎节点的连接。\n- [herb-root-connections.test.mjs]([workspace]/outputs/.flora-swarm-worktrees/task-91a1010e-4009-41d1-aa82-2f28a96b982f-caf78581/lib/herb-root-connections.test.mjs)：验证实际端环、连接、浅土边界、膨大根及资源释放，覆盖指定密度和年龄。\n\n新增测试 **3/3 通过**，类型检查通过；木本根网格在 32 组对照中一致。全量测试 **115/118 通过**，三项旧测试因要求全部顶点严格低于零而失败，按范围限制未修改。\n\n未提交、未部署。未进行视觉或实物标定；根系动力学仍为工程代理。",
+      "handoff": "Connection fix integrated; lead replaced the false all-roots-must-be-negative test with a bounded proximal exception",
+      "validationStatus": null
+    },
+    {
+      "id": "b22dc198-e8df-4f39-a7c6-dd7da636a120",
+      "title": "Fix persistent woody root identities and material attachment points",
+      "workerStatus": "failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "Codex failed (exit 1): unexpected status 502 Bad Gateway: {\"code\":\"upstream_connect_failed\",\"message\":\"Could not connect to an upstream service.\"}, url: http://127.0.0.1:3001/v1/responses",
+      "handoff": "Partial draft recovered and corrected by lead after upstream 502; worker failure is retained",
+      "validationStatus": "not_completed"
+    }
   ]
 }
