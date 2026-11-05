@@ -1,12 +1,12 @@
 {
-  "observedAt": "2026-11-05T17:07:41.857Z",
+  "observedAt": "2026-11-05T18:07:58.592Z",
   "distinctAccountEmails": 3,
-  "periodStart": "2026-11-05T15:07:41.876Z",
+  "periodStart": "2026-11-05T16:07:58.597Z",
   "accounts": [
     {
       "slot": 1,
       "status": "available",
-      "observationAt": "2026-11-05T17:07:39.510Z",
+      "observationAt": "2026-11-05T18:07:56.470Z",
       "quota": [
         {
           "source_id": "codex",
@@ -15,10 +15,10 @@
           "label_key": "session",
           "scope": "account",
           "unit": "percent",
-          "used": 0,
+          "used": 1,
           "limit": 100,
-          "remaining": 100,
-          "utilization": 0,
+          "remaining": 99,
+          "utilization": 0.01,
           "reset_at_ms": 1794472387000,
           "window_seconds": 604800,
           "state": "available",
@@ -27,25 +27,25 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 85,
-        "outputTokens": 63155,
-        "uncachedInputTokens": 223335,
-        "cachedInputTokens": 4262656,
-        "firstCompleted": 1793893600947,
-        "lastCompleted": 1793898436476
+        "count": 145,
+        "outputTokens": 139892,
+        "uncachedInputTokens": 425165,
+        "cachedInputTokens": 8891136,
+        "firstCompleted": 1793895305299,
+        "lastCompleted": 1793902073269
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 85
+          "count": 145
         }
       ]
     },
     {
       "slot": 2,
       "status": "available",
-      "observationAt": "2026-11-05T17:07:40.339Z",
+      "observationAt": "2026-11-05T18:07:57.674Z",
       "quota": [
         {
           "source_id": "codex",
@@ -54,10 +54,10 @@
           "label_key": "session",
           "scope": "account",
           "unit": "percent",
-          "used": 0,
+          "used": 1,
           "limit": 100,
-          "remaining": 100,
-          "utilization": 0,
+          "remaining": 99,
+          "utilization": 0.01,
           "reset_at_ms": 1794472391000,
           "window_seconds": 604800,
           "state": "available",
@@ -66,25 +66,25 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 65,
-        "outputTokens": 39558,
-        "uncachedInputTokens": 449344,
-        "cachedInputTokens": 3209984,
-        "firstCompleted": 1793892204400,
-        "lastCompleted": 1793898435867
+        "count": 108,
+        "outputTokens": 86431,
+        "uncachedInputTokens": 571283,
+        "cachedInputTokens": 7810048,
+        "firstCompleted": 1793895237589,
+        "lastCompleted": 1793900531585
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 65
+          "count": 108
         }
       ]
     },
     {
       "slot": 3,
       "status": "available",
-      "observationAt": "2026-11-05T17:07:41.382Z",
+      "observationAt": "2026-11-05T18:07:58.551Z",
       "quota": [
         {
           "source_id": "codex",
@@ -93,10 +93,10 @@
           "label_key": "session",
           "scope": "account",
           "unit": "percent",
-          "used": 13,
+          "used": 14,
           "limit": 100,
-          "remaining": 87,
-          "utilization": 0.13,
+          "remaining": 86,
+          "utilization": 0.14,
           "reset_at_ms": 1794472392000,
           "window_seconds": 604800,
           "state": "available",
@@ -105,18 +105,18 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 86,
-        "outputTokens": 86711,
-        "uncachedInputTokens": 371634,
-        "cachedInputTokens": 4231040,
-        "firstCompleted": 1793893601790,
-        "lastCompleted": 1793897615544
+        "count": 131,
+        "outputTokens": 129011,
+        "uncachedInputTokens": 431012,
+        "cachedInputTokens": 7311872,
+        "firstCompleted": 1793894886353,
+        "lastCompleted": 1793900333351
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 86
+          "count": 131
         }
       ]
     }

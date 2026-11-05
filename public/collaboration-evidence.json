@@ -1,5 +1,5 @@
 {
-  "version": "0.5.1",
+  "version": "0.5.2",
   "createdAt": "2026-11-05T16:19:09.961Z",
   "workflow": [
     "shared botanical constraints",
@@ -190,7 +190,11 @@
     "Welded the actual bark basal polygon to a short root collar transition with fixed bottom",
     "Added buried camphor/maple seed coat and connected embryonic axis; Acer cotyledon emergence still unimplemented",
     "Separate anonymous per-account successful calls/tokens from upstream quota snapshots",
-    "Added bounded continuation only for explicit upstream pre-connect failures; no ambiguous replay"
+    "Added bounded continuation only for explicit upstream pre-connect failures; no ambiguous replay",
+    "Ophiopogon established ramet and blade bases remain fixed while material rhizome precursors extend toward new daughter nodes",
+    "Tagged each Iris, Oxalis and Ophiopogon blade for bounded uniform-load strip deformation and matching visible/depth/distance shaders",
+    "Osmanthus secondary thickening reserves supported leaf area and a length-based basal radius, with actual new wood mass/drag counted; no change to E or force guard",
+    "Replaced unavailable native fullscreen dependency with an in-page expanded viewer retaining organ switches and growth slider; Esc exits"
   ],
   "limits": [
     "Not a calibrated Yungu individual reconstruction",
@@ -198,11 +202,12 @@
     "No full physiology, pruning, competition or mortality solver",
     "Float32 world meshes do not resolve newborn sub-micrometre cross-section normals; continuity is still tested",
     "Source growth curves and crown envelopes remain engineering priors; no natural self-pruning model is claimed",
-    "Osmanthus default loaded geometry still exceeds the linear-beam domain; a dedicated geometry/load reconciliation task remains active",
-    "Herb per-blade deformation and Ophiopogon material-node drafts are under integration, not yet part of this release",
-    "Buried seed coat remnants do not solve full Acer epigeal cotyledon anatomy or biological decay"
+    "Buried seed coat remnants do not solve full Acer epigeal cotyledon anatomy or biological decay",
+    "Osmanthus radius coefficients are engineering support budgets, not measured species allometry; tapered EI, nonlinear response and root/soil anchorage remain unsolved",
+    "Spatial canopy occupancy, leaf-age turnover, reproductive-organ phenology and Acer epigeal cotyledon anatomy remain under refinement",
+    "Successful account requests are separately proven; exact upstream charging/refresh semantics are unverified. Latest published quota observations are 99%, 99%, 86%."
   ],
-  "updatedAt": "2026-11-05T17:47:54.839Z",
+  "updatedAt": "2026-11-05T18:11:27.269Z",
   "refinementTasks": [
     {
       "id": "de89c5cb-bb50-472a-bcd0-60eb9410a258",
@@ -298,13 +303,43 @@
       "backend": "gpt-load",
       "output": "修改已保留在当前 worktree，未提交、合并或部署。\n\n- 新增 `lib/woody-establishment.ts`、`lib/woody-establishment.test.mjs`；定点修改 `additional-species.ts`、`development.ts`、`woody-root-development.ts`、两处证据元数据及 `app/page.tsx`。\n- age 0 现在有真实地下种壳；鸡爪槭另有单翅果翅。种壳下极、胚根与连续出苗轴共享支点，种壳不缩零或删除，原有木质结构保留。\n- 保持 age 0 地上高度、叶量和枝条为零。新增可访问的剖面提示按钮；早期年龄调整不再反复切换视图。樟树没有绿色地上子叶；鸡爪槭子叶对、下胚轴钩和脱壳过程未实现。\n\n尺寸与时序全部是工程先验：樟树壳高 8 mm、半径 4 mm、下极 −12 mm；鸡爪槭分别为 6 mm、3 mm、−9 mm，翅约 18 mm。胚根起点为 .008 年，地下轴在 .012–.025 年建立，均非校园实测。\n\n验证：最终专项 **19/19 通过**，覆盖要求的七个年龄、真实端点、浅土边界和连续性；类型检查、生产构建通过。全量测试 **137/140**：两项银杏失败已在原始 `0d12cc1` 复现；另一项是持久种子新增一个 mesh，超过旧绘制预算，原断言未改。\n\n已通读指定三份源码和本地物种证据。**外部来源核验未完成**：CSIRO 网页/PDF、OSU 原文及幼苗照片未成功读取，未转载图片；元数据明确区分任务提供的摘要与未核验结构。\n\n浏览器自动权限检查拒绝了 CSIRO 域名访问，终端代理与 DNS 也失败；本机预览端口监听被沙箱拒绝，因此未完成浏览器实景验收。",
       "leadIntegration": "lead reviewed, corrected/integrated, and validated in the 180-test suite; original worker status retained"
+    },
+    {
+      "id": "caabcb8f-b865-4f38-9781-8e9f5e91f92c",
+      "title": "Stop established Ophiopogon ramets and roots sliding during growth",
+      "workerStatus": "validation_failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成麦冬修复，修改保留在当前独立 worktree。\n\n- **文件**：修改 `lib/development.ts`、`lib/additional-species.ts`、`lib/rhizosphere.ts`；新增 `lib/ophiopogon-material.test.mjs`，并小幅修正旧连接测试，保留连续性检查。\n- **行为**：地下轴先延伸到固定节点，再建立子株；已有叶基、根颈和根挂点保持固定。保留早期主株根桥、浅土边界和资源释放。\n- **实测**：真实基环在 `1.23→1.53` 间位移约 **0.0000012 mm**，处于浮点精度范围。\n- **验证**：覆盖指定年龄、密度及出生阈值；TypeScript、生产构建通过。全量 **140/141** 通过，唯一失败是未改动的银杏叶面积 `>150 m²` 断言。\n- **来源与风险**：依据本地缓存的 [NC State 描述](https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/)，未重新在线抓取。发育时钟与尺度仍是未标定工程先验，不能视为植物实测验收。\n\n同事木质部和根系持久化代码未改动；未提交、合并或部署。",
+      "leadIntegration": "Original failure/validation status retained. Draft reviewed, corrected and integrated by lead; combined suite 196/196 passed plus typecheck/build and local browser checks."
+    },
+    {
+      "id": "c874b287-b400-4510-9e84-fc891dd58999",
+      "title": "Add physically motivated individual blade response for all three herbs",
+      "workerStatus": "validation_failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已实现鸢尾、酢浆草、麦冬逐叶条带变形：各自插入点与基部切线固定，保留阴影一致性和原有回退路径。修改限于叶动力学、草本标记及麦冬叶带属性；木本形态、发育和地下系统未改。\n\n验证：最终针对性测试 **22/22**、较广回归 **45/45** 通过；全量 **142/143**，唯一失败为既有银杏叶面积断言。类型检查通过。\n\n[交接说明与证据]([workspace]/outputs/.flora-swarm-worktrees/task-c874b287-b400-4510-9e84-fc891dd58999-cc833ce4/outputs/leaf-audit/README.md)记录文件、行为、来源和复跑方法。材料参数仍是工程先验；指定网关模型配置未能独立核验。未提交、合并或部署。\n\n真实 GPU 验收仍未完成：浏览器安全审查拒绝本地 `file://` 页面，仅允许 HTTP/HTTPS；沙箱同时拒绝本地服务监听。未将源代码测试冒充 GPU 编译证据。",
+      "leadIntegration": "Original failure/validation status retained. Draft reviewed, corrected and integrated by lead; combined suite 196/196 passed plus typecheck/build and local browser checks."
+    },
+    {
+      "id": "755ac7f5-ccc7-4118-b590-eb0674a54734",
+      "title": "Reconcile Osmanthus shoot growth geometry with actual supported loads",
+      "workerStatus": "validation_failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成桂花部分，保留在当前 worktree；未提交、合并或部署。当前 HEAD/main 均为 `d18a340`。\n\n仅修改：\n\n- [plant-engine.ts]([workspace]/outputs/.flora-swarm-worktrees/task-755ac7f5-ccc7-4118-b590-eb0674a54734-8ca566dc/lib/plant-engine.ts:298)：按轴长与累计承叶面积增粗，保持冠形、对生叶、固定节点及木材持久性。\n- [osmanthus-lifecycle.ts]([workspace]/outputs/.flora-swarm-worktrees/task-755ac7f5-ccc7-4118-b590-eb0674a54734-8ca566dc/lib/osmanthus-lifecycle.ts:14)：记录公式、单位、工程先验及文献限制。\n- [osmanthus-load-growth.test.mjs]([workspace]/outputs/.flora-swarm-worktrees/task-755ac7f5-ccc7-4118-b590-eb0674a54734-8ca566dc/lib/osmanthus-load-growth.test.mjs:125)：新增网格载荷审计、解析验证、连续出生与敏感性探针。\n\n未发现主轴或后代质量重复计数。默认 12 年资产的原最不利枝长 **130.69 cm**、承载 **32 片叶／0.0983 m²**，基部半径由 **1.04→7.47 mm**，长径比由 **629→87**。木材与叶片模型总质量 **8.18→20.55 kg**，新增自重和风载均已计入。\n\n同一 8 GPa、3.2 m/s、1g 探针结果如下；数值是线性外推需求，并非真实大转角：\n\n| 年龄 | 最大需求 rad，前→后 | 求解器限幅关节，前→后 |\n|---|---:|---:|\n| 2 | 0.325→0.016 | 1→0 |\n| 8 | 56.484→0.042 | 119→0 |\n| 12 | 13.142→0.039 | 202→0 |\n| 40 | 0.600→0.038 | 8→0 |\n\n12 年叶数 **7008**、叶面积 **21.314 m²**及冠幅保持原值。计入实际锥度和偏心后代力矩后，最大需求为 **0.081 rad**。\n\n定向回归共 **65 项通过、1 项已知银杏叶面积断言失败**；新增 6 项全部通过，TypeScript、`git diff --check` 通过。求解器、其他物种、依赖和锁文件未改动；浏览器验证留给主控。\n\n**限制与下一步：**枝径系数仍是未校准工程先验。较弱参数组合会使锥度审计达到 **0.313 rad**，不能宣称已获物种实测验证。建议下一任务实现变截面连续梁、传递偏心子枝力矩，并用枝径—轴长—承叶面积样本校准。已阅读离线 NCSU 来源和两张私有照片；论文链接请求因本机代理不可达失败，全文未在线核实。\n\n复现：`OSMANTHUS_LOAD_PROBE=1 node lib/osmanthus-load-growth.test.mjs`。",
+      "leadIntegration": "Original failure/validation status retained. Draft reviewed, corrected and integrated by lead; combined suite 196/196 passed plus typecheck/build and local browser checks."
     }
   ],
   "validation": {
     "suite": "Node frontend and local/community infrastructure",
-    "passed": 180,
+    "passed": 196,
     "failed": 0,
     "typecheck": "passed",
-    "browser": "pending final build inspection; previous preview screenshots retained"
+    "browser": "Actual local production-bundle rendering inspected for Iris, Oxalis, Ophiopogon and Osmanthus; no captured WebGL errors; full in-page view and Esc verified. Visual resemblance remains under refinement."
   }
 }

@@ -2,8 +2,9 @@ import {geometryHeight} from './geometry-height.ts';
 import * as THREE from "three";
 import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
 import {irisFallSurface,irisCrestSurface,herbPigment} from "./herb-surfaces.ts";
+import {tagLeafStrip} from "./herb-leaf-dynamics.ts";
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
-import { osmanthusLifecycle, osmanthusPriors } from "./osmanthus-lifecycle.ts";
+import { osmanthusLifecycle, osmanthusPriors, osmanthusSupportedRadius } from "./osmanthus-lifecycle.ts";
 
 /** Parameterized, uncalibrated morphology. Age is years; day is 1–365; motion time is seconds. */
 export type PlantSpecies = "ginkgo" | "osmanthus" | "iris" | "oxalis";
@@ -171,6 +172,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     }
     function axisLeaves(parent: THREE.Group, plan: AxisPlan) {
       const key = plan.key;
+      let supportAreaM2 = 0;
       const matrices: THREE.Matrix4[] = [], petioles: THREE.Matrix4[] = [];
       const nodes: (AxisNode & { scale: number })[] = [];
       const petals: THREE.Matrix4[] = [], peduncles: THREE.Matrix4[] = [], centers: THREE.Matrix4[] = [];
@@ -185,6 +187,9 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         const petioleRise = .12 + .50 * rng(key + n * 331 + 23)();
         const scale = (.20 + .80 * smooth(.10, 2, age)) * expansion;
         nodes.push({ ...node, scale });
+        // Age-driven, persistent leaf cohorts reserve equivalent support area.
+        // Keep this independent of bloom/seasonal visibility and load controls.
+        supportAreaM2 += 2 * bladeArea * scale * scale;
         for (let side = 0; side < 2; side++) {
           // A single node, a single expansion factor, exactly opposite petioles;
           // the next node's pair rotates 90 degrees (decussate phyllotaxis).
@@ -216,6 +221,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           }
         }
       }
+      parent.userData.ownLeafSupportAreaM2 = supportAreaM2;
       if (matrices.length) {
         const leaves = new THREE.InstancedMesh(leafGeometry, foliage, matrices.length);
         const stalks = new THREE.InstancedMesh(unitCylinder, stemMat, petioles.length);
@@ -291,6 +297,24 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         }
       }
       branchCohort(leader, leaderPlan, leader.quaternion.clone(), leader.position.clone());
+      // A short weak axillary shoot and a long vigorous terminal axis must not
+      // share one order-only diameter. Postorder sums supported blade area ONCE
+      // through real attachments; radius changes neither length nor material
+      // node positions. Allometry constants and limitations live in the priors.
+      const support = new Map<THREE.Object3D, number>();
+      for (const branch of [...branches].reverse()) {
+        const area = (branch.pivot.userData.ownLeafSupportAreaM2 ?? 0) + (support.get(branch.pivot) ?? 0);
+        const ageOrderFloorM = branch.radius;
+        branch.radius = osmanthusSupportedRadius(branch.length, area, ageOrderFloorM);
+        branch.pivot.userData.secondaryThickening = { supportedLeafAreaM2: area, ageOrderFloorM,
+          radiusM: branch.radius, status: osmanthusPriors.secondaryThickening.status };
+        if (branch.pivot.parent) support.set(branch.pivot.parent, (support.get(branch.pivot.parent) ?? 0) + area);
+        const wood = branch.pivot.children.find(o => o instanceof THREE.Mesh && o.geometry instanceof THREE.CylinderGeometry) as THREE.Mesh | undefined;
+        if (wood && branch.radius !== ageOrderFloorM) {
+          wood.geometry.dispose();
+          wood.geometry = new THREE.CylinderGeometry(branch.radius * .49, branch.radius, branch.length, branch.radius > .04 ? 10 : 6, 1);
+        }
+      }
       const bud = new THREE.Mesh(seedGeo, stemMat); bud.name = "osmanthus-terminal-bud"; bud.userData.organ = "bud";
       bud.position.y = h; bud.scale.set(.0007, .0015, .0007).multiplyScalar(smooth(.035, .12, age)); leader.add(bud);
     }
@@ -400,11 +424,11 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           for (let v = 0; v < vertices.count; v++) {
             vertices.setX(v, vertices.getX(v) + vertices.getZ(v)); vertices.setZ(v, (v%3===1?.0006:0)*expansion*Math.sin(vertices.getY(v)/Math.max(1e-8,length)*Math.PI));
           }
-          geometry.computeVertexNormals();
+          geometry.computeVertexNormals(); tagLeafStrip(geometry);
           const leaf = new THREE.Mesh(geometry, green);
           // All sword blades share the same x/y plane, in two basal ranks.
           leaf.position.x = side * .0007 * (4 - Math.floor(i / 2)) * expansion;
-          leaf.userData = { organ: "leaf", role: "sword-blade", arrangement: "distichous-fan", cohort: c, index: i, expansion };
+          leaf.userData = { organ: "leaf", leafDynamics: "material-strip", role: "sword-blade", arrangement: "distichous-fan", cohort: c, index: i, expansion };
           leaf.castShadow = true; fan.add(leaf); leafCount++;
         }
         const readiness = smooth(4, 7, expanded.reduce((a, b) => a + b, 0));
@@ -441,7 +465,8 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 3; leaf.add(frame);
           const mesh = new THREE.Mesh(leafGeometry, green); mesh.rotation.x = -Math.PI / 2;
           mesh.scale.setScalar((.38 + .10 * keyed(1100 + key)) * expansion);
-          mesh.userData.role = "heart-shaped-leaflet"; frame.add(mesh);
+          if (!leafGeometry.hasAttribute('leafMaterial')) tagLeafStrip(leafGeometry, true);
+          mesh.userData = { organ: "leaf", leafDynamics: "material-strip", role: "heart-shaped-leaflet", insertion: "leaflet-base-at-petiole-tip", leaflet: p }; mesh.castShadow = true; frame.add(mesh);
         }
         leafCount++; // Count compound leaves, not their three leaflets.
         const readiness = smooth(.85, 1, expansion) * smooth(.10, .28, age);

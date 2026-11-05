@@ -40,3 +40,14 @@ h1,h2,h3,.specimen-title h2{font-family:'Songti SC','Noto Serif SC',Georgia,seri
 @media(max-width:700px){.lab-layout{display:flex;flex-direction:column;gap:16px}.species-panel,.viewer-panel,.inspector{width:100%}.scene-wrap{min-height:510px}.page-heading h1{font-size:29px}.page-heading p{font-size:12px}.specimen-title h2{font-size:29px}.specimen-title p{max-width:230px;font-size:10px}.scene-location>span,.scene-location b,.scene-location small{font-size:8px}.organ-switch{padding:9px;gap:4px}.organ-switch button{font-size:10px;min-height:34px;white-space:nowrap}.growth-journey .timeline-ticks button{font-size:8px}.growth-stage p{font-size:10px}.root-metrics{font-size:9px}.topbar nav button{font-size:10px}}
 
 .fh-account-table{width:100%;border-collapse:collapse;font-size:11px;font-variant-numeric:tabular-nums}.fh-account-table caption{font-size:10px;text-align:left;margin:8px 0;color:#66776b}.fh-account-table th,.fh-account-table td{padding:7px 3px;border-bottom:1px solid #dce4d9;text-align:right}.fh-account-table th:first-child{text-align:left}
+
+/* An in-page presentation view also works where the native Fullscreen API is unavailable. */
+.viewer-panel.viewer-expanded{position:fixed;inset:12px;z-index:45;width:auto;height:calc(100dvh - 24px);display:flex;flex-direction:column;background:var(--bg);overflow:auto;border-radius:12px;box-shadow:0 0 0 20px #f7f8f4,0 18px 80px #20322433}
+.viewer-expanded>.organ-switch,.viewer-expanded>.viewer-header{flex-shrink:0}
+.viewer-expanded>.scene-wrap{flex:1 1 auto;min-height:220px}
+.viewer-expanded>.growth-journey{flex-shrink:0;padding:12px 22px}
+.viewer-expanded .growth-stage,.viewer-expanded .timeline-foot{display:none}
+.viewer-expanded .growth-actions{margin-bottom:10px}
+.viewer-expanded .growth-playback{margin:5px 0}
+.viewer-expanded .timeline-ticks{margin-bottom:0}
+@media(max-width:700px){.viewer-panel.viewer-expanded{inset:0;height:100dvh;border-radius:0}.viewer-expanded>.growth-journey{padding:9px 12px}.viewer-expanded .organ-switch{overflow:auto;flex-shrink:0}.viewer-expanded .specimen-title p{display:none}}

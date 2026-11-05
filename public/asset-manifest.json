@@ -1,5 +1,5 @@
 {
-  "version": "0.5.1",
+  "version": "0.5.2",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -28,11 +28,11 @@
   },
   "physics": {
     "branches": "lumped cantilever rotational dynamics",
-    "leaves": "bounded quasi-static strip bending for explicit petiolate blades",
+    "leaves": "bounded quasi-static blade/strip deformation with material coordinates on all seven species; isotropic proxy, not a shell solver",
     "rootSoil": "geometric continuity proxy with fixed collar bottom; no anchorage or hydraulic solver",
     "woodLoads": "actual rendered tube sections include merged fine shoots; nearest-owner lumping, circular/polygon-frustum approximation",
     "unsolved": "off-axis torsion, root-soil compliance, fracture and full nonlinear beam response",
-    "validity": "linear-beam demand and saturation retained; Osmanthus default geometry/load compatibility remains under refinement"
+    "validity": "explicit raw demand and saturation diagnostics; revised uncalibrated Osmanthus support priors keep the default 3.2 m/s / 1 g scenario within the small-deflection guard; other species/scenarios can saturate"
   },
   "evidence": "references/species-evidence.json",
   "photoAttribution": "references/photo-attribution.json",
@@ -44,18 +44,19 @@
     "phenology": "age and day clocks independent",
     "timing": "uncalibrated engineering priors",
     "roots": "keyed axis identities and fixed material-node prefixes; proximal seed-to-collar extension",
-    "foliation": "persistent fine-shoot material sites; lower-stem foliage uses an explicit renewal prior separate from retained wooden spurs"
+    "foliation": "persistent fine-shoot material sites; lower-stem foliage uses an explicit renewal prior separate from retained wooden spurs",
+    "ophiopogon": "fixed ramet and leaf insertion material coordinates, extending rhizome precursor before a new rooted daughter ramet"
   },
   "collaborationEvidence": "collaboration-evidence.json",
   "visualRefinement": {
-    "osmanthus": "irregular connected dense 3D crown; straight-axis approximation",
+    "osmanthus": "irregular connected 3D crown; persistent axes; explicit uncalibrated length/descendant-leaf-area support radius law; straight-axis approximation",
     "camphorAcer": "fixed curved material axes with parent-tangent-oriented descendants",
     "iris": "ribbed fans, curved falls, white fringed crests and procedural vein pigment",
-    "herbRoots": "shared active ramets, actual surface-node root starts and basal bridges"
+    "herbRoots": "fixed Ophiopogon clone nodes and material-prefix roots; actual surface-node root starts and basal bridges"
   },
   "accountUsageEvidence": "account-usage.json",
   "validation": {
-    "passed": 180,
+    "passed": 196,
     "failed": 0
   }
 }

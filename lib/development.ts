@@ -21,10 +21,24 @@ export function additionalDevelopment(species: 'camphor' | 'acer' | 'ophiopogon'
       age < (herb ? 2 : 3) ? (herb ? '基生叶丛形成' : '幼苗 · 叶序建立') :
       age < (herb ? 4 : 18) ? (herb ? '根茎扩展 · 子株建立' : '幼树 · 枝序建立') : '成熟结构 · 持续更新' };
 }
-/** Stable cohort identity shared by the visible basal rosettes and underground rhizomes. */
+/** Ophiopogon only: inverse of the illustrative smoothstep extension clock. */
+export function ophiopogonArrival(fraction: number) {
+  return .5 - Math.sin(Math.asin(1 - 2 * Math.max(0, Math.min(1, fraction))) / 3);
+}
+/** Stable material nodes shared by shoots and underground axes.
+ * NC State's cached species description: underground lateral stolons terminate
+ * in daughter plants. Distances and clocks below remain engineering priors.
+ * Preserve cohort establishment dates, extending the precursor BEFORE birth.
+ * The original division starts at its collar and extends downwards; it does
+ * not need a lateral precursor to reach an already present main collar.
+ */
 export function ophiopogonRamet(index: number, age: number) {
   const birth = index === 0 ? .025 : .55 + index * .48;
-  const growth = organGrowth(birth, .9, age), angle = index * 2.39996;
-  const spread = index === 0 ? 0 : .047 * Math.sqrt(index) * growth;
-  return { birth, growth, x: Math.cos(angle) * spread, z: Math.sin(angle) * spread };
+  const extensionDuration = .9, extensionBirth = index === 0 ? birth : birth - extensionDuration;
+  const growth = organGrowth(birth, .9, age), extension = organGrowth(extensionBirth, extensionDuration, age);
+  const angle = index * 2.39996, spread = index === 0 ? 0 : .047 * Math.sqrt(index);
+  const x = Math.cos(angle) * spread, z = Math.sin(angle) * spread;
+  return { birth, growth, x, z, extensionBirth, extensionDuration, extension,
+    nodeAt: (t: number) => ({ x: x * t, y: -.008 - (index === 0 ? .006 * t : 0), z: z * t }),
+    arrivalAt: (t: number) => extensionBirth + extensionDuration * ophiopogonArrival(t) };
 }

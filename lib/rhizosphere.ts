@@ -127,7 +127,9 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
     calibration: 'uncalibrated-engineering-prior', intervalYears: [.55, .95],
   };
   function addRoot(points: THREE.Vector3[], radius: number, order: number, organ = 'root') {
-    radius = Math.min(radius, soilDepth * .12);
+    // Ophiopogon's horizontal basal polygon must enclose the actual 8 mm
+    // square of blade offsets AND blade half-widths, even in 5 cm soil.
+    radius = Math.min(radius, soilDepth * (species === 'ophiopogon' && organ === 'root-collar' ? .14 : .12));
     const surfaceAxis=organ==='rhizome'||organ==='stolon';
     // Herb attachments are actual support nodes (Oxalis is at +3 mm), not
     // independently buried origins. Keep their proximal axes and rings intact.
@@ -232,38 +234,55 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
     const herb = species === 'ophiopogon', maturity = additional.maturity;
     const depth = Math.min(soilDepth * .85, (herb ? .24 : species === 'camphor' ? 1.8 : .95) * maturity * expansion + .025 * additional.radicle);
     const reach = (herb ? .17 : species === 'camphor' ? 3.4 : 2.2) * maturity * expansion;
-    function axis(start: THREE.Vector3, angle: number, length: number, drop: number, radius: number, order: number, organ='root') {
-      const end=start.clone().add(new THREE.Vector3(Math.cos(angle)*length,-drop,Math.sin(angle)*length));
-      return addRoot([start,start.clone().lerp(end,.45),end],radius,order,organ);
-    }
-    function fibers(parent: THREE.CatmullRomCurve3, birth: number, key: number, count: number, radius: number) {
-      for(let f=0;f<count;f++) {const g=organGrowth(birth+f*.055,.65,age);if(g<=0)continue;
-        const r=randomSource(key+f*197),a=f*2.39996+r()*.5,start=parent.getPointAt(.15+.7*(f+.5)/count),len=depth*(.45+r()*.4)*g;
-        axis(start,a,len*(herb?.35:.65),len,radius*g,2);
-      }
-    }
     if (herb) {
-      // Match buildAdditionalPlant's density clamp, cohort budget and active ramets.
+      // Ophiopogon uses fixed material paths, not fractions of a growing axis.
+      // These distances / clocks are uncalibrated; the cached NC State page
+      // supports underground lateral axes terminating in daughter plants only.
+      const targetDepth=Math.min(soilDepth*.85,.24*expansion+.025);
+      const point=(p:{x:number;y:number;z:number})=>new THREE.Vector3(p.x,p.y,p.z);
+      function materialAxis(id:string,start:THREE.Vector3,target:THREE.Vector3,g:number,radius:number,order:number,organ='root') {
+        // Constrain the FULL path before taking its prefix, so shallow soil
+        // never rotates or shortens a previously established material segment.
+        target=target.clone();target.y=Math.max(-soilDepth+.0001,target.y);
+        const end=start.clone().lerp(target,g);
+        addRoot([start,start.clone().lerp(end,.5),end],radius*g,order,organ);
+        Object.assign(group.children[group.children.length-1].userData,{axisId:id});
+      }
+      // Match the above-ground finite fallback, density clamp and cohort budget.
       const density=clamp(finite(params.density??1,1),.15,2),clumpCount=1+Math.round(6*density);
-      for(let c=0;c<clumpCount;c++){const ramet=ophiopogonRamet(c,age);if(ramet.growth<=0)continue;
-        // Slender underground axis, not the thick Iris rhizome. Every node is
-        // at -8 mm, with an explicit basal shoot connection from the y=0 rosette.
-        const origin=new THREE.Vector3(0,-.008,0),end=new THREE.Vector3(ramet.x,-.008,ramet.z);
-        if(c===0)origin.y-=.006*ramet.growth;
-        const rhizome=addRoot([origin,origin.clone().lerp(end,.5),end],.0015*ramet.growth,0,'rhizome');
-        const leafBase=new THREE.Vector3(ramet.x,0,ramet.z);
-        // The visible ribbons originate within an 8 mm square and expand on
-        // their own .6-year clock. Enclose those actual bases, including when
-        // blade expansion precedes the .9-year ramet/rhizome expansion.
-        const basalRadius=.006*organGrowth(ramet.birth,.6,age);
-        addRoot([leafBase,leafBase.clone().lerp(end,.5),end],basalRadius,0,'root-collar');
-        fibers(rhizome,ramet.birth+.04,seed*617+c*997,12,.0007);
-        for(let f=0;f<2;f++){const g=organGrowth(ramet.birth+.8+f*.2,1,age);if(g<=0)continue;
-          const a=c*2.39996+f*1.8,start=end.clone(),len=.08*g;
-          const root=axis(start,a,.025*g,len,.0007*g,1);
-          // Distal swelling belongs to a root; never a rhizome bud / daughter rosette.
-          const storage=axis(root.getPointAt(.65),a,.008*g,.018*g,.0025*g,2,'storage-root');
-          void storage;
+      for(let c=0;c<clumpCount;c++){const ramet=ophiopogonRamet(c,age);if(ramet.extension<=0)continue;
+        const origin=point(ramet.nodeAt(0)),distal=point(ramet.nodeAt(1));
+        materialAxis(`rhizome-${c}`,origin,distal,ramet.extension,.0015,0,'rhizome');
+        // Root-only views may show a precursor with no collar or leaf tuft.
+        if(ramet.growth>0){
+          const end=new THREE.Vector3(ramet.x,-.008,ramet.z),leafBase=new THREE.Vector3(ramet.x,0,ramet.z);
+          // 6.8 mm octagon inradius exceeds sqrt(2)*4 mm + .54 mm
+          // (the largest ribbon half-width at its base); geometry, not a
+          // measured collar diameter. Preserve the original offset square.
+          addRoot([leafBase,leafBase.clone().lerp(end,.5),end],.0068*organGrowth(ramet.birth,.6,age),0,'root-collar');
+          Object.assign(group.children[group.children.length-1].userData,{axisId:`collar-${c}`});
+        }
+        for(let f=0;f<12;f++){
+          // The original division can root directly from its existing collar;
+          // later fibers wait for underground extension to reach their nodes.
+          const t=c===0&&f===0?0:.15+.7*(f+.5)/12,birth=Math.max(ramet.extensionBirth+.04+f*.055,ramet.arrivalAt(t)),g=organGrowth(birth,.65,age);
+          if(g<=0)continue;
+          const r=randomSource(seed*617+c*997+f*197),a=f*2.39996+r()*.5,start=point(ramet.nodeAt(t)),len=targetDepth*(.45+r()*.4);
+          const target=start.clone().add(new THREE.Vector3(Math.cos(a)*len*.35,-len,Math.sin(a)*len*.35));
+          materialAxis(`fiber-${c}-${f}`,start,target,g,.0007,2);
+        }
+        for(let f=0;f<2;f++){const birth=ramet.birth+.8+f*.2,g=organGrowth(birth,1,age);if(g<=0)continue;
+          const a=c*2.39996+f*1.8,start=new THREE.Vector3(ramet.x,-.008,ramet.z),target=start.clone().add(new THREE.Vector3(Math.cos(a)*.025,-.08,Math.sin(a)*.025));
+          target.y=Math.max(-soilDepth+.0001,target.y);
+          materialAxis(`storage-parent-${c}-${f}`,start,target,g,.0007,1);
+          // The swelling starts at a fixed material node on an arrived root,
+          // never at .65 of its CURRENT length or as a daughter-plant bud.
+          // Use the remaining parent extension clock after the .65 node;
+          // no independent mature swelling can pop into existence at arrival.
+          const sg=clamp((g-.65)/.35);
+          if(sg<=0)continue;
+          const node=start.clone().lerp(target,.65),tip=node.clone().add(new THREE.Vector3(Math.cos(a)*.008,-.018,Math.sin(a)*.008));
+          materialAxis(`storage-${c}-${f}`,node,tip,sg,.0025,2,'storage-root');
         }
       }
     } else if (additional.radicle > 0) {
