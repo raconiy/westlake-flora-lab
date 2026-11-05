@@ -24,9 +24,12 @@ export async function status() {
   const result = await call('/api/groups/1/credentials', 'auth.key');
   if (result.code !== 0) throw new Error('Gateway rejected status request');
   const items = result.data.items;
+  const required = Number(process.env.SWARM_REQUIRED_ACCOUNTS || 3);
+  if (!Number.isInteger(required) || required < 1 || required > 5) throw new Error("Required account count must be 1–5");
   return {
     group: 'westlake-codex-local',
-    requiredDistinctAccounts: 5,
+    requiredDistinctAccounts: required,
+    accountRequirementMet: items.length >= required,
     connectedDistinctAccounts: items.length,
     fiveAccountRequirementMet: items.length >= 5,
     credentials: items.map(item => ({
