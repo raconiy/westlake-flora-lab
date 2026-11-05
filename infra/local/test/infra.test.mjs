@@ -67,7 +67,7 @@ test('SQLite records survive coordinator restart',async()=>{
 test('process timeout and Codex JSONL extraction use real child processes with test fixtures',async t=>{
   const folder=mkdtempSync(resolve(tmpdir(),'flora-cli-'));t.after(()=>rmSync(folder,{recursive:true,force:true}));
   const fixture=resolve(folder,'codex-fixture');writeFileSync(fixture,`#!${process.execPath}\nprocess.stdin.resume();process.stdin.on('end',()=>{console.log(JSON.stringify({type:'item.completed',item:{type:'agent_message',text:'fixture answer'}}));console.log(JSON.stringify({type:'turn.completed',usage:{input_tokens:1}}));});\n`,{mode:0o755});
-  const result=await runCodex('hello',{root:folder,binary:fixture});assert.equal(result.text,'fixture answer');
+  const result=await runCodex('hello',{root:folder,binary:fixture,backend:'codex'});assert.equal(result.text,'fixture answer');
   const timed=await runProcess(process.execPath,['-e','setInterval(()=>{},1000)'],{timeoutMs:30});assert.equal(timed.timedOut,true);
 });
 

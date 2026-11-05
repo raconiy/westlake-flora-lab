@@ -8,9 +8,9 @@ export const osmanthusPriors = {
   confidence: 'low', calibration: 'uncalibrated-engineering-prior',
   thresholds: { radicle: [.012, .08], shoot: [.035, .12], trueLeaves: [.10, .30], branching: [.8, 2.4], seedLoss: [.25, .9] },
   dimensions: { seedHalfAxes: [.0045, .007, .0035], seedCenterY: -.004, adultCollarY: -.004, firstYearHeight: .28, matureHeightAsymptote: 5.4 },
-  geometry: 'staggered smoothstep cohorts; node/petiole/flower dimensions and growth curves are engineering priors',
+  geometry: 'bounded distal cohorts; node coordinates sampled at axis length at birth; independent axis extension clocks; persistent wood; all timings and dimensions are engineering priors',
   botanicalSource: 'https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/',
-  botanicalScope: 'evergreen; opposite simple petiolate leaves; small four-lobed axillary flowers; timing below is not inferred from this source',
+  botanicalScope: 'dense evergreen shrub/small tree; opposite simple petiolate leaves; small four-lobed axillary flowers; exact ages and turnover are not inferred from this source',
 } as const;
 
 export function osmanthusGrowth(start: number, end: number, age: number) {

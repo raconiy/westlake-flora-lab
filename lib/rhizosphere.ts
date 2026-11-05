@@ -14,6 +14,8 @@ export interface RhizosphereParams {
   moisture: number; compaction: number;
   /** Available soil profile depth, metres. */
   soilDepth: number; cutaway: boolean; density?:number;
+  /** Actual above-ground model rest collar, not a separately guessed species origin. */
+  shootCollar?: {position:[number,number,number];radius:number};
 }
 export interface RhizosphereModel {
   group: THREE.Group;
@@ -306,6 +308,28 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
         }
       }
     }
+  }
+  // Connect the ACTUAL shoot collar to the coarse root crown. Independently
+  // clamping a root centreline below ground can otherwise leave a visible gap.
+  // This fixed geometric junction is not a root-soil anchorage/FEM solver.
+  if(woody&&params.shootCollar&&params.shootCollar.radius>1e-7){
+    const top=new THREE.Vector3().fromArray(params.shootCollar.position);
+    // Root generators use their own origin; translate their actual vertices and
+    // endpoint metadata into the same horizontal collar coordinate system.
+    if(top.x!==0||top.z!==0)for(const child of group.children){
+      if(!(child instanceof THREE.Mesh))continue;child.geometry.translate(top.x,0,top.z);
+      for(const key of ['start','end'])if(Array.isArray(child.userData[key])){child.userData[key][0]+=top.x;child.userData[key][2]+=top.z;}
+    }
+    const radius=params.shootCollar.radius,depth=Math.min(soilDepth*.70,Math.max(.004,radius*.9));
+    const primary=group.children.find(o=>o.userData.organ==='root'&&o.userData.order===0);
+    const primaryY=primary?.userData.start?.[1]??top.y;
+    const bottomY=Math.max(-soilDepth+.0001,Math.min(top.y-.004,-depth,primaryY-radius*.5));
+    const geometry=new THREE.CylinderGeometry(radius,radius*1.45,top.y-bottomY,16,3);
+    geometry.translate(top.x,(top.y+bottomY)/2,top.z);
+    const material=coarseMat.clone();material.vertexColors=false;allMaterials.push(material);geometries.push(geometry);
+    const collar=new THREE.Mesh(geometry,material);collar.name='root-shoot-junction';collar.castShadow=collar.receiveShadow=true;
+    collar.userData={organ:'root-collar',sourceType:'engineering-prior',top:top.toArray(),bottomY,anchored:true};group.add(collar);
+    group.userData.shootCollar={...params.shootCollar,geometry:'connected-root-flare-proxy',anchorage:'fixed-rest-collar-not-soil-mechanics'};
   }
   // Profile depth is fixed by soilDepth; the display box width follows root reach for framing, not a registered soil volume.
   const width = Math.max(woody ? 1.3 : .42, reach * 2.45);

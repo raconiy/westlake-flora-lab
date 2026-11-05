@@ -1,0 +1,188 @@
+{
+  "version": "0.5.0",
+  "createdAt": "2026-11-05T16:19:09.961Z",
+  "workflow": [
+    "shared botanical constraints",
+    "isolated implementation tasks",
+    "lead integration",
+    "three distinct account cross reviews consuming colleague handoffs",
+    "lead correction of concrete findings",
+    "structural tests and browser inspection",
+    "GitHub Actions deployment"
+  ],
+  "handoffs": [
+    {
+      "id": "82179cb3-2231-4ad1-8308-69a89a171cd0",
+      "title": "Osmanthus fixed-node shoot development repair",
+      "status": "validation_failed"
+    },
+    {
+      "id": "3f28dcc0-08da-4dde-bf3a-c767ac84b2f0",
+      "title": "Additional species persistent growth audit and repair",
+      "status": "validation_failed"
+    }
+  ],
+  "reviewScope": "Static source review; model statements are not substitutes for executed tests or field observations",
+  "reviews": [
+    {
+      "account": "A",
+      "requestId": "d3102722-9f20-48ae-9977-782d1db0886e",
+      "responseId": "resp_0a128ac0c479963e016aecaad9cb4887d0aefd0f68d9007706",
+      "role": "growth-cross-review",
+      "output": {
+        "summary": "仅静态审阅所附最新源码、测试源码及交接输出，未运行工具、未读取凭据，也未将同事历史回执视为本次验证。确认银杏多项持久化修复和桂花固定挂点实现已体现在源码中；发现1项仍违反固定节点契约的具体错误：银杏短枝伸长时，已形成的短枝叶节点仍随当前枝长移动，45→80年也存在该路径。桂花未在所附实现中发现其他可确认的剩余错误。缺失源码涉及的修复及根干连接保持未知，不能据此确认全部通过或发布。",
+        "reviewedHandoffs": [
+          "82179cb3-2231-4ad1-8308-69a89a171cd0",
+          "3f28dcc0-08da-4dde-bf3a-c767ac84b2f0"
+        ],
+        "blocking": [
+          {
+            "file": "lib/plant-engine.ts",
+            "defect": "银杏短枝上的既有节点仍使用当前枝长的比例坐标。主干短枝先以 .014 * spurGrowth 建立 spur，再以 spur.getPointAt(.2 + l * .16) 放置叶节点；spurGrowth 增大时，已出现节点会沿木枝移动。源码可直接推导出45→80年的实例：i=74 的 birth=43.962，45年时已有短枝和5个叶节点，但 spurGrowth 尚未达到1；80年时短枝达到完整长度，相同叶节点的材料坐标已改变。通用 shortShoots() 同样在随 shootScale 伸长的 shootCurve 上按固定比例放置节点，具有相同问题。这不是已修复的光照缩放问题，也不是实测结论。",
+            "fix": "为每条短枝定义固定目标中心线及各节点的出生材料坐标；木枝伸长仅显露该中心线的新增部分。节点待木枝到达固定坐标后形成，展叶只改变叶片尺寸，不再按当前短枝长度重新计算挂点。主干短枝循环和 shortShoots() 应同时修复。",
+            "verification": "待补充并执行回归：以相同 seed、density、day 对比45和80年，检查主干 i=74 短枝各既有叶柄基部在父轴局部坐标中的位置不变，同时允许短枝远端继续伸长；另选未完成伸长的通用短枝跨年龄检查相同不变量。读取实际叶柄实例矩阵计算基部，不仅比较元数据，并确认木枝保留且新节点未超出实际枝端。本次未执行这些检查。"
+          }
+        ],
+        "nonBlocking": [
+          {
+            "file": "lib/plant-engine.ts",
+            "observation": "静态确认银杏主干节点及主侧枝挂点采用出生时高度的 .96 材料坐标；主侧枝不再按年龄退休，主干木质短枝不再乘 light；补冠短枝数量由固定 targetLength 推导，recordLimit 不会截断木枝生成。这些修复不应继续沿用旧失败结论。",
+            "limitation": "上述确认针对源码机制，不代表已执行45→80年完整木枝集合、冠层面积或负载连接回归。"
+          },
+          {
+            "file": "lib/plant-engine.ts",
+            "observation": "桂花 AxisNode 的 attachment 由 lengthAt(nodeBirth) 固定，子枝直接使用同一节点记录，且作为父轴子对象连接；长大后没有按年龄移除木枝的分支。主轴包含44、60年的节点批次，对应新侧枝可在44.45、60.45年后建立，源码未呈现45→80年统一退枝或清空冠层的路径。",
+            "limitation": "未提供 osmanthus-lifecycle.ts，无法独立核查主轴高度、根颈位置及其跨年龄行为；不能据此确认全部世界坐标不变量。"
+          },
+          {
+            "file": "lib/osmanthus-persistence.test.mjs",
+            "observation": "所附测试确实检查固定局部与世界挂点、木枝保留、实际叶柄基部与子枝共点，以及日期和动画时间不推进年龄。",
+            "limitation": "测试未直接比较45与80年，也未执行。40→120年的数量检查不能替代这两个目标年龄的逐轴几何核对；建议发布前补充该比较。"
+          },
+          {
+            "file": "lib/additional-species.ts / lib/additional-species.test.mjs / infra/local/test/infra.test.mjs / 根干连接相关实现",
+            "observation": "这些最新源码未随本次材料提供。主控说明已隔离 fixture 后端、区分成叶与展叶尺寸并修复根连接，应覆盖旧交接失败的解释，不能将旧凭据缺失或旧叶宽断言继续认定为当前缺陷。",
+            "limitation": "香樟顶端叶及连接批次、其他树种持久化、fixture 隔离和地表0处根干真实连接均无法在本次独立确认；属于证据缺口，不是确认缺失。未校准的工程先验也不作为缺陷或实测结果。"
+          }
+        ]
+      }
+    },
+    {
+      "account": "B",
+      "requestId": "a2c0ecb9-8eb3-4d42-b882-65bbe043799f",
+      "responseId": "resp_02021cc17d5b1866016aecaad9eed487d2b5f8eca180b00393",
+      "role": "root-physics-cross-review",
+      "output": {
+        "summary": "仅审阅所附最新源码和交接输出，未运行工具、测试或浏览器，未读取凭据。在可核实范围内，没有发现可确认为当前实际断开的剩余阻断缺陷。已确认地表中心为0、plant视图对rhizosphere组仅保留root-collar，以及根颈底部计算读取最终主根起点的修复。由于缺少地上模型生成器和风动实现，尚不能确认真实根干半径匹配、所有地下器官隐藏及风中根颈固定，因此本次不构成完整发布验收。旧交接测试失败不作为最新版本仍失败的证据。",
+        "reviewedHandoffs": [
+          "82179cb3-2231-4ad1-8308-69a89a171cd0",
+          "3f28dcc0-08da-4dde-bf3a-c767ac84b2f0"
+        ],
+        "blocking": [],
+        "nonBlocking": [
+          {
+            "file": "lib/rhizosphere.ts; lib/ground-surface.ts; app/PlantScene.tsx",
+            "status": "源码确认的修复",
+            "observation": "根颈连接体使用传入shootCollar的坐标和半径；bottomY计算读取addRoot处理后主根的userData.start[1]，而非仅依据独立估算深度。地表生成器在中心产生y=0，resize也将组位置保持为0；地形起伏的垂直缩放上限为0.007米。applyMode在plant视图中仅显示soil.group下organ为root-collar的直接子对象，当前根轴及土层均作为该组直接子对象添加。",
+            "fix": "未发现这些已展示修复需要追加修改的具体问题。保留fixed-rest-collar-not-soil-mechanics的边界说明，不将固定连接代理称为土壤力学。",
+            "verification": "以上为静态代码检查，不代表已完成渲染或几何相交实测。"
+          },
+          {
+            "file": "app/PlantScene.tsx; lib/plant-engine.ts（未提供）; lib/additional-species.ts（未提供）",
+            "status": "真实地上几何与完整可见性未知",
+            "observation": "shootCollar来自首个order=0分枝的pivot.position，半径还按物种乘以1.35、1或1.4。缺少生成器源码，无法判断这些值是否恰好对应实际基部网格半径及正确坐标空间。另外，applyMode未对plant.group执行地下器官过滤；rhizosphere中存在从地上生成器提取根茎、匍匐茎和不定根的代码，但实际生成器未提供，不能据此确认当前plant视图确有地下器官泄漏，也不能确认已全部隐藏。",
+            "fix": "补充最新生成器源码供主控核对；若地上组确实保留地下网格，应按器官或角色统一执行视图过滤。不要在核对几何前直接删除半径系数。",
+            "verification": "待核对基部网格世界坐标和有效半径，并检查plant视图中两个模型组的有效可见对象。桂花固定节点、香樟顶端叶及末端枝批次等交接修复同样因缺少最新生成器源码而未获复核。"
+          },
+          {
+            "file": "app/PlantScene.tsx; lib/beam-dynamics.ts（未提供）",
+            "status": "风中固定连接尚未闭环",
+            "observation": "场景代码将根颈放在独立的soil.group，逐帧只向dynamics和叶片动态模块传递更新，所示代码没有主动移动根颈。但anchored:true只是元数据，不能证明地上主轴基点在风动时保持相同位置；其保证取决于未提供的beam-dynamics实现。",
+            "fix": "补充最新风动实现，确认主轴根节点的位置固定，同时允许上部弯曲；继续将其描述为固定边界或几何锚定代理。",
+            "verification": "待静态核对风动更新路径；主控后续验证应比较不同风力和时间下根颈顶部与地上基部的世界坐标及几何接触。本次未执行该验证。"
+          }
+        ]
+      }
+    },
+    {
+      "account": "C",
+      "requestId": "8021ec1b-93ba-486b-809a-dfca61d700e7",
+      "responseId": "resp_0db772e42195267e016aecaad9984087d0b6c25afcb302786b",
+      "role": "species-render-cross-review",
+      "output": {
+        "summary": "仅依据提供的最新源码及交接输出进行静态交叉评审，未运行工具、未读取凭据，也未将历史测试回执视为最新验证结果。固定材料坐标、侧枝等待支持轴到达挂点、香樟新增顶端叶与连通末级枝，以及镜头所有权修复均有源码依据。发现 1 项剩余缺陷：麦冬展叶过程中，年龄相关的随机数消耗会使已经出现的花葶几何发生跳变。香樟原冠层稀疏已有针对性修复，但缺少最新定量结果与主控观察，不能确认已解决，也不能沿用旧叶数判定仍然稀疏。建议完成该缺陷修复及列明的验证后，再由主控验收发布。",
+        "reviewedHandoffs": [
+          "82179cb3-2231-4ad1-8308-69a89a171cd0",
+          "3f28dcc0-08da-4dde-bf3a-c767ac84b2f0"
+        ],
+        "blocking": [
+          {
+            "file": "lib/additional-species.ts",
+            "defect": "麦冬花葶尺寸依赖当前已出生叶片数，会在单株建立过程中跳变。每片叶在 lg<=0 时提前 continue，只有已出生的叶片才额外消耗 hue、light 的两次 r()；叶循环结束后，花葶高度又从同一随机流读取。因此，每新增一片叶，既有花葶高度就会切换到另一随机值，而不是仅随 flowering 连续伸长。默认 density=1 时有 84 片叶，后续叶片出生时段与 ramet.birth+1 之后的开花建立时段重叠，不能依靠花尚未出现来规避。",
+            "fix": "为花葶使用按 seed、分株编号和器官用途独立确定的随机流；叶片也宜使用逐叶独立随机流，避免条件分支改变其他器官的随机参数。至少应保证未出生叶片同样消耗固定数量的随机数，但器官级独立随机流更稳健。",
+            "verification": "未执行测试。建议在固定 seed、density=1、盛花日期下，围绕 ramet.birth+l*0.019 的叶片出生阈值取左右年龄，选择 l>=53 且已有花葶的分株；验证既有花葶的未缩放目标高度保持一致，世界坐标几何差随年龄间隔趋近于零。该项应检查实际几何，而不只是花或叶的数量。"
+          }
+        ],
+        "nonBlocking": [
+          {
+            "file": "lib/additional-species.ts",
+            "status": "静态确认修复机制",
+            "finding": "木质轴使用完整材料中心线加 AxisPrefix 延伸；挂点由完整轴的固定参数求得，不再按当前总轴长重新定位。主侧枝、二级枝、细枝及香樟末级枝均通过父轴 birthAt 推迟出生；木质几何没有再次乘以光照或叶片物候系数。当前可见代码中，已建立木枝没有随年龄主动删除的路径。",
+            "verification": "这是公式与控制流检查，不是实际网格连接实测。曲线离散网格上的连接容差，以及缺失的 additionalDevelopment 对年龄边界的影响，仍需最新回归结果支持。"
+          },
+          {
+            "file": "lib/additional-species.ts",
+            "status": "叶片支持时序有源码依据",
+            "finding": "普通轴上的叶片 onset 不早于 axis.birthAt(t)；新增顶端叶使用出生时高度的固定 0.96 材料坐标，而不是随当前高度移动。按当前高度公式，这些顶端叶挂点在出生时位于已形成的主轴范围内。提供代码不足以完成独立芽器官的时序验收，不能据此断言项目没有芽模型。",
+            "verification": "需补查 development.ts 及芽相关实现，并对支持轴出生前后进行实际几何检查；本次没有执行。"
+          },
+          {
+            "file": "lib/additional-species.test.mjs（未提供最新源码）",
+            "status": "最新测试未知，旧失败不沿用",
+            "finding": "接受主控关于成熟叶与展开叶已分离的最新说明，不再把旧的 0.024915 米叶宽失败当作当前缺陷。但没有最新测试源码，无法确认分类条件及成熟叶范围是否保持严格。",
+            "verification": "成熟香樟叶仍应独立满足叶片长 0.06–0.12 米、宽 0.025–0.055 米；展开叶应另验连续扩展、挂接和成熟后达标，不能通过整体放宽成熟叶范围解决。夹具后端隔离也仅有主控说明，本次未检查其实现。"
+          },
+          {
+            "file": "lib/additional-species.ts",
+            "status": "香樟冠层修复已加入，效果待验收",
+            "finding": "最新代码确实增加了持续顶端叶批次，以及连接在细枝上的三级末端枝和相应叶片，不能继续按首次评审前的冠层结构下结论。旧交接中的 18 年 3652 叶也不是最新实现的有效统计。",
+            "verification": "是否仍显稀疏目前未知。应由主控在固定年龄、种子、密度、日期及镜头条件下检查最新冠层，并记录叶数和冠层分布；本次没有图像或最新统计可用于确认修复效果。"
+          },
+          {
+            "file": "lib/scene-framing.ts；app/PlantScene.tsx",
+            "status": "镜头逻辑静态检查未发现具体剩余缺陷",
+            "finding": "用户交互后，年龄重建和 resize 走 preserve；物种或器官视图变化通过 reset 主动收回镜头，符合最新约定。自动镜头仅在当前范围仍可容纳对象时缓动，否则立即定位；取景检查使用八角点及实际宽高比。重置时也有清除 OrbitControls 待处理阻尼的步骤。",
+            "verification": "未进行浏览器交互实测。当前源码支持上述判断，但不能据此声称旋转、缩放、播放和窗口变化已全部实测通过。"
+          },
+          {
+            "file": "app/PlantScene.tsx；lib/leaf-dynamics.ts（未提供）",
+            "status": "错误恢复入口存在，完整恢复效果未知",
+            "finding": "代码区分叶弯曲着色器失败与基础着色器失败：前者安排移除叶动力学补丁，后者停止渲染；普通动画异常停止后可通过 reset 重启。没有发现足以独立确认的恢复控制流缺陷。但恢复原材质依赖 createLeafDynamics.dispose()，缺少其源码，不能确认调用 dispose 就一定恢复可用材质。",
+            "verification": "需检查 dispose 的材质恢复实现，并分别注入叶补丁编译失败、基础材质编译失败及普通渲染异常验证；本次未注入或运行这些场景。"
+          },
+          {
+            "file": "lib/plant-engine.ts；lib/osmanthus-lifecycle.ts；lib/rhizosphere.ts；lib/development.ts；lib/ground-surface.ts（均未提供）",
+            "status": "审阅范围限制",
+            "finding": "已阅读桂花任务交接，但没有其最新源码，不能确认该任务的节点持久化实现。主控所述固定全目标补枝计数、根连接底部覆盖最终主根起点及地表 datum=0，也不能仅凭当前调用点完成验证。PlantScene 确有向根模型传递地上根颈位置与半径。",
+            "verification": "这些项目应标记为未知而非确认缺失或确认通过；需补齐最新源码和相应回归输出，再检查根干地表连接及桂花修复。"
+          }
+        ]
+      }
+    }
+  ],
+  "leadCorrections": [
+    "Fixed birth material coordinates and retained wooden ginkgo spurs",
+    "Fixed material nodes inside extending short shoots",
+    "Connected the actual shoot collar to the final root crown and aligned ground datum",
+    "Preserved the additional-species node fix and added apical leaves and connected camphor terminal shoots",
+    "Isolated Ophiopogon organ random streams",
+    "Separated mature blade dimension checks from expanding leaves",
+    "Isolated test fixtures from live model credentials",
+    "Added explicit model-rebuild failure recovery"
+  ],
+  "limits": [
+    "Not a calibrated Yungu individual reconstruction",
+    "Fixed root collar proxy, not a root-soil anchorage solver",
+    "No full physiology, pruning, competition or mortality solver"
+  ]
+}

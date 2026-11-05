@@ -23,5 +23,5 @@ export function createGroundSurface(){
  const map=new THREE.DataTexture(pixels,size,size,THREE.RGBAFormat);map.colorSpace=THREE.SRGBColorSpace;map.wrapS=map.wrapT=THREE.RepeatWrapping;map.magFilter=THREE.LinearFilter;map.minFilter=THREE.LinearMipmapLinearFilter;map.generateMipmaps=true;map.anisotropy=8;map.needsUpdate=true;
  const material=new THREE.MeshStandardMaterial({map,bumpMap:map,bumpScale:.0015,roughness:1,side:THREE.DoubleSide});
  const mesh=new THREE.Mesh(geometry,material);mesh.receiveShadow=true;group.add(mesh);
- return {group,resize(radius:number){group.scale.set(radius,Math.min(.007,radius*.012),radius);group.position.y=-Math.min(.004,radius*.006);map.repeat.setScalar(Math.max(.3,radius*4));},dispose(){geometry.dispose();material.dispose();map.dispose();group.clear();}};
+ return {group,resize(radius:number){group.scale.set(radius,Math.min(.007,radius*.012),radius);group.position.y=0;map.repeat.setScalar(Math.max(.3,radius*4));},dispose(){geometry.dispose();material.dispose();map.dispose();group.clear();}};
 }

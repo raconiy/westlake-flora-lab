@@ -1,40 +1,44 @@
 {
-  "model": "gpt-6.1-sol",
-  "reasoningEffort": "high",
-  "overlapMs": 41252,
-  "overlapStart": "2026-11-05T15:01:48.672Z",
-  "overlapEnd": "2026-11-05T15:02:29.924Z",
   "proven": true,
   "distinctAccounts": 3,
-  "verifiedAt": "2026-11-05T15:03:40.633Z",
-  "scope": "Three distinct authenticated GPT-Load upstream forwarding intervals overlap; not a GPU timing measurement.",
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "high",
+  "overlapMs": 90630,
+  "verifiedAt": "2026-11-05T16:19:09.632Z",
+  "scope": "Actual successful upstream forwarding intervals recorded by GPT-Load; not GPU timing",
   "accounts": [
     {
-      "slot": "B",
-      "credentialId": 2,
-      "requestId": "26dc7326-19e7-4dcd-9d97-b3b4f510dca8",
-      "startedAt": 1793890908672,
-      "completedAt": 1793890958830,
+      "slot": "A",
+      "requestId": "d3102722-9f20-48ae-9977-782d1db0886e",
+      "responseId": "resp_0a128ac0c479963e016aecaad9cb4887d0aefd0f68d9007706",
       "httpStatus": 200,
-      "role": "botanical-structure"
+      "role": "growth-cross-review",
+      "inputTokens": 25247,
+      "outputTokens": 3079,
+      "forwardingStart": "2026-11-05T16:12:08.804Z",
+      "forwardingEnd": "2026-11-05T16:13:57.589Z"
     },
     {
-      "slot": "A",
-      "credentialId": 1,
-      "requestId": "86223215-8fd8-4f3c-960e-98d9dafc0476",
-      "startedAt": 1793890908672,
-      "completedAt": 1793891019603,
+      "slot": "B",
+      "requestId": "a2c0ecb9-8eb3-4d42-b882-65bbe043799f",
+      "responseId": "resp_02021cc17d5b1866016aecaad9eed487d2b5f8eca180b00393",
       "httpStatus": 200,
-      "role": "render-realism"
+      "role": "root-physics-cross-review",
+      "inputTokens": 15508,
+      "outputTokens": 2052,
+      "forwardingStart": "2026-11-05T16:12:08.804Z",
+      "forwardingEnd": "2026-11-05T16:13:39.435Z"
     },
     {
       "slot": "C",
-      "credentialId": 3,
-      "requestId": "4b86e713-f2fd-40ed-9e91-6b642856d8a8",
-      "startedAt": 1793890908672,
-      "completedAt": 1793890949924,
+      "requestId": "8021ec1b-93ba-486b-809a-dfca61d700e7",
+      "responseId": "resp_0db772e42195267e016aecaad9984087d0b6c25afcb302786b",
       "httpStatus": 200,
-      "role": "growth-workflow"
+      "role": "species-render-cross-review",
+      "inputTokens": 16564,
+      "outputTokens": 3944,
+      "forwardingStart": "2026-11-05T16:12:08.805Z",
+      "forwardingEnd": "2026-11-05T16:15:05.299Z"
     }
   ]
 }

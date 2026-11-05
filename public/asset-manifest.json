@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -33,5 +33,13 @@
   },
   "evidence": "references/species-evidence.json",
   "photoAttribution": "references/photo-attribution.json",
-  "fieldCalibrated": false
+  "fieldCalibrated": false,
+  "growthRules": {
+    "nodes": "fixed birth material coordinates",
+    "scaffold": "persistent without an explicit pruning/damage event",
+    "rootJunction": "actual shoot collar joined to generated root crown",
+    "phenology": "age and day clocks independent",
+    "timing": "uncalibrated engineering priors"
+  },
+  "collaborationEvidence": "collaboration-evidence.json"
 }
