@@ -203,7 +203,8 @@
     "Removed permanent green winter flower scapes through an explicit bounded annual reproductive-organ cycle; no deletion of living rhizomes/stolons",
     "Validated opt-in changed-tests readiness and rolled it out only while clusteridle; lead full239test/CIgate retained",
     "Withheld two numerically plausible but anatomically unsupported candidates: Ginkgo blunt taper/cross-section retreat and Acer cotyledon placement without hypocotyl lifting",
-    "Separated source-verified seedling anatomy from unimplemented demonstration; corrected stale source/read-status labels"
+    "Separated source-verified seedling anatomy from unimplemented demonstration; corrected stale source/read-status labels",
+    "CI42096449681 retained: Linux raw Double baseline fingerprint differed. Original Mac raw controls matched13/13 before deriving portable1e-8 numerical fingerprints; occupancy, actual contact, support and independent load criteria unchanged. Correctedtest rerun4/4; crossplatformfullCIrequired."
   ],
   "limits": [
     "Not a calibrated Yungu individual reconstruction",
@@ -444,6 +445,13 @@
     "passed": 239,
     "failed": 0,
     "typecheck": "passed",
-    "browser": "Actual local production-source preview: Osmanthus12y distalfoliation and Iris spring/day335winter; no captured WebGL errors. Acer cotyledon prototype failed anatomical visual gate and is NOT included."
+    "browser": "Actual local production-source preview: Osmanthus12y distalfoliation and Iris spring/day335winter; no captured WebGL errors. Acer cotyledon prototype failed anatomical visual gate and is NOT included.",
+    "previousCiFailure": {
+      "run": 42096449681,
+      "frontendPassed": 194,
+      "frontendFailed": 1,
+      "deploy": "skipped",
+      "cause": "raw Double fingerprint portability; no implementation change in corrective commit"
+    }
   }
 }
