@@ -1,0 +1,162 @@
+{
+  "root": "/Users/wangxiangbo/Documents/Codex/2026-11-05/10-agent-swarm-real2sim-infra/outputs/westlake-flora-pages",
+  "copiedUTC": "2026-11-05T21:48:14.012987+00:00",
+  "files": {
+    "lib/beam-dynamics.ts": {
+      "sha256": "1cb9b6f7d31ec053d556ec35f4c9ad9391f916243f4f6db95d69c96559c34721",
+      "differentFromWorktree": false
+    },
+    "lib/acer-apical-cohorts.ts": {
+      "sha256": "789e97c2ecf71f04f89989cf66faef182de30972929071fef487010c327585da",
+      "differentFromWorktree": true
+    },
+    "lib/soil-material.ts": {
+      "sha256": "08d7cf82c0b79bcdfbb9aec34157df3c7c77b28e85aa06f768dea01159b43c3e",
+      "differentFromWorktree": false
+    },
+    "lib/root-collar-bridge.ts": {
+      "sha256": "7b4950fe3a9a51ce30924065e8ec949490ca63f00d4f2eede6f9d23a6b02d625",
+      "differentFromWorktree": false
+    },
+    "lib/geometry-framing.ts": {
+      "sha256": "abbe3f640571fbca5a0a8e575c5d89f0aa8c672b44bda3dc8c07a05cc98c2e70",
+      "differentFromWorktree": false
+    },
+    "lib/ground-surface.ts": {
+      "sha256": "bf4757876417673abe63a8226339560e92b0b8cd87aa317974093ee283c39138",
+      "differentFromWorktree": false
+    },
+    "lib/herb-reproduction.ts": {
+      "sha256": "95cef59f53b3fb5807ddcf98bc976e91d0c6de4b4edcc8520bb5c609ec6f8be0",
+      "differentFromWorktree": false
+    },
+    "lib/herb-leaf-dynamics.ts": {
+      "sha256": "edf41d81e8aac7b63770b251554a28f2f291d8035ebc9d2bdd58c7cf01da3db9",
+      "differentFromWorktree": true
+    },
+    "lib/specimen-evidence.ts": {
+      "sha256": "2b378ffd14cf0da514cdce1777b3041459c65647a9ae08c19070bd8b73e0ea2c",
+      "differentFromWorktree": true
+    },
+    "lib/woody-materials.ts": {
+      "sha256": "693198b20923a52b80326735b35094a7c77365255e760ea6706297f7e695c505",
+      "differentFromWorktree": false
+    },
+    "lib/lifecycle.ts": {
+      "sha256": "b642caeebbdcf146dc54ea816ddf9865ab0055a03b0a7a918a9d403419132cef",
+      "differentFromWorktree": false
+    },
+    "lib/woody-root-development.ts": {
+      "sha256": "1ee05c41575788c190a8b93304ff081712a08a223b41a3dd2d43c9416e620999",
+      "differentFromWorktree": false
+    },
+    "lib/acer-juvenile-leaves.ts": {
+      "sha256": "0812b39062b0a5d4045a92cf6f37a7526be34e5f385ef1527ecef13e9b9cb24a",
+      "differentFromWorktree": true
+    },
+    "lib/geometry-height.ts": {
+      "sha256": "4467b479c11ea1f67987491607edc1115011ca61a1d21a23f4b0fef196bd780d",
+      "differentFromWorktree": false
+    },
+    "lib/development.ts": {
+      "sha256": "98459ab35abf9803e6d6169e07cff5275eb72c13205c81192651a7be66a99d7c",
+      "differentFromWorktree": true
+    },
+    "lib/scene-framing.ts": {
+      "sha256": "a2cb8b378dd41ec5979c285f144dc23461fcb2ff165d68bf3963886109d4c51a",
+      "differentFromWorktree": false
+    },
+    "lib/growth-timeline.ts": {
+      "sha256": "e49003f1f62ddc7c5cb4e701afacfa178ad6769b4219980a48a4a3b403db359b",
+      "differentFromWorktree": false
+    },
+    "lib/physical-priors.ts": {
+      "sha256": "44b90be1881aadde6f9ae0bd04eca9a0f60d4e6a0e455d2e5d1bd8db048a5cb6",
+      "differentFromWorktree": false
+    },
+    "lib/acer-juvenile-shoot.ts": {
+      "sha256": "ef1dfe0611f89bee4311957e445ec0b6d4b9354a255e72500967e32de1a437fc",
+      "differentFromWorktree": true
+    },
+    "lib/leaf-observation.ts": {
+      "sha256": "84b1167f136d658cbd502458dabb9833917759dc4376f23fe5b3c1b3d9ccee79",
+      "differentFromWorktree": false
+    },
+    "lib/additional-species.ts": {
+      "sha256": "bd600e0ef916a37c27b54414c78b51183884a103f2f40d2c8ef957015d4a54e2",
+      "differentFromWorktree": true
+    },
+    "lib/woody-establishment.ts": {
+      "sha256": "21ee4d88bf209e132e16f2920df7607bbad56b82fa10fa4b2cc3876218ba9d1b",
+      "differentFromWorktree": true
+    },
+    "lib/plant-engine.ts": {
+      "sha256": "e47103a7ec668fae4f70d2075bc8d1afb7fee1866eca1d542fb9eb731898fada",
+      "differentFromWorktree": false
+    },
+    "lib/feedback-client.ts": {
+      "sha256": "0151337c7dd2c02777596933519170c5f957951b32f2af7688dc5389189ed572",
+      "differentFromWorktree": false
+    },
+    "lib/additional-species-data.ts": {
+      "sha256": "555f2d7df795140a2bd0ddac430a48d8f4cb93984987a84ebd5211448481030f",
+      "differentFromWorktree": false
+    },
+    "lib/herb-surfaces.ts": {
+      "sha256": "ec19250498ff7e316015705e3282bbe8c1d4e09a7e4fa1ffa2f5f6601a3dc989",
+      "differentFromWorktree": false
+    },
+    "lib/rhizosphere.ts": {
+      "sha256": "a24fd06cfeaaf60aac26460825fbb61a9c73192867156bfe655cfe3be516b403",
+      "differentFromWorktree": false
+    },
+    "lib/species.ts": {
+      "sha256": "c78ed05e3c92c3666efcaef362c69886251ef280c70376cf5d9220f58efa954c",
+      "differentFromWorktree": false
+    },
+    "lib/wood-geometry-merge.ts": {
+      "sha256": "38c7b64ea7e50f46b3dcacf07e7da8cd6a1bf14159af1e5dbb73b775bd482597",
+      "differentFromWorktree": false
+    },
+    "lib/osmanthus-lifecycle.ts": {
+      "sha256": "e58f7650fb741ba93417cde5637c8c12a59cfc510df390fe782faf0c0069205e",
+      "differentFromWorktree": false
+    },
+    "lib/wood-loads.ts": {
+      "sha256": "1674a938ca85d4617359c01985f0f9f3e79e15a71ab9c000611fc55267a34219",
+      "differentFromWorktree": false
+    },
+    "lib/leaf-dynamics.ts": {
+      "sha256": "22133921275aa136df47e6a2b2f8200c93f7689248511fd5205a860999a0b92c",
+      "differentFromWorktree": false
+    },
+    "lib/acer-apical-cohorts.test.mjs": {
+      "sha256": "2765f0518825620d0ee9f0b528db11e9ce023f75a7c6a4fb0bb7cc036a2b4eb8",
+      "differentFromWorktree": true
+    },
+    "lib/acer-establishment.test.mjs": {
+      "sha256": "eb10ec21ecdfff681048db00e8b70a366fa71ebf0e187456dabaeaa6f0ba2394",
+      "differentFromWorktree": true
+    },
+    "lib/acer-junction-test-utils.mjs": {
+      "sha256": "54470c42dc3f92fb0f86301ec6f7ba6743a6af1cad0283190d0565693270af6b",
+      "differentFromWorktree": true
+    },
+    "lib/acer-apical-bud.test.mjs": {
+      "sha256": "2ff71b02994fbfe6f361032a56d476026273574ce50d0cb7dc826e3693274393",
+      "differentFromWorktree": true
+    },
+    "lib/acer-juvenile-leaves.test.mjs": {
+      "sha256": "bc6665593f26c75a113170cc4d72c7c091e69e16b986b54db7d9cc747bd63463",
+      "differentFromWorktree": true
+    },
+    "lib/acer-juvenile-shoot.test.mjs": {
+      "sha256": "77f7bd4564fb15a40882a67bcc60f0acba4b1a32bd8ac6da909ae5d9e462ef18",
+      "differentFromWorktree": true
+    },
+    "lib/acer-establishment-reference.json": {
+      "sha256": "6e66fc2a0a2f5d6b891e6d3dc3f3d589f93db72528f4e95f1d8ff06b19d5ed23",
+      "differentFromWorktree": true
+    }
+  }
+}

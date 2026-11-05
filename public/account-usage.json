@@ -1,12 +1,12 @@
 {
-  "observedAt": "2026-11-05T20:07:56.419Z",
+  "observedAt": "2026-11-05T22:12:36.929Z",
   "distinctAccountEmails": 3,
-  "periodStart": "2026-11-05T18:07:56.420Z",
+  "periodStart": "2026-11-05T20:12:36.930Z",
   "accounts": [
     {
       "slot": 1,
       "status": "available",
-      "observationAt": "2026-11-05T20:07:54.868Z",
+      "observationAt": "2026-11-05T22:12:35.199Z",
       "quota": [
         {
           "source_id": "codex",
@@ -27,25 +27,25 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 103,
-        "outputTokens": 113332,
-        "uncachedInputTokens": 484898,
-        "cachedInputTokens": 7844864,
-        "firstCompleted": 1793902088806,
-        "lastCompleted": 1793909114969
+        "count": 180,
+        "outputTokens": 158592,
+        "uncachedInputTokens": 617397,
+        "cachedInputTokens": 10525568,
+        "firstCompleted": 1793909966350,
+        "lastCompleted": 1793916702108
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 103
+          "count": 180
         }
       ]
     },
     {
       "slot": 2,
       "status": "available",
-      "observationAt": "2026-11-05T20:07:55.665Z",
+      "observationAt": "2026-11-05T22:12:36.095Z",
       "quota": [
         {
           "source_id": "codex",
@@ -66,25 +66,25 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 155,
-        "outputTokens": 142231,
-        "uncachedInputTokens": 561089,
-        "cachedInputTokens": 9225344,
-        "firstCompleted": 1793902295720,
-        "lastCompleted": 1793909219500
+        "count": 186,
+        "outputTokens": 171888,
+        "uncachedInputTokens": 705769,
+        "cachedInputTokens": 10688000,
+        "firstCompleted": 1793910716892,
+        "lastCompleted": 1793916503955
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 155
+          "count": 186
         }
       ]
     },
     {
       "slot": 3,
       "status": "available",
-      "observationAt": "2026-11-05T20:07:56.338Z",
+      "observationAt": "2026-11-05T22:12:36.725Z",
       "quota": [
         {
           "source_id": "codex",
@@ -93,10 +93,10 @@
           "label_key": "session",
           "scope": "account",
           "unit": "percent",
-          "used": 15,
+          "used": 17,
           "limit": 100,
-          "remaining": 85,
-          "utilization": 0.15,
+          "remaining": 83,
+          "utilization": 0.17,
           "reset_at_ms": 1794472392000,
           "window_seconds": 604800,
           "state": "available",
@@ -105,18 +105,18 @@
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 117,
-        "outputTokens": 126991,
-        "uncachedInputTokens": 373951,
-        "cachedInputTokens": 7063552,
-        "firstCompleted": 1793902746756,
-        "lastCompleted": 1793909249469
+        "count": 170,
+        "outputTokens": 157740,
+        "uncachedInputTokens": 568414,
+        "cachedInputTokens": 11019648,
+        "firstCompleted": 1793909579423,
+        "lastCompleted": 1793916725116
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 117
+          "count": 170
         }
       ]
     }

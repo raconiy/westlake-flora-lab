@@ -1,5 +1,5 @@
 {
-  "version": "0.5.5",
+  "version": "0.5.6",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -21,7 +21,7 @@
     "ginkgo": "seed",
     "osmanthus": "seed",
     "camphor": "buried seed coat, connected radicle and developing shoot axis; hypogeal per CSIRO source",
-    "acer": "buried samara/coat and developing axis; epigeal hypocotyl/cotyledon draft withheld after anatomy inspection, not enabled",
+    "acer": "buried samara/coat, connected radicle, epigeal hooked hypocotyl and opposite cotyledons; staged juvenile internodes and persistent material nodes; uncalibrated scenario",
     "iris": "rhizome division",
     "oxalis": "rooted stolon node",
     "ophiopogon": "vegetative ramet"
@@ -46,11 +46,16 @@
     "roots": "keyed axis identities and fixed material-node prefixes; proximal seed-to-collar extension",
     "foliation": "persistent fine-shoot material sites; lower-stem foliage uses an explicit renewal prior separate from retained wooden spurs",
     "ophiopogon": "fixed ramet and leaf insertion material coordinates, extending rhizome precursor before a new rooted daughter ramet",
-    "localSoilWindow": "visual window only; available depth still governs all root growth and relative-water computations"
+    "localSoilWindow": "visual window only; available depth still governs all root growth and relative-water computations",
+    "acer": "6 finite first-leaf pairs with declared senescence;72 later main-axis pairs at fixed material nodes reached by parent before expansion. No wooden axis retirement without an event. Adult leader leaves intentionally revised; not a preservation claim for all prior leaf geometry."
   },
   "collaborationEvidence": "collaboration-evidence.json",
   "visualRefinement": {
-    "osmanthus": "fixed supplemental distal leaf nodes within existing 28704-leaf/869-axis capacity; true leaf area feeds support thickening and actual loads; density1.8 has no spare allocation",
+    "osmanthus": {
+      "axes": "fixed keyed curved material axes, local nodal frames and unchanged woody IDs/births within lifecycle",
+      "foliage": "13selectedcountsandmathematicalbladeareas restored, maximumactualFloat32orientationarearesidual7.18e-8m²; allprojectionchangesretainedasdiagnosticsnotanatomicaloracle",
+      "limits": "crownstillprocedural/spiky; no measuredpruning/cultivar/allometry; basalEIrotationnotalongcurvecompliance"
+    },
     "camphorAcer": "fixed curved material axes with parent-tangent-oriented descendants",
     "iris": "ribbed fans, curved falls, white fringed crests and procedural vein pigment",
     "herbRoots": "fixed Ophiopogon clone nodes and material-prefix roots; actual surface-node root starts and basal bridges",
@@ -74,20 +79,33 @@
       "method": "same vertex attributes, seam normals, winding, world-space triangles, actual wood sections and loads; retain source-local metadata ranges",
       "memory": "45y seed42 density1 merged wood buffers 88.82MB→29.68MB (66.59% less); exact buffer bytes exclude metadata/heap/GPU/transient allocations",
       "limits": "main-thread generation remains; no worker transport or decimation enabled"
-    }
+    },
+    "acer": {
+      "establishment": "32-segment hooked hypocotyl with transported cotyledon/crown; common ring contact at soil zero; one188vertex terminal organ stays closed to actual tip rim",
+      "shoot": "juvenile6/9/12/15/18/21mm segment targets; C1 join at.6y; laterfixed material catalogue with.055y unfolding",
+      "blade": "single318vertex7-lobed curved serrated template, basal notch andshallowfold; sameXYZenvelope/UVformula, actualarea+31.10%, loadsrecomputed",
+      "limits": "alltimings/spacing/budsize andlaterbladedevelopmentengineeringpriors; noYunguspecimencalibration; budmass/drag/annualdormancyunsolved; senescencecolour/sizeproxyhasnoabscissiontrajectory"
+    },
+    "stripGradient": "actualwidth/longitudinaldualcovector correctsIris/Ophiopogonbendingnormals; unchangedpositions/pressure/E/guards; notathinleafopticsmodel"
   },
   "accountUsageEvidence": "account-usage.json",
   "validation": {
-    "passed": 253,
+    "status": "lead_frozen_source_passed; CI also required on publication",
+    "tests": 317,
+    "passed": 316,
     "failed": 0,
     "skipped": 1,
-    "additionalBoundedMemoryAudit": {
+    "scope": "frontend lib, local infrastructure and shared community backend",
+    "sourceFiles": 122,
+    "sourceChangesDuringTests": 0,
+    "carriedForwardMemoryAudit": {
+      "version": "0.5.5",
       "passed": 1,
       "ages": [
         18,
         45
       ],
-      "scope": "one bounded old/new construction per age, independent triangle/load equivalence; not a stress or latency study"
+      "scope": "Ginkgo indexed geometry source unchanged; not rerun as a new performance claim"
     }
   }
 }

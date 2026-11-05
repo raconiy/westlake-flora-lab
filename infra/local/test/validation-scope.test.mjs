@@ -83,6 +83,14 @@ test('real Git changed tests with unexpected extensions fail selection explicitl
   await assert.rejects(f.plan(),/unexpected test extension/);
 });
 
+test('literal data archives of tests remain evidence and cannot become executable selections',async t=>{
+ const f=await fixture(t);f.put('lib/actual.test.mjs');
+ for(const suffix of ['txt','md','json','log','patch'])f.put(`evidence/old.test.mjs.${suffix}`);
+ const plan=await f.plan();assert.deepEqual(plan.selectedTests,['lib/actual.test.mjs']);assert.equal(plan.changedPaths.length,6);
+ assert.throws(()=>assertSafeTestPaths(f.root,['evidence/old.test.mjs.txt']),/unexpected test extension/);
+ f.put('unsupported.test.ts');await assert.rejects(f.plan(),/unexpected test extension/);
+});
+
 test('real Git test filenames with Node glob syntax fail rather than expand the selected scope',async t=>{
   const f=await fixture(t);f.put('bracket[1].test.mjs');
   await assert.rejects(f.plan(),/Node glob metacharacters rejected/);

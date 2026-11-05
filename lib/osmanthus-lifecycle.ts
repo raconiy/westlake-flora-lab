@@ -13,10 +13,11 @@ export const osmanthusPriors = {
   botanicalScope: 'dense evergreen shrub/small tree, responds to pruning; opposite simple petiolate leaves; small four-lobed axillary flowers; exact ages, scaffold angles, pruning history and turnover are not inferred from this source',
   spatialExtension: {
     status: 'uncalibrated-engineering-prior', unit: 'material coordinates: metres; birth clock: illustrative years',
-    construction: 'subdivide large fixed extension intervals into thirds, inserting two opposite pairs to retain original decussate planes; invert the parent extension law for each material target; retain every original leaf and branch site',
+    construction: 'subdivide large fixed extension intervals into thirds, inserting two opposite pairs to retain original decussate planes; invert the parent extension law for each material target; retain every original branch site; deliberately place leaf-only tail sites after the last branch support at .985 of historical extension at their unchanged birth clocks (order 3 retains its first two sites)',
     apicalLengthFractionAtBirth: .985, minimumIntervalM: .006,
+    leafOnlyRevision: 'allocate supplementary sites from the original .96 base-node intervals before moving base leaf-only tails; preserve original supplementary sites, birth clocks, angles and expansion; cross-version base tail coordinates change once, not the woody support catalogue; all sites are fixed for the entire new lifecycle; leaf-axis rise .55–1.0 is an uncalibrated arrangement prior',
     budgets: 'allocate only unused slots below the original 28,704-leaf / 869-axis lifetime bounds; saturated density catalogues receive no extra sites; <=5,216 main-pass mesh batches including flowers, shadow/other passes additional',
-    limits: 'straight axes, no measured internode/flush schedule, light competition or evergreen leaf turnover; private habit photos supply qualitative appearance only, not individual campus scale, ages or pruning history',
+    limits: 'fixed keyed curved axes are qualitative construction, not measured tropism/path growth; no measured internode/flush schedule, light competition or evergreen leaf turnover; private habit photos supply qualitative appearance only, not individual campus scale, ages or pruning history',
   },
   secondaryThickening: {
     status: 'uncalibrated-engineering-prior',

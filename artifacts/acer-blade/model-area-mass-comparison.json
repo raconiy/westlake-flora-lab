@@ -1,0 +1,42 @@
+[
+  {
+    "age": 0.12,
+    "count": 6,
+    "oldLeafAreaM2": 0.00005535948741998351,
+    "newLeafAreaM2": 0.00006048128488515996,
+    "oldMassKg": 0.00003643276160138897,
+    "newMassKg": 0.00003704737729721015,
+    "woodMassKg": 0.00002978962311099095,
+    "maxDeflectionRad": 0.004347763399607135
+  },
+  {
+    "age": 0.2,
+    "count": 8,
+    "oldLeafAreaM2": 0.00014926770565781397,
+    "newLeafAreaM2": 0.0001888238929912927,
+    "oldMassKg": 0.0003498928071924598,
+    "newMassKg": 0.00035463954967247726,
+    "woodMassKg": 0.00033198068251352216,
+    "maxDeflectionRad": 0.000946927052015636
+  },
+  {
+    "age": 0.5,
+    "count": 20,
+    "oldLeafAreaM2": 0.00884285563298984,
+    "newLeafAreaM2": 0.011593557897694007,
+    "oldMassKg": 0.004247515784420777,
+    "newMassKg": 0.004577600056185279,
+    "woodMassKg": 0.003186373108461996,
+    "maxDeflectionRad": 0.03066773955751302
+  },
+  {
+    "age": 18,
+    "count": 4630,
+    "oldLeafAreaM2": 5.133942189634191,
+    "newLeafAreaM2": 6.730837311065807,
+    "oldMassKg": 14.316226326060107,
+    "newMassKg": 14.507853740631834,
+    "woodMassKg": 13.700153263304003,
+    "maxDeflectionRad": 0.11388247049382695
+  }
+]

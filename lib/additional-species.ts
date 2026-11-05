@@ -1,13 +1,18 @@
+import {acerLeafBlade} from './acer-leaf-geometry.ts';
+import {acerAdultHeightAt,acerShootHeightAt,acerShootArrival,acerJuvenileNodeHeight,acerJuvenileShootPrior} from './acer-juvenile-shoot.ts';
+import {acerApicalCohorts,acerApicalCohortPrior} from './acer-apical-cohorts.ts';
 import {geometryHeight} from './geometry-height.ts';
+import {acerJuvenileLeafPrior,acerJuvenileLeafState} from './acer-juvenile-leaves.ts';
 import * as THREE from "three";
-import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
+import {tagWoodTube,mergeWoodSections,woodSections} from "./wood-loads.ts";
 import {mapWoodyBarkUV,wireWoodyBarkSurface,wireWoodyLeafSurface} from "./woody-materials.ts";
 import {tagLeafStrip,mergedLeafStripAttributes} from "./herb-leaf-dynamics.ts";
 import type { PlantParams, PlantModel, BranchJoint } from "./plant-engine";
 
 // @ts-ignore Native Node tests require the suffix.
 import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet } from "./development.ts";
-import {woodyEstablishmentGeometry, woodyEstablishmentState, woodyEstablishmentEvidence} from './woody-establishment.ts';
+import {woodyEstablishmentGeometry, woodyEstablishmentState, woodyEstablishmentEvidence,
+ acerHypocotylState,acerPrimaryGeometry,acerCotyledonState,acerCotyledonBlade,acerEstablishmentPriors} from './woody-establishment.ts';
 
 export type AdditionalSpecies = "camphor" | "acer" | "ophiopogon";
 /** Organ dimensions from primary botanical/extension descriptions, not campus measurements.
@@ -64,11 +69,7 @@ function merge(parts:THREE.BufferGeometry[]){const flat=parts.map(g=>g.index?g.t
  const out=new THREE.BufferGeometry();out.setAttribute("position",new THREE.BufferAttribute(p,3));out.setAttribute("normal",new THREE.BufferAttribute(normal,3));out.setAttribute("uv",new THREE.BufferAttribute(uv,2));out.setAttribute("color",new THREE.BufferAttribute(color,3));mergeWoodSections(parts,out);for(const g of new Set([...parts,...flat]))g.dispose();return out;
 }
 function camphorBlade(){const s=new THREE.Shape();s.moveTo(0,0);s.bezierCurveTo(.023,.021,.025,.058,0,.095);s.bezierCurveTo(-.025,.058,-.023,.021,0,0);const g=new THREE.ShapeGeometry(s,14),p=g.attributes.position,uv=g.attributes.uv;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i);p.setZ(i,.002*Math.sin(y/.095*Math.PI)-Math.abs(x)*.07);uv.setXY(i,.5+x/.05,y/.095)}g.computeVertexNormals();return g;}
-function mapleBlade(){const s=new THREE.Shape();s.moveTo(0,0);for(let l=0;l<7;l++){const a=-2.0+l*2/3,r=.052*(1-Math.abs(a)*.13),valley=.015,lo=a-.26,hi=a+.26;s.lineTo(Math.sin(lo)*valley,Math.cos(lo)*valley);
-  // Small teeth on the pointed lobe margins; one palmate blade, not compound leaves.
-  for(let e=1;e<=5;e++){const t=e/5,rr=valley+(r-valley)*t,aa=lo+(a-lo)*t+(e%2?.023:-.012);s.lineTo(Math.sin(aa)*rr,Math.cos(aa)*rr)}
-  for(let e=1;e<=5;e++){const t=e/5,rr=r+(valley-r)*t,aa=a+(hi-a)*t+(e%2?.018:-.013);s.lineTo(Math.sin(aa)*rr,Math.cos(aa)*rr)}
- }s.lineTo(0,0);const g=new THREE.ShapeGeometry(s,8),p=g.attributes.position,uv=g.attributes.uv;for(let i=0;i<p.count;i++){const x=p.getX(i)*.88,y=p.getY(i)*.75;p.setX(i,x);p.setY(i,y);p.setZ(i,.0025*Math.sin(y*40)-.001*Math.abs(x)/.05);uv.setXY(i,.5+x/.0924,(y+.01725)/.06)}g.computeVertexNormals();return g;}
+function mapleBlade(){return acerLeafBlade();}
 
 export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParams):PlantModel {
  const life=additionalDevelopment(species,params.age),age=life.age,day=clamp(Number.isFinite(params.day)?params.day:180,1,365),density=clamp(Number.isFinite(params.density)?params.density:1,.15,2),seed=Number.isFinite(params.seed)?params.seed:1;
@@ -88,7 +89,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
  const leafPresence=species==="acer"?smooth(65,105,day)*(1-smooth(313,344,day)):1,autumn=species==="acer"?smooth(255,309,day):0;
  if(species!=="ophiopogon" && life.shoot>0) {
   const maple=species==="acer",heightLimit=.025+(maple?6.5:16),heightTime=maple?15:24;
-  const heightAt=(year:number)=>(.025+(maple?6.5:16)*(1-Math.exp(-year/heightTime)))*organGrowth(.025,.25,year);
+  const heightAt=(year:number)=>maple?acerShootHeightAt(year):(.025+(maple?6.5:16)*(1-Math.exp(-year/heightTime)))*organGrowth(.025,.25,year);
   const h=heightAt(age),radius=(.0015+(maple?.13:.32)*(1-Math.exp(-age/45)))*life.shoot;
   // Dense broad-crowned camphor versus lower multi-stemmed maple; neither is a renamed osmanthus model.
   const ownTexture=(t:THREE.DataTexture)=>{textures.add(t)};
@@ -106,15 +107,117 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
    bark.color.set('#a0b778').lerp(new THREE.Color('#ffffff'),skinMaturity);
    bark.bumpScale=Math.min(bark.bumpScale,radius*.08)*skinMaturity;
   }
-  const trunk=joint(group,new THREE.Vector3(),UP,h,radius,0,seed),fullTrunk=curvedAxis(heightLimit,heightLimit*.025,seed),trunkCurve=new AxisPrefix(fullTrunk,h/heightLimit);
+  const hypo=maple?acerHypocotylState(age):undefined;
+  const trunk=joint(group,new THREE.Vector3(),UP,h+(hypo?.length??0),radius,0,seed),fullTrunk=curvedAxis(heightLimit,heightLimit*.025,seed),trunkCurve=new AxisPrefix(fullTrunk,h/heightLimit);
+  // A non-dynamic reference frame carries the ENTIRE original crown. The
+  // combined primary tube below remains rooted at zero, never a lifted trunk.
+  const crown:THREE.Object3D=maple?new THREE.Group():trunk;
+  if(maple){crown.name='acer-epicotyl-reference';crown.position.copy(hypo!.node);crown.quaternion.copy(hypo!.frame);trunk.add(crown);}
   const leader:ExtensionAxis={id:"leader",target:heightLimit,birth:.025,length:h,curve:trunkCurve,
-   point:t=>materialPoint(fullTrunk,t),birthAt:t=>-heightTime*Math.log((heightLimit-heightLimit*t)/(heightLimit-.025))};
+   point:t=>materialPoint(fullTrunk,t),birthAt:t=>maple?acerShootArrival(heightLimit*t):-heightTime*Math.log((heightLimit-heightLimit*t)/(heightLimit-.025))};
   trunk.userData.node={id:leader.id,birth:leader.birth};
   group.userData.continuity={calibration:"uncalibrated engineering assumptions; not measured growth rates",
-   extension:"fixed material centrelines; lateral births wait for leader / parent to reach the attachment",
+   extension:maple?"immature hypocotyl primary strain carries its node until .07 y; thereafter persistent added segment and fixed crown material sites; lateral births wait for support":"fixed material centrelines; lateral births wait for leader / parent to reach the attachment",
    timing:"original cohort onsets are lower bounds; axis extension durations remain illustrative",
-   scaffold:"persistent without a modelled pruning or damage event",dateAndAge:"day controls phenology; age controls establishment"};
-  const tm=new THREE.Mesh(geom(curvedTube(trunkCurve,radius*1.4,.001*life.shoot,24,10,true)),bark);tm.castShadow=tm.receiveShadow=true;trunk.add(tm);
+   scaffold:"persistent without a modelled pruning or damage event",dateAndAge:maple?"age and annual day are independent snapshots; single age-limited cotyledon cohort with qualitative warm-season exposure; no temperature or validated germination phenology":"day controls phenology; age controls establishment"};
+  const originalTube=curvedTube(trunkCurve,radius*1.4,.001*life.shoot,24,10);
+  const primaryGeometry=maple?acerPrimaryGeometry(originalTube,age,radius*1.4):originalTube;
+  // Map once on the final spliced primary, so both tissues share UV units.
+  mapWoodyBarkUV(primaryGeometry,radius*1.4,trunkCurve.getLength()+(hypo?.length??0));
+  const tm=new THREE.Mesh(geom(primaryGeometry),bark);tm.name=maple?'acer-primary-axis':'';tm.castShadow=tm.receiveShadow=true;trunk.add(tm);
+  if(maple){
+   const primary=branches[0];
+   primary.length=woodSections(tm.geometry).reduce((sum,s)=>sum+new THREE.Vector3(...s.a).distanceTo(new THREE.Vector3(...s.b)),0);
+   primary.flexibility=clamp(.003*Math.pow(primary.length/Math.max(.001,radius),1.05),.03,1.3);primary.sag=Math.min(.12,primary.length*.045);
+   trunk.userData.geometryAssumptions={length:'actual tube centreline chords',nominalRadius:radius,basalRadiusScale:1.4,
+    mechanics:'lumped beam uses nominal radius, not reconstructed tapered section inertia; not a primary-growth strain solver'};
+   const state=acerCotyledonState(age,day),prior=acerEstablishmentPriors;
+   group.userData.acerEstablishment={status:'literature-constrained procedural establishment; not field calibrated',
+    hypocotyl:hypo!.node.toArray(),hypocotylLength:hypo!.length,epicotylLength:h,
+    permanentHeightOffset:prior.hypocotylLength,rootCollar:[0,0,0],cotyledonCount:state.scale>0?2:0,
+    cotyledonState:state,cotyledonLifespan:'one cohort .04-.36 y; senescence from .14 y after illustrative first true-leaf establishment; never annual renewal',
+    seasonalLimit:'qualitative day 65-95 warm-up / 255-300 cooling proxy; sufficiently warm, frost-free emergence assumed; no temperature, chilling or germination history input',
+    heightAccounting:'immature crown transported by hook endpoint frame; after .07 y original crown + permanent 18 mm; actual vertex height reported',
+    primaryGrowth:hypo!.strain,appearance:'pale/green juvenile axis; bump capped at 8% nominal radius; hardening clock is an engineering prior',
+    remainingVisualLimits:'first-pair size and apex sites refined; internode proportions, heteroblasty, temperatures and growth clocks remain uncalibrated',
+    unsupported:'coat carry/release/decay, internal anatomy, calibrated senescence, pollination, collision, fracture, root-soil compliance and large-strain mechanics are not solved'};
+   if(state.scale>0){
+    const cotColour=new THREE.Color('#8db659').lerp(new THREE.Color('#52914a'),state.unfold).lerp(new THREE.Color('#bc963e'),state.senescence),
+     material=mat(new THREE.MeshStandardMaterial({color:cotColour,side:THREE.DoubleSide,roughness:.8})),
+     blades=new THREE.InstancedMesh(geom(acerCotyledonBlade(age,day)),material,2),
+     stalks=new THREE.InstancedMesh(petioleGeo,material,2),organs=new THREE.Group();
+    organs.name='acer-cotyledon-node';organs.position.copy(hypo!.node);organs.quaternion.copy(hypo!.frame);trunk.add(organs);
+    blades.name='acer-cotyledons';stalks.name='acer-cotyledon-petioles';
+    blades.userData={organ:'leaf',leafClass:'cotyledon',arrangement:'opposite',outline:'unlobed-ovate',connectedBy:'cotyledon-petiole',
+     state,nodes:[-1,1].map(side=>({id:`acer:cotyledon:${side}`,birth:prior.cotyledonBirth})),
+     calibration:'one age-limited cohort with qualitative seasonal exposure; shrink-to-zero abscission proxy; no temperature or germination calibration'};
+    stalks.userData={organ:'petiole',organPart:'petiole'};
+    for(let i=0;i<2;i++){
+     const side=i===0?-1:1,angle=.12+state.unfold*1.18,
+      direction=new THREE.Vector3(side*Math.sin(angle),Math.cos(angle),0),length=prior.petioleLength*state.scale;
+     dummy.position.copy(direction).multiplyScalar(length);dummy.quaternion.setFromUnitVectors(UP,direction);dummy.scale.setScalar(state.scale);dummy.updateMatrix();blades.setMatrixAt(i,dummy.matrix);
+     dummy.position.copy(direction).multiplyScalar(length/2);dummy.scale.set(.00016*state.scale,length,.00016*state.scale);dummy.updateMatrix();stalks.setMatrixAt(i,dummy.matrix);
+    }
+    blades.castShadow=blades.receiveShadow=true;organs.add(stalks,blades);leafCount+=2;
+   }
+   // NC State describes small green/red twig buds, terminal buds often doubled:
+   // https://plants.ces.ncsu.edu/plants/acer-palmatum/ . One terminal meristem
+   // represents the active leader; duplication, sizes and phenology are NOT
+   // measured here. Never remove the meristem while this wood keeps extending.
+   const budGrowth=organGrowth(.025,.015,age);
+   if(budGrowth>0){
+    const {segments,sides}=primaryGeometry.userData.woodTube,p=primaryGeometry.attributes.position,
+     rim=Array.from({length:sides},(_,j)=>new THREE.Vector3().fromBufferAttribute(p,segments*(sides+1)+j)),
+     endpoint=rim.reduce((sum,v)=>sum.add(v),new THREE.Vector3()).divideScalar(sides),
+     radial=rim.map(v=>v.clone().sub(endpoint)),tangent=new THREE.Vector3();
+    // Use the rendered Float32 rim, already transported through the hook.
+    // Its oriented plane supplies the local terminal tangent, not world UP.
+    for(let j=0;j<sides;j++)tangent.add(radial[j].clone().cross(radial[(j+1)%sides]));
+    tangent.normalize();
+    const u=radial[0].clone().normalize(),v=new THREE.Vector3().crossVectors(tangent,u).normalize(),
+     rimRadius=Math.max(...radial.map(r=>r.length())),maturity=smooth(.04,.2,age),
+     length=(.0015-.00045*maturity+rimRadius*1.2)*budGrowth,
+     bulge=(.0003-.000105*maturity)*budGrowth+rimRadius*.35,
+     positions=radial.flatMap(r=>r.toArray()),indices:number[]=[],rings:number[][]=[];
+    rings.push(Array.from({length:sides},(_,j)=>j));
+    // Eleven 16-sided body rings plus a closed tip retain the old 16 x 12
+    // visual resolution. A 10-to-16 triangular collar welds every real rim
+    // corner; a centre-touching ellipsoid would leave the cut edge exposed.
+    for(let k=1;k<12;k++){
+     const t=k/12,r= rimRadius*Math.pow(1-t,.7)+bulge*Math.pow(Math.sin(Math.PI*t),.8),ring:number[]=[];
+     for(let j=0;j<16;j++){
+      const a=j/16*Math.PI*2;ring.push(positions.length/3);
+      positions.push(...u.clone().multiplyScalar(r*Math.cos(a)).addScaledVector(v,r*Math.sin(a)).addScaledVector(tangent,length*t).toArray());
+     }
+     rings.push(ring);
+    }
+    for(let k=1;k<rings.length;k++){
+     const a=rings[k-1],b=rings[k];let i=0,j=0;
+     while(i<a.length||j<b.length){
+      if(i<a.length&&(j===b.length||(i+1)/a.length<=(j+1)/b.length)){
+       indices.push(a[i%a.length],a[(i+1)%a.length],b[j%b.length]);i++;
+      }else{indices.push(a[i%a.length],b[(j+1)%b.length],b[j%b.length]);j++;}
+     }
+    }
+    const tip=positions.length/3;positions.push(...tangent.clone().multiplyScalar(length).toArray());
+    const bottom=positions.length/3;positions.push(0,0,0);
+    const last=rings[rings.length-1];
+    for(let j=0;j<last.length;j++)indices.push(last[j],last[(j+1)%last.length],tip);
+    for(let j=0;j<sides;j++)indices.push(bottom,(j+1)%sides,j);
+    const budGeometry=new THREE.BufferGeometry();budGeometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+    budGeometry.setIndex(indices);budGeometry.computeVertexNormals();
+    const bud=new THREE.Mesh(geom(budGeometry),mat(new THREE.MeshStandardMaterial({color:'#a8bf73',roughness:.8})));
+    bud.name='acer-apical-bud';bud.position.copy(endpoint);bud.castShadow=bud.receiveShadow=true;
+    bud.userData={organ:'bud',sourceType:'engineering-prior',supportedBy:'actual-primary-tip-ring',
+     source:'https://plants.ces.ncsu.edu/plants/acer-palmatum/',rimVertexCount:sides,
+     calibration:'qualitative small green/red buds; single meristem proxy; dimensions and age transition unmeasured; no seasonal dormancy inference',
+     mechanics:'follows primary beam; bud mass, drag and physiology unresolved; excluded from wood/leaf load ownership',
+     budget:'one organ mesh, 188 vertices <= previous 221; after .2 y at most one additional draw for persistent meristem'};
+    // The primary mesh and bud share the same dynamic owner. Coordinates above
+    // already include the hook frame, so do not apply the crown frame twice.
+    trunk.add(bud);
+   }
+  }
   const primaryCount=maple?12:19;
   // Habit evidence: public/references/species-evidence.json (NC State pages):
   // https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/ — spreading crown
@@ -124,38 +227,62 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
   // whole-crown photographic or Yungu-individual calibration is claimed.
   // All turns, slopes and bend amplitudes below are uncalibrated engineering
   // priors. Axis-keyed streams never depend on age, day, density or visibility.
-  type Leaf={blade:THREE.Matrix4;petiole:THREE.Matrix4;variation:number;id:number;nodeId:string;birth:number};
-  function recordLeaves(axis:ExtensionAxis,frame:THREE.Matrix4,records:Leaf[],key:number,nodes:number,birth:number,firstShoot=false,apicalPhase?:number){const sq=new THREE.Quaternion().setFromRotationMatrix(frame);
+  type Leaf={blade:THREE.Matrix4;petiole:THREE.Matrix4;variation:number;id:number;nodeId:string;birth:number;juvenile?:boolean;senescence?:number};
+  leafGeo.computeBoundingBox();
+  const actualBladeLength=leafGeo.boundingBox!.max.y-leafGeo.boundingBox!.min.y;
+  const actualBladeWidth=leafGeo.boundingBox!.max.x-leafGeo.boundingBox!.min.x;
+  function recordLeaves(axis:ExtensionAxis,frame:THREE.Matrix4,records:Leaf[],key:number,nodes:number,birth:number,firstShoot=false,apicalPhase?:number,shootNode?:{heightM:number;birth:number;expansionYears:number}){const sq=new THREE.Quaternion().setFromRotationMatrix(frame);
    for(let n=0;n<nodes;n++){
-    const nominalBirth=birth+n*.045,fraction=.15+(n+.5)/nodes*.80,
-     t=firstShoot?(apicalPhase===undefined?fraction:.96)*heightAt(nominalBirth)/heightLimit:fraction,
-     onset=firstShoot?nominalBirth:Math.max(nominalBirth,axis.birthAt(t)),scale=organGrowth(onset,.38,age);
+    const juvenile=maple&&firstShoot&&apicalPhase===undefined,
+     nominalBirth=shootNode?.birth??(juvenile?acerJuvenileShootPrior.leafBirthsYears[n]:birth+n*.045),fraction=.15+(n+.5)/nodes*.80,
+     t=shootNode?shootNode.heightM/heightLimit:juvenile?acerJuvenileNodeHeight(n)/heightLimit:firstShoot?(apicalPhase===undefined?fraction:.96)*(maple?acerAdultHeightAt(nominalBirth):heightAt(nominalBirth))/heightLimit:fraction,
+     onset=firstShoot&&!maple?nominalBirth:Math.max(nominalBirth,axis.birthAt(t)),
+     juvenileState=juvenile?acerJuvenileLeafState(age,onset,n):undefined,
+     scale=juvenileState?juvenileState.envelopeScale*juvenileState.targetLengthM/actualBladeLength:organGrowth(onset,shootNode?.expansionYears??.38,age);
     // Consume a separate stream per node so delayed births cannot reroll older organs.
     const r=randomFor(key+n*104729);if(scale<=0)continue;
     const anchor=axis.point(t).applyMatrix4(frame),angle=(apicalPhase??0)+(maple?n*Math.PI/2:n*2.39996),vertical=.35+r()*.45,pairs=maple?2:1;
-    for(let p=0;p<pairs;p++){const a=angle+p*Math.PI,dir=new THREE.Vector3(Math.cos(a)*.8,vertical,Math.sin(a)*.8).normalize().applyQuaternion(sq),len=(maple?.025:.026)*scale*(.9+r()*.2),base=anchor.clone().addScaledVector(dir,len);
-      dummy.position.copy(base);dummy.quaternion.setFromUnitVectors(UP,dir);dummy.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(UP,(r()-.5)*1.3));dummy.scale.setScalar(scale*(.84+r()*.23));dummy.updateMatrix();const blade=dummy.matrix.clone();dummy.position.copy(anchor).lerp(base,.5);dummy.quaternion.setFromUnitVectors(UP,dir);dummy.scale.set(.00055*scale,len,.00055*scale);dummy.updateMatrix();records.push({blade,petiole:dummy.matrix.clone(),variation:r(),id:key+n*31+p,nodeId:`${axis.id}:leaf:${key}:${n}:${p}`,birth:onset});
+    for(let p=0;p<pairs;p++){const a=angle+p*Math.PI,dir=new THREE.Vector3(Math.cos(a)*.8,vertical,Math.sin(a)*.8).normalize().applyQuaternion(sq),len=(juvenileState?juvenileState.envelopeScale*juvenileState.targetLengthM/6:(maple?.025:.026)*scale)*(.9+r()*.2),base=anchor.clone().addScaledVector(dir,len);
+      dummy.position.copy(base);dummy.quaternion.setFromUnitVectors(UP,dir);dummy.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(UP,(r()-.5)*1.3));const bladeVariation=.84+r()*.23;
+      if(juvenileState)dummy.scale.set(juvenileState.envelopeScale*juvenileState.targetWidthM/actualBladeWidth*(.9+(bladeVariation-.84)/.23*.2),scale*bladeVariation,scale*bladeVariation);
+      else dummy.scale.setScalar(scale*bladeVariation);
+      dummy.updateMatrix();const blade=dummy.matrix.clone();dummy.position.copy(anchor).lerp(base,.5);dummy.quaternion.setFromUnitVectors(UP,dir);dummy.scale.set(.00055*scale,len,.00055*scale);dummy.updateMatrix();records.push({blade,petiole:dummy.matrix.clone(),variation:r(),id:key+n*31+p,nodeId:`${axis.id}:leaf:${key}:${n}:${p}`,birth:onset,juvenile,senescence:juvenileState?.senescence});
     }
    }
   }
   function showLeaves(parent:THREE.Object3D,records:Leaf[],cohort:string){
    const visible=records.filter(l=>randomFor(l.id)()<leafPresence);if(!visible.length)return;
+   const juvenile=maple&&cohort==='establishment-first-shoot';
    const leaves=new THREE.InstancedMesh(leafGeo,leafMat,visible.length),petioles=new THREE.InstancedMesh(petioleGeo,petioleMat,visible.length);
-   leaves.userData={organ:"leaf",leafClass:"true-leaf",connectedBy:"petiole",arrangement:maple?"opposite":"alternate",cohort,bladeSizeMetres:maple?[.03,.06,.04,.08]:[.06,.12,.025,.055],nodes:visible.map(l=>({id:l.nodeId,birth:l.birth})),venation:maple?"palmate":"three basal main veins"};petioles.userData.organ="petiole";leaves.name=`leaves:${cohort}`;leaves.castShadow=leaves.receiveShadow=true;
-   visible.forEach((l,n)=>{leaves.setMatrixAt(n,l.blade);petioles.setMatrixAt(n,l.petiole);if(maple)color.setHSL(.25-autumn*.235+(l.variation-.5)*.02,.43+autumn*.26,.29+autumn*.16+l.variation*.06);else color.setHSL(.265+(l.variation-.5)*.025,.38,.22+l.variation*.08);leaves.setColorAt(n,color);});
+   leaves.userData={organ:"leaf",leafClass:juvenile?"juvenile-true-leaf":"true-leaf",connectedBy:"petiole",arrangement:maple?"opposite":"alternate",cohort,bladeSizeMetres:maple?[.03,.06,.04,.08]:[.06,.12,.025,.055],nodes:visible.map(l=>({id:l.nodeId,birth:l.birth,leafClass:juvenile?"juvenile-true-leaf":"true-leaf",senescence:l.senescence})),venation:maple?"palmate":"three basal main veins"};petioles.userData.organ="petiole";leaves.name=`leaves:${cohort}`;leaves.castShadow=leaves.receiveShadow=true;
+   visible.forEach((l,n)=>{leaves.setMatrixAt(n,l.blade);petioles.setMatrixAt(n,l.petiole);if(maple)color.setHSL(.25-autumn*.235+(l.variation-.5)*.02,.43+autumn*.26,.29+autumn*.16+l.variation*.06);else color.setHSL(.265+(l.variation-.5)*.025,.38,.22+l.variation*.08);if(l.juvenile)color.lerp(new THREE.Color("#b9a85d"),l.senescence??0);leaves.setColorAt(n,color);});
    // New zero-size leaves start on already rendered wood. Include that support
    // in local instance bounds so rotating their aggregate AABB cannot invent a
    // sudden crown-height jump when a previously empty material node leafs out.
    const support=parent.children.find(o=>o instanceof THREE.Mesh&&!(o instanceof THREE.InstancedMesh)) as THREE.Mesh|undefined;
    if(support){support.geometry.computeBoundingBox();for(const instances of [petioles,leaves]){instances.computeBoundingBox();instances.boundingBox!.union(support.geometry.boundingBox!)}}
-   parent.add(petioles,leaves);leafCount+=visible.length;
+   if(maple&&(cohort==='establishment-first-shoot'||cohort==='main-axis')){
+    const leafGroup=new THREE.Group();leafGroup.name=`leaf-cohort:${cohort}`;parent.add(leafGroup);leafGroup.add(petioles,leaves);
+   }else parent.add(petioles,leaves);
+   leafCount+=visible.length;
   }
   // Persistent first shoot leaves. Each node expands from zero; no age-2 removal.
   const first:Leaf[]=[];recordLeaves(leader,new THREE.Matrix4(),first,seed*8191,6,.07,true);
-  // Continuing apical leaf cohorts close the former multi-year bare-leader gap.
-  // Cohort timing is an engineering prior; old leaf nodes never move upward.
-  for(let c=0;c<72;c++)recordLeaves(leader,new THREE.Matrix4(),first,seed*8191+100003+c*311,1,.45+c*.28+c*c*.018,true,c*(maple?Math.PI/2:2.39996));
-  showLeaves(trunk,first,"main-axis");
+  if(maple)showLeaves(crown,first,"establishment-first-shoot");
+  const apical:Leaf[]=[];
+  // Later cohorts are separate organs; they do not inflate the original
+  // millimetre seedling pair into an immortal adult-sized blade.
+  const apicalCatalogue=maple?acerApicalCohorts():[];
+  for(let c=0;c<72;c++)recordLeaves(leader,new THREE.Matrix4(),apical,seed*8191+100003+c*311,1,maple?apicalCatalogue[c].birth:.45+c*.28+c*c*.018,true,c*(maple?Math.PI/2:2.39996),maple?apicalCatalogue[c]:undefined);
+  if(maple)showLeaves(crown,apical,"main-axis");else showLeaves(crown,[...first,...apical],"main-axis");
+  if(maple){
+   group.userData.apicalCohorts={prior:acerApicalCohortPrior,sites:apicalCatalogue};
+   group.userData.juvenileTrueLeaves={prior:acerJuvenileLeafPrior,shootPrior:acerJuvenileShootPrior,
+    sites:Array.from({length:6},(_,n)=>({id:`leader:leaf:${seed*8191}:${n}`,birth:acerJuvenileShootPrior.leafBirthsYears[n],
+     attachment:leader.point(acerJuvenileNodeHeight(n)/heightLimit).toArray()})),
+    event:{organ:'juvenile-true-leaf',type:'senescence',startAge:.55,endAge:.8,
+     active:age>.55&&age<.8,completed:age>=.8,woodRetired:false}};
+  }
   for(let i=0;i<primaryCount;i++){const r=randomFor(seed*991+i*3011);
     // Opposing layered maple branches share fixed material nodes; camphor stays alternate.
     const t=maple?Math.floor(i/2)/6:(i+.2+r()*.6)/primaryCount,attach=maple?.13+t*.50:.10+t*.71,
@@ -168,7 +295,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
      inc=maple?baseInc+(habit()-.5)*.30:baseInc*.35+.73+habit()*.25-.10*t,
      axis=extensionAxis(`primary:${i}`,target,target*(.10+habit()*.13),habit()*Math.PI*2,birth,3,age),length=axis.length,
      dir=new THREE.Vector3(Math.cos(az)*Math.sin(inc),Math.cos(inc),Math.sin(az)*Math.sin(inc)),pr=radius*(maple?.36:.30)*Math.sqrt(growth),
-     attachment=leader.point(attach),pivot=joint(trunk,attachment,dir,length,pr,1,seed+i*79),
+     attachment=leader.point(attach),pivot=joint(crown,attachment,dir,length,pr,1,seed+i*79),
      axes:WoodAxis[]=[{id:axis.id,parentId:leader.id,birth,length,radius:pr,attachment:attachment.toArray()}],
      parts=[curvedTube(axis.curve,pr,.001*growth,14,7,true)],records:Leaf[]=[];
     pivot.userData.node={id:axis.id,birth,attachment:attachment.toArray()};

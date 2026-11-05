@@ -1,5 +1,5 @@
 {
-  "version": "0.5.5",
+  "version": "0.5.6",
   "createdAt": "2026-11-05T16:19:09.961Z",
   "workflow": [
     "shared botanical constraints",
@@ -455,44 +455,67 @@
     }
   },
   "latestLeadIntegration": {
-    "updatedAt": "2026-11-05T20:10:14.346Z",
+    "updatedAt": "2026-11-05T22:05:54.575Z",
+    "state": "lead source accepted after frozen full checks and actual WebGL inspection; deployment outcome independently recorded by GitHub Actions",
     "tasks": [
       {
-        "id": "bdcac109-8529-4950-a55f-a04863a88087",
-        "originalStatus": "completed passed_scoped",
-        "accepted": "triangle-equivalent indexed wood merge after lead review and bounded18/45 audit"
+        "id": "20030aff-a4bd-42e9-845e-bfebd86a1201",
+        "role": "connected Acer hook repair"
       },
       {
-        "id": "4dd3ea30-30d0-4591-946d-8a037ac9d01d",
-        "originalStatus": "completed passed_scoped",
-        "accepted": "bounded code textures/UV after lead source/photo and WebGL inspection, juvenile Acer appearance preserved"
+        "id": "723f9e42-28a1-4765-b913-10d7d924fb4c",
+        "role": "persistent terminal organ, independently reviewed"
+      },
+      {
+        "id": "0378e41a-3bbb-4498-bfe2-e6c330450b9c",
+        "role": "segmented juvenile axis, original archive validation failure preserved"
+      },
+      {
+        "id": "e62a003e-d931-46e5-b93b-1b4d0c3169bb",
+        "role": "curved Osmanthus and restored early cohorts; original archive failure preserved"
+      },
+      {
+        "id": "52b47780-332a-4ec2-9c2c-8c50e73a6677",
+        "role": "dual strip gradient; original archive failure preserved"
+      },
+      {
+        "id": "3a179b7f-e132-49cb-8ae3-6d7e8c2ab26e",
+        "role": "natural blade geometry; historical leaf-dependent total-height assumption replaced with retained exact woody/matrix references"
       }
     ],
+    "leadWork": "main-axis Acer material-node leaf catalogue, coordinate-derived Float32 regression, session restoration and archive selection correction",
+    "limits": "No fieldcalibrationorcompleterealism; localgateway/relayrequiredforliveassistant. Along-taperphysicsandbackgroundmodeltransferremainisolated.",
     "checks": {
-      "combined": {
-        "passed": 253,
-        "failed": 0,
-        "skipped": 1
-      },
-      "additionalMemoryAudit": {
-        "passed": 1
-      },
-      "publicCI": "pending; deployment verified separately"
-    },
-    "withheld": [
-      {
-        "id": "c67098a4-e119-4d9d-bb7e-1381fab613e3",
-        "reason": "original seasonal regression failed; corrected cd6c1a28 candidate29/29scoped now awaiting independent anatomy+browser review"
-      },
-      {
-        "id": "4d7dbeb1-62f7-4b1f-8fce-6daeb3376a9f",
-        "reason": "independent4b51460d found local area support shortfall from coarse interpolation; repairfb316422 pending; basalEI proxy does not establish taper compliance"
-      },
-      {
-        "id": "4f3497a3-ae26-45c7-8d3b-2ba8beb498ec",
-        "reason": "execution timeout; retained curved-axis draft unvalidated; recoveryfa8536d7 active"
+      "status": "lead_frozen_source_passed; CI also required on publication",
+      "tests": 317,
+      "passed": 316,
+      "failed": 0,
+      "skipped": 1,
+      "scope": "frontend lib, local infrastructure and shared community backend",
+      "sourceFiles": 122,
+      "sourceChangesDuringTests": 0,
+      "carriedForwardMemoryAudit": {
+        "version": "0.5.5",
+        "passed": 1,
+        "ages": [
+          18,
+          45
+        ],
+        "scope": "Ginkgo indexed geometry source unchanged; not rerun as a new performance claim"
       }
+    },
+    "independentReviewTasks": [
+      "2446c28a-0202-46e1-9c16-74e236eded4d",
+      "07924e1c-13a1-41f9-b7e2-18840f437918",
+      "168bbe38-5265-4086-b0e7-692a405e8bab",
+      "843014e4-6ffe-4a71-8a81-aafb4c31793d",
+      "f50187c9-0ee7-4c26-a9f0-8d2fbb81104a"
     ],
-    "limits": "No complete-realism, field-calibrated growth or full lifecycle claim; live models still depend on local gateway/relay"
+    "remaining": [
+      "Camphor crown still tiered; candidate isolated",
+      "Full along-curve mechanics and root-soil hydraulics unsolved",
+      "Leaf transmission and biological turnover not fully modeled",
+      "Background model transport remains a prototype"
+    ]
   }
 }

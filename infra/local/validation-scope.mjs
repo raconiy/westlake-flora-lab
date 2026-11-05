@@ -3,6 +3,7 @@ import {extname,posix,resolve} from 'node:path';
 
 const MAX_TESTS=24;
 const CODE_EXTENSIONS=new Set(['.mjs','.cjs','.js','.jsx','.ts','.tsx']);
+const DATA_ARCHIVE_EXTENSIONS=new Set(['.txt','.md','.json','.log','.patch']);
 
 // Porcelain v1 -z has literal paths (including spaces/newlines). Rename/copy
 // records put the destination first, then a separate NUL-terminated source.
@@ -74,7 +75,7 @@ export async function changedTestsPlan(worktree,{run,signal,timeoutMs=10000}={})
       if(stat?.isFile())add(path,'changed-test');
       else if(!stat&&deletedPaths.has(path))deletedTests.add(path);
       else throw new Error(`Validation: changed test is not a regular file ${JSON.stringify(path)}`);
-    }else if(/\.test\./.test(posix.basename(path))){
+    }else if(/\.test\./.test(posix.basename(path))&&!DATA_ARCHIVE_EXTENSIONS.has(extname(path))){
       throw new Error(`Validation: unexpected test extension ${JSON.stringify(path)}`);
     }else if(CODE_EXTENSIONS.has(extname(path))){
       const stem=posix.basename(path,extname(path)),dir=posix.dirname(path);
@@ -104,6 +105,6 @@ export async function changedTestsPlan(worktree,{run,signal,timeoutMs=10000}={})
     selectionReasons:Object.fromEntries(selectedTests.map(p=>[p,[...selected.get(p)].sort()])),codeWithoutRelatedTests,
     noTestsSelected:selectedTests.length===0,maxTests:MAX_TESTS,
     selectionPolicy:'All changed/new .test.mjs files plus exact-stem siblings in the same directory or its test/ directory; never truncate.',
-    coverageLimits:['Git working/index status only; committed changes and ignored untracked files are outside this scope.','Only .test.mjs is supported; changed tests with other extensions and test paths with Node glob metacharacters are rejected.','No import graph or broader regression inference; deleted tests are recorded, not executed.','No selected tests means typecheck and staged/unstaged diff checks only.','Worker readiness only; lead must run complete merged validation and CI before merge/publication.'],
+    coverageLimits:['Git working/index status only; committed changes and ignored untracked files are outside this scope.','Only .test.mjs is executable; unsupported test extensions and test paths with Node glob metacharacters are rejected. Final .txt/.md/.json/.log/.patch suffixes are non-executable evidence archives.','No import graph or broader regression inference; deleted tests are recorded, not executed.','No selected tests means typecheck and staged/unstaged diff checks only.','Worker readiness only; lead must run complete merged validation and CI before merge/publication.'],
     fullSuiteValidated:false,releaseApproved:false};
 }

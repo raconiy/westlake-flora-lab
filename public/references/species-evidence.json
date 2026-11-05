@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-05",
+  "version": "0.5.6",
   "scope": "物种文献约束与模型范围，不是云谷个体实测",
   "physicalModel": {
     "units": "SI: metre, second, kilogram, newton, pascal",
@@ -184,10 +184,11 @@
         "夏季叶色、树形和秋色显著受品种影响"
       ],
       "growthSequence": [
-        "种子或苗木建立",
-        "对生叶节点",
-        "细枝与层状冠建立",
-        "冠幅扩展与秋色"
+        "胚根与弯钩出苗",
+        "子叶抬升、初期逐节伸长与首批真叶",
+        "后续主轴叶在已到达的固定材料节点上展开",
+        "首批幼叶衰老，既成木质节点保留",
+        "细枝冠层扩展与季节换叶"
       ],
       "limits": [
         "校园品种和是否嫁接未确认",
@@ -196,26 +197,36 @@
       "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值",
       "establishmentEvidence": {
         "sourceUrls": [
-          "https://landscapeplants.oregonstate.edu/plants/acer-palmatum"
+          "https://landscapeplants.oregonstate.edu/plants/acer-palmatum",
+          "https://propg.ifas.ufl.edu/04-seeds/03-germination/05-seedsgermination-patterns.html",
+          "https://ir.nbu.ac.in/bitstreams/f47fcb06-569a-44d6-bfaf-71012bb31117/download"
         ],
-        "retrievalStatus": "未独立读到：终端网络不可用；翅果描述来自任务给出的机构来源摘要；未转载图片",
-        "cotyledonStatus": "AOSA Acer spp上位萌发提示未独立核验，不作为已证实种级事实；不绘制未经支持的子叶",
-        "implemented": "埋藏单翅果及保留残壳、固定下极胚根与出苗轴、另行标记掌裂真叶；残壳位置不表示已证实下位萌发",
+        "retrievalStatus": "主控已核读机构一般萌发机制，目视NBU论文printed129/PDF158与Plate6.1m/PDF168；原页与图像仅私有研究，不转载",
+        "cotyledonStatus": "种级材料支持上位萌发、顶端弯曲下胚轴、对生卵形子叶及其后首对5–7裂真叶；不是杭州个体或所有品种的尺寸校准",
+        "implemented": "连续共环下胚轴/上胚轴，有限一次子叶；早期分段伸长，后续主轴叶以父轴实际到达为前提展开，既成木质节点不删除；单个持续顶端器官闭合茎尖",
         "unsupported": [
-          "下胚轴钩",
-          "出土子叶对及种级形状",
-          "子叶提升/脱壳过程",
-          "首批幼叶异形"
+          "脱壳与种壳腐解",
+          "温度、霜冻、萌发事件史",
+          "幼组织生长应力和大应变力学",
+          "精确异形叶与后续逐叶生理",
+          "顶芽质量、阻力及周年休眠过程"
         ],
-        "engineeringPriors": "壳高6 mm、半径3 mm、翅约18 mm、下极-9 mm；根起始.008年、地下轴.012—.025年；均非校园实测"
+        "engineeringPriors": "壳高6 mm、半径3 mm、翅约18 mm、下极-9 mm；根起始.008年、地下轴.012—.025年；均非校园实测；18mm永久下胚轴、弯钩幅度、.04—.36年子叶窗口、.045年首叶扩展和.55—.8年首批叶衰老均为工程先验；新幼苗6/9/12/15/18/21mm节间目标、.295—.6年单调衔接、主轴后续72对材料节点与约20天展开均为工程先验，未以文献或校园实测标定。"
       },
       "establishmentResearch": {
         "source": "https://ir.nbu.ac.in/bitstreams/f47fcb06-569a-44d6-bfaf-71012bb31117/download",
         "checked": "Printed129/PDF158 and Plate6.1m/PDF168 visually inspected",
         "constraint": "Epigeal emergence, curved hypocotyl, opposite paracotyledons preceding true leaves",
-        "implementation": "Prototype withheld: cotyledon nodes were fixed too close to soil instead of carried by hypocotyl extension. No cotyledon prototype included in this release.",
+        "implementation": "Hook splice and apical establishment leaf sites now modeled. First true-pair5–7mm constrained by one sampled population, later sizes/timings remain priors; independent geometry, visual and release CI evidence are separate.",
         "generalMechanism": "https://propg.ifas.ufl.edu/04-seeds/03-germination/05-seedsgermination-patterns.html",
         "calibration": "No campus timing or hypocotyl dimensions measured"
+      },
+      "apicalLeafDevelopment": {
+        "source": "https://ir.nbu.ac.in/bitstreams/f47fcb06-569a-44d6-bfaf-71012bb31117/download",
+        "checked": "valid complete PDF printed112/PDF141 text read by lead; adult Darjiling seasonal leaf emergence and colour progression",
+        "constraint": "叶芽、叶片出现与颜色进展的顺序；不能推出杭州幼苗20天完全展叶或某种固定节距",
+        "implementation": "72对固定主轴材料节点，父轴到达后从零尺寸展开；保留原叶片模板尺度和原目录末端范围",
+        "priors": "初始后续节距24mm、线性节距梯度、.055年展开时间；无温度、碳分配或年度预成芽求解"
       }
     },
     {
