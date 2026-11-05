@@ -7,7 +7,7 @@ import {runCodex,runProcess} from './codex.mjs';
 export async function executeTask(task,config={},deps={}){
   const root=resolve(config.root||process.env.SWARM_ROOT||process.cwd());
   const codex=deps.runCodex||runCodex,run=deps.runProcess||runProcess;
-  let worktree=null;
+  let worktree=null;const transportRecovery=[];
   const timeoutMs=config.timeoutMs??Number(process.env.SWARM_TASK_TIMEOUT_MS||1200000);
   try{
     if(task.kind==='code'){
@@ -27,20 +27,35 @@ export async function executeTask(task,config={},deps={}){
       }
     }
     const prompt=`你是西湖大学植物real2sim项目的执行agent。任务ID：${task.id}\n任务类型：${task.kind}\n仅在指定工作目录内工作；不读取账号凭据、不修改认证、不执行git merge、不部署、不删除其他worktree。不要更改HOME/CODEX_HOME。node_modules如为共享依赖，只读使用，不安装或修改依赖与lock文件。代码修改保留在当前独立worktree，最终说明文件、行为、验证和风险。研究任务只读分析，附来源，区分假设与实测。\n任务：${task.prompt}`;
-    const answer=await codex(prompt,{root:worktree||root,sandbox:task.kind==='code'?'workspace-write':'read-only',timeoutMs,signal:config.signal});
+    const started=Date.now(),recoveryLimit=Math.max(0,Math.min(2,Number(config.connectRecoveryAttempts??process.env.SWARM_CONNECT_RECOVERY_ATTEMPTS??1)||0));
+    let answer;
+    for(let attempt=0;;attempt++){
+      const remaining=timeoutMs-(Date.now()-started);
+      if(config.signal?.aborted)throw new Error('Codex execution aborted');
+      if(remaining<=0)throw new Error('Codex execution timed out');
+      try{answer=await codex(prompt+(attempt?'\n恢复说明：前次在上游连接建立前失败。工作目录与所有已保存改动保留。先检查当前差异和已完成验证，接着完成未完成工作；不要重做已完成改动、部署或对外操作。':''),{root:worktree||root,sandbox:task.kind==='code'?'workspace-write':'read-only',timeoutMs:Math.max(1,remaining),signal:config.signal});break;}
+      catch(error){
+        // A NEW continuation call, never automatic replay of an ambiguous
+        // streamed response. Only the gateway's explicit pre-connect failure
+        // is eligible, within the original deadline, preserving the worktree.
+        if(config.signal?.aborted||attempt>=recoveryLimit||timeoutMs-(Date.now()-started)<30000||!String(error.message).includes('upstream_connect_failed'))throw error;
+        transportRecovery.push({attempt:attempt+1,category:'upstream_connect_failed',error:error.message,preservedWorktree:!!worktree});
+      }
+    }
+    const executionMetadata={usage:answer.usage,modelBackend:answer.backend??'codex',model:answer.model??null,reasoningEffort:answer.reasoningEffort??null,transportRecovery};
     const validation=[];
     if(task.kind==='code'&&config.autoValidate){
       if(!Array.isArray(config.validationCommands)||!config.validationCommands.length)throw new Error('Auto-validation enabled but no operator-defined commands configured');
       for(const args of config.validationCommands){
         if(!Array.isArray(args)||!args.length||args.some(v=>typeof v!=='string'))throw new Error('Validation commands must be argv arrays');
-        const result=await run(args[0],args.slice(1),{cwd:worktree,timeoutMs:config.validationTimeoutMs??120000,signal:config.signal,maxBytes:500000});
+        const result=await run(args[0],args.slice(1),{cwd:worktree,timeoutMs:config.validationTimeoutMs??Number(process.env.SWARM_VALIDATION_TIMEOUT_MS||600000),signal:config.signal,maxBytes:500000});
         validation.push({command:args,code:result.code,timedOut:result.timedOut,stdout:result.stdout.slice(-1500),stderr:result.stderr.slice(-1000)});
-        if(result.code!==0||result.timedOut||result.overflow||result.aborted)return{status:'validation_failed',result:{summary:answer.text.slice(-9000),worktree,validation,merged:false}};
+        if(result.code!==0||result.timedOut||result.overflow||result.aborted)return{status:'validation_failed',result:{summary:answer.text.slice(-9000),worktree,validation,validationStatus:'failed',...executionMetadata,merged:false}};
       }
     }
     let diff=null;if(worktree){const d=await run('git',['-C',worktree,'status','--short'],{timeoutMs:10000});diff=d.stdout;}
-    return{status:'completed',result:{summary:answer.text.slice(-9000),worktree,validation,validationStatus:task.kind!=='code'?'not_applicable':config.autoValidate?'passed':'not_run',changes:diff,merged:false,usage:answer.usage,modelBackend:answer.backend??'codex',model:answer.model??null,reasoningEffort:answer.reasoningEffort??null}};
-  }catch(error){return{status:'failed',result:{error:error.message,failureCategory:/timed out/i.test(error.message)?'timeout':/worktree/i.test(error.message)?'workspace':/validat/i.test(error.message)?'validation':'execution',worktree,partialChangesPreserved:!!worktree,modelBackend:process.env.SWARM_MODEL_BACKEND||'codex',model:process.env.SWARM_GPT_LOAD_MODEL||null,reasoningEffort:process.env.SWARM_MODEL_REASONING_EFFORT||null,validationStatus:'not_completed',merged:false}};}
+    return{status:'completed',result:{summary:answer.text.slice(-9000),worktree,validation,validationStatus:task.kind!=='code'?'not_applicable':config.autoValidate?'passed':'not_run',changes:diff,merged:false,...executionMetadata}};
+  }catch(error){return{status:'failed',result:{error:error.message,transportRecovery,failureCategory:/timed out/i.test(error.message)?'timeout':/worktree/i.test(error.message)?'workspace':/validat/i.test(error.message)?'validation':'execution',worktree,partialChangesPreserved:!!worktree,modelBackend:process.env.SWARM_MODEL_BACKEND||'codex',model:process.env.SWARM_GPT_LOAD_MODEL||null,reasoningEffort:process.env.SWARM_MODEL_REASONING_EFFORT||null,validationStatus:'not_completed',merged:false}};}
 }
 
 export async function runWorker(config={}){

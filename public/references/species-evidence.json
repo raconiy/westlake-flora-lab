@@ -117,7 +117,22 @@
         "常绿换叶与叶龄仍需独立测量",
         "根网深度和分布为工程先验"
       ],
-      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值",
+      "establishmentEvidence": {
+        "sourceUrls": [
+          "https://apps.lucidcentral.org/rainforest/text/entities/cinnamomum_camphora.htm",
+          "https://apps.lucidcentral.org/rainforest/pdf/entities/cinnamomum_camphora.pdf"
+        ],
+        "retrievalStatus": "未独立读到：终端代理/DNS失败，浏览器出口授权拒绝；未查看或转载幼苗照片",
+        "taskSuppliedSummary": "CSIRO 描述 HYPOGEAL cotyledons；按任务提供摘要约束为种内地下子叶，不画绿色地上子叶",
+        "implemented": "固定地下种壳下极连接胚根、连续轴与地表主轴；种壳保留为残壳代理",
+        "unsupported": [
+          "内部子叶解剖",
+          "种壳开裂和腐解",
+          "首批幼叶异形"
+        ],
+        "engineeringPriors": "壳高8 mm、半径4 mm、下极-12 mm；根起始.008年、地下轴.012—.025年；所有尺寸/时序均非校园实测"
+      }
     },
     {
       "id": "acer",
@@ -138,7 +153,22 @@
         "校园品种和是否嫁接未确认",
         "不能将未知个体默认全年红叶"
       ],
-      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值",
+      "establishmentEvidence": {
+        "sourceUrls": [
+          "https://landscapeplants.oregonstate.edu/plants/acer-palmatum"
+        ],
+        "retrievalStatus": "未独立读到：终端网络不可用；翅果描述来自任务给出的机构来源摘要；未转载图片",
+        "cotyledonStatus": "AOSA Acer spp上位萌发提示未独立核验，不作为已证实种级事实；不绘制未经支持的子叶",
+        "implemented": "埋藏单翅果及保留残壳、固定下极胚根与出苗轴、另行标记掌裂真叶；残壳位置不表示已证实下位萌发",
+        "unsupported": [
+          "下胚轴钩",
+          "出土子叶对及种级形状",
+          "子叶提升/脱壳过程",
+          "首批幼叶异形"
+        ],
+        "engineeringPriors": "壳高6 mm、半径3 mm、翅约18 mm、下极-9 mm；根起始.008年、地下轴.012—.025年；均非校园实测"
+      }
     },
     {
       "id": "ophiopogon",

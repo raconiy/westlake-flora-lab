@@ -16,7 +16,7 @@ export function additionalDevelopment(species: 'camphor' | 'acer' | 'ophiopogon'
   const herb = species === 'ophiopogon';
   return { age, radicle: organGrowth(.008, .12, age), shoot: organGrowth(.025, .25, age),
     maturity: 1 - Math.exp(-age / (herb ? 1.4 : species === 'acer' ? 15 : 24)),
-    stage: age === 0 ? (herb ? '营养繁殖起点 · 未建立叶丛' : '种子 · 尚未出苗') :
+    stage: (herb ? age === 0 : age <= .025) ? (herb ? '营养繁殖起点 · 未建立叶丛' : '种子 · 地下建立，尚未出苗') :
       age < .3 ? (herb ? '营养繁殖建立' : '萌发 · 主轴与真叶建立') :
       age < (herb ? 2 : 3) ? (herb ? '基生叶丛形成' : '幼苗 · 叶序建立') :
       age < (herb ? 4 : 18) ? (herb ? '根茎扩展 · 子株建立' : '幼树 · 枝序建立') : '成熟结构 · 持续更新' };

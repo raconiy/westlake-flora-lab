@@ -184,16 +184,25 @@
     "Retained foliation sites with keyed season sampling and fixed per-cohort budgets",
     "Recovered woody-root draft after 502, corrected the primary-root bend, and validated actual ring continuity",
     "Preserved surface root origins and matched Ophiopogon density/ramet topology",
-    "Counted merged fine wood in mass, projected drag and owner-beam loads"
+    "Counted merged fine wood in mass, projected drag and owner-beam loads",
+    "Measured exact rest-pose vertex height independently of conservative camera boxes",
+    "Reserved fixed unique ginkgo leaf-site capacity and made density sampling nested/monotone",
+    "Welded the actual bark basal polygon to a short root collar transition with fixed bottom",
+    "Added buried camphor/maple seed coat and connected embryonic axis; Acer cotyledon emergence still unimplemented",
+    "Separate anonymous per-account successful calls/tokens from upstream quota snapshots",
+    "Added bounded continuation only for explicit upstream pre-connect failures; no ambiguous replay"
   ],
   "limits": [
     "Not a calibrated Yungu individual reconstruction",
     "Fixed root collar proxy, not a root-soil anchorage solver",
     "No full physiology, pruning, competition or mortality solver",
     "Float32 world meshes do not resolve newborn sub-micrometre cross-section normals; continuity is still tested",
-    "Source growth curves and crown envelopes remain engineering priors; no natural self-pruning model is claimed"
+    "Source growth curves and crown envelopes remain engineering priors; no natural self-pruning model is claimed",
+    "Osmanthus default loaded geometry still exceeds the linear-beam domain; a dedicated geometry/load reconciliation task remains active",
+    "Herb per-blade deformation and Ophiopogon material-node drafts are under integration, not yet part of this release",
+    "Buried seed coat remnants do not solve full Acer epigeal cotyledon anatomy or biological decay"
   ],
-  "updatedAt": "2026-11-05T16:57:59.777Z",
+  "updatedAt": "2026-11-05T17:47:54.839Z",
   "refinementTasks": [
     {
       "id": "de89c5cb-bb50-472a-bcd0-60eb9410a258",
@@ -249,6 +258,53 @@
       "output": "Codex failed (exit 1): unexpected status 502 Bad Gateway: {\"code\":\"upstream_connect_failed\",\"message\":\"Could not connect to an upstream service.\"}, url: http://127.0.0.1:3001/v1/responses",
       "handoff": "Partial draft recovered and corrected by lead after upstream 502; worker failure is retained",
       "validationStatus": "not_completed"
+    },
+    {
+      "id": "bd53ae32-f34a-43cf-9f64-bf04bf8640d1",
+      "title": "Ginkgo photo habit, persistent foliage budgets and growth-envelope correction",
+      "workerStatus": "failed",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "backend": "gpt-load",
+      "output": "Codex execution timed out",
+      "leadIntegration": "lead reviewed, corrected/integrated, and validated in the 180-test suite; original worker status retained"
+    },
+    {
+      "id": "27911db1-35e5-4e8a-8d85-7923bba1a763",
+      "title": "Biomechanics cross-check actual loads and root anchorage geometry",
+      "workerStatus": "validation_failed",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "backend": "gpt-load",
+      "output": "已基于 `0d12cc1` 完成修改，保留在当前 worktree；未提交、合并或部署。\n\n- `lib/wood-loads.ts`：修正椭圆/多边形截面迎风宽度、木段分布载荷积分；验证细木按最近动力学关节归属，未重复叠加主轴代理质量。\n- `lib/beam-dynamics.ts`：逐三角形计算叶片面积与投影，新增限幅前需求角度及风载、重力诊断。\n- `lib/physical-priors.ts`：补充来源与假设说明，**未提高 E 或隐藏限幅**。\n- 扩展两项现有测试文件，新增 `lib/physics-acceptance.test.mjs`。\n\n默认风速 3.2 m/s、正常重力下，物种切换默认参数的计算结果：\n\n| 物种 | 年龄 / day | 最大线性外推需求 rad | 限幅关节 |\n|---|---:|---:|---:|\n| 银杏 | 18 / 305 | 0.384 | 1/10 |\n| 桂花 | 12 / 270 | 13.149 | 202/275 |\n| 香樟 | 24 / 180 | 0.00354 | 0/15 |\n| 鸡爪槭 | 14 / 305 | 0.00643 | 0/13 |\n\n桂花在积分前、仅风载或仅重力时也已超范围，说明当前枝形与载荷组合不适用于线性梁近似；13.149 rad 不能解释为真实转角。初始页面的 45 年银杏未限幅。\n\n根颈按 `PlantScene` 的 `shootCollar` 构造，检查了实际基环与固定根颈几何。测试中均仍相交，但未全周密合：统一 12 年场景下，基环最高点高于根颈顶面约银杏 **3.967 mm**、桂花 **0.075 mm**、香樟 **1.659 mm**、鸡爪槭 **0.707 mm**；其中部分偏差静止时已存在。连续弯曲、实际截面 EI、冠层遮蔽和根土锚固仍未求解。\n\n相关 **25 项测试通过**；完整回归仅保留修改前已有的两项银杏冠形测试失败。TypeScript 与 `git diff --check` 通过。\n\n依据任务提供的 [erz288](https://doi.org/10.1093/jxb/erz288) 与 [39 物种研究](https://doi.org/10.1111/j.1469-8137.2011.03887.x)，未将重构机制或物种差异推定为通用数值参数。以上数值均为程序探针结果，并非实物测量。\n\n论文网页读取被浏览器自动权限审查拒绝，原因是未获网络外连授权；上述论文未在本次在线复核。",
+      "leadIntegration": "lead reviewed, corrected/integrated, and validated in the 180-test suite; original worker status retained"
+    },
+    {
+      "id": "3578f881-c25d-4ec9-bd51-d72c5d67b876",
+      "title": "Seven-species primary-source growth and visual acceptance dossier",
+      "workerStatus": "completed",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "backend": "gpt-load",
+      "output": "`3578f881-c25d-4ec9-bd51-d72c5d67b876`：完成只读审查。**当前版本具备七物种的形态与生长阶段代理，但尚不能通过“近真实生长与力学”验收。**没有修改、提交或部署文件。\n\nHEAD 为 `0d12cc180197f610e7b3a86d147dc722909838f3`。已读取共享物种证据、同事 A/B/C 交接、生成器、`woody-root-development.ts`、`herb-surfaces.ts`、根系和力学实现及照片归属。以下植物学约束来自**仓库来源摘录与实际图像观察**；机构网页本次未在线复核。\n\n**七物种验收档案**\n\n| 物种及来源 URL | 应满足的形态、器官起源和阶段顺序 | 当前代码与下一项验收 |\n|---|---|---|\n| [银杏 Ginkgo biloba](https://plants.ces.ncsu.edu/plants/ginkgo-biloba/) | 扇形叶、二歧脉；长枝互生，短枝密簇。种子内保留子叶，胚根→芽与真叶→长短枝分化→木质增粗；秋落叶，木枝保留。繁殖须区分雌雄。 | `plant-engine.ts:695–778` 已采用固定节点和持续保留的木轴；雌雄繁殖未实现。下一步修正高度统计，并以整株参考图核对冠形，不能用固定叶面积阈值代替真实外观验收。 |\n| [桂花 Osmanthus fragrans](https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/) | 对生革质单叶、叶腋小型四裂花；灌木或小乔木。繁殖体建立→真叶→腋芽侧枝→多级冠层；常绿叶仍须更新。秋花窗口须限定品种。 | `plant-engine.ts:149–289` 的节点与侧枝共用固定挂点；全年叶片保留，尚无叶龄周转。下一步加入独立叶批次更新，保留所有无损伤事件的木轴；不得由私照推断树龄、分枝角或修剪史。 |\n| [鸢尾 Iris tectorum](https://plants.ces.ncsu.edu/plants/iris-tectorum/) | 基生二列剑叶形成叶扇；横走浅根茎产生新叶扇及不定根。分株→叶扇→根茎延伸→抽薹→花→蒴果。三外三内花被，外花被具鸡冠。 | `plant-engine.ts:366–423` 已有叶扇、根茎、花被及鸡冠；花茎全年保留，蒴果缺失。下一步拆分花茎的发生、结果及衰老状态，并实现逐叶弯曲。 |\n| [酢浆草 Oxalis corniculata](https://plants.ces.ncsu.edu/plants/oxalis-corniculata/) | 三出复叶，小叶倒心形；匍匐茎节生不定根，五瓣黄花。当前营养起点应为带根茎节→节间伸长→新节生根与分枝→花→蒴果与散播。 | `plant-engine.ts:424–469` 保持匍匐轴与节点连接，复叶计数正确；花梗全年保留，蒴果、弹射与睡眠运动缺失。下一步先完成花梗周转和独立叶柄/小叶响应。 |\n| [香樟 Cinnamomum camphora](https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/) | 互生单叶、离基三出脉；开展常绿冠。胚根与幼苗→顶端伸长及侧枝→冠层展开与增粗；旧叶更新与木材保留分开。花、果有季节过程。 | `additional-species.ts:79–202` 已有持续顶端叶及连接的末级枝；叶片长期保留，花果未模拟，年龄零的“种子”场景为空。下一步补齐建立起点与叶批次更新；根型须按种生/移植来源校准。 |\n| [鸡爪槭 Acer palmatum](https://plants.ces.ncsu.edu/plants/acer-palmatum/) | 对生掌裂叶、细枝开展；品种影响叶裂、颜色和冠形。种子或嫁接苗→对生芽叶→枝冠→花与双翅果；秋转色后落叶，冬留木轴。 | 同文件已有对生叶、夏绿秋色和冬季失叶；花果及嫁接结构缺失，种子起点为空。下一步先确认品种、繁殖来源，再验收叶形、冠形与翅果，不能由红叶照片推断全年红叶。 |\n| [麦冬 Ophiopogon japonicus](https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/) | 基生狭线叶；地下横向轴产生子株，须根部分膨大储藏。分株→叶丛→地下扩展与子株→短花葶、下垂六花被花→蓝色种子。储藏根不能充当分株芽。 | `additional-species.ts:203–218`、`rhizosphere.ts:247–269` 区分了叶丛、地下轴和储藏根，但子株基点会横移。下一步固定已建立子株和根的材料位置；共享 JSON 的“蓝色果实”应与物种记录中的“蓝色种子”统一。 |\n\n代码入口：[主生成器](./lib/plant-engine.ts)、[新增物种生成器](./lib/additional-species.ts)、[根系](./lib/rhizosphere.ts)、[木本根发育](./lib/woody-root-development.ts)、[草本表面](./lib/herb-surfaces.ts)、[共享证据](./public/references/species-evidence.json)。\n\n**剩余问题，按优先级排序**\n\n| 优先级 | 已确认的问题及证据 | 具体下一任务与通过条件 |\n|---|---|---|\n| **P1** | **麦冬已建立子株随年龄平移。** `development.ts:25–29` 将整个子株位置乘以生长系数。实际基部网格端环在年龄 `1.23→1.53` 横移约 **21.5 mm**，同期已有叶片和根轴。 | 地下轴先延伸到固定目标节点，再建立子株；跨年龄比较真实基环、根起点和已形成节点，要求保持不动，允许新增远端组织。 |\n| **P1** | **三种草本均未接入逐叶弯曲。** 实际调用 `createLeafDynamics`，整株与叶片特写的 `bladeMeshes` 均为 **0**；现有运动主要旋转整叶扇、叶丛或复叶组件。 | 为叶片/叶柄建立独立基点与弯曲坐标。验收基点固定、叶尖相对基部改变，且同丛不同叶具有可解释的差异。来源形态不能提供刚度数值。 |\n| **P1** | **叶更新与生殖器官周转缺失。** 桂花、香樟及草本的旧叶长期保留；鸢尾和酢浆草冬季分别仍有 **3、19** 根非零绿色花梗。现有草本测试还要求冬夏支持骨架完全相同。 | 将叶、花梗、花果生命周期与持久木轴分开；加入可追踪批次。验收旧叶更替、花梗衰老，同时木枝和存活地下轴不因年龄或落叶被删除。 |\n| **P1：力学范围** | **花的出现没有进入对应负载。** 固定年龄比较有花/无花日期，三草本的 `estimatedMassKg` 完全相同；`beam-dynamics.ts` 主要计入木轴代理及叶面积，花果负载缺失。 | 先为鸢尾花茎加入器官质量、质心及迎风面积；用指定测试负载验证弯矩变化，随后以实测标定。当前不能验收“花果负载下的真实弯曲”。 |\n| **P2** | **银杏高度统计虚高。** 20 年场景报告 `8.620 m`，扫描实际顶点最高为 `7.636 m`；来自旋转后的聚合包围盒，并非真实上枝失控。 | 分开精确几何高度与保守取景包围盒；测试实际顶点和界面高度一致，保留相机安全余量。 |\n| **P2** | **建立及繁殖阶段不完整。** 香樟、鸡爪槭年龄零没有种子网格；多数物种只有花或直接缺少生殖结构。 | 明确“种生”或“苗木/分株”入口，按物种补齐可见阶段；尚未实现的阶段继续标注缺失，不使用统一成熟年龄。 |\n\n银杏另一项失败是硬编码 `叶面积 >150 m²`：实际为 **147.625 m²**，面积比 **2.655** 已落在该测试自己的 `2–3.5` 范围内。**这只能说明工程回归断言不一致，不能证明植物冠层不真实。**\n\n**图片证据与测量缺口**\n\n实际查看了全部 **9 张公开图片及两张指定桂花私照**。银杏有整株证据；鸢尾图是花与局部叶丛近景；香樟、鸡爪槭图是器官近景，不能支持整冠比例。酢浆草和麦冬图支持局部群落形态，不能揭示地下连接。桂花第一张支持圆密灌丛轮廓，第二张裁切较紧；私照未复制或发布。公开归属记录见 [photo-attribution.json](./public/references/photo-attribution.json)。\n\n仍需采集：物种/品种与繁殖来源、带尺度整株多视角、顶端新梢和旧节点重复定位、逐叶标记与跨季节复拍、地下轴及生根位置、风速同步视频、叶片/枝条弯曲试验。现有照片均不能提供统一年龄、角度、根深或材料常数。\n\n**真实验证结果**\n\n- `node --test lib/*.test.mjs`：**134/136 通过**；两项银杏失败单独重跑均复现。\n- `tsc --noEmit --incremental false`：通过。\n- 同事 A 的银杏短枝挂点问题、C 的麦冬花葶随机跳变已有当前修复及通过的回归；未重新列为剩余缺陷。四木本根材料节点持久化测试通过。\n- 审查期间其他进程修改了土表、根系材质及界面文件；关键生成器、动力学、证据和上述失败测试经 `git diff 0d12cc1` 确认未变。全量结果不是冻结工作区的最终集成验收。\n- 未完成生成场景的浏览器视觉验收或植物实测。根土锚固、水力、碳分配及完整生理生命周期求解均不存在。\n\n网络核验受限：浏览器自动权限审查拒绝了 NC State 外连，理由是未获得网络外连授权；此前终端请求因 `127.0.0.1:7897` 代理无法连接而失败。NC State、eFloras、Oregon State 及两篇枝构型论文均未在本次在线读到，未从这些未读材料推断通用年龄或角度。",
+      "leadIntegration": "read-only audit handed off into subsequent tasks"
+    },
+    {
+      "id": "38bd0893-0500-40ab-ad8e-72d616088094",
+      "title": "Complete anatomically connected camphor and maple seed establishment",
+      "workerStatus": "validation_failed",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "backend": "gpt-load",
+      "output": "修改已保留在当前 worktree，未提交、合并或部署。\n\n- 新增 `lib/woody-establishment.ts`、`lib/woody-establishment.test.mjs`；定点修改 `additional-species.ts`、`development.ts`、`woody-root-development.ts`、两处证据元数据及 `app/page.tsx`。\n- age 0 现在有真实地下种壳；鸡爪槭另有单翅果翅。种壳下极、胚根与连续出苗轴共享支点，种壳不缩零或删除，原有木质结构保留。\n- 保持 age 0 地上高度、叶量和枝条为零。新增可访问的剖面提示按钮；早期年龄调整不再反复切换视图。樟树没有绿色地上子叶；鸡爪槭子叶对、下胚轴钩和脱壳过程未实现。\n\n尺寸与时序全部是工程先验：樟树壳高 8 mm、半径 4 mm、下极 −12 mm；鸡爪槭分别为 6 mm、3 mm、−9 mm，翅约 18 mm。胚根起点为 .008 年，地下轴在 .012–.025 年建立，均非校园实测。\n\n验证：最终专项 **19/19 通过**，覆盖要求的七个年龄、真实端点、浅土边界和连续性；类型检查、生产构建通过。全量测试 **137/140**：两项银杏失败已在原始 `0d12cc1` 复现；另一项是持久种子新增一个 mesh，超过旧绘制预算，原断言未改。\n\n已通读指定三份源码和本地物种证据。**外部来源核验未完成**：CSIRO 网页/PDF、OSU 原文及幼苗照片未成功读取，未转载图片；元数据明确区分任务提供的摘要与未核验结构。\n\n浏览器自动权限检查拒绝了 CSIRO 域名访问，终端代理与 DNS 也失败；本机预览端口监听被沙箱拒绝，因此未完成浏览器实景验收。",
+      "leadIntegration": "lead reviewed, corrected/integrated, and validated in the 180-test suite; original worker status retained"
     }
-  ]
+  ],
+  "validation": {
+    "suite": "Node frontend and local/community infrastructure",
+    "passed": 180,
+    "failed": 0,
+    "typecheck": "passed",
+    "browser": "pending final build inspection; previous preview screenshots retained"
+  }
 }

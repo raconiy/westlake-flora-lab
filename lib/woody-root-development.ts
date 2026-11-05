@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {osmanthusGrowth, osmanthusLifecycle} from './osmanthus-lifecycle.ts';
+import {woodySeedPole} from './woody-establishment.ts';
 
 /** All dimensions, clocks and branching below are uncalibrated engineering
  * priors, not measured root reconstructions, growth rates or soil mechanics.
@@ -26,7 +27,7 @@ export function woodyRootAxes(species: string, seed: number, expansion: number, 
   const ginkgo = species === 'ginkgo', osmanthus = species === 'osmanthus';
   const camphor = species === 'camphor', acer = species === 'acer';
   const prefix = `${species}:root`, axes: WoodyRootAxis[] = [];
-  const seedY = ginkgo ? -.037 : osmanthus ? -.011 : -.004;
+  const seedY = ginkgo ? -.037 : osmanthus ? -.011 : camphor || acer ? woodySeedPole(camphor ? 'camphor' : 'acer').y : -.004;
   const birth = camphor || acer ? .008 : .012;
   const primaryLimit = (ginkgo ? 2.18 : camphor ? 1.85 : acer ? 1.0 : 1.15) * expansion;
   function growth(onset: number, duration: number, limit: number, tau: number, age: number) {

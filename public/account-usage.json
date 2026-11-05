@@ -121,5 +121,11 @@
       ]
     }
   ],
-  "interpretation": "Quota windows are upstream observations, not locally inferred token use. Successful requests/token output and task receipts are separate evidence. Exact charging discrepancy remains unverified."
+  "interpretation": "Quota windows are upstream observations, not locally inferred token use. Successful requests/token output and task receipts are separate evidence. Exact charging discrepancy remains unverified.",
+  "identityConsistency": {
+    "verifiedAt": "2026-11-05T17:10:47.025Z",
+    "distinctTokenSubjects": 3,
+    "distinctTokenAccountIds": 3,
+    "allMetadataEmailsMatchTokens": true
+  }
 }

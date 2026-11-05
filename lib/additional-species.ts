@@ -5,6 +5,7 @@ import type { PlantParams, PlantModel, BranchJoint } from "./plant-engine";
 
 // @ts-ignore Native Node tests require the suffix.
 import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet } from "./development.ts";
+import {woodyEstablishmentGeometry, woodyEstablishmentState, woodyEstablishmentEvidence} from './woody-establishment.ts';
 
 export type AdditionalSpecies = "camphor" | "acer" | "ophiopogon";
 /** Organ dimensions from primary botanical/extension descriptions, not campus measurements.
@@ -76,6 +77,12 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
  function joint(parent:THREE.Object3D,pos:THREE.Vector3,dir:THREE.Vector3,length:number,radius:number,order:number,key:number){const pivot=new THREE.Group();pivot.position.copy(pos);pivot.quaternion.setFromUnitVectors(UP,dir.clone().normalize());parent.add(pivot);branches.push({pivot,rest:pivot.quaternion.clone(),length,radius,order,phase:randomFor(key)()*6.28,flexibility:clamp(.003*Math.pow(length/Math.max(.001,radius),1.05),.03,1.3),sag:Math.min(.12,length*.045)});return pivot;}
  function addWood(parent:THREE.Object3D,parts:THREE.BufferGeometry[],material:THREE.Material,axes:WoodAxis[]){if(!parts.length)return;const m=new THREE.Mesh(geom(merge(parts)),material);m.castShadow=m.receiveShadow=true;m.userData.axes=axes;parent.add(m);}
  const stageLabel=life.stage;
+ if(species==='camphor'||species==='acer'){
+  const establishment=new THREE.Mesh(geom(woodyEstablishmentGeometry(species,age)),mat(new THREE.MeshStandardMaterial({vertexColors:true,side:THREE.DoubleSide,roughness:.93})));
+  establishment.name='woody-seed-establishment';establishment.userData={organ:'seed',organs:establishment.geometry.userData.organs,sourceType:'engineering-prior',calibrated:false,support:woodyEstablishmentState(species,age),evidence:woodyEstablishmentEvidence[species]};
+  establishment.castShadow=establishment.receiveShadow=true;group.add(establishment);
+  group.userData.establishment=woodyEstablishmentEvidence[species];
+ }
  const leafPresence=species==="acer"?smooth(65,105,day)*(1-smooth(313,344,day)):1,autumn=species==="acer"?smooth(255,309,day):0;
  if(species!=="ophiopogon" && life.shoot>0) {
   const maple=species==="acer",heightLimit=.025+(maple?6.5:16),heightTime=maple?15:24;
@@ -124,7 +131,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
   function showLeaves(parent:THREE.Object3D,records:Leaf[],cohort:string){
    const visible=records.filter(l=>randomFor(l.id)()<leafPresence);if(!visible.length)return;
    const leaves=new THREE.InstancedMesh(leafGeo,leafMat,visible.length),petioles=new THREE.InstancedMesh(petioleGeo,petioleMat,visible.length);
-   leaves.userData={organ:"leaf",connectedBy:"petiole",arrangement:maple?"opposite":"alternate",cohort,bladeSizeMetres:maple?[.03,.06,.04,.08]:[.06,.12,.025,.055],nodes:visible.map(l=>({id:l.nodeId,birth:l.birth})),venation:maple?"palmate":"three basal main veins"};petioles.userData.organ="petiole";leaves.name=`leaves:${cohort}`;leaves.castShadow=leaves.receiveShadow=true;
+   leaves.userData={organ:"leaf",leafClass:"true-leaf",connectedBy:"petiole",arrangement:maple?"opposite":"alternate",cohort,bladeSizeMetres:maple?[.03,.06,.04,.08]:[.06,.12,.025,.055],nodes:visible.map(l=>({id:l.nodeId,birth:l.birth})),venation:maple?"palmate":"three basal main veins"};petioles.userData.organ="petiole";leaves.name=`leaves:${cohort}`;leaves.castShadow=leaves.receiveShadow=true;
    visible.forEach((l,n)=>{leaves.setMatrixAt(n,l.blade);petioles.setMatrixAt(n,l.petiole);if(maple)color.setHSL(.25-autumn*.235+(l.variation-.5)*.02,.43+autumn*.26,.29+autumn*.16+l.variation*.06);else color.setHSL(.265+(l.variation-.5)*.025,.38,.22+l.variation*.08);leaves.setColorAt(n,color);});
    // New zero-size leaves start on already rendered wood. Include that support
    // in local instance bounds so rotating their aggregate AABB cannot invent a

@@ -69,8 +69,8 @@ export const specimenEvidence: Record<SpeciesId, SpecimenRecord> = {
       {organ: '地下部', literature: '根系受土层、移植与生境影响。', model: '主根与扩展侧根先验，非校园香樟实测根系。'},
     ],
     establishment: ['种子、幼苗建立', '主轴与互生叶', '侧枝、冠幅扩展', '常绿冠层、干枝增粗'],
-    implemented: '独立互生叶序、年龄驱动枝序和常绿冠层几何。',
-    remaining: '逐叶周转、真实叶脉、修剪移植史与花果发育。',
+    implemented: '地下种壳、共点胚根与出苗轴；互生真叶、年龄枝序与常绿冠层。CSIRO 下位子叶描述来自任务摘要，尚未独立读取原页；不画地上绿色子叶。',
+    remaining: '种内子叶解剖、种壳开裂腐解、首批幼叶形态、逐叶周转、修剪移植史与花果；尺寸与时序均为工程先验，非校园实测。',
   },
   acer: {
     ncStateSlug: 'acer-palmatum',
@@ -80,8 +80,8 @@ export const specimenEvidence: Record<SpeciesId, SpecimenRecord> = {
       {organ: '地下部', literature: '嫁接砧木及生境影响根系。', model: '泛化侧根示意，未还原砧木。'},
     ],
     establishment: ['种子或苗木建立', '对生芽、细枝形成', '层状冠幅扩展', '干枝增粗、季节换叶'],
-    implemented: '对生掌裂叶、层状冠与季节转色；默认普通绿叶型。',
-    remaining: '园艺品种、嫁接与修剪史；转色的色素生理和温度响应。',
+    implemented: '地下单翅果繁殖体、共点胚根和出苗轴；对生掌裂真叶、层状冠与季节转色。翅果来源为任务所给机构页面摘要，尚未独立读取。',
+    remaining: '种级子叶出土证据、下胚轴钩、子叶对及脱壳未核验且未绘制；首批真叶暂用成年叶轮廓先验，幼叶异形未重建。埋藏残壳不是下位萌发断言。繁殖体尺寸与时序为工程先验，品种、嫁接与修剪史未知。',
   },
   ophiopogon: {
     ncStateSlug: 'ophiopogon-japonicus',

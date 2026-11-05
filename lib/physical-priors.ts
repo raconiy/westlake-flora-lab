@@ -1,5 +1,9 @@
 import type {SpeciesId} from './species';
-/** Role-based defaults for simulation experiments, not species-specific measurements. */
+/** Role-based defaults for simulation experiments, not species-specific measurements.
+ * No numeric species claim is inferred from the 39-species experiment:
+ * https://doi.org/10.1111/j.1469-8137.2011.03887.x
+ * Radius/architecture and small-deflection adequacy must be checked separately;
+ * increasing E to conceal a clipped response is not material calibration. */
 export function physicalPriors(species:SpeciesId,age:number){
  const herb=['iris','oxalis','ophiopogon'].includes(species);
  const lignification=herb?0:Math.min(1,Math.max(0,age/3));
