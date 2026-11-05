@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {soilMaterial} from './soil-material.ts';
 import {buildPlant} from './plant-engine.ts';
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
 import { osmanthusLifecycle, osmanthusPriors } from './osmanthus-lifecycle.ts';
@@ -76,10 +77,7 @@ function soilLayer(width: number, depth: number, thickness: number, bottom: numb
   geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
   // Millimetre-scale aggregate texture in world-space UVs; avoid metre-sized
   // triangular colour noise being mistaken for the structure of a soil profile.
-  const textureRandom=randomSource(seed+71),size=128,pixels=new Uint8Array(size*size*4);
-  for(let i=0;i<size*size;i++){const n=textureRandom(),v=n>.975?246:n<.05?118:184+n*42;pixels[i*4]=pixels[i*4+1]=pixels[i*4+2]=v;pixels[i*4+3]=255;}
-  const map=new THREE.DataTexture(pixels,size,size,THREE.RGBAFormat);map.colorSpace=THREE.SRGBColorSpace;map.wrapS=map.wrapT=THREE.RepeatWrapping;map.magFilter=THREE.LinearFilter;map.minFilter=THREE.LinearMipmapLinearFilter;map.generateMipmaps=true;map.needsUpdate=true;
-  const material = new THREE.MeshStandardMaterial({ color: '#ffffff', map, bumpMap:map,bumpScale:.001,vertexColors: true, roughness: 1 });
+  const surface=soilMaterial('#bcb6a6',seed+71),material=surface.material;material.vertexColors=true;
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(0, bottom + thickness / 2, half ? width / 4 + .002 : 0);
   mesh.userData = { organ: 'soil', sourceType: 'engineering-prior' };
@@ -329,6 +327,6 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
   group.userData.profileWidth = width;
   let disposed = false;
   return { group, rootDepth, rootLength, rootTips, availableWater, waterStress,
-    dispose() { if (disposed) return; disposed = true; for (const g of geometries) g.dispose(); for (const m of allMaterials) {if(m instanceof THREE.MeshStandardMaterial)m.map?.dispose();m.dispose();} group.clear(); }
+    dispose() { if (disposed) return; disposed = true; for (const g of geometries) g.dispose(); const textures=new Set<THREE.Texture>();for(const m of allMaterials){for(const value of Object.values(m))if(value instanceof THREE.Texture)textures.add(value);m.dispose();}for(const t of textures)t.dispose(); group.clear(); }
   };
 }
