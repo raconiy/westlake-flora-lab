@@ -51,3 +51,5 @@ h1,h2,h3,.specimen-title h2{font-family:'Songti SC','Noto Serif SC',Georgia,seri
 .viewer-expanded .growth-playback{margin:5px 0}
 .viewer-expanded .timeline-ticks{margin-bottom:0}
 @media(max-width:700px){.viewer-panel.viewer-expanded{inset:0;height:100dvh;border-radius:0}.viewer-expanded>.growth-journey{padding:9px 12px}.viewer-expanded .organ-switch{overflow:auto;flex-shrink:0}.viewer-expanded .specimen-title p{display:none}}
+
+.scene-bottom{background:transparent;border-top:0;pointer-events:none}.scene-bottom>span{background:#f5f8eec9;border-radius:4px;padding:3px 6px}

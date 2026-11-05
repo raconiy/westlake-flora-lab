@@ -688,11 +688,32 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     return Math.max(2,Math.round(5+rr()*3));
   }
   function spurCapacity(key:number,n:number) {let count=0;for(let s=0;s<n;s++)count+=spurLeafCount(key,s);return count;}
+  function spreadSpurSlots(key:number,n:number) {
+    // Reserve complete compressed spur modules across the FULL fixed catalogue,
+    // not the currently formed/visible prefix. Start near opposite fifths, with
+    // a stable reflection to avoid favouring either end when only one module
+    // fits. Fill the remaining gaps in farthest-point order. The last reserved
+    // module may be partial; neither density nor age can reassign its slots.
+    const low=Math.floor((n-1)*.2),order=[low];
+    if(n>1)order.push(n-1-low);
+    if(rng(key+15485863)()<.5)order.reverse();
+    while(order.length<n) {
+      let next=-1,gap=-1;
+      for(let s=0;s<n;s++)if(!order.includes(s)) {
+        const distance=Math.min(...order.map(other=>Math.abs(s-other)));
+        if(distance>gap){gap=distance;next=s;}
+      }
+      order.push(next);
+    }
+    const starts=new Array<number>(n);let slot=0;
+    for(const s of order){starts[s]=slot;slot+=spurLeafCount(key,s);}
+    return starts;
+  }
   function shortShoots(curve:THREE.CatmullRomCurve3,frame:THREE.Matrix4,wood:THREE.BufferGeometry[],records:LeafRecord[],buds:THREE.Matrix4[],key:number,idPrefix:string,n:number,leafScale:number,surfaceUp: THREE.Vector3 = UP,axisFraction=1,leafSlotBudget=Infinity) {
     const shootCount=Math.max(1,Math.round(n)), axisLength=curve.getLength();
-    let slot=0;
+    const spreadSlots=Number.isFinite(leafSlotBudget)?spreadSpurSlots(key,shootCount):null;let slot=0;
     for(let s=0;s<shootCount;s++) {
-      const rr=rng(key+s*12289),leafN=spurLeafCount(key,s),siteSlot=slot;slot+=leafN;
+      const rr=rng(key+s*12289),leafN=spurLeafCount(key,s),siteSlot=spreadSlots?.[s]??slot;slot+=leafN;
       const t=.09+(s+.3+rr()*.35)/shootCount*.88;
       const nodeGrowth=smooth((s+.15)*.030,(s+.85)*.045,axisLength)*smooth(t,t+.05,axisFraction);
       const shootScale=leafScale*nodeGrowth;if(shootScale<1e-7)continue;
@@ -859,8 +880,14 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
       const side=new THREE.Vector3(Math.cos(az),.12,Math.sin(az));const direction=tangent.clone().multiplyScalar(.25).addScaledVector(side,.78).addScaledVector(site.up,.38).normalize();
       const orientation=new THREE.Quaternion().setFromUnitVectors(UP,direction),frame=new THREE.Matrix4().compose(start,orientation,new THREE.Vector3(1,1,1));
       const targetLength=.075+site.curve.getLength()*(.20+fillRandom()*.14),length=targetLength*siteScale,twig=curveFor(length,0,az),fullTwig=curveFor(targetLength,0,az);
+      // Fixed material-axis catalogue for inspecting allocation against the full
+      // candidate extent, including portions which have not formed yet. Local to
+      // this scaffold pivot; these endpoints are diagnostics, never leaf anchors.
+      const idPrefix=`primary:${site.axis}/secondary:${Math.floor(site.index/4)}/twig:${site.index%4}/cohort:${cohort}`,candidateSpurs=Math.max(3,Math.round(targetLength/.045));
+      (canopy.parent.userData.foliationAxes??=[]).push({idPrefix,candidateSpurs,formedFraction:siteScale,
+        start:fullTwig.getPoint(0).applyMatrix4(frame).toArray(),end:fullTwig.getPoint(1).applyMatrix4(frame).toArray()});
       canopy.fine.push(tube(twig,.00115*siteScale,.00040*siteScale,4,4).applyMatrix4(frame));const before=canopy.records.length;
-      shortShoots(fullTwig,frame,canopy.fine,canopy.records,canopy.buds,site.key+cohort*4231,`primary:${site.axis}/secondary:${Math.floor(site.index/4)}/twig:${site.index%4}/cohort:${cohort}`,Math.max(3,Math.round(targetLength/.045)),siteScale,site.up,siteScale,fillBudgets[site.axis][site.index*12+cohort]);
+      shortShoots(fullTwig,frame,canopy.fine,canopy.records,canopy.buds,site.key+cohort*4231,idPrefix,candidateSpurs,siteScale,site.up,siteScale,fillBudgets[site.axis][site.index*12+cohort]);
       for(let i=before;i<canopy.records.length;i++)potentialArea+=recordArea(canopy.records[i]);potentialCount+=canopy.records.length-before;totalFineCohorts++;
     }
   }
@@ -872,7 +899,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     crownBaseM:projectedBox.isEmpty()?0:projectedBox.min.y,crownTopM:projectedBox.isEmpty()?0:projectedBox.max.y,leaderHeightM:h,
     crownWidthM:finalSize.x+.08,crownDepthM:finalSize.z+.08,leafAreaRatio:projectedCrownAreaM2>.01?visibleLeafAreaM2/projectedCrownAreaM2:0,targetAreaRatio:2.8*density,potentialLeafCount:potentialCount,
     connectedFineShootCohorts:totalFineCohorts,maxLeafBudget,lifetimeLeafSiteCapacity:80*6+21*perAxisLeafBudget,densityPresence,
-    allocation:"fixed material-site identities; targetAreaRatio is diagnostic only",calibration:"uncalibrated engineering estimate; one-sided mesh area / ellipse of leaf-centre bounds; not measured stand LAI"};
+    allocation:"fixed material-site identities; complete-catalogue spur spread; targetAreaRatio is diagnostic only",calibration:"uncalibrated engineering estimate; one-sided mesh area / ellipse of leaf-centre bounds; not measured stand LAI"};
   group.traverse(o=>{if(!o.userData.organ&&o.parent?.userData.organ)o.userData.organ=o.parent.userData.organ;});group.updateMatrixWorld(true);
   const gravityFrames=branches.map(j=>{const down=new THREE.Vector3(0,-1,0).applyQuaternion(j.pivot.getWorldQuaternion(new THREE.Quaternion()).invert()),axis=new THREE.Vector3().crossVectors(UP,down),perpendicular=axis.length();if(perpendicular>1e-8)axis.multiplyScalar(1/perpendicular);else axis.set(1,0,0);return{axis,perpendicular};});
   const gr=new THREE.Quaternion(),wr=new THREE.Quaternion(),euler=new THREE.Euler();

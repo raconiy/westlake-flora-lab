@@ -100,3 +100,5 @@ export function directionalShadowFrame(bounds: THREE.Box3, direction: THREE.Vect
     // reverse side of a thin blade its vertex normal can point away from light.
     normalBias: texel * .2, bias: -texel * .35 / (far - near), texel};
 }
+
+export {modelGeometryFrame,unionGeometryFrames,perspectiveGeometryFrame,cameraContainsGeometry} from './geometry-framing.ts';

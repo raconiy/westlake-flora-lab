@@ -1,5 +1,5 @@
 {
-  "version": "0.5.2",
+  "version": "0.5.3",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -45,18 +45,22 @@
     "timing": "uncalibrated engineering priors",
     "roots": "keyed axis identities and fixed material-node prefixes; proximal seed-to-collar extension",
     "foliation": "persistent fine-shoot material sites; lower-stem foliage uses an explicit renewal prior separate from retained wooden spurs",
-    "ophiopogon": "fixed ramet and leaf insertion material coordinates, extending rhizome precursor before a new rooted daughter ramet"
+    "ophiopogon": "fixed ramet and leaf insertion material coordinates, extending rhizome precursor before a new rooted daughter ramet",
+    "localSoilWindow": "visual window only; available depth still governs all root growth and relative-water computations"
   },
   "collaborationEvidence": "collaboration-evidence.json",
   "visualRefinement": {
     "osmanthus": "irregular connected 3D crown; persistent axes; explicit uncalibrated length/descendant-leaf-area support radius law; straight-axis approximation",
     "camphorAcer": "fixed curved material axes with parent-tangent-oriented descendants",
     "iris": "ribbed fans, curved falls, white fringed crests and procedural vein pigment",
-    "herbRoots": "fixed Ophiopogon clone nodes and material-prefix roots; actual surface-node root starts and basal bridges"
+    "herbRoots": "fixed Ophiopogon clone nodes and material-prefix roots; actual surface-node root starts and basal bridges",
+    "ginkgo": "complete-catalogue spread of connected short-shoot modules, fixed site identities and original leaf dimensions; remaining crown gaps are not field-calibrated",
+    "framing": "cached occupied geometry with bounded compound joint/blade displacement; root close-up hides soil and frames actual roots; manual camera ownership retained",
+    "soil": "shallow local herb root-zone window contains all drawn roots, independently labelled from available soil depth; reduced repetitive macrotexture contrast; illustrative strata, no campus soil measurement"
   },
   "accountUsageEvidence": "account-usage.json",
   "validation": {
-    "passed": 196,
+    "passed": 205,
     "failed": 0
   }
 }

@@ -11,9 +11,9 @@ import {physicalPriors} from '../lib/physical-priors';
 import {createGroundSurface} from '../lib/ground-surface';
 import {createLeafDynamics} from '../lib/leaf-dynamics';
 import {createLeafObservation} from '../lib/leaf-observation';
-import {modelBounds,directionalShadowFrame,cameraFrameAction,perspectiveBoundsFrame,cameraContainsBounds,perspectiveCameraRange} from '../lib/scene-framing';
+import {modelBounds,directionalShadowFrame,cameraFrameAction,modelGeometryFrame,unionGeometryFrames,perspectiveGeometryFrame,cameraContainsGeometry,perspectiveCameraRange} from '../lib/scene-framing';
 import type {Scenario} from '../lib/species';
-type RootStats={rootDepth:number;rootLength:number;rootTips:number;waterStress:number};
+type RootStats={rootDepth:number;rootLength:number;rootTips:number;waterStress:number;profileDepth:number};
 type Props={scenario:Scenario;autoFrame:boolean;organView:'plant'|'section'|'root'|'leaf'|'stem';mode:string;resetKey:number;motion:boolean;onStats:(s:{leaves:number;height:number;fps:number})=>void;onRootStats:(s:RootStats)=>void;onPhysicsStats:(s:BeamDynamicsStats)=>void;onError:(s:string)=>void};
 export default function PlantScene(props:Props){
  const holder=useRef<HTMLDivElement>(null),live=useRef(props);live.current=props;
@@ -41,6 +41,7 @@ export default function PlantScene(props:Props){
   const ground=createGroundSurface(),stage=ground.group;scene.add(stage);
   const desiredCamera=new THREE.Vector3(),desiredTarget=new THREE.Vector3();let fitting=false,userControlled=false;
   const plantBounds=new THREE.Box3(),rootBounds=new THREE.Box3(),soilBounds=new THREE.Box3(),leafBounds=new THREE.Box3();
+  let plantGeometry:ReturnType<typeof modelGeometryFrame>={cells:[],bounds:new THREE.Box3()},soilGeometry=plantGeometry,rootGeometry=plantGeometry,leafGeometry=plantGeometry,sectionGeometry=plantGeometry;
   // OrbitControls emits start for drag, touch and wheel. Ownership persists after
   // end, through playback, stage transitions, mode changes and resize.
   const takeCamera=()=>{userControlled=true;fitting=false;};
@@ -64,23 +65,22 @@ export default function PlantScene(props:Props){
    Object.assign(sun.shadow.camera,{left:frame.left,right:frame.right,bottom:frame.bottom,top:frame.top,near:frame.near,far:frame.far});
    sun.shadow.normalBias=frame.normalBias;sun.shadow.bias=frame.bias;sun.shadow.camera.updateProjectionMatrix();
   }
-  function observationBounds(){
+  function observationGeometry(){
    const view=live.current.organView;
-   if(view==='stem')return stemFocus();
-   const box=(view==='leaf'?leafBounds:view==='root'?rootBounds:plantBounds).clone();
-   if(view==='section')box.union(soilBounds);
-   // Same conservative displacement envelope as the shadow fit, in metres.
-   if(!box.isEmpty()&&view!=='root')box.expandByScalar(Math.max(.001,Math.max(...box.getSize(new THREE.Vector3()).toArray())*(view==='leaf'?.14:.07)));
-   return box;
+   if(view==='stem'){const bounds=stemFocus();return {cells:[bounds],bounds};}
+   if(view==='leaf')return leafGeometry;
+   if(view==='root')return rootGeometry;
+   if(view==='section')return sectionGeometry;
+   return plantGeometry;
   }
   const frameCamera=(reclaim=false)=>{
-   if(!plant)return;const view=live.current.organView,box=observationBounds();
+   if(!plant)return;const view=live.current.organView,geometry=observationGeometry(),box=geometry.bounds;
    const direction=view==='root'?new THREE.Vector3(.2,.35,-2.15):view==='section'?new THREE.Vector3(.8,.44,-2.1):view==='leaf'?new THREE.Vector3(.45,.18,2.1):view==='stem'?new THREE.Vector3(4,1.5,6):new THREE.Vector3(1,.9,1.65);
-   const frame=perspectiveBoundsFrame(box,direction,camera.fov,camera.aspect);
+   const frame=perspectiveGeometryFrame(geometry,direction,camera.fov,camera.aspect);
    desiredTarget.copy(frame.target);desiredCamera.copy(frame.position);
    const range=perspectiveCameraRange(box,userControlled&&!reclaim?camera.position:desiredCamera,userControlled&&!reclaim?controls.target:desiredTarget,frame.distance);
    camera.near=range.near;camera.far=range.far;controls.minDistance=range.minDistance;controls.maxDistance=range.maxDistance;camera.updateProjectionMatrix();
-   const action=cameraFrameAction(userControlled,live.current.autoFrame,cameraContainsBounds(box,camera),reclaim);
+   const action=cameraFrameAction(userControlled,live.current.autoFrame,userControlled&&!reclaim||cameraContainsGeometry(geometry,camera),reclaim);
    if(action==='preserve')return;
    fitting=action==='ease';
    if(!fitting){
@@ -89,8 +89,29 @@ export default function PlantScene(props:Props){
    }
   };
   const reset=()=>{if(buildFailed){rebuild();return;}const retry=renderFailed&&!shaderFatal;if(retry)renderFailed=false;userControlled=false;fitting=false;frameCamera(true);if(retry){live.current.onError('');prior=performance.now();raf=requestAnimationFrame(animate);}};
-  function applyMode(){const p=live.current;sectionLight.visible=p.organView==='section'||p.organView==='root';if(!plant)return;plant.group.visible=p.organView!=='leaf'&&p.organView!=='root';if(soil){soil.group.visible=['plant','section','root'].includes(p.organView);for(const child of soil.group.children)child.visible=p.organView!=='plant'||child.userData.organ==='root-collar';}if(leafDetail)leafDetail.visible=p.organView==='leaf';stage.visible=p.organView==='plant';plant.group.traverse(o=>{if(o instanceof THREE.Mesh&&(['root','rhizome'].includes(o.userData.organ)||['rhizome-propagule','rhizome','adventitious-root'].includes(o.userData.role)))o.visible=false;if(o instanceof THREE.Mesh&&['stolon-propagule','stolon-internode'].includes(o.userData.role))o.visible=p.organView==='plant';if(['leaf','flower'].includes(o.userData.organ))o.visible=p.mode!=='skeleton';if(o instanceof THREE.Mesh)for(const m of Array.isArray(o.material)?o.material:[o.material])if('wireframe'in m)(m as THREE.MeshStandardMaterial).wireframe=p.mode==='wire';});}
-  const rebuild=()=>{const retryBuild=buildFailed;try{const p=live.current,s=p.scenario,buildKey=JSON.stringify([s.species,s.age,s.day,s.seed,s.density,s.moisture,s.compaction,s.soilDepth]);if(buildKey===lastBuildKey)return;clearLeaf();leafFlex?.dispose();leafFlex=null;dynamics?.dispose();if(plant){scene.remove(plant.group);plant.dispose();}if(soil){scene.remove(soil.group);soil.dispose();}plant=null;soil=null;dynamics=null;collarBridge=null;const params={age:s.age,day:s.day,seed:s.seed,density:s.density};plant=['camphor','acer','ophiopogon'].includes(s.species)?buildAdditionalPlant(s.species as 'camphor'|'acer'|'ophiopogon',params):buildPlant(s.species as 'ginkgo'|'osmanthus'|'iris'|'oxalis',params);const rootSpecies=s.species;const rootJoint=plant.branches.find(j=>j.order===0),shootCollar=rootJoint?{position:rootJoint.pivot.position.toArray() as [number,number,number],radius:rootJoint.radius*(s.species==='ginkgo'?1.35:s.species==='osmanthus'?1:1.4)}:undefined;soil=buildRhizosphere(rootSpecies,{age:s.age,seed:s.seed,moisture:s.moisture,compaction:s.compaction,soilDepth:s.soilDepth,density:s.density,shootCollar,cutaway:true});scene.add(plant.group,soil.group);if(!leafShaderFailed)leafFlex=createLeafDynamics(plant.group);dynamics=createBeamDynamics(plant,physicalPriors(s.species,s.age));dynamics.update(time,s.wind,s.gravity*9.81,s.stiffness);collarBridge=rootCollarBridge(plant,soil);collarBridge?.update();p.onPhysicsStats({...dynamics.stats});makeLeaf();plantBounds.copy(modelBounds(plant.group));rootBounds.copy(modelBounds(soil.group,o=>o.userData.organ!=='soil'));soilBounds.copy(modelBounds(soil.group));leafBounds.copy(leafDetail?modelBounds(leafDetail):plantBounds);const size=plantBounds.getSize(new THREE.Vector3()),r=Math.max(.08,plant.height*.55,Math.max(size.x,size.z)*.7);ground.resize(r);p.onRootStats({rootDepth:soil.rootDepth,rootLength:soil.rootLength,rootTips:soil.rootTips,waterStress:soil.waterStress});buildFailed=false;applyMode();updateShadows();const key=`${s.species}:${p.organView}`;if(oldKey!==key){oldKey=key;reset();}else frameCamera();prior=performance.now();since=prior;frames=0;p.onStats({height:plant.height,leaves:plant.leafCount,fps:0});lastBuildKey=buildKey;if(retryBuild&&renderFailed)reset();}catch(error){console.error('PlantScene rebuild failed',error);clearLeaf();leafFlex?.dispose();leafFlex=null;dynamics?.dispose();dynamics=null;collarBridge=null;if(plant){scene.remove(plant.group);plant.dispose();plant=null;}if(soil){scene.remove(soil.group);soil.dispose();soil=null;}buildFailed=true;lastBuildKey='';failRender('植物几何生成失败，已停止场景更新。请使用复位相机重试；参数快照仍保留。');}};
+  function applyMode(){const p=live.current;sectionLight.visible=p.organView==='section'||p.organView==='root';if(!plant)return;plant.group.visible=p.organView!=='leaf'&&p.organView!=='root';if(soil){soil.group.visible=['plant','section','root'].includes(p.organView);for(const child of soil.group.children)child.visible=p.organView==='root'?child.userData.organ!=='soil':p.organView!=='plant'||child.userData.organ==='root-collar';}if(leafDetail)leafDetail.visible=p.organView==='leaf';stage.visible=p.organView==='plant';plant.group.traverse(o=>{if(o instanceof THREE.Mesh&&(['root','rhizome'].includes(o.userData.organ)||['rhizome-propagule','rhizome','adventitious-root'].includes(o.userData.role)))o.visible=false;if(o instanceof THREE.Mesh&&['stolon-propagule','stolon-internode'].includes(o.userData.role))o.visible=p.organView==='plant';if(['leaf','flower'].includes(o.userData.organ))o.visible=p.mode!=='skeleton';if(o instanceof THREE.Mesh)for(const m of Array.isArray(o.material)?o.material:[o.material])if('wireframe'in m)(m as THREE.MeshStandardMaterial).wireframe=p.mode==='wire';});}
+  const rebuild=()=>{const retryBuild=buildFailed;try{const p=live.current,s=p.scenario,buildKey=JSON.stringify([s.species,s.age,s.day,s.seed,s.density,s.moisture,s.compaction,s.soilDepth]);if(buildKey===lastBuildKey)return;clearLeaf();leafFlex?.dispose();leafFlex=null;dynamics?.dispose();if(plant){scene.remove(plant.group);plant.dispose();}if(soil){scene.remove(soil.group);soil.dispose();}plant=null;soil=null;dynamics=null;collarBridge=null;const params={age:s.age,day:s.day,seed:s.seed,density:s.density};plant=['camphor','acer','ophiopogon'].includes(s.species)?buildAdditionalPlant(s.species as 'camphor'|'acer'|'ophiopogon',params):buildPlant(s.species as 'ginkgo'|'osmanthus'|'iris'|'oxalis',params);const rootSpecies=s.species;const rootJoint=plant.branches.find(j=>j.order===0),shootCollar=rootJoint?{position:rootJoint.pivot.position.toArray() as [number,number,number],radius:rootJoint.radius*(s.species==='ginkgo'?1.35:s.species==='osmanthus'?1:1.4)}:undefined;soil=buildRhizosphere(rootSpecies,{age:s.age,seed:s.seed,moisture:s.moisture,compaction:s.compaction,soilDepth:s.soilDepth,density:s.density,shootCollar,cutaway:true});scene.add(plant.group,soil.group);if(!leafShaderFailed)leafFlex=createLeafDynamics(plant.group);dynamics=createBeamDynamics(plant,physicalPriors(s.species,s.age));collarBridge=rootCollarBridge(plant,soil);collarBridge?.update();makeLeaf();plantBounds.copy(modelBounds(plant.group));rootBounds.copy(modelBounds(soil.group,o=>o.userData.organ!=='soil'));soilBounds.copy(modelBounds(soil.group));leafBounds.copy(leafDetail?modelBounds(leafDetail):plantBounds);const size=plantBounds.getSize(new THREE.Vector3()),r=Math.max(.08,plant.height*.55,Math.max(size.x,size.z)*.7);ground.resize(r);p.onRootStats({rootDepth:soil.rootDepth,rootLength:soil.rootLength,rootTips:soil.rootTips,waterStress:soil.waterStress,profileDepth:soil.profileDepth});buildFailed=false;applyMode();
+   // Build-time vertex pass; subsequent framing only visits compact occupied hulls.
+   // Underground organs stay hidden in shoot views, as in applyMode above.
+   plantGeometry=modelGeometryFrame(plant.group,{pivots:plant.branches.map(b=>b.pivot),include:o=>!['root','rhizome'].includes(o.userData.organ)&&!['rhizome-propagule','rhizome','adventitious-root'].includes(o.userData.role)});
+   const collarPivot=plant.branches.find(b=>b.order===0)?.pivot.getWorldPosition(new THREE.Vector3());
+   const collarDisplacement=(mesh:THREE.Mesh)=>{
+    if(mesh.userData.organ!=='root-collar'||!collarPivot)return 0;
+    // The bridge follows the rotating basal bark ring while its bottom stays
+    // fixed. Its interpolation weights are <=1, so a ring chord bounds it.
+    const positions=mesh.geometry.getAttribute('position'),point=new THREE.Vector3();let radius=0;
+    for(let i=0;i<positions.count;i++)radius=Math.max(radius,point.fromBufferAttribute(positions,i).applyMatrix4(mesh.matrixWorld).distanceTo(collarPivot));
+    return 2*Math.sin(.28/2)*radius;
+   };
+   soilGeometry=modelGeometryFrame(soil.group,{leafBending:false,displacement:collarDisplacement});
+   rootGeometry=modelGeometryFrame(soil.group,{include:o=>o.userData.organ!=='soil',leafBending:false,displacement:collarDisplacement});
+   const collarGeometry=modelGeometryFrame(soil.group,{include:o=>o.userData.organ==='root-collar',leafBending:false,displacement:collarDisplacement});
+   leafGeometry=leafDetail?modelGeometryFrame(leafDetail):plantGeometry;
+   sectionGeometry=unionGeometryFrames(plantGeometry,soilGeometry);
+   plantGeometry=unionGeometryFrames(plantGeometry,collarGeometry);
+   // Cache the full bounded motion envelope from REST, then apply the actual current load.
+   dynamics.update(time,s.wind,s.gravity*9.81,s.stiffness);collarBridge?.update();p.onPhysicsStats({...dynamics.stats});
+   updateShadows();const key=`${s.species}:${p.organView}`;if(oldKey!==key){oldKey=key;reset();}else frameCamera();prior=performance.now();since=prior;frames=0;p.onStats({height:plant.height,leaves:plant.leafCount,fps:0});lastBuildKey=buildKey;if(retryBuild&&renderFailed)reset();}catch(error){console.error('PlantScene rebuild failed',error);clearLeaf();leafFlex?.dispose();leafFlex=null;dynamics?.dispose();dynamics=null;collarBridge=null;if(plant){scene.remove(plant.group);plant.dispose();plant=null;}if(soil){scene.remove(soil.group);soil.dispose();soil=null;}buildFailed=true;lastBuildKey='';failRender('植物几何生成失败，已停止场景更新。请使用复位相机重试；参数快照仍保留。');}};
   system.current={rebuild,reset,mode:applyMode,view:()=>{applyMode();updateShadows();reset();}};
   const resize=()=>{const r=container.getBoundingClientRect();renderer.setSize(r.width,r.height);camera.aspect=r.width/Math.max(1,r.height);camera.updateProjectionMatrix();if(plant)frameCamera();};const observer=new ResizeObserver(resize);observer.observe(container);resize();rebuild();reset();
   const noise=(t:number)=>{const index=Math.floor(t),u=t-index,f=u*u*(3-2*u),hash=(v:number)=>{let n=Math.imul(v+live.current.scenario.seed,1597334677);n=Math.imul(n^(n>>>16),2246822519);return(n>>>0)/4294967295-.5;};return hash(index)*(1-f)+hash(index+1)*f;};

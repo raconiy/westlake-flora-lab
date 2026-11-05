@@ -16,5 +16,5 @@ export function createGroundSurface(){
  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));geometry.setIndex(indices);geometry.computeVertexNormals();
  const surface=soilMaterial('#75634b',8191),material=surface.material;material.side=THREE.DoubleSide;
  const mesh=new THREE.Mesh(geometry,material);mesh.receiveShadow=true;group.add(mesh);
- return {group,resize(radius:number){group.scale.set(radius,Math.min(.007,radius*.012),radius);group.position.y=0;surface.repeat(Math.max(.3,radius*4));},dispose(){geometry.dispose();material.dispose();for(const map of surface.textures)map.dispose();group.clear();}};
+ return {group,resize(radius:number){group.scale.set(radius,Math.min(.007,radius*.012),radius);group.position.y=0;surface.repeat(Math.max(.3,radius*2));},dispose(){geometry.dispose();material.dispose();for(const map of surface.textures)map.dispose();group.clear();}};
 }

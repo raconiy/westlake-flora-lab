@@ -24,6 +24,8 @@ export interface RhizosphereModel {
   /** Maximum root centreline depth and summed drawn-axis lengths, metres.
    * rootTips counts drawn axis ends, not all biological root tips in a living plant. */
   rootDepth: number; rootLength: number; rootTips: number;
+  /** Visible soil window only, not the available rooting depth. */
+  profileDepth: number;
   /** Relative availability / stress, 0–1, not measured water volume. */
   availableWater: number; waterStress: number;
   dispose(): void;
@@ -71,7 +73,7 @@ function soilLayer(width: number, depth: number, thickness: number, bottom: numb
     const noise = Math.sin(x * 91.7 + y * 173.3 + z * 67.9 + seed) * 43758.5453;
     const fine = noise - Math.floor(noise), bands = Math.sin((y + bottom) / depth * 145 + Math.sin(x * 11) * .2);
     const c = base.clone().multiplyScalar(.94 + fine * .04 + bands * .018);
-    const nx=Math.abs(normals.getX(i)),ny=Math.abs(normals.getY(i));uv.setXY(i,(nx>.5?z:x)*2.5,(ny>.5?z:y+bottom)*2.5);
+    const nx=Math.abs(normals.getX(i)),ny=Math.abs(normals.getY(i));uv.setXY(i,(nx>.5?z:x),(ny>.5?z:y+bottom));
     colors.push(c.r, c.g, c.b);
   }
   geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
@@ -333,19 +335,26 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
     collar.userData={organ:'root-collar',sourceType:'engineering-prior',top:top.toArray(),bottomY,anchored:true};group.add(collar);
     group.userData.shootCollar={...params.shootCollar,geometry:'connected-root-flare-proxy',anchorage:'fixed-rest-collar-not-soil-mechanics'};
   }
-  // Profile depth is fixed by soilDepth; the display box width follows root reach for framing, not a registered soil volume.
+  // The available depth still constrains all roots and water availability above.
+  // A shallow-rooted herb shows a LOCAL soil window with all drawn roots, rather
+  // than a 2.5 m column that makes a 7 cm plant almost invisible. This window is
+  // not a bedrock boundary, a geological measurement or a change to the roots.
+  const profileDepth = woody ? soilDepth : Math.min(soilDepth, Math.max(.12, rootDepth * 1.25 + .025));
   const width = Math.max(woody ? 1.3 : .42, reach * 2.45);
   const strata = [{ ratio: .12, color: '#564532', label: '有机表层 · 示意' }, { ratio: .35, color: '#8b6846', label: '根系活跃层 · 示意' }, { ratio: .53, color: '#a28b68', label: '下部土层 · 示意' }];
   let top = -.003;
   for (let i = 0; i < strata.length; i++) {
-    const layer = strata[i], thickness = layer.ratio * soilDepth;
-    const mesh = soilLayer(width, soilDepth, thickness, top - thickness, layer.color, params.cutaway, seed + i * 13);
+    const layer = strata[i], thickness = layer.ratio * profileDepth;
+    const mesh = soilLayer(width, profileDepth, thickness, top - thickness, layer.color, params.cutaway, seed + i * 13);
     mesh.name = layer.label; mesh.userData.layer = i; group.add(mesh);
     geometries.push(mesh.geometry); allMaterials.push(mesh.material as THREE.Material); top -= thickness;
   }
   group.userData.profileWidth = width;
+  group.userData.profileDepth = profileDepth;
+  group.userData.availableSoilDepth = soilDepth;
+  group.userData.profileScope = woody ? 'full-available-depth-illustration' : 'local-root-zone-window-not-bedrock';
   let disposed = false;
-  return { group, rootDepth, rootLength, rootTips, availableWater, waterStress,
+  return { group, rootDepth, rootLength, rootTips, profileDepth, availableWater, waterStress,
     dispose() { if (disposed) return; disposed = true; for (const g of geometries) g.dispose(); const textures=new Set<THREE.Texture>();for(const m of allMaterials){for(const value of Object.values(m))if(value instanceof THREE.Texture)textures.add(value);m.dispose();}for(const t of textures)t.dispose(); group.clear(); }
   };
 }
