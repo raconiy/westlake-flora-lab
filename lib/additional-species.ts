@@ -91,8 +91,14 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
   const h=heightAt(age),radius=(.0015+(maple?.13:.32)*(1-Math.exp(-age/45)))*life.shoot;
   // Dense broad-crowned camphor versus lower multi-stemmed maple; neither is a renamed osmanthus model.
   const pixels=new Uint8Array(64*256*4),rr=randomFor(seed*67);for(let y=0;y<256;y++)for(let x=0;x<64;x++){const groove=Math.pow(Math.max(0,Math.sin(x*.75+Math.sin(y*.035)*.5)),14),shade=.75+rr()*.19-(maple?.06:.30)*groove,o=(y*64+x)*4;pixels[o]=(maple?146:129)*shade;pixels[o+1]=(maple?143:125)*shade;pixels[o+2]=(maple?129:112)*shade;pixels[o+3]=255}
+  // Qualitative juvenile pigmentation, not a measured ontogenetic clock. The
+  // NBU Acer seedling account describes an initially pale/green axis hardening
+  // later; do not apply adult dark pigment and millimetres of relief to a
+  // sub-millimetre seedling stem. Geometry and material-node positions stay fixed.
+  const skinMaturity=maple?smooth(.12,.5,age):1;
+  if(maple&&skinMaturity<1)for(let i=0;i<pixels.length;i+=4)for(let c=0;c<3;c++)pixels[i+c]=Math.round(245*(1-skinMaturity)+pixels[i+c]*skinMaturity);
   const barkTexture=new THREE.DataTexture(pixels,64,256,THREE.RGBAFormat);barkTexture.wrapS=barkTexture.wrapT=THREE.RepeatWrapping;barkTexture.colorSpace=THREE.SRGBColorSpace;barkTexture.needsUpdate=true;textures.add(barkTexture);
-  const bark=mat(new THREE.MeshStandardMaterial({color:maple?"#c4b6a0":"#bfb39e",map:barkTexture,bumpMap:barkTexture,bumpScale:maple?.0015:.006,roughness:.9})),twigMat=mat(new THREE.MeshStandardMaterial({color:maple?"#8d6556":"#8d8a5f",roughness:.8}));
+  const bark=mat(new THREE.MeshStandardMaterial({color:maple?new THREE.Color("#a0b778").lerp(new THREE.Color("#c4b6a0"),skinMaturity):"#bfb39e",map:barkTexture,bumpMap:barkTexture,bumpScale:maple?Math.min(.0015,radius*.08)*skinMaturity:.006,roughness:.9})),twigMat=mat(new THREE.MeshStandardMaterial({color:maple?"#8d6556":"#8d8a5f",roughness:.8}));
   const leafGeo=geom(maple?mapleBlade():camphorBlade()),leafPixels=new Uint8Array(128*128*4);
   for(let y=0;y<128;y++)for(let x=0;x<128;x++){const u=x/128,v=y/128;let vein=0;if(maple){const xx=(u-.5)*.0924,yy=v*.06-.01725;for(let l=0;l<7;l++){const a=-2+l*2/3,proj=xx*Math.sin(a)+yy*Math.cos(a),perp=Math.abs(xx*Math.cos(a)-yy*Math.sin(a));if(proj>0)vein=Math.max(vein,1-smooth(.0002,.0007,perp))}}else{const vBase=.06+(1-v)*.15;vein=Math.max(1-smooth(.005,.018,Math.abs(u-.5)),1-smooth(.005,.016,Math.abs(Math.abs(u-.5)-Math.sin(v*Math.PI)*vBase)));}const shade=1-.20*vein,o=(y*128+x)*4;leafPixels[o]=245*shade;leafPixels[o+1]=251*shade;leafPixels[o+2]=222*shade;leafPixels[o+3]=255}
   const leafTexture=new THREE.DataTexture(leafPixels,128,128,THREE.RGBAFormat);leafTexture.colorSpace=THREE.SRGBColorSpace;leafTexture.needsUpdate=true;textures.add(leafTexture);

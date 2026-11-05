@@ -44,7 +44,7 @@ try{
   const env={...process.env,
     PATH:dirname(process.execPath)+':'+(process.env.PATH||''),
     CODEX_BIN:process.env.CODEX_BIN||'codex',
-    SWARM_ROOT:root,SWARM_DB:resolve(workspace,'.runtime/swarm.sqlite'),SWARM_AUTO_VALIDATE:'1',SWARM_VALIDATION_COMMANDS:JSON.stringify([['node','node_modules/typescript/bin/tsc','--noEmit'],['node','--test']]),SWARM_TASK_TIMEOUT_MS:'1200000',SWARM_HOST:'127.0.0.1',SWARM_PORT:'8788',SWARM_MODEL_BACKEND:'gpt-load',SWARM_GPT_LOAD_MODEL:'gpt-6.1-sol',SWARM_MODEL_REASONING_EFFORT:'high',
+    SWARM_ROOT:root,SWARM_DB:resolve(workspace,'.runtime/swarm.sqlite'),SWARM_AUTO_VALIDATE:'1',SWARM_VALIDATION_SCOPE:process.env.SWARM_VALIDATION_SCOPE||'changed-tests',SWARM_VALIDATION_TIMEOUT_MS:'600000',SWARM_VALIDATION_COMMANDS:JSON.stringify([['node','node_modules/typescript/bin/tsc','--noEmit'],['node','--test','--test-concurrency=2']]),SWARM_TASK_TIMEOUT_MS:'1200000',SWARM_HOST:'127.0.0.1',SWARM_PORT:'8788',SWARM_MODEL_BACKEND:'gpt-load',SWARM_GPT_LOAD_MODEL:'gpt-6.1-sol',SWARM_MODEL_REASONING_EFFORT:'high',
   };
   const launch=(file,extra={})=>{
     const child=spawn(process.execPath,[resolve(here,file)],{cwd:here,env:{...env,...extra},stdio:'inherit'});

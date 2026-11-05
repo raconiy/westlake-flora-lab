@@ -3,6 +3,7 @@ import * as THREE from "three";
 import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
 import {irisFallSurface,irisCrestSurface,herbPigment} from "./herb-surfaces.ts";
 import {tagLeafStrip} from "./herb-leaf-dynamics.ts";
+import {herbReproduction,herbReproductionPriors} from "./herb-reproduction.ts";
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
 import { osmanthusLifecycle, osmanthusPriors, osmanthusSupportedRadius } from "./osmanthus-lifecycle.ts";
 
@@ -104,9 +105,11 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     foliage.roughness = .48; // Leathery evergreen surface; an appearance prior.
     stageLabel = life.stageLabel;
     group.userData = { stageLabel, lifecycle: life, priors: osmanthusPriors,
-      architecture: { coordinates: "axis length sampled at node birth; persistent local supports", maxOrder: 3,
-        maxAxisBudget: 869, maxLeafBudget: 30000, leafTurnover: "uncalibrated; persistent foliage proxy, not a physiology solver",
-        habit: "dense rounded 3D evergreen crown; unequal axillary shoot vigour and angles; straight material axes",
+      architecture: { coordinates: "fixed material sites; pair birth when the extending parent reaches the site; persistent local supports", maxOrder: 3,
+        maxAxisBudget: 869, maxLeafBudget: 28704, maxDrawBudget: 5216,
+        leafTurnover: "uncalibrated; persistent foliage proxy, not a physiology solver",
+        habit: "connected 3D evergreen crown; unequal axillary shoot vigour and angles; straight material axes within a broad extension envelope",
+        extensionNodes: "finite pairs of successive material nodes fill large extension gaps using unallocated lifetime leaf slots; original sites/branch anchors retained; saturated density catalogues have no extra slots",
         calibration: "timing, angles, envelope and density are engineering priors, not measured campus data",
         references: "NCSU Osmanthus fragrans description and two private habit photographs; no photograph redistribution",
         pruning: "source describes pruning response; no pruning history or age-only wood removal inferred" },
@@ -143,7 +146,21 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     }
     type AxisNode = { index: number; birth: number; attachment: number[]; angle: number; lengthAtBirth: number };
     type AxisPlan = { id: string; birth: number; order: number; key: number; matureLength: number;
-      lengthAt: (atAge: number) => number; nodes: AxisNode[] };
+      lengthAt: (atAge: number) => number; nodes: AxisNode[]; leafNodes: AxisNode[] };
+    // Reserve within the EXISTING whole-life catalogue, not a larger hard limit.
+    // There are <=28/168/672 lateral axes of orders 1/2/3. Extra leaf sites never
+    // sprout new axes. Both sites and their budgets are age-independent; adding
+    // a later branch cannot displace an earlier axis's allocation.
+    const counts = [16, Math.max(2, Math.min(20, Math.round(12 * density))),
+      Math.max(2, Math.min(14, Math.round(8 * density))), Math.max(2, Math.min(17, Math.round(16 * density)))];
+    const basePairs = counts[0] + 28 * counts[1] + 168 * counts[2] + 672 * counts[3];
+    const reserveScale = Math.min(density, (28704 / 2 - basePairs) / (40 + 28 * 16 + 168 * 8));
+    // Insert TWO successive pairs per interval to preserve the old decussate
+    // planes on either side as well as every old node's index/angle/coordinate.
+    const extraPairs = [40, 16, 8, 0].map(n => 2 * Math.floor(n * reserveScale / 2));
+    group.userData.architecture.leafCatalogue = { basePairsBound: basePairs, extraPairsPerAxis: extraPairs,
+      lifetimePairsBound: basePairs + extraPairs[0] + 28 * extraPairs[1] + 168 * extraPairs[2],
+      drawDefinition: "single main-pass mesh batches, excluding shadow/other passes: at most six per axis (wood, blades, petioles, three flower batches) plus seed and terminal bud" };
     // Explicit, finite architecture: each axis owns its extension clock. Nodes
     // establish just behind its apex at BIRTH, never at a fraction of today's wood.
     // Later distal cohorts continue through mature ages instead of translating
@@ -154,8 +171,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         : order === 2 ? [.10, .32, .54, .76, 1.2, 2, 3.2, 5] : [.10, .22, .36, .52, .72, .96, 1.3, 1.8, 2.4, 3.2];
       // Density changes lateral node sampling, not leader height or its late cohorts.
       // Fixed maxima prove a whole-life budget of at most 28,704 leaves / 869 axes.
-      const count = order === 0 ? onsets.length : Math.max(2, Math.min(order === 1 ? 20 : order === 2 ? 14 : 17,
-        Math.round((order === 3 ? 16 : onsets.length) * density)));
+      const count = counts[order];
       const vigour = rng(key + 407)();
       const lengthAt = order === 0 ? (atAge: number) => osmanthusLifecycle(atAge).height : (atAge: number) => {
         const elapsed = Math.max(0, atAge - birth);
@@ -168,7 +184,41 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         return { index, birth: nodeBirth, lengthAtBirth, attachment: [0, .96 * lengthAtBirth, 0],
           angle: phase + (order === 0 ? 0 : rng(key + 809)() * Math.PI * 2) + index * Math.PI / 2 };
       });
-      return { id, birth, order, key, matureLength, lengthAt, nodes };
+      const leafNodes = [...nodes];
+      // Subdivide the largest *material* intervals, including the terminal
+      // extension. This is a bounded construction catalogue, never an age-time
+      // loop or a percentage of today's length. Original branch-cohort nodes
+      // remain in `nodes`; supplementary sites are only leaf/flower supports.
+      const intervals = nodes.map((node, i) => ({
+        left: node, end: nodes[i + 1]?.attachment[1] ?? matureLength * .985 * .999,
+        serial: i,
+      })).filter(g => (order !== 0 || g.left.index >= 3) && g.end > g.left.attachment[1]);
+      for (let pair = 0; pair < extraPairs[order] / 2; pair++) {
+        intervals.sort((a, b) => (b.end - b.left.attachment[1]) - (a.end - a.left.attachment[1]) || a.serial - b.serial);
+        const gap = intervals.shift(); if (!gap || gap.end - gap.left.attachment[1] < .006) break;
+        const inserted: AxisNode[] = [];
+        for (let j = 1; j <= 2; j++) {
+          const y = gap.left.attachment[1] + (gap.end - gap.left.attachment[1]) * j / 3;
+          // Invert the actual parent extension law at a fixed material target.
+          // The 1.5% apical offset is an explicit illustration prior. The birth
+          // clock cannot precede the previous established node, even in a tiny
+          // internode. Expansion starts at zero and is independent of season.
+          let lo = gap.left.birth, hi = birth + 512;
+          for (let k = 0; k < 48; k++) {
+            const mid = (lo + hi) / 2;
+            if (lengthAt(mid) < y / .985) lo = mid; else hi = mid;
+          }
+          const nodeBirth = hi, lengthAtBirth = lengthAt(nodeBirth);
+          const node = { index: 1000 + pair * 2 + j - 1, birth: nodeBirth, lengthAtBirth,
+            attachment: [0, y, 0], angle: gap.left.angle + j * Math.PI / 2 };
+          inserted.push(node); leafNodes.push(node);
+        }
+        const chain = [gap.left, ...inserted];
+        chain.forEach((left, j) => intervals.push({ left, end: inserted[j]?.attachment[1] ?? gap.end,
+          serial: nodes.length + pair * 3 + j }));
+      }
+      leafNodes.sort((a, b) => a.attachment[1] - b.attachment[1]);
+      return { id, birth, order, key, matureLength, lengthAt, nodes, leafNodes };
     }
     function axisLeaves(parent: THREE.Group, plan: AxisPlan) {
       const key = plan.key;
@@ -177,7 +227,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       const nodes: (AxisNode & { scale: number })[] = [];
       const petals: THREE.Matrix4[] = [], peduncles: THREE.Matrix4[] = [], centers: THREE.Matrix4[] = [];
       const flowerSites: { node: number; side: number; center: number[]; attachment: number[]; orientation: number[] }[] = [];
-      for (const node of plan.nodes) {
+      for (const node of plan.leafNodes) {
         const n = node.index, expansion = smooth(node.birth, node.birth + .20, age);
         if (expansion <= 0) continue;
         const attachment = new THREE.Vector3(...node.attachment);
@@ -334,7 +384,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     const projectedCrownAreaM2 = Math.PI * span.x * span.z / 4;
     group.userData.canopyMetrics = { oneSidedLeafAreaM2, projectedCrownAreaM2,
       leafAreaRatio: projectedCrownAreaM2 > 0 ? oneSidedLeafAreaM2 / projectedCrownAreaM2 : 0,
-      crownSpanM: span.toArray(), maxLeafBudget: 30000,
+      crownSpanM: span.toArray(), maxLeafBudget: 28704,
       projectionDefinition: "horizontal ellipse of leaf-base bounds in the fixed rest pose",
       calibration: "actual one-sided mesh area / horizontal crown bounding ellipse; engineering density proxy, not measured stand LAI" };
   } else if (species === "iris" || species === "oxalis") {
@@ -342,6 +392,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     // Durations, cohort budgets and flowering windows below are uncalibrated
     // presentation priors, NOT measured germination or first-flowering ages.
     const iris = species === "iris";
+    const reproductiveCycle = herbReproduction(species, day);
     const source = iris ? "https://plants.ces.ncsu.edu/plants/iris-tectorum/" : "https://plants.ces.ncsu.edu/plants/oxalis-corniculata/";
     const keyed = (key: number) => rng((params.seed || 1) + key * 104729)();
     const phase = keyed(1) * Math.PI * 2;
@@ -352,17 +403,28 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     const storage = new THREE.MeshStandardMaterial({ color: "#9d885d", roughness: .95 });
     const petalMat = new THREE.MeshStandardMaterial({ color: iris ? "#7c73bf" : "#f4ce3d", side: THREE.DoubleSide, roughness: .7 });
     const light = new THREE.MeshStandardMaterial({ color: "#b3a5df", side: THREE.DoubleSide, roughness: .7 });
+    const reproductiveStem = new THREE.MeshStandardMaterial({ color: "#637a3d", roughness: .95 });
+    reproductiveStem.color.lerp(new THREE.Color("#a8916d"), reproductiveCycle.dryFraction);
+    materials.push(reproductiveStem);
     materials.push(green, storage, petalMat, light);const leafMap=herbPigment(iris?"iris-blade":"oxalis-blade");green.map=leafMap;green.bumpMap=leafMap;green.bumpScale=iris?.00018:.00008;extraTextures.push(leafMap);
     stageLabel = iris
       ? age < .025 ? "根茎分株 · 带芽繁殖体" : age < .14 ? "分株建立 · 首叶展开" : age < .5 ? "二列扇叶 · 新叶建立" : "根茎横走 · 分株扩展（繁殖结构为季节先验）"
       : age < .018 ? "带根匍匐茎节 · 营养繁殖体" : age < .10 ? "茎节建立 · 首片三出复叶" : age < .35 ? "匍匐伸长 · 新节生根" : "匍匐群落 · 连续展叶（繁殖结构为季节先验）";
     group.userData = { stageLabel, development: {
       origin: iris ? "rhizome-division" : "rooted-stolon-node", ageClock: "years-since-vegetative-propagule-establishment",
-      seedGerminationModeled: false, source, evidence: "botanical constraints from user-supplied NCSU source; not locally measured",
+      seedGerminationModeled: false, source, evidence: "NCSU institutional text cache, retrieved 2026-11-05T17:18:47.175Z; not locally measured",
       calibration: "uncalibrated-engineering-prior", timing: "cohort expansion is a presentation prior, not a biological flowering-age estimate",
-      flowering: { dayWindow: iris ? [89, 106, 145, 158] : [45, 85, 310, 345], status: "engineering-season-prior", firstFloweringAge: null },
-      reproduction: "flowers only; pollination, capsules and seed dispersal not modeled",
-      seasonalSkeleton: "support axes retained as a structural proxy; seasonal senescence not simulated",
+      flowering: { dayWindow: herbReproductionPriors[species].petals, status: "engineering-season-prior", firstFloweringAge: null },
+      reproduction: "flowers and annually replaced reproductive supports only; pollination, capsules and seed dispersal not modeled",
+      seasonalSkeleton: "living vegetative axes and buds retained; reproductive supports emerge, dry and collapse continuously to zero before annual replacement",
+      reproductiveCycle: { ...herbReproductionPriors[species],
+        scope: "bounded qualitative annual cycle; not tracked multi-year plant physiology",
+        clocks: "cyclic input day controls reproduction; age controls vegetative establishment/readiness without random rerolling",
+        timing: "all exact day windows are uncalibrated Hangzhou presentation priors; source bounds are not universal dates",
+        ownership: "support and flower share the same leaf/fan branch and a common endpoint, including under wind/gravity",
+        mechanics: "reproductive mass, centre of mass and drag are excluded from the load estimator; shared branch motion is not a calibrated reproductive load solver",
+        units: "geometry in metres; inclination in radians; day 1–365; age in years since vegetative establishment; cycle factors dimensionless",
+      },
     } };
     function segment(parent: THREE.Object3D, start: THREE.Vector3, end: THREE.Vector3, radius: number, material: THREE.Material, role: string) {
       const mesh = new THREE.Mesh(unit, material);
@@ -387,6 +449,23 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       branches.push({ pivot, rest: pivot.quaternion.clone(), length, radius: iris ? .003 : .0008,
         order: 2, phase: keyed(key) * Math.PI * 2, flexibility: iris ? .85 : 1.3, sag: .015 });
       return pivot;
+    }
+    function reproductiveSite(parent: THREE.Object3D, readiness: number, matureTip: THREE.Vector3, radius: number, role: string, site: number) {
+      const assembly = new THREE.Group(); assembly.name = `annual-reproductive-axis-${site}`;
+      assembly.rotation.z = reproductiveCycle.inclination;
+      // As with the axillary flower assemblies above, "flower" includes its
+      // reproductive support. It must not be mistaken for a persistent stem.
+      assembly.userData = { organ: "flower", role: "annual-reproductive-axis", site, readiness,
+        lifecycle: "annual-replacement", cycle: { ...reproductiveCycle }, ownerBranch: branches.findIndex(branch => branch.pivot === parent) };
+      parent.add(assembly);
+      const tip = matureTip.clone().multiplyScalar(readiness * reproductiveCycle.support);
+      const stalk = segment(assembly, new THREE.Vector3(), tip,
+        radius * readiness * reproductiveCycle.support, reproductiveStem, role);
+      stalk.userData = { ...stalk.userData, organ: "flower", organPart: "reproductive-support", site, lifecycle: "annual-replacement" };
+      const flower = new THREE.Group(); flower.position.copy(tip);
+      flower.scale.setScalar(readiness * reproductiveCycle.petals);
+      flower.rotation.z = .18 * reproductiveCycle.petalDecline;
+      assembly.add(flower); return flower;
     }
     if (iris) {
       const outerGeo = irisFallSurface(),crestGeo=irisCrestSurface(), innerGeo = petalGeometry(.055, .014, .008);
@@ -432,12 +511,8 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           leaf.castShadow = true; fan.add(leaf); leafCount++;
         }
         const readiness = smooth(4, 7, expanded.reduce((a, b) => a + b, 0));
-        const stemHeight = .32 * readiness;
-        const stalk = segment(fan, new THREE.Vector3(), new THREE.Vector3(0, stemHeight, 0), .0022 * readiness, stemMat, "flower-scape");
-        stalk.userData.organ = "stem";
-        const bloom = smooth(89, 106, day) * (1 - smooth(145, 158, day));
-        const flower = new THREE.Group(); flower.position.y = stemHeight; flower.scale.setScalar(readiness * bloom);
-        flower.userData = { organ: "flower", role: "iris-flower", outerTepals: 3, innerTepals: 3, styleBranches: 3 }; fan.add(flower);
+        const flower = reproductiveSite(fan, readiness, new THREE.Vector3(0, .32, 0), .0022, "flower-scape", c);
+        flower.userData = { organ: "flower", role: "iris-flower", outerTepals: 3, innerTepals: 3, styleBranches: 3 };
         for (let p = 0; p < 3; p++) {
           const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 3; flower.add(frame);
           const fall = new THREE.Mesh(outerGeo, petalMat); fall.rotation.x = -Math.PI / 2; fall.userData.role = "drooping-outer-tepal"; frame.add(fall);const crest=new THREE.Mesh(crestGeo,crestMat);crest.rotation.copy(fall.rotation);crest.userData.role="fringed-white-crest";frame.add(crest);
@@ -470,11 +545,8 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         }
         leafCount++; // Count compound leaves, not their three leaflets.
         const readiness = smooth(.85, 1, expansion) * smooth(.10, .28, age);
-        const tip = new THREE.Vector3(.016 * readiness, height * readiness, .008 * readiness);
-        const stalk = segment(pivot, new THREE.Vector3(), tip, .00045 * readiness, stemMat, "axillary-peduncle"); stalk.userData.organ = "stem";
-        const flower = new THREE.Group(); flower.position.copy(tip);
-        const bloom = smooth(45, 85, day) * (1 - smooth(310, 345, day)); flower.scale.setScalar(readiness * bloom);
-        flower.userData = { organ: "flower", role: "oxalis-flower", petals: 5 }; pivot.add(flower);
+        const flower = reproductiveSite(pivot, readiness, new THREE.Vector3(.016, height, .008), .00045, "axillary-peduncle", key);
+        flower.userData = { organ: "flower", role: "oxalis-flower", petals: 5 };
         for (let p = 0; p < 5; p++) {
           const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 5;
           const mesh = new THREE.Mesh(petalGeo, petalMat); mesh.rotation.x = -Math.PI / 2 + .15; frame.add(mesh); flower.add(frame);

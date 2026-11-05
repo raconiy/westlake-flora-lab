@@ -3,11 +3,30 @@ import {mkdirSync,readFileSync,writeFileSync,existsSync,symlinkSync} from 'node:
 import {resolve,dirname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {runCodex,runProcess} from './codex.mjs';
+import {changedTestsPlan,assertSafeTestPaths} from './validation-scope.mjs';
+
+// Commands always go through runProcess's shell:false executor. Keep failures
+// (including spawn errors, output bounds and cancellation) in the same receipt.
+async function validationCommand(args,{run,cwd,signal,timeoutMs,maxBytes=500000,deadline=Infinity,phase='check'}){
+  const startedAt=new Date().toISOString(),started=performance.now();
+  const remaining=deadline-Date.now(),bound=Math.max(1,Math.min(timeoutMs,remaining));
+  let result;
+  if(signal?.aborted)result={code:null,aborted:true,stderr:'Validation aborted before command start'};
+  else if(remaining<=0)result={code:null,timedOut:true,stderr:'Validation budget exhausted before command start'};
+  else try{result=await run(args[0],args.slice(1),{cwd,timeoutMs:bound,signal,maxBytes});}
+  catch(error){result={code:null,error:error.message,stderr:error.message,aborted:!!signal?.aborted};}
+  const status=result.aborted?'aborted':result.timedOut?'timed_out':result.overflow?'output_limit':result.error?'spawn_error':result.code===0?'passed':'failed';
+  return{result,receipt:{command:[...args],phase,status,code:result.code??null,timedOut:!!result.timedOut,overflow:!!result.overflow,aborted:!!result.aborted,signal:result.signal??null,
+    startedAt,finishedAt:new Date().toISOString(),durationMs:Math.round(performance.now()-started),timeoutMs:bound,
+    stdout:(result.stdout||'').slice(-1500),stderr:(result.stderr||'').slice(-1000),...(result.error?{error:result.error}:{})}};
+}
 
 export async function executeTask(task,config={},deps={}){
   const root=resolve(config.root||process.env.SWARM_ROOT||process.cwd());
   const codex=deps.runCodex||runCodex,run=deps.runProcess||runProcess;
-  let worktree=null;const transportRecovery=[];
+  let worktree=null;const transportRecovery=[],validation=[];
+  let executionMetadata={},validationPlan=null;
+  const validationScope=config.validationScope??'operator-defined';
   const timeoutMs=config.timeoutMs??Number(process.env.SWARM_TASK_TIMEOUT_MS||1200000);
   try{
     if(task.kind==='code'){
@@ -42,20 +61,45 @@ export async function executeTask(task,config={},deps={}){
         transportRecovery.push({attempt:attempt+1,category:'upstream_connect_failed',error:error.message,preservedWorktree:!!worktree});
       }
     }
-    const executionMetadata={usage:answer.usage,modelBackend:answer.backend??'codex',model:answer.model??null,reasoningEffort:answer.reasoningEffort??null,transportRecovery};
-    const validation=[];
+    executionMetadata={usage:answer.usage,modelBackend:answer.backend??'codex',model:answer.model??null,reasoningEffort:answer.reasoningEffort??null,transportRecovery};
+    const validationMetadata=()=>({validation,validationScope,validationPlan,integrationGate:'lead_full_validation_and_ci_required',releaseApproved:false});
+    const validationFailure=error=>({status:'validation_failed',result:{summary:answer.text.slice(-9000),worktree,...validationMetadata(),validationStatus:'failed',...(error?{validationError:error}:{}),...executionMetadata,merged:false}});
     if(task.kind==='code'&&config.autoValidate){
-      if(!Array.isArray(config.validationCommands)||!config.validationCommands.length)throw new Error('Auto-validation enabled but no operator-defined commands configured');
-      for(const args of config.validationCommands){
-        if(!Array.isArray(args)||!args.length||args.some(v=>typeof v!=='string'))throw new Error('Validation commands must be argv arrays');
-        const result=await run(args[0],args.slice(1),{cwd:worktree,timeoutMs:config.validationTimeoutMs??Number(process.env.SWARM_VALIDATION_TIMEOUT_MS||600000),signal:config.signal,maxBytes:500000});
-        validation.push({command:args,code:result.code,timedOut:result.timedOut,stdout:result.stdout.slice(-1500),stderr:result.stderr.slice(-1000)});
-        if(result.code!==0||result.timedOut||result.overflow||result.aborted)return{status:'validation_failed',result:{summary:answer.text.slice(-9000),worktree,validation,validationStatus:'failed',...executionMetadata,merged:false}};
+      try{
+        if(!['operator-defined','full','changed-tests'].includes(validationScope))throw new Error('Unknown validation scope');
+        const timeout=config.validationTimeoutMs??Number(process.env.SWARM_VALIDATION_TIMEOUT_MS||600000);
+        if(!Number.isFinite(timeout)||timeout<=0)throw new Error('Validation timeout must be positive and finite');
+        // Scoped readiness has a total budget as well as individual command
+        // bounds. The legacy operator-defined/full path retains its deadlines.
+        const scoped=validationScope==='changed-tests',budgetMs=scoped?Math.min(timeout,300000):null;
+        const deadline=budgetMs===null?Infinity:Date.now()+budgetMs;
+        const commandTimeoutMs=scoped?Math.min(timeout,120000):timeout;
+        const checkedRun=async(args,options={})=>{
+          const checked=await validationCommand(args,{...options,run,cwd:worktree,signal:config.signal,timeoutMs:options.timeoutMs??commandTimeoutMs,deadline});
+          validation.push(checked.receipt);return checked.result;
+        };
+        if(scoped){
+          validationPlan={scope:validationScope,commands:[],selectedTests:[],selectionStatus:'pending',fullSuiteValidated:false,releaseApproved:false};
+          validationPlan={...await changedTestsPlan(worktree,{signal:config.signal,run:(binary,args,options)=>checkedRun([binary,...args],{...options,phase:'selection'})}),selectionStatus:'selected',budgetMs,commandTimeoutMs};
+        }else{
+          if(!Array.isArray(config.validationCommands)||!config.validationCommands.length)throw new Error('Auto-validation enabled but no operator-defined commands configured');
+          // Validate the complete list before executing any command.
+          for(const args of config.validationCommands)if(!Array.isArray(args)||!args.length||args.some(v=>typeof v!=='string'||v.includes('\0'))||!args[0])throw new Error('Validation commands must be argv arrays');
+          validationPlan={scope:validationScope,commands:config.validationCommands.map(args=>[...args]),commandTimeoutMs,releaseApproved:false};
+        }
+        for(const args of validationPlan.commands){
+          if(scoped&&args.includes('--test'))assertSafeTestPaths(worktree,validationPlan.selectedTests);
+          await checkedRun(args);
+          if(validation.at(-1).status!=='passed')return validationFailure();
+        }
+      }catch(error){
+        if(validationPlan?.selectionStatus==='pending')validationPlan.selectionStatus='failed';
+        return validationFailure(error.message);
       }
     }
     let diff=null;if(worktree){const d=await run('git',['-C',worktree,'status','--short'],{timeoutMs:10000});diff=d.stdout;}
-    return{status:'completed',result:{summary:answer.text.slice(-9000),worktree,validation,validationStatus:task.kind!=='code'?'not_applicable':config.autoValidate?'passed':'not_run',changes:diff,merged:false,...executionMetadata}};
-  }catch(error){return{status:'failed',result:{error:error.message,transportRecovery,failureCategory:/timed out/i.test(error.message)?'timeout':/worktree/i.test(error.message)?'workspace':/validat/i.test(error.message)?'validation':'execution',worktree,partialChangesPreserved:!!worktree,modelBackend:process.env.SWARM_MODEL_BACKEND||'codex',model:process.env.SWARM_GPT_LOAD_MODEL||null,reasoningEffort:process.env.SWARM_MODEL_REASONING_EFFORT||null,validationStatus:'not_completed',merged:false}};}
+    return{status:'completed',result:{summary:answer.text.slice(-9000),worktree,...validationMetadata(),validationStatus:task.kind!=='code'?'not_applicable':!config.autoValidate?'not_run':validationScope==='changed-tests'?(validationPlan.noTestsSelected?'passed_checks_only':'passed_scoped'):'passed',changes:diff,merged:false,...executionMetadata}};
+  }catch(error){return{status:'failed',result:{error:error.message,transportRecovery,failureCategory:/timed out/i.test(error.message)?'timeout':/worktree/i.test(error.message)?'workspace':/validat/i.test(error.message)?'validation':'execution',worktree,partialChangesPreserved:!!worktree,modelBackend:process.env.SWARM_MODEL_BACKEND||'codex',model:process.env.SWARM_GPT_LOAD_MODEL||null,reasoningEffort:process.env.SWARM_MODEL_REASONING_EFFORT||null,...executionMetadata,validation,validationScope,validationPlan,validationStatus:'not_completed',merged:false,releaseApproved:false}};}
 }
 
 export async function runWorker(config={}){
@@ -86,5 +130,5 @@ export async function runWorker(config={}){
 }
 if(import.meta.url===pathToFileURL(resolve(process.argv[1]||'')).href){
   let validationCommands=[];try{validationCommands=JSON.parse(process.env.SWARM_VALIDATION_COMMANDS||'[]');}catch{throw new Error('SWARM_VALIDATION_COMMANDS must be JSON argv arrays');}
-  await runWorker({autoValidate:process.env.SWARM_AUTO_VALIDATE==='1',validationCommands,once:process.argv.includes('--once')});
+  await runWorker({autoValidate:process.env.SWARM_AUTO_VALIDATE==='1',validationScope:process.env.SWARM_VALIDATION_SCOPE||'operator-defined',validationCommands,once:process.argv.includes('--once')});
 }

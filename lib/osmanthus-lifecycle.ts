@@ -8,9 +8,16 @@ export const osmanthusPriors = {
   confidence: 'low', calibration: 'uncalibrated-engineering-prior',
   thresholds: { radicle: [.012, .08], shoot: [.035, .12], trueLeaves: [.10, .30], branching: [.8, 2.4], seedLoss: [.25, .9] },
   dimensions: { seedHalfAxes: [.0045, .007, .0035], seedCenterY: -.004, adultCollarY: -.004, firstYearHeight: .28, matureHeightAsymptote: 5.4 },
-  geometry: 'bounded distal cohorts; node coordinates sampled at axis length at birth; independent unequal shoot vigour, axillary angles and extension clocks; dense rounded 3D envelope; persistent wood; all timings, angles, density and dimensions are engineering priors, not measured campus data',
+  geometry: 'persistent original branch/leaf anchors plus bounded successive material sites in large extension intervals; birth when the parent reaches each site, zero-size pair expansion; opposite decussate petiolate leaves; independent unequal shoot vigour, axillary angles and extension clocks; broad 3D extension envelope, not a prescribed pruned sphere; retained leaf-area proxy and persistent wood; all timings, spacings, angles, density and dimensions are engineering priors, not measured campus data',
   botanicalSource: 'https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/',
   botanicalScope: 'dense evergreen shrub/small tree, responds to pruning; opposite simple petiolate leaves; small four-lobed axillary flowers; exact ages, scaffold angles, pruning history and turnover are not inferred from this source',
+  spatialExtension: {
+    status: 'uncalibrated-engineering-prior', unit: 'material coordinates: metres; birth clock: illustrative years',
+    construction: 'subdivide large fixed extension intervals into thirds, inserting two opposite pairs to retain original decussate planes; invert the parent extension law for each material target; retain every original leaf and branch site',
+    apicalLengthFractionAtBirth: .985, minimumIntervalM: .006,
+    budgets: 'allocate only unused slots below the original 28,704-leaf / 869-axis lifetime bounds; saturated density catalogues receive no extra sites; <=5,216 main-pass mesh batches including flowers, shadow/other passes additional',
+    limits: 'straight axes, no measured internode/flush schedule, light competition or evergreen leaf turnover; private habit photos supply qualitative appearance only, not individual campus scale, ages or pruning history',
+  },
   secondaryThickening: {
     status: 'uncalibrated-engineering-prior',
     referenceLengthM: 1, referenceBasalDiameterM: .01, leafAreaPerSapwoodArea: 2500,

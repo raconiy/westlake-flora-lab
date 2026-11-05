@@ -53,3 +53,16 @@ h1,h2,h3,.specimen-title h2{font-family:'Songti SC','Noto Serif SC',Georgia,seri
 @media(max-width:700px){.viewer-panel.viewer-expanded{inset:0;height:100dvh;border-radius:0}.viewer-expanded>.growth-journey{padding:9px 12px}.viewer-expanded .organ-switch{overflow:auto;flex-shrink:0}.viewer-expanded .specimen-title p{display:none}}
 
 .scene-bottom{background:transparent;border-top:0;pointer-events:none}.scene-bottom>span{background:#f5f8eec9;border-radius:4px;padding:3px 6px}
+
+/* Short portrait presentation: captions must not cover the root/canopy centre. */
+@media(max-width:700px) and (max-height:700px){
+ .viewer-expanded .specimen-title{top:10px;bottom:auto;left:14px;max-width:205px;pointer-events:none}
+ .viewer-expanded .specimen-title .specimen-code,.viewer-expanded .specimen-title p{display:none}
+ .viewer-expanded .specimen-title h2{font-size:17px;margin:0;line-height:1.35}
+ .viewer-expanded .specimen-title h2 i{font-size:9px;margin-left:7px}
+ .viewer-expanded .scene-location{top:36px;left:14px;max-width:175px}
+ .viewer-expanded .scene-location>span,.viewer-expanded .scene-location>b{display:none}
+ .viewer-expanded .scene-location small{font-size:8px;line-height:1.35}
+ .viewer-expanded .scene-badge{top:auto;bottom:7px;left:14px;font-size:8px;padding:3px 5px}
+ .viewer-expanded .scene-bottom{display:none}
+}

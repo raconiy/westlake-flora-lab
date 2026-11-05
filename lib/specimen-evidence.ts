@@ -47,7 +47,7 @@ export const specimenEvidence: Record<SpeciesId, SpecimenRecord> = {
       {organ: '地下部', literature: '近表层横向根茎，伴生须根。', model: '表层根茎与须根示意，非水力网络。'},
     ],
     establishment: ['根茎建立', '二列叶扇形成', '根茎横向分株', '多年生叶丛与抽薹'],
-    implemented: '叶扇、花被结构和地下根茎示意。',
+    implemented: '叶扇、三外三内花被与白冠、地下根茎；花葶抽生、退花、变干与倒伏的定性年度周期。',
     remaining: '根茎芽的资源分配、分株存活和蒴果发育；早期建立仅为形态代理。',
   },
   oxalis: {
@@ -58,7 +58,7 @@ export const specimenEvidence: Record<SpeciesId, SpecimenRecord> = {
       {organ: '地下部', literature: '茎节形成不定根，支持贴地扩展。', model: '节点根示意；未求解节点生根概率。'},
     ],
     establishment: ['带根匍匐茎节建立', '匍匐节间伸长', '茎节生根、分枝', '覆盖扩展与开花'],
-    implemented: '三出心形叶、五瓣黄花及贴地扩展的几何代理。',
+    implemented: '三出心形叶、五瓣黄花及贴地扩展；花梗与花同步抽生、退花后干枯倒伏的定性年度代理。',
     remaining: '节点生根概率、克隆个体追踪、叶片睡眠运动和种子弹射。',
   },
   camphor: {
@@ -69,7 +69,7 @@ export const specimenEvidence: Record<SpeciesId, SpecimenRecord> = {
       {organ: '地下部', literature: '根系受土层、移植与生境影响。', model: '主根与扩展侧根先验，非校园香樟实测根系。'},
     ],
     establishment: ['种子、幼苗建立', '主轴与互生叶', '侧枝、冠幅扩展', '常绿冠层、干枝增粗'],
-    implemented: '地下种壳、共点胚根与出苗轴；互生真叶、年龄枝序与常绿冠层。CSIRO 下位子叶描述来自任务摘要，尚未独立读取原页；不画地上绿色子叶。',
+    implemented: '地下种壳、共点胚根与出苗轴；互生真叶、年龄枝序与常绿冠层。CSIRO 物种页面的下位萌发描述已核读；种内子叶解剖未细化，不画地上绿色子叶。',
     remaining: '种内子叶解剖、种壳开裂腐解、首批幼叶形态、逐叶周转、修剪移植史与花果；尺寸与时序均为工程先验，非校园实测。',
   },
   acer: {
@@ -80,8 +80,8 @@ export const specimenEvidence: Record<SpeciesId, SpecimenRecord> = {
       {organ: '地下部', literature: '嫁接砧木及生境影响根系。', model: '泛化侧根示意，未还原砧木。'},
     ],
     establishment: ['种子或苗木建立', '对生芽、细枝形成', '层状冠幅扩展', '干枝增粗、季节换叶'],
-    implemented: '地下单翅果繁殖体、共点胚根和出苗轴；对生掌裂真叶、层状冠与季节转色。翅果来源为任务所给机构页面摘要，尚未独立读取。',
-    remaining: '种级子叶出土证据、下胚轴钩、子叶对及脱壳未核验且未绘制；首批真叶暂用成年叶轮廓先验，幼叶异形未重建。埋藏残壳不是下位萌发断言。繁殖体尺寸与时序为工程先验，品种、嫁接与修剪史未知。',
+    implemented: '地下单翅果繁殖体、共点胚根和出苗轴；对生掌裂真叶、层状冠与季节转色。翅果形态参考 OSU 资料；当前建立轴尚未表达完整上位萌发。',
+    remaining: '原始幼苗研究已核对上位萌发，但下胚轴延长携带子叶、子叶对及脱壳尚未完成建模；首批真叶暂用成年叶轮廓先验，幼叶异形未重建。埋藏残壳不是下位萌发断言。繁殖体尺寸与时序为工程先验，品种、嫁接与修剪史未知。',
   },
   ophiopogon: {
     ncStateSlug: 'ophiopogon-japonicus',

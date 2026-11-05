@@ -23,3 +23,7 @@ Operator flow:
 5. Lead review, integration, tests and GitHub push precede Pages publication. The relay synchronizes actual task states to the public board.
 
 The bridge must remain running for live model replies; D1 stores suggestions and queued questions independently while it is offline. This is not a cloud-hosted model gateway. Test: `node --test infra/local/test/*.test.mjs`.
+
+Worker readiness defaults to `changed-tests`: typecheck, staged/unstaged diff checks, and changed/new or exact-stem sibling `.test.mjs` files selected from Git status. A result of `passed_scoped` is ready for lead review; `passed_checks_only` means no tests were selected. Receipts include the selection and coverage limits. Neither status grants merge or release approval.
+
+The lead must still validate the complete combined change and pass the full GitHub Actions suite before publication. Set `SWARM_VALIDATION_SCOPE=operator-defined` or `full` to restore the launcher’s full command list. Replace workers only while the cluster is idle; changing source or environment does not update running workers.

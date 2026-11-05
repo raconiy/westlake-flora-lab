@@ -1,5 +1,5 @@
 {
-  "version": "0.5.3",
+  "version": "0.5.4",
   "createdAt": "2026-11-05T16:19:09.961Z",
   "workflow": [
     "shared botanical constraints",
@@ -198,7 +198,12 @@
     "Recovered failed framing draft with original failure retained; captured frame hulls from rest before applying current force",
     "Reserved bounded per-blade strip displacement in the cached camera geometry; root-only view hides soil and uses a separate root hull",
     "Local shallow herb soil windows preserve all drawn roots and keep available-depth water/growth calculations unchanged",
-    "Reduced visible repeating macrotexture contrast and removed the full-width opaque scene-status strip"
+    "Reduced visible repeating macrotexture contrast and removed the full-width opaque scene-status strip",
+    "Kept all old woody axes and opposite support nodes while supplementing bounded Osmanthus distal leaf sites",
+    "Removed permanent green winter flower scapes through an explicit bounded annual reproductive-organ cycle; no deletion of living rhizomes/stolons",
+    "Validated opt-in changed-tests readiness and rolled it out only while clusteridle; lead full239test/CIgate retained",
+    "Withheld two numerically plausible but anatomically unsupported candidates: Ginkgo blunt taper/cross-section retreat and Acer cotyledon placement without hypocotyl lifting",
+    "Separated source-verified seedling anatomy from unimplemented demonstration; corrected stale source/read-status labels"
   ],
   "limits": [
     "Not a calibrated Yungu individual reconstruction",
@@ -211,9 +216,12 @@
     "Spatial canopy occupancy, leaf-age turnover, reproductive-organ phenology and Acer epigeal cotyledon anatomy remain under refinement",
     "Successful account requests are separately proven; exact upstream charging/refresh semantics are unverified. Latest published quota observations are 99%, 99%, 86%.",
     "Spatial foliage improvement is generated geometry and CPU occupancy evidence, not a match to any field-measured campus tree",
-    "Acer cotyledon and herb reproductive-cycle follow-ups are not part of this release; original workers may still fail validation and require lead correction"
+    "Acer cotyledon and herb reproductive-cycle follow-ups are not part of this release; original workers may still fail validation and require lead correction",
+    "This release intentionally does not include the Acer cotyledon prototype or Ginkgo support draft; scientific/visual gates overruled some passing numerical tests",
+    "Reproductive stalk drying/collapse is a qualitative annual proxy with uncalibrated dates; reproductive mass/drag and organ abscission trajectories remain unsolved",
+    "Opaque leaf shading and straight Osmanthus axes remain visibly procedural; no near-photoreal claim"
   ],
-  "updatedAt": "2026-11-05T18:29:02.892Z",
+  "updatedAt": "2026-11-05T19:41:21.676Z",
   "refinementTasks": [
     {
       "id": "de89c5cb-bb50-472a-bcd0-60eb9410a258",
@@ -369,17 +377,73 @@
       "reasoningEffort": "high",
       "output": "已完成独立 CPU 原型，仅新增三个文件，未接入网站：\n\n- [实现]([workspace]/outputs/.flora-swarm-worktrees/task-69c5498e-806f-4cee-babe-df292508efc7-889afc47/lib/continuous-beam.ts)：支持端斜率、点载和均布载荷，固定基部位置与切线，提供材料节点连接、截面旋转及法线 Jacobian。\n- [测试]([workspace]/outputs/.flora-swarm-worktrees/task-69c5498e-806f-4cee-babe-df292508efc7-889afc47/lib/continuous-beam.test.mjs)：14/14 通过，覆盖解析解、基环固定、连接连续性、有限差分及静态卸载。\n- [交接 JSON]([workspace]/outputs/.flora-swarm-worktrees/task-69c5498e-806f-4cee-babe-df292508efc7-889afc47/outputs/continuous-beam-handoff.json)：包含 API、固定曲线适配及 GPU 三通道一致性方案。\n\n限制为恒定 EI、直梁、小挠度静态参考；未完成动力学、GPU、浏览器或实地验证。typecheck 与全量验证留给协调者，未来集成必须先经 root 明确审阅。",
       "leadIntegration": "Isolated CPU prototype only; not enabled or included in the production model."
+    },
+    {
+      "id": "dc5ef75d-f2ef-429e-ab34-773657514bb8",
+      "title": "Replace permanent green herb flower stalks with a sourced seasonal organ cycle",
+      "workerStatus": "validation_failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成，修改留在当前独立 worktree，仅涉及：\n\n- [plant-engine.ts](lib/plant-engine.ts)：两种花梗连续抽生、退花、变干、倒伏归零；花与支撑共用运动分枝和实际末端，营养轴保留。\n- [herb-reproduction.ts](lib/herb-reproduction.ts)：独立年内日循环，年龄只控制营养建立与准备度。\n- [herb-reproduction.test.mjs](lib/herb-reproduction.test.mjs)：覆盖全部指定日期、年龄、种子42/73，以及接触、连续性、数量和资源释放。\n- [species-evidence.json](public/references/species-evidence.json)：记录机构来源→规则、时序先验、单位与生物学缺口。\n\n验证：草本定向 **20/20**、持久性 **17/17** 通过；定向严格类型检查、差异检查通过。密度2时网格数与基线相同：鸢尾155、酢浆草445。原有测试未修改。\n\n原始失败保留说明：新增测试首轮 **3/5**，发现第335日酢浆草残花及新增预算400低于基线445；分别修正退花时序和预算依据。类型检查首次报三处 TS2556，改用显式索引后通过。\n\n来源缓存时间为 `2026-11-05T17:18:47.175Z`：[鸢尾](https://plants.ces.ncsu.edu/plants/iris-tectorum/)支持春花及三外三内花被、白冠；[酢浆草](https://plants.ces.ncsu.edu/plants/oxalis-corniculata/)支持五瓣黄花和多年生营养扩展。精确日期仍是未校准先验。几何单位m、角度rad、年龄年。\n\n这是有界定性年度代理；蒴果、重复花批次、授粉散播、水力及生殖质量/风载未求解。未提交、合并或部署。当前工具无法独立核实 GPT-Load 的实际模型路由与推理档位，未修改模型参数。",
+      "leadIntegration": "Lead integrated seasonal support/flower changes;239fulltests passed; original600000ms validation timeout retained."
+    },
+    {
+      "id": "4d4e9b7c-add3-4abc-bce4-ef650b63536b",
+      "title": "Refine Osmanthus connected distal foliation against real whole-plant habit",
+      "workerStatus": "validation_failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成，修改保留在当前 worktree，未提交、合并或部署。\n\n仅修改三个文件：\n\n- [plant-engine.ts]([workspace]/outputs/.flora-swarm-worktrees/task-4d4e9b7c-add3-4abc-bce4-ef650b63536b-3a93f046/lib/plant-engine.ts:149)：利用原预算空余叶位补充固定材料节点，按父轴伸长反求出生时间；保留全部旧叶位、木轴 ID、挂点和方向，对生／交互对生及花腋支持保持连接。\n- [osmanthus-lifecycle.ts]([workspace]/outputs/.flora-swarm-worktrees/task-4d4e9b7c-add3-4abc-bce4-ef650b63536b-3a93f046/lib/osmanthus-lifecycle.ts:14)：明确节点构造、预算和未校准先验。\n- [osmanthus-spatial.test.mjs]([workspace]/outputs/.flora-swarm-worktrees/task-4d4e9b7c-add3-4abc-bce4-ef650b63536b-3a93f046/lib/osmanthus-spatial.test.mjs:231)：新增真实三角形三视图覆盖、外冠、末端支持、连续性及预算验证，包含 13 个所选样本。\n\n相对 `1794da9`，默认 seed 42、density 1 的生成几何测量如下。覆盖率为 96² 正交投影 XY／XZ／ZY；末端支持指裸露段不超过 12 cm。\n\n| 年龄 | 三视图覆盖率%，前→后 | 末端支持率，前→后 |\n|---|---|---|\n| 2 | 20.7/17.2/9.1 → 27.1/19.5/13.8 | 100%→100% |\n| 8 | 27.0/26.3/32.2 → 29.8/29.3/35.8 | 87.8%→98.7% |\n| 12 | 29.5/29.9/37.1 → 31.6/31.4/39.2 | 91.4%→99.6% |\n| 40 | 38.1/40.9/39.1 → 40.4/42.7/41.5 | 89.5%→97.1% |\n| 80 | 39.7/41.5/40.4 → 42.0/43.3/42.9 | 90.8%→97.5% |\n\n12 年叶数 **7008→8210**，模型质量 **20.55→23.16 kg**。新增叶面积进入原后序承载增粗，实际木材质量和迎风面积进入原求解器；保持 **8 GPa、原力输入和 0.28 rad 保护限**。终生上限为 **28,704 叶／869 轴**，主通道网格批次上限 **5,216**，阴影等附加通道另计。\n\n验证：指定五个测试文件 **28/28 通过**；TypeScript、`git diff --check` 通过。全量验证和新版本浏览器复核留给协调者。\n\n剩余差距：density 1.8 已满预算，本次几何保持原样，成年样本仍约一成被评估轴末端裸露超过 12 cm；直轴、叶龄周转和遮光竞争仍未解决。以上是生成几何与工程载荷测量，不是照片级真实性验收。[NCSU 来源](https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/)和指定私照仅支持定性形态，不能标定校园个体尺度、树龄、修剪史、节点时序或木材系数；私照未复制发布。",
+      "leadIntegration": "Lead integrated fixed distal nodes and actual supported-area thickening;239fulltests passed; original600000ms timeout retained."
+    },
+    {
+      "id": "67c197ea-1628-42be-909c-8a9af202bff0",
+      "title": "Separate isolated-worker readiness checks from full merged publication validation",
+      "workerStatus": "completed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成，仅保留在当前独立 worktree。\n\n- 修改 [worker.mjs](infra/local/worker.mjs)，新增 [validation-scope.mjs](infra/local/validation-scope.mjs) 及两份定向测试。`changed-tests` 显式启用；默认全量命令保持兼容。\n- 定向验证包含 typecheck、两类 diff 检查及 Git 选择的测试，记录命令、耗时、超时、失败与覆盖范围。\n- 验证：新增测试及 recovery **28/28 通过**；全部 infra **38/44 通过**。其余 6 项均为监听端口 `EPERM`，已在未修改基线复现。typecheck、语法和 diff 检查通过。\n- 风险：同名关联测试无法覆盖全部跨模块回归；worker 完成仍须经过主控完整集成验证与 CI。\n\n详细证据和安全切换步骤见 [交接 JSON](infra/local/validation-scope.handoff.json)。当前服务未更新、活动任务未中断；主控须等待空闲后同步两个源码文件并启用 scope。",
+      "leadIntegration": "44infrastructure tests passed outside restricted sandbox; integrated and safely loaded during zero queued/active tasks. Scoped worker readiness does not grant full-regression or publication approval."
+    },
+    {
+      "id": "ad68693e-7cd9-4ef8-96dc-e71c481efbd6",
+      "title": "Prototype transferable plant assets for non-blocking growth generation",
+      "workerStatus": "completed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成隔离原型，基于 `aa867f0`；新增 codec、worker、两份测试、基准脚本和 [handoff JSON](plant-asset-handoff.json)，未接入生产代码、提交或部署。\n\n- 保留共享资源、全部几何属性、纹理配置、关节引用及木材元数据；显式区分 `copy/move`、阻止重复资源所有权，解码后的 `update()` 明确报不支持。\n- 新增测试 **15/15 通过**，TypeScript 检查通过，包含真实 transfer 脱离、独立线程和过期结果处理。\n- 45 年银杏单次实测：构建 **1331 ms**、编码 **570 ms**、clone **45 ms**、解码 **609 ms**，payload **178 MB**；几何、元数据、节点 ID 和资源预算等价。\n\n解码及梁初始化仍有明显成本，GPU 和生长动画成本未解决；浏览器 module worker 验证留给协调者。环境未提供 GPT-Load 切换接口，未更改模型路由。",
+      "leadIntegration": "Isolated codec/worker prototype only. Not enabled or copied into production;178MB45y payload and decode overhead need further work."
+    },
+    {
+      "id": "94400def-ca1a-4c5e-adc4-dfc73da517e1",
+      "title": "Cross-review retained Ginkgo support draft after stream failure",
+      "workerStatus": "completed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "建议**暂缓原样集成**。承载统计的修复有实测依据，但已复现跨年龄木材边界回退；`.49` 整轴锥度也缺少形态依据。本次仅审查保存状态，未重放模型调用、修改文件、安装、提交或部署。\n\n**主要阻断点：**\n\n- **实际截面没有严格保持。** [增粗函数]([workspace]/outputs/.flora-swarm-worktrees/task-07219547-11df-4a25-a7b5-147c06a8eddf-aba7d750/lib/ginkgo-support.ts:48)围绕当年重建管的多边形质心缩放。seed 42 的 `primary:2` 在18→45年间长度仍为4.724708 m、支撑基半径仍为51.349 mm，但实际基环质心移动 **0.205 mm**，部分边界向旧截面内部回退约 **0.188 mm**。这明显超过浮点误差。[现有持久性测试]([workspace]/outputs/.flora-swarm-worktrees/task-07219547-11df-4a25-a7b5-147c06a8eddf-aba7d750/lib/ginkgo-support.test.mjs:225)比较等效半径，无法发现这种平移。节点不动不能证明旧木材全部保留。\n- **`.49` 是重大形态假设。** 18年 `primary:2` 末端等效直径从 **1.184 mm增至50.322 mm**，半径约增42.5倍。代码如实标注其未经标定，但“消除截断”不足以支持这个形态。[规则说明]([workspace]/outputs/.flora-swarm-worktrees/task-07219547-11df-4a25-a7b5-147c06a8eddf-aba7d750/lib/ginkgo-support.ts:8)中的 `.005`、2500和`.49`均为工程先验；[USDA](https://plants.usda.gov/DocumentLibrary/plantguide/pdf/pg_ginkg.pdf)、[NCSU](https://plants.ces.ncsu.edu/plants/ginkgo-biloba/)不能作为这些系数的测量依据。\n- **验收尚未完成。** 保存日志分别记录初轮13/14通过、支撑测试4/5通过；`focused-final.tap`只有三条通过记录，没有完成汇总。不能据此宣布worker完成。整株零出生连续性也未获证明：原有 `growth<1e-7` 跳过条件和主枝50 μm尖端下限仍在；本次未做边界实测。\n\n**独立CPU实测**如下，均为seed 42、day 305、density 1、1g；原始角需求未经截断：\n\n| 年龄 | 总质量 kg | 3.2 m/s风力 N | 无风需求 rad | 3.2 m/s需求 rad／截断数 |\n|---|---:|---:|---:|---:|\n| 2 | 0.12005 | 0.11464 | 0 | 0.00019881／0 |\n| 8 | 7.96426 | 1.71075 | 0.00856159 | 0.01098722／0 |\n| 18 | 119.77591 | 112.83929 | 0.01459903 | 0.01712426／0 |\n| 45 | 504.61123 | 403.16581 | 未测 | 0.01625023／0 |\n\n18年基线文件已核对与`aa867f0`同一blob：质量71.83887 kg、风力102.72272 N、原始需求0.37890187 rad、截断1个。\n\n**可以保留的正确部分：**\n\n- 从最终三角顶点独立重建截面并积分后，18年质量、风力误差约`10⁻¹⁴`，原始需求误差约`10⁻¹⁶`；未发现新增木材漏计、重复计入或陈旧截面缓存。调整后的主枝`joint.radius`与实际基环等效半径误差小于`10⁻⁹ m`。主干仍沿用原有名义半径，不能泛称所有关节都匹配真实截面。\n- 独立解析`:long:`、`/spur:`、`/cohort:`，核对1606条结构轴，祖先叶面积最大差约`3.9×10⁻⁹ m²`，未发现漏祖先或重复累计。结构储备先于密度抽样和落叶筛选；隐藏叶片没有被加成实际叶质量。159996固定站点预算保留。\n- 默认18年全部实例矩阵及叶ID的hash与基线相同。18→45年原有1606条结构轴均存在，储备、基半径及测试所比较的半径包络未下降；这些成立，但不足以证明实际截面包含旧截面。\n- 本次选跑3项当前测试及只读类型检查均通过。弱材性仍暴露饱和：`E=3e8`、3.2 m/s时需求0.456647 rad、截断2个。25 m/s时无截断并非自动失败；26 m/s仍正确标记输入超范围。\n\n最小恢复方案是：先修正固定材料截面的构造与实际多边形包含检查，覆盖上述18→45年反例；再将基部支撑律与锥度分开评审。可研究按截面**下游叶面积**分配管面积、采用固定材料坐标的单调半径包络，避免把整枝总叶面积沿`.49`包络一直配置到尖端。该方案仍需验证，不能直接指定另一个“正确”系数。\n\n随后仅重跑相关持久性、独立载荷和默认验收检查，并补草稿浏览器视图。我查看的是发布版实际截图和实物参考，**没有草稿渲染证据**。最终仍需实测枝径沿程、末端木径、分枝级序、叶面积、材性及受风响应，才能判断形态和力学是否合理。",
+      "leadIntegration": "Independent account review consumed by lead; unsupported.49taper and measured material-section retreat blocked Ginkgo support draft publication."
+    },
+    {
+      "id": "41ce49f2-6a7e-448c-a425-7e643ac56252",
+      "title": "Implement sourced Acer epigeal cotyledons and connected seedling emergence",
+      "workerStatus": "validation_failed",
+      "backend": "gpt-load",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "output": "已完成，修改仅保留在当前 worktree，未提交、合并或部署。\n\n- [woody-establishment.ts](lib/woody-establishment.ts)：新增连续出土钩、独立卵形子叶对、展开、黄化皱缩及缩零脱落代理，明确标注未校准时序与尺度。\n- [additional-species.ts](lib/additional-species.ts)：仅接入 Acer；子叶附着于固定材料位点，先于真叶出现。保留地下残壳、根连接和成年结构。\n- [development.ts](lib/development.ts)、[species-evidence.json](public/references/species-evidence.json)：更新 Acer 阶段及来源。\n- [acer-establishment.test.mjs](lib/acer-establishment.test.mjs)：新增8项实际几何测试。\n\n指定三份专项测试 **17/17通过**。默认参数下，生成几何为：\n\n| 年龄 | 实际株高 | 真叶 / 子叶 |\n|---|---:|---:|\n| .04年 | 0.301毫米 | 0 / 0 |\n| 1/12年 | 8.417毫米 | 2 / 2 |\n| .12年 | 24.844毫米 | 4 / 2 |\n| .5年 | 238.110毫米 | 14 / 0 |\n\n临时子叶容器为 **1 mesh、336顶点**；测试检查了实际叶柄端点、叶片顶点及受力后的连接。0.5、1、18、80岁全部几何与实例矩阵摘要、叶量和高度均与1794da9一致。\n\n已阅读并目视核对[论文](https://ir.nbu.ac.in/bitstreams/f47fcb06-569a-44d6-bfaf-71012bb31117/download)第129页及 Plate 6.1.m，仅据其建立定性顺序，未复制原图或全文。携壳、脱壳及内部解剖仍未解决；缩零脱落是动画代理，所有尺度与时序均非杭州实测。全套、typecheck/build及浏览器验收按分工留给协调者与lead。",
+      "leadIntegration": "Originaltypecheck failure recovered (17targeted tests passed), but actual preview showed cotyledon insertion too close to soil. Entire cotyledon/hook candidate withheld; originalstatus kept. New anatomy task distinguishes elongating hypocotyl from mature fixed wood."
     }
   ],
   "validation": {
-    "suite": "Node frontend and local/community infrastructure",
-    "passed": 205,
+    "suite": "Node frontend plus local/community infrastructure",
+    "passed": 239,
     "failed": 0,
     "typecheck": "passed",
-    "additionalSoilChecks": {
-      "passed": 19,
-      "failed": 0
-    },
-    "browser": "Actual local production sources rendered for Ginkgo18/45y and Ophiopogon leaf/local-soil views, with earlier 0.5.2 herb/Osmanthus checks. No captured WebGL errors. Still visibly procedural, not field/photoreal acceptance."
+    "browser": "Actual local production-source preview: Osmanthus12y distalfoliation and Iris spring/day335winter; no captured WebGL errors. Acer cotyledon prototype failed anatomical visual gate and is NOT included."
   }
 }

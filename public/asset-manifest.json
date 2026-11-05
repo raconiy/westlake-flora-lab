@@ -1,5 +1,5 @@
 {
-  "version": "0.5.3",
+  "version": "0.5.4",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -21,7 +21,7 @@
     "ginkgo": "seed",
     "osmanthus": "seed",
     "camphor": "buried seed coat, connected radicle and developing shoot axis; hypogeal per CSIRO source",
-    "acer": "buried samara/coat remnant and developing axis; epigeal cotyledon emergence remains unimplemented",
+    "acer": "buried samara/coat and developing axis; epigeal hypocotyl/cotyledon draft withheld after anatomy inspection, not enabled",
     "iris": "rhizome division",
     "oxalis": "rooted stolon node",
     "ophiopogon": "vegetative ramet"
@@ -50,17 +50,19 @@
   },
   "collaborationEvidence": "collaboration-evidence.json",
   "visualRefinement": {
-    "osmanthus": "irregular connected 3D crown; persistent axes; explicit uncalibrated length/descendant-leaf-area support radius law; straight-axis approximation",
+    "osmanthus": "fixed supplemental distal leaf nodes within existing 28704-leaf/869-axis capacity; true leaf area feeds support thickening and actual loads; density1.8 has no spare allocation",
     "camphorAcer": "fixed curved material axes with parent-tangent-oriented descendants",
     "iris": "ribbed fans, curved falls, white fringed crests and procedural vein pigment",
     "herbRoots": "fixed Ophiopogon clone nodes and material-prefix roots; actual surface-node root starts and basal bridges",
     "ginkgo": "complete-catalogue spread of connected short-shoot modules, fixed site identities and original leaf dimensions; remaining crown gaps are not field-calibrated",
     "framing": "cached occupied geometry with bounded compound joint/blade displacement; root close-up hides soil and frames actual roots; manual camera ownership retained",
-    "soil": "shallow local herb root-zone window contains all drawn roots, independently labelled from available soil depth; reduced repetitive macrotexture contrast; illustrative strata, no campus soil measurement"
+    "soil": "shallow local herb root-zone window contains all drawn roots, independently labelled from available soil depth; reduced repetitive macrotexture contrast; illustrative strata, no campus soil measurement",
+    "herbReproduction": "Iris/Oxalis stalk emergence, petal decline, drying and gradual collapse annual proxy; living vegetative axes retained; no reproductive mass, capsules or dispersal solver",
+    "shortPortrait": "expanded viewer captions and root-zone depth labels avoid the central model at <=700px width/height"
   },
   "accountUsageEvidence": "account-usage.json",
   "validation": {
-    "passed": 205,
+    "passed": 239,
     "failed": 0
   }
 }
