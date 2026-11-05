@@ -25,5 +25,55 @@
     "source": "https://plants.ces.ncsu.edu/plants/ginkgo-biloba/",
     "use": "银杏物种形态参考，非云谷个体照片，未修改",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  {
+    "species": "osmanthus",
+    "file": "osmanthus-leaf-flower.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Osmanthus-fragrans--Forest-and-Kim-Starr--cc-by-2-0.jpg",
+    "author": "Forest and Kim Starr",
+    "license": "CC BY 2.0",
+    "source": "https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "use": "物种形态参考，非云谷个体照片；原文件未修改"
+  },
+  {
+    "species": "iris",
+    "file": "iris-form.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Iris_tectorum--groundcover-Jason_Sturner--cc-by-2.0.jpg",
+    "author": "Jason Sturner",
+    "license": "CC BY 2.0",
+    "source": "https://plants.ces.ncsu.edu/plants/iris-tectorum/",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "use": "物种形态参考，非云谷个体照片；原文件未修改"
+  },
+  {
+    "species": "oxalis",
+    "file": "oxalis-form.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Oxalis_corniculata_C_s6IpHgwZFkAb.jpe",
+    "author": "F. A.",
+    "license": "CC BY 2.0",
+    "source": "https://plants.ces.ncsu.edu/plants/oxalis-corniculata/",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "use": "物种形态参考，非云谷个体照片；原文件未修改"
+  },
+  {
+    "species": "ophiopogon",
+    "file": "ophiopogon-form.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Ophiopogon-japonicus--Forest-and-Kim-Starr--CC-BY.jpg",
+    "author": "Forest and Kim Starr",
+    "license": "CC BY 2.0",
+    "source": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "use": "物种形态参考，非云谷个体照片；原文件未修改"
+  },
+  {
+    "species": "acer",
+    "file": "acer-autumn.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/acer-palmatum-leaves_PwQyKYjBKsra.jpg",
+    "author": "Hope Duckworth",
+    "license": "CC BY 4.0",
+    "source": "https://plants.ces.ncsu.edu/plants/acer-palmatum/",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "use": "物种形态参考，非云谷个体照片；原文件未修改"
   }
 ]

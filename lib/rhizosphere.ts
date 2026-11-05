@@ -2,8 +2,11 @@ import * as THREE from 'three';
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
 import { osmanthusLifecycle, osmanthusPriors, osmanthusGrowth } from './osmanthus-lifecycle.ts';
 
+// @ts-ignore Native Node tests require the suffix.
+import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet } from './development.ts';
+
 /** A botanical illustration, not a measured root reconstruction or soil-water solver. */
-export type RootSpecies = 'ginkgo' | 'osmanthus' | 'iris' | 'oxalis';
+export type RootSpecies = 'ginkgo' | 'osmanthus' | 'iris' | 'oxalis' | 'camphor' | 'acer' | 'ophiopogon';
 export interface RhizosphereParams {
   age: number; seed: number;
   /** Relative soil moisture and compaction, each 0–1; uncalibrated. */
@@ -80,8 +83,9 @@ function soilLayer(width: number, depth: number, thickness: number, bottom: numb
   return mesh;
 }
 
-export function buildRhizosphere(species: RootSpecies, params: RhizosphereParams): RhizosphereModel {
-  if (!['ginkgo', 'osmanthus', 'iris', 'oxalis'].includes(species)) throw new Error('Unknown root species');
+export function buildRhizosphere(species: RootSpecies | string, params: RhizosphereParams): RhizosphereModel {
+  const known = ['ginkgo', 'osmanthus', 'iris', 'oxalis', 'camphor', 'acer', 'ophiopogon'].includes(species);
+  const additional = species === 'camphor' || species === 'acer' || species === 'ophiopogon' ? additionalDevelopment(species, params.age) : null;
   const age = clamp(finite(params.age, 0), 0, 1500), seed = finite(params.seed, 42);
   const moisture = clamp(finite(params.moisture, .55)), compaction = clamp(finite(params.compaction, .2));
   const soilDepth = clamp(finite(params.soilDepth, 1.6), .05, 8), random = randomSource(seed);
@@ -90,7 +94,7 @@ export function buildRhizosphere(species: RootSpecies, params: RhizosphereParams
   // Saturation may reduce aeration; this is an illustrative stress proxy, not hydraulic simulation.
   const waterStress = clamp(1 - availableWater + Math.max(0, moisture - .91) * 2.5);
   const expansion = (.56 + .44 * availableWater) * (1 - .46 * compaction);
-  const woody = species === 'ginkgo' || species === 'osmanthus';
+  const woody = species === 'ginkgo' || species === 'osmanthus' || species === 'camphor' || species === 'acer' || !known;
   const osmanthus = species === 'osmanthus' ? osmanthusLifecycle(age) : null;
   const development = woody ? 1 - Math.exp(-age / 9) : 1 - Math.exp(-age / .65);
   const germination = clamp((age - .012) / .08);
@@ -104,12 +108,16 @@ export function buildRhizosphere(species: RootSpecies, params: RhizosphereParams
   const geometries: THREE.BufferGeometry[] = [];
   let rootDepth = 0, rootLength = 0, rootTips = 0;
   group.userData = {
-    sourceType: 'engineering-prior', calibrated: false, units: 'metres',
+    sourceType: 'engineering-prior', calibrated: false, units: 'metres', requestedSpecies: species, knownSpecies: known,
     note: '根系空间、相对水分和压实响应均未校准；土壤纹理不代表校园土层；根尖计数仅为绘制根轴末端数。',
     metricsMeaning: { rootLength: 'sum-of-drawn-root-axis-lengths', rootTips: 'drawn-root-axis-end-count', availableWater: 'relative-illustration-index-not-hydraulic-solver' },
     soilDepth, moisture, compaction, cutaway: params.cutaway,
     architecture: species === 'ginkgo' ? 'primary-root-with-laterals' : species === 'osmanthus' ? 'generalized-lateral-root-system' : species === 'iris' ? 'horizontal-rhizome-and-fibrous-roots' : 'stolon-node-adventitious-roots'
   };
+  if (!known) Object.assign(group.userData, { architecture: 'generic-unknown-root-engineering-prior', note: '未知物种：泛化工程先验，非物种实测根系。' });
+  if (additional) Object.assign(group.userData, { lifecycle: additional, priors: developmentPriors,
+    architecture: species === 'ophiopogon' ? 'slender-rhizomes-adventitious-fibrous-and-storage-roots' : species === 'camphor' ? 'camphor-primary-and-spreading-lateral-prior' : 'acer-primary-and-layered-lateral-prior',
+    note: '形态约束下的独立物种工程先验；木本根网、砧木、根深与材料参数未知，非现场实测。' });
   if (osmanthus) Object.assign(group.userData, { lifecycle: osmanthus, priors: osmanthusPriors, architecture: 'emerging-primary-radicle-then-staggered-laterals' });
   if (species === 'ginkgo') group.userData.collarTransition = {
     source: 'project engineering continuity construction, not empirical growth data', unit: 'years and metres',
@@ -130,7 +138,7 @@ export function buildRhizosphere(species: RootSpecies, params: RhizosphereParams
     mesh.name = `${organ}:order:${order}`;
     mesh.userData = { organ, order, sourceType: 'engineering-prior', start: points[0].toArray(), end: points.at(-1)!.toArray(), radius };
     mesh.castShadow = order < 2; group.add(mesh); geometries.push(built.geometry);
-    if (organ === 'root') {
+    if (organ === 'root' || organ === 'storage-root') {
       rootLength += built.curve.getLength(); rootTips++;
       for (const p of built.curve.getPoints(24)) rootDepth = Math.max(rootDepth, Math.min(soilDepth - .00005, -p.y));
     }
@@ -148,7 +156,45 @@ export function buildRhizosphere(species: RootSpecies, params: RhizosphereParams
       if (order === 1 && (species !== 'ginkgo' || age > .2)) laterals(curve, 3 + Math.floor(random() * 3), len * .45, radius * .28, 2, angle + .8);
     }
   }
-  if (age > .012) {
+  if (additional) {
+    const herb = species === 'ophiopogon', maturity = additional.maturity;
+    const depth = Math.min(soilDepth * .85, (herb ? .24 : species === 'camphor' ? 1.8 : .95) * maturity * expansion + .025 * additional.radicle);
+    const reach = (herb ? .17 : species === 'camphor' ? 3.4 : 2.2) * maturity * expansion;
+    function axis(start: THREE.Vector3, angle: number, length: number, drop: number, radius: number, order: number, organ='root') {
+      const end=start.clone().add(new THREE.Vector3(Math.cos(angle)*length,-drop,Math.sin(angle)*length));
+      return addRoot([start,start.clone().lerp(end,.45),end],radius,order,organ);
+    }
+    function fibers(parent: THREE.CatmullRomCurve3, birth: number, key: number, count: number, radius: number) {
+      for(let f=0;f<count;f++) {const g=organGrowth(birth+f*.055,.65,age);if(g<=0)continue;
+        const r=randomSource(key+f*197),a=f*2.39996+r()*.5,start=parent.getPointAt(.15+.7*(f+.5)/count),len=depth*(.45+r()*.4)*g;
+        axis(start,a,len*(herb?.35:.65),len,radius*g,2);
+      }
+    }
+    if (herb) {
+      for(let c=0;c<7;c++){const ramet=ophiopogonRamet(c,age);if(ramet.growth<=0)continue;
+        // Slender underground axis, not the thick Iris rhizome. Rosette and rhizome tips share x/z.
+        const origin=new THREE.Vector3(0,-.008,0),end=new THREE.Vector3(ramet.x,-.008,ramet.z);
+        if(c===0)end.y-=.006*ramet.growth;
+        const rhizome=addRoot([origin,origin.clone().lerp(end,.5),end],.0015*ramet.growth,0,'rhizome');
+        fibers(rhizome,ramet.birth+.04,seed*617+c*997,12,.0007);
+        for(let f=0;f<2;f++){const g=organGrowth(ramet.birth+.8+f*.2,1,age);if(g<=0)continue;
+          const a=c*2.39996+f*1.8,start=end.clone(),len=.08*g;
+          const root=axis(start,a,.025*g,len,.0007*g,1);
+          // Distal swelling belongs to a root; never a rhizome bud / daughter rosette.
+          const storage=axis(root.getPointAt(.65),a,.008*g,.018*g,.0025*g,2,'storage-root');
+          void storage;
+        }
+      }
+    } else if(additional.radicle>0) {
+      const radius=(.001+ (species==='camphor'?.075:.035)*maturity)*additional.radicle;
+      const primary=axis(new THREE.Vector3(0,-.004,0),.7,.015*additional.radicle,depth*additional.radicle,radius,0);
+      for(let i=0;i<10;i++){const birth=.14+i*(species==='camphor'?.32:.42),g=organGrowth(birth,1.1,age);if(g<=0)continue;
+        const r=randomSource(seed*811+i*311),angle=i*2.39996+r()*.4,start=primary.getPointAt(.12+.7*(i+.5)/10);
+        const lateral=axis(start,angle,reach*(.65+r()*.35)*g,depth*.24*g,radius*.4*g,1);
+        fibers(lateral,birth+.35,seed*127+i*997,8,radius*.09*g);
+      }
+    }
+  } else if (age > .012) {
     if (osmanthus) {
       const radius = osmanthus.radius * .9 + .00035 * osmanthus.radicle;
       const origin = new THREE.Vector3(0, osmanthus.rootOriginY, 0);
