@@ -1,0 +1,100 @@
+/* Collaboration evidence and growth controls; scoped to avoid changing the lab's scene. */
+.swarm-layout > *, .swarm-layout .swarm-right > * { min-width: 0; }
+.swarm-layout .cluster-evidence { grid-column: 1 / -1; background: #fdfefa; border: 1px solid #d9e2d2; border-radius: 12px; padding: 26px; }
+.cluster-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.cluster-heading h2 { font-size: 20px; margin-top: 9px; font-weight: 550; }
+.cluster-state { border-radius: 20px; padding: 8px 12px; font-size: 12px; background: #edf1e7; }
+.cluster-state.ready { color: #315c46; background: #e7f0e3; }
+.cluster-state.unavailable { color: #77572b; background: #f8efdf; }
+.cluster-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 22px 0 16px; }
+.cluster-metrics > div { background: #f0f4eb; border-radius: 8px; padding: 16px; min-width: 0; }
+.cluster-metrics dt, .task-evidence-body dt { color: #5b6d54; font-size: 12px; line-height: 1.6; }
+.cluster-metrics dd { font-size: 17px; font-weight: 550; margin: 9px 0 0; overflow-wrap: anywhere; }
+.gateway-evidence { display: flex; justify-content: space-between; gap: 20px; align-items: center; border-top: 1px solid #dfe7d7; padding-top: 20px; }
+.gateway-evidence h3 { font-size: 14px; }
+.gateway-evidence p { margin: 9px 0; font-size: 14px; }
+.gateway-evidence strong { font-size: 23px; }
+.gateway-evidence small { font-size: 12px; color: #5b6d54; line-height: 1.8; }
+.gateway-evidence a { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; border: 1px solid #b5c7a6; border-radius: 7px; padding: 12px; font-size: 13px; }
+.gateway-evidence a small { flex-basis: 100%; }
+.cluster-note, .queue-explainer { font-size: 13px; color: #5b6d54; line-height: 1.9; }
+.evidence-error { display: flex; align-items: flex-start; gap: 9px; color: #7b4827; background: #fff1e5; border-radius: 7px; padding: 14px; margin-top: 16px; overflow-wrap: anywhere; line-height: 1.8; font-size: 13px; }
+.evidence-error svg { flex-shrink: 0; margin-top: 3px; }
+.swarm-layout .chat-panel > header h2 { font-size: 20px; }
+.swarm-layout .chat-panel > header p, .swarm-layout .chat-context { font-size: 12px; color: #5b6d54; }
+.swarm-layout .chat-context { overflow-wrap: anywhere; }
+.swarm-layout .message > div { font-size: 14px; line-height: 1.9; overflow-wrap: anywhere; white-space: pre-wrap; }
+.swarm-layout .message > span { font-size: 12px; color: #5b6d54; }
+.swarm-layout .chat-compose textarea, .swarm-layout .suggestion-card textarea { font-size: 14px; line-height: 1.8; min-height: 110px; }
+.swarm-layout .chat-compose label, .swarm-layout .chat-disclaimer, .swarm-layout .role-card > p, .swarm-layout .connection-card > p { font-size: 12px; line-height: 1.9; color: #5b6d54; }
+.swarm-layout .chat-compose > div { flex-wrap: wrap; gap: 12px; }
+.swarm-layout .chat-compose label { display: flex; align-items: center; gap: 7px; }
+.swarm-layout .chat-compose label input { flex-shrink: 0; }
+.swarm-layout .chat-suggestions button { font-size: 12px; min-height: 40px; text-align: left; }
+.swarm-layout .connection-card button, .swarm-layout .suggestion-card > button { font-size: 13px; min-height: 44px; }
+.swarm-layout .role-list b { font-size: 13px; }
+.swarm-layout .role-list small { font-size: 11px; color: #5b6d54; }
+.swarm-layout .queue-panel { padding: 26px; }
+.queue-explainer { margin: 14px 0 20px; }
+.evidence-tasks { display: grid; gap: 12px; }
+.evidence-task { border: 1px solid #d9e2d2; border-radius: 9px; background: #fbfcf8; overflow: hidden; }
+.evidence-task summary { display: flex; align-items: center; gap: 12px; padding: 18px; cursor: pointer; list-style: none; min-height: 68px; }
+.evidence-task summary::-webkit-details-marker { display: none; }
+.task-heading { flex: 1; min-width: 0; }
+.task-heading b { display: block; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; font-weight: 550; }
+.task-heading small { display: block; font-size: 11px; color: #5b6d54; overflow-wrap: anywhere; margin-top: 5px; }
+.task-badges { display: flex; flex-wrap: wrap; gap: 6px; max-width: 220px; }
+.task-badges > span { font-size: 11px; border-radius: 5px; padding: 5px 8px; background: #eaf0e3; color: #405e35; }
+.task-badges .failure-badge { color: #8a3b26; background: #f9e8dc; }
+.task-chevron { flex-shrink: 0; transition: transform .15s; }
+.evidence-task[open] .task-chevron { transform: rotate(180deg); }
+.task-evidence-body { border-top: 1px solid #dfe7d7; padding: 20px; }
+.task-evidence-body dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 20px; }
+.task-evidence-body dd { font-family: ui-monospace, monospace; font-size: 13px; margin: 5px 0 0; overflow-wrap: anywhere; line-height: 1.7; }
+.task-evidence-body h3 { font-size: 13px; margin-bottom: 10px; }
+.task-summary, .task-failure p { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; line-height: 1.9; }
+.task-failure { background: #fff0e4; color: #813f27; padding: 15px; border-radius: 6px; margin-top: 16px; }
+.task-failure b { display: block; margin-bottom: 7px; font-size: 13px; }
+.merge-note { font-size: 12px; color: #5b6d54; line-height: 1.8; margin-top: 18px; }
+.swarm-layout :is(button, a, summary, textarea, input):focus-visible, .growth-journey :is(button, input):focus-visible { outline: 3px solid #4e7d36; outline-offset: 3px; }
+.swarm-layout .empty-state { font-size: 13px; line-height: 1.8; }
+.growth-actions { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.growth-journey .grow-from-seed, .growth-journey .spring-preset { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 9px 11px; margin: 0; border: 1px solid #bdceb1; border-radius: 6px; font-size: 12px; color: #315c46; background: #f8fbf3; }
+.growth-journey .grow-from-seed { background: #315c46; color: white; }
+.growth-journey .timeline-top { flex-wrap: wrap; }
+.growth-journey .time-switch { gap: 6px; }
+.growth-journey .time-switch button { font-size: 12px; min-height: 40px; padding: 8px; }
+.growth-journey .time-value span { font-size: 11px; }
+.growth-journey .play-button { min-height: 40px; min-width: 40px; }
+.growth-playback { color: #52694b; font-size: 12px; line-height: 1.8; margin: 9px 0 14px; }
+.growth-journey .timeline-ticks { gap: 4px; flex-wrap: wrap; }
+.growth-journey .timeline-ticks button { font-size: 12px; min-height: 44px; padding: 8px; border: 1px solid transparent; border-radius: 6px; color: #52694b; }
+.growth-journey .timeline-ticks button.active { background: #e4edda; border-color: #9db98a; color: #24472c; font-weight: 600; }
+.growth-journey .growth-stage b { font-size: 13px; color: #315c46; }
+.growth-journey .growth-stage p { font-size: 12px; color: #52694b; line-height: 1.9; }
+.growth-journey .growth-clocks { border-top: 1px solid #d9e3ce; padding-top: 7px; margin-top: 9px; }
+.growth-journey .timeline-foot { flex-wrap: wrap; gap: 10px; align-items: center; }
+.growth-journey .timeline-foot > span { font-size: 11px; line-height: 1.8; color: #52694b; }
+.growth-journey .timeline-foot button { font-size: 12px; min-height: 40px; }
+@media (max-width: 700px) {
+ .swarm-layout .cluster-evidence, .swarm-layout .queue-panel { padding: 18px; }
+ .cluster-metrics { grid-template-columns: 1fr; gap: 8px; }
+ .cluster-metrics > div { padding: 13px; }
+ .cluster-metrics dd { font-size: 16px; }
+ .gateway-evidence { align-items: stretch; flex-direction: column; }
+ .swarm-layout .swarm-right { grid-template-columns: 1fr; }
+ .swarm-layout .swarm-right > * { grid-column: 1 / -1; }
+ .swarm-layout .chat-suggestions { flex-wrap: wrap; }
+ .swarm-layout .queue-header { flex-wrap: wrap; gap: 15px; }
+ .evidence-task summary { flex-wrap: wrap; padding: 14px; gap: 8px; }
+ .task-heading { flex-basis: calc(100% - 50px); }
+ .task-badges { margin-left: 13px; max-width: none; }
+ .task-chevron { margin-left: auto; }
+ .task-evidence-body { padding: 15px; }
+ .task-evidence-body dl { grid-template-columns: 1fr; gap: 12px; }
+ .growth-journey .timeline-ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+ .growth-journey .timeline-ticks button { font-size: 11px; }
+ .growth-journey .time-switch { flex-wrap: wrap; }
+ .growth-journey .time-value { margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .task-chevron { transition: none; } }

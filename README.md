@@ -1,0 +1,40 @@
+# 西湖·生境 · Westlake Flora Lab
+
+公开展示：https://raconiy.github.io/westlake-flora-lab/
+
+云谷校园植物的程序化研究原型。React + Three.js；七种植物，可观察地上植株、根系与土壤剖面、茎和叶，独立控制年龄、年内季节、风与重力。
+
+## 本版
+
+- 桂花种子、胚根、真叶幼苗与分枝阶段；对生交互叶序、叶柄和腋生四裂小花。
+- 连续的早期根系与根颈衔接，分尺度阴影与手动观察相机。
+- 独立的生长和季节时间轴；可保存、导入、导出本机参数快照。
+- 协作界面显示实际健康配置、账号数量和任务交付证据。
+
+## 运行与发布
+
+Node.js 24：
+
+```sh
+npm ci
+npm run dev
+npm test
+npm run build
+```
+
+推送 main 后，GitHub Actions 自动测试、构建并发布 GitHub Pages。Vite base 为 `/westlake-flora-lab/`，更改仓库名时同时更新 vite.config.ts。
+
+## 助手与执行集群
+
+GitHub Pages 托管静态展示，不托管 GPT-Load、账号授权或自动改码服务。网站在“连接设置”中连接成员自己的本地协调服务，默认 `http://127.0.0.1:8788`，或管理员配置的团队 HTTPS 服务。没有连接时明确显示离线，不会生成伪造的模型回答或账号调用记录。
+
+账号密码、OAuth 文件、网关密钥、任务数据库与运行日志均不属于这个公开仓库。浏览器中的访问口令只存于页面内存。团队共享后端需另行部署带认证的服务。
+
+## 模型范围与来源
+
+本项目是未校准的程序化几何与力学近似；并非校园个体扫描还原，也不是完整植物生理求解器。形态与物候来源在“研究依据”中列出；种子萌发时点、器官尺寸、生长曲线和材料参数含明确的工程先验。根系水分响应为示意，尚无实测根系、土壤水力、光合作用、繁殖或衰老模型。
+
+银杏、桂花、香樟有校园文字来源；其余物种为杭州地区候选，校园分布待确认。银杏物种参考图片来自 NC State Plant Toolbox，不标为云谷照片。作者、CC 许可证与原始链接见 [图片署名](public/references/photo-attribution.json)。
+
+- [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)
+- [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

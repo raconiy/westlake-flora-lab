@@ -1,0 +1,29 @@
+[
+  {
+    "file": "ginkgo-habit.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/ginkgo_biloba_Ginkgo_CZ-ccby201_qVmuCju.jpg",
+    "author": "Ginkgo CZ",
+    "license": "CC BY 2.0",
+    "source": "https://plants.ces.ncsu.edu/plants/ginkgo-biloba/",
+    "use": "银杏物种形态参考，非云谷个体照片，未修改",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/"
+  },
+  {
+    "file": "ginkgo-leaves.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Ginkgo_biloba_1_Rand_TqVT5FCUEMkv.jfif",
+    "author": "Randy Harter",
+    "license": "CC BY 4.0",
+    "source": "https://plants.ces.ncsu.edu/plants/ginkgo-biloba/",
+    "use": "银杏物种形态参考，非云谷个体照片，未修改",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  {
+    "file": "ginkgo-autumn.jpg",
+    "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Ginkgo_biloba_3_Rand_4InMHe6VgJk4.jfif",
+    "author": "Randy Harter",
+    "license": "CC BY 4.0",
+    "source": "https://plants.ces.ncsu.edu/plants/ginkgo-biloba/",
+    "use": "银杏物种形态参考，非云谷个体照片，未修改",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  }
+]
