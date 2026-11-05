@@ -1,3 +1,4 @@
+import {geometryHeight} from './geometry-height.ts';
 import * as THREE from "three";
 import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
 import type { PlantParams, PlantModel, BranchJoint } from "./plant-engine";
@@ -222,5 +223,5 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
  function update(time:number,wind:number,gravity:number,stiffness:number){const rigid=Math.max(.1,stiffness),area=.24+.76*leafPresence*density;branches.forEach((j,i)=>{const load=clamp(wind,0,25)**2*.00025*j.flexibility/rigid*area,osc=.65*Math.sin(time*(1+j.order*.35)+j.phase)+.35*Math.sin(time*.49+j.phase*.4),bend=Math.min(.18,load)*(.65+.35*osc),sag=Math.min(.14,j.sag*clamp(gravity,0,30)/9.81/rigid*gravityFrames[i].perp);gravityQ.setFromAxisAngle(gravityFrames[i].axis,sag);euler.set(bend*.4,0,-bend);windQ.setFromEuler(euler);j.pivot.quaternion.copy(j.rest).multiply(gravityQ).multiply(windQ)})}
  const box=new THREE.Box3().setFromObject(group);
  function dispose(){group.traverse(o=>{if(o instanceof THREE.InstancedMesh)o.dispose()});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());group.clear()}
- return{group,branches,leafCount,height:box.isEmpty()?0:Math.max(0,box.max.y),stageLabel,update,dispose};
+ return{group,branches,leafCount,height:geometryHeight(group),stageLabel,update,dispose};
 }

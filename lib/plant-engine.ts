@@ -1,3 +1,4 @@
+import {geometryHeight} from './geometry-height.ts';
 import * as THREE from "three";
 import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
 import {irisFallSurface,irisCrestSurface,herbPigment} from "./herb-surfaces.ts";
@@ -474,7 +475,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
   // Copy organ labels to descendants as well as roots: skeleton renderers can toggle
   // every object independently without making an unlabelled petal/leaf visible again.
   group.traverse(obj => { if (!obj.userData.organ && obj.parent?.userData.organ) obj.userData.organ = obj.parent.userData.organ; });
-  group.updateMatrixWorld(true); const box = new THREE.Box3().setFromObject(group); const height = Math.max(.001, box.max.y);
+  group.updateMatrixWorld(true); const box = new THREE.Box3().setFromObject(group); const height = geometryHeight(group);
   // Compute gravity in each branch's undeformed local frame. This is a rest-pose
   // cantilever approximation: descendants inherit parent deformation, while local
   // torque axes are not re-solved with the fully deformed geometry as in FEA.
@@ -834,7 +835,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     branches.forEach((j,i)=>{const load=speed*speed*.00023*j.flexibility/rigid*area,osc=Math.sin(time*(.9+j.order*.47)+j.phase)*.65+Math.sin(time*.43+j.phase*.7)*.35,bend=Math.min(.16,load)*(.65+osc*.35),sag=Math.min(.13,j.sag*clamp(gravity,0,30)/9.81/rigid*gravityFrames[i].perpendicular);gr.setFromAxisAngle(gravityFrames[i].axis,sag);euler.set(bend*.42,0,-bend);wr.setFromEuler(euler);j.pivot.quaternion.copy(j.rest).multiply(gr).multiply(wr);});
   }
   function dispose(){group.traverse(o=>{if(o instanceof THREE.InstancedMesh)o.dispose();});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());group.clear();}
-  const box=new THREE.Box3().setFromObject(group);return{group,branches,leafCount,height:Math.max(.025,box.max.y),stageLabel,update,dispose};
+  const box=new THREE.Box3().setFromObject(group);return{group,branches,leafCount,height:geometryHeight(group),stageLabel,update,dispose};
 }
 
 export function naturalFanBlade(segments=24,radialRings=1):THREE.BufferGeometry {
