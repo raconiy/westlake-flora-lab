@@ -10,7 +10,7 @@ export type QueueTask = {
  workerId?:string; model?:string; reasoningEffort?:string; validationStatus?:string;
  merged?:boolean; error?:unknown; failureReason?:unknown; validationError?:unknown;
  result?:{summary?:string; workerId?:string; model?:string; reasoningEffort?:string;
-  validationStatus?:string; merged?:boolean; error?:unknown; failureReason?:unknown; validationError?:unknown};
+  validationStatus?:string; merged?:boolean; leadRecovery?:{summary:string;commit:string;validationStatus:string;deploymentUrl:string}; error?:unknown; failureReason?:unknown; validationError?:unknown};
 };
 export function isGPTLoad(health:ClusterHealth|null){return /gpt[\s_-]*load/i.test(health?.modelBackend||'');}
 const display=(value:unknown)=>typeof value==='string'&&value.trim()?value:'未报告';
@@ -35,13 +35,14 @@ export function TaskEvidence({tasks,online,error,onRefresh}:{tasks:QueueTask[];o
   <p className="queue-explainer">展开查看执行结果与验证记录。模型返回、验证通过、代码合并是不同状态；合并标记也不代表已部署。</p>
   {error&&<p className="evidence-error" role="status"><AlertCircle size={16}/>{error}{tasks.length?'；以下为上次读取的任务，状态可能已变化。':''}</p>}
   {tasks.length?<div className="evidence-tasks">{tasks.map(task=>{
-   const result=task.result,validation=result?.validationStatus??task.validationStatus;
+   const result=task.result,recovery=result?.leadRecovery,validation=result?.validationStatus??task.validationStatus;
    const merged=task.merged===true||result?.merged===true;
    const failure=reason(task.error)||reason(task.failureReason)||reason(task.validationError)||reason(result?.error)||reason(result?.failureReason)||reason(result?.validationError);
    const failed=['failed','validation_failed'].includes(task.status)||/fail|error|reject/i.test(validation||'');
    return <details className="evidence-task" key={task.id}><summary><span className={`task-status ${task.status}`} aria-hidden="true"/><span className="task-heading"><b>{task.title}</b><small>{task.id} · {task.kind||'类型未报告'}</small></span><span className="task-badges"><span className={failed?'failure-badge':''}>{states[task.status]||task.status}</span><span>{merged?'已标记合并':'未确认合并'}</span></span><ChevronDown className="task-chevron" size={18}/></summary>
     <div className="task-evidence-body"><dl><div><dt>workerId</dt><dd>{display(result?.workerId??task.workerId)}</dd></div><div><dt>model</dt><dd>{display(result?.model??task.model)}</dd></div><div><dt>reasoningEffort</dt><dd>{display(result?.reasoningEffort??task.reasoningEffort)}</dd></div><div><dt>validationStatus</dt><dd>{display(validation)}</dd></div><div><dt>merged · 合并标记</dt><dd>{merged?'true · 服务标记已合并':task.merged===false||result?.merged===false?'false · 尚未合并':'未报告 · 尚未确认合并'}</dd></div></dl>
     <h3>result.summary · 执行摘要</h3><p className="task-summary">{result?.summary?.trim()||'尚无执行摘要。'}</p>
+    {recovery&&<div className="gateway-evidence"><div><h3>主控已接续并发布</h3><p>{recovery.summary}</p><small>验证 {recovery.validationStatus} · 提交 {recovery.commit.slice(0,8)}；原失败记录保留。</small></div><a href={recovery.deploymentUrl} target="_blank" rel="noreferrer">查看发布</a></div>}
     {(failed||failure)&&<div className="task-failure"><b>失败原因</b><p>{failure||'服务未提供具体失败原因，请查看协调服务或 worker 日志。'}</p></div>}
     <p className="merge-note">{merged?'服务已报告合并；网站是否部署需另行确认。':'尚未确认合并，不能视为网站已实施。'}</p></div>
    </details>;

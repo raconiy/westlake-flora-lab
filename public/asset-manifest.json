@@ -1,0 +1,37 @@
+{
+  "version": "0.4.0",
+  "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
+  "species": [
+    "ginkgo",
+    "osmanthus",
+    "iris",
+    "oxalis",
+    "camphor",
+    "acer",
+    "ophiopogon"
+  ],
+  "units": {
+    "length": "m",
+    "age": "years since displayed establishment origin",
+    "season": "day of year 1–365",
+    "wind": "m/s",
+    "gravity": "multiple of 9.81 m/s²"
+  },
+  "growthOrigins": {
+    "ginkgo": "seed",
+    "osmanthus": "seed",
+    "camphor": "seed establishment without embryonic detail",
+    "acer": "seed establishment without embryonic detail",
+    "iris": "rhizome division",
+    "oxalis": "rooted stolon node",
+    "ophiopogon": "vegetative ramet"
+  },
+  "physics": {
+    "branches": "lumped cantilever rotational dynamics",
+    "leaves": "bounded quasi-static strip bending for explicit petiolate blades",
+    "rootSoil": "root topology and relative soil response illustration, no hydraulic or anchorage solver"
+  },
+  "evidence": "references/species-evidence.json",
+  "photoAttribution": "references/photo-attribution.json",
+  "fieldCalibrated": false
+}

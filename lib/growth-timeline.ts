@@ -22,3 +22,14 @@ export function advanceGrowth(time: {age: number; day: number}, clock: GrowthClo
 export function selectGrowthAge(age: number) { return {age}; }
 /** Explicit observation preset, not a campus measurement or germination requirement. */
 export function springObservation() { return {day: 120}; }
+
+/** Observation anchors matched to implemented organ cohorts, not measured ages. */
+export const observationStages:Record<string,readonly (readonly [string,number])[]>={
+ ginkgo:[['种子',.005],['胚根 / 芽',.06],['真叶幼苗',.5],['幼树',8],['成年树冠',45]],
+ osmanthus:[['种子',0],['胚根与芽',.04],['对生真叶',.25],['分枝幼株',1.5],['常绿冠层',12]],
+ iris:[['根茎分株',0],['首叶展开',.08],['二列叶扇',.4],['新分株形成',1.5]],
+ oxalis:[['带根茎节',0],['三出复叶',.05],['匍匐新节',.3],['群落扩展',.8]],
+ camphor:[['种子建立',0],['主轴出苗',.15],['互生叶建立',.6],['侧枝形成',3],['开展冠层',24]],
+ acer:[['种子建立',0],['主轴出苗',.15],['对生叶建立',.6],['细枝分化',3],['层状冠',18]],
+ ophiopogon:[['营养繁殖起点',0],['首批狭叶',.15],['基生叶丛',.8],['根茎与子株',3]],
+};

@@ -210,48 +210,169 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       const bud = new THREE.Mesh(seedGeo, stemMat); bud.name = "osmanthus-terminal-bud"; bud.userData.organ = "bud";
       bud.position.y = h; bud.scale.set(.0007, .0015, .0007).multiplyScalar(smooth(.035, .12, age)); leader.add(bud);
     }
-  } else if (species === "iris") {
-    const maturity = .08 + .92 * (1 - Math.exp(-age / 1.5)); const growth = .65 + .35 * smooth(45, 110, day); const flowering = smooth(89, 106, day) * (1 - smooth(145, 158, day)) * smooth(.4, 1.3, age);
-    const count = 1 + Math.floor(6 * maturity * density);
-    const leafMats = ["#617b42", "#799453", "#4b6939"].map(color => new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide, roughness: .75 })); materials.push(...leafMats);
-    const outerGeo = petalGeometry(.082, .035, -.040), innerGeo = petalGeometry(.066, .022, .012); extraGeometries.push(outerGeo, innerGeo);
-    const purple = new THREE.MeshStandardMaterial({ color: "#7c73bf", side: THREE.DoubleSide, roughness: .67 }); const purpleLight = new THREE.MeshStandardMaterial({ color: "#a89bd3", side: THREE.DoubleSide, roughness: .65 }); const white = new THREE.MeshStandardMaterial({ color: "#f1eddf", roughness: .7 }); materials.push(purple, purpleLight, white);
-    for (let c = 0; c < count; c++) {
-      const a = c * 2.3999, rad = c === 0 ? 0 : .075 * Math.sqrt(c); const base = new THREE.Group(); base.position.set(Math.cos(a) * rad, .005, Math.sin(a) * rad); group.add(base);
-      const j = { pivot: base, rest: base.quaternion.clone(), length: .42 * maturity, radius: .012, order: 2, phase: random() * 6.28, flexibility: .85, sag: .015 }; branches.push(j);
-      for (let i = 0; i < 8; i++) { const lean = (i - 3.5) * .17; const length = (.26 + .20 * random()) * maturity * growth; const mesh = new THREE.Mesh(bladeGeometry(length, .025 * maturity, lean, a), leafMats[i % 3]); mesh.position.set(Math.sin(a) * (i - 3.5) * .005, 0, Math.cos(a) * (i - 3.5) * .005); mesh.castShadow = true; mesh.userData.organ = "leaf"; base.add(mesh); leafCount++; }
-      const stemH = .31 * maturity * (.82 + .18 * random());
-      if (flowering > .04 && c % 2 === 0) { cylinder(base, stemH, .003, .0025, stemMat);
-        const flower = new THREE.Group(); flower.userData.organ = "flower"; flower.position.y = stemH; flower.scale.setScalar(Math.min(1, flowering * 1.4)); base.add(flower);
+  } else if (species === "iris" || species === "oxalis") {
+    // Botanical constraints supplied by NCSU Plant Toolbox; geometry is in metres.
+    // Durations, cohort budgets and flowering windows below are uncalibrated
+    // presentation priors, NOT measured germination or first-flowering ages.
+    const iris = species === "iris";
+    const source = iris ? "https://plants.ces.ncsu.edu/plants/iris-tectorum/" : "https://plants.ces.ncsu.edu/plants/oxalis-corniculata/";
+    const keyed = (key: number) => rng((params.seed || 1) + key * 104729)();
+    const phase = keyed(1) * Math.PI * 2;
+    const unit = new THREE.CylinderGeometry(1, 1, 1, 7);
+    const sphere = new THREE.SphereGeometry(1, 10, 6);
+    extraGeometries.push(unit, sphere);
+    const green = new THREE.MeshStandardMaterial({ color: iris ? "#617b42" : "#5f8e49", side: THREE.DoubleSide, roughness: .8 });
+    const storage = new THREE.MeshStandardMaterial({ color: "#9d885d", roughness: .95 });
+    const petalMat = new THREE.MeshStandardMaterial({ color: iris ? "#7c73bf" : "#f4ce3d", side: THREE.DoubleSide, roughness: .7 });
+    const light = new THREE.MeshStandardMaterial({ color: "#b3a5df", side: THREE.DoubleSide, roughness: .7 });
+    materials.push(green, storage, petalMat, light);
+    stageLabel = iris
+      ? age < .025 ? "根茎分株 · 带芽繁殖体" : age < .14 ? "分株建立 · 首叶展开" : age < .5 ? "二列扇叶 · 新叶建立" : "根茎横走 · 分株扩展（繁殖结构为季节先验）"
+      : age < .018 ? "带根匍匐茎节 · 营养繁殖体" : age < .10 ? "茎节建立 · 首片三出复叶" : age < .35 ? "匍匐伸长 · 新节生根" : "匍匐群落 · 连续展叶（繁殖结构为季节先验）";
+    group.userData = { stageLabel, development: {
+      origin: iris ? "rhizome-division" : "rooted-stolon-node", ageClock: "years-since-vegetative-propagule-establishment",
+      seedGerminationModeled: false, source, evidence: "botanical constraints from user-supplied NCSU source; not locally measured",
+      calibration: "uncalibrated-engineering-prior", timing: "cohort expansion is a presentation prior, not a biological flowering-age estimate",
+      flowering: { dayWindow: iris ? [89, 106, 145, 158] : [45, 85, 310, 345], status: "engineering-season-prior", firstFloweringAge: null },
+      reproduction: "flowers only; pollination, capsules and seed dispersal not modeled",
+      seasonalSkeleton: "support axes retained as a structural proxy; seasonal senescence not simulated",
+    } };
+    function segment(parent: THREE.Object3D, start: THREE.Vector3, end: THREE.Vector3, radius: number, material: THREE.Material, role: string) {
+      const mesh = new THREE.Mesh(unit, material);
+      mesh.position.copy(start).lerp(end, .5);
+      const delta = end.clone().sub(start), length = delta.length();
+      if (length > 0) mesh.quaternion.setFromUnitVectors(UP, delta.multiplyScalar(1 / length));
+      mesh.scale.set(radius, length, radius); mesh.name = role;
+      mesh.userData = { role, start: start.toArray(), end: end.toArray() };
+      parent.add(mesh); return mesh;
+    }
+    function root(parent: THREE.Object3D, size: number) {
+      const mesh = segment(parent, new THREE.Vector3(), new THREE.Vector3(.003 * size, -.022 * size, 0), .00065 * size, storage, "adventitious-root");
+      mesh.userData.organ = "root";
+    }
+    function bud(parent: THREE.Object3D, size: number) {
+      const mesh = new THREE.Mesh(sphere, green); mesh.scale.set(.0015, .003, .0015).multiplyScalar(size);
+      mesh.userData.organ = "bud"; parent.add(mesh);
+    }
+    function sway(parent: THREE.Object3D, key: number, length: number) {
+      // Only above-ground organs sway: surface runners and their rooted nodes stay connected.
+      const pivot = new THREE.Group(); parent.add(pivot);
+      branches.push({ pivot, rest: pivot.quaternion.clone(), length, radius: iris ? .003 : .0008,
+        order: 2, phase: keyed(key) * Math.PI * 2, flexibility: iris ? .85 : 1.3, sag: .015 });
+      return pivot;
+    }
+    if (iris) {
+      const outerGeo = petalGeometry(.065, .024, -.045), innerGeo = petalGeometry(.055, .014, .008);
+      const styleGeo = petalGeometry(.042, .007, .004);
+      extraGeometries.push(outerGeo, innerGeo, styleGeo);
+      const fanCount = Math.max(1, Math.round(4 * density));
+      // One shallow, horizontal rhizome chain. Each new fan waits for its segment.
+      let node = new THREE.Vector3(.015, -.003, 0);
+      segment(group, new THREE.Vector3(-.015, -.003, 0), node, .004, storage, "rhizome-propagule");
+      for (let c = 0; c < fanCount; c++) {
+        const birth = c === 0 ? 0 : .5 + (c - 1) * .55;
+        const extension = c === 0 ? 1 : smooth(birth, birth + .22, age);
+        const start = node.clone();
+        if (c > 0) {
+          const angle = phase + .25 * (keyed(100 + c) - .5);
+          node = start.clone().add(new THREE.Vector3(Math.cos(angle), 0, Math.sin(angle)).multiplyScalar(.065 * extension));
+          const rhizome = segment(group, start, node, .0035 * extension, storage, "rhizome");
+          rhizome.userData = { ...rhizome.userData, cohort: c, birth, growth: extension };
+        }
+        const fanBirth = c === 0 ? 0 : birth + .22;
+        const establishment = c === 0 ? 1 : smooth(fanBirth, fanBirth + .10, age);
+        const base = new THREE.Group(); base.name = `iris-fan-${c}`; base.position.copy(node); base.rotation.y = phase;
+        base.userData = { role: "rhizome-node", cohort: c, birth: fanBirth }; group.add(base);
+        root(base, establishment); bud(base, establishment);
+        const expanded = Array.from({ length: 8 }, (_, i) => smooth(fanBirth + .025 + i * .07, fanBirth + .14 + i * .07, age));
+        const fan = sway(base, 200 + c, .40 * expanded[0]);
+        for (let i = 0; i < 8; i++) {
+          const expansion = expanded[i]; if (expansion <= 0) continue;
+          const side = i % 2 === 0 ? -1 : 1;
+          const length = (.30 + .12 * keyed(300 + c * 17 + i)) * expansion;
+          const geometry = bladeGeometry(length, (.019 + .006 * keyed(500 + c * 17 + i)) * expansion, side * (.12 + .065 * (3 - Math.floor(i / 2))), 0);
+          // The generic ribbon bends perpendicular to its width. Iris blades
+          // instead expand and spread in the common plane of the equitant fan.
+          const vertices = geometry.attributes.position;
+          for (let v = 0; v < vertices.count; v++) {
+            vertices.setX(v, vertices.getX(v) + vertices.getZ(v)); vertices.setZ(v, 0);
+          }
+          geometry.computeVertexNormals();
+          const leaf = new THREE.Mesh(geometry, green);
+          // All sword blades share the same x/y plane, in two basal ranks.
+          leaf.position.x = side * .0007 * (4 - Math.floor(i / 2)) * expansion;
+          leaf.userData = { organ: "leaf", role: "sword-blade", arrangement: "distichous-fan", cohort: c, index: i, expansion };
+          leaf.castShadow = true; fan.add(leaf); leafCount++;
+        }
+        const readiness = smooth(4, 7, expanded.reduce((a, b) => a + b, 0));
+        const stemHeight = .32 * readiness;
+        const stalk = segment(fan, new THREE.Vector3(), new THREE.Vector3(0, stemHeight, 0), .0022 * readiness, stemMat, "flower-scape");
+        stalk.userData.organ = "stem";
+        const bloom = smooth(89, 106, day) * (1 - smooth(145, 158, day));
+        const flower = new THREE.Group(); flower.position.y = stemHeight; flower.scale.setScalar(readiness * bloom);
+        flower.userData = { organ: "flower", role: "iris-flower", outerTepals: 3, innerTepals: 3, styleBranches: 3 }; fan.add(flower);
         for (let p = 0; p < 3; p++) {
-          const ang = p * Math.PI * 2 / 3; const petal = new THREE.Mesh(outerGeo, purple); petal.rotation.set(-Math.PI / 2, 0, 0); const frame = new THREE.Group(); frame.rotation.y = ang; frame.add(petal); flower.add(frame);
-          const crest = new THREE.Mesh(new THREE.BoxGeometry(.005, .035, .006), white); crest.position.set(0, -.004, -.030); crest.rotation.x = -Math.PI / 2; frame.add(crest);
-          const innerFrame = new THREE.Group(); innerFrame.rotation.y = ang + Math.PI / 3; const inner = new THREE.Mesh(innerGeo, purpleLight); inner.rotation.x = .22; innerFrame.add(inner); flower.add(innerFrame);
+          const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 3; flower.add(frame);
+          const fall = new THREE.Mesh(outerGeo, petalMat); fall.rotation.x = -Math.PI / 2; fall.userData.role = "drooping-outer-tepal"; frame.add(fall);
+          const style = new THREE.Mesh(styleGeo, light); style.rotation.x = -Math.PI / 2 + .22; style.userData.role = "style-branch"; frame.add(style);
+          const standardFrame = new THREE.Group(); standardFrame.rotation.y = Math.PI / 3; frame.add(standardFrame);
+          const standard = new THREE.Mesh(innerGeo, light); standard.rotation.x = .22; standard.userData.role = "upright-inner-tepal"; standardFrame.add(standard);
         }
       }
-    }
-  } else {
-    const maturity = .08 + .92 * (1 - Math.exp(-age / .5)); const count = Math.max(2, Math.floor((5 + maturity * 34) * density));
-    const yellow = new THREE.MeshStandardMaterial({ color: "#f4ce3d", side: THREE.DoubleSide, roughness: .7 }); const centerMat = new THREE.MeshStandardMaterial({ color: "#c8a334", roughness: .9 }); const green = new THREE.MeshStandardMaterial({ color: "#5f8e49", side: THREE.DoubleSide, roughness: .75 }); materials.push(yellow, centerMat, green);
-    const petal = petalGeometry(.015, .008, -.002); extraGeometries.push(petal); const blooming = smooth(45, 85, day) * (1 - smooth(310, 345, day));
-    for (let i = 0; i < count; i++) {
-      const a = i * 2.39996, rad = .25 * maturity * Math.sqrt(i / count); const x = Math.cos(a) * rad, z = Math.sin(a) * rad; const h = .045 + random() * .085 * maturity;
-      const base = new THREE.Group(); base.position.set(x, .008, z); group.add(base); cylinder(base, h, .0017, .001, stemMat);
-      branches.push({ pivot: base, rest: base.quaternion.clone(), length: h, radius: .0017, order: 2, phase: random() * 6.28, flexibility: 1.3, sag: .02 });
-      const leaf = new THREE.Group(); leaf.userData.organ = "leaf"; leaf.position.y = h; leaf.rotation.y = a; base.add(leaf);
-      for (let p = 0; p < 3; p++) { const mesh = new THREE.Mesh(leafGeometry, green); mesh.rotation.set(-Math.PI / 2 + .12, 0, p * 2 * Math.PI / 3); leaf.add(mesh); leafCount++; }
-      if (i > 0) { const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(-x * .28, -.002, -z * .28)]), new THREE.LineBasicMaterial({ color: "#7e8b4e" })); base.add(line); }
-      if (i % 3 === 0 && blooming > .1) {
-        const fs = new THREE.Group(); fs.userData.organ = "flower"; fs.position.set(.017, h * .65 + .045, .008); fs.rotation.x = -.2; base.add(fs); fs.scale.setScalar(blooming);
-        for (let p = 0; p < 5; p++) { const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 5; const mesh = new THREE.Mesh(petal, yellow); mesh.rotation.x = -Math.PI / 2 + .15; frame.add(mesh); fs.add(frame); }
-        const center = new THREE.Mesh(new THREE.SphereGeometry(.0035, 6, 4), centerMat); fs.add(center);
+    } else {
+      const petalGeo = petalGeometry(.006, .003, -.0006); extraGeometries.push(petalGeo);
+      const origin = new THREE.Group(); origin.position.y = .003; origin.name = "oxalis-rooted-propagule"; group.add(origin);
+      segment(origin, new THREE.Vector3(-.008, 0, 0), new THREE.Vector3(), .0009, stemMat, "stolon-propagule");
+      root(origin, 1); bud(origin, 1);
+      const runnerCount = Math.max(1, Math.round(3 * density)), nodeLimit = 6;
+      function nodeOrgans(parent: THREE.Object3D, birth: number, key: number) {
+        const establishment = smooth(birth, birth + .05, age); if (key !== 0) root(parent, establishment);
+        const expansion = smooth(birth + .018, birth + .10, age);
+        if (expansion <= 0) return;
+        const height = (.035 + .035 * keyed(800 + key)) * expansion;
+        const pivot = sway(parent, 900 + key, height);
+        segment(pivot, new THREE.Vector3(), new THREE.Vector3(0, height, 0), .00065 * expansion, stemMat, "petiole");
+        const leaf = new THREE.Group(); leaf.position.y = height; leaf.rotation.y = phase + keyed(1000 + key) * Math.PI;
+        leaf.userData = { organ: "leaf", role: "trifoliate-leaf", node: key, birth, expansion }; pivot.add(leaf);
+        for (let p = 0; p < 3; p++) {
+          const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 3; leaf.add(frame);
+          const mesh = new THREE.Mesh(leafGeometry, green); mesh.rotation.x = -Math.PI / 2;
+          mesh.scale.setScalar((.38 + .10 * keyed(1100 + key)) * expansion);
+          mesh.userData.role = "heart-shaped-leaflet"; frame.add(mesh);
+        }
+        leafCount++; // Count compound leaves, not their three leaflets.
+        const readiness = smooth(.85, 1, expansion) * smooth(.10, .28, age);
+        const tip = new THREE.Vector3(.016 * readiness, height * readiness, .008 * readiness);
+        const stalk = segment(pivot, new THREE.Vector3(), tip, .00045 * readiness, stemMat, "axillary-peduncle"); stalk.userData.organ = "stem";
+        const flower = new THREE.Group(); flower.position.copy(tip);
+        const bloom = smooth(45, 85, day) * (1 - smooth(310, 345, day)); flower.scale.setScalar(readiness * bloom);
+        flower.userData = { organ: "flower", role: "oxalis-flower", petals: 5 }; pivot.add(flower);
+        for (let p = 0; p < 5; p++) {
+          const frame = new THREE.Group(); frame.rotation.y = p * Math.PI * 2 / 5;
+          const mesh = new THREE.Mesh(petalGeo, petalMat); mesh.rotation.x = -Math.PI / 2 + .15; frame.add(mesh); flower.add(frame);
+        }
+      }
+      nodeOrgans(origin, 0, 0);
+      for (let r = 0; r < runnerCount; r++) {
+        let parent: THREE.Object3D = origin;
+        for (let n = 1; n <= nodeLimit; n++) {
+          const birth = .12 + r * .045 + (n - 1) * .14;
+          const extension = smooth(birth, birth + .10, age);
+          const angle = phase + r * Math.PI * 2 / runnerCount + .2 * (keyed(1200 + r * 31 + n) - .5);
+          const end = new THREE.Vector3(Math.cos(angle), 0, Math.sin(angle)).multiplyScalar((.035 + .015 * keyed(1300 + r * 31 + n)) * extension);
+          const internode = segment(parent, new THREE.Vector3(), end, .0008 * extension, stemMat, "stolon-internode");
+          internode.userData = { ...internode.userData, runner: r, node: n, birth, growth: extension };
+          const node = new THREE.Group(); node.name = `oxalis-node-${r}-${n}`; node.position.copy(end);
+          node.userData = { role: "rooting-stolon-node", runner: r, node: n, birth: birth + .10 }; parent.add(node);
+          nodeOrgans(node, birth + .10, r * nodeLimit + n); parent = node;
+        }
       }
     }
   }
   // Copy organ labels to descendants as well as roots: skeleton renderers can toggle
   // every object independently without making an unlabelled petal/leaf visible again.
   group.traverse(obj => { if (!obj.userData.organ && obj.parent?.userData.organ) obj.userData.organ = obj.parent.userData.organ; });
-  group.updateMatrixWorld(true); const box = new THREE.Box3().setFromObject(group); const height = Math.max(species === "osmanthus" ? .001 : .05, box.max.y);
+  group.updateMatrixWorld(true); const box = new THREE.Box3().setFromObject(group); const height = Math.max(.001, box.max.y);
   // Compute gravity in each branch's undeformed local frame. This is a rest-pose
   // cantilever approximation: descendants inherit parent deformation, while local
   // torque axes are not re-solved with the fully deformed geometry as in FEA.

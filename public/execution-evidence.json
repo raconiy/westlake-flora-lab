@@ -1,0 +1,40 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "high",
+  "overlapMs": 41252,
+  "overlapStart": "2026-11-05T15:01:48.672Z",
+  "overlapEnd": "2026-11-05T15:02:29.924Z",
+  "proven": true,
+  "distinctAccounts": 3,
+  "verifiedAt": "2026-11-05T15:03:40.633Z",
+  "scope": "Three distinct authenticated GPT-Load upstream forwarding intervals overlap; not a GPU timing measurement.",
+  "accounts": [
+    {
+      "slot": "B",
+      "credentialId": 2,
+      "requestId": "26dc7326-19e7-4dcd-9d97-b3b4f510dca8",
+      "startedAt": 1793890908672,
+      "completedAt": 1793890958830,
+      "httpStatus": 200,
+      "role": "botanical-structure"
+    },
+    {
+      "slot": "A",
+      "credentialId": 1,
+      "requestId": "86223215-8fd8-4f3c-960e-98d9dafc0476",
+      "startedAt": 1793890908672,
+      "completedAt": 1793891019603,
+      "httpStatus": 200,
+      "role": "render-realism"
+    },
+    {
+      "slot": "C",
+      "credentialId": 3,
+      "requestId": "4b86e713-f2fd-40ed-9e91-6b642856d8a8",
+      "startedAt": 1793890908672,
+      "completedAt": 1793890949924,
+      "httpStatus": 200,
+      "role": "growth-workflow"
+    }
+  ]
+}

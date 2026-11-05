@@ -75,5 +75,15 @@
     "source": "https://plants.ces.ncsu.edu/plants/acer-palmatum/",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
     "use": "物种形态参考，非云谷个体照片；原文件未修改"
+  },
+  {
+    "species": "camphor",
+    "file": "camphor-leaves.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Starr_060429-8045_Cinnamomum_camphora.jpg",
+    "author": "Forest and Kim Starr",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Starr_060429-8045_Cinnamomum_camphora.jpg",
+    "use": "香樟叶片形态参考，非云谷个体；原文件未修改"
   }
 ]

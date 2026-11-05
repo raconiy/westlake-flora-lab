@@ -1,4 +1,4 @@
-import type {Scenario} from './species';
+import {initialScenario,validateScenario,type Scenario} from './species.ts';
 
 export const COMMUNITY_API = 'https://westlake-flora-lab-yungu.sableborage.chatgpt.site/api/community';
 export const FEEDBACK_LIMIT = 2000;
@@ -6,7 +6,7 @@ export const POLL_INTERVAL = 4000;
 export const feedbackStatuses = {
   received: '已接收', triaging: '正在分流', awaiting_review: '等待审核',
   queued: '排队中', running: '处理中', validating: '验证中', review: '等待复核',
-  failed: '处理失败', deployed: '已部署',
+  failed: '处理失败', deployed: '已部署', completed:'已回复',
 } as const;
 export type FeedbackStatus = keyof typeof feedbackStatuses;
 export type Suggestion = {
@@ -31,7 +31,7 @@ export function statusLabel(status: string) {
   return feedbackStatuses[status as FeedbackStatus] ?? '状态待确认';
 }
 
-export function isFinished(status: string) { return status === 'failed' || status === 'deployed'; }
+export function isFinished(status: string) { return status === 'failed' || status === 'deployed' || status === 'completed'; }
 
 export function feedbackError(error: unknown): string {
   return error instanceof FeedbackError ? error.message : '暂时无法连接社区服务，请稍后重试。';
@@ -122,6 +122,11 @@ export class FeedbackClient {
     }
   }
 
+  async history(signal?:AbortSignal):Promise<{text:string;scenario:Scenario;job:ChatJob}[]> {
+    const data=await this.authenticated('/history',undefined,signal);
+    if(!Array.isArray(data.turns))invalidResponse();
+    return data.turns.map(value=>{if(!object(value)||typeof value.text!=='string'||!object(value.scenario)||!validJob(value.job))invalidResponse();return{text:value.text,scenario:validateScenario({...initialScenario,...value.scenario}),job:value.job};});
+  }
   async health(signal?: AbortSignal): Promise<CommunityHealth> {
     const data = await this.request('/health', {signal});
     if (typeof data.ok !== 'boolean' || !object(data.relay) || typeof data.relay.online !== 'boolean') invalidResponse();

@@ -1,0 +1,165 @@
+{
+  "version": "2026-11-05",
+  "scope": "物种文献约束与模型范围，不是云谷个体实测",
+  "physicalModel": {
+    "units": "SI: metre, second, kilogram, newton, pascal",
+    "branch": "圆截面悬臂的一阶转动近似，风阻与风速平方、迎风面积有关；重力通过质量与质心力臂产生弯矩",
+    "material": "等效弹性模量、密度、阻尼及叶片厚度为未校准工程先验；木材各向异性、含水率和缺陷影响实测值",
+    "source": "https://research.fs.usda.gov/treesearch/62244",
+    "unimplemented": [
+      "完整气弹性与流固耦合",
+      "根土锚固与断裂",
+      "土壤水力和光合碳分配",
+      "繁殖过程与生理衰老"
+    ]
+  },
+  "species": [
+    {
+      "id": "ginkgo",
+      "name": "银杏",
+      "source": "https://plants.ces.ncsu.edu/plants/ginkgo-biloba/",
+      "traits": [
+        "落叶乔木；幼冠较窄，成年趋宽卵形",
+        "长枝互生扇叶，短枝承载簇叶；叶脉二歧分叉",
+        "种子萌发时子叶留在种内，真叶随后出土"
+      ],
+      "growthSequence": [
+        "种子与胚根",
+        "初生茎与真叶",
+        "长短枝分化",
+        "树冠与木质轴增粗"
+      ],
+      "limits": [
+        "冬季木质轴保留，失叶降低叶面风载",
+        "雌雄个体与繁殖成熟必须另行确认"
+      ],
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+    },
+    {
+      "id": "osmanthus",
+      "name": "桂花",
+      "source": "https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/",
+      "traits": [
+        "常绿灌木或小乔木",
+        "对生、革质单叶；腋生小型四裂花",
+        "品种和修剪影响树形与花期，不能统一设为精确日期"
+      ],
+      "growthSequence": [
+        "种子与胚根",
+        "首批真叶成对展开",
+        "叶节形成与侧枝建立",
+        "多级分枝与花序"
+      ],
+      "limits": [
+        "常绿叶不等于叶片永不更替",
+        "种子休眠和萌发条件未求解"
+      ],
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+    },
+    {
+      "id": "iris",
+      "name": "鸢尾",
+      "source": "https://plants.ces.ncsu.edu/plants/iris-tectorum/",
+      "traits": [
+        "近地表横走根茎",
+        "剑形叶在基部呈二列扇状",
+        "花被内外轮形态不同，外花被有冠状附属结构"
+      ],
+      "growthSequence": [
+        "根茎分株起点",
+        "首批基生叶",
+        "扇状叶丛与新根",
+        "根茎扩展与花茎"
+      ],
+      "limits": [
+        "当前建立过程以分株为对象，非种子胚发育",
+        "土壤水分仅为相对示意"
+      ],
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+    },
+    {
+      "id": "oxalis",
+      "name": "酢浆草",
+      "source": "https://plants.ces.ncsu.edu/plants/oxalis-corniculata/",
+      "traits": [
+        "匍匐生长，茎节可形成不定根",
+        "三出复叶，小叶心形；黄色小花",
+        "可由种子和营养体扩展，果实为细长蒴果"
+      ],
+      "growthSequence": [
+        "繁殖体建立",
+        "首批三出叶",
+        "匍匐轴与节生根",
+        "分枝扩展与花期"
+      ],
+      "limits": [
+        "未求解弹射散播机制",
+        "不把三个小叶统计成三枚复叶"
+      ],
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+    },
+    {
+      "id": "camphor",
+      "name": "香樟",
+      "source": "https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/",
+      "traits": [
+        "常绿大乔木，树冠开展",
+        "互生单叶，基部有明显三出脉",
+        "排水不良可影响根系健康"
+      ],
+      "growthSequence": [
+        "种子建立",
+        "主轴和首叶",
+        "多级侧枝与冠层",
+        "树冠展开与木质增粗"
+      ],
+      "limits": [
+        "常绿换叶与叶龄仍需独立测量",
+        "根网深度和分布为工程先验"
+      ],
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+    },
+    {
+      "id": "acer",
+      "name": "鸡爪槭",
+      "source": "https://plants.ces.ncsu.edu/plants/acer-palmatum/",
+      "traits": [
+        "落叶小乔木，对生掌状裂叶",
+        "枝条开展，树冠可呈层次状",
+        "夏季叶色、树形和秋色显著受品种影响"
+      ],
+      "growthSequence": [
+        "种子或苗木建立",
+        "对生叶节点",
+        "细枝与层状冠建立",
+        "冠幅扩展与秋色"
+      ],
+      "limits": [
+        "校园品种和是否嫁接未确认",
+        "不能将未知个体默认全年红叶"
+      ],
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+    },
+    {
+      "id": "ophiopogon",
+      "name": "麦冬",
+      "source": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+      "traits": [
+        "常绿根茎地被，狭线形基生叶",
+        "地下细轴扩展产生新株丛，非木本树枝",
+        "小型淡色花与蓝色果实，常隐藏于叶丛"
+      ],
+      "growthSequence": [
+        "分株/新株建立",
+        "基生狭叶展开",
+        "须根与根茎扩展",
+        "新株丛形成"
+      ],
+      "limits": [
+        "模型按营养繁殖建立，不冒充种子胚发育",
+        "须根与储藏根参数未实测"
+      ],
+      "ageAndTiming": "年龄阈值和几何曲线为未校准工程先验；不作为萌发天数、成熟年龄或寿命的实测值"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {buildPlant} from './plant-engine.ts';
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
 import { osmanthusLifecycle, osmanthusPriors, osmanthusGrowth } from './osmanthus-lifecycle.ts';
 
@@ -12,7 +13,7 @@ export interface RhizosphereParams {
   /** Relative soil moisture and compaction, each 0–1; uncalibrated. */
   moisture: number; compaction: number;
   /** Available soil profile depth, metres. */
-  soilDepth: number; cutaway: boolean;
+  soilDepth: number; cutaway: boolean; density?:number;
 }
 export interface RhizosphereModel {
   group: THREE.Group;
@@ -127,11 +128,12 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
   function addRoot(points: THREE.Vector3[], radius: number, order: number, organ = 'root') {
     // The centreline cannot cross above the soil or below the supplied profile.
     radius = Math.min(radius, soilDepth * .12);
-    points = points.map(p => new THREE.Vector3(p.x, clamp(p.y, -soilDepth + radius + .0001, osmanthus ? -.00005 : -.002 - radius), p.z));
+    const surfaceAxis=organ==='rhizome'||organ==='stolon';
+    points = points.map(p => new THREE.Vector3(p.x, clamp(p.y, -soilDepth + radius + .0001, surfaceAxis?.003:osmanthus ? -.00005 : -.002 - radius), p.z));
     const built = taperedTube(points, radius, order < 2 ? 8 : 5, order < 2 ? 24 : 12);
     // Avoid spline overshoot protruding above the soil or through a shallow hard boundary.
     const positions = built.geometry.attributes.position;
-    for (let i = 0; i < positions.count; i++) positions.setY(i, clamp(positions.getY(i), -soilDepth + .00005, -.00005));
+    for (let i = 0; i < positions.count; i++) positions.setY(i, clamp(positions.getY(i), -soilDepth + .00005, surfaceAxis?.008:-.00005));
     built.geometry.computeVertexNormals();
     const material = organ === 'rhizome' ? rhizomeMat : order > 1 ? fineMat : coarseMat;
     const mesh = new THREE.Mesh(built.geometry, material);
@@ -156,7 +158,41 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
       if (order === 1 && (species !== 'ginkgo' || age > .2)) laterals(curve, 3 + Math.floor(random() * 3), len * .45, radius * .28, 2, angle + .8);
     }
   }
-  if (additional) {
+  if (species === 'iris' || species === 'oxalis') {
+    // Reuse actual clonal support-axis endpoints, not an unrelated radial root proxy.
+    // The small herb generator runs only on rebuild. Its geometry is disposed after extraction.
+    const source = buildPlant(species,{age,day:180,seed,density:clamp(finite(params.density??1,1),.15,2)});
+    const rootAnchors:{origin:THREE.Vector3;growth:number;key:number}[]=[];
+    let supportCount=0;
+    source.group.updateMatrixWorld(true);
+    source.group.traverse(object=>{
+      if(!(object instanceof THREE.Mesh)||!object.parent)return;
+      const role=object.userData.role;
+      if(!['rhizome-propagule','rhizome','stolon-propagule','stolon-internode','adventitious-root'].includes(role))return;
+      const a=object.userData.start,b=object.userData.end;
+      if(!Array.isArray(a)||!Array.isArray(b))return;
+      const start=new THREE.Vector3().fromArray(a).applyMatrix4(object.parent.matrixWorld);
+      const end=new THREE.Vector3().fromArray(b).applyMatrix4(object.parent.matrixWorld);
+      if(start.distanceTo(end)<1e-8||object.scale.x<=1e-8)return;
+      const organ=role==='adventitious-root'?'root':species==='iris'?'rhizome':'stolon';
+      const mid=start.clone().lerp(end,.5);
+      addRoot([start,mid,end],object.scale.x,organ==='root'?1:0,organ);
+      supportCount++;
+      if(organ==='root')rootAnchors.push({origin:start.clone(),growth:clamp(object.scale.x/.00065),key:rootAnchors.length});
+    });
+    source.dispose();
+    for(const anchor of rootAnchors){
+      const depth=(species==='iris'?.24:.095)*anchor.growth*expansion*(1-Math.exp(-age/.55));
+      if(depth<1e-7)continue;
+      for(let f=0;f<(species==='iris'?7:4);f++){
+        const rr=randomSource(seed+anchor.key*811+f*127),angle=f*2.39996+rr()*.4;
+        const tip=anchor.origin.clone().add(new THREE.Vector3(Math.cos(angle)*depth*.38,-depth*(.55+rr()*.45),Math.sin(angle)*depth*.38));
+        const curve=addRoot([anchor.origin.clone(),anchor.origin.clone().lerp(tip,.5),tip],(species==='iris'?.0011:.00045)*anchor.growth,1);
+        laterals(curve,2,depth*.18,(species==='iris'?.0003:.00014)*anchor.growth,2,angle);
+      }
+    }
+    Object.assign(group.userData,{sharedTopology:'actual-herb-support-axis-endpoints',supportCount,establishment:species==='iris'?'rhizome-division':'rooted-stolon-node',fiberExtension:'uncalibrated-engineering-prior'});
+  } else if (additional) {
     const herb = species === 'ophiopogon', maturity = additional.maturity;
     const depth = Math.min(soilDepth * .85, (herb ? .24 : species === 'camphor' ? 1.8 : .95) * maturity * expansion + .025 * additional.radicle);
     const reach = (herb ? .17 : species === 'camphor' ? 3.4 : 2.2) * maturity * expansion;

@@ -15,7 +15,7 @@ function dateLabel(value: string) {
   return Number.isNaN(date.getTime()) ? '时间待确认' : date.toLocaleString('zh-CN', {month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
 }
 function deploymentLink(value?: string) {
-  try { const url = new URL(value || ''); return url.protocol === 'https:' && !url.username && !url.password && url.hostname.endsWith('.chatgpt.site') ? url.href : undefined; }
+  try { const url = new URL(value || ''); return url.protocol === 'https:' && !url.username && !url.password && (url.origin==='https://raconiy.github.io'&&url.pathname.startsWith('/westlake-flora-lab/')) ? url.href : undefined; }
   catch { return undefined; }
 }
 function Status({status}: {status: string}) {
@@ -23,14 +23,17 @@ function Status({status}: {status: string}) {
 }
 
 /** Embed with <FeedbackHub scenario={scenario} />. No page wiring or existing state is required. */
-export default function FeedbackHub({scenario}: {scenario: Scenario}) {
+export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario;inline?:boolean}) {
   const [client] = useState(() => new FeedbackClient());
   const [open, setOpen] = useState(false);
+  const visible=inline||open;
   const [mode, setMode] = useState<'chat' | 'suggest'>('chat');
   const [chatInput, setChatInput] = useState('');
   const [suggestInput, setSuggestInput] = useState('');
   const [health, setHealth] = useState<CommunityHealth | null>(null);
+  const [proof,setProof]=useState<{proven:boolean;distinctAccounts:number;model:string;reasoningEffort:string;overlapMs:number;verifiedAt:string;accounts:{slot:string;requestId:string;httpStatus:number}[]}|null>(null);
   const [healthError, setHealthError] = useState('');
+  const [historyError,setHistoryError]=useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [boardError, setBoardError] = useState('');
   const [boardLoaded, setBoardLoaded] = useState(false);
@@ -58,7 +61,7 @@ export default function FeedbackHub({scenario}: {scenario: Scenario}) {
   }, []);
 
   useEffect(() => {
-    if (!open) return;
+    if (!visible) return;
     const controller = new AbortController();
     let timer: ReturnType<typeof setTimeout>;
     async function refresh() {
@@ -75,7 +78,12 @@ export default function FeedbackHub({scenario}: {scenario: Scenario}) {
     }
     void refresh();
     return () => { controller.abort(); clearTimeout(timer); };
-  }, [client, open, refreshTick]);
+  }, [client, visible, refreshTick]);
+
+  const historyLoaded=useRef(false);
+  useEffect(()=>{if(!visible||historyLoaded.current)return;const controller=new AbortController();client.history(controller.signal).then(history=>{if(controller.signal.aborted)return;historyLoaded.current=true;setHistoryError('');setTurns(current=>[...history.filter(h=>!current.some(t=>t.job?.id===h.job.id)).map(h=>({key:h.job.id,...h})),...current]);}).catch(error=>{if(!controller.signal.aborted)setHistoryError(feedbackError(error));});return()=>controller.abort();},[client,visible,refreshTick]);
+
+  useEffect(()=>{if(!visible)return;const controller=new AbortController();fetch(`${import.meta.env.BASE_URL}execution-evidence.json`,{signal:controller.signal}).then(r=>r.ok?r.json():null).then(value=>{if(!controller.signal.aborted&&value?.proven===true&&value.distinctAccounts===3&&Array.isArray(value.accounts))setProof(value);}).catch(()=>{});return()=>controller.abort();},[visible]);
 
   const jobId = activeTurn?.job?.id;
   const turnKey = activeTurn?.key;
@@ -100,14 +108,20 @@ export default function FeedbackHub({scenario}: {scenario: Scenario}) {
   }, [client, jobId, turnKey, pollTick]);
 
   useEffect(() => {
-    if (!open) return;
+    const show=()=>{setMode('suggest');setOpen(true);};
+    window.addEventListener('flora:feedback',show);
+    return()=>window.removeEventListener('flora:feedback',show);
+  },[]);
+
+  useEffect(() => {
+    if (!visible) return;
     textarea.current?.focus();
     function keydown(event: KeyboardEvent) {
-      if (event.key === 'Escape') { setOpen(false); opener.current?.focus(); }
+      if (event.key === 'Escape'&&!inline) { setOpen(false); opener.current?.focus(); }
     }
     document.addEventListener('keydown', keydown);
     return () => document.removeEventListener('keydown', keydown);
-  }, [open]);
+  }, [visible]);
 
   async function sendChat(turn: Turn) {
     const signal = lifetime.current?.signal;
@@ -163,14 +177,17 @@ export default function FeedbackHub({scenario}: {scenario: Scenario}) {
   const serviceLabel = healthError ? '社区服务暂不可达' : !health ? '连接状态待检测'
     : !health.ok ? '社区服务暂未就绪' : health.relay.online ? '助手服务已连接' : '助手暂离线 · 建议可尝试提交';
 
-  return <div className="feedback-hub">
-    <button ref={opener} type="button" className="fh-launcher" aria-expanded={open} aria-controls={panelId}
-      onClick={() => setOpen(value => !value)}><MessageCircle size={19} aria-hidden="true"/><span>建议与助手</span><span className="fh-launcher-dot" aria-hidden="true"/></button>
-    {open && <aside ref={panel} id={panelId} className="fh-panel" role="dialog" aria-label="植物社区建议与助手" aria-labelledby={titleId}>
+  return <div className={`feedback-hub ${inline?'fh-inline':''}`}>
+    {!inline&&<button ref={opener} type="button" className="fh-launcher" aria-expanded={open} aria-controls={panelId}
+      onClick={() => setOpen(value => !value)}><MessageCircle size={19} aria-hidden="true"/><span>建议与助手</span><span className="fh-launcher-dot" aria-hidden="true"/></button>}
+    {visible && <aside ref={panel} id={panelId} className="fh-panel" role={inline?'region':'dialog'} aria-label="植物社区建议与助手" aria-labelledby={titleId}>
       <header className="fh-header"><div className="fh-mark"><Leaf size={22} aria-hidden="true"/></div><div><span className="fh-eyebrow">WESTLAKE · COMMUNITY</span><h2 id={titleId}>一起，让生境更真实。</h2></div>
-        <button type="button" className="fh-icon-button" aria-label="关闭建议与助手" onClick={() => {setOpen(false); opener.current?.focus();}}><X size={20}/></button></header>
+        {!inline&&<button type="button" className="fh-icon-button" aria-label="关闭建议与助手" onClick={() => {setOpen(false); opener.current?.focus();}}><X size={20}/></button>}</header>
       <div className="fh-connection" role="status"><span className={`fh-dot ${health?.ok && health.relay.online && !healthError ? 'fh-connected' : ''}`}/><span>{serviceLabel}</span>
         <button type="button" onClick={() => setRefreshTick(n => n + 1)} aria-label="重新检测连接并刷新建议"><RefreshCw size={13}/></button></div>
+      {health?.relay.online&&<div className="fh-model-evidence"><b>{health.relay.model} / {health.relay.reasoningEffort}</b><span>{health.relay.availableAccounts??'—'} 个可用账号 · {typeof health.relay.workers==='number'?health.relay.workers:'—'} 个执行器 · 云端共享记录</span></div>}
+      {proof&&<details className="fh-proof"><summary>已核验 {proof.distinctAccounts} 个账号同时调用 · {proof.model} / {proof.reasoningEffort}</summary><p>本轮上游转发区间共同重叠 {(proof.overlapMs/1000).toFixed(3)} 秒；验收时间 {new Date(proof.verifiedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})}。</p>{proof.accounts.map(a=><p key={a.slot}>匿名账号 {a.slot} · HTTP {a.httpStatus} · 请求 {a.requestId.slice(0,8)}</p>)}<p>这是已完成调用的日志验收；当前连接与可用账号数以上方健康状态为准。</p><a href={`${import.meta.env.BASE_URL}execution-evidence.json`} target="_blank" rel="noreferrer">查看可核对回执 ↗</a></details>}
+      {historyError&&<p className="fh-network-note">历史对话暂未恢复：{historyError}<button type="button" onClick={()=>setRefreshTick(n=>n+1)}>重新读取</button></p>}
       {healthError && <p className="fh-network-note">{healthError}</p>}
       <div className="fh-tabs" role="group" aria-label="选择问助手或提建议">
         <button type="button" aria-pressed={mode === 'chat'} className={mode === 'chat' ? 'fh-selected' : ''} onClick={() => setMode('chat')}><MessageCircle size={15}/>问助手</button>
@@ -184,12 +201,13 @@ export default function FeedbackHub({scenario}: {scenario: Scenario}) {
               <div className="fh-user"><small>你 · {speciesNames[turn.scenario.species]}</small><p>{turn.text}</p></div>
               <div className="fh-assistant">
                 {turn.sending ? <p className="fh-pending" role="status"><LoaderCircle size={14} className="fh-spin"/>正在发送，请勿重复提交…</p> : <>
-                  {turn.job && <div className="fh-job-state"><Status status={turn.job.status}/>{!turn.job.reply && !turn.job.error && !isFinished(turn.job.status) && <span>尚未收到回复 · 每 4 秒查询</span>}</div>}
+                  {turn.job && <div className="fh-job-state"><Status status={turn.job.status}/><small title={turn.job.id}>请求 {turn.job.id.slice(0,8)}</small>{!turn.job.reply && !turn.job.error && !isFinished(turn.job.status) && <span>尚未收到回复 · 每 4 秒查询</span>}</div>}
                   {turn.job?.reply && <><small>助手回复</small><p className="fh-reply">{turn.job.reply}</p></>}
                   {(turn.job?.error || turn.job?.status === 'failed') && <p className="fh-error">本次助手处理失败。可复制上方问题，重新发起对话。</p>}
                   {turn.job && isFinished(turn.job.status) && !turn.job.reply && !turn.job.error && turn.job.status !== 'failed' && <p className="fh-note">服务处理已结束，但未返回助手正文。</p>}
                   {turn.error && <div className="fh-error" role="alert"><p>{turn.error}</p><button type="button" disabled={sendLock.current} onClick={() => turn.job ? setPollTick(n => n + 1) : void sendChat(turn)}>{turn.job ? '重试查询' : '重试同一请求'}</button>{!turn.job && <button type="button" onClick={() => setTurns(items => items.filter(item => item.key !== turn.key))}>取消重试</button>}</div>}
-                  {!!turn.job?.suggestions?.length && <p className="fh-note">助手整理了 {turn.job.suggestions.length} 条修改提案；提交为公开建议后可跟进处理。</p>}
+                  {!!turn.job?.suggestions?.length && <p className="fh-note">助手整理了 {turn.job.suggestions.length} 条修改提案；展开检查并编辑为公开建议。</p>}
+                  {turn.job?.suggestions?.map((proposal,i)=><details className="fh-proposal" key={i}><summary>{proposal.kind==='code'?'代码提案':'研究提案'} · {proposal.title}</summary><p>{proposal.prompt}</p><button type="button" onClick={()=>{setSuggestInput(`${proposal.title}\n${proposal.prompt}`);setMode('suggest');textarea.current?.focus();}}>编辑为公开建议</button></details>)}
                 </>}
               </div>
             </article>)}
@@ -211,7 +229,7 @@ export default function FeedbackHub({scenario}: {scenario: Scenario}) {
           {boardError && <div className="fh-error" role="alert"><p>{boardError}{boardLoaded ? ' 下方保留上次读取的记录。' : ''}</p><button type="button" onClick={() => setRefreshTick(n => n + 1)}>重试读取</button></div>}
           {!boardLoaded && !boardError && <p className="fh-empty">正在读取公开建议…</p>}
           {boardLoaded && !suggestions.length && <p className="fh-empty">暂时没有公开建议，欢迎分享你的第一条观察。</p>}
-          {suggestions.map(item => { const url = deploymentLink(item.deploymentUrl); return <article className="fh-card" key={item.id}><div className="fh-card-top"><span>{speciesNames[item.species] || '其他物种'}</span><Status status={item.status}/></div><p>{item.text}</p>{item.summary && <p className="fh-summary">处理摘要：{item.summary}</p>}{item.status === 'failed' && <p className="fh-error">本条建议处理未完成，等待维护者跟进。</p>}<div className="fh-card-footer"><time dateTime={item.createdAt}>{dateLabel(item.createdAt)}</time>{item.status === 'deployed' && url && <a href={url} target="_blank" rel="noopener noreferrer">查看部署<ChevronRight size={12}/></a>}</div></article>; })}
+          {suggestions.map(item => { const url = deploymentLink(item.deploymentUrl); return <article className="fh-card" key={item.id}><div className="fh-card-top"><span>{speciesNames[item.species] || '其他物种'}</span><Status status={item.status}/></div><p>{item.text}</p>{item.summary && <p className="fh-summary">处理摘要：{item.summary}</p>}{item.status === 'failed' && <p className="fh-error">本条建议处理未完成，等待维护者跟进。</p>}<div className="fh-card-footer"><code title={item.id}>记录 {item.id.slice(0,8)}{item.taskId?` · 任务 ${item.taskId.slice(0,8)}`:''}</code><time dateTime={item.createdAt}>{dateLabel(item.createdAt)}</time>{item.status === 'deployed' && url && <a href={url} target="_blank" rel="noopener noreferrer">查看部署<ChevronRight size={12}/></a>}</div></article>; })}
         </section>
         <p className="fh-privacy">访客会话仅用于本次交流，可保存在此浏览器。会话凭据不在公开看板显示。</p>
       </div>
