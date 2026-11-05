@@ -1,6 +1,7 @@
 import {geometryHeight} from './geometry-height.ts';
 import * as THREE from "three";
 import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
+import {mapWoodyBarkUV,wireWoodyBarkSurface,wireWoodyLeafSurface} from "./woody-materials.ts";
 import {tagLeafStrip,mergedLeafStripAttributes} from "./herb-leaf-dynamics.ts";
 import type { PlantParams, PlantModel, BranchJoint } from "./plant-engine";
 
@@ -28,10 +29,10 @@ const UP = new THREE.Vector3(0,1,0);
 const clamp=(x:number,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const smooth=(a:number,b:number,x:number)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t)};
 function randomFor(seed:number){let s=seed>>>0;return()=>{s+=0x6D2B79F5;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}};
-function curvedTube(curve:THREE.Curve<THREE.Vector3>,radius:number,tip:number,segments=10,sides=6){
+function curvedTube(curve:THREE.Curve<THREE.Vector3>,radius:number,tip:number,segments=10,sides=6,woodySurface=false){
  const f=curve.computeFrenetFrames(segments,false),p:number[]=[],uv:number[]=[],ix:number[]=[];
  for(let i=0;i<=segments;i++){const t=i/segments,c=curve.getPointAt(t),r=tip+(radius-tip)*Math.pow(1-t,.86);for(let j=0;j<=sides;j++){const a=j/sides*Math.PI*2,n=f.normals[i].clone().multiplyScalar(Math.cos(a)*r).addScaledVector(f.binormals[i],Math.sin(a)*r);p.push(c.x+n.x,c.y+n.y,c.z+n.z);uv.push(j/sides,t*curve.getLength());if(i<segments&&j<sides){const v=i*(sides+1)+j;ix.push(v,v+sides+1,v+1,v+1,v+sides+1,v+sides+2)}}}
- const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(p,3));g.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();return tagWoodTube(g,segments,sides);
+ const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(p,3));g.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();if(woodySurface)mapWoodyBarkUV(g,radius,curve.getLength());return tagWoodTube(g,segments,sides);
 }
 function curvedAxis(length:number,bend:number,phase:number){return new THREE.CatmullRomCurve3([new THREE.Vector3(),new THREE.Vector3(bend*.1,length*.28,Math.sin(phase)*bend*.2),new THREE.Vector3(bend,length*.70,Math.sin(phase+.5)*bend*.4),new THREE.Vector3(bend*.7,length,Math.sin(phase+1)*bend*.55)])}
 // Engineering assumption: extension adds a prefix of one material centreline;
@@ -90,19 +91,21 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
   const heightAt=(year:number)=>(.025+(maple?6.5:16)*(1-Math.exp(-year/heightTime)))*organGrowth(.025,.25,year);
   const h=heightAt(age),radius=(.0015+(maple?.13:.32)*(1-Math.exp(-age/45)))*life.shoot;
   // Dense broad-crowned camphor versus lower multi-stemmed maple; neither is a renamed osmanthus model.
-  const pixels=new Uint8Array(64*256*4),rr=randomFor(seed*67);for(let y=0;y<256;y++)for(let x=0;x<64;x++){const groove=Math.pow(Math.max(0,Math.sin(x*.75+Math.sin(y*.035)*.5)),14),shade=.75+rr()*.19-(maple?.06:.30)*groove,o=(y*64+x)*4;pixels[o]=(maple?146:129)*shade;pixels[o+1]=(maple?143:125)*shade;pixels[o+2]=(maple?129:112)*shade;pixels[o+3]=255}
-  // Qualitative juvenile pigmentation, not a measured ontogenetic clock. The
-  // NBU Acer seedling account describes an initially pale/green axis hardening
-  // later; do not apply adult dark pigment and millimetres of relief to a
-  // sub-millimetre seedling stem. Geometry and material-node positions stay fixed.
+  const ownTexture=(t:THREE.DataTexture)=>{textures.add(t)};
+  const bark=mat(new THREE.MeshStandardMaterial()),twigMat=mat(new THREE.MeshStandardMaterial());
+  wireWoodyBarkSurface(bark,species,age,false,seed,ownTexture);
+  wireWoodyBarkSurface(twigMat,species,age,true,seed,ownTexture);
+  const leafGeo=geom(maple?mapleBlade():camphorBlade());
+  const leafMat=mat(new THREE.MeshStandardMaterial({color:"#ffffff",side:THREE.DoubleSide})),petioleMat=mat(new THREE.MeshStandardMaterial({color:maple?"#985c4f":"#6c804b",roughness:.8})),petioleGeo=geom(new THREE.CylinderGeometry(1,1,1,4));
+  wireWoodyLeafSurface(leafMat,leafGeo,species,ownTexture);
+  // Preserve the published qualitative juvenile Acer colour and radius-relative
+  // relief guard when replacing its old shared colour/bump texture. These are
+  // unmeasured appearance priors, not a tissue-age or spectral calibration.
   const skinMaturity=maple?smooth(.12,.5,age):1;
-  if(maple&&skinMaturity<1)for(let i=0;i<pixels.length;i+=4)for(let c=0;c<3;c++)pixels[i+c]=Math.round(245*(1-skinMaturity)+pixels[i+c]*skinMaturity);
-  const barkTexture=new THREE.DataTexture(pixels,64,256,THREE.RGBAFormat);barkTexture.wrapS=barkTexture.wrapT=THREE.RepeatWrapping;barkTexture.colorSpace=THREE.SRGBColorSpace;barkTexture.needsUpdate=true;textures.add(barkTexture);
-  const bark=mat(new THREE.MeshStandardMaterial({color:maple?new THREE.Color("#a0b778").lerp(new THREE.Color("#c4b6a0"),skinMaturity):"#bfb39e",map:barkTexture,bumpMap:barkTexture,bumpScale:maple?Math.min(.0015,radius*.08)*skinMaturity:.006,roughness:.9})),twigMat=mat(new THREE.MeshStandardMaterial({color:maple?"#8d6556":"#8d8a5f",roughness:.8}));
-  const leafGeo=geom(maple?mapleBlade():camphorBlade()),leafPixels=new Uint8Array(128*128*4);
-  for(let y=0;y<128;y++)for(let x=0;x<128;x++){const u=x/128,v=y/128;let vein=0;if(maple){const xx=(u-.5)*.0924,yy=v*.06-.01725;for(let l=0;l<7;l++){const a=-2+l*2/3,proj=xx*Math.sin(a)+yy*Math.cos(a),perp=Math.abs(xx*Math.cos(a)-yy*Math.sin(a));if(proj>0)vein=Math.max(vein,1-smooth(.0002,.0007,perp))}}else{const vBase=.06+(1-v)*.15;vein=Math.max(1-smooth(.005,.018,Math.abs(u-.5)),1-smooth(.005,.016,Math.abs(Math.abs(u-.5)-Math.sin(v*Math.PI)*vBase)));}const shade=1-.20*vein,o=(y*128+x)*4;leafPixels[o]=245*shade;leafPixels[o+1]=251*shade;leafPixels[o+2]=222*shade;leafPixels[o+3]=255}
-  const leafTexture=new THREE.DataTexture(leafPixels,128,128,THREE.RGBAFormat);leafTexture.colorSpace=THREE.SRGBColorSpace;leafTexture.needsUpdate=true;textures.add(leafTexture);
-  const leafMat=mat(new THREE.MeshStandardMaterial({color:"#ffffff",map:leafTexture,side:THREE.DoubleSide,roughness:maple?.79:.50})),petioleMat=mat(new THREE.MeshStandardMaterial({color:maple?"#985c4f":"#6c804b",roughness:.8})),petioleGeo=geom(new THREE.CylinderGeometry(1,1,1,4));
+  if(maple) {
+   bark.color.set('#a0b778').lerp(new THREE.Color('#ffffff'),skinMaturity);
+   bark.bumpScale=Math.min(bark.bumpScale,radius*.08)*skinMaturity;
+  }
   const trunk=joint(group,new THREE.Vector3(),UP,h,radius,0,seed),fullTrunk=curvedAxis(heightLimit,heightLimit*.025,seed),trunkCurve=new AxisPrefix(fullTrunk,h/heightLimit);
   const leader:ExtensionAxis={id:"leader",target:heightLimit,birth:.025,length:h,curve:trunkCurve,
    point:t=>materialPoint(fullTrunk,t),birthAt:t=>-heightTime*Math.log((heightLimit-heightLimit*t)/(heightLimit-.025))};
@@ -111,7 +114,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
    extension:"fixed material centrelines; lateral births wait for leader / parent to reach the attachment",
    timing:"original cohort onsets are lower bounds; axis extension durations remain illustrative",
    scaffold:"persistent without a modelled pruning or damage event",dateAndAge:"day controls phenology; age controls establishment"};
-  const tm=new THREE.Mesh(geom(curvedTube(trunkCurve,radius*1.4,.001*life.shoot,24,10)),bark);tm.castShadow=tm.receiveShadow=true;trunk.add(tm);
+  const tm=new THREE.Mesh(geom(curvedTube(trunkCurve,radius*1.4,.001*life.shoot,24,10,true)),bark);tm.castShadow=tm.receiveShadow=true;trunk.add(tm);
   const primaryCount=maple?12:19;
   // Habit evidence: public/references/species-evidence.json (NC State pages):
   // https://plants.ces.ncsu.edu/plants/cinnamomum-camphora/ — spreading crown
@@ -167,7 +170,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
      dir=new THREE.Vector3(Math.cos(az)*Math.sin(inc),Math.cos(inc),Math.sin(az)*Math.sin(inc)),pr=radius*(maple?.36:.30)*Math.sqrt(growth),
      attachment=leader.point(attach),pivot=joint(trunk,attachment,dir,length,pr,1,seed+i*79),
      axes:WoodAxis[]=[{id:axis.id,parentId:leader.id,birth,length,radius:pr,attachment:attachment.toArray()}],
-     parts=[curvedTube(axis.curve,pr,.001*growth,14,7)],records:Leaf[]=[];
+     parts=[curvedTube(axis.curve,pr,.001*growth,14,7,true)],records:Leaf[]=[];
     pivot.userData.node={id:axis.id,birth,attachment:attachment.toArray()};
     // Azimuth is around the actual parent tangent, not the same nominal UP
     // on every scaffold. A gravity-frame slope keeps maple sprays layered,
@@ -190,7 +193,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
        point=axis.point(tt),frame=new THREE.Matrix4().compose(point,q,new THREE.Vector3(1,1,1)),
        second=extensionAxis(`${axis.id}:secondary:${b}`,starget,starget*(.10+hr()*.14),hr()*Math.PI*2,sbirth,1.4,age),sr=pr*.28*Math.sqrt(sg);
       axes.push({id:second.id,parentId:axis.id,birth:sbirth,length:second.length,radius:sr,attachment:point.toArray()});
-      parts.push(curvedTube(second.curve,sr,.0008*sg,8,5).applyMatrix4(frame));recordLeaves(second,frame,records,seed+i*8191+b*79,Math.max(3,Math.round((maple?6:10)*density)),sbirth+.15);
+      parts.push(curvedTube(second.curve,sr,.0008*sg,8,5,true).applyMatrix4(frame));recordLeaves(second,frame,records,seed+i*8191+b*79,Math.max(3,Math.round((maple?6:10)*density)),sbirth+.15);
       for(let c=0;c<(maple?4:5);c++){
         const ct=.25+(c+.5)/(maple?4:5)*.70,tbirth=Math.max(sbirth+.6+c*.14,second.birthAt(ct)),tg=organGrowth(tbirth,1.1,age);if(tg<=0)continue;
         const cr=randomFor(seed*197+i*881+b*997+c*104729),hr=randomFor(seed*8191+i*524287+b*131071+c*15485863),point=second.point(ct).applyMatrix4(frame),a=phi+c*2.39996+(hr()-.5)*1.3,
@@ -199,7 +202,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
          tf=new THREE.Matrix4().compose(point,tq,new THREE.Vector3(1,1,1)),ttarget=starget*(.30+cr()*.20),
          twig=extensionAxis(`${second.id}:twig:${c}`,ttarget,ttarget*(.08+hr()*.10),hr()*Math.PI*2,tbirth,1.1,age);
         axes.push({id:twig.id,parentId:second.id,birth:tbirth,length:twig.length,radius:.0019*tg,attachment:point.toArray()});
-        parts.push(curvedTube(twig.curve,.0019*tg,.00045*tg,5,4).applyMatrix4(tf));recordLeaves(twig,tf,records,seed+i*1213+b*139+c*29,Math.max(3,Math.round((maple?5:8)*density)),tbirth+.12);
+        parts.push(curvedTube(twig.curve,.0019*tg,.00045*tg,5,4,true).applyMatrix4(tf));recordLeaves(twig,tf,records,seed+i*1213+b*139+c*29,Math.max(3,Math.round((maple?5:8)*density)),tbirth+.12);
         if(!maple)for(let d=0;d<3;d++){
           const at=.36+d*.22,fbirth=Math.max(tbirth+.7+d*.17,twig.birthAt(at)),fg=organGrowth(fbirth,1,age);if(fg<=0)continue;
           const fr=randomFor(seed+i*479+b*2017+c*137+d*67),hr=randomFor(seed*32771+i*524287+b*8191+c*131071+d*15485863),angle=a+d*2.39996+(hr()-.5)*1.4,
@@ -208,11 +211,11 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
            fq=new THREE.Quaternion().setFromUnitVectors(UP,fd),ff=new THREE.Matrix4().compose(origin,fq,new THREE.Vector3(1,1,1)),
            terminal=extensionAxis(`${twig.id}:terminal:${d}`,ttarget*(.4+fr()*.22),ttarget*(.05+hr()*.07),hr()*Math.PI*2,fbirth,1,age);
           axes.push({id:terminal.id,parentId:twig.id,birth:fbirth,length:terminal.length,radius:.00085*fg,attachment:origin.toArray()});
-          parts.push(curvedTube(terminal.curve,.00085*fg,.0002*fg,5,4).applyMatrix4(ff));recordLeaves(terminal,ff,records,seed+i*1621+b*631+c*101+d*43,Math.max(3,Math.round(8*density)),fbirth+.08);
+          parts.push(curvedTube(terminal.curve,.00085*fg,.0002*fg,5,4,true).applyMatrix4(ff));recordLeaves(terminal,ff,records,seed+i*1621+b*631+c*101+d*43,Math.max(3,Math.round(8*density)),fbirth+.08);
         }
       }
     }
-    addWood(pivot,parts,bark,axes);showLeaves(pivot,records,`branch-${i}`);
+    addWood(pivot,parts,twigMat,axes);showLeaves(pivot,records,`branch-${i}`);
   }
   group.userData.reproduction="not simulated: no ornamental large flowers";
  } else if(species==="ophiopogon") {
@@ -239,6 +242,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
  const gravityFrames=branches.map(j=>{const down=new THREE.Vector3(0,-1,0).applyQuaternion(j.pivot.getWorldQuaternion(new THREE.Quaternion()).invert()),axis=new THREE.Vector3().crossVectors(UP,down),perp=axis.length();if(perp>1e-8)axis.multiplyScalar(1/perp);else axis.set(1,0,0);return{axis,perp}}),gravityQ=new THREE.Quaternion(),windQ=new THREE.Quaternion(),euler=new THREE.Euler();
  function update(time:number,wind:number,gravity:number,stiffness:number){const rigid=Math.max(.1,stiffness),area=.24+.76*leafPresence*density;branches.forEach((j,i)=>{const load=clamp(wind,0,25)**2*.00025*j.flexibility/rigid*area,osc=.65*Math.sin(time*(1+j.order*.35)+j.phase)+.35*Math.sin(time*.49+j.phase*.4),bend=Math.min(.18,load)*(.65+.35*osc),sag=Math.min(.14,j.sag*clamp(gravity,0,30)/9.81/rigid*gravityFrames[i].perp);gravityQ.setFromAxisAngle(gravityFrames[i].axis,sag);euler.set(bend*.4,0,-bend);windQ.setFromEuler(euler);j.pivot.quaternion.copy(j.rest).multiply(gravityQ).multiply(windQ)})}
  const box=new THREE.Box3().setFromObject(group);
- function dispose(){group.traverse(o=>{if(o instanceof THREE.InstancedMesh)o.dispose()});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());group.clear()}
+ let disposed=false;
+ function dispose(){if(disposed)return;disposed=true;group.traverse(o=>{if(o instanceof THREE.InstancedMesh)o.dispose()});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());group.clear()}
  return{group,branches,leafCount,height:geometryHeight(group),stageLabel,update,dispose};
 }

@@ -1,5 +1,5 @@
 {
-  "version": "0.5.4",
+  "version": "0.5.5",
   "sourceStatus": "literature-constrained procedural assets; not field-calibrated reconstruction",
   "species": [
     "ginkgo",
@@ -58,11 +58,36 @@
     "framing": "cached occupied geometry with bounded compound joint/blade displacement; root close-up hides soil and frames actual roots; manual camera ownership retained",
     "soil": "shallow local herb root-zone window contains all drawn roots, independently labelled from available soil depth; reduced repetitive macrotexture contrast; illustrative strata, no campus soil measurement",
     "herbReproduction": "Iris/Oxalis stalk emergence, petal decline, drying and gradual collapse annual proxy; living vegetative axes retained; no reproductive mass, capsules or dispersal solver",
-    "shortPortrait": "expanded viewer captions and root-zone depth labels avoid the central model at <=700px width/height"
+    "shortPortrait": "expanded viewer captions and root-zone depth labels avoid the central model at <=700px width/height",
+    "woodySurfaces": {
+      "species": [
+        "osmanthus",
+        "camphor",
+        "acer"
+      ],
+      "rules": "separate code-generated pigment/bump/roughness textures; pinnate reticulation, three basal veins, palmate veins; smooth young wood vs older camphor ridges",
+      "status": "qualitative species source constraints and unmeasured appearance priors, not spectral or relief calibration",
+      "limits": "single two-sided leaf material; no measured transmission/abaxial surface; fine veins remain subtle at small viewport sizes; merged lateral wood conservatively smooth",
+      "inspectionLighting": "neutral organ-only fill for leaf viewing; not a measured reflectance or transmission model"
+    },
+    "ginkgoIndexedWood": {
+      "method": "same vertex attributes, seam normals, winding, world-space triangles, actual wood sections and loads; retain source-local metadata ranges",
+      "memory": "45y seed42 density1 merged wood buffers 88.82MB→29.68MB (66.59% less); exact buffer bytes exclude metadata/heap/GPU/transient allocations",
+      "limits": "main-thread generation remains; no worker transport or decimation enabled"
+    }
   },
   "accountUsageEvidence": "account-usage.json",
   "validation": {
-    "passed": 239,
-    "failed": 0
+    "passed": 253,
+    "failed": 0,
+    "skipped": 1,
+    "additionalBoundedMemoryAudit": {
+      "passed": 1,
+      "ages": [
+        18,
+        45
+      ],
+      "scope": "one bounded old/new construction per age, independent triangle/load equivalence; not a stress or latency study"
+    }
   }
 }

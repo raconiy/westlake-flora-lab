@@ -1,6 +1,8 @@
 import {geometryHeight} from './geometry-height.ts';
 import * as THREE from "three";
-import {tagWoodTube,mergeWoodSections} from "./wood-loads.ts";
+import {tagWoodTube} from "./wood-loads.ts";
+import {mergeWoodGeometries} from "./wood-geometry-merge.ts";
+import {mapWoodyBarkUV,wireWoodyBarkSurface,wireWoodyLeafSurface} from "./woody-materials.ts";
 import {irisFallSurface,irisCrestSurface,herbPigment} from "./herb-surfaces.ts";
 import {tagLeafStrip} from "./herb-leaf-dynamics.ts";
 import {herbReproduction,herbReproductionPriors} from "./herb-reproduction.ts";
@@ -83,11 +85,18 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
   const col = new THREE.Color();
   const extraGeometries: THREE.BufferGeometry[] = [];const extraTextures:THREE.Texture[]=[];
   const leafGeometry = species === "ginkgo" ? fanGeometry() : species === "osmanthus" ? ovalGeometry() : heartGeometry();
+  if (species === 'osmanthus') {
+    const ownTexture = (t: THREE.DataTexture) => { extraTextures.push(t); };
+    wireWoodyLeafSurface(foliage, leafGeometry, species, ownTexture);
+    wireWoodyBarkSurface(bark, species, age, false, params.seed, ownTexture);
+    wireWoodyBarkSurface(youngBark, species, age, true, params.seed, ownTexture);
+  }
   const leafPresence = species === "ginkgo" ? smooth(65, 105, day) * (1 - smooth(320, 350, day)) : 1;
 
   function cylinder(parent: THREE.Object3D, length: number, radius: number, endRadius: number, material = bark) {
     if (length < .0001) return;
     const mesh = new THREE.Mesh(new THREE.CylinderGeometry(Math.max(species === "osmanthus" ? 1e-9 : .00025, endRadius), Math.max(species === "osmanthus" ? 1e-9 : .0003, radius), length, radius > .04 ? 10 : 6, 1), material);
+    if (species === 'osmanthus') mapWoodyBarkUV(mesh.geometry, Math.max(1e-9, radius), length);
     mesh.position.y = length / 2; mesh.castShadow = true; mesh.receiveShadow = true; parent.add(mesh); return mesh;
   }
   function joint(parent: THREE.Object3D, pos: THREE.Vector3, direction: THREE.Vector3, length: number, radius: number, order: number, phaseKey?: number) {
@@ -363,6 +372,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         if (wood && branch.radius !== ageOrderFloorM) {
           wood.geometry.dispose();
           wood.geometry = new THREE.CylinderGeometry(branch.radius * .49, branch.radius, branch.length, branch.radius > .04 ? 10 : 6, 1);
+          mapWoodyBarkUV(wood.geometry, branch.radius, branch.length);
         }
       }
       const bud = new THREE.Mesh(seedGeo, stemMat); bud.name = "osmanthus-terminal-bud"; bud.userData.organ = "bud";
@@ -694,11 +704,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     const g = new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(positions,3));g.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));g.setIndex(indices);g.computeVertexNormals();return tagWoodTube(g,segments,sides);
   }
   function mergeGeometries(parts: THREE.BufferGeometry[]) {
-    let count=0; const flat=parts.map(g=>{const f=g.index?g.toNonIndexed():g;count+=f.attributes.position.count;return f;});
-    const positions=new Float32Array(count*3),normals=new Float32Array(count*3),uv=new Float32Array(count*2);let n=0;
-    for(const g of flat){positions.set(g.attributes.position.array as ArrayLike<number>,n*3);normals.set(g.attributes.normal.array as ArrayLike<number>,n*3);if(g.attributes.uv)uv.set(g.attributes.uv.array as ArrayLike<number>,n*2);n+=g.attributes.position.count;}
-    const out=new THREE.BufferGeometry();out.setAttribute("position",new THREE.BufferAttribute(positions,3));out.setAttribute("normal",new THREE.BufferAttribute(normals,3));out.setAttribute("uv",new THREE.BufferAttribute(uv,2));
-    mergeWoodSections(parts,out);for(const g of new Set([...parts,...flat]))g.dispose(); return ownGeometry(out);
+    return ownGeometry(mergeWoodGeometries(parts));
   }
   function meshParts(parent:THREE.Object3D,parts:THREE.BufferGeometry[],mat:THREE.Material) {if(!parts.length)return;const mesh=new THREE.Mesh(mergeGeometries(parts),mat);mesh.castShadow=mesh.receiveShadow=true;parent.add(mesh);}
   // An extending axis reveals more of a fixed material centreline. Scaling a

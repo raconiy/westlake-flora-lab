@@ -1,5 +1,5 @@
 {
-  "version": "0.5.4",
+  "version": "0.5.5",
   "createdAt": "2026-11-05T16:19:09.961Z",
   "workflow": [
     "shared botanical constraints",
@@ -453,5 +453,46 @@
       "deploy": "skipped",
       "cause": "raw Double fingerprint portability; no implementation change in corrective commit"
     }
+  },
+  "latestLeadIntegration": {
+    "updatedAt": "2026-11-05T20:10:14.346Z",
+    "tasks": [
+      {
+        "id": "bdcac109-8529-4950-a55f-a04863a88087",
+        "originalStatus": "completed passed_scoped",
+        "accepted": "triangle-equivalent indexed wood merge after lead review and bounded18/45 audit"
+      },
+      {
+        "id": "4dd3ea30-30d0-4591-946d-8a037ac9d01d",
+        "originalStatus": "completed passed_scoped",
+        "accepted": "bounded code textures/UV after lead source/photo and WebGL inspection, juvenile Acer appearance preserved"
+      }
+    ],
+    "checks": {
+      "combined": {
+        "passed": 253,
+        "failed": 0,
+        "skipped": 1
+      },
+      "additionalMemoryAudit": {
+        "passed": 1
+      },
+      "publicCI": "pending; deployment verified separately"
+    },
+    "withheld": [
+      {
+        "id": "c67098a4-e119-4d9d-bb7e-1381fab613e3",
+        "reason": "original seasonal regression failed; corrected cd6c1a28 candidate29/29scoped now awaiting independent anatomy+browser review"
+      },
+      {
+        "id": "4d7dbeb1-62f7-4b1f-8fce-6daeb3376a9f",
+        "reason": "independent4b51460d found local area support shortfall from coarse interpolation; repairfb316422 pending; basalEI proxy does not establish taper compliance"
+      },
+      {
+        "id": "4f3497a3-ae26-45c7-8d3b-2ba8beb498ec",
+        "reason": "execution timeout; retained curved-axis draft unvalidated; recoveryfa8536d7 active"
+      }
+    ],
+    "limits": "No complete-realism, field-calibrated growth or full lifecycle claim; live models still depend on local gateway/relay"
   }
 }
