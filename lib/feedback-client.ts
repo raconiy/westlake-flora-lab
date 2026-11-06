@@ -97,13 +97,20 @@ export class FeedbackClient {
     try {
       const raw = localStorage.getItem(SESSION_KEY);
       const saved: unknown = JSON.parse(raw || 'null');
-      if (typeof saved === 'string' && saved.trim()) memberId = saved.trim();
+      if (typeof saved === 'string' && /^m_[A-Za-z0-9_-]{16,80}$/.test(saved.trim())) memberId = saved.trim();
       else if (object(saved) && typeof saved.memberId === 'string' && saved.memberId.trim()) memberId = saved.memberId.trim();
       else if (raw) localStorage.removeItem(SESSION_KEY); // Drop legacy persisted sessionId/token records.
     } catch { /* Private browsing / disabled storage: keep session in memory. */ }
+    if (!memberId) {
+      memberId = `m_${crypto.randomUUID().replaceAll('-', '')}`;
+      try { localStorage.setItem(SESSION_KEY, JSON.stringify(memberId)); } catch { /* memory only */ }
+    }
     if (!this.sessionRequest) {
       this.sessionRequest = this.request('/sessions', {body: memberId ? {memberId} : {}, signal}).then(data => {
-        const returnedMemberId = typeof data.memberId === 'string' ? data.memberId : data.sessionId;
+        // Old community workers return sessionId only. Keep the local public
+        // label stable until the worker is upgraded, while never persisting its
+        // private bearer token.
+        const returnedMemberId = typeof data.memberId === 'string' ? data.memberId : memberId || data.sessionId;
         if (typeof returnedMemberId !== 'string' || !returnedMemberId || typeof data.token !== 'string' || !data.token) invalidResponse();
         this.session = {memberId: returnedMemberId, token: data.token};
         try { localStorage.setItem(SESSION_KEY, JSON.stringify(returnedMemberId)); } catch { /* memory only */ }
