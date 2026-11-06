@@ -19,6 +19,38 @@ function keyed(key: number) {
   return () => { s += 0x6D2B79F5; let t = s; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
 export type OsmanthusAxis = ReturnType<typeof createOsmanthusAxis>;
+
+/** Fail closed on detached organs: a catalogue coordinate alone is not wood.
+ * Inspect the encoded mesh at every formed node before publishing the axis.
+ * The tolerance bounds Float32 geometry error in metres, not field accuracy.
+ */
+export function assertOsmanthusWoodSupport(geometry: THREE.BufferGeometry,
+  nodes: readonly { materialS?: number; attachment: number[] }[]) {
+  if (!nodes.length) return;
+  const spec = geometry.userData.osmanthusAxis, sides = geometry.userData.woodTube?.sides;
+  const position = geometry.getAttribute('position'), referenced = new Set(geometry.index?.array);
+  if (!spec || !sides || !position || !referenced.size) throw new Error('Osmanthus organ has no actual parent wood');
+  const stationIndex = new Map<number, number>(spec.materialSectionsM.map((s: number, i: number) => [s, i]));
+  for (const node of nodes) {
+    const s = node.materialS, ring = s === undefined ? undefined : stationIndex.get(s);
+    if (s === undefined || !Number.isFinite(s) || s < 0 || s > spec.axialParameterM || ring === undefined) {
+      throw new Error(`Osmanthus organ is beyond parent wood: ${spec.id}/${s}`);
+    }
+    const corners = Array.from({ length: sides }, (_, j) => {
+      const index = ring * (sides + 1) + j;
+      if (!referenced.has(index)) throw new Error(`Osmanthus organ section is not part of parent triangles: ${spec.id}/${s}`);
+      return new THREE.Vector3().fromBufferAttribute(position, index);
+    });
+    const center = corners.reduce((sum, p) => sum.add(p), new THREE.Vector3()).divideScalar(sides);
+    const areaVector = corners.reduce((sum, p, i) => sum.add(p.clone().sub(center)
+      .cross(corners[(i + 1) % sides].clone().sub(center))), new THREE.Vector3());
+    if (!(areaVector.lengthSq() > 0) || !areaVector.toArray().every(Number.isFinite)
+      || !(center.distanceTo(new THREE.Vector3(...node.attachment)) <= 3e-7)) {
+      throw new Error(`Osmanthus organ lacks a positive woody section at its attachment: ${spec.id}/${s}`);
+    }
+  }
+}
+
 export function createOsmanthusAxis(key: number, id: string, target: number, order: number, sites: number[]) {
   if (!Number.isFinite(target) || target < 0) throw new RangeError('Osmanthus target must be finite and nonnegative');
   let identity = key; for (const c of id) identity = Math.imul(identity ^ c.charCodeAt(0), 16777619);

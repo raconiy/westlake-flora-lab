@@ -16,6 +16,13 @@ export const osmanthusPriors = {
     engineeringPrior: '90-degree decussate pair planes, birth/expansion clocks, seed-loss collar rise and fixed adult-collar envelope are construction choices, not source-derived measurements',
     collar: 'actual collar rises continuously by 7 mm during .25–.9 illustrative years; rootOriginY follows it; formed shoot material translates with this hierarchy, without retargeting its lifetime geometry',
     wood: 'retain every formed axis and material node; only scheduled births add axes; no natural-death events are modeled, so no age-only retirement is allowed',
+    invariants: {
+      identity: 'for fixed seed/density, formed axisId and birth are permanent; age cannot delete or replace them',
+      dimensions: 'length and basal radius are nondecreasing on every formed axis; fixed material sections remain inside actual wood',
+      organs: 'every formed leaf node owns a live parent axis and a positive indexed woody cross-section; both petiole and flower peduncle bases project onto that section centre',
+      additions: 'only the fixed keyed birth clock may add axes; season and animation never change the woody catalogue',
+      status: 'engineering regression contract, not measured Hangzhou survival, growth or leaf-turnover data',
+    },
   },
   spatialExtension: {
     status: 'uncalibrated-engineering-prior', unit: 'material coordinates: metres; birth clock: illustrative years',

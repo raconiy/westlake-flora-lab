@@ -8,7 +8,7 @@ import {tagLeafStrip} from "./herb-leaf-dynamics.ts";
 import {herbReproduction,herbReproductionPriors} from "./herb-reproduction.ts";
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
 import { osmanthusLifecycle, osmanthusPriors, osmanthusSupportedRadius } from "./osmanthus-lifecycle.ts";
-import { createOsmanthusAxis, osmanthusAxisPrior, type OsmanthusAxis } from "./osmanthus-axis.ts";
+import { assertOsmanthusWoodSupport, createOsmanthusAxis, osmanthusAxisPrior, type OsmanthusAxis } from "./osmanthus-axis.ts";
 
 /** Parameterized, uncalibrated morphology. Age is years; day is 1–365; motion time is seconds. */
 export type PlantSpecies = "ginkgo" | "osmanthus" | "iris" | "oxalis";
@@ -107,6 +107,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         leafTurnover: "uncalibrated; persistent foliage proxy, not a physiology solver",
         habit: "connected 3D evergreen crown; unequal axillary shoot vigour and fixed material curvature within a broad extension envelope",
         woodyAxis: osmanthusAxisPrior,
+        persistence: osmanthusPriors.continuity.invariants,
         leafAxisArrangement: "fixed keyed .55–1.0 nodal rise before normalization; opposite/decussate in actual section frames; unchanged centimetre-scale blades; engineering prior",
         extensionNodes: "finite pairs of successive material nodes fill large extension gaps using unallocated lifetime leaf slots; woody branch anchors retained; leaf-only tail nodes use .985 of historical birth extension at fixed clocks/count bound; saturated density catalogues have no extra slots",
         calibration: "timing, angles, envelope and density are engineering priors, not measured campus data",
@@ -305,8 +306,8 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       if (matrices.length) {
         const leaves = new THREE.InstancedMesh(leafGeometry, foliage, matrices.length);
         const stalks = new THREE.InstancedMesh(unitCylinder, stemMat, petioles.length);
-        leaves.userData = { organ: "leaf", connectedBy: "petiole", phyllotaxis: "opposite-decussate", nodes };
-        stalks.userData = { organ: "leaf", role: "petiole" };
+        leaves.userData = { organ: "leaf", axisId: plan.id, connectedBy: "petiole", phyllotaxis: "opposite-decussate", nodes };
+        stalks.userData = { organ: "leaf", axisId: plan.id, role: "petiole" };
         matrices.forEach((m, i) => { leaves.setMatrixAt(i, m); stalks.setMatrixAt(i, petioles[i]); col.setHSL(.27, .40, .22 + rng(key + Math.floor(i / 2) * 17)() * .06); leaves.setColorAt(i, col); });
         leaves.castShadow = leaves.receiveShadow = true; parent.add(stalks, leaves); leafCount += matrices.length;
       }
@@ -314,8 +315,8 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         const flowers = new THREE.InstancedMesh(flowerGeo, flowerMat, petals.length);
         const stalks = new THREE.InstancedMesh(unitCylinder, stemMat, peduncles.length);
         const cores = new THREE.InstancedMesh(flowerCenterGeo, flowerMat, centers.length);
-        flowers.userData = { organ: "flower", role: "corolla-lobes", lobesPerFlower: 4, sites: flowerSites };
-        stalks.userData = { organ: "flower", role: "axillary-peduncle" };
+        flowers.userData = { organ: "flower", axisId: plan.id, role: "corolla-lobes", lobesPerFlower: 4, sites: flowerSites };
+        stalks.userData = { organ: "flower", axisId: plan.id, role: "axillary-peduncle" };
         cores.userData = { organ: "flower", role: "center" };
         petals.forEach((m, i) => flowers.setMatrixAt(i, m));
         centers.forEach((m, i) => { cores.setMatrixAt(i, m); stalks.setMatrixAt(i, peduncles[i]); });
@@ -398,6 +399,9 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         if (branch.pivot.parent) support.set(branch.pivot.parent, (support.get(branch.pivot.parent) ?? 0) + area);
         const plan = axisPlans.get(branch.pivot)!;
         const geometry = plan.curve.geometry(branch.length, branch.radius);
+        // Validate formed cohorts against actual indexed wood; never hide a
+        // stranded leaf or retire/retarget its parent to mask a support error.
+        assertOsmanthusWoodSupport(geometry, plan.leafNodes.filter(node => age > node.birth));
         mapWoodyBarkUV(geometry, branch.radius, branch.length);
         const wood = new THREE.Mesh(geometry, branch.order > 2 ? youngBark : bark);
         wood.name = "osmanthus-wood-axis"; wood.castShadow = wood.receiveShadow = true;
