@@ -8,7 +8,16 @@ import type {RhizosphereModel} from './rhizosphere';
  * O(collar vertices), no per-frame plant traversal or geometry allocation. */
 export function rootCollarBridge(plant:PlantModel,soil:RhizosphereModel){
  const joint=plant.branches.find(b=>b.order===0),collar=soil.group.getObjectByName('root-shoot-junction') as THREE.Mesh|undefined;
- if(!joint||!collar)return null;
+ const ophiopogon=plant.group.name.startsWith('plant:ophiopogon:');
+ const rametBridges=ophiopogon?plant.branches.map(branch=>{
+   const cohort=branch.pivot.userData.cohort;
+   const mesh=soil.group.children.find(o=>o instanceof THREE.Mesh&&o.userData.axisId===`collar-${cohort}`) as THREE.Mesh|undefined;
+   if(!mesh||typeof cohort!=='number')return null;
+   const position=mesh.geometry.getAttribute('position'),original=new Float64Array(position.count*3),center=new THREE.Vector3(branch.pivot.position.x,0,branch.pivot.position.z);
+   for(let i=0;i<position.count;i++){original[i*3]=position.getX(i);original[i*3+1]=position.getY(i);original[i*3+2]=position.getZ(i);}
+   return {branch,mesh,position,original,center};
+ }).filter(Boolean) as {branch:PlantModel['branches'][number];mesh:THREE.Mesh;position:THREE.BufferAttribute;original:Float64Array;center:THREE.Vector3}[]:[];
+ if(!joint||!collar)return rametBridges.length?{update(){updateRametBridges(rametBridges);}}:null;
  const bark=joint.pivot.children.find(o=>o instanceof THREE.Mesh&&!(o instanceof THREE.InstancedMesh)&&(o.geometry.userData.woodTube||o.geometry instanceof THREE.CylinderGeometry)) as THREE.Mesh|undefined;
  if(!bark)return null;
  const geometry=collar.geometry as THREE.CylinderGeometry,n=geometry.parameters.radialSegments;
@@ -50,5 +59,22 @@ export function rootCollarBridge(plant:PlantModel,soil:RhizosphereModel){
    p.setXYZ(i,x+w*(target.x-oldTopX),y+w*(target.y-top.y),z+w*(target.z-oldTopZ));
   }
   p.needsUpdate=true;geometry.computeVertexNormals();
+  updateRametBridges(rametBridges);
  }};
+}
+
+function updateRametBridges(bridges:{branch:PlantModel['branches'][number];mesh:THREE.Mesh;position:THREE.BufferAttribute;original:Float64Array;center:THREE.Vector3}[]){
+ for(const bridge of bridges){
+  bridge.branch.pivot.updateWorldMatrix(true,false);bridge.mesh.updateWorldMatrix(true,false);
+  const q=bridge.branch.pivot.getWorldQuaternion(new THREE.Quaternion());
+  const point=new THREE.Vector3(),offset=new THREE.Vector3();
+  for(let i=0;i<bridge.position.count;i++){
+   const y=bridge.original[i*3+1],w=THREE.MathUtils.smoothstep(y,-.008,0);
+   if(w<=0)continue;
+   offset.set(bridge.original[i*3]-bridge.center.x,y,bridge.original[i*3+2]-bridge.center.z).applyQuaternion(q);
+   point.set(bridge.center.x+offset.x,offset.y,bridge.center.z+offset.z);
+   bridge.position.setXYZ(i,bridge.original[i*3]+w*(point.x-bridge.original[i*3]),y+w*(point.y-y),bridge.original[i*3+2]+w*(point.z-bridge.original[i*3+2]));
+  }
+  bridge.position.needsUpdate=true;bridge.mesh.geometry.computeVertexNormals();
+ }
 }
