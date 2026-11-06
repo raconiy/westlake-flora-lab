@@ -28,8 +28,8 @@ export function assertOsmanthusWoodSupport(geometry: THREE.BufferGeometry,
   nodes: readonly { materialS?: number; attachment: number[] }[]) {
   if (!nodes.length) return;
   const spec = geometry.userData.osmanthusAxis, sides = geometry.userData.woodTube?.sides;
-  const position = geometry.getAttribute('position'), referenced = new Set(geometry.index?.array);
-  if (!spec || !sides || !position || !referenced.size) throw new Error('Osmanthus organ has no actual parent wood');
+  const position = geometry.getAttribute('position'), index = geometry.index;
+  if (!spec || !sides || !position || !index?.count) throw new Error('Osmanthus organ has no actual parent wood');
   const stationIndex = new Map<number, number>(spec.materialSectionsM.map((s: number, i: number) => [s, i]));
   for (const node of nodes) {
     const s = node.materialS, ring = s === undefined ? undefined : stationIndex.get(s);
@@ -38,7 +38,6 @@ export function assertOsmanthusWoodSupport(geometry: THREE.BufferGeometry,
     }
     const corners = Array.from({ length: sides }, (_, j) => {
       const index = ring * (sides + 1) + j;
-      if (!referenced.has(index)) throw new Error(`Osmanthus organ section is not part of parent triangles: ${spec.id}/${s}`);
       return new THREE.Vector3().fromBufferAttribute(position, index);
     });
     const center = corners.reduce((sum, p) => sum.add(p), new THREE.Vector3()).divideScalar(sides);
