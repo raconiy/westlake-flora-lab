@@ -11,6 +11,12 @@ export const osmanthusPriors = {
   geometry: 'persistent original branch/leaf anchors plus bounded successive material sites in large extension intervals; birth when the parent reaches each site, zero-size pair expansion; opposite decussate petiolate leaves; independent unequal shoot vigour, axillary angles and extension clocks; broad 3D extension envelope, not a prescribed pruned sphere; retained leaf-area proxy and persistent wood; all timings, spacings, angles, density and dimensions are engineering priors, not measured campus data',
   botanicalSource: 'https://plants.ces.ncsu.edu/plants/osmanthus-fragrans/',
   botanicalScope: 'dense evergreen shrub/small tree, responds to pruning; opposite simple petiolate leaves; small four-lobed axillary flowers; exact ages, scaffold angles, pruning history and turnover are not inferred from this source',
+  continuity: {
+    botanicalEvidence: 'existing NCSU description: evergreen woody habit, opposite simple petiolate leaves and four-lobed axillary flowers; no measured seedling growth trajectory',
+    engineeringPrior: '90-degree decussate pair planes, birth/expansion clocks, seed-loss collar rise and fixed adult-collar envelope are construction choices, not source-derived measurements',
+    collar: 'actual collar rises continuously by 7 mm during .25–.9 illustrative years; rootOriginY follows it; formed shoot material translates with this hierarchy, without retargeting its lifetime geometry',
+    wood: 'retain every formed axis and material node; only scheduled births add axes; no natural-death events are modeled, so no age-only retirement is allowed',
+  },
   spatialExtension: {
     status: 'uncalibrated-engineering-prior', unit: 'material coordinates: metres; birth clock: illustrative years',
     construction: 'subdivide large fixed extension intervals into thirds, inserting two opposite pairs to retain original decussate planes; invert the parent extension law for each material target; retain every original branch site; deliberately place leaf-only tail sites after the last branch support at .985 of historical extension at their unchanged birth clocks (order 3 retains its first two sites)',

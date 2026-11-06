@@ -11,6 +11,8 @@ export const feedbackStatuses = {
 export type FeedbackStatus = keyof typeof feedbackStatuses;
 export type Suggestion = {
   id: string; text: string; species: string; status: string; createdAt: string;
+  /** Stable anonymous author label returned by the community service. */
+  memberId?: string;
   summary?: string; taskId?: string; error?: string; deploymentUrl?: string;
 };
 export type ChatJob = {id: string; status: string; reply?: string; error?: string; suggestions?: {title:string;prompt:string;kind:'code'|'research'}[]};
@@ -19,7 +21,7 @@ export type CommunityHealth = {ok: boolean; relay: {
   availableAccounts?: number; workers?: unknown; lastSeen?: string | number | null;
 }};
 export type FeedbackPayload = {scenario: Scenario; idempotencyKey: string};
-type Session = {sessionId: string; token: string};
+type Session = {memberId: string; token: string};
 const SESSION_KEY = 'westlake-flora-community-session-v1';
 
 export class FeedbackError extends Error {
@@ -40,12 +42,9 @@ export function feedbackError(error: unknown): string {
 function object(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
-function validSession(value: unknown): value is Session {
-  return object(value) && typeof value.sessionId === 'string' && !!value.sessionId &&
-    typeof value.token === 'string' && !!value.token && !/[\r\n]/.test(value.token);
-}
 function validSuggestion(value: unknown): value is Suggestion {
   return object(value) && ['id', 'text', 'species', 'status', 'createdAt'].every(key => typeof value[key] === 'string') &&
+    (value.memberId === undefined || typeof value.memberId === 'string') &&
     ['summary', 'taskId', 'error', 'deploymentUrl'].every(key => value[key] === undefined || typeof value[key] === 'string');
 }
 function validJob(value: unknown): value is ChatJob {
@@ -56,7 +55,7 @@ function validJob(value: unknown): value is ChatJob {
 }
 function invalidResponse(): never { throw new FeedbackError('服务返回的数据不完整，请稍后重试。'); }
 
-/** Only visitor session credentials are stored; public reads never send Authorization. */
+/** Only the anonymous member label is persisted; the session token stays in memory. */
 export class FeedbackClient {
   private session: Session | null = null;
   private sessionRequest: Promise<Session> | null = null;
@@ -94,15 +93,20 @@ export class FeedbackClient {
 
   private async visitor(signal?: AbortSignal): Promise<Session> {
     if (this.session) return this.session;
+    let memberId: string | undefined;
     try {
-      const saved: unknown = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
-      if (validSession(saved)) return (this.session = saved);
+      const raw = localStorage.getItem(SESSION_KEY);
+      const saved: unknown = JSON.parse(raw || 'null');
+      if (typeof saved === 'string' && saved.trim()) memberId = saved.trim();
+      else if (object(saved) && typeof saved.memberId === 'string' && saved.memberId.trim()) memberId = saved.memberId.trim();
+      else if (raw) localStorage.removeItem(SESSION_KEY); // Drop legacy persisted sessionId/token records.
     } catch { /* Private browsing / disabled storage: keep session in memory. */ }
     if (!this.sessionRequest) {
-      this.sessionRequest = this.request('/sessions', {body: {}, signal}).then(data => {
-        if (!validSession(data)) invalidResponse();
-        this.session = {sessionId: data.sessionId, token: data.token};
-        try { localStorage.setItem(SESSION_KEY, JSON.stringify(this.session)); } catch { /* memory only */ }
+      this.sessionRequest = this.request('/sessions', {body: memberId ? {memberId} : {}, signal}).then(data => {
+        const returnedMemberId = typeof data.memberId === 'string' ? data.memberId : data.sessionId;
+        if (typeof returnedMemberId !== 'string' || !returnedMemberId || typeof data.token !== 'string' || !data.token) invalidResponse();
+        this.session = {memberId: returnedMemberId, token: data.token};
+        try { localStorage.setItem(SESSION_KEY, JSON.stringify(returnedMemberId)); } catch { /* memory only */ }
         return this.session;
       }).finally(() => { this.sessionRequest = null; });
     }

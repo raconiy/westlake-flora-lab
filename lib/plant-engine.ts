@@ -327,7 +327,13 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       const leader = woodyJoint(group, new THREE.Vector3(0, life.collarY, 0), UP, h, r, leaderPlan);
       leader.userData = { axis: "leader", axisId: leaderPlan.id, birth: 0 };
       axisLeaves(leader, leaderPlan);
-      function branchCohort(parent: THREE.Group, plan: AxisPlan, worldRest: THREE.Quaternion, worldOrigin: THREE.Vector3) {
+      // Reach belongs to the fixed lifetime catalogue. Seed loss raises the
+      // actual collar by 7 mm; using that moving origin here would retarget
+      // already formed axes. Plan against the adult collar, while rendering
+      // pivots in the actual parent hierarchy to retain root/organ contact.
+      const adultCollarOrigin = new THREE.Vector3(0, osmanthusPriors.dimensions.adultCollarY, 0);
+      function branchCohort(parent: THREE.Group, plan: AxisPlan, worldRest: THREE.Quaternion,
+        catalogueOrigin: THREE.Vector3) {
         if (plan.order >= 3) return;
         // Branches use the SAME node records as the rendered leaf/petiole pairs.
         // Sparse supporting nodes include distal cohorts on every branching order.
@@ -346,7 +352,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           const onset = Math.max(plan.birth + (order === 1 ? .8 : 1.2), node.birth + (order === 1 ? .45 : .65)) + delay;
           if (age <= onset) continue;
           const position = new THREE.Vector3(...node.attachment);
-          const origin = position.clone().applyQuaternion(worldRest).add(worldOrigin);
+          const origin = position.clone().applyQuaternion(worldRest).add(catalogueOrigin);
           const angle = node.angle + side * Math.PI + (rr() - .5) * 1.25;
           const inclination = (order === 1 ? .72 : .65) + rr() * (order === 1 ? .72 : 1.05);
           const parentFrame = plan.curve.frame(node.materialS!);
@@ -377,7 +383,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
           branchCohort(axis, child, worldRest.clone().multiply(axis.quaternion), origin);
         }
       }
-      branchCohort(leader, leaderPlan, leader.quaternion.clone(), leader.position.clone());
+      branchCohort(leader, leaderPlan, leader.quaternion.clone(), adultCollarOrigin);
       // A short weak axillary shoot and a long vigorous terminal axis must not
       // share one order-only diameter. Postorder sums supported blade area ONCE
       // through real attachments; radius changes neither length nor material

@@ -8,7 +8,10 @@ class ApiError extends Error {constructor(status,message){super(message);this.st
 const text=(s,max=6000)=>{if(typeof s!=='string'||!s.trim()||s.length>max)throw new ApiError(400,'请输入有效文本，最多 '+max+' 字符');return s.trim();};
 function checkSecrets(s){if(/(?:password|密码|验证码|2fa)\s*[:：=]\s*\S+|\bsk-[\w-]{12,}|-----BEGIN .*PRIVATE KEY/i.test(s))throw new ApiError(400,'请勿提交密码、验证码或密钥');}
 function scenario(s){const out={};if(s&&typeof s==='object'){if(species.has(s.species))out.species=s.species;for(const k of ['age','day','seed','density','wind','gravity','stiffness','moisture','compaction','soilDepth'])if(typeof s[k]==='number'&&Number.isFinite(s[k]))out[k]=s[k];}return JSON.stringify(out);}
-const publicSuggestion=r=>({id:r.id,text:r.text,species:r.species,status:r.status,summary:r.summary??undefined,taskId:r.task_id??undefined,error:r.error??undefined,deploymentUrl:r.deployment_url??undefined,createdAt:new Date(r.created_at).toISOString(),updatedAt:new Date(r.updated_at).toISOString()});
+// A member id is a public author label, never permission to recover a session.
+// Legacy rows used opaque UUIDs as session ids and remain readable.
+const memberOf=id=>id.split('.')[0];
+const publicSuggestion=r=>({id:r.id,text:r.text,species:r.species,memberId:memberOf(r.session_id),status:r.status,summary:r.summary??undefined,taskId:r.task_id??undefined,error:r.error??undefined,deploymentUrl:r.deployment_url??undefined,createdAt:new Date(r.created_at).toISOString(),updatedAt:new Date(r.updated_at).toISOString()});
 const publicJob=r=>({id:r.id,status:r.status,reply:r.reply??undefined,error:r.error??undefined,suggestions:r.proposals?JSON.parse(r.proposals):[],createdAt:r.created_at});
 export default {async fetch(request,env){
  const url=new URL(request.url),origin=request.headers.get('origin');
@@ -32,9 +35,16 @@ export default {async fetch(request,env){
   if(method==='GET'&&path==='/health'){const row=await db.prepare('SELECT * FROM community_relay WHERE id=?').bind('leader').first();const value=row?JSON.parse(row.payload):{};return reply(200,{ok:true,storage:'D1',relay:{...value,online:!!row&&now-row.last_seen<45000,lastSeen:row?.last_seen??null}});}
   if(method==='GET'&&path==='/suggestions'){const rows=await db.prepare('SELECT * FROM community_suggestions ORDER BY created_at DESC LIMIT 100').all();return reply(200,{suggestions:rows.results.map(publicSuggestion)});}
   if(method==='POST'&&path==='/sessions'){
-   if(!secret)throw new ApiError(503,'共享服务尚未配置');await body();
+   if(!secret)throw new ApiError(503,'共享服务尚未配置');const requested=await body();
    const ip=await hash(secret+':'+(request.headers.get('cf-connecting-ip')||'unknown'));await rate('sessions:'+ip,12,600000);
-   const id=random(),token=random()+random();await db.prepare('INSERT INTO community_sessions VALUES(?,?,?,?)').bind(id,await hash(token),now,now+14*86400000).run();return reply(201,{sessionId:id,token});
+   const requestedMember=typeof requested.memberId==='string'&&/^m_[A-Za-z0-9_-]{16,80}$/.test(requested.memberId)?requested.memberId:null;
+   const existing=requestedMember?await db.prepare('SELECT id FROM community_sessions WHERE substr(id,1,?)=? LIMIT 1').bind(requestedMember.length+1,requestedMember+'.').first():null;
+   const memberId=existing?requestedMember:'m_'+random().replaceAll('-','');
+   // Every page session gets independent credentials and private chat history.
+   // Reusing a public member label cannot rotate another session's token.
+   const id=memberId+'.'+random(),token=random()+random();
+   await db.prepare('INSERT INTO community_sessions VALUES(?,?,?,?)').bind(id,await hash(token),now,now+14*86400000).run();
+   return reply(201,{memberId,token});
   }
   if(method==='POST'&&(path==='/suggestions'||path==='/chat')){
    const sid=await session(),b=await body(),isSuggestion=path==='/suggestions',input=text(isSuggestion?b.text:b.message);checkSecrets(input);const idem=text(b.idempotencyKey,100),s=scenario(b.scenario),sp=species.has(b.species)?b.species:JSON.parse(s).species||'ginkgo';

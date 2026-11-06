@@ -1,6 +1,6 @@
-import {AccountUsageEvidence} from './AccountUsageEvidence';
 'use client';
 
+import {AccountUsageEvidence} from './AccountUsageEvidence';
 import {useEffect, useId, useRef, useState, type FormEvent} from 'react';
 import {Leaf, MessageCircle, Send, X, RefreshCw, ChevronRight, LoaderCircle, Lightbulb} from 'lucide-react';
 import {getSpecies, type Scenario} from '../lib/species';
@@ -28,7 +28,7 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
   const [client] = useState(() => new FeedbackClient());
   const [open, setOpen] = useState(false);
   const visible=inline||open;
-  const [mode, setMode] = useState<'chat' | 'suggest'>('chat');
+  const [mode, setMode] = useState<'chat' | 'suggest'>('suggest');
   const [chatInput, setChatInput] = useState('');
   const [suggestInput, setSuggestInput] = useState('');
   const [health, setHealth] = useState<CommunityHealth | null>(null);
@@ -72,7 +72,17 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
       if (healthResult.status === 'fulfilled') { setHealth(healthResult.value); setHealthError(''); }
       else { setHealth(null); setHealthError(feedbackError(healthResult.reason)); }
       if (boardResult.status === 'fulfilled') {
-        setSuggestions(boardResult.value); setBoardError(''); setBoardLoaded(true);
+        const latest = boardResult.value;
+        const acknowledged = lastAttempt.current?.result;
+        // Show the server receipt immediately, even if a concurrent list read
+        // completed before the write or the newest record is outside its limit.
+        setSuggestions(acknowledged && !latest.some(item => item.id === acknowledged.id) ? [acknowledged, ...latest] : latest);
+        const updated = acknowledged && latest.find(item => item.id === acknowledged.id);
+        if (updated && lastAttempt.current) {
+          const next = {...lastAttempt.current, result: updated};
+          lastAttempt.current = next; setAttempt(next);
+        }
+        setBoardError(''); setBoardLoaded(true);
         setBoardUpdated(new Date().toLocaleTimeString('zh-CN', {hour: '2-digit', minute: '2-digit', second: '2-digit'}));
       } else setBoardError(feedbackError(boardResult.reason));
       timer = setTimeout(refresh, POLL_INTERVAL);
@@ -149,6 +159,8 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
       if (signal.aborted) return;
       const next = {...value, result, error: undefined};
       setAttempt(next); lastAttempt.current = next;
+      setSuggestions(items => [result, ...items.filter(item => item.id !== result.id)]);
+      setBoardLoaded(true);
       setSuggestInput(current => current.trim() === value.text ? '' : current);
       setRefreshTick(n => n + 1);
     } catch (error) {
@@ -175,19 +187,19 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
   }
 
   const input = mode === 'chat' ? chatInput : suggestInput;
-  const serviceLabel = healthError ? '社区服务暂不可达' : !health ? '连接状态待检测'
-    : !health.ok ? '社区服务暂未就绪' : health.relay.online ? '助手服务已连接' : '助手暂离线 · 建议可尝试提交';
+  const serviceLabel = healthError ? '社区离线 · 尚无法确认提交或答复' : !health ? '连接状态待检测'
+    : !health.ok ? '社区离线 · 服务尚未就绪' : health.relay.online ? '助手服务已连接' : '助手离线 · 建议可接收，答复等待服务恢复';
 
   return <div className={`feedback-hub ${inline?'fh-inline':''}`}>
     {!inline&&<button ref={opener} type="button" className="fh-launcher" aria-expanded={open} aria-controls={panelId}
-      onClick={() => setOpen(value => !value)}><MessageCircle size={19} aria-hidden="true"/><span>建议与助手</span><span className="fh-launcher-dot" aria-hidden="true"/></button>}
+      onClick={() => { setOpen(value => !value); if (!open) setMode('suggest'); }}><Lightbulb size={19} aria-hidden="true"/><span>公开提建议</span><span className="fh-launcher-dot" aria-hidden="true"/></button>}
     {visible && <aside ref={panel} id={panelId} className="fh-panel" role={inline?'region':'dialog'} aria-label="植物社区建议与助手" aria-labelledby={titleId}>
       <header className="fh-header"><div className="fh-mark"><Leaf size={22} aria-hidden="true"/></div><div><span className="fh-eyebrow">WESTLAKE · COMMUNITY</span><h2 id={titleId}>一起，让生境更真实。</h2></div>
         {!inline&&<button type="button" className="fh-icon-button" aria-label="关闭建议与助手" onClick={() => {setOpen(false); opener.current?.focus();}}><X size={20}/></button>}</header>
       <div className="fh-connection" role="status"><span className={`fh-dot ${health?.ok && health.relay.online && !healthError ? 'fh-connected' : ''}`}/><span>{serviceLabel}</span>
         <button type="button" onClick={() => setRefreshTick(n => n + 1)} aria-label="重新检测连接并刷新建议"><RefreshCw size={13}/></button></div>
       {health?.relay.online&&<div className="fh-model-evidence"><b>{health.relay.model} / {health.relay.reasoningEffort}</b><span>{health.relay.availableAccounts??'—'} 个可用账号 · {typeof health.relay.workers==='number'?health.relay.workers:'—'} 个执行器 · 云端共享记录</span></div>}
-      <p className="fh-network-note">建议记录保存在云端；模型回复与代码执行需要团队本地网关和转发服务保持在线。</p>
+      <p className="fh-network-note">仅服务确认接收的建议保存在云端；离线或提交失败时不表示已接收。助手离线时不会生成答复。</p>
       {proof&&<details className="fh-proof"><summary>已核验 {proof.distinctAccounts} 个账号同时调用 · {proof.model} / {proof.reasoningEffort}</summary><p>该次验收的上游转发区间共同重叠 {(proof.overlapMs/1000).toFixed(3)} 秒；验收时间 {new Date(proof.verifiedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})}。</p>{proof.accounts.map(a=><p key={a.slot}>匿名账号 {a.slot} · HTTP {a.httpStatus} · 请求 {a.requestId.slice(0,8)}</p>)}<p>这是已完成调用的日志验收；当前连接与可用账号数以上方健康状态为准。</p><a href={`${import.meta.env.BASE_URL}execution-evidence.json`} target="_blank" rel="noreferrer">查看可核对回执 ↗</a><p><a href={`${import.meta.env.BASE_URL}collaboration-evidence.json`} target="_blank" rel="noreferrer">查看分工、同事交接与三个账号的审查原文 ↗</a></p></details>}
       {historyError&&<p className="fh-network-note">历史对话暂未恢复：{historyError}<button type="button" onClick={()=>setRefreshTick(n=>n+1)}>重新读取</button></p>}
       <AccountUsageEvidence/>
@@ -215,7 +227,7 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
               </div>
             </article>)}
           </> : <div className="fh-suggest-intro"><h3>把观察变成下一步改进</h3><p>描述哪里不准确、期望怎样改进。建议及关联物种会公开给其他访客；当前场景参数会随提交发送。</p><p className="fh-note">请勿填写个人隐私、密钥或本机文件路径。已接收表示服务收到建议，后续仍需审核、处理和验证。</p>
-            {attempt && <div className="fh-receipt" aria-live="polite">{sendingSuggestion ? <p className="fh-pending"><LoaderCircle size={14} className="fh-spin"/>正在提交建议…</p> : attempt.error ? <><p className="fh-error">{attempt.error}</p><button type="button" onClick={() => void sendSuggestion(attempt)}>重试同一建议</button></> : attempt.result ? <><Status status={attempt.result.status}/><p>服务已返回建议记录，可在下方看板跟进最新状态。</p></> : null}</div>}
+            {attempt && <div className="fh-receipt" aria-live="polite">{sendingSuggestion ? <p className="fh-pending"><LoaderCircle size={14} className="fh-spin"/>正在提交建议…</p> : attempt.error ? <><p className="fh-error">{attempt.error}</p><button type="button" onClick={() => void sendSuggestion(attempt)}>重试同一建议</button></> : attempt.result ? <><Status status={attempt.result.status}/><p>服务已确认接收，记录已显示在下方看板。每 4 秒查询状态与答复。</p>{attempt.result.summary && <p className="fh-reply">{attempt.result.summary}</p>}</> : null}</div>}
           </div>}
         </section>
         <form className="fh-composer" onSubmit={submit}>
@@ -232,9 +244,9 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
           {boardError && <div className="fh-error" role="alert"><p>{boardError}{boardLoaded ? ' 下方保留上次读取的记录。' : ''}</p><button type="button" onClick={() => setRefreshTick(n => n + 1)}>重试读取</button></div>}
           {!boardLoaded && !boardError && <p className="fh-empty">正在读取公开建议…</p>}
           {boardLoaded && !suggestions.length && <p className="fh-empty">暂时没有公开建议，欢迎分享你的第一条观察。</p>}
-          {suggestions.map(item => { const url = deploymentLink(item.deploymentUrl); return <article className="fh-card" key={item.id}><div className="fh-card-top"><span>{speciesNames[item.species] || '其他物种'}</span><Status status={item.status}/></div><p>{item.text}</p>{item.summary && <p className="fh-summary">处理摘要：{item.summary}</p>}{item.status === 'failed' && <p className="fh-error">本条建议处理未完成，等待维护者跟进。</p>}<div className="fh-card-footer"><code title={item.id}>记录 {item.id.slice(0,8)}{item.taskId?` · 任务 ${item.taskId.slice(0,8)}`:''}</code><time dateTime={item.createdAt}>{dateLabel(item.createdAt)}</time>{item.status === 'deployed' && url && <a href={url} target="_blank" rel="noopener noreferrer">查看部署<ChevronRight size={12}/></a>}</div></article>; })}
+          {suggestions.map(item => { const url = deploymentLink(item.deploymentUrl); return <article className="fh-card" key={item.id}><div className="fh-card-top"><span>{speciesNames[item.species] || '其他物种'}</span><Status status={item.status}/></div><p className="fh-note" style={{overflowWrap: 'anywhere'}}>作者 memberId：{item.memberId || '旧服务未提供'}</p><p>{item.text}</p>{item.summary && <p className="fh-summary">答复 / 处理摘要：{item.summary}</p>}{item.status === 'failed' && <p className="fh-error">本条建议处理未完成，等待维护者跟进。</p>}<div className="fh-card-footer"><code title={item.id}>记录 {item.id.slice(0,8)}{item.taskId?` · 任务 ${item.taskId.slice(0,8)}`:''}</code><time dateTime={item.createdAt}>{dateLabel(item.createdAt)}</time>{item.status === 'deployed' && url && <a href={url} target="_blank" rel="noopener noreferrer">查看部署<ChevronRight size={12}/></a>}</div></article>; })}
         </section>
-        <p className="fh-privacy">访客会话仅用于本次交流，可保存在此浏览器。会话凭据不在公开看板显示。</p>
+        <p className="fh-privacy">浏览器仅保留匿名 memberId；密码、token、邮箱不持久化或展示。刷新后不会恢复私人对话；公开建议和答复仍可在看板查看。memberId 是公开作者标签，不是身份认证凭据。</p>
       </div>
     </aside>}
   </div>;
