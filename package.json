@@ -10,7 +10,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test --test-concurrency=2 lib/acer-establishment.test.mjs lib/acer-juvenile-leaves.test.mjs lib/additional-continuity.test.mjs lib/feedback-client.test.mjs lib/ophiopogon-material.test.mjs lib/osmanthus-age-support.test.mjs lib/osmanthus-persistence.test.mjs lib/root-collar-bridge.test.mjs lib/root-junction.test.mjs",
+    "test": "node --test --test-concurrency=2 lib/acer-juvenile-leaves.test.mjs lib/feedback-client.test.mjs lib/ophiopogon-material.test.mjs lib/root-collar-bridge.test.mjs lib/root-junction.test.mjs",
     "test:full": "node --test --test-concurrency=2 lib/*.test.mjs"
   },
   "dependencies": {
