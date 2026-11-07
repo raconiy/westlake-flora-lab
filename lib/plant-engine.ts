@@ -534,6 +534,12 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         base.userData = { role: "rhizome-node", cohort: c, birth: fanBirth }; group.add(base);
         root(base, establishment); bud(base, establishment);
         const expanded = Array.from({ length: 8 }, (_, i) => smooth(fanBirth + .025 + i * .07, fanBirth + .14 + i * .07, age));
+        // Do not register a dynamics branch before the first blade cohort has
+        // formed.  At age zero the fan is a propagule with a real root/bud
+        // anchor, but its aerial support has zero length; putting that support
+        // in `branches` created a phantom zero-length joint that could be
+        // mistaken for formed wood by continuity and load audits.
+        if (expanded[0] <= 0) continue;
         const fan = sway(base, 200 + c, .40 * expanded[0]);
         for (let i = 0; i < 8; i++) {
           const expansion = expanded[i]; if (expansion <= 0) continue;
@@ -682,7 +688,11 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
   const heightAt = (a:number) => a < 1 ? (.025 + .42 * a) * smooth(.035,.12,a) : .445 + 13.5 * (1 - Math.exp(-(a - 1) / 25));
   const h = heightAt(age);
   group.userData.priors = { calibration: "uncalibrated-engineering-prior", source: "Flora of China / USDA morphology; growth curves not empirical age/DBH data" };
-  const radius = age < 1 ? .001 + .003 * age : .004 + .25 * (1 - Math.exp(-(age - 1) / 42));
+  // Primary emergence starts from zero length AND cross-section. Thereafter
+  // the fixed material centreline extends distally; secondary thickening only
+  // changes radii, never stretches established material nodes.
+  const emerged = smooth(.035, .12, age);
+  const radius = (age < 1 ? .001 + .003 * age : .004 + .25 * (1 - Math.exp(-(age - 1) / 42))) * emerged;
   const branches: BranchJoint[] = [], textures: THREE.Texture[] = [], geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
   let leafCount = 0;
   function ownGeometry<T extends THREE.BufferGeometry>(g: T) { geometries.add(g); return g; }
@@ -856,10 +866,10 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     const seam=new THREE.Mesh(ownGeometry(new THREE.TorusGeometry(.0135,.00055,4,32)),budMaterial);seam.rotation.y=Math.PI/2;seam.scale.y=1.35;seedGroup.add(seam);
     if(age>.07)seedGroup.scale.setScalar(1-smooth(.25,.65,age)*.7);
   }
-  if(h > .001) {
+  if(h > 0) {
     const leader=branchJoint(group,new THREE.Vector3(),UP,h,radius,0,seed);
     const trunkCurve=curveFor(h,0,seed*.13);
-    const trunk=new THREE.Mesh(ownGeometry(tube(trunkCurve,radius*1.35,Math.max(.001,radius*.055),Math.max(12,Math.round(h*4)),12)),age<1?twigMaterial:bark);trunk.castShadow=trunk.receiveShadow=true;leader.add(trunk);
+    const trunk=new THREE.Mesh(ownGeometry(tube(trunkCurve,radius*1.35,Math.max(.001*emerged,radius*.055),Math.max(12,Math.round(h*4)),12)),age<1?twigMaterial:bark);trunk.castShadow=trunk.receiveShadow=true;leader.add(trunk);
     const majorCount=21, leafScale=Math.min(1,.24+smooth(.075,1.5,age)*.76);
     const trueLeaves=smooth(.075,.16,age), initialPhase=rng(seed*211)()*Math.PI*2;
     // Persistent stem nodes: lower nodes are born first, at their height at birth.
@@ -868,13 +878,15 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     for(let i=0;i<80;i++) {
       const birth=.08+i*.075+i*i*.007, nodeAge=age-birth;
       if(nodeAge<=0)break;
-      const materialY=heightAt(birth)*.96,t=materialY/Math.max(.001,h), angle=initialPhase+i*2.39996;
+      const materialY=heightAt(birth)*.96, angle=initialPhase+i*2.39996;
       const attachment=axisPoint(materialY,seed*.13), expansion=smooth(0,.12,nodeAge)*trueLeaves;
-      // Older lower-stem foliage fades under an explicit renewal prior;
-      // its woody spur remains. This is not a calibrated competition solver.
-      const light=1-smooth(2,5,nodeAge)*(1-smooth(.24,.56,t));
+      // Retain established organs in the age-driven foliage proxy, as on the
+      // lateral axes. No light-competition/abscission event is solved here:
+      // scaling lower leaves by their fraction of today's height erased real
+      // petioles/blades (and later spur leaves) at five years. Seasonal loss
+      // remains controlled independently by day/leafPresence.
       const direction=new THREE.Vector3(Math.cos(angle),.18,Math.sin(angle)).normalize();
-      appendLeaf(records,attachment,direction,.032*expansion,leafScale*expansion*light,.12*Math.sin(i*2.1),rng(seed+i*113)()-.5,UP,`stem-leaf:${i}`);
+      appendLeaf(records,attachment,direction,.032*expansion,leafScale*expansion,.12*Math.sin(i*2.1),rng(seed+i*113)()-.5,UP,`stem-leaf:${i}`);
       const spurGrowth=smooth(.85,1.8,nodeAge);
       if(spurGrowth>.001) {
         const end=attachment.clone().addScaledVector(direction,.014*spurGrowth);
@@ -885,7 +897,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
         for(let l=0;l<5;l++) {
           const a=angle+l*2.39996, d=new THREE.Vector3(Math.cos(a),.18,Math.sin(a)).normalize();
           const nodeT=.2+l*.16,expansion=smooth(nodeT,nodeT+.08,spurGrowth),fixedNode=attachment.clone().addScaledVector(direction,.014*nodeT);
-          appendLeaf(records,fixedNode,d,.032*spurGrowth*expansion,leafScale*spurGrowth*light*expansion,.1*Math.sin(l),0,UP,`stem-spur:${i}:${l}`);
+          appendLeaf(records,fixedNode,d,.032*spurGrowth*expansion,leafScale*spurGrowth*expansion,.1*Math.sin(l),0,UP,`stem-spur:${i}:${l}`);
         }
       }
     }
@@ -966,7 +978,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     }
     const terminal=new THREE.Mesh(unitBud,budMaterial);terminal.name="terminal-bud";terminal.position.copy(trunkCurve.getPointAt(1));
     const budMaturity=smooth(.2,20,age),budRadius=.00065+.0018*budMaturity,budLength=.0025+.0055*budMaturity;
-    terminal.scale.set(budRadius,budLength*.5,budRadius);terminal.userData.organ="bud";leader.add(terminal);
+    terminal.scale.set(budRadius,budLength*.5,budRadius).multiplyScalar(emerged);terminal.userData.organ="bud";leader.add(terminal);
   }
   // Fixed identity budgets, established before any axes grow. Reserve the
   // actual stable base-spur counts, then partition the remainder among 36 sites
