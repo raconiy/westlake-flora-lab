@@ -892,7 +892,12 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     leader.userData.phyllotaxis="spiral alternate long shoots; second-year axillary clustered short shoots";
     pendingCanopies.push({parent:leader,wood:[],fine,records,buds,sites:[]});
     for(let i=0;i<majorCount;i++) {
-      const rr=rng(seed*104729+i*8191), birth=4+i*1.10+i*i*.080, branchAge=age-birth;
+      const rr=rng(seed*104729+i*8191), baseBirth=4+i*1.10+i*i*.080;
+      // Seeded individuals keep the same upward order, but their bud-break
+      // timing is not identical. The small bounded jitter is a procedural
+      // prior for light, vigour and microsite differences; it is not field
+      // calibration and never allows a later node to precede an earlier one.
+      const birth=baseBirth+(rr()-.5)*.08, branchAge=age-birth;
       // A fixed birth-time vigour prior: later scaffold axes extend more slowly
       // as leader production slows. Existing axes are never clipped to a moving
       // crown envelope. All child births use this same developmental clock.
