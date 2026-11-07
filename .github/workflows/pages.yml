@@ -20,6 +20,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      # Full geometry sweep remains available locally as `npm run test:full`.
+      # The publish gate runs the changed-physics, lifecycle, feedback and
+      # root-contact suites so CI stays within the runner time limit.
       - run: npm test
       - run: node --test infra/local/test/*.test.mjs infra/community/test/*.test.mjs
       - run: npm run build

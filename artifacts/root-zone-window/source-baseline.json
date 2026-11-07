@@ -3,13 +3,13 @@
   "sha256": {
     "rhizosphere.ts": "a24fd06cfeaaf60aac26460825fbb61a9c73192867156bfe655cfe3be516b403",
     "plant-engine.ts": "057a26cc1b5a83a098020f109ee1ecc0ad39b75df4c9c0aae59799763579ba28",
-    "additional-species.ts": "4015cf1fb3683073c1138f94abe9cf015d8f0016fc72dd94728112e508ff7d7a",
+    "additional-species.ts": "b3efe2b3b43b4212eb07eedf797a5c144bc5ff6c07ac5d6e02d0a965f3fb5278",
     "woody-root-development.ts": "1ee05c41575788c190a8b93304ff081712a08a223b41a3dd2d43c9416e620999",
     "development.ts": "98459ab35abf9803e6d6169e07cff5275eb72c13205c81192651a7be66a99d7c",
     "beam-dynamics.ts": "1cb9b6f7d31ec053d556ec35f4c9ad9391f916243f4f6db95d69c96559c34721",
     "physical-priors.ts": "44b90be1881aadde6f9ae0bd04eca9a0f60d4e6a0e455d2e5d1bd8db048a5cb6",
     "wood-loads.ts": "1674a938ca85d4617359c01985f0f9f3e79e15a71ab9c000611fc55267a34219",
-    "root-collar-bridge.ts": "7b4950fe3a9a51ce30924065e8ec949490ca63f00d4f2eede6f9d23a6b02d625",
+    "root-collar-bridge.ts": "e6867c546b7554ef421d024974571931ed4736469294cd3e8100e096b81028ed",
     "scene-framing.ts": "a2cb8b378dd41ec5979c285f144dc23461fcb2ff165d68bf3963886109d4c51a"
   }
 }
