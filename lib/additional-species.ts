@@ -245,7 +245,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
     // Consume a separate stream per node so delayed births cannot reroll older organs.
     const r=randomFor(key+n*104729);if(scale<=0)continue;
     const anchor=axis.point(t).applyMatrix4(frame),angle=(apicalPhase??0)+(maple?n*Math.PI/2:n*2.39996),vertical=.35+r()*.45,pairs=maple?2:1;
-    for(let p=0;p<pairs;p++){const a=angle+p*Math.PI,dir=new THREE.Vector3(Math.cos(a)*.8,vertical,Math.sin(a)*.8).normalize().applyQuaternion(sq),len=(juvenileState?juvenileState.expansion*juvenileState.targetLengthM/6:(maple?.025:.026)*scale)*(.9+r()*.2),base=anchor.clone().addScaledVector(dir,len);
+    for(let p=0;p<pairs;p++){const a=angle+p*Math.PI,dir=new THREE.Vector3(Math.cos(a)*.8,vertical,Math.sin(a)*.8).normalize().applyQuaternion(sq),clearance=maple?.0012:.0016,len=((juvenileState?juvenileState.expansion*juvenileState.targetLengthM/6:(maple?.025:.026)*scale)*(.9+r()*.2))+clearance,base=anchor.clone().addScaledVector(dir,len);
       dummy.position.copy(base);dummy.quaternion.setFromUnitVectors(UP,dir);dummy.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(UP,(r()-.5)*1.3));const bladeVariation=.84+r()*.23;
       if(juvenileState)dummy.scale.set(juvenileState.expansion*juvenileState.targetWidthM/actualBladeWidth*(.9+(bladeVariation-.84)/.23*.2),scale*bladeVariation,scale*bladeVariation);
       else dummy.scale.setScalar(scale*bladeVariation);
