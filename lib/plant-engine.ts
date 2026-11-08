@@ -927,7 +927,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
         for(let l=0;l<5;l++) {
           const a=angle+l*2.39996, d=new THREE.Vector3(Math.cos(a),.18,Math.sin(a)).normalize();
           const nodeT=.2+l*.16,expansion=smooth(nodeT,nodeT+.08,spurGrowth),fixedNode=attachment.clone().addScaledVector(direction,.014*nodeT);
-          appendLeaf(records,fixedNode,d,.032*spurGrowth*expansion,leafScale*spurGrowth*expansion*(i>=74?1:stemLeafRetention),.1*Math.sin(l),0,UP,`stem-spur:${i}:${l}`);
+          appendLeaf(records,fixedNode,d,.032*spurGrowth*expansion,leafScale*spurGrowth*expansion*stemLeafRetention,.1*Math.sin(l),0,UP,`stem-spur:${i}:${l}`);
         }
       }
     }
