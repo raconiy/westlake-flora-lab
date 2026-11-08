@@ -27,6 +27,44 @@ export function additionalDevelopment(species: 'camphor' | 'acer' | 'ophiopogon'
 export function ophiopogonArrival(fraction: number) {
   return .5 - Math.sin(Math.asin(1 - 2 * Math.max(0, Math.min(1, fraction))) / 3);
 }
+/** Relative packing control, never plants per square metre. The supplied
+ * botanical descriptions constrain habit; all distances/clocks are priors.
+ * A pioneer reaches the patch edge, followed by irregular lateral infill.
+ * Higher density adds more sites inside the same patch envelope; existing
+ * material nodes are never resampled or moved.
+ */
+export const clonalArchitecturePrior = {
+  calibrated: false, sourceType: 'engineering-prior',
+  densityMeaning: 'relative clonal packing, not measured campus planting counts',
+  allocation: 'seeded low-discrepancy pioneer and lateral infill; finite lifetime catalogue',
+  evidence: 'institutional habit descriptions and clonal architecture research; no fitted response coefficients',
+  sources: [
+    'https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/',
+    'https://www.missouribotanicalgarden.org/gardens-gardening/your-garden/help-for-the-home-gardener/advice-tips-resources/gardening-help-faqs/question/1480/how-do-i-divide-my-iris-plants',
+    'https://pubmed.ncbi.nlm.nih.gov/25216101/',
+    'https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2745.12066',
+  ],
+};
+export function clonalDensity(value: number) {
+  return Math.max(.15, Math.min(2, Number.isFinite(value) ? value : 1));
+}
+export function clonalSample(seed: number, key: number) {
+  let t = (seed + Math.imul(key, 104729)) >>> 0;
+  t = Math.imul(t ^ t >>> 16, 0x21f0aaad);
+  t = Math.imul(t ^ t >>> 15, 0x735a2d97);
+  return ((t ^ t >>> 15) >>> 0) / 4294967296;
+}
+export function clonalPatchNode(index: number, seed: number, _inputDensity: number, radius: number) {
+  if (index === 0) return { x: 0, z: 0 };
+  // The catalogue is keyed by seed and site index. Density selects a prefix
+  // of these sites; it must not resample or move the sites that were already
+  // formed when a denser stand adds later ramets.
+  const phase = clonalSample(seed, 1) * Math.PI * 2;
+  const angle = phase + (index - 1) * 2.3999632297 + (clonalSample(seed, 100 + index) - .5) * .7;
+  const radialSample = (index * .754877666 + clonalSample(seed, 2)) % 1;
+  const spread = radius * (index === 1 ? 1 : .25 + .48 * Math.sqrt(radialSample));
+  return { x: Math.cos(angle) * spread, z: Math.sin(angle) * spread };
+}
 /** Stable material nodes shared by shoots and underground axes.
  * NC State's cached species description: underground lateral stolons terminate
  * in daughter plants. Distances and clocks below remain engineering priors.
@@ -34,12 +72,11 @@ export function ophiopogonArrival(fraction: number) {
  * The original division starts at its collar and extends downwards; it does
  * not need a lateral precursor to reach an already present main collar.
  */
-export function ophiopogonRamet(index: number, age: number) {
+export function ophiopogonRamet(index: number, age: number, seed = 42, density = 1) {
   const birth = index === 0 ? .025 : .55 + index * .48;
   const extensionDuration = .9, extensionBirth = index === 0 ? birth : birth - extensionDuration;
   const growth = organGrowth(birth, .9, age), extension = organGrowth(extensionBirth, extensionDuration, age);
-  const angle = index * 2.39996, spread = index === 0 ? 0 : .047 * Math.sqrt(index);
-  const x = Math.cos(angle) * spread, z = Math.sin(angle) * spread;
+  const { x, z } = clonalPatchNode(index, seed, density, .115);
   return { birth, growth, x, z, extensionBirth, extensionDuration, extension,
     nodeAt: (t: number) => ({ x: x * t, y: -.008 - (index === 0 ? .006 * t : 0), z: z * t }),
     arrivalAt: (t: number) => extensionBirth + extensionDuration * ophiopogonArrival(t) };

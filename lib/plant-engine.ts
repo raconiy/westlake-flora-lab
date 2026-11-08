@@ -6,6 +6,7 @@ import {mapWoodyBarkUV,wireWoodyBarkSurface,wireWoodyLeafSurface} from "./woody-
 import {irisFallSurface,irisCrestSurface,herbPigment} from "./herb-surfaces.ts";
 import {tagLeafStrip} from "./herb-leaf-dynamics.ts";
 import {herbReproduction,herbReproductionPriors} from "./herb-reproduction.ts";
+import {clonalArchitecturePrior,clonalDensity,clonalPatchNode} from "./development.ts";
 // @ts-ignore Explicit suffix is required by the native Node TypeScript test runner.
 import { osmanthusLifecycle, osmanthusPriors, osmanthusSupportedRadius } from "./osmanthus-lifecycle.ts";
 import { assertOsmanthusWoodSupport, createOsmanthusAxis, osmanthusAxisPrior, type OsmanthusAxis } from "./osmanthus-axis.ts";
@@ -75,7 +76,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
   const natural = species === "ginkgo" ? buildNaturalGinkgo(params) : null;
   if (natural) return natural;
   const age = Math.max(0, Number.isFinite(params.age) ? params.age : 12), day = clamp(params.day, 1, 365);
-  const density = clamp(params.density, .15, 2);
+  const density = clonalDensity(params.density);
   const group = new THREE.Group(); group.name = `plant:${species}:seed:${params.seed}`;
   const branches: BranchJoint[] = []; let leafCount = 0;
   const bark = new THREE.MeshStandardMaterial({ color: species === "ginkgo" ? "#786950" : "#6e6d53", roughness: .96 });
@@ -469,6 +470,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
         units: "geometry in metres; inclination in radians; day 1–365; age in years since vegetative establishment; cycle factors dimensionless",
       },
     } };
+    group.userData.clonalArchitecture = { ...clonalArchitecturePrior, density };
     function segment(parent: THREE.Object3D, start: THREE.Vector3, end: THREE.Vector3, radius: number, material: THREE.Material, role: string) {
       const mesh = new THREE.Mesh(unit, material);
       mesh.position.copy(start).lerp(end, .5);
@@ -481,6 +483,7 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     function root(parent: THREE.Object3D, size: number) {
       const mesh = segment(parent, new THREE.Vector3(), new THREE.Vector3(.003 * size, -.022 * size, 0), .00065 * size, storage, "adventitious-root");
       mesh.userData.organ = "root";
+      mesh.userData.axisId=`${parent.name}:root`;mesh.userData.parentNodeId=parent.userData.rametId;
     }
     function bud(parent: THREE.Object3D, size: number) {
       const mesh = new THREE.Mesh(sphere, green); mesh.scale.set(.0015, .003, .0015).multiplyScalar(size);
@@ -514,24 +517,31 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       const outerGeo = irisFallSurface(),crestGeo=irisCrestSurface(), innerGeo = petalGeometry(.055, .014, .008);
       const styleGeo = petalGeometry(.042, .007, .004);
       extraGeometries.push(outerGeo, innerGeo, styleGeo,crestGeo);const fallMap=herbPigment("iris-fall");petalMat.map=fallMap;petalMat.color.set("#ffffff");extraTextures.push(fallMap);const crestMat=new THREE.MeshStandardMaterial({color:"#f1edf8",side:THREE.DoubleSide,roughness:.82});materials.push(crestMat);
-      const fanCount = Math.max(1, Math.round(4 * density));
-      // One shallow, horizontal rhizome chain. Each new fan waits for its segment.
-      let node = new THREE.Vector3(.015, -.003, 0);
-      segment(group, new THREE.Vector3(-.015, -.003, 0), node, .004, storage, "rhizome-propagule");
+      // A density value controls both cohort count and the occupied rhizome
+      // footprint. It is a relative packing prior, never a campus plant count.
+      const fanCount = 1 + Math.round(3 * density);
+      const origin = new THREE.Vector3(.015, -.003, 0);
+      const nodes = Array.from({length:fanCount},(_,c)=>{
+        const p=clonalPatchNode(c,params.seed,density,.065);
+        return origin.clone().add(new THREE.Vector3(p.x,0,p.z));
+      });
+      segment(group, new THREE.Vector3(-.015, -.003, 0), origin, .004, storage, "rhizome-propagule").userData.axisId='iris:propagule';
       for (let c = 0; c < fanCount; c++) {
         const birth = c === 0 ? 0 : .5 + (c - 1) * .55;
         const extension = c === 0 ? 1 : smooth(birth, birth + .22, age);
-        const start = node.clone();
+        // Attach to the closest already established material node. This
+        // produces lateral branches and clumps rather than one zigzag chain.
+        let parent = 0;
+        for(let p=1;p<c;p++)if(nodes[p].distanceToSquared(nodes[c])<nodes[parent].distanceToSquared(nodes[c]))parent=p;
+        const start=nodes[parent],node=c===0?origin.clone():start.clone().lerp(nodes[c],extension);
         if (c > 0) {
-          const angle = phase + .25 * (keyed(100 + c) - .5);
-          node = start.clone().add(new THREE.Vector3(Math.cos(angle), 0, Math.sin(angle)).multiplyScalar(.065 * extension));
           const rhizome = segment(group, start, node, .0035 * extension, storage, "rhizome");
-          rhizome.userData = { ...rhizome.userData, cohort: c, birth, growth: extension };
+          rhizome.userData = { ...rhizome.userData, cohort: c, birth, growth: extension,axisId:`iris:rhizome:${c}`,parentNodeId:`iris:ramet:${parent}`,nodeId:`iris:ramet:${c}` };
         }
         const fanBirth = c === 0 ? 0 : birth + .22;
         const establishment = c === 0 ? 1 : smooth(fanBirth, fanBirth + .10, age);
         const base = new THREE.Group(); base.name = `iris-fan-${c}`; base.position.copy(node); base.rotation.y = phase+(keyed(150+c)-.5)*.65;
-        base.userData = { role: "rhizome-node", cohort: c, birth: fanBirth }; group.add(base);
+        base.userData = { role: "rhizome-node", cohort: c, birth: fanBirth,rametId:`iris:ramet:${c}`,established:age>=fanBirth }; group.add(base);
         root(base, establishment); bud(base, establishment);
         const expanded = Array.from({ length: 8 }, (_, i) => smooth(fanBirth + .025 + i * .07, fanBirth + .14 + i * .07, age));
         // Do not register a dynamics branch before the first blade cohort has
@@ -573,9 +583,15 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
     } else {
       const petalGeo = petalGeometry(.006, .003, -.0006); extraGeometries.push(petalGeo);
       const origin = new THREE.Group(); origin.position.y = .003; origin.name = "oxalis-rooted-propagule"; group.add(origin);
-      segment(origin, new THREE.Vector3(-.008, 0, 0), new THREE.Vector3(), .0009, stemMat, "stolon-propagule");
+      origin.userData={role:'rooting-stolon-node',rametId:'oxalis:ramet:0',birth:0};
+      segment(origin, new THREE.Vector3(-.008, 0, 0), new THREE.Vector3(), .0009, stemMat, "stolon-propagule").userData.axisId='oxalis:propagule';
       root(origin, 1); bud(origin, 1);
-      const runnerCount = Math.max(1, Math.round(3 * density)), nodeLimit = 6;
+      const runnerCount = Math.max(1, Math.round(3 * density));
+      const nodeLimit = 4 + Math.round(2 * density), catalogueLimit = 8;
+      // Keep each canonical runner's material coordinates fixed for a seed;
+      // density adds later runners/nodes inside the same patch instead of
+      // moving an already formed stolon when the display density changes.
+      const reach = .24, runners:THREE.Object3D[][]=[];
       function nodeOrgans(parent: THREE.Object3D, birth: number, key: number) {
         const establishment = smooth(birth, birth + .05, age); if (key !== 0) root(parent, establishment);
         const expansion = smooth(birth + .018, birth + .10, age);
@@ -603,17 +619,24 @@ export function buildPlant(species: PlantSpecies, params: PlantParams): PlantMod
       }
       nodeOrgans(origin, 0, 0);
       for (let r = 0; r < runnerCount; r++) {
-        let parent: THREE.Object3D = origin;
-        for (let n = 1; n <= nodeLimit; n++) {
-          const birth = .12 + r * .045 + (n - 1) * .14;
-          const extension = smooth(birth, birth + .10, age);
-          const angle = phase + r * Math.PI * 2 / runnerCount + .2 * (keyed(1200 + r * 31 + n) - .5);
-          const end = new THREE.Vector3(Math.cos(angle), 0, Math.sin(angle)).multiplyScalar((.035 + .015 * keyed(1300 + r * 31 + n)) * extension);
+        const branchNode=Math.max(1,Math.floor(catalogueLimit*.3)),limit=Math.max(3,nodeLimit-r%3);
+        let parent: THREE.Object3D = r===0?origin:runners[0][branchNode-1];
+        const onset=r===0?.12:.12+.84*branchNode/catalogueLimit+.08+r*.045;
+        const duration=.84,angle=phase+r*2.399963+(keyed(1200+r)-.5)*.65;
+        const length=reach*(r===0?1:.48),bend=(keyed(1300+r)-.5)*.24;
+        const path=(t:number)=>new THREE.Vector3(Math.cos(angle)*t-Math.sin(angle)*bend*Math.sin(Math.PI*t)*t,0,Math.sin(angle)*t+Math.cos(angle)*bend*Math.sin(Math.PI*t)*t).multiplyScalar(length);
+        const catalogue:THREE.Object3D[]=[];runners.push(catalogue);
+        for (let n = 1; n <= limit; n++) {
+          const birth = onset + (n - 1) / catalogueLimit * duration;
+          // Constant advancing front, subdivided into density-dependent fixed
+          // spacers. Born nodes never slide when another node is added by age.
+          const extension = clamp((age-birth)/(duration/catalogueLimit));
+          const end=path(n/catalogueLimit).sub(path((n-1)/catalogueLimit)).multiplyScalar(extension);
           const internode = segment(parent, new THREE.Vector3(), end, .0008 * extension, stemMat, "stolon-internode");
-          internode.userData = { ...internode.userData, runner: r, node: n, birth, growth: extension };
+          internode.userData = { ...internode.userData, runner: r, node: n, birth, growth: extension,axisId:`oxalis:stolon:${r}:${n}`,nodeId:`oxalis:ramet:${r}:${n}`,parentNodeId:parent.userData.rametId };
           const node = new THREE.Group(); node.name = `oxalis-node-${r}-${n}`; node.position.copy(end);
-          node.userData = { role: "rooting-stolon-node", runner: r, node: n, birth: birth + .10 }; parent.add(node);
-          nodeOrgans(node, birth + .10, r * nodeLimit + n); parent = node;
+          node.userData = { role: "rooting-stolon-node", runner: r, node: n, birth: birth + duration/catalogueLimit,rametId:`oxalis:ramet:${r}:${n}` }; parent.add(node);catalogue.push(node);
+          nodeOrgans(node, birth + duration/catalogueLimit, 1+r*32+n); parent = node;
         }
       }
     }

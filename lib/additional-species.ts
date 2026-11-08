@@ -10,7 +10,7 @@ import {tagLeafStrip,mergedLeafStripAttributes} from "./herb-leaf-dynamics.ts";
 import type { PlantParams, PlantModel, BranchJoint } from "./plant-engine";
 
 // @ts-ignore Native Node tests require the suffix.
-import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet } from "./development.ts";
+import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet, clonalArchitecturePrior } from "./development.ts";
 import {woodyEstablishmentGeometry, woodyEstablishmentState, woodyEstablishmentEvidence,
  acerHypocotylState,acerPrimaryGeometry,acerCotyledonState,acerCotyledonBlade,acerEstablishmentPriors} from './woody-establishment.ts';
 
@@ -351,7 +351,7 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
  } else if(species==="ophiopogon") {
   const clumpCount=1+Math.round(6*density),leafMaterial=mat(new THREE.MeshStandardMaterial({color:"#ffffff",side:THREE.DoubleSide,vertexColors:true,roughness:.67})),scapeMat=mat(new THREE.MeshStandardMaterial({color:"#7a925d",roughness:.8})),flowerMat=mat(new THREE.MeshStandardMaterial({color:"#ded8ee",side:THREE.DoubleSide,roughness:.72}));
   const bloom=smooth(145,172,day)*(1-smooth(226,246,day))*smooth(.5,1.5,age),petalShape=new THREE.Shape();petalShape.moveTo(0,0);petalShape.bezierCurveTo(.0016,.001,.0019,.004,0,.005);petalShape.bezierCurveTo(-.0019,.004,-.0016,.001,0,0);const flowerGeo=geom(new THREE.ShapeGeometry(petalShape,5));
-  for(let c=0;c<clumpCount;c++){const ramet=ophiopogonRamet(c,age);if(ramet.growth<=0)continue;const r=randomFor(seed*199+c*761),rosetteLength=(.20+r()*.14)*ramet.growth,base=joint(group,new THREE.Vector3(ramet.x,0,ramet.z),UP,rosetteLength,.004*ramet.growth,2,seed+c*17),parts:THREE.BufferGeometry[]=[];base.userData.organ="basal-rosette";base.userData.cohort=c;base.userData.woody=false;const leafN=Math.max(5,Math.round(84*density));
+  for(let c=0;c<clumpCount;c++){const ramet=ophiopogonRamet(c,age,seed,density);if(ramet.growth<=0)continue;const r=randomFor(seed*199+c*761),rosetteLength=(.20+r()*.14)*ramet.growth,base=joint(group,new THREE.Vector3(ramet.x,0,ramet.z),UP,rosetteLength,.004*ramet.growth,2,seed+c*17),parts:THREE.BufferGeometry[]=[];base.userData.organ="basal-rosette";base.userData.cohort=c;base.userData.woody=false;base.userData.rametId=`ramet:${c}`;const leafN=Math.max(5,Math.round(84*density));
     // Leaf bases are material nodes inside the expanding 8 mm basal square.
     // Freeze each offset at its own birth, when the collar already encloses it.
     // In particular the first blade begins at the zero-radius collar centre.
@@ -366,7 +366,8 @@ export function buildAdditionalPlant(species:AdditionalSpecies,params:PlantParam
       for(let f=0;f<6;f++){const t=.56+f*.073,point=scape.getPointAt(t),direction=new THREE.Vector3(Math.cos(f*2.4),-.7,Math.sin(f*2.4)).normalize();for(let p=0;p<6;p++){const a=p*Math.PI/3;dummy.position.copy(point).addScaledVector(direction,.003);dummy.quaternion.setFromUnitVectors(UP,direction);dummy.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(UP,a));dummy.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),.30));dummy.scale.setScalar(bloom);dummy.updateMatrix();petals.setMatrixAt(f*6+p,dummy.matrix);}}flowers.add(petals);
     }
   }
-  group.userData.identification="Ophiopogon japonicus; narrow evergreen tuft; short, partly hidden summer raceme";
+ group.userData.identification="Ophiopogon japonicus; narrow evergreen tuft; short, partly hidden summer raceme";
+ group.userData.clonalArchitecture={...clonalArchitecturePrior,density,clumpCount,pioneerReachM:.115*(.85+.15*density),seed};
  }
  group.traverse(o=>{if(!o.userData.organ&&o.parent?.userData.organ)o.userData.organ=o.parent.userData.organ});group.updateMatrixWorld(true);
  const gravityFrames=branches.map(j=>{const down=new THREE.Vector3(0,-1,0).applyQuaternion(j.pivot.getWorldQuaternion(new THREE.Quaternion()).invert()),axis=new THREE.Vector3().crossVectors(UP,down),perp=axis.length();if(perp>1e-8)axis.multiplyScalar(1/perp);else axis.set(1,0,0);return{axis,perp}}),gravityQ=new THREE.Quaternion(),windQ=new THREE.Quaternion(),euler=new THREE.Euler();

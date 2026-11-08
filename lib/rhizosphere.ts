@@ -5,7 +5,7 @@ import {buildPlant} from './plant-engine.ts';
 import { osmanthusLifecycle, osmanthusPriors } from './osmanthus-lifecycle.ts';
 
 // @ts-ignore Native Node tests require the suffix.
-import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet } from './development.ts';
+import { additionalDevelopment, developmentPriors, organGrowth, ophiopogonRamet, clonalArchitecturePrior } from './development.ts';
 import {woodyRootAxes, woodyRootGeometry} from './woody-root-development.ts';
 
 /** A botanical illustration, not a measured root reconstruction or soil-water solver. */
@@ -156,7 +156,7 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
     const material = organ === 'rhizome' ? rhizomeMat : order > 1 ? fineMat : coarseMat;
     const mesh = new THREE.Mesh(built.geometry, material);
     mesh.name = `${organ}:order:${order}`;
-    mesh.userData = { organ, order, sourceType: 'engineering-prior', start: points[0].toArray(), end: points.at(-1)!.toArray(), radius };
+    mesh.userData = { organ, order, sourceType: 'engineering-prior', start: points[0].toArray(), end: points.at(-1)!.toArray(), radius,axisId:`${species}:axis:${geometries.length}` };
     mesh.castShadow = order < 2; group.add(mesh); geometries.push(built.geometry);
     if (organ === 'root' || organ === 'storage-root') {
       rootLength += built.curve.getLength(); rootTips++;
@@ -217,6 +217,7 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
       const organ=role==='adventitious-root'?'root':species==='iris'?'rhizome':'stolon';
       const mid=start.clone().lerp(end,.5);
       addRoot([start,mid,end],object.scale.x,organ==='root'?1:0,organ);
+      Object.assign(group.children.at(-1)!.userData,{axisId:object.userData.axisId,parentNodeId:object.userData.parentNodeId,nodeId:object.userData.nodeId});
       supportCount++;
       // Extend the actual adventitious root, rather than drawing another bundle
       // from the surface node and exposing unnecessary parallel proximal axes.
@@ -254,7 +255,7 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
       }
       // Match the above-ground finite fallback, density clamp and cohort budget.
       const density=clamp(finite(params.density??1,1),.15,2),clumpCount=1+Math.round(6*density);
-      for(let c=0;c<clumpCount;c++){const ramet=ophiopogonRamet(c,age);if(ramet.extension<=0)continue;
+      for(let c=0;c<clumpCount;c++){const ramet=ophiopogonRamet(c,age,seed,density);if(ramet.extension<=0)continue;
         const origin=point(ramet.nodeAt(0)),distal=point(ramet.nodeAt(1));
         materialAxis(`rhizome-${c}`,origin,distal,ramet.extension,.0015,0,'rhizome');
         // Root-only views may show a precursor with no collar or leaf tuft.
@@ -289,6 +290,8 @@ export function buildRhizosphere(species: RootSpecies | string, params: Rhizosph
           materialAxis(`storage-${c}-${f}`,node,tip,sg,.0025,2,'storage-root');
         }
       }
+      Object.assign(group.userData,{clonalArchitecture:{...clonalArchitecturePrior,density,clumpCount,seed,
+        pioneerReachM:.115*(.85+.15*density)}});
     } else if (additional.radicle > 0) {
       addWoodyRoots();
     }
