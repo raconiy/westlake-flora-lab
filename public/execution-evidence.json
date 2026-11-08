@@ -1,44 +1,66 @@
 {
   "proven": true,
-  "distinctAccounts": 3,
+  "distinctAccounts": 5,
   "model": "gpt-6.1-sol",
   "reasoningEffort": "high",
-  "overlapMs": 90630,
-  "verifiedAt": "2026-11-05T16:19:09.632Z",
-  "scope": "Actual successful upstream forwarding intervals recorded by GPT-Load; not GPU timing",
+  "overlapMs": 75348,
+  "verifiedAt": "2026-11-08T13:56:07.879000Z",
+  "scope": "Five distinct GPT-Load credential IDs with successful HTTP 200 responses for the five-way plant audit; not a worker count or GPU timing.",
   "accounts": [
     {
-      "slot": "A",
-      "requestId": "d3102722-9f20-48ae-9977-782d1db0886e",
-      "responseId": "resp_0a128ac0c479963e016aecaad9cb4887d0aefd0f68d9007706",
+      "slot": "#1",
+      "credentialId": 1,
+      "requestId": "cbe61c2c-b16b-4ebc-b427-41bf17485fee",
       "httpStatus": 200,
-      "role": "growth-cross-review",
-      "inputTokens": 25247,
-      "outputTokens": 3079,
-      "forwardingStart": "2026-11-05T16:12:08.804Z",
-      "forwardingEnd": "2026-11-05T16:13:57.589Z"
+      "role": "five-way plant artifact audit",
+      "inputTokens": 507,
+      "outputTokens": 2962,
+      "forwardingStart": "2026-11-08T13:53:15.418000Z",
+      "forwardingEnd": "2026-11-08T13:55:14.626000Z"
     },
     {
-      "slot": "B",
-      "requestId": "a2c0ecb9-8eb3-4d42-b882-65bbe043799f",
-      "responseId": "resp_02021cc17d5b1866016aecaad9eed487d2b5f8eca180b00393",
+      "slot": "#2",
+      "credentialId": 2,
+      "requestId": "2214fb9b-bc2f-49e3-be7f-4f5d074fd047",
       "httpStatus": 200,
-      "role": "root-physics-cross-review",
-      "inputTokens": 15508,
-      "outputTokens": 2052,
-      "forwardingStart": "2026-11-05T16:12:08.804Z",
-      "forwardingEnd": "2026-11-05T16:13:39.435Z"
+      "role": "five-way plant artifact audit",
+      "inputTokens": 510,
+      "outputTokens": 3791,
+      "forwardingStart": "2026-11-08T13:53:15.418000Z",
+      "forwardingEnd": "2026-11-08T13:55:40.441000Z"
     },
     {
-      "slot": "C",
-      "requestId": "8021ec1b-93ba-486b-809a-dfca61d700e7",
-      "responseId": "resp_0db772e42195267e016aecaad9984087d0b6c25afcb302786b",
+      "slot": "#3",
+      "credentialId": 3,
+      "requestId": "aedaaca5-99f6-4061-bae8-ac1ce8bf3743",
       "httpStatus": 200,
-      "role": "species-render-cross-review",
-      "inputTokens": 16564,
-      "outputTokens": 3944,
-      "forwardingStart": "2026-11-05T16:12:08.805Z",
-      "forwardingEnd": "2026-11-05T16:15:05.299Z"
+      "role": "five-way plant artifact audit",
+      "inputTokens": 537,
+      "outputTokens": 3804,
+      "forwardingStart": "2026-11-08T13:53:15.418000Z",
+      "forwardingEnd": "2026-11-08T13:55:44.450000Z"
+    },
+    {
+      "slot": "#4",
+      "credentialId": 4,
+      "requestId": "de75161b-aae1-4a6b-8e73-42e036997686",
+      "httpStatus": 200,
+      "role": "five-way plant artifact audit",
+      "inputTokens": 522,
+      "outputTokens": 1828,
+      "forwardingStart": "2026-11-08T13:53:15.415000Z",
+      "forwardingEnd": "2026-11-08T13:54:30.766000Z"
+    },
+    {
+      "slot": "#5",
+      "credentialId": 5,
+      "requestId": "a395a369-b3db-44dd-bc0e-a2954f361492",
+      "httpStatus": 200,
+      "role": "five-way plant artifact audit",
+      "inputTokens": 519,
+      "outputTokens": 4388,
+      "forwardingStart": "2026-11-08T13:53:15.417000Z",
+      "forwardingEnd": "2026-11-08T13:56:07.879000Z"
     }
   ]
 }
