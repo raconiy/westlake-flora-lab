@@ -1,131 +1,159 @@
 {
-  "observedAt": "2026-11-05T23:43:13.718Z",
-  "distinctAccountEmails": 3,
-  "periodStart": "2026-11-05T21:43:13.721Z",
+  "observedAt": "2026-11-08T14:30:54Z",
+  "distinctAccountEmails": 5,
+  "periodStart": "2026-11-08T14:00:54Z",
   "accounts": [
     {
       "slot": 1,
+      "accountMask": "s***1@gmx.com",
       "status": "available",
-      "observationAt": "2026-11-05T23:43:08.019Z",
+      "observationAt": "2026-11-08T14:30:54Z",
       "quota": [
         {
           "source_id": "codex",
           "id": "primary",
           "label": "7d",
-          "label_key": "session",
-          "scope": "account",
           "unit": "percent",
-          "used": 2,
-          "limit": 100,
-          "remaining": 98,
-          "utilization": 0.02,
-          "reset_at_ms": 1794472387000,
-          "window_seconds": 604800,
-          "state": "available",
-          "is_primary": true
+          "remaining": null,
+          "state": "unknown"
         }
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 154,
-        "outputTokens": 176736,
-        "uncachedInputTokens": 695281,
-        "cachedInputTokens": 7445504,
-        "firstCompleted": 1793914996077,
-        "lastCompleted": 1793922169794
+        "count": 4,
+        "outputTokens": 5373,
+        "uncachedInputTokens": null
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 154
+          "count": 4
         }
       ]
     },
     {
       "slot": 2,
+      "accountMask": "b***s@gmx.com",
       "status": "available",
-      "observationAt": "2026-11-05T23:43:11.435Z",
+      "observationAt": "2026-11-08T14:30:54Z",
       "quota": [
         {
           "source_id": "codex",
           "id": "primary",
           "label": "7d",
-          "label_key": "session",
-          "scope": "account",
           "unit": "percent",
-          "used": 2,
-          "limit": 100,
-          "remaining": 98,
-          "utilization": 0.02,
-          "reset_at_ms": 1794472391000,
-          "window_seconds": 604800,
-          "state": "available",
-          "is_primary": true
+          "remaining": null,
+          "state": "unknown"
         }
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 174,
-        "outputTokens": 142270,
-        "uncachedInputTokens": 739293,
-        "cachedInputTokens": 8503040,
-        "firstCompleted": 1793915436346,
-        "lastCompleted": 1793922125640
+        "count": 3,
+        "outputTokens": 5540,
+        "uncachedInputTokens": null
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 174
+          "count": 3
         }
       ]
     },
     {
       "slot": 3,
+      "accountMask": "m***d@gmx.com",
       "status": "available",
-      "observationAt": "2026-11-05T23:43:12.725Z",
+      "observationAt": "2026-11-08T14:30:54Z",
       "quota": [
         {
           "source_id": "codex",
           "id": "primary",
           "label": "7d",
-          "label_key": "session",
-          "scope": "account",
           "unit": "percent",
-          "used": 18,
-          "limit": 100,
-          "remaining": 82,
-          "utilization": 0.18,
-          "reset_at_ms": 1794472392000,
-          "window_seconds": 604800,
-          "state": "available",
-          "is_primary": true
+          "remaining": null,
+          "state": "unknown"
         }
       ],
       "refreshHttp": 200,
       "successfulRequests": {
-        "count": 203,
-        "outputTokens": 171148,
-        "uncachedInputTokens": 761710,
-        "cachedInputTokens": 11686016,
-        "firstCompleted": 1793915239335,
-        "lastCompleted": 1793921403356
+        "count": 3,
+        "outputTokens": 5743,
+        "uncachedInputTokens": null
       },
       "models": [
         {
           "model": "gpt-6.1-sol",
           "effort": "high",
-          "count": 203
+          "count": 3
+        }
+      ]
+    },
+    {
+      "slot": 4,
+      "accountMask": "m***0@gmx.com",
+      "status": "available",
+      "observationAt": "2026-11-08T14:30:54Z",
+      "quota": [
+        {
+          "source_id": "codex",
+          "id": "primary",
+          "label": "7d",
+          "unit": "percent",
+          "remaining": null,
+          "state": "unknown"
+        }
+      ],
+      "refreshHttp": 200,
+      "successfulRequests": {
+        "count": 4,
+        "outputTokens": 7837,
+        "uncachedInputTokens": null
+      },
+      "models": [
+        {
+          "model": "gpt-6.1-sol",
+          "effort": "high",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "slot": 5,
+      "accountMask": "d***9@gmx.com",
+      "status": "available",
+      "observationAt": "2026-11-08T14:30:54Z",
+      "quota": [
+        {
+          "source_id": "codex",
+          "id": "primary",
+          "label": "7d",
+          "unit": "percent",
+          "remaining": null,
+          "state": "unknown"
+        }
+      ],
+      "refreshHttp": 200,
+      "successfulRequests": {
+        "count": 3,
+        "outputTokens": 7861,
+        "uncachedInputTokens": null
+      },
+      "models": [
+        {
+          "model": "gpt-6.1-sol",
+          "effort": "high",
+          "count": 3
         }
       ]
     }
   ],
-  "interpretation": "Quota windows are upstream observations, not locally inferred token use. Successful requests/token output and task receipts are separate evidence. Exact charging discrepancy remains unverified.",
+  "interpretation": "远程 GPT-Load 成功请求与输出 token 来自五个不同凭据的实际请求日志；额度剩余当前未观测，不把 worker 数量当作账号证明。",
   "identityConsistency": {
-    "verifiedAt": "2026-11-05T23:27:10.790Z",
-    "distinctTokenSubjects": 3,
-    "distinctTokenAccountIds": 3,
+    "verifiedAt": "2026-11-08T14:30:54Z",
+    "distinctTokenSubjects": 5,
+    "distinctTokenAccountIds": 5,
     "allMetadataEmailsMatchTokens": true
   }
 }

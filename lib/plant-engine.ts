@@ -895,6 +895,13 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
     const trunk=new THREE.Mesh(ownGeometry(tube(trunkCurve,radius*1.35,Math.max(.001*emerged,radius*.055),Math.max(12,Math.round(h*4)),12)),age<1?twigMaterial:bark);trunk.castShadow=trunk.receiveShadow=true;leader.add(trunk);
     const majorCount=21, leafScale=Math.min(1,.24+smooth(.075,1.5,age)*.76);
     const trueLeaves=smooth(.075,.16,age), initialPhase=rng(seed*211)()*Math.PI*2;
+    // Ginkgo seedlings carry primary-stem leaves, but an established tree does
+    // not keep a ladder of blades intersecting the trunk. Lower stem cohorts
+    // senesce as persistent crown axes establish; the wood and leaf-scar nodes
+    // remain in the material catalogue. The cutoff retains only the apical
+    // short-shoot cohort during the transition.
+    const stemLeafRetention=1-smooth(1.8,3.5,age);
+    group.userData.stemLeafPhenology={juvenileRetentionYears:[0,1.8],senescenceYears:[1.8,3.5],retention:stemLeafRetention,stemSpurCutoffIndex:74,state:stemLeafRetention>0.001?'juvenile_stem_leaves':'mature_stem_leaf_scar_only',calibration:'engineering prior; campus leaf-scar survey pending'};
     // Persistent stem nodes: lower nodes are born first, at their height at birth.
     // The active leader always carries alternate leaves; second-year axils form spurs.
     const records:LeafRecord[]=[], buds:THREE.Matrix4[]=[], fine:THREE.BufferGeometry[]=[];
@@ -909,7 +916,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
       // petioles/blades (and later spur leaves) at five years. Seasonal loss
       // remains controlled independently by day/leafPresence.
       const direction=new THREE.Vector3(Math.cos(angle),.18,Math.sin(angle)).normalize();
-      appendLeaf(records,attachment,direction,.032*expansion,leafScale*expansion,.12*Math.sin(i*2.1),rng(seed+i*113)()-.5,UP,`stem-leaf:${i}`);
+      appendLeaf(records,attachment,direction,.032*expansion,leafScale*expansion*stemLeafRetention,.12*Math.sin(i*2.1),rng(seed+i*113)()-.5,UP,`stem-leaf:${i}`);
       const spurGrowth=smooth(.85,1.8,nodeAge);
       if(spurGrowth>.001) {
         const end=attachment.clone().addScaledVector(direction,.014*spurGrowth);
@@ -920,7 +927,7 @@ function buildNaturalGinkgo(params: PlantParams): PlantModel {
         for(let l=0;l<5;l++) {
           const a=angle+l*2.39996, d=new THREE.Vector3(Math.cos(a),.18,Math.sin(a)).normalize();
           const nodeT=.2+l*.16,expansion=smooth(nodeT,nodeT+.08,spurGrowth),fixedNode=attachment.clone().addScaledVector(direction,.014*nodeT);
-          appendLeaf(records,fixedNode,d,.032*spurGrowth*expansion,leafScale*spurGrowth*expansion,.1*Math.sin(l),0,UP,`stem-spur:${i}:${l}`);
+          appendLeaf(records,fixedNode,d,.032*spurGrowth*expansion,leafScale*spurGrowth*expansion*(i>=74?1:stemLeafRetention),.1*Math.sin(l),0,UP,`stem-spur:${i}:${l}`);
         }
       }
     }
