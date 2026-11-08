@@ -7,7 +7,7 @@ const random=()=>crypto.randomUUID();
 class ApiError extends Error {constructor(status,message){super(message);this.status=status;}}
 const text=(s,max=6000)=>{if(typeof s!=='string'||!s.trim()||s.length>max)throw new ApiError(400,'请输入有效文本，最多 '+max+' 字符');return s.trim();};
 function checkSecrets(s){if(/(?:password|密码|验证码|2fa)\s*[:：=]\s*\S+|\bsk-[\w-]{12,}|-----BEGIN .*PRIVATE KEY/i.test(s))throw new ApiError(400,'请勿提交密码、验证码或密钥');}
-function scenario(s){const out={};if(s&&typeof s==='object'){if(species.has(s.species))out.species=s.species;for(const k of ['age','day','seed','density','wind','gravity','stiffness','moisture','compaction','soilDepth'])if(typeof s[k]==='number'&&Number.isFinite(s[k]))out[k]=s[k];}return JSON.stringify(out);}
+function scenario(s){const out={};const bounds={age:[0,200],day:[1,365],seed:[-2147483648,2147483647],density:[.15,2],wind:[0,25],gravity:[0,3],stiffness:[.1,4],moisture:[0,1],compaction:[0,1],soilDepth:[.1,5]};if(s&&typeof s==='object'){if(species.has(s.species))out.species=s.species;for(const k of Object.keys(bounds)){if(typeof s[k]!=='number'||!Number.isFinite(s[k]))continue;const [lo,hi]=bounds[k];if(s[k]<lo||s[k]>hi)throw new ApiError(400,`场景参数 ${k} 超出范围`);out[k]=s[k];}}return JSON.stringify(out);}
 // A member id is a public author label, never permission to recover a session.
 // Legacy rows used opaque UUIDs as session ids and remain readable.
 const memberOf=id=>id.split('.')[0];
@@ -32,14 +32,12 @@ export default {async fetch(request,env){
   const session=async()=>{if(!bearer)throw new ApiError(401,'请重新建立访客会话');const s=await db.prepare('SELECT id FROM community_sessions WHERE token_hash=? AND expires_at>?').bind(await hash(bearer),now).first();if(!s)throw new ApiError(401,'访客会话已失效，请重新连接');return s.id;};
   const rate=async(key,max,window=60000)=>{const bucket=Math.floor(now/window);const row=await db.prepare('INSERT INTO community_rate(key,count,expires_at) VALUES(?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1 RETURNING count').bind(key+':'+bucket,now+window*2).first();if(row.count>max)throw new ApiError(429,'提交较频繁，请稍后再试');};
   const body=async()=>{if(!request.headers.get('content-type')?.startsWith('application/json'))throw new ApiError(415,'请使用 JSON');if(Number(request.headers.get('content-length')||0)>18000)throw new ApiError(413,'请求过大');const reader=request.body?.getReader();let size=0,chunks=[];if(reader)while(true){const {value,done}=await reader.read();if(done)break;size+=value.length;if(size>18000){await reader.cancel();throw new ApiError(413,'请求过大');}chunks.push(value);}const data=new Uint8Array(size);let n=0;for(const c of chunks){data.set(c,n);n+=c.length;}try{const b=JSON.parse(new TextDecoder().decode(data)||'{}');if(!b||typeof b!=='object'||Array.isArray(b))throw 0;return b;}catch{throw new ApiError(400,'JSON 格式错误');}};
-  if(method==='GET'&&path==='/health'){const row=await db.prepare('SELECT * FROM community_relay WHERE id=?').bind('leader').first();const value=row?JSON.parse(row.payload):{};return reply(200,{ok:true,storage:'D1',relay:{...value,online:!!row&&now-row.last_seen<45000,lastSeen:row?.last_seen??null}});}
+  if(method==='GET'&&path==='/health'){const row=await db.prepare('SELECT * FROM community_relay WHERE id=?').bind('leader').first();const value=row?JSON.parse(row.payload):{},heartbeatOnline=!!row&&now-row.last_seen<45000,capacityOnline=heartbeatOnline&&Number(value.availableAccounts)>0&&Number(value.workers)>0;return reply(200,{ok:true,storage:'D1',relay:{...value,heartbeatOnline,online:capacityOnline,lastSeen:row?.last_seen??null}});}
   if(method==='GET'&&path==='/suggestions'){const rows=await db.prepare('SELECT * FROM community_suggestions ORDER BY created_at DESC LIMIT 100').all();return reply(200,{suggestions:rows.results.map(publicSuggestion)});}
   if(method==='POST'&&path==='/sessions'){
-   if(!secret)throw new ApiError(503,'共享服务尚未配置');const requested=await body();
+   if(!secret)throw new ApiError(503,'共享服务尚未配置');await body();
    const ip=await hash(secret+':'+(request.headers.get('cf-connecting-ip')||'unknown'));await rate('sessions:'+ip,12,600000);
-   const requestedMember=typeof requested.memberId==='string'&&/^m_[A-Za-z0-9_-]{16,80}$/.test(requested.memberId)?requested.memberId:null;
-   const existing=requestedMember?await db.prepare('SELECT id FROM community_sessions WHERE substr(id,1,?)=? LIMIT 1').bind(requestedMember.length+1,requestedMember+'.').first():null;
-   const memberId=existing?requestedMember:'m_'+random().replaceAll('-','');
+   const memberId='m_'+random().replaceAll('-','');
    // Every page session gets independent credentials and private chat history.
    // Reusing a public member label cannot rotate another session's token.
    const id=memberId+'.'+random(),token=random()+random();
@@ -50,8 +48,9 @@ export default {async fetch(request,env){
    const sid=await session(),b=await body(),isSuggestion=path==='/suggestions',input=text(isSuggestion?b.text:b.message);checkSecrets(input);const idem=text(b.idempotencyKey,100),s=scenario(b.scenario),sp=species.has(b.species)?b.species:JSON.parse(s).species||'ginkgo';
    if(isSuggestion){const existing=await db.prepare('SELECT * FROM community_suggestions WHERE session_id=? AND idempotency=?').bind(sid,idem).first();if(existing)return reply(200,{suggestion:publicSuggestion(existing)});}
    else{const existing=await db.prepare('SELECT * FROM community_jobs WHERE session_id=? AND kind=? AND idempotency=?').bind(sid,'chat',idem).first();if(existing)return reply(200,{job:publicJob(existing)});}
-   await rate('submit:'+sid,8,600000);await rate('daily-inference',120,86400000);
+   await rate('submit:'+sid,8,600000);
    const waiting=await db.prepare("SELECT COUNT(*) AS n FROM community_jobs WHERE status IN ('queued','running')").first();if(waiting.n>=40)throw new ApiError(429,'执行队列已满，请稍后再试');
+   await rate('daily-inference',120,86400000);
    const id=random(),suggestionId=isSuggestion?random():null;
    const statements=[];
    if(isSuggestion)statements.push(db.prepare('INSERT INTO community_suggestions(id,session_id,text,species,scenario,status,created_at,updated_at,idempotency) VALUES(?,?,?,?,?,?,?,?,?)').bind(suggestionId,sid,input,sp,s,'received',now,now,idem));
@@ -80,7 +79,7 @@ export default {async fetch(request,env){
   }
   if(method==='GET'&&path==='/relay/review'){const rows=await db.prepare("SELECT s.*,j.proposals FROM community_suggestions s JOIN community_jobs j ON j.suggestion_id=s.id WHERE s.status='awaiting_review' ORDER BY s.created_at LIMIT 30").all();return reply(200,{suggestions:rows.results.map(r=>({...publicSuggestion(r),proposals:JSON.parse(r.proposals||'[]')}))});}
   const progress=path.match(/^\/moderate\/([\w-]+)$/);
-  if(method==='POST'&&progress){const b=await body();if(!stages.has(b.status))throw new ApiError(400,'无效状态');const deployment=b.deploymentUrl?new URL(b.deploymentUrl):null;if(deployment&&(deployment.origin!=='https://raconiy.github.io'||!deployment.pathname.startsWith('/westlake-flora-lab/')))throw new ApiError(400,'无效发布地址');if(b.status==='deployed'&&!deployment)throw new ApiError(400,'发布状态需要可核验地址');const summary=b.summary?text(b.summary,12000):null;await db.prepare('UPDATE community_suggestions SET status=?,summary=COALESCE(?,summary),task_id=COALESCE(?,task_id),error=?,deployment_url=COALESCE(?,deployment_url),updated_at=? WHERE id=?').bind(b.status,summary,b.taskId?text(b.taskId,100):null,b.error?text(b.error,1000):null,deployment?.href||null,now,progress[1]).run();return reply(200,{ok:true});}
+  if(method==='POST'&&progress){const b=await body();if(!stages.has(b.status))throw new ApiError(400,'无效状态');let deployment=null;try{deployment=b.deploymentUrl?new URL(b.deploymentUrl):null;}catch{throw new ApiError(400,'无效发布地址');}if(deployment&&(deployment.origin!=='https://raconiy.github.io'||!deployment.pathname.startsWith('/westlake-flora-lab/')))throw new ApiError(400,'无效发布地址');if(b.status==='deployed'&&!deployment)throw new ApiError(400,'发布状态需要可核验地址');const summary=b.summary?text(b.summary,12000):null;await db.prepare('UPDATE community_suggestions SET status=?,summary=COALESCE(?,summary),task_id=COALESCE(?,task_id),error=?,deployment_url=COALESCE(?,deployment_url),updated_at=? WHERE id=?').bind(b.status,summary,b.taskId?text(b.taskId,100):null,b.error?text(b.error,1000):null,deployment?.href||null,now,progress[1]).run();return reply(200,{ok:true});}
   throw new ApiError(404,'接口不存在');
  }catch(error){return reply(error.status||500,{error:error.status?error.message:'共享服务暂时未能完成请求，请稍后重试'});}
 }};
