@@ -81,7 +81,7 @@ test('direct delivery returns its durable job immediately and shares one lease a
  const input={message:'银杏的叶子长在哪？',idempotencyKey:'slow-chat'};
  const posted=await api('/chat',input,visitor,undefined,{waitUntil:p=>background.push(p)});
  const {job}=posted.body;assert.equal(posted.status,202);assert.equal(job.status,'running');
- assert.equal((await sent.promise).jobId,job.id);
+ const forwarded=await sent.promise;assert.equal(forwarded.jobId,job.id);assert.equal(forwarded.kind,'chat');
  assert.equal((await api('/relay/claim',{},admin)).body.job,null);
  const replay=await api('/chat',input,visitor);
  assert.equal(replay.body.job.id,job.id);assert.equal(replay.body.job.status,'running');assert.equal(calls,1);
@@ -108,7 +108,8 @@ test('fresh consumer heartbeats select the persistent queue even with a configur
 test('remote failures become terminal and visible to both suggestions and chats without a second model call',async t=>{
  const {api,session,env}=await fixture(),visitor=await session(),admin=env.COMMUNITY_RELAY_TOKEN;
  Object.assign(env,{REMOTE_RELAY_URL:'https://relay.example',REMOTE_RELAY_TOKEN:'fixture'});
- const remote=t.mock.method(globalThis,'fetch',async()=>new Response('private diagnostic',{status:503}));
+ const kinds=[];
+ const remote=t.mock.method(globalThis,'fetch',async(_,options)=>{kinds.push(JSON.parse(options.body).kind);return new Response('private diagnostic',{status:503});});
  const msg={message:'树干为什么弯曲？',idempotencyKey:'error'};
  const chat=await api('/chat',msg,visitor);
  assert.equal(chat.body.job.status,'failed');assert.match(chat.body.job.error,/HTTP 503/);
@@ -117,7 +118,7 @@ test('remote failures become terminal and visible to both suggestions and chats 
  assert.equal(suggestion.body.suggestion.status,'failed');assert.match(suggestion.body.suggestion.error,/HTTP 503/);
  assert.ok(!suggestion.body.suggestion.error.includes('private diagnostic'));
  assert.equal((await api('/relay/claim',{},admin)).body.job,null);
- assert.equal(remote.mock.callCount(),2);
+ assert.equal(remote.mock.callCount(),2);assert.deepEqual(kinds,['chat','triage']);
 });
 
 test('polling expires an abandoned direct lease and fences a late upstream result',async t=>{

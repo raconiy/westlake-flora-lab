@@ -19,8 +19,9 @@ test('counts distinct available credential IDs from management status and requir
 
 test('model completion survives consumer restart and transient D1 failure without a second inference',async t=>{
  const dir=await directory(t),queued=[job()],id=queued[0].id;
+ queued[0].kind='triage';
  let infer=0,deliver=0,clock=0;const beats=[],answers=[];
- const cfg={dir,report:()=>{},now:()=>clock,probe:async()=>1,complete:async body=>{infer++;assert.equal(body.jobId,id);return {reply:'桂花的叶片对生。'};},
+ const cfg={dir,report:()=>{},now:()=>clock,probe:async()=>1,complete:async body=>{infer++;assert.equal(body.jobId,id);assert.equal(body.kind,'triage');return {reply:'桂花的叶片对生。'};},
   callCommunity:async(path,b)=>{
    if(path==='/relay/heartbeat'){beats.push(b);return {};}
    if(path==='/relay/claim')return {job:queued.shift()||null};

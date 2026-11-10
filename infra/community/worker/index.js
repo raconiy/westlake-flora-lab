@@ -54,7 +54,7 @@ async function completeRemotely(db,env,{id,sid,token,input,scenarioValue,isSugge
   const history=isSuggestion?[]:await chatHistory(db,sid,id);
   const r=await fetch(env.REMOTE_RELAY_URL.replace(/\/$/,'')+'/complete',{
    method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+env.REMOTE_RELAY_TOKEN,'idempotency-key':id},
-   body:JSON.stringify({jobId:id,input,scenario:JSON.parse(scenarioValue),history}),signal:AbortSignal.timeout(remoteTimeoutMs),
+   body:JSON.stringify({jobId:id,kind:isSuggestion?'triage':'chat',input,scenario:JSON.parse(scenarioValue),history}),signal:AbortSignal.timeout(remoteTimeoutMs),
   });
   if(!r.ok){
    failure='远程助手返回 HTTP '+r.status+'，本次调用未取得答复。';

@@ -4,6 +4,9 @@ import {join, resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {setTimeout as sleep} from 'node:timers/promises';
 
+import {countAvailable} from './remote-reply.mjs';
+export {countAvailable};
+
 const community = 'https://westlake-flora-lab-yungu.sableborage.chatgpt.site/api/community';
 const gateway = 'http://127.0.0.1:3001';
 const maxSlots = 5;
@@ -55,18 +58,8 @@ async function communityThroughProxy(url,token,body,proxy){
 function log(event,details={}){console.log(JSON.stringify({event,...details}));}
 const failureCode = error => error?.status || error?.name || 'error';
 
-export function countAvailable(payload) {
- if(payload?.code!==0||!Array.isArray(payload.data?.items))throw Error('Unrecognized credential status');
- const ready=new Set();
- for(const row of payload.data.items){
-  if(!Number.isSafeInteger(row.credential_id)||row.credential_id<1)throw Error('Missing credential identity');
-  if(row.effective_status==='available' && (!row.auth_state || row.auth_state==='ready'))ready.add(row.credential_id);
- }
- return ready.size;
-}
-
 function relayBody(job){
- const body={jobId:job.id,input:job.input,scenario:job.scenario,history:[]};
+ const body={jobId:job.id,kind:job.kind,input:job.input,scenario:job.scenario,history:[]};
  if(size(body)>maxBody)throw Error('Input exceeds local relay envelope');
  const history=Array.isArray(job.history)?job.history:[];
  for(let i=history.length-2;i>=0;i-=2){
