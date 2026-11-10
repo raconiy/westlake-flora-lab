@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-import {chmodSync, closeSync, lstatSync, mkdirSync, openSync} from 'node:fs';
+import {chmodSync, closeSync, statSync, mkdirSync, openSync, realpathSync} from 'node:fs';
 import {join} from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 
@@ -25,7 +25,10 @@ function privateDatabase(dir,name){
 }
 export function openJobs({dir,hasSlot,run,now=Date.now,maxPending=maxQueuedAndRunning,maxTotal=maxRecords,ttl=retentionMs}){
  mkdirSync(dir,{recursive:true,mode:0o700});
- const stat=lstatSync(dir);
+ // DynamicUser StateDirectory can expose a systemd-managed symlink into
+ // /var/lib/private. Check the resolved directory on this service's namespace.
+ dir=realpathSync(dir);
+ const stat=statSync(dir);
  if(!stat.isDirectory()||(stat.mode&0o077)!==0||stat.uid!==process.getuid())throw Error('Relay state directory must be private and owned by the relay user');
  // Hold a separate SQLite writer lock for the process lifetime. A second
  // daemon must not mark the first daemon's live calls as abandoned.

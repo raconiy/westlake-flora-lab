@@ -4,7 +4,7 @@ import {randomUUID} from 'node:crypto';
 import {once} from 'node:events';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {mkdtemp,readdir,rm,stat} from 'node:fs/promises';
+import {mkdir,mkdtemp,readdir,rm,stat,symlink} from 'node:fs/promises';
 import {setTimeout as wait} from 'node:timers/promises';
 import {DatabaseSync} from 'node:sqlite';
 import {createRelay} from './remote-reply.mjs';
@@ -69,6 +69,14 @@ test('model and synchronous clients share five calls, backpressure does not drop
  assert.equal((await call('/complete',{input:'额外同步请求'})).status,429);
  gates[0]();await sync;await until(()=>gates.length===6);gates[1]();await until(()=>gates.length===7);
  gates.forEach(release=>release());await until(async()=>(await Promise.all(paths.map(p=>call(p)))).every(x=>x.data.status==='completed'));assert.equal(peak,5);
+});
+test('opens systemd private state directory through its managed symlink',async t=>{
+ const base=await privateDir(t),target=join(base,'private'),alias=join(base,'service-state');
+ await mkdir(target,{mode:0o700});await symlink(target,alias);
+ const q=openJobs({dir:alias,hasSlot:()=>false,run:()=>{throw Error('unexpected');}});
+ try{assert.deepEqual(q.submit(randomUUID(),{input:'状态'}),{status:'queued'});}
+ finally{q.close();}
+ assert.ok((await stat(join(target,'jobs.sqlite'))).isFile());
 });
 test('upstream unavailability becomes a persistent terminal failed receipt',async t=>{
  const dir=await privateDir(t),p='/jobs/'+randomUUID();let calls=0;
