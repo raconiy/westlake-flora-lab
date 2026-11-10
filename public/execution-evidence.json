@@ -3,64 +3,64 @@
   "distinctAccounts": 5,
   "model": "gpt-6.1-sol",
   "reasoningEffort": "high",
-  "overlapMs": 75348,
-  "verifiedAt": "2026-11-08T13:56:07.879000Z",
-  "scope": "Five distinct GPT-Load credential IDs with successful HTTP 200 responses for the five-way plant audit; not a worker count or GPU timing.",
+  "overlapMs": 48400,
+  "verifiedAt": "2026-11-08T16:13:28.740000Z",
+  "scope": "Five distinct GPT-Load credential IDs with successful HTTP 200 responses for the ginkgo artifact audit; not a worker count or GPU timing.",
   "accounts": [
     {
       "slot": "#1",
       "credentialId": 1,
-      "requestId": "cbe61c2c-b16b-4ebc-b427-41bf17485fee",
+      "requestId": "e62b2af0-10ee-4f7d-91e9-84e837270405",
       "httpStatus": 200,
-      "role": "five-way plant artifact audit",
-      "inputTokens": 507,
-      "outputTokens": 2962,
-      "forwardingStart": "2026-11-08T13:53:15.418000Z",
-      "forwardingEnd": "2026-11-08T13:55:14.626000Z"
+      "role": "ginkgo artifact audit",
+      "inputTokens": 511,
+      "outputTokens": 2362,
+      "forwardingStart": "2026-11-08T16:10:51.786000Z",
+      "forwardingEnd": "2026-11-08T16:12:19.981000Z"
     },
     {
       "slot": "#2",
       "credentialId": 2,
-      "requestId": "2214fb9b-bc2f-49e3-be7f-4f5d074fd047",
+      "requestId": "cc9173c3-e482-49d8-841f-4974b5fd1c61",
       "httpStatus": 200,
-      "role": "five-way plant artifact audit",
-      "inputTokens": 510,
-      "outputTokens": 3791,
-      "forwardingStart": "2026-11-08T13:53:15.418000Z",
-      "forwardingEnd": "2026-11-08T13:55:40.441000Z"
+      "role": "ginkgo artifact audit",
+      "inputTokens": 515,
+      "outputTokens": 1372,
+      "forwardingStart": "2026-11-08T16:10:51.787000Z",
+      "forwardingEnd": "2026-11-08T16:11:49.935000Z"
     },
     {
       "slot": "#3",
       "credentialId": 3,
-      "requestId": "aedaaca5-99f6-4061-bae8-ac1ce8bf3743",
+      "requestId": "0ba57e73-60cb-4e15-bae1-8577cfdab77a",
       "httpStatus": 200,
-      "role": "five-way plant artifact audit",
-      "inputTokens": 537,
-      "outputTokens": 3804,
-      "forwardingStart": "2026-11-08T13:53:15.418000Z",
-      "forwardingEnd": "2026-11-08T13:55:44.450000Z"
+      "role": "ginkgo artifact audit",
+      "inputTokens": 518,
+      "outputTokens": 3950,
+      "forwardingStart": "2026-11-08T16:10:51.787000Z",
+      "forwardingEnd": "2026-11-08T16:13:26.300000Z"
     },
     {
       "slot": "#4",
       "credentialId": 4,
-      "requestId": "de75161b-aae1-4a6b-8e73-42e036997686",
+      "requestId": "c06a8e2a-b567-426a-80e9-d6dc86050d27",
       "httpStatus": 200,
-      "role": "five-way plant artifact audit",
-      "inputTokens": 522,
-      "outputTokens": 1828,
-      "forwardingStart": "2026-11-08T13:53:15.415000Z",
-      "forwardingEnd": "2026-11-08T13:54:30.766000Z"
+      "role": "ginkgo artifact audit",
+      "inputTokens": 519,
+      "outputTokens": 1426,
+      "forwardingStart": "2026-11-08T16:10:51.784000Z",
+      "forwardingEnd": "2026-11-08T16:11:40.187000Z"
     },
     {
       "slot": "#5",
       "credentialId": 5,
-      "requestId": "a395a369-b3db-44dd-bc0e-a2954f361492",
+      "requestId": "dc9acf64-bb47-4026-a518-65aaea62551c",
       "httpStatus": 200,
-      "role": "five-way plant artifact audit",
-      "inputTokens": 519,
-      "outputTokens": 4388,
-      "forwardingStart": "2026-11-08T13:53:15.417000Z",
-      "forwardingEnd": "2026-11-08T13:56:07.879000Z"
+      "role": "ginkgo artifact audit",
+      "inputTokens": 509,
+      "outputTokens": 4282,
+      "forwardingStart": "2026-11-08T16:10:51.786000Z",
+      "forwardingEnd": "2026-11-08T16:13:28.740000Z"
     }
   ]
 }
