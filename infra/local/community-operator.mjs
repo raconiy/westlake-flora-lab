@@ -31,7 +31,7 @@ if(args[0]==='review'){
  const map=await readMap();if(map[suggestionId])throw Error('Suggestion already has an assigned task; inspect it before reassigning');
  const task=JSON.parse(await fs.readFile(resolve(taskFile),'utf8'));if(!['code','research'].includes(task.kind)||typeof task.prompt!=='string'||typeof task.title!=='string')throw Error('Invalid reviewed task');
  const current=(await community('/suggestions')).suggestions.find(s=>s.id===suggestionId);if(!current)throw Error('Unknown suggestion');
- const response=await fetch('http://127.0.0.1:8788/api/suggestions',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...task,title:('社区建议 · '+task.title).slice(0,200)})});const assigned=await response.json();if(!response.ok)throw Error('Task enqueue failed');
+ const response=await fetch('http://127.0.0.1:8788/api/suggestions',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...task,requestKey:'community-'+suggestionId,title:('社区建议 · '+task.title).slice(0,200)})});const assigned=await response.json();if(!response.ok)throw Error('Task enqueue failed');
  map[suggestionId]={taskId:assigned.task.id,assignedAt:Date.now(),publicSummary:task.publicSummary||null};await saveMap(map);await sync();console.log(JSON.stringify({suggestionId,taskId:assigned.task.id,status:assigned.task.status}));
 }else if(args[0]==='sync')await sync();
 else if(args.length)throw Error('Commands: review | assign <id> <reviewed-task.json> | sync');

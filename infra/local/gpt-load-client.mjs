@@ -24,7 +24,11 @@ export async function status() {
   const result = await call('/api/groups/1/credentials', 'auth.key');
   if (result.code !== 0) throw new Error('Gateway rejected status request');
   const items = result.data.items;
-  const required = Number(process.env.SWARM_REQUIRED_ACCOUNTS || 3);
+  // This project is configured for five distinct GPT-Load credentials. Keep
+  // the override for staging and recovery, but make the production default
+  // match the verified account pool instead of reporting a three-account
+  // requirement.
+  const required = Number(process.env.SWARM_REQUIRED_ACCOUNTS || 5);
   if (!Number.isInteger(required) || required < 1 || required > 5) throw new Error("Required account count must be 1–5");
   return {
     group: 'westlake-codex-local',

@@ -80,3 +80,5 @@
 .fh-proposal{border:1px solid #dce5d4;border-radius:8px;margin:10px 0;padding:10px;background:#f8faf5}.fh-proposal summary{cursor:pointer;font-size:13px;color:#38583e}.fh-proposal p{white-space:pre-wrap;line-height:1.8;font-size:12px}.fh-proposal button,.fh-network-note button{font-size:12px;color:#315d3f;border:1px solid #dce5d4;padding:6px 9px;border-radius:6px;background:white}.fh-card-footer code{font-size:10px;overflow-wrap:anywhere;color:#82907b}.fh-card-footer{flex-wrap:wrap;gap:6px}
 
 .fh-proof{margin:8px 20px;padding:10px 12px;border:1px solid #dbe5d3;border-radius:8px;font-size:11px;color:#607057;background:#f7faf3}.fh-proof summary{cursor:pointer;color:#3e603d;font-size:12px}.fh-proof p{line-height:1.7;overflow-wrap:anywhere}.fh-proof a{color:#3b6848;text-decoration:underline}
+
+.fh-operator-guide{align-self:flex-start;margin:4px 20px 8px;color:#335840;font-size:13px;text-decoration:underline;text-underline-offset:.15em}

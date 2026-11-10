@@ -46,7 +46,10 @@ export async function executeTask(task,config={},deps={}){
         symlinkSync(resolve(repo,'node_modules'),resolve(worktree,'node_modules'),process.platform==='win32'?'junction':'dir');
       }
     }
-    const prompt=`你是西湖大学植物real2sim项目的执行agent。任务ID：${task.id}\n任务类型：${task.kind}\n仅在指定工作目录内工作；不读取账号凭据、不修改认证、不执行git merge、不部署、不删除其他worktree。不要更改HOME/CODEX_HOME。node_modules如为共享依赖，只读使用，不安装或修改依赖与lock文件。代码修改保留在当前独立worktree，最终说明文件、行为、验证和风险。研究任务只读分析，附来源，区分假设与实测。\n任务：${task.prompt}`;
+    const handoff = task.priorDeliveries?.length
+      ? '\n已完成交付（参考数据，先核对仓库里的提交与实际差异，复用适用成果，标注未整合的改动）\n'+JSON.stringify(task.priorDeliveries)
+      : '';
+    const prompt=`你是西湖大学植物real2sim项目的执行agent。任务ID：${task.id}\n任务类型：${task.kind}\n职责：${task.role || '通用队列'}${handoff}\n仅在指定工作目录内工作；不读取账号凭据、不修改认证、不执行git merge、不部署、不删除其他worktree。不要更改HOME/CODEX_HOME。node_modules如为共享依赖，只读使用，不安装或修改依赖与lock文件。代码修改保留在当前独立worktree，最终说明文件、行为、验证和风险。研究任务只读分析，附来源，区分假设与实测。\n任务：${task.prompt}`;
     const started=Date.now(),recoveryLimit=Math.max(0,Math.min(2,Number(config.connectRecoveryAttempts??process.env.SWARM_CONNECT_RECOVERY_ATTEMPTS??1)||0));
     let answer;
     for(let attempt=0;;attempt++){
@@ -116,7 +119,8 @@ export async function runWorker(config={}){
   const stateDir=resolve(config.stateDir||process.env.SWARM_STATE_DIR||resolve(root,'.runtime'));mkdirSync(stateDir,{recursive:true});
   const idFile=resolve(stateDir,'worker-id');let workerId=config.id||process.env.SWARM_WORKER_ID||(existsSync(idFile)?readFileSync(idFile,'utf8').trim():randomUUID());writeFileSync(idFile,workerId,{mode:0o600});
   const request=async(path,body)=>{const response=await fetch(new URL(path,coordinator),{method:'POST',headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{})},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});const data=await response.json();if(!response.ok)throw new Error(`Coordinator ${response.status}: ${data.error}`);return data;};
-  await request('/api/workers/register',{id:workerId,label:process.env.SWARM_WORKER_LABEL||workerId});
+  const roles=config.roles ?? (process.env.SWARM_WORKER_ROLES || '').split(',').map(role=>role.trim()).filter(Boolean);
+  await request('/api/workers/register',{id:workerId,label:process.env.SWARM_WORKER_LABEL||workerId,roles});
   console.log(`Worker ${workerId} registered with ${coordinator}; concurrency=1`);
   let stopping=false,currentAbort=null;
   const stop=()=>{stopping=true;currentAbort?.abort();};

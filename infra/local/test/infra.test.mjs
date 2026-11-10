@@ -48,8 +48,8 @@ test('CORS, host rejection, token check, JSON size and shared snapshots',async t
 });
 
 test('chat model adapter receives read-only sandbox and atomically queues structured suggestions',async t=>{
-  let calls=0;const{req}=await start(t,{runCodex:async(prompt,options)=>{calls++;assert.equal(options.sandbox,'read-only');assert.ok(prompt.includes('扇形'));return{text:JSON.stringify({reply:'已整理建议。',suggestions:[{title:'改进银杏叶',prompt:'将银杏叶生成器改成扇形，并检查叶序。',kind:'code'}]}),usage:null};}});
-  const result=await req('/api/chat',{message:'将叶片改为扇形',scenario:{species:'ginkgo'}});assert.equal(result.status,200);assert.equal(result.data.tasks.length,1);assert.equal(calls,1);
+  let calls=0;const{req}=await start(t,{runCodex:async(prompt,options)=>{calls++;assert.equal(options.sandbox,'read-only');assert.ok(prompt.includes('扇形'));return{text:JSON.stringify({reply:'已整理建议。',suggestions:[{title:'改进银杏叶',prompt:'将银杏叶生成器改成扇形，并检查叶序。',kind:'code',role:'botany'}]}),usage:null};}});
+  const result=await req('/api/chat',{message:'将叶片改为扇形',scenario:{species:'ginkgo'}});assert.equal(result.status,200);assert.equal(result.data.tasks.length,1);assert.equal(result.data.tasks[0].role,'botany');assert.equal(calls,1);
   assert.equal((await req('/api/messages')).data.messages.length,2);
 });
 
@@ -77,4 +77,60 @@ test('code task runs in an isolated Git worktree; failing validation is explicit
   await run(['init',repo]);await run(['-C',repo,'config','user.email','test@example.invalid']);await run(['-C',repo,'config','user.name','Infra test']);writeFileSync(resolve(repo,'plant.txt'),'original');await run(['-C',repo,'add','.']);await run(['-C',repo,'commit','-m','initial']);
   const result=await executeTask({id:'task-test',kind:'code',prompt:'change plant'},{root:repo,stateDir:resolve(folder,'controller-runtime'),resultDir:resolve(folder,'controller-runtime/task-results'),worktreeRoot:resolve(folder,'trees'),autoValidate:true,validationCommands:[[process.execPath,'-e','process.exit(2)']]},{runCodex:async(_prompt,opts)=>{assert.equal(opts.sandbox,'workspace-write');assert.notEqual(opts.root,repo);writeFileSync(resolve(opts.root,'plant.txt'),'modified');return{text:'changed',usage:null};}});
   assert.equal(result.status,'validation_failed');assert.equal(result.result.merged,false);assert.equal(result.result.fullOutput.retained,true);assert.equal(dirname(result.result.fullOutput.path),realpathSync(resolve(folder,'controller-runtime/task-results')));assert.equal((await run(['-C',repo,'status','--porcelain'])).stdout,'');
+});
+
+test('role routes persist across restarts, reserve ownership and pass prior deliveries',async t=>{
+  const folder=mkdtempSync(resolve(tmpdir(),'flora-role-queue-'));
+  t.after(()=>rmSync(folder,{recursive:true,force:true}));
+  const dbPath=resolve(folder,'queue.sqlite');
+  const {DatabaseSync}=await import('node:sqlite');
+  const old=new DatabaseSync(dbPath);
+  old.exec(`CREATE TABLE tasks(id TEXT PRIMARY KEY,title TEXT NOT NULL,prompt TEXT NOT NULL,kind TEXT NOT NULL,status TEXT NOT NULL,created_at INTEGER NOT NULL,updated_at INTEGER NOT NULL,worker_id TEXT,lease_token TEXT,lease_until INTEGER,attempts INTEGER NOT NULL DEFAULT 0,result TEXT,source TEXT);
+    CREATE TABLE workers(id TEXT PRIMARY KEY,label TEXT NOT NULL,registered_at INTEGER NOT NULL,last_seen INTEGER NOT NULL);
+    INSERT INTO workers VALUES('legacy','legacy',1,1);
+    INSERT INTO tasks(id,title,prompt,kind,status,created_at,updated_at) VALUES('first','legacy','old','code','queued',1,1);`);
+  old.close();
+  const migrated=createCoordinator({dbPath});
+  assert.equal(migrated.db.prepare("SELECT roles FROM workers WHERE id='legacy'").get().roles,'[]');
+  migrated.db.close();
+  const {req}=await start(t,{dbPath});
+  const submit=async (title,role,extra={})=>await req('/api/suggestions',{title,prompt:title,role,...extra});
+  const lease=async workerId=>(await req('/api/lease',{workerId})).data.task;
+  await req('/api/workers/register',{id:'growing',roles:['botany']});
+  await req('/api/workers/register',{id:'ops',roles:['infra','qa']});
+  assert.equal((await req('/api/workers/register',{id:'bad',roles:['typo']})).status,400);
+  const garden=(await submit('挂点','botany',{requestKey:'g1'})).data.task;
+  assert.equal(garden.role,'botany');
+  const same=await Promise.all([submit('挂点','botany',{requestKey:'g1'}),submit('挂点','botany',{requestKey:'g1'})]);
+  assert.ok(same.every(r=>r.data.task.id===garden.id));
+  assert.equal((await submit('新任务','infra',{requestKey:'g1'})).status,409);
+  assert.equal((await submit('无效交接','qa',{handoffFrom:[garden.id]})).status,409);
+  assert.equal((await submit('非法职责','wrong')).status,400);
+  const [grown,original]=await Promise.all([lease('growing'),lease('legacy')]);
+  assert.equal(grown.id,garden.id);
+  assert.equal(original.id,'first');
+  assert.equal(await lease('ops'),null);
+  await req(`/api/tasks/${garden.id}/complete`,{workerId:'growing',leaseToken:grown.leaseToken,status:'completed',result:{summary:'挂点已固定',validationStatus:'passed_scoped',fullOutput:{sha256:'a'.repeat(64)},merged:false}});
+  const follow=(await submit('挂点后续','botany')).data.task;
+  const review=(await submit('验证','qa',{handoffFrom:[garden.id]})).data.task;
+  const reviewLease=await lease('ops'), followLease=await lease('growing');
+  assert.equal(reviewLease.id,review.id);
+  assert.equal(followLease.id,follow.id);
+  assert.equal(reviewLease.priorDeliveries[0].id,garden.id);
+  assert.equal(followLease.priorDeliveries[0].merged,false);
+  assert.equal(reviewLease.priorDeliveries[0].outputSha256,'a'.repeat(64));
+  assert.equal(reviewLease.priorDeliveries[0].summary,'挂点已固定');
+  let incoming;
+  const receipt=await executeTask({...reviewLease,kind:'research'},{root:folder,resultDir:resolve(folder,'receipts')},{runCodex:async prompt=>{incoming=prompt;return{text:'ok'};}});
+  assert.equal(receipt.status,'completed');
+  assert.ok(incoming.includes('职责：qa') && incoming.includes(garden.id));
+});
+
+test('launcher assigns all five responsibilities with a full or reduced pool',async()=>{
+  const {roleIds,workerRoles}=await import('../roles.mjs');
+  for(let count=1;count<=5;count++) {
+    const allocations=Array.from({length:count},(_,i)=>workerRoles(i,count));
+    assert.equal(new Set(allocations.flat()).size,5);
+    assert.deepEqual(allocations.flat().sort(),[...roleIds].sort());
+  }
 });

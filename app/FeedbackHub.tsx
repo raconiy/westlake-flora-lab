@@ -26,9 +26,9 @@ function Status({status}: {status: string}) {
 /** Embed with <FeedbackHub scenario={scenario} />. No page wiring or existing state is required. */
 export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario;inline?:boolean}) {
   const [client] = useState(() => new FeedbackClient());
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(() => window.location.hash === '#assistant');
   const visible=inline||open;
-  const [mode, setMode] = useState<'chat' | 'suggest'>('suggest');
+  const [mode, setMode] = useState<'chat' | 'suggest'>('chat');
   const [chatInput, setChatInput] = useState('');
   const [suggestInput, setSuggestInput] = useState('');
   const [health, setHealth] = useState<CommunityHealth | null>(null);
@@ -120,19 +120,35 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
 
   useEffect(() => {
     const show=()=>{setMode('suggest');setOpen(true);};
+    const followLink=(event: HashChangeEvent)=>{
+      if (window.location.hash === '#assistant') {setMode('chat');setOpen(true);}
+      else if (new URL(event.oldURL).hash === '#assistant') setOpen(false);
+    };
     window.addEventListener('flora:feedback',show);
-    return()=>window.removeEventListener('flora:feedback',show);
+    window.addEventListener('hashchange',followLink);
+    return()=>{
+      window.removeEventListener('flora:feedback',show);
+      window.removeEventListener('hashchange',followLink);
+    };
   },[]);
+
+  function closePanel() {
+    if (window.location.hash === '#assistant') {
+      window.history.replaceState(window.history.state,'',window.location.pathname + window.location.search);
+    }
+    setOpen(false);
+    opener.current?.focus();
+  }
 
   useEffect(() => {
     if (!visible) return;
     textarea.current?.focus();
     function keydown(event: KeyboardEvent) {
-      if (event.key === 'Escape'&&!inline) { setOpen(false); opener.current?.focus(); }
+      if (event.key === 'Escape'&&!inline) closePanel();
     }
     document.addEventListener('keydown', keydown);
     return () => document.removeEventListener('keydown', keydown);
-  }, [visible]);
+  }, [visible,inline]);
 
   async function sendChat(turn: Turn) {
     const signal = lifetime.current?.signal;
@@ -192,10 +208,10 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
 
   return <div className={`feedback-hub ${inline?'fh-inline':''}`}>
     {!inline&&<button ref={opener} type="button" className="fh-launcher" aria-expanded={open} aria-controls={panelId}
-      onClick={() => { setOpen(value => !value); if (!open) setMode('suggest'); }}><Lightbulb size={19} aria-hidden="true"/><span>公开提建议</span><span className="fh-launcher-dot" aria-hidden="true"/></button>}
+      onClick={() => { if(open) closePanel(); else { setMode('chat'); setOpen(true); } }}><MessageCircle size={19} aria-hidden="true"/><span>问 GPT / 提建议</span><span className="fh-launcher-dot" aria-hidden="true"/></button>}
     {visible && <aside ref={panel} id={panelId} className="fh-panel" role={inline?'region':'dialog'} aria-label="植物社区建议与助手" aria-labelledby={titleId}>
-      <header className="fh-header"><div className="fh-mark"><Leaf size={22} aria-hidden="true"/></div><div><span className="fh-eyebrow">WESTLAKE · COMMUNITY</span><h2 id={titleId}>一起，让生境更真实。</h2></div>
-        {!inline&&<button type="button" className="fh-icon-button" aria-label="关闭建议与助手" onClick={() => {setOpen(false); opener.current?.focus();}}><X size={20}/></button>}</header>
+      <header className="fh-header"><div className="fh-mark"><Leaf size={22} aria-hidden="true"/></div><div><span className="fh-eyebrow">WESTLAKE · COMMUNITY</span><h2 id={titleId}>问 GPT / 提建议</h2></div>
+        {!inline&&<button type="button" className="fh-icon-button" aria-label="关闭建议与助手" onClick={closePanel}><X size={20}/></button>}</header>
       <div className="fh-connection" role="status"><span className={`fh-dot ${health?.ok && health.relay.online && !healthError ? 'fh-connected' : ''}`}/><span>{serviceLabel}</span>
         <button type="button" onClick={() => setRefreshTick(n => n + 1)} aria-label="重新检测连接并刷新建议"><RefreshCw size={13}/></button></div>
       {health?.relay.online&&<div className="fh-model-evidence"><b>{health.relay.model} / {health.relay.reasoningEffort}</b><span>{health.relay.availableAccounts??'—'} 个可用账号 · {typeof health.relay.workers==='number'?health.relay.workers:'—'} 个并行执行器 · 远程 GPT-Load 集群</span></div>}
@@ -203,6 +219,7 @@ export default function FeedbackHub({scenario,inline=false}: {scenario: Scenario
       {proof&&<details className="fh-proof"><summary>已核验 {proof.distinctAccounts} 个账号同时调用 · {proof.model} / {proof.reasoningEffort}</summary><p>该次验收的上游转发区间共同重叠 {(proof.overlapMs/1000).toFixed(3)} 秒；验收时间 {new Date(proof.verifiedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})}。</p>{proof.accounts.map(a=><p key={a.slot}>匿名账号 {a.slot} · HTTP {a.httpStatus} · 请求 {a.requestId.slice(0,8)}</p>)}<p>这是五个不同 GPT‑Load 凭据的实际成功请求回执；当前连接与可用账号数以上方健康状态为准，不把执行器数量当作账号证明。</p><a href={`${import.meta.env.BASE_URL}execution-evidence.json`} target="_blank" rel="noreferrer">查看五账号可核对回执 ↗</a><p><a href={`${import.meta.env.BASE_URL}collaboration-evidence.json`} target="_blank" rel="noreferrer">查看五账号分工与审查原文 ↗</a></p></details>}
       {historyError&&<p className="fh-network-note">历史对话暂未恢复：{historyError}<button type="button" onClick={()=>setRefreshTick(n=>n+1)}>重新读取</button></p>}
       <AccountUsageEvidence/>
+      <a className="fh-operator-guide" href="https://github.com/raconiy/westlake-flora-lab/blob/main/public/five-role-agent-swarm.md" target="_blank" rel="noreferrer">五职责协作使用说明 ↗</a>
       {healthError && <p className="fh-network-note">{healthError}</p>}
       <div className="fh-tabs" role="group" aria-label="选择问助手或提建议">
         <button type="button" aria-pressed={mode === 'chat'} className={mode === 'chat' ? 'fh-selected' : ''} onClick={() => setMode('chat')}><MessageCircle size={15}/>问助手</button>

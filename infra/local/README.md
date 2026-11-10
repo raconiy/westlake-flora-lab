@@ -10,7 +10,7 @@ Private runtime paths relative to the repository root:
 
 These paths are ignored by Git. Store each key through the relevant local/hosted configuration flow, never by editing tracked source. For a new gateway, follow the upstream GPT-Load README; passwords and TOTP lists are not OAuth credential files.
 
-Start: `node infra/local/start-gpt-load-cluster.mjs`. It launches the coordinator and three workers, with GPT-Load / gpt-6.1-sol / high and automatic checks. Set CODEX_BIN if the CLI is not on PATH.
+Start the coordinator with `node infra/local/start-gpt-load-cluster.mjs`. It launches up to five workers, capped at the number of connected credentials at startup. Workers share GPT-Load, which selects a credential per request. Check the credential ID in the gateway request log to identify which account served a task. Set `SWARM_WORKER_COUNT` for a smaller pool and `CODEX_BIN` if the CLI is outside `PATH`.
 
 Start outbound community bridge: `NODE_USE_ENV_PROXY=1 node infra/local/community-relay.mjs`. This respects the current environment network proxy; the gateway/coordinator remain loopback services. Include localhost and 127.0.0.1 in NO_PROXY.
 
@@ -35,3 +35,11 @@ Completed, validation-failed, and failed-after-answer results include `fullOutpu
 Publication uses a complete, synced temporary file and an exclusive hard link, never replacing an existing task artifact. A repeated task ID may reuse only byte-identical content. Different content, unsafe permissions, invalid Unicode, or filesystem errors produce `failed` / `failureCategory: full_output_retention` with `fullOutput.retained: false` and an explicit error; validation does not run. On conflict the original remains intact. Use a new task ID for a new answer, and retain existing failure/recovery receipts. Storage requires a local filesystem supporting hard links, no-follow opens, and directory fsync; unsupported operations fail closed. Disk retention/cleanup is operator-owned. This only preserves future successful model returns; previously discarded report headers are not recovered.
 
 Keep the result directory under a trusted, controller-owned parent. These permissions do not isolate other programs running as the same OS user. Test fixtures explicitly select their own temporary result directory so inherited runtime environment settings cannot receive fixture outputs.
+
+### Assign work by responsibility
+
+The launcher allocates five responsibilities across its available workers. With five workers each receives one. With a smaller pool a worker can receive multiple responsibilities. Workers register the responsibilities they can handle and claim their own tasks first. Unclassified historical tasks remain eligible for every worker. Older workers can continue processing that general queue. Gateway logs provide the independent account identity for each request.
+
+For a reviewed task sent to `POST /api/suggestions`, set `role` to `botany` (plant growth and morphology), `physics` (loads, roots and soils), `scene` (layout and rendering), `infra` (assistant and infrastructure), or `qa` (verification). Use a stable `requestKey` when retrying the same submission. Reusing a key with different content returns HTTP 409. The community operator derives this key from the suggestion ID. To hand work across roles, add `handoffFrom` with up to six completed task IDs. On lease, workers receive the named handoffs and the two latest completed deliveries for their role, including reported checks, merge state and the retained output hash when available. Check current source before reusing a previous result.
+
+For example, submit `{"role":"physics","requestKey":"yungu-root-contact-1","title":"核对根颈接地","prompt":"遍历幼树与成树的风载姿态，修复根颈与地面间隙并补回归测试。","kind":"code"}`. Once that task completes, a `qa` submission can reference its returned ID in `handoffFrom`.

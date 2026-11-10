@@ -4,6 +4,8 @@ import {dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {status as gatewayStatus} from './gpt-load-client.mjs';
 
+import {workerRoles} from './roles.mjs';
+
 const here=dirname(fileURLToPath(import.meta.url));
 const workspace=resolve(here,'../..');
 const root=workspace;
@@ -60,10 +62,12 @@ try{
     await new Promise(resolveDelay=>setTimeout(resolveDelay,200));
   }
   if(!ready)throw new Error('Gateway-backed coordinator did not start');
-  const requestedCount=Number(process.env.SWARM_WORKER_COUNT||3);
+  // Workers share the gateway. Its scheduler selects a credential per request.
+  const requestedCount=Number(process.env.SWARM_WORKER_COUNT||5);
   if(!Number.isInteger(requestedCount)||requestedCount<1||requestedCount>5)throw new Error('SWARM_WORKER_COUNT must be 1–5');
   const count=Math.min(requestedCount,state.connectedDistinctAccounts);
   for(let n=1;n<=count;n++)launch('worker.mjs',{
+    SWARM_WORKER_ROLES:workerRoles(n-1,count).join(','),
     SWARM_WORKER_ID:`gpt-load-worker-${n}`,SWARM_WORKER_LABEL:`GPT-Load 执行器 ${n}`,
     SWARM_STATE_DIR:resolve(runtime,`worker-${n}`),
   });
