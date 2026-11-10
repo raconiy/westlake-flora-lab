@@ -1,6 +1,6 @@
 // Three.js world X/Z, model metres. The GLB scale assumes a 3.41 m lamp height.
-// Registered core and original seed grid. Its first 384,606 accepted sites
-// remain byte-identical; the outer planting is a visual engineering prior.
+// Registered core and original seed grid. The refitted tree excludes 60 former
+// core sites. Every unaffected root retains its location and per-site seed.
 export const meadowCoreBounds = { minX: -20, maxX: 24, minZ: -42, maxZ: 10 } as const;
 export const meadowBounds = {minX:-32,maxX:36,minZ:-54,maxZ:22} as const;
 
@@ -59,7 +59,9 @@ function nearPolygon(x: number, z: number, polygon: readonly Point[], radius: nu
   return inside;
 }
 
-const bases = [...trunks, ...lamps];
+// Keep the prior small unplanted patch. The new disk clears the reconstructed stem.
+const resolvedMidStem: Footprint = [1.86790073239639, -14.176994769265088, 0.1814712459830393];
+const bases = [...trunks, ...lamps, resolvedMidStem];
 const verge = .025; // Additional padding beyond the packed stone extent.
 
 /** True where a grass root and its optional horizontal reach (metres) fit. */

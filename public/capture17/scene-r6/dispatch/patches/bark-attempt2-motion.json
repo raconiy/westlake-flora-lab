@@ -1,0 +1,57 @@
+{
+  "method": "Product solver and named GLB nodes, 60 Hz. +6 m/s 4 s, zero 18 s, -6 m/s 4 s, zero 18 s. Fixed transforms, local sockets, signed axis response and calm. Names newly added or removed reported individually; change to preexisting beam rest/response measured as local rest-relative quaternion absolute angle.",
+  "baseline": {
+    "sha256": "5d4dd0e83b360d486f4f3fd57251d6133d679cfd4f88f071646385a9fc850464",
+    "joints": 78,
+    "anchorNames": [
+      "Lamp.Forecourt.ReferenceB",
+      "tree.far-center",
+      "tree.foreground.forked",
+      "tree.horizon-01",
+      "tree.horizon-02",
+      "tree.horizon-03",
+      "tree.lawn-left-01",
+      "tree.lawn-left-02",
+      "tree.left-round",
+      "tree.left-slender",
+      "tree.left-spreading",
+      "tree.mid-fork",
+      "tree.right-group"
+    ],
+    "maxBaseMatrixDrift": 0,
+    "maxLocalSocketDriftM": 0,
+    "leafMeshes": 39,
+    "attachedLeafMeshes": 39,
+    "maxReleaseAngleRad": 0,
+    "maxSignedInversionErrorRad": 0
+  },
+  "candidate": {
+    "sha256": "daf67f439104ebf2b197b6ca3484d7b9c66399c1c39cf20cf2d0516722e14a17",
+    "joints": 78,
+    "anchorNames": [
+      "Lamp.Forecourt.ReferenceB",
+      "tree.far-center",
+      "tree.foreground.forked",
+      "tree.horizon-01",
+      "tree.horizon-02",
+      "tree.horizon-03",
+      "tree.lawn-left-01",
+      "tree.lawn-left-02",
+      "tree.left-round",
+      "tree.left-slender",
+      "tree.left-spreading",
+      "tree.mid-fork",
+      "tree.right-group"
+    ],
+    "maxBaseMatrixDrift": 0,
+    "maxLocalSocketDriftM": 0,
+    "leafMeshes": 39,
+    "attachedLeafMeshes": 39,
+    "maxReleaseAngleRad": 0,
+    "maxSignedInversionErrorRad": 0
+  },
+  "sharedJointCount": 78,
+  "addedJointNames": [],
+  "removedJointNames": [],
+  "sharedWithResponseChanged": []
+}

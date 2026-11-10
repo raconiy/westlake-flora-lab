@@ -1,0 +1,27 @@
+{
+  "yungu-lawn.glb": {
+    "sha256": "4d00caf13362036ad338db65a3eae2782a891157d7a25452baff170bf61a8ecc",
+    "bytes": 43320268
+  },
+  "yungu-meadow.glb": {
+    "sha256": "a4dbb95635f47de31fe1534b92315229558658d2d66e71afc08c310d85b81ee9",
+    "bytes": 1424644
+  },
+  "yungu-meadow-full.glb": {
+    "sha256": "ab8fb6360298a56b8690e2c4fe7976f87f63e1b2ca227140c31c54debda95a58",
+    "bytes": 26732224
+  },
+  "contact-world.xml": {
+    "sha256": "a7b80bb86dc1c7b1932ffd29802d5528ed80688bc00776a0946b803510e3c1f4",
+    "bytes": 48048
+  },
+  "near-reference.webp": {
+    "sha256": "d33e16408b061827ba764eca621e4cae8c32916c60c48582857a44a535382b3d",
+    "bytes": 373286
+  },
+  "yungu-campus-scene-source-v6.zip": {
+    "sha256": "682802289002f3af610b2989b1924aaf9d9f64273a0c54860a8eb946a7ebd47b",
+    "bytes": 220997095,
+    "url": "https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v6/yungu-campus-scene-source-v6.zip"
+  }
+}

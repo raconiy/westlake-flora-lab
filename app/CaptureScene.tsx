@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {Box, Camera, Download, Layers3, Orbit, Wind, RotateCcw} from 'lucide-react';
 import * as THREE from 'three';
+import {createCaptureSky} from '../lib/capture-scene-sky';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -88,7 +89,8 @@ export default function CaptureScene() {
     renderer.shadowMap.autoUpdate = false;
     renderer.shadowMap.needsUpdate = true;
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xb0d7ef);
+    const sky = createCaptureSky();
+    scene.add(sky);
     const camera = new THREE.PerspectiveCamera(47, 4/3, 0.05, 260);
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -123,7 +125,7 @@ export default function CaptureScene() {
 
     const controller = new AbortController();
     async function load() {
-      const buffer = await readCaptureAsset(media+'yungu-lawn.glb?v=5',controller.signal,
+      const buffer = await readCaptureAsset(media+'yungu-lawn.glb?v=6',controller.signal,
         fraction=>{if(active)setProgress(Math.min(99,Math.round(100*fraction)));});
       if (!active) return;
       const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(buffer, media);
@@ -330,6 +332,8 @@ export default function CaptureScene() {
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);
       comparisonCache.forEach(disposeModel);
+      sky.geometry.dispose();
+      sky.material.dispose();
       sun.shadow.dispose();
       renderer.dispose();
       renderer.forceContextLoss();
@@ -349,7 +353,7 @@ export default function CaptureScene() {
   return <section className="capture" aria-label="云谷草坪实拍重建">
     <div className="capture-layout">
       <div className="capture-stage">
-        <img className="capture-poster" src={media + 'near-reference.webp?v=5'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
+        <img className="capture-poster" src={media + 'near-reference.webp?v=6'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
         {open && <div className={'capture-webgl' + (ready ? ' loaded' : '')} ref={mount}/>}
         {!open && <div className="capture-start"><button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/>进入三维场景</button><button className="capture-enter capture-wind-start" onClick={()=>{startAtTurf.current=true; setOpen(true);}}>近看草坪</button><button className="capture-enter capture-wind-start" onClick={gust}><Wind size={17}/>试一次阵风</button></div>}
         {open && !ready && <div className="capture-loading" role="status">{message || (progress >= 98 ? '正在准备三维网格…' : '正在读取场景' + (progress ? ' '+progress+'%' : '…'))}
@@ -358,15 +362,15 @@ export default function CaptureScene() {
       </div>
       <div className="capture-info">
         <h2>草坪与步道</h2>
-        <p>沿步道看三株近树：前树高处分叉，中树冠密而圆，左树的侧枝横向展开。进入三维后可侧看分枝，也可以贴近地面检查草叶。</p>
-        <p><a className="capture-contact-link" href={media+'lawn-r5/index.html'}>拖动对照实拍与模型，查看五个账号的工作记录 →</a></p>
+        <p>沿步道看前树的弯曲分叉、中树的密冠、左树的侧枝和右侧复干树。进入三维后可切换实拍机位、侧看分枝，也可以贴近地面检查草叶。</p>
+        <p><a className="capture-contact-link" href={media+'scene-r6/index.html'}>拖动对照实拍与模型，查看五个账号的工作记录 →</a></p>
         <dl><dt>采集素材</dt><dd>13 张照片 · 4 段视频</dd><dt>相机配准</dt><dd>29 个视角 · 7,674 个稀疏点</dd><dt>重建范围</dt><dd>乔木、草坪、步道与灯具</dd><dt>可见性</dt><dd>前树冠顶和左树侧缘超出取景，遮挡部分的分枝和叶片按可见范围推断。</dd><dt>尺度与动力</dt><dd>模型尺寸使用工程估计。树种、地下根形与枝条刚度尚待现场核对。</dd></dl>
-        <a className="capture-download" href={media+'yungu-lawn.glb?v=5'} download><Download size={16}/> 下载校园场景 <span>GLB</span></a>
+        <a className="capture-download" href={media+'yungu-lawn.glb?v=6'} download><Download size={16}/> 下载校园场景 <span>GLB</span></a>
         <a className="capture-contact-link" href={media+'contact-world.xml'} download>下载碰撞模型（MuJoCo）</a>
-        <a className="capture-contact-link" href={media+'yungu-meadow.glb?v=5'} download>单独下载草叶实例（GLB）</a>
-        <a className="capture-contact-link" href={media+'yungu-meadow-full.glb?v=5'} download>下载全密度草坪（离线渲染）</a>
-        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v5/yungu-campus-scene-source-v5.zip">下载 Blender 工程及生成脚本</a>
-        <a className="capture-contact-link" href={media+'lawn-r5/dispatch/index.html'}>查看本版五个账号的完整派工与回执</a>
+        <a className="capture-contact-link" href={media+'yungu-meadow.glb?v=6'} download>单独下载草叶实例（GLB）</a>
+        <a className="capture-contact-link" href={media+'yungu-meadow-full.glb?v=6'} download>下载全密度草坪（离线渲染）</a>
+        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v6/yungu-campus-scene-source-v6.zip">下载 Blender 工程及生成脚本</a>
+        <a className="capture-contact-link" href={media+'scene-r6/dispatch/index.html'}>查看本版五个账号的完整派工与回执</a>
       </div>
     </div>
     {ready && <div className="capture-tools">

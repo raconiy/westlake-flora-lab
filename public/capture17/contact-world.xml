@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='utf-8'?>
 <mujoco model="Yungu lawn contact geometry">
   <option gravity="0 0 -9.81" timestep="0.002" />
   <default>
@@ -41,7 +40,32 @@
     <geom name="tree.foreground.forked.collider.stem" type="capsule" fromto="0 0 0 -0.062501967 -0.0059709549 3.28351259" size="0.22400001" rgba=".40 .33 .25 1" />
     <geom name="tree.mid-fork.collider.stem" type="capsule" fromto="-1.07755542 11.7815285 8.77116447e-17 -1.08568013 11.8801899 2.00180626" size="0.380000014" rgba=".40 .33 .25 1" />
     <geom name="tree.left-spreading.collider.stem" type="capsule" fromto="-12.7447491 13.1954384 0 -12.5339479 13.2087994 2.32231045" size="0.250000012" rgba=".40 .33 .25 1" />
-    <geom name="tree.right-group.collider.stem" type="capsule" fromto="1.7694751 12.023674 0 1.66532004 12.1065245 2.15196919" size="0.0941659687" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.stem" type="capsule" fromto="1.86790073 14.1769948 0 1.85130073 13.7415948 1.0089" size="0.1295" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.01" type="capsule" fromto="1.85130073 13.7415948 1.0089 1.46870073 13.6410948 2.0455" size="0.0724" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.02" type="capsule" fromto="1.85130073 13.7415948 1.0089 1.86450073 13.9941948 1.509" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.03" type="capsule" fromto="1.86450073 13.9941948 1.509 1.86950073 14.3292948 2.1719" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.04" type="capsule" fromto="1.86950073 14.3292948 2.1719 1.80870073 14.3405948 2.8232" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.05" type="capsule" fromto="1.80870073 14.3405948 2.8232 1.72820073 14.6339948 3.6284" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.06" type="capsule" fromto="1.72820073 14.6339948 3.6284 1.79610073 14.5443948 4.1998" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.07" type="capsule" fromto="1.79610073 14.5443948 4.1998 1.88600073 14.7101948 4.9407" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.08" type="capsule" fromto="1.88600073 14.7101948 4.9407 1.94140073 14.6540948 5.4866" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.09" type="capsule" fromto="1.94140073 14.6540948 5.4866 2.01490073 14.6339948 6.2134" size="0.051" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.10" type="capsule" fromto="1.85130073 13.7415948 1.0089 2.02420073 13.9017948 1.3181" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.11" type="capsule" fromto="2.02420073 13.9017948 1.3181 2.26500073 14.1007948 1.7279" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.12" type="capsule" fromto="2.26500073 14.1007948 1.7279 2.42490073 14.1845948 2.1524" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.13" type="capsule" fromto="2.42490073 14.1845948 2.1524 2.63690073 14.1007948 2.7151" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.14" type="capsule" fromto="2.63690073 14.1007948 2.7151 2.74590073 14.1309948 3.0725" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.15" type="capsule" fromto="2.74590073 14.1309948 3.0725 2.89050073 13.9865948 3.52" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.16" type="capsule" fromto="2.89050073 13.9865948 3.52 3.11060073 13.9124948 3.9547" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.17" type="capsule" fromto="3.11060073 13.9124948 3.9547 3.41510073 13.8722948 4.5308" size="0.0559" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.18" type="capsule" fromto="1.46870073 13.6410948 2.0455 1.34850073 14.0072948 2.3268" size="0.0441" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.19" type="capsule" fromto="1.34850073 14.0072948 2.3268 1.15900073 14.4816948 2.6997" size="0.0441" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.20" type="capsule" fromto="1.15900073 14.4816948 2.6997 0.937300732 14.5708948 3.0644" size="0.0441" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.21" type="capsule" fromto="0.937300732 14.5708948 3.0644 0.759400732 14.8243948 3.5479" size="0.0441" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.22" type="capsule" fromto="0.759400732 14.8243948 3.5479 0.545000732 14.8581948 3.9585" size="0.0441" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.23" type="capsule" fromto="0.545000732 14.8581948 3.9585 0.400100732 15.0909948 4.5027" size="0.0441" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.24" type="capsule" fromto="0.400100732 15.0909948 4.5027 0.316700732 15.1469948 4.9226" size="0.0441" rgba=".40 .33 .25 1" />
+    <geom name="tree.right-group.collider.wood.25" type="capsule" fromto="0.316700732 15.1469948 4.9226 0.206300732 15.2813948 5.4674" size="0.0441" rgba=".40 .33 .25 1" />
     <geom name="tree.left-slender.collider.stem" type="capsule" fromto="-12.2056732 24.1277504 0 -12.0287523 24.0274715 2.59214044" size="0.104759407" rgba=".40 .33 .25 1" />
     <geom name="tree.left-round.collider.stem" type="capsule" fromto="-13.8378153 39.6033478 0 -13.7235231 39.7837486 2.30879998" size="0.0920000039" rgba=".40 .33 .25 1" />
     <geom name="tree.lawn-left-01.collider.stem" type="capsule" fromto="-12.0534449 32.8859673 0 -11.8333511 32.692749 2.65136123" size="0.111675448" rgba=".40 .33 .25 1" />

@@ -1,0 +1,257 @@
+{
+  "stage": "post-C-local-bark-followup",
+  "originalCRequestSceneSHA": "5d4dd0e83b360d486f4f3fd57251d6133d679cfd4f88f071646385a9fc850464",
+  "patchedSceneSHA": "4d00caf13362036ad338db65a3eae2782a891157d7a25452baff170bf61a8ecc",
+  "objectWorldTrianglesExact": false,
+  "protocol": "Before review of bark candidate pixels, choose exact projected native tree.foreground.trunk triangles wholly 0.05..2.20m above nominal ground, erode1px; compare all same support and original R4 manually fixed protective small boxes in two physical cameras. These image losses are appearance proxies. Camera matrices exactly equal C snapshots. No additional model requests.",
+  "frozenOldFrames": {
+    "FinalScene-10.png": "2ac4b73915ff34911459cc220cd04ea9f17e8c02c9d1ec37e3b567bdf3c791f7",
+    "FinalScene-06.png": "b5f3b97476168a68dd5159cfb86f96785198b9449d19a8c583bd80ff7a1d3cc4",
+    "FinalScene-13.png": "8d326fbfc19b33e2b16be9ec529b9b07b83102a872f2876f1f3975490d7fead2",
+    "FinalScene-01.png": "192f50b6086e55cca9cd9a2d57dde8a22c2574ea40588802a11771d9c6fc4a6c"
+  },
+  "cases": {
+    "01": {
+      "sourceHashes": {
+        "photo": "7b31bab3cf0b5873d858b577dd3073a0785d7fe4dea534e9049a259051890ee6",
+        "CroundImage": "192f50b6086e55cca9cd9a2d57dde8a22c2574ea40588802a11771d9c6fc4a6c",
+        "barkPatched": "5b73236fbbc654156eb905cbe62c5c0f8b4b5eb7f121a8308d7bb966c1c5fb95"
+      },
+      "triangleCount": 322,
+      "referenceR4ROI": {
+        "foreground-trunk": [
+          574,
+          572,
+          582,
+          601
+        ],
+        "lamp-pole": [
+          160,
+          546,
+          165,
+          598
+        ],
+        "green-cover": [
+          526,
+          662,
+          553,
+          668
+        ],
+        "paving": [
+          221,
+          698,
+          288,
+          714
+        ]
+      },
+      "metrics": {
+        "foreground-trunk": {
+          "pixels": 232,
+          "beforeLinearRGBError": 0.4008261840027544,
+          "afterLinearRGBError": 0.16628694092411364,
+          "pairedMaxLinearRGBDifference": 0.5476988488057377,
+          "pairedMeanLinearRGBDifference": 0.2539781209895381
+        },
+        "lamp-pole": {
+          "pixels": 260,
+          "beforeLinearRGBError": 0.04201300078097369,
+          "afterLinearRGBError": 0.04201300078097369,
+          "pairedMaxLinearRGBDifference": 0.0,
+          "pairedMeanLinearRGBDifference": 0.0
+        },
+        "green-cover": {
+          "pixels": 162,
+          "beforeLinearRGBError": 0.059024729212968315,
+          "afterLinearRGBError": 0.059024729212968315,
+          "pairedMaxLinearRGBDifference": 0.0,
+          "pairedMeanLinearRGBDifference": 0.0
+        },
+        "paving": {
+          "pixels": 1072,
+          "beforeLinearRGBError": 0.0402539876527806,
+          "afterLinearRGBError": 0.0402539876527806,
+          "pairedMaxLinearRGBDifference": 0.0,
+          "pairedMeanLinearRGBDifference": 0.0
+        },
+        "wholeFrame": {
+          "pixels": 786432,
+          "beforeLinearRGBError": 0.1379658488230544,
+          "afterLinearRGBError": 0.13709856114201177,
+          "pairedMaxLinearRGBDifference": 0.7192931960675858,
+          "pairedMeanLinearRGBDifference": 0.001904205897555367
+        },
+        "lowerTrunkProjectedInterior": {
+          "pixels": 4555,
+          "beforeLinearRGBError": 0.23385789347054933,
+          "afterLinearRGBError": 0.14041903055941082,
+          "pairedMaxLinearRGBDifference": 0.5911737299021225,
+          "pairedMeanLinearRGBDifference": 0.20360794750339922
+        }
+      },
+      "changedOutsideLower2p2mTrunkMask": 5073,
+      "note": "Outside mask includes any higher trunk change, antialiasing outside the chosen height cutoff, and scene lighting differences; interpret with the actual code span."
+    },
+    "13": {
+      "sourceHashes": {
+        "photo": "1501fd6de67567552dd1cca488320fa1ccc443813990f905ffdda39ed6e5f6be",
+        "CroundImage": "8d326fbfc19b33e2b16be9ec529b9b07b83102a872f2876f1f3975490d7fead2",
+        "barkPatched": "5ec458f047815298b256346bf401f8abc76cef33e2248973a309721ff809d55d"
+      },
+      "triangleCount": 322,
+      "referenceR4ROI": {
+        "foreground-trunk": [
+          666,
+          504,
+          679,
+          533
+        ],
+        "lamp-pole": [
+          157,
+          522,
+          163,
+          575
+        ],
+        "green-cover": [
+          706,
+          613,
+          740,
+          623
+        ],
+        "paving": [
+          225,
+          668,
+          286,
+          680
+        ]
+      },
+      "metrics": {
+        "foreground-trunk": {
+          "pixels": 377,
+          "beforeLinearRGBError": 0.31516888550563976,
+          "afterLinearRGBError": 0.07627860081462472,
+          "pairedMaxLinearRGBDifference": 0.593626349588626,
+          "pairedMeanLinearRGBDifference": 0.3126733207492553
+        },
+        "lamp-pole": {
+          "pixels": 318,
+          "beforeLinearRGBError": 0.016946436455256633,
+          "afterLinearRGBError": 0.016946436455256633,
+          "pairedMaxLinearRGBDifference": 0.0,
+          "pairedMeanLinearRGBDifference": 0.0
+        },
+        "green-cover": {
+          "pixels": 340,
+          "beforeLinearRGBError": 0.06163999298451189,
+          "afterLinearRGBError": 0.06163999298451189,
+          "pairedMaxLinearRGBDifference": 0.0,
+          "pairedMeanLinearRGBDifference": 0.0
+        },
+        "paving": {
+          "pixels": 732,
+          "beforeLinearRGBError": 0.03187864525238457,
+          "afterLinearRGBError": 0.03187864525238457,
+          "pairedMaxLinearRGBDifference": 0.0,
+          "pairedMeanLinearRGBDifference": 0.0
+        },
+        "wholeFrame": {
+          "pixels": 786432,
+          "beforeLinearRGBError": 0.13678866128709777,
+          "afterLinearRGBError": 0.13558153867061196,
+          "pairedMaxLinearRGBDifference": 0.8533917160171063,
+          "pairedMeanLinearRGBDifference": 0.003117860568384225
+        },
+        "lowerTrunkProjectedInterior": {
+          "pixels": 6073,
+          "beforeLinearRGBError": 0.2526671896764754,
+          "afterLinearRGBError": 0.12143961971892894,
+          "pairedMaxLinearRGBDifference": 0.6107884327498243,
+          "pairedMeanLinearRGBDifference": 0.2510393988217029
+        }
+      },
+      "changedOutsideLower2p2mTrunkMask": 6352,
+      "note": "Outside mask includes any higher trunk change, antialiasing outside the chosen height cutoff, and scene lighting differences; interpret with the actual code span."
+    }
+  },
+  "attempt": 3,
+  "disposition": "accepted_with_limits",
+  "observedAtMs": 1794338139869,
+  "additionalModelRequests": 0,
+  "reason": "Four actual fixed-camera WebGL images were visually inspected. Horizontal bands are gone; vertical bark appearance and the dark root improve. Actual GLB has a valid 512x1024 baseColor image and no normalTexture. Native01 improves against the photograph and no longer has the severe whitening of Bark2. Detail remains blurry;13 and unobserved surfaces still use extrapolation.",
+  "visualReview": {
+    "WebGLViews": [
+      "01",
+      "06",
+      "10",
+      "13"
+    ],
+    "nativeViews": [
+      "01"
+    ],
+    "nativeViewsNotVerified": [
+      "06",
+      "10",
+      "13"
+    ],
+    "notHeldOut": "Texture fitted from photograph01; these are same-support engineering comparisons, not independent validation of absolute bark reflectance."
+  },
+  "sourceTexture": {
+    "sha256": "5eeebe0ff528715f8b9bfcd528dee6a17639e99cd52eb8b9fcdeb58bb7985424",
+    "size": [
+      512,
+      1024
+    ]
+  },
+  "allWebGLFrameHashes": {
+    "01": "5b73236fbbc654156eb905cbe62c5c0f8b4b5eb7f121a8308d7bb966c1c5fb95",
+    "06": "44dc8bd4ea6492126e9fbc7fc32cfb100764a4cc60cf06ffb67f1901e316e24f",
+    "10": "e2a5232881904885b4ce53192b52690d3b21d8b5b0a6dadea1b5f80218e98d35",
+    "13": "5ec458f047815298b256346bf401f8abc76cef33e2248973a309721ff809d55d"
+  },
+  "materialAudit": {
+    "sceneSha256": "4d00caf13362036ad338db65a3eae2782a891157d7a25452baff170bf61a8ecc",
+    "actualMaterials": [
+      {
+        "index": 42,
+        "name": "Foreground bark from photograph 01",
+        "baseColor": {
+          "texture": 10,
+          "image": 10,
+          "imageSha256": "5eeebe0ff528715f8b9bfcd528dee6a17639e99cd52eb8b9fcdeb58bb7985424",
+          "size": [
+            512,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        "normal": null,
+        "roughness": 0.9399999976158142,
+        "doubleSided": true
+      }
+    ],
+    "baseColorImageAtLeast128x128": true,
+    "normalTextureOmitted": true,
+    "passed": true
+  },
+  "crossRendererReportSha256": "23ff8d603c2de4082e55db1e63182f0ccc2bb0c15cf5ce1dcfdcf21300faf420",
+  "motion": {
+    "sha256": "413515de39ba683d47feefe33c88ca8a2eae59ba890a0866bc3845d5f660d524",
+    "oldJoints": 78,
+    "newJoints": 78,
+    "oldNamesLost": 0,
+    "newNames": 0,
+    "changedResponses": 0,
+    "fixedMatricesMaxDrift": 0,
+    "socketMaxDriftM": 0
+  },
+  "geometryChange": {
+    "oldVertexCount": 816,
+    "newVertexCount": 816,
+    "indicesIdentical": false,
+    "maxBidirectionalNearestVertexM": 0.017951530549053893,
+    "note": "Native trunk was re-exported; exact vertex/index identity does not hold. All reported image comparisons use the intersection of both projected interior masks."
+  },
+  "supersedesRejectedAttempts": [
+    1,
+    2
+  ]
+}
