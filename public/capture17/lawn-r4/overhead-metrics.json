@@ -1,0 +1,344 @@
+{
+  "gpu": {
+    "widthM": 120,
+    "cameraCenterXZ": [
+      2,
+      -16
+    ],
+    "hashes": {
+      "before": "ad4694c04182a6119e683d86a4ac0a6bd1337338b4f35098b491934f709cdd8d",
+      "after": "ff4d72752a4c12ab50fe54275f81ecaa37875d0faaa9adbaf262c1c34571474f",
+      "bare": "2c05d2cc5ce6b0bd7a9a6a3b3fb2c861795e94e189f5e7e6e51a24d04d30d5dc"
+    },
+    "strips": {
+      "west": {
+        "before": {
+          "samples": 20,
+          "mean": 0.10849242194965998,
+          "p90": 0.12458437228707196
+        },
+        "after": {
+          "samples": 20,
+          "mean": 0.002545435273643167,
+          "p90": 0.006903095067478926
+        },
+        "bare": {
+          "samples": 20,
+          "mean": 0.0011454406735527973,
+          "p90": 0.002858237157357158
+        }
+      },
+      "east": {
+        "before": {
+          "samples": 45,
+          "mean": 0.1109769668005184,
+          "p90": 0.126077133235279
+        },
+        "after": {
+          "samples": 45,
+          "mean": 0.0013326192088201393,
+          "p90": 0.005807576842086328
+        },
+        "bare": {
+          "samples": 45,
+          "mean": 0.000984629187459604,
+          "p90": 0.0035171899351616803
+        }
+      },
+      "north": {
+        "before": {
+          "samples": 26,
+          "mean": 0.08636919618136679,
+          "p90": 0.11302419079800816
+        },
+        "after": {
+          "samples": 26,
+          "mean": 0.002716130244152704,
+          "p90": 0.01012635444563744
+        },
+        "bare": {
+          "samples": 26,
+          "mean": 0.004289896396428781,
+          "p90": 0.009753434286270221
+        }
+      },
+      "south": {
+        "before": {
+          "samples": 14,
+          "mean": 0.10253607326794435,
+          "p90": 0.11790731118618217
+        },
+        "after": {
+          "samples": 14,
+          "mean": 0.0013751230455507396,
+          "p90": 0.005052349844734946
+        },
+        "bare": {
+          "samples": 14,
+          "mean": 0.0003775317316951652,
+          "p90": 0.0011249095570682766
+        }
+      },
+      "NW": {
+        "before": {
+          "samples": 5,
+          "mean": 0.009894501906469916,
+          "p90": 0.029683505719409753
+        },
+        "after": {
+          "samples": 5,
+          "mean": 0.0007874317878364262,
+          "p90": 0.0020478987912196404
+        },
+        "bare": {
+          "samples": 5,
+          "mean": 0.0026715718361550343,
+          "p90": 0.004632131663414607
+        }
+      },
+      "NE": {
+        "before": {
+          "samples": 5,
+          "mean": 0.014910346251598811,
+          "p90": 0.04114846292234342
+        },
+        "after": {
+          "samples": 5,
+          "mean": 0.006174167783825876,
+          "p90": 0.01507884901903332
+        },
+        "bare": {
+          "samples": 5,
+          "mean": 0.0022802803169763297,
+          "p90": 0.005819054307200066
+        }
+      },
+      "SE": {
+        "before": {
+          "samples": 5,
+          "mean": 0.024823386534991953,
+          "p90": 0.07155712507716097
+        },
+        "after": {
+          "samples": 5,
+          "mean": 0.0,
+          "p90": 0.0
+        },
+        "bare": {
+          "samples": 5,
+          "mean": 0.004711338576521906,
+          "p90": 0.007327368253756567
+        }
+      },
+      "SW": {
+        "before": {
+          "samples": 0,
+          "mean": null,
+          "p90": null
+        },
+        "after": {
+          "samples": 0,
+          "mean": null,
+          "p90": null
+        },
+        "bare": {
+          "samples": 0,
+          "mean": null,
+          "p90": null
+        }
+      }
+    }
+  },
+  "webgl": {
+    "widthM": 112,
+    "cameraCenterXZ": [
+      2,
+      -16
+    ],
+    "hashes": {
+      "before": "72f56af1995523c6c7470ed501576e5573e166a1cc0bc4863df0751f3eab1753",
+      "after": "4f16fcc644e9703e6adcc00772f465df5e7a28dbdccb0c122d27eacfc2767af9",
+      "bare": "dbbd3affd5171045897d3ff3b1a4973800391ca383723eb98002aad78bbf93a6",
+      "oldBare": "62535df32b5fc9e8ad811e97f203e45b2f4304003df06f2e328a49c6ff3fc0cc"
+    },
+    "strips": {
+      "west": {
+        "before": {
+          "samples": 20,
+          "mean": 0.002262349211709243,
+          "p90": 0.009163762016970129
+        },
+        "after": {
+          "samples": 20,
+          "mean": 0.0012592293978237745,
+          "p90": 0.004695213224451042
+        },
+        "bare": {
+          "samples": 20,
+          "mean": 0.0012851882911721346,
+          "p90": 0.004772590335949526
+        },
+        "oldBare": {
+          "samples": 20,
+          "mean": 0.0023641051592088666,
+          "p90": 0.009146574210182279
+        }
+      },
+      "east": {
+        "before": {
+          "samples": 45,
+          "mean": 0.007095228690483851,
+          "p90": 0.018043669260470782
+        },
+        "after": {
+          "samples": 45,
+          "mean": 0.001132376289694848,
+          "p90": 0.0033236429483390357
+        },
+        "bare": {
+          "samples": 45,
+          "mean": 0.0012551418952067319,
+          "p90": 0.0036565053147952354
+        },
+        "oldBare": {
+          "samples": 45,
+          "mean": 0.007168797838988137,
+          "p90": 0.01816321716435981
+        }
+      },
+      "north": {
+        "before": {
+          "samples": 26,
+          "mean": 0.007305621486195711,
+          "p90": 0.027150137159735632
+        },
+        "after": {
+          "samples": 26,
+          "mean": 0.002448909156612202,
+          "p90": 0.007462445526155062
+        },
+        "bare": {
+          "samples": 26,
+          "mean": 0.002454766107528527,
+          "p90": 0.007462445526155062
+        },
+        "oldBare": {
+          "samples": 26,
+          "mean": 0.0074248429813559705,
+          "p90": 0.027128508524382283
+        }
+      },
+      "south": {
+        "before": {
+          "samples": 14,
+          "mean": 0.0034183925454611486,
+          "p90": 0.010489026014024646
+        },
+        "after": {
+          "samples": 14,
+          "mean": 0.0010854274515328785,
+          "p90": 0.0038768328434736245
+        },
+        "bare": {
+          "samples": 14,
+          "mean": 0.0012086848272814057,
+          "p90": 0.0038768328434736245
+        },
+        "oldBare": {
+          "samples": 14,
+          "mean": 0.0033547689176379714,
+          "p90": 0.010456572880922325
+        }
+      },
+      "NW": {
+        "before": {
+          "samples": 5,
+          "mean": 0.003907895398770095,
+          "p90": 0.007126204983125212
+        },
+        "after": {
+          "samples": 5,
+          "mean": 0.0031803627206897223,
+          "p90": 0.006102175338475751
+        },
+        "bare": {
+          "samples": 5,
+          "mean": 0.0029353999841785715,
+          "p90": 0.0053672871289423
+        },
+        "oldBare": {
+          "samples": 5,
+          "mean": 0.004129572904552947,
+          "p90": 0.007612420049308283
+        }
+      },
+      "NE": {
+        "before": {
+          "samples": 5,
+          "mean": 0.00573656034424902,
+          "p90": 0.014514918893127471
+        },
+        "after": {
+          "samples": 5,
+          "mean": 0.003598896246869021,
+          "p90": 0.007011515418898407
+        },
+        "bare": {
+          "samples": 5,
+          "mean": 0.003598896246869021,
+          "p90": 0.007011515418898407
+        },
+        "oldBare": {
+          "samples": 5,
+          "mean": 0.00573656034424902,
+          "p90": 0.014514918893127471
+        }
+      },
+      "SE": {
+        "before": {
+          "samples": 5,
+          "mean": 0.006297160415534192,
+          "p90": 0.013817042993545392
+        },
+        "after": {
+          "samples": 5,
+          "mean": 0.0037035502083491156,
+          "p90": 0.00605776758164161
+        },
+        "bare": {
+          "samples": 5,
+          "mean": 0.003761169616547333,
+          "p90": 0.006046601498367393
+        },
+        "oldBare": {
+          "samples": 5,
+          "mean": 0.006297160415534192,
+          "p90": 0.013817042993545392
+        }
+      },
+      "SW": {
+        "before": {
+          "samples": 0,
+          "mean": null,
+          "p90": null
+        },
+        "after": {
+          "samples": 0,
+          "mean": null,
+          "p90": null
+        },
+        "bare": {
+          "samples": 0,
+          "mean": null,
+          "p90": null
+        },
+        "oldBare": {
+          "samples": 0,
+          "mean": null,
+          "p90": null
+        }
+      }
+    }
+  },
+  "measurement": "Every sample compares four same-orientation 1 m-spaced ground patches; across-edge luminance difference minus the mean of flanks, floored at zero. Roads/trunk zones explicitly excluded. Corners use a diagonal. Southwest original rectangle corner lies in the unplanted near-walk side and is not observable as a grass seam. These aerial renders are from an engineering camera outside the provided 13 photos; they diagnose synthetic clipping, not field-measured density."
+}

@@ -131,6 +131,11 @@ def attach(source):
         groups[node['name']] = len(pos)
     if not groups:
         raise ValueError('No EXT_mesh_gpu_instancing grass groups found')
+    summaries = [n['extras']['stats'] for n in doc['nodes'] if 'stats' in n.get('extras', {})]
+    if len(summaries) != 1 or sum(groups.values()) != summaries[0].get('tufts'):
+        raise ValueError('GLB summary differs from the actual planted point count')
+    collection['attachment_tufts'] = summaries[0]['tufts']
+    collection['full_field_tufts'] = summaries[0]['fieldTufts']
     bpy.context.view_layer.update()
     return groups
 

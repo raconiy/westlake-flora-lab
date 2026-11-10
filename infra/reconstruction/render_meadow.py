@@ -109,8 +109,11 @@ for obj in scene.objects:
     if obj.name.startswith('Turf.NearVergeBlades'):
         obj.hide_render = True
 meadow = bpy.data.collections.get('Capture17 supplemental meadow')
-if not meadow or sum(obj.get('persistent_tufts', 0) for obj in meadow.objects) != 384606:
-    raise RuntimeError('The scene lacks the frozen full-detail meadow.')
+points = [g for g in meadow.objects if g.get('persistent_tufts')] if meadow else []
+actual = sum(len(g.data.vertices) for g in points)
+if (len(points) != 4 or not all('near' in g.name and len(g.data.vertices)==g['persistent_tufts'] for g in points)
+        or actual != meadow.get('full_field_tufts', actual) or actual != meadow.get('attachment_tufts',actual)):
+    raise RuntimeError('The scene must contain four full-detail grass templates and all registered planting points.')
 if args.view in ('both', 'registered'):
     render(scene, bpy.data.objects['Photo 01 registered'], 'photo01-optix', (1536, 1152), args.samples, folder)
 if args.view in ('both', 'close'):

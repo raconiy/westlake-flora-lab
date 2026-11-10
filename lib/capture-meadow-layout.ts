@@ -1,7 +1,20 @@
 // Three.js world X/Z, model metres. The GLB scale assumes a 3.41 m lamp height.
-// The near rectangle uses the registered turf atlas width; the far cutoff at
-// -42 m includes all reconstructed tree bases. Its edges are rendering limits.
-export const meadowBounds = { minX: -20, maxX: 24, minZ: -42, maxZ: 10 } as const;
+// Registered core and original seed grid. Its first 384,606 accepted sites
+// remain byte-identical; the outer planting is a visual engineering prior.
+export const meadowCoreBounds = { minX: -20, maxX: 24, minZ: -42, maxZ: 10 } as const;
+export const meadowBounds = {minX:-32,maxX:36,minZ:-54,maxZ:22} as const;
+
+export function meadowFringeWeight(x:number,z:number):number {
+  const b=meadowCoreBounds;
+  const dx=Math.max(b.minX-x,0,x-b.maxX), dz=Math.max(b.minZ-z,0,z-b.maxZ);
+  const distance=Math.hypot(dx,dz);
+  if(!distance)return 1;
+  // Variable outward reach avoids an offset rectangular contour. Use distance
+  // to the nearest point on the core so the four corners transition radially.
+  const width=8.4+1.55*Math.sin(.125*x+.188*z)+.95*Math.cos(.23*x-.132*z);
+  const t=Math.min(1,distance/width);
+  return 1-t*t*(3-2*t);
+}
 
 type Footprint = readonly [x: number, z: number, radius: number];
 

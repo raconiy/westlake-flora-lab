@@ -32,7 +32,10 @@ missing=[im.name for im in bpy.data.images if im.source=='FILE' and not im.packe
 if missing:
     raise ValueError('Unpacked bitmap images: '+', '.join(missing))
 bpy.context.scene['capture17_source']='13 registered photographs and 4 videos. 3.41 m lamp scale is nominal.'
-bpy.context.scene['capture17_meadow']='384606 persistent modelled grass groups; full detail, mowing and growth density are priors.'
+meadow=bpy.data.collections['Capture17 supplemental meadow']
+if sum(groups.values()) != meadow['full_field_tufts']:
+    raise ValueError('Assembly requires one point per full-field planting site')
+bpy.context.scene['capture17_meadow']=f'{sum(groups.values())} persistent modelled grass groups; full detail, mowing and growth density are priors.'
 bpy.context.preferences.filepaths.save_version=0
 bpy.ops.wm.save_as_mainfile(filepath=str(args.destination.resolve()),compress=True)
 print('ASSEMBLY',json.dumps({'treeSource':source,'fullMeadowPointObjects':groups,'fixtures':fixture_objects,'oldTurfHidden':old,'packed':True},ensure_ascii=False))

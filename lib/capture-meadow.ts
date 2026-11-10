@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {isMeadowPoint, meadowBounds} from './capture-meadow-layout.ts';
+import {isMeadowPoint, meadowBounds, meadowCoreBounds, meadowFringeWeight} from './capture-meadow-layout.ts';
 
 const cell = .065;                        // metres between candidate tiller groups
 const cellsPerChunk = 30;
@@ -18,6 +18,10 @@ function random(seed:number) {
   return ()=>{n=(Math.imul(n,1664525)+1013904223)>>>0;return unit(n);};
 }
 const smooth = (a:number,b:number,x:number)=>{const t=THREE.MathUtils.clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+/** Smooth fine-detail fraction over a camera-distance interval in world metres. */
+export function meadowDetailMix(distance:number,near:number,far:number) {
+  return far>near ? 1-smooth(near,far,distance) : 0;
+}
 
 // The independent scene-light field comes from the photo-01/02/13 lawn fit.
 function captureLight(x:number,z:number) {
@@ -29,53 +33,72 @@ function captureLight(x:number,z:number) {
 type Chunk={x:number;z:number;start:number;end:number;mid:number[];far:number[]};
 /** Deterministic ground-frame layout. Each array is indexed by persistent tuft ID. */
 export function createMeadowLayout(seed=meadowSeed) {
-  const nx=Math.ceil((meadowBounds.maxX-meadowBounds.minX)/cell);
-  const nz=Math.ceil((meadowBounds.maxZ-meadowBounds.minZ)/cell);
-  const xs=new Float32Array(nx*nz),zs=new Float32Array(nx*nz),traits=new Uint32Array(nx*nz);
+  const core=meadowCoreBounds;
+  // All integer grid coordinates, including negative fringe indices, use the
+  // original origin. Extending the planting must not move a single old root.
+  const gridX=(x:number)=>(x-core.minX)/cell, gridZ=(z:number)=>(z-core.minZ)/cell;
+  const left=Math.floor(gridX(meadowBounds.minX)),right=Math.ceil(gridX(meadowBounds.maxX));
+  const top=Math.floor(gridZ(meadowBounds.minZ)),bottom=Math.ceil(gridZ(meadowBounds.maxZ));
+  const size=(right-left)*(bottom-top);
+  const xs=new Float32Array(size),zs=new Float32Array(size),traits=new Uint32Array(size);
   const chunks:Chunk[]=[];let count=0;
-  for(let cz=0;cz<nz;cz+=cellsPerChunk)for(let cx=0;cx<nx;cx+=cellsPerChunk){
-    const c:Chunk={x:meadowBounds.minX+(cx+cellsPerChunk/2)*cell,z:meadowBounds.minZ+(cz+cellsPerChunk/2)*cell,start:count,end:count,mid:[],far:[]};
-    for(let j=cz;j<Math.min(nz,cz+cellsPerChunk);j++)for(let i=cx;i<Math.min(nx,cx+cellsPerChunk);i++){
-      const h=hash(i,j,seed),jitter=hash(j,i,seed^0x73ef9f);
-      const x=meadowBounds.minX+(i+.08+.84*(jitter&65535)/65535)*cell;
-      const z=meadowBounds.minZ+(j+.08+.84*(jitter>>>16)/65535)*cell;
-      // Mown grass has soft variations in shoot density. Do not leave clear rows.
-      const density=.86+.065*Math.sin(x*.73+z*.25)+.05*Math.cos(z*.81-x*.35);
-      if(unit(hash(i,j,seed^0x319a51))>density || !isMeadowPoint(x,z,clearance))continue;
-      xs[count]=x;zs[count]=z;traits[count]=h;
-      const rank=(h&65535)/65535;
-      if(rank<.285)c.mid.push(count);
-      if(rank<.044)c.far.push(count);
-      count++;
+  function append(minI:number,maxI:number,minJ:number,maxJ:number,fringe:boolean) {
+    for(let cz=minJ;cz<maxJ;cz+=cellsPerChunk)for(let cx=minI;cx<maxI;cx+=cellsPerChunk){
+      const c:Chunk={x:core.minX+(cx+cellsPerChunk/2)*cell,z:core.minZ+(cz+cellsPerChunk/2)*cell,start:count,end:count,mid:[],far:[]};
+      for(let j=cz;j<Math.min(maxJ,cz+cellsPerChunk);j++)for(let i=cx;i<Math.min(maxI,cx+cellsPerChunk);i++){
+        const h=hash(i,j,seed),jitter=hash(j,i,seed^0x73ef9f);
+        const x=core.minX+(i+.08+.84*(jitter&65535)/65535)*cell;
+        const z=core.minZ+(j+.08+.84*(jitter>>>16)/65535)*cell;
+        const oldFootprint=x>core.minX+clearance&&x<core.maxX-clearance&&z>core.minZ+clearance&&z<core.maxZ-clearance;
+        if(oldFootprint===fringe)continue;
+        if(fringe&&unit(hash(i,j,seed^0x69d54f))>=meadowFringeWeight(x,z))continue;
+        const density=.86+.065*Math.sin(x*.73+z*.25)+.05*Math.cos(z*.81-x*.35);
+        if(unit(hash(i,j,seed^0x319a51))>density || !isMeadowPoint(x,z,clearance))continue;
+        xs[count]=x;zs[count]=z;traits[count]=h;
+        const rank=(h&65535)/65535;
+        if(rank<.285)c.mid.push(count);
+        if(rank<.044)c.far.push(count);
+        count++;
+      }
+      c.end=count;if(c.end>c.start)chunks.push(c);
     }
-    c.end=count;if(c.end>c.start)chunks.push(c);
   }
-  return {seed,count,x:xs.subarray(0,count),z:zs.subarray(0,count),traits:traits.subarray(0,count),chunks};
+  append(0,Math.ceil(gridX(core.maxX)),0,Math.ceil(gridZ(core.maxZ)),false);
+  const coreCount=count;
+  append(left,right,top,bottom,true);
+  return {seed,count,coreCount,x:xs.subarray(0,count),z:zs.subarray(0,count),traits:traits.subarray(0,count),chunks};
 }
 
 type Tier = 0|1|2;
 const tierName=['near','middle','far'];
 function tuftGeometry(tier:Tier,variant:number,seed:number) {
-  const next=random(hash(tier,variant,seed^0x4c351));
-  const blades=[39+variant,10+variant,5+variant][tier];
+  // Generate one physical tuft. Coarser meshes retain a nested subset of the
+  // same blades, their shoot sockets, centerlines, widths and pigmentation.
+  const next=random(hash(0,variant,seed^0x4c351));
+  const allBlades=Array.from({length:39+variant},(_,i)=>i);
+  const sample=(ids:number[],count:number)=>Array.from({length:count},(_,i)=>ids[Math.floor((i+.5)*ids.length/count)]);
+  const mid=sample(allBlades,10+variant);
+  const sourceBladeIds=tier===0?allBlades:tier===1?mid:sample(mid,5+variant);
+  const retained=new Set(sourceBladeIds);
   const position:number[]=[],color:number[]=[],index:number[]=[];
-  const rows=tier===0?[0,.44,.77,1]:tier===1?[0,.57,1]:[0,1];
+  const rows=tier===0?[0,.44,.77,1]:tier===1?[0,.44,1]:[0,1];
   const columns=tier===0?3:2;
-  const shoots=Array.from({length:Math.ceil(blades/(tier===0?1.5:2.0))},()=>{
-    const angle=next()*Math.PI*2,r=Math.sqrt(next())*(tier===0?.036:.023);
+  const shoots=Array.from({length:Math.ceil(allBlades.length/1.5)},()=>{
+    const angle=next()*Math.PI*2,r=Math.sqrt(next())*.036;
     // A runner's position and the azimuth of its grass shoot are independent.
     return {x:Math.cos(angle)*r,z:Math.sin(angle)*r,a:next()*Math.PI*2};
   });
-  for(let k=0;k<blades;k++){
+  for(const k of allBlades){
     const shoot=shoots[k%shoots.length], angle=shoot.a+(k%3)*2.17+(next()-.5)*1.05;
     const cx=Math.cos(angle),cz=Math.sin(angle),sx=-cz,sz=cx;
     // Short secondary leaves fill the space beneath the mower-cut upper tips.
-    const shortLeaf=tier===0 && k%5<2;
+    const shortLeaf=k%5<2;
     const height=shortLeaf?.023+.018*next():.036+.031*next();
     const lean=shortLeaf?.39+.35*next():.21+.42*next(),curl=(next()-.5)*.26;
-    const halfWidth=(.00079+.00089*next())*[1,1.22,1.65][tier];
+    const halfWidth=.00079+.00089*next();
     const tint=next(),clipped=next()<.74;
     const rootX=shoot.x+(next()-.5)*.004,rootZ=shoot.z+(next()-.5)*.004;
+    if(!retained.has(k))continue;
     const offset=position.length/3;
     for(let j=0;j<rows.length;j++){
       const t=rows[j],arc=height*(.045*t+lean*t*t),turn=height*curl*t*t*t;
@@ -97,7 +120,7 @@ function tuftGeometry(tier:Tier,variant:number,seed:number) {
   geometry.setAttribute('color',new THREE.Float32BufferAttribute(color,3));
   geometry.setIndex(index);geometry.computeVertexNormals();geometry.computeBoundingSphere();
   geometry.name=`Turf blades ${tierName[tier]} ${variant+1}`;
-  geometry.userData={bladesPerTuft:blades,detailTier:tierName[tier]};
+  geometry.userData={bladesPerTuft:sourceBladeIds.length,detailTier:tierName[tier],sourceBladeIds};
   return geometry;
 }
 
@@ -122,7 +145,7 @@ function patchMeadowWind(mat:THREE.MeshStandardMaterial,amplitude:{value:number}
 export function createCaptureMeadow(seed=meadowSeed) {
   const layout=createMeadowLayout(seed);
   const group=new THREE.Group();group.name='Yungu captured lawn meadow';
-  group.userData={seed,basis:'44 by 52 m bounded field, including an 8 m far extension beyond the registered turf atlas; metre scale from assumed 3.41 m lamp. Tiller density, mowing height and hidden plants are engineering priors.',rootPlaneY:rootY};
+  group.userData={seed,basis:'Original 44 by 52 m core plus a deterministic, gradual 6–11 m outer grass transition; metre scale from assumed 3.41 m lamp. Tiller density, mowing height and hidden plants are engineering priors.',rootPlaneY:rootY,originalCoreTufts:layout.coreCount};
   const amplitude={value:0},phase={value:0};
   const material=new THREE.MeshStandardMaterial({name:'Mown lawn tillers',vertexColors:true,roughness:.92,metalness:0,side:THREE.DoubleSide});
   patchMeadowWind(material,amplitude,phase);
@@ -152,9 +175,9 @@ export function createCaptureMeadow(seed=meadowSeed) {
       for(let j=0;j<n;j++){
         const id=candidates?candidates[j]:chunk.start+j;
         const h=layout.traits[id],rank=(h&65535)/65535;
-        const stagger=(h>>>24)/255;
-        const d=(layout.x[id]-eye.x)**2+(layout.z[id]-eye.z)**2+dy;
-        const tier=fullDetail||d<(3.7+1.6*stagger)**2?0:d<(10.5+4*stagger)**2?1:2;
+        const stagger=((h>>>24)+.5)/256;
+        const distance=Math.sqrt((layout.x[id]-eye.x)**2+(layout.z[id]-eye.z)**2+dy);
+        const tier=fullDetail||stagger<meadowDetailMix(distance,3.7,5.3)?0:stagger<meadowDetailMix(distance,10.5,14.5)?1:2;
         if(tier===1&&rank>=.285 || tier===2&&rank>=.044)continue;
         beds[tier*variants+((h>>>16)&3)].ids.push(id);
       }

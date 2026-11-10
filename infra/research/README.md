@@ -25,3 +25,9 @@ sudo python3 /opt/westlake-swarm/verify-research.py --summary
 ```sh
 node --test infra/local/test/infra.test.mjs infra/research/research.test.mjs
 ```
+
+### 查看重建派工原文
+
+云谷草坪页面的“查看草坪实拍对照、五岗提示词与调用记录”可按岗位和轮次筛选。展开单次任务能看到实际发送的文本、对照图、上游请求编号及采用结果。主控任务书单列。原始 JSON 含请求体的 SHA-256，可以复核。公开批次放在 `public/capture17/lawn-r4/`。更新公开回执后运行 `python3 infra/research/build_prompt_journal.py public/capture17/lawn-r4` 重新生成可离线打开的页面。
+
+研究推理服务在调用网关前将请求正文原样写入服务器私有目录 `/var/lib/westlake-research-prompts/`，结束时以同一 attemptId 写回执；尚缺回执的尝试保留供排查。请求记录不含 HTTP 授权头。公开记录由主控从项目批次选取，成员私聊保留在服务端。
