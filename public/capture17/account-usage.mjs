@@ -118,7 +118,15 @@ export function summarizePostrender(data,initial){
   }
   if(data.acceptedArtifacts>tasks.size)throw Error('已接收交付超过回执中的独立任务数');
   const list=[...accounts.values()].sort((a,b)=>a.credentialId-b.credentialId);
-  return {asOf:stamped,rows:[...data.requests].sort((a,b)=>a.startMs-b.startMs),accounts:list,
+  const events=data.requests.flatMap(r=>[[r.startMs,r.credentialId,1],[r.endMs,r.credentialId,-1]]).sort((a,b)=>a[0]-b[0]);
+  const active=new Map();let cursor=events[0][0],accountMs=0,quietMs=0,allFiveMs=0;
+  for(const [time,id,delta] of events){
+    const elapsed=time-cursor,count=active.size;
+    accountMs+=elapsed*count;if(!count)quietMs+=elapsed;if(count===5)allFiveMs+=elapsed;
+    const next=(active.get(id)||0)+delta;if(next)active.set(id,next);else active.delete(id);cursor=time;
+  }
+  const elapsedMs=cursor-events[0][0];
+  return {timing:{elapsedMs,accountMs,quietMs,allFiveMs},asOf:stamped,rows:[...data.requests].sort((a,b)=>a.startMs-b.startMs),accounts:list,
     accepted:data.acceptedArtifacts,output:tokens,repeated:list.filter(a=>a.count>1).length};
 }
 
@@ -128,6 +136,8 @@ async function loadPostrender(capturePromise){
     const [initial,data]=await Promise.all([capturePromise,readJson('./postrender-work.json')]);
     const batch=summarizePostrender(data,initial);
     const dateTime=t=>day.format(t)+' '+clock.format(t);
+    const {elapsedMs,accountMs,quietMs,allFiveMs}=batch.timing;
+    document.getElementById('work-clock').textContent='从首笔发出到末笔返回 '+(elapsedMs/1000).toFixed(3)+' 秒，其中有 '+(quietMs/1000).toFixed(3)+' 秒没有本批请求在途。五个账号同时在途共 '+(allFiveMs/1000).toFixed(3)+' 秒。这批请求占五个账号可用时长的 '+(100*accountMs/(5*elapsedMs)).toFixed(1)+'%；不含其他任务，也不代表订阅扣费。';
     const summary=batch.repeated
       ? batch.repeated+' 个账号各有至少两次成功请求。'
       : '当前记录中的每个账号仅有一次成功请求。';
