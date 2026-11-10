@@ -1,7 +1,7 @@
 import http from 'node:http';
 import {DatabaseSync} from 'node:sqlite';
 import {randomUUID,timingSafeEqual} from 'node:crypto';
-import {mkdirSync} from 'node:fs';
+import {mkdirSync,readFileSync} from 'node:fs';
 import {resolve,dirname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {runCodex,chatSchema} from './codex.mjs';
@@ -19,7 +19,31 @@ export function createCoordinator(options={}) {
   const root=resolve(options.root||process.env.SWARM_ROOT||process.cwd());
   const dbPath=options.dbPath||process.env.SWARM_DB||resolve(root,'.runtime/swarm.sqlite');
   const host=options.host||process.env.SWARM_HOST||'127.0.0.1';
-  const token=options.token??process.env.SWARM_TOKEN??'';
+  const secretFile = path => readFileSync(path, 'utf8').trim();
+  const token=options.token ?? (process.env.SWARM_TOKEN_FILE ? secretFile(process.env.SWARM_TOKEN_FILE) : process.env.SWARM_TOKEN || '');
+  function loadResearchTokens(path) {
+    if (!path) return {};
+    const data = secretFile(path);
+    try { return JSON.parse(data); }
+    catch { throw new Error('Invalid research token map JSON'); }
+  }
+  const researchTokens = options.researchTokens ?? loadResearchTokens(process.env.SWARM_RESEARCH_TOKENS_FILE);
+  if (!researchTokens || typeof researchTokens !== 'object' || Array.isArray(researchTokens)) {
+    throw new Error('Expected role-to-bearer map');
+  }
+  if ((process.env.SWARM_TOKEN_FILE || process.env.SWARM_RESEARCH_TOKENS_FILE) && token.length < 24) {
+    throw new Error('File-based coordinator credentials require a strong management token');
+  }
+  const credentials = new Set([token]);
+  const researchWorkers = new Map();
+  for (const [role, secret] of Object.entries(researchTokens)) {
+    if (!isLoopback(host) || token.length < 24 || !Object.hasOwn(roles, role)
+      || typeof secret !== 'string' || !/^[!-~]{24,}$/.test(secret) || credentials.has(secret)) {
+      throw new Error('Scoped workers require a loopback coordinator and distinct strong credentials');
+    }
+    credentials.add(secret);
+    researchWorkers.set('research-' + role, {id:'research-' + role, role, authorization:'Bearer ' + secret});
+  }
   if(!isLoopback(host)&&token.length<24)throw new Error('Non-loopback binding requires SWARM_TOKEN (at least 24 characters)');
   const allowedOrigins=new Set(options.allowedOrigins||String(process.env.SWARM_ALLOWED_ORIGINS||'http://127.0.0.1:5173,http://localhost:5173,https://raconiy.github.io,https://westlake-flora-lab-yungu.sableborage.chatgpt.site').split(',').map(v=>v.trim()).filter(Boolean));
   const leaseSeconds=options.leaseSeconds??60;
@@ -54,12 +78,25 @@ export function createCoordinator(options={}) {
     if (!db.prepare('PRAGMA table_info(workers)').all().some(column => column.name === 'roles')) {
       db.exec("ALTER TABLE workers ADD COLUMN roles TEXT NOT NULL DEFAULT '[]'");
     }
+    if (!db.prepare('PRAGMA table_info(workers)').all().some(column => column.name === 'kinds')) {
+      db.exec(`ALTER TABLE workers ADD COLUMN kinds TEXT NOT NULL DEFAULT '["code","research"]'`);
+    }
     db.exec(`CREATE UNIQUE INDEX IF NOT EXISTS task_submission_key ON tasks(request_key) WHERE request_key IS NOT NULL;
              CREATE INDEX IF NOT EXISTS task_role_queue ON tasks(role, status, created_at);`);
   });
   function validRole(role) {
     if (typeof role !== 'string' || !Object.hasOwn(roles, role)) throw new ApiError(400, 'Unknown task role');
     return role;
+  }
+  function researchExcerpt(result) {
+    const excerpt = {summary:String(result.artifact.summary ?? result.summary ?? '').slice(0,350), records:[]};
+    const records = Array.isArray(result.artifact.records) ? result.artifact.records.slice(0,3) : [];
+    for (const record of records) {
+      const text = JSON.stringify(record);
+      excerpt.records.push(text.length > 800 ? {excerpt:text.slice(0,350) + '…'} : record);
+      if (JSON.stringify(excerpt).length > 3200) { excerpt.records.pop(); break; }
+    }
+    return JSON.stringify(excerpt);
   }
   function compactDelivery(row) {
     const result = JSON.parse(row.result || '{}');
@@ -68,6 +105,9 @@ export function createCoordinator(options={}) {
       validationStatus:result.validationStatus ?? null, merged:result.merged === true,
       mergeCommit:result.mergeCommit ?? null, outputSha256:result.fullOutput?.sha256 ?? null,
       changes:String(result.changes || '').slice(0,700),
+      ...(result.kind === 'research_artifact' && row.kind === 'research' && result.validationStatus === 'research_artifact_received' && result.artifact ? {
+        artifactExcerpt: researchExcerpt(result),
+      } : {}),
     };
   }
   function deliveries(row) {
@@ -117,7 +157,7 @@ export function createCoordinator(options={}) {
     return publicTask(db.prepare('SELECT * FROM tasks WHERE id=?').get(id));
   }
   const workerExists=id=>{
-    const worker=typeof id==='string' && db.prepare('SELECT id,roles FROM workers WHERE id=?').get(id);
+    const worker=typeof id==='string' && db.prepare('SELECT id,roles,kinds FROM workers WHERE id=?').get(id);
     if(!worker)throw new ApiError(404,'Unknown worker; register first');
     return worker;
   };
@@ -133,46 +173,88 @@ export function createCoordinator(options={}) {
       const origin=req.headers.origin;
       if(origin){let same=false;try{const u=new URL(origin);same=isLoopback(host)&&isLoopback(u.hostname)&&u.port===String(server.address()?.port)&&u.protocol==='http:';}catch{}if(!same&&!allowedOrigins.has(origin))throw new ApiError(403,'Origin rejected');res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');}
       if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization',...(origin?{'Access-Control-Allow-Private-Network':'true'}:{})});res.end();return;}
-      if(token&&!safeEqual(req.headers.authorization||'',`Bearer ${token}`))throw new ApiError(401,'Bearer token required');
+      const authorization = req.headers.authorization || '';
+      let scope;
+      if (token && !safeEqual(authorization, 'Bearer ' + token)) {
+        scope = [...researchWorkers.values()].find(worker => safeEqual(authorization, worker.authorization));
+        if (!scope) throw new ApiError(401, 'Bearer token required');
+      }
       const url=new URL(req.url,'http://localhost');const path=url.pathname;
+      const heartbeat=path.match(/^\/api\/workers\/([^/]+)\/heartbeat$/);
+      const complete=path.match(/^\/api\/tasks\/([^/]+)\/complete$/);
+      if (scope && (req.method !== 'POST' || !(path === '/api/workers/register' || path === '/api/lease'
+        || (heartbeat && decodeURIComponent(heartbeat[1]) === scope.id) || complete))) {
+        throw new ApiError(403, 'Worker credential is not authorized for this route');
+      }
       if(req.method==='GET'&&path==='/api/health'){
         expire();let gateway=null;
         if(modelBackend==='gpt-load'){
           try{const state=await gatewayStatus();gateway={ok:true,group:state.group,connectedAccounts:state.connectedDistinctAccounts,availableAccounts:state.credentials.filter(c=>c.status==='available').length,requiredAccounts:state.requiredDistinctAccounts,fiveAccountRequirementMet:state.fiveAccountRequirementMet};}
           catch{gateway={ok:false,error:'GPT-Load status unavailable'};}
         }
+        if(modelBackend==='research-only')return reply(200,{ok:true,mode:'research_artifacts',modelBackend,model:'gpt-6.1-sol',reasoningEffort:'high',acceptedWorkerKinds:['research'],shellExecution:false,storage:'sqlite',leaseSeconds});
         return reply(200,{ok:true,mode:'codex-cli',modelBackend,model:modelBackend==='gpt-load'?(process.env.SWARM_GPT_LOAD_MODEL||'gpt-6.1-sol'):null,reasoningEffort:modelBackend==='gpt-load'?(process.env.SWARM_MODEL_REASONING_EFFORT||'high'):null,gateway,chatBusy,storage:'sqlite',leaseSeconds});
       }
       if(req.method==='GET'&&path==='/api/tasks'){expire();return reply(200,{tasks:db.prepare('SELECT * FROM tasks ORDER BY created_at DESC LIMIT 200').all().map(publicTask)});}
-      if(req.method==='GET'&&path==='/api/workers'){return reply(200,{workers:db.prepare('SELECT * FROM workers ORDER BY registered_at').all().map(w=>({id:w.id,label:w.label,roles:JSON.parse(w.roles),lastSeen:w.last_seen,online:now()-w.last_seen<45000}))});}
+      if(req.method==='GET'&&path==='/api/workers'){return reply(200,{workers:db.prepare('SELECT * FROM workers ORDER BY registered_at').all().map(w=>({id:w.id,label:w.label,roles:JSON.parse(w.roles),kinds:JSON.parse(w.kinds),lastSeen:w.last_seen,online:now()-w.last_seen<45000}))});}
       if(req.method==='GET'&&path==='/api/snapshots')return reply(200,{snapshots:db.prepare('SELECT * FROM snapshots ORDER BY created_at DESC LIMIT 200').all().map(s=>({id:s.id,label:s.label,scenario:JSON.parse(s.scenario),createdAt:s.created_at}))});
       if(req.method==='GET'&&path==='/api/messages')return reply(200,{messages:db.prepare('SELECT role,content,created_at AS createdAt FROM messages ORDER BY created_at DESC LIMIT 60').all().reverse()});
       if(req.method!=='POST')throw new ApiError(404,'Unknown route');
       if(!String(req.headers['content-type']||'').startsWith('application/json'))throw new ApiError(415,'Use application/json');
       const b=await body(req);
+      if (path === '/api/workers/register' || path === '/api/lease' || heartbeat || complete) {
+        const id = path === '/api/workers/register' ? (b.id ?? scope?.id)
+          : heartbeat ? decodeURIComponent(heartbeat[1]) : b.workerId;
+        if ((scope && id !== scope.id) || (!scope && researchWorkers.has(id))) {
+          throw new ApiError(403, 'Worker identity does not match its credential');
+        }
+      }
       if(path==='/api/snapshots'){const label=validText(b.label,'snapshot label',200);if(!b.scenario||typeof b.scenario!=='object'||Array.isArray(b.scenario))throw new ApiError(400,'scenario must be object');const scenario=JSON.stringify(b.scenario);if(scenario.length>32000)throw new ApiError(400,'Scenario too large');const snapshot={id:randomUUID(),label,scenario:b.scenario,createdAt:now()};db.prepare('INSERT INTO snapshots VALUES(?,?,?,?)').run(snapshot.id,label,scenario,snapshot.createdAt);return reply(201,{snapshot});}
       const cancel=path.match(/^\/api\/tasks\/([^/]+)\/cancel$/);
       if(cancel){const id=decodeURIComponent(cancel[1]),task=db.prepare('SELECT * FROM tasks WHERE id=?').get(id);if(!task)throw new ApiError(404,'Unknown task');if(!['queued','leased'].includes(task.status))throw new ApiError(409,'Task already terminal');db.prepare("UPDATE tasks SET status='cancelled',lease_token=NULL,lease_until=NULL,updated_at=? WHERE id=?").run(now(),id);return reply(200,{task:publicTask(db.prepare('SELECT * FROM tasks WHERE id=?').get(id))});}
       if(path==='/api/suggestions')return reply(201,{task:transaction(()=>enqueue(b))});
       if(path==='/api/workers/register'){
-        const id=b.id?validText(b.id,'worker id',100):randomUUID(),label=validText(b.label||id,'worker label',100),t=now();
-        const assigned=b.roles ?? (b.role == null ? [] : [b.role]);
+        const id=b.id?validText(b.id,'worker id',100):(scope?.id ?? randomUUID()),label=validText(b.label||id,'worker label',100),t=now();
+        const assigned=b.roles ?? (b.role == null ? (scope ? [scope.role] : []) : [b.role]);
         if(!Array.isArray(assigned) || assigned.length>Object.keys(roles).length) throw new ApiError(400,'Invalid worker roles');
         const accepted=[...new Set(assigned.map(validRole))];
-        db.prepare(`INSERT INTO workers(id,label,registered_at,last_seen,roles) VALUES(?,?,?,?,?)
-                    ON CONFLICT(id) DO UPDATE SET label=excluded.label,last_seen=excluded.last_seen,roles=excluded.roles`).run(id,label,t,t,JSON.stringify(accepted));
-        return reply(200,{worker:{id,label,roles:accepted},leaseSeconds});
+        const kinds = b.kinds ?? (scope ? ['research'] : ['code','research']);
+        if (!Array.isArray(kinds) || !kinds.length || kinds.some(kind => !['code','research'].includes(kind))) {
+          throw new ApiError(400, 'Invalid worker kinds');
+        }
+        if (scope && (accepted.length !== 1 || accepted[0] !== scope.role || kinds.length !== 1 || kinds[0] !== 'research')) {
+          throw new ApiError(403, 'Worker registration exceeds credential scope');
+        }
+        db.prepare(`INSERT INTO workers(id,label,registered_at,last_seen,roles,kinds) VALUES(?,?,?,?,?,?)
+                    ON CONFLICT(id) DO UPDATE SET label=excluded.label,last_seen=excluded.last_seen,roles=excluded.roles,kinds=excluded.kinds`).run(id,label,t,t,JSON.stringify(accepted),JSON.stringify(kinds));
+        return reply(200,{worker:{id,label,roles:accepted,kinds},leaseSeconds});
       }
-      const heartbeat=path.match(/^\/api\/workers\/([^/]+)\/heartbeat$/);
-      if(heartbeat){const id=decodeURIComponent(heartbeat[1]);workerExists(id);if(b.taskId){checkLease(b.taskId,id,b.leaseToken);db.prepare('UPDATE tasks SET lease_until=?,updated_at=? WHERE id=?').run(now()+leaseSeconds*1000,now(),b.taskId);}db.prepare('UPDATE workers SET last_seen=? WHERE id=?').run(now(),id);return reply(200,{ok:true});}
+      const checkAuthorizedLease = (taskId,workerId) => {
+        const leased = checkLease(taskId,workerId,b.leaseToken);
+        if (scope && (leased.kind !== 'research' || leased.role !== scope.role)) throw new ApiError(403,'Lease is outside worker scope');
+      };
+      if (heartbeat) {
+        const id=decodeURIComponent(heartbeat[1]);
+        transaction(() => {
+          workerExists(id);
+          if (b.taskId) {
+            checkAuthorizedLease(b.taskId,id);
+            db.prepare('UPDATE tasks SET lease_until=?,updated_at=? WHERE id=?').run(now()+leaseSeconds*1000,now(),b.taskId);
+          }
+          db.prepare('UPDATE workers SET last_seen=? WHERE id=?').run(now(),id);
+        });
+        return reply(200,{ok:true});
+      }
       if(path==='/api/lease'){
         const task=transaction(()=>{
           expire();
           const worker=workerExists(b.workerId);
           if(db.prepare("SELECT id FROM tasks WHERE worker_id=? AND status='leased'").get(b.workerId))throw new ApiError(409,'Worker concurrency is limited to one task');
           const row=db.prepare(`SELECT * FROM tasks WHERE status='queued'
+            AND kind IN (SELECT value FROM json_each(?))
             AND (role IS NULL OR role IN (SELECT value FROM json_each(?)))
-            ORDER BY (role IS NULL),created_at,id LIMIT 1`).get(worker.roles);
+            AND (? IS NULL OR (role=? AND kind='research'))
+            ORDER BY (role IS NULL),created_at,id LIMIT 1`).get(worker.kinds,worker.roles,scope?.role ?? null,scope?.role ?? null);
           if(!row)return null;
           const leaseToken=randomUUID(),t=now();
           db.prepare("UPDATE tasks SET status='leased',worker_id=?,lease_token=?,lease_until=?,attempts=attempts+1,updated_at=? WHERE id=?").run(b.workerId,leaseToken,t+leaseSeconds*1000,t,row.id);
@@ -181,9 +263,38 @@ export function createCoordinator(options={}) {
         });
         return reply(200,{task,leaseSeconds});
       }
-      const complete=path.match(/^\/api\/tasks\/([^/]+)\/complete$/);
-      if(complete){const id=decodeURIComponent(complete[1]);checkLease(id,b.workerId,b.leaseToken);if(!['completed','failed','validation_failed'].includes(b.status))throw new ApiError(400,'Invalid completion status');if(!b.result||typeof b.result!=='object'||Array.isArray(b.result))throw new ApiError(400,'result must be an object');db.prepare('UPDATE tasks SET status=?,result=?,lease_token=NULL,lease_until=NULL,updated_at=? WHERE id=?').run(b.status,JSON.stringify(b.result),now(),id);return reply(200,{task:publicTask(db.prepare('SELECT * FROM tasks WHERE id=?').get(id))});}
+      if (complete) {
+        const id = decodeURIComponent(complete[1]);
+        if (!['completed','failed','validation_failed'].includes(b.status)) throw new ApiError(400,'Invalid completion status');
+        const result = b.result;
+        if (!result || typeof result !== 'object' || Array.isArray(result)) throw new ApiError(400,'result must be an object');
+        if (scope) {
+          // Restricted workers can only attest to the data they produced.
+          if (result.merged || result.mergeCommit || result.deploymentUrl || result.releaseApproved || result.reviewStatus || result.worktree) {
+            throw new ApiError(400,'Research results cannot attest to code or release');
+          }
+          if (b.status === 'completed') {
+            if (result.kind !== 'research_artifact' || !result.artifact || typeof result.artifact !== 'object'
+              || Array.isArray(result.artifact) || !Object.keys(result.artifact).length || typeof result.summary !== 'string' || !result.summary.trim()
+              || result.model !== 'gpt-6.1-sol' || result.reasoningEffort !== 'high' || !Number.isSafeInteger(result.usage?.input_tokens)
+              || result.usage.input_tokens < 1 || !Number.isSafeInteger(result.usage.output_tokens) || result.usage.output_tokens < 1) {
+              throw new ApiError(400,'Expected research artifact and model usage receipt');
+            }
+          }
+          result.validationStatus = b.status === 'completed' ? 'research_artifact_received' : 'not_completed';
+          result.merged = false;
+          result.releaseApproved = false;
+        }
+        const task = transaction(() => {
+          checkAuthorizedLease(id,b.workerId);
+          db.prepare('UPDATE tasks SET status=?,result=?,lease_token=NULL,lease_until=NULL,updated_at=? WHERE id=?')
+            .run(b.status,JSON.stringify(result),now(),id);
+          return publicTask(db.prepare('SELECT * FROM tasks WHERE id=?').get(id));
+        });
+        return reply(200,{task});
+      }
       if(path==='/api/chat'){
+        if(modelBackend==='research-only')throw new ApiError(405,'Use the public community assistant for chat');
         const message=validText(b.message,'message',12000);rejectSecrets(message);if(chatBusy)throw new ApiError(429,'Assistant busy; retry after current response');
         const history=Array.isArray(b.history)?b.history.slice(-12).map(m=>({role:['user','assistant'].includes(m.role)?m.role:'user',content:validText(m.content,'history content',8000)})):[];
         for(const entry of history)rejectSecrets(entry.content);

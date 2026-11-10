@@ -134,3 +134,73 @@ test('launcher assigns all five responsibilities with a full or reduced pool',as
     assert.deepEqual(allocations.flat().sort(),[...roleIds].sort());
   }
 });
+
+test('role bearers register a single research identity and cannot access management routes',async t=>{
+  const token = 'a'.repeat(32);
+  const researchTokens = {botany:'b'.repeat(32),physics:'p'.repeat(32)};
+  const {req} = await start(t,{token,researchTokens});
+  const auth = {Authorization:'Bearer ' + token};
+  const botany = {Authorization:'Bearer ' + researchTokens.botany};
+  const physics = {Authorization:'Bearer ' + researchTokens.physics};
+  assert.equal((await req('/api/tasks',undefined,botany)).status,403);
+  assert.equal((await req('/api/workers',undefined,physics)).status,403);
+  assert.equal((await req('/api/health',undefined,botany)).status,403);
+  assert.equal((await req('/api/suggestions',{text:'seed'},botany)).status,403);
+  assert.equal((await req('/api/chat',{message:'seed'},botany)).status,403);
+  assert.equal((await req('/api/workers/register',{id:'research-physics'},botany)).status,403);
+  assert.equal((await req('/api/workers/register',{roles:['qa']},botany)).status,403);
+  assert.equal((await req('/api/workers/register',{kinds:['code']},botany)).status,403);
+  assert.equal((await req('/api/workers/register',{id:'research-physics'},auth)).status,403);
+  const registered = (await req('/api/workers/register',{},botany)).data.worker;
+  assert.deepEqual(registered,{id:'research-botany',label:'research-botany',roles:['botany'],kinds:['research']});
+  await req('/api/workers/register',{},physics);
+  assert.equal((await req('/api/lease',{workerId:registered.id},physics)).status,403);
+  assert.equal((await req('/api/workers/research-botany/heartbeat',{},physics)).status,403);
+  assert.equal((await req('/api/workers/research-botany/heartbeat',{},botany)).status,200);
+  assert.deepEqual((await req('/api/workers',undefined,auth)).data.workers[0].kinds,['research']);
+  assert.throws(()=>createCoordinator({dbPath:':memory:',token,researchTokens:{botany:token}}));
+  assert.throws(()=>createCoordinator({dbPath:':memory:',token,researchTokens,host:'0.0.0.0'}));
+  assert.throws(()=>createCoordinator({dbPath:':memory:',researchTokens}));
+});
+
+test('research leases filter kind and role atomically; release claims are rejected and artifacts pass to reviewers',async t=>{
+  const token = 'a'.repeat(32);
+  const researchTokens = {botany:'b'.repeat(32),qa:'q'.repeat(32)};
+  const {app,req} = await start(t,{token,researchTokens});
+  const admin={Authorization:'Bearer '+token};
+  const submit=async(text,role,kind,extra={})=>(await req('/api/suggestions',{text,role,kind,...extra},admin)).data.task;
+  const headers=role=>({Authorization:'Bearer '+researchTokens[role]});
+  const lease=async role=>(await req('/api/lease',{workerId:'research-'+role},headers(role))).data.task;
+  for(const role of Object.keys(researchTokens)) await req('/api/workers/register',{},headers(role));
+  const code=await submit('Older code assignment','botany','code');
+  await submit('Unassigned research',null,'research');
+  const research=await submit('Leaf retention examples','botany','research');
+  // A restored, overbroad registration must not widen the role bearer at lease time.
+  app.db.prepare('UPDATE workers SET roles=?,kinds=? WHERE id=?')
+    .run(JSON.stringify(['botany','qa']),JSON.stringify(['code','research']),'research-botany');
+  const [task,other]=await Promise.all([lease('botany'),lease('qa')]);
+  assert.equal(task.id,research.id);
+  assert.equal(other,null);
+  const complete = (result,role='botany')=>req('/api/tasks/'+task.id+'/complete',{
+    workerId:'research-botany',leaseToken:task.leaseToken,status:'completed',result,
+  },headers(role));
+  const result={kind:'research_artifact',artifact:{records:[{organ:'leaf'}]},summary:'staged leaf persistence',
+    model:'gpt-6.1-sol',reasoningEffort:'high',usage:{input_tokens:10,output_tokens:50}};
+  assert.equal((await complete(result,'qa')).status,403);
+  assert.equal((await complete({...result,kind:'code'})).status,400);
+  assert.equal((await complete({...result,merged:true})).status,400);
+  assert.equal((await complete({...result,deploymentUrl:'https://example.invalid'})).status,400);
+  assert.equal((await complete({...result,usage:null})).status,400);
+  const done=await complete(result);
+  assert.equal(done.status,200);
+  assert.equal(done.data.task.result.validationStatus,'research_artifact_received');
+  assert.equal(done.data.task.result.releaseApproved,false);
+  assert.equal(await lease('botany'),null);
+  const review=await submit('Compare leaf and wood persistence','qa','research',{handoffFrom:[research.id]});
+  const reviewLease=await lease('qa');
+  assert.equal(reviewLease.id,review.id);
+  assert.deepEqual(JSON.parse(reviewLease.priorDeliveries[0].artifactExcerpt).records,[{organ:'leaf'}]);
+  assert.equal((await req('/api/tasks',undefined,admin)).data.tasks.find(t=>t.id===code.id).attempts,0);
+  await req('/api/workers/register',{id:'legacy',roles:['botany']},admin);
+  assert.equal((await req('/api/lease',{workerId:'legacy'},admin)).data.task.id,code.id);
+});

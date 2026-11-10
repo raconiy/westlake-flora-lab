@@ -1,0 +1,35 @@
+[Unit]
+Description=Westlake private research task coordinator
+After=network.target
+
+[Service]
+User=westlake-research-coord
+Group=westlake-research-coord
+StateDirectory=westlake-research-coordinator
+StateDirectoryMode=0700
+UMask=0077
+LoadCredential=admin-token:/etc/westlake-swarm/admin-token
+LoadCredential=role-tokens:/etc/westlake-swarm/role-tokens.json
+Environment=SWARM_TOKEN_FILE=%d/admin-token SWARM_RESEARCH_TOKENS_FILE=%d/role-tokens
+ExecStart=/usr/bin/node /opt/westlake-swarm/research/infra/research/coordinator.mjs
+Restart=on-failure
+RestartSec=4
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+ProtectProc=invisible
+RestrictAddressFamilies=AF_INET AF_UNIX
+IPAddressDeny=any
+IPAddressAllow=localhost
+MemoryMax=220M
+TasksMax=32
+
+[Install]
+WantedBy=multi-user.target

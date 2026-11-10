@@ -24,7 +24,7 @@ jobs:
       # The publish gate runs the changed-physics, lifecycle, feedback and
       # root-contact suites so CI stays within the runner time limit.
       - run: npm test
-      - run: node --test infra/local/test/*.test.mjs infra/community/test/*.test.mjs infra/remote/*.test.mjs
+      - run: node --test infra/local/test/*.test.mjs infra/community/test/*.test.mjs infra/remote/*.test.mjs infra/research/*.test.mjs
       - run: npm run build
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9

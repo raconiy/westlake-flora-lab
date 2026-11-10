@@ -1,0 +1,35 @@
+[Unit]
+Description=Westlake data artifact worker (%i)
+Wants=westlake-research-coordinator.service westlake-research-infer.service
+After=westlake-research-coordinator.service westlake-research-infer.service
+
+[Service]
+User=westlake-r-%i
+Group=westlake-r-%i
+SupplementaryGroups=westlake-research-client
+StateDirectory=westlake-research-%i
+StateDirectoryMode=0700
+UMask=0077
+LoadCredential=worker-token:/etc/westlake-swarm/roles/%i
+ExecStart=/usr/bin/node --permission --allow-fs-read=/opt/westlake-swarm/research/infra/research --allow-fs-read=%d/worker-token --allow-fs-read=/var/lib/westlake-research-%i --allow-fs-write=/var/lib/westlake-research-%i /opt/westlake-swarm/research/infra/research/worker.mjs %i
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+ProtectProc=invisible
+RestrictAddressFamilies=AF_INET AF_UNIX
+IPAddressDeny=any
+IPAddressAllow=localhost
+MemoryMax=160M
+TasksMax=32
+
+[Install]
+WantedBy=multi-user.target
