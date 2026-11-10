@@ -39,13 +39,53 @@ async function finishLease(db,id,token,answer,proposals,error){
  return result.meta.changes===1;
 }
 
-async function chatHistory(db,sid,id){
- const previous=await db.prepare("SELECT input,reply FROM community_jobs WHERE session_id=? AND kind='chat' AND status='completed' AND id<>? ORDER BY created_at DESC LIMIT 6").bind(sid,id).all();
+async function chatHistory(db,sid,id,through=Date.now()){
+ const previous=await db.prepare("SELECT input,reply FROM community_jobs WHERE session_id=? AND kind='chat' AND status='completed' AND id<>? AND updated_at<=? ORDER BY created_at DESC,id DESC LIMIT 6").bind(sid,id,through).all();
  return previous.results.reverse().flatMap(r=>[{role:'user',content:r.input},{role:'assistant',content:r.reply}]);
 }
 
 function parseProposals(list){
  return Array.isArray(list)?list.slice(0,5).map(p=>({title:text(p?.title,200),prompt:text(p?.prompt,8000),kind:p?.kind==='code'?'code':'research'})):[];
+}
+
+// A push lease belongs exclusively to the durable remote job. A timeout may
+// lose the acknowledgement, so every recovery addresses the very same UUID.
+async function syncRemoteJob(db,env,row,submit=false){
+ if(row?.status!=='running'||!row.lease_token?.startsWith('push:'))return;
+ const now=Date.now();
+ if(!submit){
+  const lock=await db.prepare("UPDATE community_jobs SET updated_at=? WHERE id=? AND status='running' AND lease_token=? AND updated_at<=? AND lease_until>?")
+   .bind(now,row.id,row.lease_token,now-3000,now).run();
+  if(lock.meta.changes!==1)return;
+ }
+ const url=env.REMOTE_RELAY_URL.replace(/\/$/,'')+'/jobs/'+encodeURIComponent(row.id);
+ const headers={authorization:'Bearer '+env.REMOTE_RELAY_TOKEN,'content-type':'application/json'};
+ const send=async(init={})=>fetch(url,{...init,headers,redirect:'error',signal:AbortSignal.timeout(3800)});
+ try{
+  let result=submit?null:await send();
+  if(!result||result.status===404){
+   const history=row.kind==='chat'?await chatHistory(db,row.session_id,row.id,row.created_at):[];
+   const payload={input:row.input,scenario:JSON.parse(row.scenario),kind:row.kind,history:[]};
+   const bytes=v=>new TextEncoder().encode(JSON.stringify(v)).length;
+   if(bytes(payload)>17500){await finishLease(db,row.id,row.lease_token,null,[],'问题和场景合计过长，请缩短后重新提交。');return;}
+   for(let i=history.length-2;i>=0;i-=2){
+    const candidate=[...history.slice(i,i+2),...payload.history];
+    if(bytes({...payload,history:candidate})>17500)break;
+    payload.history=candidate;
+   }
+   result=await send({method:'POST',body:JSON.stringify(payload)});
+  }
+  if(!result.ok)return;
+  const value=await result.json();
+  if(value.status==='completed')await finishLease(db,row.id,row.lease_token,text(value.reply,16000),parseProposals(value.suggestions),null);
+  if(value.status==='failed')await finishLease(db,row.id,row.lease_token,null,[],'模型任务未能完成，请联系主控核查这条记录。');
+ }catch{ /* D1 retains the lease. The next poll recovers through the same UUID. */ }
+}
+async function syncOldestPush(db,env,kind){
+ const now=Date.now();
+ const row=await db.prepare("SELECT * FROM community_jobs WHERE status='running' AND lease_token LIKE 'push:%' AND updated_at<=? AND lease_until>? AND (? IS NULL OR kind=?) ORDER BY updated_at LIMIT 1")
+  .bind(now-3000,now,kind,kind).first();
+ if(row)await syncRemoteJob(db,env,row);
 }
 
 async function completeRemotely(db,env,{id,sid,token,input,scenarioValue,isSuggestion}){
@@ -90,19 +130,24 @@ export default {async fetch(request,env,ctx){
   const rate=async(key,max,window=60000)=>{const bucket=Math.floor(now/window);const row=await db.prepare('INSERT INTO community_rate(key,count,expires_at) VALUES(?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1 RETURNING count').bind(key+':'+bucket,now+window*2).first();if(row.count>max)throw new ApiError(429,'提交较频繁，请稍后再试');};
   const body=async()=>{if(!request.headers.get('content-type')?.startsWith('application/json'))throw new ApiError(415,'请使用 JSON');if(Number(request.headers.get('content-length')||0)>18000)throw new ApiError(413,'请求过大');const reader=request.body?.getReader();let size=0,chunks=[];if(reader)while(true){const {value,done}=await reader.read();if(done)break;size+=value.length;if(size>18000){await reader.cancel();throw new ApiError(413,'请求过大');}chunks.push(value);}const data=new Uint8Array(size);let n=0;for(const c of chunks){data.set(c,n);n+=c.length;}try{const b=JSON.parse(new TextDecoder().decode(data)||'{}');if(!b||typeof b!=='object'||Array.isArray(b))throw 0;return b;}catch{throw new ApiError(400,'JSON 格式错误');}};
   const remoteHealth=async()=>{if(!env.REMOTE_RELAY_URL||!env.REMOTE_RELAY_TOKEN)return null;try{const r=await fetch(`${env.REMOTE_RELAY_URL.replace(/\/$/,'')}/health`,{signal:AbortSignal.timeout(2500)});if(!r.ok)return null;return await r.json();}catch{return null;}};
+  const push=env.REMOTE_JOB_API==='durable-v1'&&!!env.REMOTE_RELAY_URL&&!!env.REMOTE_RELAY_TOKEN;
   const relayState=async()=>{
    const row=await db.prepare('SELECT * FROM community_relay WHERE id=?').bind('leader').first();
    const value=row?JSON.parse(row.payload):{},fresh=!!row&&now-row.last_seen<45000;
    return {...value,heartbeatOnline:fresh,online:fresh&&Number(value.availableAccounts)>0&&Number(value.workers)>0,lastSeen:row?.last_seen??null};
   };
   if(method==='GET'&&path==='/health'){
+   if(push){
+    const remote=await remoteHealth();
+    return reply(200,{ok:true,storage:'D1',relay:{model:remote?.model,reasoningEffort:remote?.reasoningEffort,availableAccounts:remote?.availableAccounts??null,transport:'durable',online:remote?.asyncJobs===true&&Number(remote.availableAccounts)>0,lastSeen:remote?.ok?now:null}});
+   }
    const consumer=await relayState();if(consumer.online)return reply(200,{ok:true,storage:'D1',relay:{...consumer,transport:'queue'}});
    const remote=await remoteHealth();
    if(remote?.ok)return reply(200,{ok:true,storage:'D1',relay:{...remote,heartbeatOnline:consumer.heartbeatOnline,online:Number(remote.availableAccounts)>0,transport:'direct',lastSeen:now}});
    return reply(200,{ok:true,storage:'D1',relay:consumer});
   }
   if(method==='GET'&&(path==='/history'||path==='/suggestions'||path.startsWith('/chat/')))await expireJobs(db,now);
-  if(method==='GET'&&path==='/suggestions'){const rows=await db.prepare('SELECT * FROM community_suggestions ORDER BY created_at DESC LIMIT 100').all();return reply(200,{suggestions:rows.results.map(publicSuggestion)});}
+  if(method==='GET'&&path==='/suggestions'){await syncOldestPush(db,env,'triage');const rows=await db.prepare('SELECT * FROM community_suggestions ORDER BY created_at DESC LIMIT 100').all();return reply(200,{suggestions:rows.results.map(publicSuggestion)});}
   if(method==='POST'&&path==='/sessions'){
    if(!secret)throw new ApiError(503,'共享服务尚未配置');await body();
    const ip=await hash(secret+':'+(request.headers.get('cf-connecting-ip')||'unknown'));await rate('sessions:'+ip,12,600000);
@@ -122,14 +167,14 @@ export default {async fetch(request,env,ctx){
    const waiting=await db.prepare("SELECT COUNT(*) AS n FROM community_jobs WHERE status IN ('queued','running')").first();if(waiting.n>=40)throw new ApiError(429,'执行队列已满，请稍后再试');
    await rate('daily-inference',120,86400000);
    const id=random(),suggestionId=isSuggestion?random():null;
-   const direct=env.REMOTE_RELAY_URL&&env.REMOTE_RELAY_TOKEN&&!(await relayState()).online;
-   const token=direct?random():null;
+   const direct=push||env.REMOTE_RELAY_URL&&env.REMOTE_RELAY_TOKEN&&!(await relayState()).online;
+   const token=push?'push:'+random():direct?random():null;
    // D1 executes the batch in one transaction. The count belongs inside the
    // write as several visitors can pass the earlier, cheap admission check.
    const statements=[
     db.prepare(`INSERT INTO community_jobs(id,session_id,suggestion_id,kind,input,scenario,status,created_at,updated_at,idempotency,lease_token,lease_until,attempts)
      SELECT ?,?,?,?,?,?,?,?,?,?,?,?,? WHERE (SELECT count(*) FROM community_jobs WHERE status IN ('queued','running'))<40`)
-     .bind(id,sid,suggestionId,isSuggestion?'triage':'chat',input,s,direct?'running':'queued',now,now,idem,token,direct?now+remoteTimeoutMs+15_000:null,direct?1:0),
+     .bind(id,sid,suggestionId,isSuggestion?'triage':'chat',input,s,direct?'running':'queued',now,now,idem,token,push?now+queueTtlMs:direct?now+remoteTimeoutMs+15_000:null,direct?1:0),
    ];
    if(isSuggestion)statements.push(db.prepare(`INSERT INTO community_suggestions(id,session_id,text,species,scenario,status,created_at,updated_at,idempotency)
     SELECT ?,?,?,?,?,?,?,?,? WHERE EXISTS (SELECT 1 FROM community_jobs WHERE id=?)`)
@@ -143,7 +188,7 @@ export default {async fetch(request,env,ctx){
     throw error;
    }
    if(direct){
-    const work=completeRemotely(db,env,{id,sid,token,input,scenarioValue:s,isSuggestion});
+    const work=push?syncRemoteJob(db,env,{id,session_id:sid,input,scenario:s,kind:isSuggestion?'triage':'chat',status:'running',lease_token:token,created_at:now},true):completeRemotely(db,env,{id,sid,token,input,scenarioValue:s,isSuggestion});
     if(ctx?.waitUntil)ctx.waitUntil(work);else await work;
    }
    if(isSuggestion)return reply(201,{suggestion:publicSuggestion(await db.prepare('SELECT * FROM community_suggestions WHERE id=?').bind(suggestionId).first())});
@@ -152,12 +197,19 @@ export default {async fetch(request,env,ctx){
   }
   if(method==='GET'&&path==='/history'){const sid=await session();const rows=await db.prepare("SELECT * FROM community_jobs WHERE session_id=? AND kind='chat' ORDER BY created_at DESC LIMIT 12").bind(sid).all();return reply(200,{turns:rows.results.reverse().map(r=>({text:r.input,scenario:JSON.parse(r.scenario),job:publicJob(r)}))});}
   const chat=path.match(/^\/chat\/([\w-]+)$/);
-  if(method==='GET'&&chat){const sid=await session(),row=await db.prepare('SELECT * FROM community_jobs WHERE id=? AND session_id=? AND kind=?').bind(chat[1],sid,'chat').first();if(!row)throw new ApiError(404,'对话不存在');return reply(200,{job:publicJob(row)});}
+  if(method==='GET'&&chat){
+   const sid=await session(),query=db.prepare("SELECT * FROM community_jobs WHERE id=? AND session_id=? AND kind='chat'").bind(chat[1],sid);
+   const row=await query.first();if(!row)throw new ApiError(404,'对话不存在');
+   await syncRemoteJob(db,env,row);
+   return reply(200,{job:publicJob(await query.first())});
+  }
   if(!admin)throw new ApiError(401,'需要协调服务授权');
   if(method==='POST'&&path==='/relay/heartbeat'){const b=await body();const config={model:typeof b.model==='string'?b.model.slice(0,50):null,reasoningEffort:b.reasoningEffort==='high'?'high':null,availableAccounts:Math.max(0,Math.min(5,Number(b.availableAccounts)||0)),workers:Math.max(0,Math.min(20,Number(b.workers)||0))};await db.prepare('INSERT INTO community_relay VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,last_seen=excluded.last_seen').bind('leader',JSON.stringify(config),now).run();return reply(200,{ok:true});}
   if(method==='POST'&&path==='/relay/claim'){
    await body();
    await expireJobs(db,now);
+   const sync=syncOldestPush(db,env,null);
+   if(ctx?.waitUntil)ctx.waitUntil(sync);else await sync;
    const token=random();const row=await db.prepare("UPDATE community_jobs SET status='running',lease_token=?,lease_until=?,attempts=attempts+1,updated_at=? WHERE id=(SELECT id FROM community_jobs WHERE status='queued' ORDER BY created_at LIMIT 1) AND status='queued' RETURNING *").bind(token,now+claimMs,now).first();
    if(row?.suggestion_id)await db.prepare("UPDATE community_suggestions SET status='triaging',updated_at=? WHERE id=?").bind(now,row.suggestion_id).run();
    const history=row?.kind==='chat'?await chatHistory(db,row.session_id,row.id):[];

@@ -154,3 +154,46 @@ test('concurrent visitors cannot exceed the queue limit or leave an orphaned sug
  assert.equal(db.prepare('SELECT count(*) AS n FROM community_jobs').get().n,40);
  assert.equal(db.prepare('SELECT count(*) AS n FROM community_suggestions s WHERE NOT EXISTS (SELECT 1 FROM community_jobs j WHERE j.suggestion_id=s.id)').get().n,0);
 });
+
+test('durable push recovers a lost POST acknowledgement without repeating inference or exposing a private answer',async t=>{
+ const {api,session,env,db}=await fixture(),member=await session(),other=await session();
+ Object.assign(env,{REMOTE_RELAY_URL:'https://relay.example',REMOTE_RELAY_TOKEN:'server-token',REMOTE_JOB_API:'durable-v1'});
+ const records=new Map();let posts=0,reads=0;
+ t.mock.method(globalThis,'fetch',async(url,{method,headers,body})=>{
+  const id=new URL(url).pathname.slice('/jobs/'.length);
+  assert.equal(headers.authorization,'Bearer server-token');
+  if(method==='POST'){
+   posts++;assert.equal(JSON.parse(body).kind,'chat');records.set(id,{status:'completed',reply:'枝干锚定在根颈。',suggestions:[]});
+   throw new TypeError('response lost after remote commit');
+  }
+  reads++;return Response.json(records.get(id)||{}, {status:records.has(id)?200:404});
+ });
+ const input={message:'风会改变树的位置吗？',idempotencyKey:'durable-1'};
+ const first=await api('/chat',input,member),id=first.body.job.id;
+ assert.equal(first.status,202);assert.equal(posts,1);
+ assert.equal((await api('/chat',input,member)).body.job.id,id);
+ assert.equal((await api('/chat/'+id,undefined,other)).status,404);
+ db.prepare('UPDATE community_jobs SET updated_at=0 WHERE id=?').run(id);
+ const response=await api('/chat/'+id,undefined,member);
+ assert.equal(response.body.job.status,'completed');assert.equal(response.body.job.reply,'枝干锚定在根颈。');
+ assert.equal(posts,1);assert.equal(reads,1);
+ assert.equal((await api('/relay/claim',{},env.COMMUNITY_RELAY_TOKEN)).body.job,null);
+});
+
+test('a missing durable job is submitted under its original ID and its public suggestion is reconciled once',async t=>{
+ const {api,session,env,db}=await fixture(),member=await session();let tries=0;const ids=new Set();
+ Object.assign(env,{REMOTE_RELAY_URL:'https://relay.example',REMOTE_RELAY_TOKEN:'fixture',REMOTE_JOB_API:'durable-v1'});
+ t.mock.method(globalThis,'fetch',async(url,options)=>{
+  ids.add(new URL(url).pathname);
+  if(options.method!=='POST')return Response.json({}, {status:404});
+  tries++;if(tries===1)throw new TypeError('offline before delivery');
+  const data=JSON.parse(options.body);assert.equal(data.kind,'triage');
+  return Response.json({status:'completed',reply:'记录银杏叶痕问题。',suggestions:[{kind:'code',title:'叶痕',prompt:'保留落叶位点'}]});
+ });
+ const result=await api('/suggestions',{text:'保留银杏叶痕。',idempotencyKey:'durable-suggestion'},member);
+ assert.equal(result.status,201);
+ db.prepare('UPDATE community_jobs SET updated_at=0 WHERE suggestion_id=?').run(result.body.suggestion.id);
+ const board=await api('/suggestions');assert.equal(board.body.suggestions[0].status,'awaiting_review');
+ assert.equal(tries,2);assert.equal(ids.size,1);
+ assert.equal((await api('/relay/review',undefined,env.COMMUNITY_RELAY_TOKEN)).body.suggestions[0].proposals[0].title,'叶痕');
+});
