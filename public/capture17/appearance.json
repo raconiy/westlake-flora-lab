@@ -1,0 +1,76 @@
+{
+  "program": "detail.py",
+  "frame": "published GLB Y-up; metres from a 3.41 m lamp-height assumption",
+  "source": "new optical correspondences triangulated from separately registered photographs, initialized near retained native COLMAP points; no geometry copied from a single image",
+  "referencePhotos": [
+    "01",
+    "03",
+    "05",
+    "06",
+    "08",
+    "10",
+    "12",
+    "13"
+  ],
+  "matchingPhotos": [
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "01",
+    "02",
+    "03",
+    "04"
+  ],
+  "native": {
+    "file": "crown-tracks.bin",
+    "vertices": 187,
+    "sha256": "8f0fb4a0f00c08d5aa58bb3e1cae51acb72b36ec6bbe2a5d656fc7ce13353a74",
+    "counts": {
+      "foreground": 95,
+      "middle": 50,
+      "left": 42
+    },
+    "wood": 58,
+    "stride": 16
+  },
+  "detail": {
+    "file": "crown-detail.bin",
+    "vertices": 1888,
+    "counts": {
+      "foreground": 145,
+      "middle": 749,
+      "left": 994
+    },
+    "wood": 0,
+    "stride": 16,
+    "sha256": "7ae492f8901d91bbbc273c966fae935ed030e6f3356dfc1bc69d003edca95941",
+    "sourceViewsMinMedianMax": [
+      3,
+      5.0,
+      13
+    ],
+    "reprojectionRmsPxMedianMax": [
+      0.6729595956518737,
+      1.096119613524399
+    ],
+    "maximumRayAngleDegMinMedianMax": [
+      1.70001939963597,
+      2.8645020982467257,
+      10.363903198116594
+    ],
+    "projectedBeforeSpatialDedup": 1929,
+    "dedupCellM": 0.035
+  },
+  "limits": [
+    "Only textured visible crown fragments; upper foreground canopy exits capture.",
+    "Manual multi-view regions and geometric neighbor exclusions are approximate at overlapping crowns.",
+    "Distinct photographs can include nearly repeated exposures; a minimum 1.7 degree triangulation angle applies independently.",
+    "Unknown absolute scale; no leaf instances, cultivar identification, hidden branch topology or spectral reflectance inferred."
+  ]
+}

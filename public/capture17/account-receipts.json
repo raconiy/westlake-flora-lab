@@ -1,0 +1,54 @@
+{
+  "model": "gpt-6.1-sol",
+  "effort": "high",
+  "inputMode": "Text transcriptions of photos 01 and last and qualitative observations. No photos or crops were sent to the GPT workers.",
+  "overlapSeconds": 122.137,
+  "requests": [
+    {
+      "role": "botany",
+      "credential": 1,
+      "request": "55de4e5e-ab72-4947-975e-031a1f04606b",
+      "status": 200,
+      "inputTokens": 6141,
+      "outputTokens": 4033,
+      "artifactSha256": "06d9d68501ca81984169f165036774c04b90020ad37ff2084fbed473eff47bef"
+    },
+    {
+      "role": "physics",
+      "credential": 4,
+      "request": "a7f46055-836e-4e44-967d-e91d867c53c6",
+      "status": 200,
+      "inputTokens": 8373,
+      "outputTokens": 4113,
+      "artifactSha256": "997fcc62e1385d2b7e430d6cd10fb3e7e897c33e4835406d16e957a7ceae94a5"
+    },
+    {
+      "role": "scene",
+      "credential": 5,
+      "request": "e6491ce1-9a00-41e3-b638-650c08808bf5",
+      "status": 200,
+      "inputTokens": 5193,
+      "outputTokens": 4869,
+      "artifactSha256": "ba2e9efc7444b05af1586e33618acc330ee2d9fe69e7147647e3d520be5f06eb"
+    },
+    {
+      "role": "infra",
+      "credential": 2,
+      "request": "ebd364b8-9313-4490-9143-bd3f0c723c29",
+      "status": 200,
+      "inputTokens": 2941,
+      "outputTokens": 3667,
+      "artifactSha256": "bbb07a5964e8d598915402f0dec5cee3c421cd36ac1e8b71fc345fcb16a57889"
+    },
+    {
+      "role": "qa",
+      "credential": 3,
+      "request": "ad2f5657-c723-4d26-a287-8e61ff819380",
+      "status": 200,
+      "inputTokens": 9995,
+      "outputTokens": 3940,
+      "artifactSha256": "2990942d0e12d8827d2ab1293da54bb642064d14622e3da2e8c27f2d0fbec8d9"
+    }
+  ],
+  "outputTokens": 20622
+}
