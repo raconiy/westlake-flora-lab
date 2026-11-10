@@ -3,6 +3,9 @@ import {timingSafeEqual} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
+import {createRequire} from 'node:module';
+
+const require=createRequire(import.meta.url);
 
 const model='gpt-6.1-sol', reasoningEffort='high';
 const bodyLimit=18_000;
@@ -64,11 +67,27 @@ function decode(body,triage){
  return {reply:result.reply.trim(),suggestions};
 }
 
-export function createRelay({token,gatewayToken,gatewayURL='http://127.0.0.1:3001/v1/responses',readAdminKey,fetchImpl=fetch,timeout=150_000,healthTimeout=1700}){
+export function createRelay({token,gatewayToken,gatewayURL='http://127.0.0.1:3001/v1/responses',readAdminKey,fetchImpl=fetch,timeout=150_000,healthTimeout=1700,stateDir}){
  const gateway=new URL(gatewayURL);
  if(!token||!gatewayToken||!['127.0.0.1','localhost','[::1]'].includes(gateway.hostname)||gateway.protocol!=='http:'||gateway.username||gateway.password)throw Error('Invalid local gateway configuration');
- let inFlight=0;
- return http.createServer(async(req,res)=>{
+ let inFlight=0,admitting=0;
+ async function modelReply(job,clientSignal){
+  const deadline=AbortSignal.timeout(timeout);
+  try{
+   const r=await fetchImpl(gateway,{method:'POST',headers:{authorization:'Bearer '+gatewayToken,'content-type':'application/json'},
+    body:JSON.stringify(requestBody(job)),redirect:'error',signal:clientSignal?AbortSignal.any([deadline,clientSignal]):deadline});
+   if(!r.ok){await r.body?.cancel();throw new RelayError(502,'gateway_http_'+r.status);}
+   let result;try{result=await r.json();}catch{throw new RelayError(502,'invalid_upstream_result');}
+   return decode(result,job.kind==='triage');
+  }catch(e){
+   if(deadline.aborted)throw new RelayError(504,'gateway_timeout');
+   if(e instanceof RelayError)throw e;
+   throw new RelayError(502,'gateway_unavailable');
+  }
+ }
+ const jobs=stateDir?require('./relay-jobs.mjs').openJobs({dir:stateDir,hasSlot:()=>inFlight<5,
+  run:async job=>{inFlight++;try{return await modelReply(job);}finally{inFlight--;}}}):null;
+ const server=http.createServer(async(req,res)=>{
   try{
    if(req.method==='GET'&&req.url==='/health'){
     try{
@@ -76,40 +95,48 @@ export function createRelay({token,gatewayToken,gatewayURL='http://127.0.0.1:300
      const r=await fetchImpl(new URL('/api/groups/1/credentials',gateway),{headers:{authorization:'Bearer '+admin},redirect:'error',signal:AbortSignal.timeout(healthTimeout)});
      if(!r.ok){await r.body?.cancel();throw Error('status unavailable');}
      const availableAccounts=countAvailable(await r.json());
-     send(res,200,{ok:true,model,reasoningEffort,availableAccounts,capacitySource:'gpt-load-management'});return;
+     send(res,200,{ok:true,model,reasoningEffort,availableAccounts,capacitySource:'gpt-load-management',...(jobs?{asyncJobs:true}:{})});return;
     }catch{send(res,503,{ok:false,error:'gateway_status_unavailable',availableAccounts:null});return;}
    }
-   if(req.method!=='POST'||req.url!=='/complete')throw new RelayError(404,'not_found');
+   const jobPath=jobs && /^\/jobs\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.exec(req.url);
+   const asyncRoute=jobPath && ['GET','POST'].includes(req.method);
+   if(!asyncRoute && !(req.method==='POST' && req.url==='/complete'))throw new RelayError(404,'not_found');
    if(!authorized(req.headers.authorization,token))throw new RelayError(401,'unauthorized');
+   if(asyncRoute){
+    const id=jobPath[1].toLowerCase();
+    let state;
+    if(req.method==='GET')state=jobs.get(id);
+    else{
+     if(admitting>=16)throw new RelayError(503,'job_admission_busy');
+     admitting++;
+     try{state=jobs.submit(id,await readBody(req));}finally{admitting--;}
+    }
+    if(!state)throw new RelayError(404,'unknown_job');
+    send(res,req.method==='POST'&&['queued','running'].includes(state.status)?202:200,state);return;
+   }
    if(inFlight>=5)throw new RelayError(429,'relay_busy');
    inFlight++;
-   try{
-    const job=await readBody(req);
-    const lost=new AbortController(),deadline=AbortSignal.timeout(timeout);
-    const cancel=()=>{if(!res.writableEnded)lost.abort();};res.once('close',cancel);
-    try{
-     const r=await fetchImpl(gateway,{method:'POST',headers:{authorization:'Bearer '+gatewayToken,'content-type':'application/json'},
-      body:JSON.stringify(requestBody(job)),redirect:'error',signal:AbortSignal.any([deadline,lost.signal])});
-     if(!r.ok){await r.body?.cancel();throw new RelayError(502,'gateway_http_'+r.status);}
-     let result;try{result=await r.json();}catch{throw new RelayError(502,'invalid_upstream_result');}
-     send(res,200,decode(result,job.kind==='triage'));
-    }catch(e){
-     if(deadline.aborted)throw new RelayError(504,'gateway_timeout');
-     if(e instanceof RelayError)throw e;
-     throw new RelayError(502,'gateway_unavailable');
-    }finally{res.removeListener('close',cancel);}
-   }finally{inFlight--;}
-  }catch(e){send(res,e.status||500,{error:e.code||'relay_error'});}
+   const lost=new AbortController();
+   const cancel=()=>{if(!res.writableEnded)lost.abort();};res.once('close',cancel);
+   try{send(res,200,await modelReply(await readBody(req),lost.signal));}
+   finally{res.removeListener('close',cancel);inFlight--;jobs?.wake();}
+  }catch(e){
+   if(e.code==='ERR_SQLITE_ERROR')send(res,503,{error:'job_store_unavailable'});
+   else send(res,e.status||500,{error:e.code||'relay_error'});
+  }
  });
+ server.once('close',()=>jobs?.close());
+ return server;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const port=Number(process.env.RELAY_PORT||80),host=process.env.RELAY_HOST||'127.0.0.1';
+ if(process.env.WESTLAKE_RELAY_STATE_DIR&&!['127.0.0.1','::1'].includes(host))throw Error('Persistent relay requires loopback bind');
  if(!Number.isInteger(port)||port<1||port>65535)throw Error('Invalid relay port');
  const statusKey=process.env.GPT_LOAD_STATUS_KEY_FILE||
   (process.env.CREDENTIALS_DIRECTORY&&resolve(process.env.CREDENTIALS_DIRECTORY,'gateway-status-token'));
  if(!statusKey)throw Error('Missing systemd gateway-status-token credential or GPT_LOAD_STATUS_KEY_FILE');
  const server=createRelay({token:process.env.COMMUNITY_RELAY_TOKEN,gatewayToken:process.env.GPT_LOAD_ACCESS_KEY,
-  gatewayURL:process.env.GPT_LOAD_URL,readAdminKey:async()=>(await readFile(statusKey,'utf8')).trim()});
+  gatewayURL:process.env.GPT_LOAD_URL,stateDir:process.env.WESTLAKE_RELAY_STATE_DIR,readAdminKey:async()=>(await readFile(statusKey,'utf8')).trim()});
  server.headersTimeout=12_000;server.requestTimeout=15_000;
  server.listen(port,host,()=>console.log('Community relay listening at '+host+':'+port));
 }
