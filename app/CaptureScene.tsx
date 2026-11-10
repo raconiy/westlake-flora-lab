@@ -365,7 +365,7 @@ export default function CaptureScene() {
         <a className="capture-contact-link" href={media+'yungu-meadow.glb?v=3'} download>单独下载草叶实例（GLB）</a>
         <a className="capture-contact-link" href={media+'yungu-meadow-full.glb?v=3'} download>下载全密度草坪（离线渲染）</a>
         <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v3/yungu-campus-scene-source-v3.zip">下载 Blender 工程及生成脚本</a>
-        <a className="capture-contact-link" href={media+'account-receipts.json?v=3'} target="_blank" rel="noreferrer">查看五账号任务与调用回执</a>
+        <a className="capture-contact-link" href={media+'account-usage.html#r3-usage'}>查看五账号调用时间与用量</a>
       </div>
     </div>
     {ready && <div className="capture-tools">

@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch private root approvals for completed reconstruction products
+
+[Path]
+PathChanged=/var/lib/westlake-round-approvals/inbox
+Unit=westlake-approved-rounds.service
+
+[Install]
+WantedBy=multi-user.target

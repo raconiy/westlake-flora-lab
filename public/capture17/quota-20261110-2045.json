@@ -1,0 +1,32 @@
+[
+  {
+    "credentialId": 1,
+    "observedAt": "2026-11-10T12:45:05.218Z",
+    "windowSeconds": 604800,
+    "remainingPercent": 100
+  },
+  {
+    "credentialId": 2,
+    "observedAt": "2026-11-10T12:45:10.842Z",
+    "windowSeconds": 604800,
+    "remainingPercent": 100
+  },
+  {
+    "credentialId": 3,
+    "observedAt": "2026-11-10T12:45:17.394Z",
+    "windowSeconds": 604800,
+    "remainingPercent": 27
+  },
+  {
+    "credentialId": 4,
+    "observedAt": "2026-11-10T12:45:25.740Z",
+    "windowSeconds": 604800,
+    "remainingPercent": 97
+  },
+  {
+    "credentialId": 5,
+    "observedAt": "2026-11-10T12:45:35.940Z",
+    "windowSeconds": 604800,
+    "remainingPercent": 97
+  }
+]

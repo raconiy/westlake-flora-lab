@@ -15,7 +15,10 @@
       "requestId": "647eac7d-ecad-47b4-8f2d-7985255de073",
       "credentialId": 3,
       "code": 200,
-      "outputSha256": "9258825e32898a5dd9150cac75b15805b556dce91b3fc3106914be335cc6fd8b"
+      "outputSha256": "9258825e32898a5dd9150cac75b15805b556dce91b3fc3106914be335cc6fd8b",
+      "upstreamAttemptStartMs": 1794309724337,
+      "upstreamAttemptEndMs": 1794309830277,
+      "reasoningTokens": 1552
     },
     {
       "role": "physics",
@@ -26,7 +29,10 @@
       "requestId": "bdd9b400-f39a-4172-8bc5-25d0804a2926",
       "credentialId": 2,
       "code": 200,
-      "outputSha256": "a64559134d34882a6c29142664531159e4ca46e55e93f298a2c4ada89c13514d"
+      "outputSha256": "a64559134d34882a6c29142664531159e4ca46e55e93f298a2c4ada89c13514d",
+      "upstreamAttemptStartMs": 1794309723879,
+      "upstreamAttemptEndMs": 1794309842814,
+      "reasoningTokens": 1948
     },
     {
       "role": "scene",
@@ -37,7 +43,10 @@
       "requestId": "a8e0f565-21be-47a8-b8b0-52c8d48a93a7",
       "credentialId": 4,
       "code": 200,
-      "outputSha256": "cefa46f524b06634afa3fb0aebe06f57e6beeed8d56201ef2ec841c17533361f"
+      "outputSha256": "cefa46f524b06634afa3fb0aebe06f57e6beeed8d56201ef2ec841c17533361f",
+      "upstreamAttemptStartMs": 1794309723850,
+      "upstreamAttemptEndMs": 1794309837745,
+      "reasoningTokens": 1552
     },
     {
       "role": "infra",
@@ -48,7 +57,10 @@
       "requestId": "fd299fc1-e935-4867-ae81-664c5d1fec7f",
       "credentialId": 1,
       "code": 200,
-      "outputSha256": "36769377cedfb3fbfa7214826737d900df078dd9dcae0e9bf55c90af13300c62"
+      "outputSha256": "36769377cedfb3fbfa7214826737d900df078dd9dcae0e9bf55c90af13300c62",
+      "upstreamAttemptStartMs": 1794309725395,
+      "upstreamAttemptEndMs": 1794309828284,
+      "reasoningTokens": 1552
     },
     {
       "role": "qa",
@@ -59,9 +71,14 @@
       "requestId": "9cc90091-90f2-4e1d-8b48-0faf665ae160",
       "credentialId": 5,
       "code": 200,
-      "outputSha256": "c689a374e64f62d51858d32b624c2b9a4bda2f89aa807a563ce9e9247388efe9"
+      "outputSha256": "c689a374e64f62d51858d32b624c2b9a4bda2f89aa807a563ce9e9247388efe9",
+      "upstreamAttemptStartMs": 1794309723848,
+      "upstreamAttemptEndMs": 1794309817048,
+      "reasoningTokens": 1034
     }
   ],
   "totalOutputTokens": 15804,
-  "simulation": "Each role received numeric capture observations. Reconstruction and GPU rendering ran separately."
+  "simulation": "Each role received numeric capture observations. Reconstruction and GPU rendering ran separately.",
+  "intervalSource": "One successful upstream attempt for each credential, from attemptsLog completion time and duration. Times are Unix epoch milliseconds.",
+  "quotaComparison": "The separately observed seven-day percentages cover account-wide activity across a longer interval. This batch has no attributable subscription percentage delta."
 }

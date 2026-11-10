@@ -1,0 +1,249 @@
+{
+  "asOfUtc": "2026-11-10T13:06:36.042875Z",
+  "requests": [
+    {
+      "credentialId": 5,
+      "role": "qa",
+      "stage": "成品分析",
+      "requestId": "379ad677-05a5-4322-8257-e87d151ed502",
+      "statusCode": 200,
+      "outputTokens": 3406,
+      "taskId": "82aa1510-cea4-4c75-b9ee-f7062c636ba3",
+      "parents": [
+        "21cea0dc-17ad-459a-a24c-96b0f4b988ab",
+        "19b6b297-5601-4aaf-8616-49169ffda7c7"
+      ],
+      "startMs": 1794314784564,
+      "endMs": 1794314893169
+    },
+    {
+      "credentialId": 4,
+      "role": "botany",
+      "stage": "成品分析",
+      "requestId": "b6d6a3c0-f674-43d0-9ddc-6c31aead6f4c",
+      "statusCode": 200,
+      "outputTokens": 5040,
+      "taskId": "a170b062-72e7-457d-b754-76bb61951e37",
+      "parents": [
+        "2cec0711-5329-46f9-912b-6e1f223b7197",
+        "21cea0dc-17ad-459a-a24c-96b0f4b988ab"
+      ],
+      "startMs": 1794314785081,
+      "endMs": 1794314912666
+    },
+    {
+      "credentialId": 2,
+      "role": "physics",
+      "stage": "成品分析",
+      "requestId": "c75a275d-87cb-4734-8474-847a46fbdaf5",
+      "statusCode": 200,
+      "outputTokens": 3373,
+      "taskId": "02b0a4eb-86b0-4385-8465-75e518f6d012",
+      "parents": [
+        "ebf1dd94-786e-427b-b076-f553685be260",
+        "2cec0711-5329-46f9-912b-6e1f223b7197"
+      ],
+      "startMs": 1794314785274,
+      "endMs": 1794314871280
+    },
+    {
+      "credentialId": 3,
+      "role": "scene",
+      "stage": "成品分析",
+      "requestId": "295dd62e-6c5e-4538-970a-d1adaeb0d5de",
+      "statusCode": 200,
+      "outputTokens": 3347,
+      "taskId": "86b2b4a6-72cf-4cd4-9357-2a87ef9c4706",
+      "parents": [
+        "19b6b297-5601-4aaf-8616-49169ffda7c7",
+        "2cec0711-5329-46f9-912b-6e1f223b7197"
+      ],
+      "startMs": 1794314785326,
+      "endMs": 1794314867276
+    },
+    {
+      "credentialId": 1,
+      "role": "infra",
+      "stage": "成品分析",
+      "requestId": "e9096df8-011d-4d91-a6ad-8e20caa2bfc8",
+      "statusCode": 200,
+      "outputTokens": 5008,
+      "taskId": "d62e4a54-71e0-43f1-aa8b-f478f0f9e80d",
+      "parents": [
+        "13e35487-f9b4-4e32-8209-8066456c31fd",
+        "21cea0dc-17ad-459a-a24c-96b0f4b988ab"
+      ],
+      "startMs": 1794314785815,
+      "endMs": 1794314936085
+    },
+    {
+      "credentialId": 5,
+      "role": "qa",
+      "stage": "交叉审查",
+      "requestId": "2676cb6a-1e4d-44ff-943e-678d6fc58c10",
+      "statusCode": 200,
+      "outputTokens": 5663,
+      "taskId": "7c796be8-0202-4744-86ed-d63014770578",
+      "parents": [
+        "a170b062-72e7-457d-b754-76bb61951e37",
+        "02b0a4eb-86b0-4385-8465-75e518f6d012",
+        "86b2b4a6-72cf-4cd4-9357-2a87ef9c4706",
+        "d62e4a54-71e0-43f1-aa8b-f478f0f9e80d",
+        "82aa1510-cea4-4c75-b9ee-f7062c636ba3"
+      ],
+      "startMs": 1794314940809,
+      "endMs": 1794315060742
+    },
+    {
+      "credentialId": 4,
+      "role": "botany",
+      "stage": "编写首批规则",
+      "requestId": "05a3b599-6c38-44d1-ba1e-d058acc79101",
+      "statusCode": 200,
+      "outputTokens": 207,
+      "taskId": "8fd8f45b-c2e0-50ba-9164-ab6f89365eae",
+      "parents": [
+        "a170b062-72e7-457d-b754-76bb61951e37",
+        "7c796be8-0202-4744-86ed-d63014770578"
+      ],
+      "startMs": 1794315324600,
+      "endMs": 1794315335747
+    },
+    {
+      "credentialId": 2,
+      "role": "physics",
+      "stage": "编写首批规则",
+      "requestId": "b7b67958-1edd-43ec-bb3f-f541f3a00ef0",
+      "statusCode": 200,
+      "outputTokens": 283,
+      "taskId": "67d09d73-3a15-51ac-a870-f80e499a5dbc",
+      "parents": [
+        "02b0a4eb-86b0-4385-8465-75e518f6d012",
+        "7c796be8-0202-4744-86ed-d63014770578"
+      ],
+      "startMs": 1794315324601,
+      "endMs": 1794315338958
+    },
+    {
+      "credentialId": 3,
+      "role": "infra",
+      "stage": "编写首批规则",
+      "requestId": "c86731c4-9dee-4a2d-98b6-831297b4548b",
+      "statusCode": 200,
+      "outputTokens": 207,
+      "taskId": "24fe2158-ea38-55ea-9c25-d3918b43f1b8",
+      "parents": [
+        "d62e4a54-71e0-43f1-aa8b-f478f0f9e80d",
+        "7c796be8-0202-4744-86ed-d63014770578"
+      ],
+      "startMs": 1794315324605,
+      "endMs": 1794315335430
+    },
+    {
+      "credentialId": 1,
+      "role": "scene",
+      "stage": "编写首批规则",
+      "requestId": "2706cab6-0fad-45de-8b5a-ff24221c129b",
+      "statusCode": 200,
+      "outputTokens": 200,
+      "taskId": "9a64ae13-57b1-55be-a193-695a973138a4",
+      "parents": [
+        "86b2b4a6-72cf-4cd4-9357-2a87ef9c4706",
+        "7c796be8-0202-4744-86ed-d63014770578"
+      ],
+      "startMs": 1794315324606,
+      "endMs": 1794315336114
+    },
+    {
+      "credentialId": 5,
+      "role": "qa",
+      "stage": "编写首批规则",
+      "requestId": "5d45f1c5-71ba-4c51-96a5-d51814f63948",
+      "statusCode": 200,
+      "outputTokens": 254,
+      "taskId": "2733482e-2036-5088-815f-24c1a96749eb",
+      "parents": [
+        "82aa1510-cea4-4c75-b9ee-f7062c636ba3",
+        "7c796be8-0202-4744-86ed-d63014770578"
+      ],
+      "startMs": 1794315324607,
+      "endMs": 1794315337387
+    },
+    {
+      "credentialId": 4,
+      "role": "botany",
+      "stage": "实拍误差工具",
+      "requestId": "603f8396-73bc-490a-991d-50dce79d700f",
+      "statusCode": 200,
+      "outputTokens": 328,
+      "taskId": "16191833-af1d-5714-bb15-a48db77c2977",
+      "parents": [
+        "8fd8f45b-c2e0-50ba-9164-ab6f89365eae",
+        "9a64ae13-57b1-55be-a193-695a973138a4"
+      ],
+      "startMs": 1794315645801,
+      "endMs": 1794315658305
+    },
+    {
+      "credentialId": 2,
+      "role": "physics",
+      "stage": "实拍误差工具",
+      "requestId": "98a650c6-6536-46a6-a3a4-89aa542b8b31",
+      "statusCode": 200,
+      "outputTokens": 304,
+      "taskId": "b0f7b1fd-b501-5498-8fa2-023dc4bc68fb",
+      "parents": [
+        "67d09d73-3a15-51ac-a870-f80e499a5dbc",
+        "8fd8f45b-c2e0-50ba-9164-ab6f89365eae"
+      ],
+      "startMs": 1794315645827,
+      "endMs": 1794315659016
+    },
+    {
+      "credentialId": 3,
+      "role": "infra",
+      "stage": "实拍误差工具",
+      "requestId": "e4763584-2e2a-459d-977c-6b2fcede064f",
+      "statusCode": 200,
+      "outputTokens": 282,
+      "taskId": "42565b03-8495-5b12-a09b-16a4ccabc1f4",
+      "parents": [
+        "24fe2158-ea38-55ea-9c25-d3918b43f1b8",
+        "67d09d73-3a15-51ac-a870-f80e499a5dbc"
+      ],
+      "startMs": 1794315645828,
+      "endMs": 1794315659520
+    },
+    {
+      "credentialId": 1,
+      "role": "qa",
+      "stage": "实拍误差工具",
+      "requestId": "2b2a6625-9952-4ccd-9ebc-342075fc5c8f",
+      "statusCode": 200,
+      "outputTokens": 264,
+      "taskId": "412f9f36-3ec0-54d2-9756-832c2de4d00d",
+      "parents": [
+        "2733482e-2036-5088-815f-24c1a96749eb",
+        "24fe2158-ea38-55ea-9c25-d3918b43f1b8"
+      ],
+      "startMs": 1794315645839,
+      "endMs": 1794315658802
+    },
+    {
+      "credentialId": 5,
+      "role": "scene",
+      "stage": "实拍误差工具",
+      "requestId": "1b8a6032-1a61-4a1b-87da-b15a6f3d8cef",
+      "statusCode": 200,
+      "outputTokens": 197,
+      "taskId": "c2bb17be-a987-58bf-ab33-10e8938c3f3f",
+      "parents": [
+        "9a64ae13-57b1-55be-a193-695a973138a4",
+        "2733482e-2036-5088-815f-24c1a96749eb"
+      ],
+      "startMs": 1794315645840,
+      "endMs": 1794315654337
+    }
+  ],
+  "acceptedArtifacts": 16
+}

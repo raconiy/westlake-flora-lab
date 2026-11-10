@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>云谷草坪 · 账号调用与额度</title>
+  <style>
+    :root{color-scheme:light;font-family:system-ui,"PingFang SC","Microsoft YaHei",sans-serif;color:#1d3529;background:#f7f8f3;font-variant-numeric:tabular-nums}
+    *{box-sizing:border-box}body{margin:0}main{max-width:1040px;margin:auto;padding:clamp(24px,6vw,76px) clamp(16px,4vw,48px)}
+    a{color:#265b45;text-decoration:underline;text-underline-offset:.22em}a:focus-visible,.scroll:focus-visible{outline:2px solid #235e45;outline-offset:3px}
+    h1{font-size:clamp(26px,4vw,40px);line-height:1.22;letter-spacing:-.035em;margin:30px 0 12px}h2{font-size:19px;margin:30px 0 8px}
+    p{line-height:1.65;margin:7px 0}.meta,.note{color:#536455;font-size:14px}
+    .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:24px 0 10px;border-block:1px solid #c7d3c8;padding:18px 0;gap:14px}
+    .metrics dt{font-size:14px}.metrics dd{margin:5px 0 0;font-size:clamp(22px,3.7vw,36px);font-weight:650}.metrics small{font-size:13px;font-weight:450}
+    .scroll{max-width:100%;overflow-x:auto;border:1px solid #cad4c9;border-radius:8px;background:white;margin-top:14px}
+    table{border-collapse:collapse;width:100%;font-size:14px;white-space:nowrap}th,td{padding:11px 12px;text-align:right;border-bottom:1px solid #e1e5dc}
+    tr:last-child td,tr:last-child th[scope=row]{border:0}thead{background:#eaf0e6}th:first-child{text-align:left}th[scope=row]{font-weight:600}
+    #postrender-work details{margin:14px 0}#postrender-work summary{cursor:pointer;color:#265b45}#postrender-list{line-height:1.6}#postrender-list li{margin-bottom:12px;overflow-wrap:anywhere}#postrender-list small{display:block;color:#536455}footer{margin-top:28px;padding-top:15px;border-top:1px solid #c7d3c8} [hidden]{display:none!important}
+    @media(max-width:540px){.metrics{gap:8px;grid-template-columns:1fr}.metrics div{display:flex;justify-content:space-between;align-items:center;gap:8px}.metrics dd{margin:0}th,td{padding:9px 11px}}
+  </style>
+</head>
+<body>
+<main id="r3-usage">
+  <nav><a href="../#reconstruction">返回云谷草坪重建</a> · <a href="#postrender-work">本次接力记录</a></nav>
+  <h1>云谷草坪 · 账号调用与额度</h1>
+  <h2>R3 初次分工</h2>
+  <p id="status" role="status">正在读取本批调用回执…</p>
+  <noscript><p>请打开下方匿名回执查看逐笔记录。</p></noscript>
+  <section id="evidence" hidden aria-label="本批执行记录">
+    <p id="period" class="meta"></p>
+    <dl class="metrics">
+      <div><dt>五账号同时请求</dt><dd><span id="common"></span> <small>秒</small></dd></div>
+      <div><dt>首个请求到最后返回</dt><dd><span id="wall"></span> <small>秒</small></dd></div>
+      <div><dt>五次请求时长合计</dt><dd><span id="sum"></span> <small>账号秒</small></dd></div>
+    </dl>
+    <p class="note" id="occupancy"></p>
+    <h2>各账号的请求</h2>
+    <p id="tokens"></p>
+    <div class="scroll" role="region" aria-label="五账号逐笔调用表，可横向滚动" tabindex="0">
+      <table aria-label="上游成功请求，北京时间"><thead><tr><th scope="col">账号与分工</th><th scope="col">请求数</th><th scope="col">开始</th><th scope="col">返回</th><th scope="col">时长（秒）</th><th scope="col">输入 token</th><th scope="col">输出 token</th><th scope="col">其中推理</th></tr></thead><tbody id="requests"></tbody></table>
+    </div>
+    <p class="note">账号编号来自 GPT-Load 的匿名凭据记录。各次时长包含等待上游响应的时间。每个账号根据采集文字和数值返回一份研究规格，共五份。</p>
+    <h2>本批消耗了多少订阅额度？</h2>
+    <p>上游按账号汇总七天内的所有用量。这五次请求能核对 token，现有读数无法单独算出它们消耗的订阅额度百分点。</p>
+  </section>
+  <section aria-labelledby="quota-title">
+    <h2 id="quota-title">另一次观测 · 七天剩余额度</h2>
+    <p id="quota-status" role="status">正在读取额度快照…</p>
+    <div id="quota-data" hidden>
+      <p id="quota-time" class="note"></p>
+      <div class="scroll" role="region" aria-label="七天剩余额度表" tabindex="0">
+        <table aria-label="各账号七天剩余额度"><thead><tr><th scope="col">匿名账号</th><th scope="col">读取时间（北京时间）</th><th scope="col">七天剩余</th></tr></thead><tbody id="quota-rows"></tbody></table>
+      </div>
+      <p class="note">每行是上游返回的账号整体额度。显示为 100% 的账号在上表中也有成功请求。</p>
+    </div>
+  </section>
+  <section id="postrender-work" aria-labelledby="postrender-heading">
+    <h2 id="postrender-heading">本次接力（不含 R3 初次分工的五笔请求）</h2>
+    <p id="postrender-status" role="status">正在核对后续请求…</p>
+    <div id="postrender-data" hidden>
+      <p id="postrender-summary"></p>
+      <p id="postrender-asof" class="note"></p>
+      <div class="scroll" role="region" aria-label="后续各账号成功次数" tabindex="0">
+        <table aria-label="后续账号汇总"><thead><tr><th scope="col">账号</th><th scope="col">成功请求</th><th scope="col">输出 token</th><th scope="col">参与阶段</th></tr></thead><tbody id="postrender-accounts"></tbody></table>
+      </div>
+      <details><summary>查看逐笔请求与前置任务</summary><ol id="postrender-list"></ol></details>
+      <a href="./postrender-work.json">下载接力回执（JSON）</a>
+      <p class="note">21:08–21:09（北京时间）再次读取七天额度：#1、#2 均剩 100%，#4、#5 均剩 97%。#3 刷新返回 502，最近保存值为 25%，不能当作本次刷新结果。这些是账号总额度。<a href="./quota-after-postrender.json">逐个查看观测时间</a></p>
+      <h2>实拍对照：树冠哪里太密或太稀</h2>
+      <p>三株树、两个相机位，共有 73 块区域能与实拍对照。橙色表示模型挡住了实拍中的天空，蓝色表示模型比实拍稀疏。</p>
+      <a href="./gap-map.jpg"><img src="./gap-map.jpg" loading="lazy" style="width:100%;height:auto" alt="机位 01 和 13 的并排渲染及树冠空隙偏差图。"></a>
+      <p>候选只调整叶片宽度，叶片基点和原有木质节点保持不动。13 号机位前景树冠的可见天隙从 7.61% 变为 8.05%，实拍为 34.48%。候选未通过，线上场景保留原资产。<a href="./gap-review.json">查看区域测量和十段已测试的程序</a></p>
+    </div>
+  </section>
+  <footer><a href="./account-receipts.json">下载 R3 匿名回执（JSON）</a> · <a href="./quota-20261110-2045.json">下载七天额度快照（JSON）</a></footer>
+</main>
+<script type="module" src="./account-usage.mjs"></script>
+</body>
+</html>

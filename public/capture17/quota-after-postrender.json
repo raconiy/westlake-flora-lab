@@ -1,0 +1,42 @@
+[
+  {
+    "credentialId": 1,
+    "windowSeconds": 604800,
+    "remainingPercent": 100,
+    "observedAt": "2026-11-10T13:08:36.534Z",
+    "refreshStatus": 200,
+    "observation": "fresh"
+  },
+  {
+    "credentialId": 2,
+    "windowSeconds": 604800,
+    "remainingPercent": 100,
+    "observedAt": "2026-11-10T13:08:43.088Z",
+    "refreshStatus": 200,
+    "observation": "fresh"
+  },
+  {
+    "credentialId": 3,
+    "windowSeconds": 604800,
+    "remainingPercent": 25,
+    "observedAt": "2026-11-10T13:00:49.232Z",
+    "refreshStatus": 502,
+    "observation": "last_cached_observation"
+  },
+  {
+    "credentialId": 4,
+    "windowSeconds": 604800,
+    "remainingPercent": 97,
+    "observedAt": "2026-11-10T13:08:58.875Z",
+    "refreshStatus": 200,
+    "observation": "fresh"
+  },
+  {
+    "credentialId": 5,
+    "windowSeconds": 604800,
+    "remainingPercent": 97,
+    "observedAt": "2026-11-10T13:09:04.686Z",
+    "refreshStatus": 200,
+    "observation": "fresh"
+  }
+]
