@@ -1,0 +1,218 @@
+import * as THREE from 'three';
+import {isMeadowPoint, meadowBounds} from './capture-meadow-layout.ts';
+
+const cell = .065;                        // metres between candidate tiller groups
+const cellsPerChunk = 30;
+const variants = 4;
+const rootY = -.003107703;                  // decoded plane height of the frozen v2 GLB
+const clearance = .108;                    // includes bent tip, wind deflection and root scatter
+export const meadowSeed = 0x73c103a7;
+const unit = (bits:number) => (bits>>>0)/4294967296;
+function hash(a:number,b:number,seed:number) {
+  let v=Math.imul(a^seed,0x7feb352d)^Math.imul(b^0x635b,0x846ca68b);
+  v=Math.imul(v^(v>>>16),0x85ebca6b);v=Math.imul(v^(v>>>13),0xc2b2ae35);
+  return (v^(v>>>16))>>>0;
+}
+function random(seed:number) {
+  let n=seed;
+  return ()=>{n=(Math.imul(n,1664525)+1013904223)>>>0;return unit(n);};
+}
+const smooth = (a:number,b:number,x:number)=>{const t=THREE.MathUtils.clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+
+// The independent scene-light field comes from the photo-01/02/13 lawn fit.
+function captureLight(x:number,z:number) {
+  const a=x-.36903619,b=-z-.00876927;
+  const s=.77264685*a+.63483608*b, t=.63483608*a-.77264685*b;
+  return (1-smooth(-.2,.2,s))*(1-smooth(7,11,Math.max(-8.1277918-t,t-4.2566911)))*(1-smooth(11,15,-s));
+}
+
+type Chunk={x:number;z:number;start:number;end:number;mid:number[];far:number[]};
+/** Deterministic ground-frame layout. Each array is indexed by persistent tuft ID. */
+export function createMeadowLayout(seed=meadowSeed) {
+  const nx=Math.ceil((meadowBounds.maxX-meadowBounds.minX)/cell);
+  const nz=Math.ceil((meadowBounds.maxZ-meadowBounds.minZ)/cell);
+  const xs=new Float32Array(nx*nz),zs=new Float32Array(nx*nz),traits=new Uint32Array(nx*nz);
+  const chunks:Chunk[]=[];let count=0;
+  for(let cz=0;cz<nz;cz+=cellsPerChunk)for(let cx=0;cx<nx;cx+=cellsPerChunk){
+    const c:Chunk={x:meadowBounds.minX+(cx+cellsPerChunk/2)*cell,z:meadowBounds.minZ+(cz+cellsPerChunk/2)*cell,start:count,end:count,mid:[],far:[]};
+    for(let j=cz;j<Math.min(nz,cz+cellsPerChunk);j++)for(let i=cx;i<Math.min(nx,cx+cellsPerChunk);i++){
+      const h=hash(i,j,seed),jitter=hash(j,i,seed^0x73ef9f);
+      const x=meadowBounds.minX+(i+.08+.84*(jitter&65535)/65535)*cell;
+      const z=meadowBounds.minZ+(j+.08+.84*(jitter>>>16)/65535)*cell;
+      // Mown grass has soft variations in shoot density. Do not leave clear rows.
+      const density=.86+.065*Math.sin(x*.73+z*.25)+.05*Math.cos(z*.81-x*.35);
+      if(unit(hash(i,j,seed^0x319a51))>density || !isMeadowPoint(x,z,clearance))continue;
+      xs[count]=x;zs[count]=z;traits[count]=h;
+      const rank=(h&65535)/65535;
+      if(rank<.285)c.mid.push(count);
+      if(rank<.044)c.far.push(count);
+      count++;
+    }
+    c.end=count;if(c.end>c.start)chunks.push(c);
+  }
+  return {seed,count,x:xs.subarray(0,count),z:zs.subarray(0,count),traits:traits.subarray(0,count),chunks};
+}
+
+type Tier = 0|1|2;
+const tierName=['near','middle','far'];
+function tuftGeometry(tier:Tier,variant:number,seed:number) {
+  const next=random(hash(tier,variant,seed^0x4c351));
+  const blades=[39+variant,10+variant,5+variant][tier];
+  const position:number[]=[],color:number[]=[],index:number[]=[];
+  const rows=tier===0?[0,.44,.77,1]:tier===1?[0,.57,1]:[0,1];
+  const columns=tier===0?3:2;
+  const shoots=Array.from({length:Math.ceil(blades/(tier===0?1.5:2.0))},()=>{
+    const angle=next()*Math.PI*2,r=Math.sqrt(next())*(tier===0?.036:.023);
+    // A runner's position and the azimuth of its grass shoot are independent.
+    return {x:Math.cos(angle)*r,z:Math.sin(angle)*r,a:next()*Math.PI*2};
+  });
+  for(let k=0;k<blades;k++){
+    const shoot=shoots[k%shoots.length], angle=shoot.a+(k%3)*2.17+(next()-.5)*1.05;
+    const cx=Math.cos(angle),cz=Math.sin(angle),sx=-cz,sz=cx;
+    // Short secondary leaves fill the space beneath the mower-cut upper tips.
+    const shortLeaf=tier===0 && k%5<2;
+    const height=shortLeaf?.023+.018*next():.036+.031*next();
+    const lean=shortLeaf?.39+.35*next():.21+.42*next(),curl=(next()-.5)*.26;
+    const halfWidth=(.00079+.00089*next())*[1,1.22,1.65][tier];
+    const tint=next(),clipped=next()<.74;
+    const rootX=shoot.x+(next()-.5)*.004,rootZ=shoot.z+(next()-.5)*.004;
+    const offset=position.length/3;
+    for(let j=0;j<rows.length;j++){
+      const t=rows[j],arc=height*(.045*t+lean*t*t),turn=height*curl*t*t*t;
+      const width=halfWidth*(j===rows.length-1?(clipped?.28:.045):.78+.22*Math.sin(Math.PI*t));
+      const value=.56+.51*t+.18*tint;
+      for(let l=0;l<columns;l++){
+        const u=2*l/(columns-1)-1;
+        position.push(rootX+cx*arc+sx*(turn+u*width),height*t+(1-Math.abs(u))*width*.29,rootZ+cz*arc+sz*(turn+u*width));
+        color.push((.082+.077*tint)*value,(.205+.11*tint)*value,(.029+.029*tint)*value);
+      }
+      if(j>0)for(let l=0;l<columns-1;l++){
+        const a=offset+(j-1)*columns+l,b=a+1,c=a+columns,d=c+1;
+        index.push(a,c,b,b,c,d);
+      }
+    }
+  }
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(position,3));
+  geometry.setAttribute('color',new THREE.Float32BufferAttribute(color,3));
+  geometry.setIndex(index);geometry.computeVertexNormals();geometry.computeBoundingSphere();
+  geometry.name=`Turf blades ${tierName[tier]} ${variant+1}`;
+  geometry.userData={bladesPerTuft:blades,detailTier:tierName[tier]};
+  return geometry;
+}
+
+function patchMeadowWind(mat:THREE.MeshStandardMaterial,amplitude:{value:number},phase:{value:number}) {
+  mat.onBeforeCompile=shader=>{
+    shader.uniforms.meadowBend=amplitude;shader.uniforms.meadowTime=phase;
+    shader.vertexShader='uniform float meadowBend; uniform float meadowTime;\n'+shader.vertexShader.replace('#include <begin_vertex>',`
+      #include <begin_vertex>
+      #ifdef USE_INSTANCING
+        vec4 rest = instanceMatrix * vec4(transformed, 1.0);
+        float h = max(0.0, rest.y - instanceMatrix[3].y);
+        float direction = meadowBend * (.82 + .18*sin(meadowTime-dot(instanceMatrix[3].xz,vec2(1.7,.91))));
+        float slope = direction * min(.50, 7.*h);
+        transformed += inverse(mat3(instanceMatrix)) * vec3(.974555*h*slope, -h*(1.-sqrt(max(0.,1.-slope*slope))), .224148*h*slope);
+      #endif
+    `);
+  };
+  mat.customProgramCacheKey=()=> 'capture-meadow-wind-v1';
+}
+
+/** Renderable camera-dependent density and wind over persistent world-space planting sites. */
+export function createCaptureMeadow(seed=meadowSeed) {
+  const layout=createMeadowLayout(seed);
+  const group=new THREE.Group();group.name='Yungu captured lawn meadow';
+  group.userData={seed,basis:'44 by 52 m bounded field, including an 8 m far extension beyond the registered turf atlas; metre scale from assumed 3.41 m lamp. Tiller density, mowing height and hidden plants are engineering priors.',rootPlaneY:rootY};
+  const amplitude={value:0},phase={value:0};
+  const material=new THREE.MeshStandardMaterial({name:'Mown lawn tillers',vertexColors:true,roughness:.92,metalness:0,side:THREE.DoubleSide});
+  patchMeadowWind(material,amplitude,phase);
+  const beds=Array.from({length:3*variants},(_,k)=>({
+    geometry:tuftGeometry(Math.floor(k/variants) as Tier,k%variants,seed),mesh:null as THREE.InstancedMesh|null,ids:[] as number[],
+  }));
+  const eye=new THREE.Vector3(),prior=new THREE.Vector3(Infinity,0,0),rotation=new THREE.Quaternion(),lastRotation=new THREE.Quaternion();
+  const frustum=new THREE.Frustum(),projection=new THREE.Matrix4(),oldProjection=new THREE.Matrix4();
+  const chunkSphere=new THREE.Sphere(new THREE.Vector3(),cellsPerChunk*cell*.72+.5);
+  const matrix=new THREE.Matrix4(),instanceColor=new THREE.Color();
+  const stats={seed,fieldTufts:layout.count,tufts:0,blades:0,drawCalls:0,nearBlades:0,middleBlades:0,farBlades:0};
+  let disposed=false;
+  function rebuild(camera:THREE.Camera,allChunks=false,fullDetail=false) {
+    camera.updateWorldMatrix(true,false);camera.getWorldPosition(eye);camera.getWorldQuaternion(rotation);
+    if(!allChunks && prior.distanceToSquared(eye)<.28**2 && Math.abs(rotation.dot(lastRotation))>.9997 && camera.projectionMatrix.equals(oldProjection)) return false;
+    prior.copy(eye);lastRotation.copy(rotation);oldProjection.copy(camera.projectionMatrix);
+    projection.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);frustum.setFromProjectionMatrix(projection);
+    for(const bed of beds)bed.ids.length=0;
+    const dy=(eye.y-rootY)**2;
+    for(const chunk of layout.chunks){
+      chunkSphere.center.set(chunk.x,rootY+.04,chunk.z);
+      if(!allChunks && !frustum.intersectsSphere(chunkSphere))continue;
+      const lower=Math.max(0,Math.hypot(chunk.x-eye.x,chunk.z-eye.z)-chunkSphere.radius);
+      const nearestSq=lower*lower+dy;
+      const candidates=fullDetail?null:nearestSq>14.5**2?chunk.far:nearestSq>5.3**2?chunk.mid:null;
+      const n=candidates?.length??chunk.end-chunk.start;
+      for(let j=0;j<n;j++){
+        const id=candidates?candidates[j]:chunk.start+j;
+        const h=layout.traits[id],rank=(h&65535)/65535;
+        const stagger=(h>>>24)/255;
+        const d=(layout.x[id]-eye.x)**2+(layout.z[id]-eye.z)**2+dy;
+        const tier=fullDetail||d<(3.7+1.6*stagger)**2?0:d<(10.5+4*stagger)**2?1:2;
+        if(tier===1&&rank>=.285 || tier===2&&rank>=.044)continue;
+        beds[tier*variants+((h>>>16)&3)].ids.push(id);
+      }
+    }
+    const totals=[0,0,0];stats.tufts=0;stats.drawCalls=0;
+    for(let k=0;k<beds.length;k++){
+      const bed=beds[k],n=bed.ids.length;
+      if(!n){if(bed.mesh){bed.mesh.count=0;bed.mesh.visible=false;}continue;}
+      if(!bed.mesh || bed.mesh.instanceMatrix.count<n){
+        if(bed.mesh){group.remove(bed.mesh);bed.mesh.dispose();}
+        const mesh=new THREE.InstancedMesh(bed.geometry,material,Math.ceil(n*1.25)+16);
+        mesh.name=bed.geometry.name;mesh.receiveShadow=true;mesh.frustumCulled=false;
+        mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);bed.mesh=mesh;group.add(mesh);
+      }
+      const mesh=bed.mesh;mesh.count=n;mesh.visible=true;
+      for(let q=0;q<n;q++){
+        const id=bed.ids[q],x=layout.x[id],z=layout.z[id],traits=layout.traits[id];
+        const yaw=unit(hash(traits,seed,3))*Math.PI*2;
+        const sy=.82+.28*((traits>>>18)&255)/255,sw=.86+.25*((traits>>>24)&255)/255;
+        const co=sw*Math.cos(yaw),si=sw*Math.sin(yaw);
+        matrix.set(co,0,si,x, 0,sy,0,rootY, -si,0,co,z, 0,0,0,1);mesh.setMatrixAt(q,matrix);
+        const shade=captureLight(x,z),v=.88+.20*unit(hash(traits,2,seed));
+        instanceColor.setRGB(v*(1-.82885*shade),v*(1-.78591*shade),v*(.94-.69130*shade));mesh.setColorAt(q,instanceColor);
+      }
+      mesh.instanceMatrix.addUpdateRange(0,n*16);mesh.instanceMatrix.needsUpdate=true;
+      if(mesh.instanceColor){mesh.instanceColor.addUpdateRange(0,n*3);mesh.instanceColor.needsUpdate=true;}
+      stats.tufts+=n;stats.drawCalls++;totals[Math.floor(k/variants)]+=n*bed.geometry.userData.bladesPerTuft;
+    }
+    [stats.nearBlades,stats.middleBlades,stats.farBlades]=totals;
+    stats.blades=totals[0]+totals[1]+totals[2];return true;
+  }
+  return {group,stats,layout,
+    update(camera:THREE.Camera,seconds=0,speed=0){
+      if(disposed)return false;
+      const changed=rebuild(camera),wind=Number.isFinite(speed)?THREE.MathUtils.clamp(speed,-12,12):0;
+      if((wind===0&&amplitude.value===0)||!(seconds>0))return changed;
+      const target=wind*Math.abs(wind)/(36+wind*wind),dt=Math.min(seconds,.2);
+      amplitude.value+=(target-amplitude.value)*-Math.expm1(-dt/.22);
+      if(!wind&&Math.abs(amplitude.value)<.0001)amplitude.value=0;
+      phase.value=amplitude.value?(phase.value+dt*(1.5+.32*Math.abs(wind)))%(2*Math.PI):0;
+      return true;
+    },
+    /** Static, complete campus attachment; nearby density is referenced to the given camera.
+     * The returned group borrows source geometries/materials. Export before disposing this field. */
+    exportSnapshot(camera:THREE.Camera,detail:'distance'|'full'='distance'){
+      if(disposed)throw Error('The meadow has been disposed');
+      rebuild(camera,true,detail==='full');
+      const snapshot=new THREE.Group();snapshot.name=group.name;snapshot.userData={...group.userData,stats:{...stats},densityReference:detail==='full'?'Full near-detail blades at every persistent planting site.':'Camera distance sets three geometric representations across the whole planting extent.'};
+      for(const bed of beds){
+        const mesh=bed.mesh;if(!mesh?.visible||!mesh.count)continue;
+        const copy=new THREE.InstancedMesh(bed.geometry,material,mesh.count);copy.name=mesh.name;
+        copy.instanceMatrix.array.set(mesh.instanceMatrix.array.subarray(0,mesh.count*16));
+        if(mesh.instanceColor)copy.instanceColor=new THREE.InstancedBufferAttribute(mesh.instanceColor.array.slice(0,mesh.count*3),3);
+        snapshot.add(copy);
+      }
+      prior.x=Infinity;
+      return snapshot;
+    },
+    dispose(){if(disposed)return;disposed=true;for(const bed of beds){bed.mesh?.dispose();bed.geometry.dispose();}material.dispose();group.removeFromParent();group.clear();}
+  };
+}

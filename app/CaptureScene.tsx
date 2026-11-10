@@ -6,11 +6,12 @@ import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {readCrownSamples, disposeSamples} from './captureSamples';
 import {createCaptureWind} from '../lib/capture-wind';
-import {createCaptureGrass} from '../lib/capture-grass';
+import {createCaptureMeadow} from '../lib/capture-meadow';
+import {readCaptureAsset} from './readCaptureAsset';
 import './capture.css';
 
 const media = import.meta.env.BASE_URL + 'capture17/';
-type Actions = { reset: () => void; photograph: (id: string) => void; overhead: () => void; samples: () => Promise<void>; projection: (id:string) => Promise<void>; free: () => void };
+type Actions = { turf: () => void; side: () => void; reset: () => void; photograph: (id: string) => void; overhead: () => void; samples: () => Promise<void>; projection: (id:string) => Promise<void>; free: () => void };
 
 function disposeModel(root: THREE.Object3D) {
   const textures = new Set<THREE.Texture>();
@@ -33,11 +34,12 @@ function disposeModel(root: THREE.Object3D) {
 
 export default function CaptureScene() {
   const mount = useRef<HTMLDivElement>(null);
+  const startAtTurf = useRef(false);
   const actions = useRef<Actions | null>(null);
   const [open, setOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState('');
-  const experiment = useRef({speed: 0, hanging: false, gustAt: -Infinity, startOnLoad: false});
+  const experiment = useRef({speed: 0, hanging: false, gustRemaining:0, startOnLoad: false});
   const [speed, setSpeed] = useState(0);
   const [hanging, setHanging] = useState(false);
   const [readout, setReadout] = useState({speed:0, maxTipCm:0, testTipCm:0, limited:0});
@@ -46,6 +48,7 @@ export default function CaptureScene() {
   const [photos, setPhotos] = useState<string[]>([]);
   const [photo, setPhoto] = useState('01');
   const [pointCount, setPointCount] = useState(0);
+  const [blades, setBlades] = useState(0);
   const [sampleBusy, setSampleBusy] = useState(false);
   const [sampleError, setSampleError] = useState(false);
   const [projected,setProjected] = useState(false);
@@ -65,7 +68,7 @@ export default function CaptureScene() {
     let comparison:THREE.Object3D|undefined;
     let generation=0;
     let weight: THREE.Group | undefined;
-    let grass: ReturnType<typeof createCaptureGrass> | undefined;
+    let meadow: ReturnType<typeof createCaptureMeadow> | undefined;
     let renderer: THREE.WebGLRenderer;
     const fail = (text: string) => {
       if (active) { setMessage(text); setReady(false); }
@@ -120,31 +123,15 @@ export default function CaptureScene() {
 
     const controller = new AbortController();
     async function load() {
-      const response = await fetch(media + 'yungu-lawn.glb?v=2', {signal: controller.signal});
-      if (!response.ok) throw new Error('GLB HTTP ' + response.status);
-      const length = Number(response.headers.get('content-length'));
-      let buffer: ArrayBuffer;
-      if (response.body && length > 0) {
-        const reader = response.body.getReader();
-        const chunks: Uint8Array<ArrayBuffer>[] = [];
-        let received = 0;
-        for (;;) {
-          const {done, value} = await reader.read();
-          if (done) break;
-          chunks.push(new Uint8Array(value));
-          received += value.byteLength;
-          if (active) setProgress(Math.min(99, Math.round(100 * received / length)));
-        }
-        buffer = await new Blob(chunks).arrayBuffer();
-      } else {
-        buffer = await response.arrayBuffer();
-      }
+      const buffer = await readCaptureAsset(media+'yungu-lawn.glb?v=3',controller.signal,
+        fraction=>{if(active)setProgress(Math.min(99,Math.round(100*fraction)));});
       if (!active) return;
       const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(buffer, media);
       if (!active) { disposeModel(gltf.scene); return; }
       model = gltf.scene;
       model.traverse(o => {
         if (o instanceof THREE.Light) o.visible = false;
+        if (['turfnearvergeblades','capturemeadowstatic'].includes(o.name.replace(/[^a-z0-9]/gi,'').toLowerCase())) o.visible = false;
         if (o instanceof THREE.Mesh) { o.castShadow = true; o.receiveShadow = true; }
       });
       scene.add(model);
@@ -157,7 +144,7 @@ export default function CaptureScene() {
       });
       const crownParts:THREE.Object3D[]=[];
       for(const tree of matchedTrees)tree.traverse(o=>{
-        if(o.userData.source_photo || /visible.crown|visiblecrown|\.foliage|foliage|blade|leaves/i.test(o.name)) crownParts.push(o);
+        if(o.userData.source_photo || /volume.branchlets|volume.leaves|visible.crown|visiblecrown|\.foliage|foliage|blade|leaves/i.test(o.name)) crownParts.push(o);
       });
       const clearProjection=()=>{
         generation++;
@@ -201,12 +188,20 @@ export default function CaptureScene() {
         }
         dirty = true;
       }
+      const returnToMesh = () => {
+        clearProjection();
+        if (samples) samples.group.visible=false;
+        matchedTrees.forEach(tree=>{tree.visible=true;});
+        setPointCount(0);
+      };
       const home = () => { setView(refPosition, target, reference instanceof THREE.PerspectiveCamera ? reference : undefined); setPhoto('01'); };
       home();
       controls.saveState();
       actions.current = {
-        reset: ()=>{clearProjection();home();},
+        reset: ()=>{returnToMesh();home();},
         free: clearProjection,
+        turf: () => { returnToMesh(); setView(new THREE.Vector3(1.65,.19,1.95),new THREE.Vector3(.68,.055,.98)); },
+        side: () => { returnToMesh(); setView(new THREE.Vector3(15,4.2,-1.2),new THREE.Vector3(-1,5.2,-4)); },
         projection: async id=>{
           if(comparison){clearProjection();return;}
           const nearest=['01','06','10','13'].reduce((a,b)=>Math.abs(+b-(+id))<Math.abs(+a-(+id))?b:a);
@@ -270,10 +265,12 @@ export default function CaptureScene() {
           setView(pos, aim, view);
           setPhoto(id);
         },
-        overhead: () => {clearProjection();setView(new THREE.Vector3(target.x + 3, 36, target.z + 7), new THREE.Vector3(target.x, 0, target.z));}
+        overhead: () => {returnToMesh();setView(new THREE.Vector3(target.x + 3, 36, target.z + 7), new THREE.Vector3(target.x, 0, target.z));}
       };
+      if (startAtTurf.current) { actions.current.turf(); startAtTurf.current=false; }
       const dynamics = createCaptureWind(model);
-      grass = createCaptureGrass(model);
+      meadow = createCaptureMeadow();
+      scene.add(meadow.group);
       setHasWind(dynamics.stats.branchCount>0);
       const tipWorld = new THREE.Vector3();
       if(dynamics.sample) {
@@ -289,18 +286,17 @@ export default function CaptureScene() {
         const delta = last ? Math.min(.2, (time - last) / 1000) : 0;
         last = time;
         const input=experiment.current;
-        if(input.startOnLoad) {input.gustAt=time;input.startOnLoad=false;}
-        const gustTime=(time-input.gustAt)/1000;
-        const gust = gustTime>=0 && gustTime<3 ? Math.min(1,gustTime/.3)*6 : 0;
+        if(input.startOnLoad) {input.gustRemaining=3;input.startOnLoad=false;}
+        const gust = input.gustRemaining>0 ? Math.min(1,(3-input.gustRemaining+delta)/.3)*6 : 0;
+        input.gustRemaining=Math.max(0,input.gustRemaining-delta);
         const airSpeed=Math.min(12,input.speed+gust);
         if (dynamics.stats.moving || airSpeed!==prevWind || input.hanging!==prevLoad) {
           dynamics.step(delta,airSpeed,input.hanging?1:0);
           renderer.shadowMap.needsUpdate=true;
           dirty=true;
         }
-        if (grass?.step(delta, airSpeed)) {
+        if (meadow?.update(camera, delta, airSpeed)) {
           dirty = true;
-          renderer.shadowMap.needsUpdate = true;
         }
         prevWind=airSpeed;prevLoad=input.hanging;
         if(weight && dynamics.sample) {
@@ -309,6 +305,7 @@ export default function CaptureScene() {
         }
         if (time-lastRead>180) {
           lastRead=time;
+          if (meadow) setBlades(meadow.stats.blades);
           const next={speed:Math.round(airSpeed*10)/10, maxTipCm:Math.round(dynamics.stats.maxTipCm*10)/10,
             testTipCm:Math.round(dynamics.stats.testTipCm*10)/10, limited:dynamics.stats.limited};
           setReadout(old=>old.speed===next.speed && old.maxTipCm===next.maxTipCm && old.testTipCm===next.testTipCm && old.limited===next.limited?old:next);
@@ -329,7 +326,7 @@ export default function CaptureScene() {
       renderer.setAnimationLoop(null);
       renderer.domElement.removeEventListener('webglcontextlost', onLost);
       if (weight) disposeModel(weight);
-      grass?.dispose();
+      meadow?.dispose();
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);
       comparisonCache.forEach(disposeModel);
@@ -341,36 +338,41 @@ export default function CaptureScene() {
   }, [open, attempt]);
 
   const close = () => {
+    startAtTurf.current=false;
     setOpen(false); setReady(false); setMessage(''); setSpeed(0);setHanging(false);setHasWind(false);setReadout({speed:0,maxTipCm:0,testTipCm:0,limited:0});
-    experiment.current={speed:0,hanging:false,gustAt:-Infinity,startOnLoad:false}; setProgress(0); setPhotos([]); setPointCount(0); setSampleBusy(false); setSampleError(false); setProjected(false);setProjectBusy(false);
+    experiment.current={speed:0,hanging:false,gustRemaining:0,startOnLoad:false}; setProgress(0); setPhotos([]); setPointCount(0); setSampleBusy(false); setSampleError(false); setProjected(false);setProjectBusy(false);
   };
   const gust = () => {
-    if(ready){actions.current?.free();experiment.current.gustAt=performance.now();}
+    if(ready){actions.current?.free();experiment.current.gustRemaining=3;}
     else {experiment.current.startOnLoad=true;setOpen(true);}
   };
   return <section className="capture" aria-label="云谷草坪实拍重建">
     <div className="capture-layout">
       <div className="capture-stage">
-        <img className="capture-poster" src={media + 'near-reference.webp?v=2'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
+        <img className="capture-poster" src={media + 'near-reference.webp?v=3'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
         {open && <div className={'capture-webgl' + (ready ? ' loaded' : '')} ref={mount}/>}
-        {!open && <div className="capture-start"><button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/>进入三维场景</button><button className="capture-enter capture-wind-start" onClick={gust}><Wind size={17}/>试一次阵风</button></div>}
+        {!open && <div className="capture-start"><button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/>进入三维场景</button><button className="capture-enter capture-wind-start" onClick={()=>{startAtTurf.current=true; setOpen(true);}}>近看草坪</button><button className="capture-enter capture-wind-start" onClick={gust}><Wind size={17}/>试一次阵风</button></div>}
         {open && !ready && <div className="capture-loading" role="status">{message || (progress >= 98 ? '正在准备三维网格…' : '正在读取场景' + (progress ? ' '+progress+'%' : '…'))}
           {message && <button onClick={()=>{setMessage('');setProgress(0);setAttempt(a=>a+1);}}>重试</button>}
           <button onClick={close}>返回渲染图</button></div>}
       </div>
       <div className="capture-info">
         <h2>草坪与步道</h2>
-        <p>沿步道看三株近树：前树高处分叉，中树冠密而圆，左树的侧枝横向展开。拖动可转动视角。</p>
-        <dl><dt>采集素材</dt><dd>13 张照片 · 4 段视频</dd><dt>相机配准</dt><dd>29 个视角 · 7,674 个稀疏点</dd><dt>重建范围</dt><dd>乔木、草坪、步道与灯具</dd><dt>可见性</dt><dd>主树冠顶超出画面，背面枝叶按可见冠形补建。</dd><dt>尺度与动力</dt><dd>模型尺寸使用工程估计。树种、地下根形与枝条刚度尚待现场核对。</dd></dl>
-        <a className="capture-download" href={media+'yungu-lawn.glb?v=2'} download><Download size={16}/> 下载三维资产 <span>GLB</span></a>
+        <p>沿步道看三株近树：前树高处分叉，中树冠密而圆，左树的侧枝横向展开。进入三维后可侧看分枝，也可以贴近地面检查草叶。</p>
+        <dl><dt>采集素材</dt><dd>13 张照片 · 4 段视频</dd><dt>相机配准</dt><dd>29 个视角 · 7,674 个稀疏点</dd><dt>重建范围</dt><dd>乔木、草坪、步道与灯具</dd><dt>可见性</dt><dd>前树冠顶和左树侧缘超出取景，遮挡部分的分枝和叶片按可见范围推断。</dd><dt>尺度与动力</dt><dd>模型尺寸使用工程估计。树种、地下根形与枝条刚度尚待现场核对。</dd></dl>
+        <a className="capture-download" href={media+'yungu-lawn.glb?v=3'} download><Download size={16}/> 下载校园场景 <span>GLB</span></a>
         <a className="capture-contact-link" href={media+'contact-world.xml'} download>下载碰撞模型（MuJoCo）</a>
-        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v2/yungu-campus-scene-source-v2.zip">下载 Blender 工程及生成脚本</a>
-        <a className="capture-contact-link" href={media+'account-receipts.json?v=2'} target="_blank" rel="noreferrer">查看五账号任务与调用回执</a>
+        <a className="capture-contact-link" href={media+'yungu-meadow.glb?v=3'} download>单独下载草叶实例（GLB）</a>
+        <a className="capture-contact-link" href={media+'yungu-meadow-full.glb?v=3'} download>下载全密度草坪（离线渲染）</a>
+        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v3/yungu-campus-scene-source-v3.zip">下载 Blender 工程及生成脚本</a>
+        <a className="capture-contact-link" href={media+'account-receipts.json?v=3'} target="_blank" rel="noreferrer">查看五账号任务与调用回执</a>
       </div>
     </div>
     {ready && <div className="capture-tools">
       <button onClick={()=>actions.current?.reset()}><Camera size={16}/>实拍机位</button>
       {photos.length > 1 && <label className="capture-select">照片机位 <select aria-label="照片机位" value={photo} onChange={e=>actions.current?.photograph(e.target.value)}>{photos.map(id=><option key={id} value={id}>{id}</option>)}</select></label>}
+      <button onClick={()=>actions.current?.turf()}>贴近草叶</button>
+      <button onClick={()=>actions.current?.side()}>侧看主树</button>
       <button onClick={()=>actions.current?.overhead()}><Layers3 size={16}/>俯看布局</button>
       <button disabled={sampleBusy} aria-pressed={pointCount>0} onClick={()=>void actions.current?.samples()}>{sampleBusy?'读取实拍点…':pointCount?'还原三维树冠':'查看实拍采样点'}</button>
       <button disabled={sampleBusy||projectBusy} aria-pressed={projected} onClick={()=>void actions.current?.projection(photo)}>{projectBusy?'读取照片纹理…':projected?'返回可动冠层':'对照实拍冠层'}</button>
@@ -382,7 +384,7 @@ export default function CaptureScene() {
       <label>背景风速 <input aria-label="背景风速" type="range" min="0" max="10" step=".5" value={speed} onChange={e=>{const v=Number(e.target.value);experiment.current.speed=v;setSpeed(v);}}/><output>{speed.toFixed(1)} m/s</output></label>
       <button onClick={gust}><Wind size={15}/>施加 3 秒阵风</button>
       <button aria-pressed={hanging} onClick={()=>{experiment.current.hanging=!hanging;setHanging(!hanging);}}>{hanging?'卸下砝码':'前树枝端挂载 1 kg'}</button>
-      <div className="capture-telemetry">当前气流 <b data-air>{readout.speed.toFixed(1)} m/s</b> · 最大枝端位移 <b data-tip>{readout.maxTipCm.toFixed(1)} cm</b>{hanging && <> · 挂载枝端 <b>{readout.testTipCm.toFixed(1)} cm</b></>}{!!readout.limited && <small> · {readout.limited} 个枝组达到小角度模型上限</small>}</div>
+      <div className="capture-telemetry">当前气流 <b data-air>{readout.speed.toFixed(1)} m/s</b> · 当前视野草叶 <b data-blades>{blades.toLocaleString()}</b> · 最大枝端位移 <b data-tip>{readout.maxTipCm.toFixed(1)} cm</b>{hanging && <> · 挂载枝端 <b>{readout.testTipCm.toFixed(1)} cm</b></>}{!!readout.limited && <small> · {readout.limited} 个枝组达到小角度模型上限</small>}</div>
     </div>}
     <div className="capture-footer"><Box size={15}/><span>{projected ? '照片 '+photo+' · 纹理来自实拍，局部深度由立体点插值；转动后回到可动模型' : pointCount ? '三株近景树 · '+pointCount.toLocaleString()+' 个多视图采样点，空白处缺少观测' : open&&ready?'可交互三维网格':'实拍机位 · 三维渲染'}</span></div>
   </section>;

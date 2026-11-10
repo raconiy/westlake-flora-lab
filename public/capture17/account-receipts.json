@@ -1,187 +1,67 @@
 {
-  "scene": "yungu-capture17-v2",
+  "scene": "yungu-capture17-v3",
   "model": "gpt-6.1-sol",
   "reasoningEffort": "high",
   "verifiedAccountCount": 5,
-  "acceptedArtifacts": 14,
-  "tokensForAcceptedArtifacts": {
-    "input_tokens": 102137,
-    "output_tokens": 53642
-  },
-  "commonUpstreamOverlapMs": 54779,
+  "acceptedArtifacts": 5,
+  "commonUpstreamOverlapMs": 91653,
   "requests": [
     {
       "role": "botany",
-      "state": "failed",
-      "error": "gateway_timeout"
+      "task": "2cec0711-5329-46f9-912b-6e1f223b7197",
+      "state": "completed",
+      "outputTokens": 3503,
+      "inputTokens": 6693,
+      "requestId": "647eac7d-ecad-47b4-8f2d-7985255de073",
+      "credentialId": 3,
+      "code": 200,
+      "outputSha256": "9258825e32898a5dd9150cac75b15805b556dce91b3fc3106914be335cc6fd8b"
     },
     {
       "role": "physics",
+      "task": "ebf1dd94-786e-427b-b076-f553685be260",
       "state": "completed",
-      "credentialId": 5,
-      "code": 200,
-      "requestId": "89dcbbe8-53c0-48c9-a872-8fc6995f62a6",
-      "outputTokens": 7645,
-      "outputSha256": "dac0f2ce5de9b604860c26e06db537ed6d108c127153c5f9d08c4f7a46f40a11"
-    },
-    {
-      "role": "scene",
-      "state": "completed",
-      "credentialId": 3,
-      "code": 200,
-      "requestId": "0c951de8-0b26-44d9-be51-8d79503aff7c",
-      "outputTokens": 7394,
-      "outputSha256": "142e668ebc30296b0cb5a6e274f98b15676dfce6c27748e927eae607fd3d50fd"
-    },
-    {
-      "role": "infra",
-      "state": "completed",
-      "credentialId": 1,
-      "code": 200,
-      "requestId": "b53eccf9-2ab1-4f5b-9ca3-26cdd57cbc53",
-      "outputTokens": 6328,
-      "outputSha256": "bd6b2fe42dd955c87506ddd9e71953709dbdd97be4d9a3d3d821a1da3182e45e"
-    },
-    {
-      "role": "qa",
-      "state": "failed",
-      "error": "invalid_record"
-    },
-    {
-      "role": "qa",
-      "state": "completed",
-      "credentialId": 1,
-      "code": 200,
-      "requestId": "96ebfbb8-d3bd-4182-bb9e-d89fad144b23",
-      "outputTokens": 3974,
-      "outputSha256": "590cccde171002d552b1fa1b9f6a52d179db21a21903f23050207b1a3e30aa36"
-    },
-    {
-      "role": "botany",
-      "state": "completed",
-      "credentialId": 5,
-      "code": 200,
-      "requestId": "2319626d-6bd9-4adc-a453-38f6b88abad9",
-      "outputTokens": 5023,
-      "outputSha256": "64e6a75e6d5c356996ac557efed10fabcc5ae36d40ab6c41985d428c75cfa5c1"
-    },
-    {
-      "role": "physics",
-      "state": "completed",
-      "credentialId": 3,
-      "code": 200,
-      "requestId": "71fbf20f-151d-4067-86d3-d8c91baa7637",
-      "outputTokens": 3341,
-      "outputSha256": "def5157c26f396b9bb4a79d465ca0171b4b266102ff4a28a40a7c6bc12df6c78"
-    },
-    {
-      "role": "scene",
-      "state": "completed",
-      "credentialId": 4,
-      "code": 200,
-      "requestId": "0223cd74-e7f0-43b0-95ed-4f28321eba5b",
-      "outputTokens": 2950,
-      "outputSha256": "d2901a3cd8f1e63aa73113dfa2877d188cb8c6462236eb8e8d3b73a84e86784b"
-    },
-    {
-      "role": "infra",
-      "state": "completed",
+      "outputTokens": 3514,
+      "inputTokens": 8906,
+      "requestId": "bdd9b400-f39a-4172-8bc5-25d0804a2926",
       "credentialId": 2,
       "code": 200,
-      "requestId": "324ab5f2-083b-422e-8858-494228beb353",
-      "outputTokens": 2957,
-      "outputSha256": "57853d1f0c8c0e5eff1eabc1b53e9e7260a4c94f1f0b22a878242c005718114c"
-    },
-    {
-      "role": "qa",
-      "state": "completed",
-      "credentialId": 1,
-      "code": 200,
-      "requestId": "2031fd85-7657-4240-a821-7e48192a77a1",
-      "outputTokens": 3408,
-      "outputSha256": "b8f427ee1cc7dd0d8a7436197c61e19bbd081c65634729db197b8f90da6838b9"
-    },
-    {
-      "role": "botany",
-      "state": "completed",
-      "credentialId": 2,
-      "code": 200,
-      "requestId": "452fda4d-aaea-4623-812d-495b1f5b16bb",
-      "outputTokens": 2086,
-      "outputSha256": "9bbf7e70874cb2584a21e5c499e6279ed1a01c064d275ca93b86421fab9004a3"
-    },
-    {
-      "role": "physics",
-      "state": "completed",
-      "credentialId": 5,
-      "code": 200,
-      "requestId": "2cdcc4b4-136f-454c-afe6-0d1adf4a3bcf",
-      "outputTokens": 2193,
-      "outputSha256": "747e6a15420a1cf008c9dc87d494e729a8f8f86171d686e37d29bda9c8fa89d7"
+      "outputSha256": "a64559134d34882a6c29142664531159e4ca46e55e93f298a2c4ada89c13514d"
     },
     {
       "role": "scene",
+      "task": "19b6b297-5601-4aaf-8616-49169ffda7c7",
       "state": "completed",
+      "outputTokens": 3106,
+      "inputTokens": 5909,
+      "requestId": "a8e0f565-21be-47a8-b8b0-52c8d48a93a7",
       "credentialId": 4,
       "code": 200,
-      "requestId": "680fc21b-0c86-442b-a430-e7a05d830868",
-      "outputTokens": 1969,
-      "outputSha256": "d9d5f38d007394542c9f14653541335e381a1ae3d3e6143636036f3f46540ce8"
+      "outputSha256": "cefa46f524b06634afa3fb0aebe06f57e6beeed8d56201ef2ec841c17533361f"
     },
     {
       "role": "infra",
+      "task": "13e35487-f9b4-4e32-8209-8066456c31fd",
       "state": "completed",
+      "outputTokens": 3147,
+      "inputTokens": 3828,
+      "requestId": "fd299fc1-e935-4867-ae81-664c5d1fec7f",
       "credentialId": 1,
       "code": 200,
-      "requestId": "dd22f129-8b2f-474e-9c81-f80ae1e06234",
-      "outputTokens": 2145,
-      "outputSha256": "9d6afde04800e6a8407a2cbb5072848727b715507f95de2a70e2d3f91ecff7d8"
+      "outputSha256": "36769377cedfb3fbfa7214826737d900df078dd9dcae0e9bf55c90af13300c62"
     },
     {
       "role": "qa",
+      "task": "21cea0dc-17ad-459a-a24c-96b0f4b988ab",
       "state": "completed",
-      "credentialId": 3,
+      "outputTokens": 2534,
+      "inputTokens": 9252,
+      "requestId": "9cc90091-90f2-4e1d-8b48-0faf665ae160",
+      "credentialId": 5,
       "code": 200,
-      "requestId": "c7285849-0210-460d-bc74-7a42844a1974",
-      "outputTokens": 2229,
-      "outputSha256": "6f7d99e67ccc2aef9514358db539deab3fcc558e19672f9f264b57c343092387"
+      "outputSha256": "c689a374e64f62d51858d32b624c2b9a4bda2f89aa807a563ce9e9247388efe9"
     }
   ],
-  "simultaneousHandoff": [
-    {
-      "role": "botany",
-      "credentialId": 2,
-      "requestId": "452fda4d-aaea-4623-812d-495b1f5b16bb",
-      "outputTokens": 2086,
-      "outputSha256": "9bbf7e70874cb2584a21e5c499e6279ed1a01c064d275ca93b86421fab9004a3"
-    },
-    {
-      "role": "physics",
-      "credentialId": 5,
-      "requestId": "2cdcc4b4-136f-454c-afe6-0d1adf4a3bcf",
-      "outputTokens": 2193,
-      "outputSha256": "747e6a15420a1cf008c9dc87d494e729a8f8f86171d686e37d29bda9c8fa89d7"
-    },
-    {
-      "role": "scene",
-      "credentialId": 4,
-      "requestId": "680fc21b-0c86-442b-a430-e7a05d830868",
-      "outputTokens": 1969,
-      "outputSha256": "d9d5f38d007394542c9f14653541335e381a1ae3d3e6143636036f3f46540ce8"
-    },
-    {
-      "role": "infra",
-      "credentialId": 1,
-      "requestId": "dd22f129-8b2f-474e-9c81-f80ae1e06234",
-      "outputTokens": 2145,
-      "outputSha256": "9d6afde04800e6a8407a2cbb5072848727b715507f95de2a70e2d3f91ecff7d8"
-    },
-    {
-      "role": "qa",
-      "credentialId": 3,
-      "requestId": "c7285849-0210-460d-bc74-7a42844a1974",
-      "outputTokens": 2229,
-      "outputSha256": "6f7d99e67ccc2aef9514358db539deab3fcc558e19672f9f264b57c343092387"
-    }
-  ]
+  "totalOutputTokens": 15804,
+  "simulation": "Each role received numeric capture observations. Reconstruction and GPU rendering ran separately."
 }
