@@ -27,3 +27,13 @@
 .capture-contact-link {display:block; font-size:13px; color:#315640; margin-top:12px; text-underline-offset:3px;}
 .capture-select {display:flex; gap:8px; align-items:center; font-size:13px; padding:4px 9px; color:#315640;}
 .capture-select select {font:inherit; background:white; color:#234b35; border:1px solid #b2c4b5; border-radius:5px; padding:5px;}
+.capture-start { position:absolute; bottom:16px; left:16px; display:flex; gap:8px; flex-wrap:wrap; }
+.capture-start .capture-enter { position:static; }
+.capture-wind-start {background:#f9fbf3f5;color:#23432d; border:1px solid #658568;}
+.capture-forces { display:flex; gap:12px; flex-wrap:wrap; align-items:center; padding:12px 17px; background:#f2f6ef; border-top:1px solid #d6e1d2; }
+.capture-forces label,.capture-forces button {display:inline-flex;align-items:center;gap:8px;font-size:14px;}
+.capture-forces input {width:clamp(80px,14vw,190px);accent-color:#37684d;}
+.capture-forces output,.capture-telemetry b {font-variant-numeric:tabular-nums;}
+.capture-forces button {border:1px solid #a4b7a7;color:#254a35;background:white;padding:7px 11px;border-radius:7px;}
+.capture-forces button[aria-pressed=true] {background:#87502a;color:white;}
+.capture-telemetry {font-size:13px;color:#45604b;}

@@ -1,54 +1,187 @@
 {
+  "scene": "yungu-capture17-v2",
   "model": "gpt-6.1-sol",
-  "effort": "high",
-  "inputMode": "Text transcriptions of photos 01 and last and qualitative observations. No photos or crops were sent to the GPT workers.",
-  "overlapSeconds": 122.137,
+  "reasoningEffort": "high",
+  "verifiedAccountCount": 5,
+  "acceptedArtifacts": 14,
+  "tokensForAcceptedArtifacts": {
+    "input_tokens": 102137,
+    "output_tokens": 53642
+  },
+  "commonUpstreamOverlapMs": 54779,
   "requests": [
     {
       "role": "botany",
-      "credential": 1,
-      "request": "55de4e5e-ab72-4947-975e-031a1f04606b",
-      "status": 200,
-      "inputTokens": 6141,
-      "outputTokens": 4033,
-      "artifactSha256": "06d9d68501ca81984169f165036774c04b90020ad37ff2084fbed473eff47bef"
+      "state": "failed",
+      "error": "gateway_timeout"
     },
     {
       "role": "physics",
-      "credential": 4,
-      "request": "a7f46055-836e-4e44-967d-e91d867c53c6",
-      "status": 200,
-      "inputTokens": 8373,
-      "outputTokens": 4113,
-      "artifactSha256": "997fcc62e1385d2b7e430d6cd10fb3e7e897c33e4835406d16e957a7ceae94a5"
+      "state": "completed",
+      "credentialId": 5,
+      "code": 200,
+      "requestId": "89dcbbe8-53c0-48c9-a872-8fc6995f62a6",
+      "outputTokens": 7645,
+      "outputSha256": "dac0f2ce5de9b604860c26e06db537ed6d108c127153c5f9d08c4f7a46f40a11"
     },
     {
       "role": "scene",
-      "credential": 5,
-      "request": "e6491ce1-9a00-41e3-b638-650c08808bf5",
-      "status": 200,
-      "inputTokens": 5193,
-      "outputTokens": 4869,
-      "artifactSha256": "ba2e9efc7444b05af1586e33618acc330ee2d9fe69e7147647e3d520be5f06eb"
+      "state": "completed",
+      "credentialId": 3,
+      "code": 200,
+      "requestId": "0c951de8-0b26-44d9-be51-8d79503aff7c",
+      "outputTokens": 7394,
+      "outputSha256": "142e668ebc30296b0cb5a6e274f98b15676dfce6c27748e927eae607fd3d50fd"
     },
     {
       "role": "infra",
-      "credential": 2,
-      "request": "ebd364b8-9313-4490-9143-bd3f0c723c29",
-      "status": 200,
-      "inputTokens": 2941,
-      "outputTokens": 3667,
-      "artifactSha256": "bbb07a5964e8d598915402f0dec5cee3c421cd36ac1e8b71fc345fcb16a57889"
+      "state": "completed",
+      "credentialId": 1,
+      "code": 200,
+      "requestId": "b53eccf9-2ab1-4f5b-9ca3-26cdd57cbc53",
+      "outputTokens": 6328,
+      "outputSha256": "bd6b2fe42dd955c87506ddd9e71953709dbdd97be4d9a3d3d821a1da3182e45e"
     },
     {
       "role": "qa",
-      "credential": 3,
-      "request": "ad2f5657-c723-4d26-a287-8e61ff819380",
-      "status": 200,
-      "inputTokens": 9995,
-      "outputTokens": 3940,
-      "artifactSha256": "2990942d0e12d8827d2ab1293da54bb642064d14622e3da2e8c27f2d0fbec8d9"
+      "state": "failed",
+      "error": "invalid_record"
+    },
+    {
+      "role": "qa",
+      "state": "completed",
+      "credentialId": 1,
+      "code": 200,
+      "requestId": "96ebfbb8-d3bd-4182-bb9e-d89fad144b23",
+      "outputTokens": 3974,
+      "outputSha256": "590cccde171002d552b1fa1b9f6a52d179db21a21903f23050207b1a3e30aa36"
+    },
+    {
+      "role": "botany",
+      "state": "completed",
+      "credentialId": 5,
+      "code": 200,
+      "requestId": "2319626d-6bd9-4adc-a453-38f6b88abad9",
+      "outputTokens": 5023,
+      "outputSha256": "64e6a75e6d5c356996ac557efed10fabcc5ae36d40ab6c41985d428c75cfa5c1"
+    },
+    {
+      "role": "physics",
+      "state": "completed",
+      "credentialId": 3,
+      "code": 200,
+      "requestId": "71fbf20f-151d-4067-86d3-d8c91baa7637",
+      "outputTokens": 3341,
+      "outputSha256": "def5157c26f396b9bb4a79d465ca0171b4b266102ff4a28a40a7c6bc12df6c78"
+    },
+    {
+      "role": "scene",
+      "state": "completed",
+      "credentialId": 4,
+      "code": 200,
+      "requestId": "0223cd74-e7f0-43b0-95ed-4f28321eba5b",
+      "outputTokens": 2950,
+      "outputSha256": "d2901a3cd8f1e63aa73113dfa2877d188cb8c6462236eb8e8d3b73a84e86784b"
+    },
+    {
+      "role": "infra",
+      "state": "completed",
+      "credentialId": 2,
+      "code": 200,
+      "requestId": "324ab5f2-083b-422e-8858-494228beb353",
+      "outputTokens": 2957,
+      "outputSha256": "57853d1f0c8c0e5eff1eabc1b53e9e7260a4c94f1f0b22a878242c005718114c"
+    },
+    {
+      "role": "qa",
+      "state": "completed",
+      "credentialId": 1,
+      "code": 200,
+      "requestId": "2031fd85-7657-4240-a821-7e48192a77a1",
+      "outputTokens": 3408,
+      "outputSha256": "b8f427ee1cc7dd0d8a7436197c61e19bbd081c65634729db197b8f90da6838b9"
+    },
+    {
+      "role": "botany",
+      "state": "completed",
+      "credentialId": 2,
+      "code": 200,
+      "requestId": "452fda4d-aaea-4623-812d-495b1f5b16bb",
+      "outputTokens": 2086,
+      "outputSha256": "9bbf7e70874cb2584a21e5c499e6279ed1a01c064d275ca93b86421fab9004a3"
+    },
+    {
+      "role": "physics",
+      "state": "completed",
+      "credentialId": 5,
+      "code": 200,
+      "requestId": "2cdcc4b4-136f-454c-afe6-0d1adf4a3bcf",
+      "outputTokens": 2193,
+      "outputSha256": "747e6a15420a1cf008c9dc87d494e729a8f8f86171d686e37d29bda9c8fa89d7"
+    },
+    {
+      "role": "scene",
+      "state": "completed",
+      "credentialId": 4,
+      "code": 200,
+      "requestId": "680fc21b-0c86-442b-a430-e7a05d830868",
+      "outputTokens": 1969,
+      "outputSha256": "d9d5f38d007394542c9f14653541335e381a1ae3d3e6143636036f3f46540ce8"
+    },
+    {
+      "role": "infra",
+      "state": "completed",
+      "credentialId": 1,
+      "code": 200,
+      "requestId": "dd22f129-8b2f-474e-9c81-f80ae1e06234",
+      "outputTokens": 2145,
+      "outputSha256": "9d6afde04800e6a8407a2cbb5072848727b715507f95de2a70e2d3f91ecff7d8"
+    },
+    {
+      "role": "qa",
+      "state": "completed",
+      "credentialId": 3,
+      "code": 200,
+      "requestId": "c7285849-0210-460d-bc74-7a42844a1974",
+      "outputTokens": 2229,
+      "outputSha256": "6f7d99e67ccc2aef9514358db539deab3fcc558e19672f9f264b57c343092387"
     }
   ],
-  "outputTokens": 20622
+  "simultaneousHandoff": [
+    {
+      "role": "botany",
+      "credentialId": 2,
+      "requestId": "452fda4d-aaea-4623-812d-495b1f5b16bb",
+      "outputTokens": 2086,
+      "outputSha256": "9bbf7e70874cb2584a21e5c499e6279ed1a01c064d275ca93b86421fab9004a3"
+    },
+    {
+      "role": "physics",
+      "credentialId": 5,
+      "requestId": "2cdcc4b4-136f-454c-afe6-0d1adf4a3bcf",
+      "outputTokens": 2193,
+      "outputSha256": "747e6a15420a1cf008c9dc87d494e729a8f8f86171d686e37d29bda9c8fa89d7"
+    },
+    {
+      "role": "scene",
+      "credentialId": 4,
+      "requestId": "680fc21b-0c86-442b-a430-e7a05d830868",
+      "outputTokens": 1969,
+      "outputSha256": "d9d5f38d007394542c9f14653541335e381a1ae3d3e6143636036f3f46540ce8"
+    },
+    {
+      "role": "infra",
+      "credentialId": 1,
+      "requestId": "dd22f129-8b2f-474e-9c81-f80ae1e06234",
+      "outputTokens": 2145,
+      "outputSha256": "9d6afde04800e6a8407a2cbb5072848727b715507f95de2a70e2d3f91ecff7d8"
+    },
+    {
+      "role": "qa",
+      "credentialId": 3,
+      "requestId": "c7285849-0210-460d-bc74-7a42844a1974",
+      "outputTokens": 2229,
+      "outputSha256": "6f7d99e67ccc2aef9514358db539deab3fcc558e19672f9f264b57c343092387"
+    }
+  ]
 }

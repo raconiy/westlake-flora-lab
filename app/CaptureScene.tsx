@@ -1,14 +1,16 @@
 import {useEffect, useRef, useState} from 'react';
-import {Box, Camera, Download, Layers3, Orbit, Pause, Play, RotateCcw} from 'lucide-react';
+import {Box, Camera, Download, Layers3, Orbit, Wind, RotateCcw} from 'lucide-react';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {readCrownSamples, disposeSamples} from './captureSamples';
+import {createCaptureWind} from '../lib/capture-wind';
+import {createCaptureGrass} from '../lib/capture-grass';
 import './capture.css';
 
 const media = import.meta.env.BASE_URL + 'capture17/';
-type Actions = { reset: () => void; photograph: (id: string) => void; overhead: () => void; samples: () => Promise<void>; motion: (enabled: boolean) => void };
+type Actions = { reset: () => void; photograph: (id: string) => void; overhead: () => void; samples: () => Promise<void>; projection: (id:string) => Promise<void>; free: () => void };
 
 function disposeModel(root: THREE.Object3D) {
   const textures = new Set<THREE.Texture>();
@@ -35,7 +37,10 @@ export default function CaptureScene() {
   const [open, setOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState('');
-  const [wind, setWind] = useState(false);
+  const experiment = useRef({speed: 0, hanging: false, gustAt: -Infinity, startOnLoad: false});
+  const [speed, setSpeed] = useState(0);
+  const [hanging, setHanging] = useState(false);
+  const [readout, setReadout] = useState({speed:0, maxTipCm:0, testTipCm:0, limited:0});
   const [hasWind, setHasWind] = useState(false);
   const [progress, setProgress] = useState(0);
   const [photos, setPhotos] = useState<string[]>([]);
@@ -43,18 +48,24 @@ export default function CaptureScene() {
   const [pointCount, setPointCount] = useState(0);
   const [sampleBusy, setSampleBusy] = useState(false);
   const [sampleError, setSampleError] = useState(false);
+  const [projected,setProjected] = useState(false);
+  const [projectBusy,setProjectBusy] = useState(false);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     const node = mount.current;
     if (!open || !node) return;
     let active = true;
-    let playing = false;
+    let lastRead = 0;
     let dirty = true;
     let matchedPose: THREE.Quaternion | undefined;
     let samples: Awaited<ReturnType<typeof readCrownSamples>> | undefined;
     let model: THREE.Object3D | undefined;
-    let mixer: THREE.AnimationMixer | undefined;
+    const comparisonCache=new Map<string,THREE.Object3D>();
+    let comparison:THREE.Object3D|undefined;
+    let generation=0;
+    let weight: THREE.Group | undefined;
+    let grass: ReturnType<typeof createCaptureGrass> | undefined;
     let renderer: THREE.WebGLRenderer;
     const fail = (text: string) => {
       if (active) { setMessage(text); setReady(false); }
@@ -79,7 +90,7 @@ export default function CaptureScene() {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.addEventListener('change', () => { dirty = true; });
-    controls.addEventListener('start', () => { matchedPose = undefined; dirty = true; });
+    controls.addEventListener('start', () => { actions.current?.free(); matchedPose = undefined; dirty = true; });
     controls.minDistance = 0.45;
     controls.maxDistance = 130;
     controls.maxPolarAngle = Math.PI - 0.015;
@@ -109,7 +120,7 @@ export default function CaptureScene() {
 
     const controller = new AbortController();
     async function load() {
-      const response = await fetch(media + 'yungu-lawn.glb', {signal: controller.signal});
+      const response = await fetch(media + 'yungu-lawn.glb?v=2', {signal: controller.signal});
       if (!response.ok) throw new Error('GLB HTTP ' + response.status);
       const length = Number(response.headers.get('content-length'));
       let buffer: ArrayBuffer;
@@ -144,6 +155,17 @@ export default function CaptureScene() {
       model.traverse(node => {
         if (capturedTreeNames.has(node.name.toLowerCase().replace(/[^a-z0-9]/g, ''))) matchedTrees.push(node);
       });
+      const crownParts:THREE.Object3D[]=[];
+      for(const tree of matchedTrees)tree.traverse(o=>{
+        if(o.userData.source_photo || /visible.crown|visiblecrown|\.foliage|foliage|blade|leaves/i.test(o.name)) crownParts.push(o);
+      });
+      const clearProjection=()=>{
+        generation++;
+        if(comparison)comparison.visible=false;
+        comparison=undefined;
+        crownParts.forEach(o=>o.visible=true);
+        setProjected(false);setProjectBusy(false);dirty=true;renderer.shadowMap.needsUpdate=true;
+      };
       const cameras = new Map<string, THREE.PerspectiveCamera>();
       model.traverse(node => {
         if (!(node instanceof THREE.PerspectiveCamera)) return;
@@ -183,8 +205,39 @@ export default function CaptureScene() {
       home();
       controls.saveState();
       actions.current = {
-        reset: home,
+        reset: ()=>{clearProjection();home();},
+        free: clearProjection,
+        projection: async id=>{
+          if(comparison){clearProjection();return;}
+          const nearest=['01','06','10','13'].reduce((a,b)=>Math.abs(+b-(+id))<Math.abs(+a-(+id))?b:a);
+          const view=cameras.get(nearest);
+          if(!view)return;
+          const version=++generation;
+          setProjectBusy(true);setSampleError(false);
+          try {
+            let object=comparisonCache.get(nearest);
+            if(!object){
+              const r=await fetch(media+'appearance-'+nearest+'.glb',{signal:controller.signal});
+              if(!r.ok)throw Error('Comparison unavailable');
+              object=(await new GLTFLoader().parseAsync(await r.arrayBuffer(),media)).scene;
+              if(!active||version!==generation){disposeModel(object);return;}
+              object.traverse(o=>{if(o instanceof THREE.Mesh)for(const mat of Array.isArray(o.material)?o.material:[o.material])mat.toneMapped=false;});
+              scene.add(object);comparisonCache.set(nearest,object);
+            }
+            if(!active||version!==generation)return;
+            if(samples)samples.group.visible=false;
+            matchedTrees.forEach(o=>o.visible=true);setPointCount(0);
+            const pos=view.getWorldPosition(new THREE.Vector3());
+            setView(pos,view.getWorldDirection(new THREE.Vector3()).multiplyScalar(13).add(pos),view);
+            setPhoto(nearest);
+            crownParts.forEach(o=>o.visible=false);
+            comparison=object;object.visible=true;setProjected(true);
+            renderer.shadowMap.needsUpdate=true;dirty=true;
+          } catch {if(active&&version===generation)setSampleError(true);}
+          finally {if(active&&version===generation)setProjectBusy(false);}
+        },
         samples: async () => {
+          clearProjection();
           setSampleError(false);
           if (!samples) {
             setSampleBusy(true);
@@ -209,6 +262,7 @@ export default function CaptureScene() {
           dirty = true;
         },
         photograph: id => {
+          clearProjection();
           const view = cameras.get(id);
           if (!view) return;
           const pos = view.getWorldPosition(new THREE.Vector3());
@@ -216,33 +270,51 @@ export default function CaptureScene() {
           setView(pos, aim, view);
           setPhoto(id);
         },
-        overhead: () => setView(new THREE.Vector3(target.x + 3, 36, target.z + 7), new THREE.Vector3(target.x, 0, target.z)),
-        motion: enabled => { playing = enabled; }
+        overhead: () => {clearProjection();setView(new THREE.Vector3(target.x + 3, 36, target.z + 7), new THREE.Vector3(target.x, 0, target.z));}
       };
-      if (gltf.animations.length) {
-        mixer = new THREE.AnimationMixer(model);
-        const tracks = new Set<string>();
-        for (const clip of gltf.animations) {
-          if (clip.tracks.some(t => tracks.has(t.name))) continue;
-          clip.tracks.forEach(t => tracks.add(t.name));
-          mixer.clipAction(clip).play();
-        }
-        setHasWind(tracks.size > 0);
+      const dynamics = createCaptureWind(model);
+      grass = createCaptureGrass(model);
+      setHasWind(dynamics.stats.branchCount>0);
+      const tipWorld = new THREE.Vector3();
+      if(dynamics.sample) {
+        const group = new THREE.Group();
+        const cord = new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.24,6),new THREE.MeshStandardMaterial({color:0x534435}));
+        const mass = new THREE.Mesh(new THREE.SphereGeometry(.054,12,8),new THREE.MeshStandardMaterial({color:0xc1642d,roughness:.48}));
+        cord.position.y=-.12; mass.position.y=-.294;
+        group.add(cord,mass);
+        group.visible=false; scene.add(group); weight=group;
       }
-      let last = 0;
+      let last = 0, prevWind = 0, prevLoad = false;
       renderer.setAnimationLoop((time: number) => {
-        const delta = last ? Math.min(0.06, (time - last) / 1000) : 0;
+        const delta = last ? Math.min(.2, (time - last) / 1000) : 0;
         last = time;
-        if (playing && mixer) {
-          mixer.update(delta);
-          renderer.shadowMap.needsUpdate = true;
+        const input=experiment.current;
+        if(input.startOnLoad) {input.gustAt=time;input.startOnLoad=false;}
+        const gustTime=(time-input.gustAt)/1000;
+        const gust = gustTime>=0 && gustTime<3 ? Math.min(1,gustTime/.3)*6 : 0;
+        const airSpeed=Math.min(12,input.speed+gust);
+        if (dynamics.stats.moving || airSpeed!==prevWind || input.hanging!==prevLoad) {
+          dynamics.step(delta,airSpeed,input.hanging?1:0);
+          renderer.shadowMap.needsUpdate=true;
+          dirty=true;
+        }
+        if (grass?.step(delta, airSpeed)) {
           dirty = true;
+          renderer.shadowMap.needsUpdate = true;
+        }
+        prevWind=airSpeed;prevLoad=input.hanging;
+        if(weight && dynamics.sample) {
+          weight.visible = input.hanging;
+          if (input.hanging) weight.position.copy(dynamics.sample.node.localToWorld(tipWorld.copy(dynamics.sample.restTip)));
+        }
+        if (time-lastRead>180) {
+          lastRead=time;
+          const next={speed:Math.round(airSpeed*10)/10, maxTipCm:Math.round(dynamics.stats.maxTipCm*10)/10,
+            testTipCm:Math.round(dynamics.stats.testTipCm*10)/10, limited:dynamics.stats.limited};
+          setReadout(old=>old.speed===next.speed && old.maxTipCm===next.maxTipCm && old.testTipCm===next.testTipCm && old.limited===next.limited?old:next);
         }
         if (!matchedPose) controls.update();
-        if (dirty) {
-          renderer.render(scene, camera);
-          dirty = false;
-        }
+        if (dirty) { renderer.render(scene, camera); dirty=false; }
       });
       setReady(true);
       setProgress(100);
@@ -256,9 +328,11 @@ export default function CaptureScene() {
       controls.dispose();
       renderer.setAnimationLoop(null);
       renderer.domElement.removeEventListener('webglcontextlost', onLost);
-      mixer?.stopAllAction();
-      if (model) { mixer?.uncacheRoot(model); disposeModel(model); }
+      if (weight) disposeModel(weight);
+      grass?.dispose();
+      if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);
+      comparisonCache.forEach(disposeModel);
       sun.shadow.dispose();
       renderer.dispose();
       renderer.forceContextLoss();
@@ -267,25 +341,31 @@ export default function CaptureScene() {
   }, [open, attempt]);
 
   const close = () => {
-    setOpen(false); setReady(false); setMessage(''); setWind(false); setHasWind(false); setProgress(0); setPhotos([]); setPointCount(0); setSampleBusy(false); setSampleError(false);
+    setOpen(false); setReady(false); setMessage(''); setSpeed(0);setHanging(false);setHasWind(false);setReadout({speed:0,maxTipCm:0,testTipCm:0,limited:0});
+    experiment.current={speed:0,hanging:false,gustAt:-Infinity,startOnLoad:false}; setProgress(0); setPhotos([]); setPointCount(0); setSampleBusy(false); setSampleError(false); setProjected(false);setProjectBusy(false);
+  };
+  const gust = () => {
+    if(ready){actions.current?.free();experiment.current.gustAt=performance.now();}
+    else {experiment.current.startOnLoad=true;setOpen(true);}
   };
   return <section className="capture" aria-label="云谷草坪实拍重建">
     <div className="capture-layout">
       <div className="capture-stage">
-        <img className="capture-poster" src={media + 'near-reference.webp'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
+        <img className="capture-poster" src={media + 'near-reference.webp?v=2'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
         {open && <div className={'capture-webgl' + (ready ? ' loaded' : '')} ref={mount}/>}
-        {!open && <button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/> 进入三维场景</button>}
+        {!open && <div className="capture-start"><button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/>进入三维场景</button><button className="capture-enter capture-wind-start" onClick={gust}><Wind size={17}/>试一次阵风</button></div>}
         {open && !ready && <div className="capture-loading" role="status">{message || (progress >= 98 ? '正在准备三维网格…' : '正在读取场景' + (progress ? ' '+progress+'%' : '…'))}
           {message && <button onClick={()=>{setMessage('');setProgress(0);setAttempt(a=>a+1);}}>重试</button>}
           <button onClick={close}>返回渲染图</button></div>}
       </div>
       <div className="capture-info">
         <h2>草坪与步道</h2>
-        <p>前景路灯、分叉乔木和后方草径来自同一组校园实拍。进入三维后可拖动旋转，滚动或双指缩放。</p>
+        <p>沿步道看三株近树：前树高处分叉，中树冠密而圆，左树的侧枝横向展开。拖动可转动视角。</p>
         <dl><dt>采集素材</dt><dd>13 张照片 · 4 段视频</dd><dt>相机配准</dt><dd>29 个视角 · 7,674 个稀疏点</dd><dt>重建范围</dt><dd>乔木、草坪、步道与灯具</dd><dt>可见性</dt><dd>主树冠顶超出画面，背面枝叶按可见冠形补建。</dd><dt>尺度与动力</dt><dd>模型尺寸使用工程估计。树种、地下根形与枝条刚度尚待现场核对。</dd></dl>
-        <a className="capture-download" href={media+'yungu-lawn.glb'} download><Download size={16}/> 下载三维资产 <span>GLB</span></a>
+        <a className="capture-download" href={media+'yungu-lawn.glb?v=2'} download><Download size={16}/> 下载三维资产 <span>GLB</span></a>
         <a className="capture-contact-link" href={media+'contact-world.xml'} download>下载碰撞模型（MuJoCo）</a>
-        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v1/yungu-campus-scene-source.zip">下载 Blender 工程及生成脚本</a>
+        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v2/yungu-campus-scene-source-v2.zip">下载 Blender 工程及生成脚本</a>
+        <a className="capture-contact-link" href={media+'account-receipts.json?v=2'} target="_blank" rel="noreferrer">查看五账号任务与调用回执</a>
       </div>
     </div>
     {ready && <div className="capture-tools">
@@ -293,10 +373,17 @@ export default function CaptureScene() {
       {photos.length > 1 && <label className="capture-select">照片机位 <select aria-label="照片机位" value={photo} onChange={e=>actions.current?.photograph(e.target.value)}>{photos.map(id=><option key={id} value={id}>{id}</option>)}</select></label>}
       <button onClick={()=>actions.current?.overhead()}><Layers3 size={16}/>俯看布局</button>
       <button disabled={sampleBusy} aria-pressed={pointCount>0} onClick={()=>void actions.current?.samples()}>{sampleBusy?'读取实拍点…':pointCount?'还原三维树冠':'查看实拍采样点'}</button>
-      {sampleError && <span role="status">实拍点读取失败，请重试。</span>}
-      {hasWind && <button aria-pressed={wind} onClick={()=>{actions.current?.motion(!wind);setWind(!wind);}}>{wind?<Pause size={16}/>:<Play size={16}/>} {wind?'暂停风动':'播放风动'}</button>}
+      <button disabled={sampleBusy||projectBusy} aria-pressed={projected} onClick={()=>void actions.current?.projection(photo)}>{projectBusy?'读取照片纹理…':projected?'返回可动冠层':'对照实拍冠层'}</button>
+      {sampleError && <span role="status">实拍对照文件读取失败，请重试。</span>}
+
       <button onClick={close}><RotateCcw size={15}/>返回渲染图</button>
     </div>}
-    <div className="capture-footer"><Box size={15}/><span>{pointCount ? '三株近景树 · '+pointCount.toLocaleString()+' 个实拍三角测量点，空白处缺少观测' : open&&ready?'可交互三维网格':'实拍机位 · 三维渲染'}</span></div>
+    {ready && hasWind && !projected && !pointCount && <div className="capture-forces">
+      <label>背景风速 <input aria-label="背景风速" type="range" min="0" max="10" step=".5" value={speed} onChange={e=>{const v=Number(e.target.value);experiment.current.speed=v;setSpeed(v);}}/><output>{speed.toFixed(1)} m/s</output></label>
+      <button onClick={gust}><Wind size={15}/>施加 3 秒阵风</button>
+      <button aria-pressed={hanging} onClick={()=>{experiment.current.hanging=!hanging;setHanging(!hanging);}}>{hanging?'卸下砝码':'前树枝端挂载 1 kg'}</button>
+      <div className="capture-telemetry">当前气流 <b data-air>{readout.speed.toFixed(1)} m/s</b> · 最大枝端位移 <b data-tip>{readout.maxTipCm.toFixed(1)} cm</b>{hanging && <> · 挂载枝端 <b>{readout.testTipCm.toFixed(1)} cm</b></>}{!!readout.limited && <small> · {readout.limited} 个枝组达到小角度模型上限</small>}</div>
+    </div>}
+    <div className="capture-footer"><Box size={15}/><span>{projected ? '照片 '+photo+' · 纹理来自实拍，局部深度由立体点插值；转动后回到可动模型' : pointCount ? '三株近景树 · '+pointCount.toLocaleString()+' 个多视图采样点，空白处缺少观测' : open&&ready?'可交互三维网格':'实拍机位 · 三维渲染'}</span></div>
   </section>;
 }
