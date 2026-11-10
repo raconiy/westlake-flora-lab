@@ -46,7 +46,7 @@
    curl --fail --silent https://113-240-94-210.sslip.io/health
    systemctl stop westlake-reply-check
    ```
-4. 将 `remote-reply.mjs` 放到活动消费者程序所在目录，再更新同目录的 `community-consumer.mjs`。消费者复用相邻模块中的凭据统计函数。新装时按 unit 中的路径安装两份 JS，D1 消费凭据由 `LoadCredential` 引入。当前服务器的本机 HTTP 端口是 80，unit 的 `LOCAL_RELAY_URL` 应为 `http://127.0.0.1:80`。消费者空闲时重启。公网 `/api/community/health` 应报告新鲜消费者心跳，随后用网页问一个问题并提交一条建议，验证答复和待审提案。执行器数量由消费者心跳报告。
+4. 将 `remote-reply.mjs` 放到活动消费者程序所在目录，再更新同目录的 `community-consumer.mjs`。消费者从回环健康接口读取已核实的可用账号数，管理凭据仅供 HTTP relay 读取。新装时按 unit 中的路径安装两份 JS，D1 消费凭据由 `LoadCredential` 引入。当前服务器的本机 HTTP 端口是 80，unit 的 `LOCAL_RELAY_URL` 应为 `http://127.0.0.1:80`。消费者空闲时重启。公网 `/api/community/health` 应报告新鲜消费者心跳，随后用网页问一个问题并提交一条建议，验证答复和待审提案。执行器数量由消费者心跳报告。
 5. HTTP 回滚可用 `install -m 0644 /opt/remote-reply.previous.mjs /opt/remote-reply.rollback.mjs && mv /opt/remote-reply.rollback.mjs /opt/remote-reply.mjs && systemctl restart westlake-relay`，然后再次核对两个健康入口。若消费者也已更新，使用同次发布前保留的消费者版本恢复，并保留其私有 outbox。
 
 独立测试可在仓库根目录运行 `node --test infra/remote/*.test.mjs infra/community/test/*.test.mjs`。测试使用隔离的回环 HTTP 服务及受控上游响应。

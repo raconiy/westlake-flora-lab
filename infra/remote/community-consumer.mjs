@@ -4,11 +4,9 @@ import {join, resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {setTimeout as sleep} from 'node:timers/promises';
 
-import {countAvailable} from './remote-reply.mjs';
-export {countAvailable};
+export {countAvailable} from './remote-reply.mjs';
 
 const community = 'https://westlake-flora-lab-yungu.sableborage.chatgpt.site/api/community';
-const gateway = 'http://127.0.0.1:3001';
 const maxSlots = 5;
 const heartbeatPeriod = 12_000;
 const maxBody = 17_500; // The D1 API and the local relay both limit JSON body size.
@@ -38,7 +36,7 @@ export function curlConfig(token,body){
 async function communityThroughProxy(url,token,body,proxy){
  const config=curlConfig(token,body);
  return new Promise((resolve,reject)=>{
-  const child=spawn('/usr/bin/curl',['--disable','--silent','--proto','=https','--proxy',proxy,'--noproxy','','--connect-timeout','4','--max-time','10','--write-out','\\n%{http_code}','--config','-',url],{stdio:['pipe','pipe','ignore']});
+  const child=spawn('/usr/bin/curl',['--disable','--silent','--proto','=https','--proxy',proxy,'--noproxy','','--connect-timeout','9','--max-time','18','--write-out','\\n%{http_code}','--config','-',url],{stdio:['pipe','pipe','ignore']});
   let size=0;const chunks=[];
   child.stdout.on('data',chunk=>{
    size+=chunk.length;if(size>1_000_000){child.kill();return;}chunks.push(chunk);
@@ -46,11 +44,11 @@ async function communityThroughProxy(url,token,body,proxy){
   child.on('error',reject);
   child.stdin.on('error',()=>{});
   child.on('close',code=>{
-   if(code!==0||size>1_000_000){reject(Error('Proxy transport failed'));return;}
+   if(code!==0||size>1_000_000){const error=Error('Proxy transport failed');error.name=code?'curl_'+code:'proxy_response_limit';reject(error);return;}
    const output=Buffer.concat(chunks).toString('utf8'),at=output.lastIndexOf('\n');
    const status=Number(output.slice(at+1));
    if(status<200||status>=300){reject(new UpstreamError(status));return;}
-   try{resolve(JSON.parse(output.slice(0,at)));}catch(e){reject(e);}
+   try{resolve(JSON.parse(output.slice(0,at)));}catch{reject(new UpstreamError(502));}
   });
   child.stdin.end(config);
  });
@@ -148,9 +146,14 @@ export function createConsumer({dir,callCommunity,probe,complete,report=log,now=
   await saveReceipt(dir,job.id,body);
  }
  async function tick(){
-  if(now()>=healthDue)await publishHealth();
-  if(!await deliver())return;
-  while(active.size<capacity){
+  // A failed heartbeat must never strand an answer already saved on disk.
+  const [health,delivery]=await Promise.allSettled([
+   now()>=healthDue?publishHealth():Promise.resolve(),deliver()
+  ]);
+  if(health.status==='rejected'){report('heartbeat-deferred',{error:failureCode(health.reason)});throw health.reason;}
+  if(delivery.status==='rejected')throw delivery.reason;
+  if(!delivery.value)return;
+  for(let claimed=0;claimed<maxSlots&&active.size<capacity&&now()<healthDue;claimed++){
    const {job}=await callCommunity('/relay/claim',{});
    if(!job)break;
    if(!idPattern.test(job.id)||typeof job.leaseToken!=='string'||!job.leaseToken||active.has(job.id))throw Error('Invalid lease');
@@ -168,8 +171,7 @@ async function main(){
  const relayToken=process.env.COMMUNITY_RELAY_TOKEN;
  if(!credentials||!state||!relayToken)throw Error('Required consumer service configuration is missing');
  const d1=(await readFile(join(credentials,'community-token'),'utf8')).trim();
- const admin=(await readFile(join(credentials,'gateway-status-token'),'utf8')).trim();
- if(!d1||!admin)throw Error('Required credential file is empty');
+ if(!d1)throw Error('Required credential file is empty');
  const relay=new URL(process.env.LOCAL_RELAY_URL||'http://127.0.0.1:80');
  if(relay.protocol!=='http:'||relay.hostname!=='127.0.0.1'||relay.username||relay.password||relay.pathname!=='/'||relay.search||relay.hash)throw Error('Expected loopback relay origin');
  const proxy=process.env.COMMUNITY_HTTPS_PROXY;
@@ -178,9 +180,10 @@ async function main(){
   callCommunity:(path,body)=>proxy?communityThroughProxy(community+path,d1,body,proxy):json(community+path,{token:d1,body}),
   complete:body=>json(relay.origin+'/complete',{token:relayToken,body,timeout:175_000}),
   probe:async()=>{
-   const [health,credentials]=await Promise.all([json(relay.origin+'/health'),json(gateway+'/api/groups/1/credentials',{token:admin})]);
-   if(health?.ok!==true)throw Error('Local relay unavailable');
-   return countAvailable(credentials);
+   const health=await json(relay.origin+'/health');
+   if(health?.ok!==true||health.capacitySource!=='gpt-load-management'||
+       !Number.isSafeInteger(health.availableAccounts)||health.availableAccounts<0)throw Error('Unverified relay capacity');
+   return health.availableAccounts;
   }});
  const controller=new AbortController();
  const stop=()=>controller.abort();

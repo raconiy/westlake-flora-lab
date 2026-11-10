@@ -70,6 +70,22 @@ test('large Chinese replies and proposals fit D1 byte limits without breaking Un
  assert.throws(()=>completionBody('lease',{reply:'已收到建议，但没有生成可展示的回复。'}));
 });
 
+test('a failed heartbeat still delivers the existing result without another model call',async t=>{
+ const dir=await directory(t),work=[job()];
+ let clock=0,offline=false,calls=0,deliveries=0;
+ const consumer=createConsumer({dir,now:()=>clock,probe:async()=>1,report:()=>{},
+  complete:async()=>{calls++;return {reply:'已完成'};},
+  callCommunity:async path=>{
+   if(path==='/relay/heartbeat'){if(offline)throw new Error('heartbeat interrupted');return {};}
+   if(path==='/relay/claim')return {job:work.shift()||null};
+   deliveries++;return {};
+  }});
+ await consumer.tick();await consumer.drain();
+ clock=13_000;offline=true;
+ await assert.rejects(consumer.tick(),/heartbeat interrupted/);
+ assert.equal(deliveries,1);assert.equal(calls,1);assert.deepEqual(await readdir(dir),[]);
+});
+
 test('curl reads the private config over stdin and preserves quoted, multiline member text',async t=>{
  const data={reply:'「叶片」\n"quoted"\\path\tline',suggestions:[]};
  const received=Promise.withResolvers();

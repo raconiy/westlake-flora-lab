@@ -11,7 +11,6 @@ UnsetEnvironment=GPT_LOAD_ACCESS_KEY
 Environment=COMMUNITY_HTTPS_PROXY=http://127.0.0.1:7897
 Environment=LOCAL_RELAY_URL=http://127.0.0.1:80
 LoadCredential=community-token:/etc/westlake-community/community-relay.key
-LoadCredential=gateway-status-token:/var/lib/gpt-load/auth.key
 StateDirectory=westlake-community-consumer
 StateDirectoryMode=0700
 WorkingDirectory=/opt/westlake-flora-pages
