@@ -1,0 +1,158 @@
+"""Refit existing terminal growth units as supported, nonuniform leafy clusters."""
+import bpy,sys,json,hashlib
+from pathlib import Path
+import numpy as np
+args=sys.argv[sys.argv.index('--')+1:]
+unit_path,resource_path,sky_path,out=map(Path,args[:4])
+mode=args[4] if len(args)>4 else "resource"
+if mode not in ("resource","direction","photo-direction"):raise ValueError("Unknown bounded candidate")
+out.mkdir(parents=True,exist_ok=True)
+U=np.load(unit_path);R=np.load(resource_path);S=np.load(sky_path)
+names=('tree.foreground.forked','tree.mid-fork','tree.left-spreading')
+report={'basis':'Spatially varying terminal shoot resources and orientation around existing parent branches. Static reconstruction, not a field measured growth history.','changes':{},'woodySegmentsRemoved':0,'mode':mode}
+rng=np.random.default_rng(71991);changed=[];extras={}
+def vertices(mesh):
+ p=np.empty((len(mesh.vertices),3),np.float32);mesh.vertices.foreach_get('co',p.ravel());return p
+def unit(x):return x/np.maximum(1e-10,np.linalg.norm(x,axis=-1,keepdims=True))
+def world(p,m):
+ w=p@m[:3,:3].T+m[:3,3];return w[...,[0,2,1]]*[1,1,-1]
+def rotations(old,new):
+ a=unit(old);b=unit(new);v=np.cross(a,b);c=np.clip((a*b).sum(axis=1),-1,1)
+ # Stable quaternion rotation, bounded below antiparallel by the target blend.
+ q=unit(np.column_stack([v,1+c]));x,y,z,w=q.T
+ return np.stack([1-2*y*y-2*z*z,2*x*y-2*z*w,2*x*z+2*y*w,
+ 2*x*y+2*z*w,1-2*x*x-2*z*z,2*y*z-2*x*w,
+ 2*x*z-2*y*w,2*y*z+2*x*w,1-2*x*x-2*y*y],axis=1).reshape(-1,3,3)
+def sky_confidence(p,view):
+ m=S['matrix_'+view];fx,fy,px,py,k=S['optics_'+view]
+ q=(p-m[:3,3])@m[:3,:3];depth=-q[...,2];valid=depth>.05
+ uv=q[...,:2]/np.where(valid,depth,1)[...,None]
+ uv*=1+k*(uv*uv).sum(axis=-1,keepdims=True)
+ x=uv[...,0]*fx+px;y=-uv[...,1]*fy+py
+ inside=valid&(x>1)&(x<1022)&(y>1)&(y<766)
+ return S['sky_'+view][np.rint(y.clip(0,767)).astype(int),np.rint(x.clip(0,1023)).astype(int)]*inside
+def surface(v):
+ total=np.zeros(len(v))
+ for a,b,c in [(0,1,2),(0,2,3),(1,4,2),(2,4,3)]:
+  total+=.5*np.linalg.norm(np.cross(v[:,b]-v[:,a],v[:,c]-v[:,a]),axis=1)
+ return total
+def new_leaf_mesh(source,v,colors,indices):
+ v=v[indices];n=len(v);mesh=bpy.data.meshes.new(source.name+'.r7')
+ faces=(np.arange(n)[:,None,None]*5+np.array([[0,1,2],[0,2,3],[1,4,2],[2,4,3]])).reshape(-1,3)
+ mesh.from_pydata(v.reshape(-1,3).tolist(),[],faces.tolist())
+ for material in source.materials:mesh.materials.append(material)
+ color=mesh.color_attributes.new('Blade pigments','BYTE_COLOR','POINT')
+ mesh.color_attributes.active_color=color;color.data.foreach_set('color_srgb',colors[indices].ravel());mesh.update()
+ return mesh
+web={}
+for label,tree in enumerate(names):
+ for joint in bpy.data.objects[tree].children:
+  if not joint.get('wind_joint'):continue
+  leaf=next(o for o in joint.children if '.volume-leaves.' in o.name)
+  wood=next(o for o in joint.children if '.volume-branchlets.' in o.name)
+  key=leaf.name;paths=U[key+'::path'];indices=U[key+'::segments'];resources=R[key+'::resource']
+  w=vertices(wood.data).reshape(-1,2,4,3);original_wood=w.copy();ends=w.mean(axis=2)
+  radius=np.linalg.norm(w-ends[:,:,None],axis=3).mean(axis=2)
+  supports=np.flatnonzero((abs(radius[:,0]/.004-1)<.18)&(abs(radius[:,1]/.0029-1)<.18))
+  parent=supports[np.clip(np.searchsorted(supports,indices)-1,0,len(supports)-1)]
+  tangent=unit(ends[parent,1]-ends[parent,0])
+  old_axis=unit(paths[:,2]-paths[:,0])
+  alignment=[.38,.23,.48][label]
+  target=unit(old_axis*(1-alignment)+tangent*alignment+np.array([0,0,.07 if label!=2 else -.025]))
+  rot=rotations(old_axis,target)
+  extent=(.97+.06*resources) if mode in ("direction","photo-direction") else (.87+.22*resources)
+  moved=paths[:,0,None]+np.einsum('nij,nkj->nki',rot,paths-paths[:,0,None])*extent[:,None,None]
+  m=np.array(leaf.matrix_world);proposed=world(moved,m)
+  votes=[np.max(sky_confidence(proposed,v),axis=1)>=12 for v in S['views']]
+  original=world(paths,m);prior=[np.max(sky_confidence(original,v),axis=1)>=12 for v in S['views']]
+  guarded=(np.sum(votes,axis=0)>=2)&(np.sum(prior,axis=0)<2)
+  rot[guarded]=np.eye(3);extent[guarded]=1
+  # Root rings and all main branch attachments remain at their exact original centre.
+  for offset in [0,1]:
+   old=w[indices+offset].copy()
+   base=paths[:,0,None,None]
+   w[indices+offset]=base+np.einsum('nij,nklj->nkli',rot,old-base)*extent[:,None,None,None]
+  wood.data.vertices.foreach_set('co',w.astype('f').ravel());wood.data.update()
+  v=vertices(leaf.data).reshape(-1,5,3)
+  group=U[key+'::unit'];path=paths[group]
+  delta=path[:,1:]-path[:,:2];t=np.clip(((v[:,0,None]-path[:,:2])*delta).sum(axis=2)/(delta*delta).sum(axis=2),0,1)
+  error=np.linalg.norm(v[:,0,None]-(path[:,:2]+delta*t[:,:,None]),axis=2).min(axis=1)
+  unmatched=error>.003
+  repaired=int(unmatched.sum());max_repair=0.
+  for li in np.flatnonzero(unmatched):
+   a=paths[:,:2];delta_all=paths[:,1:]-a
+   tt=np.clip(((v[li,0]-a)*delta_all).sum(axis=2)/(delta_all*delta_all).sum(axis=2),0,1)
+   nearest=a+tt[:,:,None]*delta_all
+   distances=np.linalg.norm(v[li,0]-nearest,axis=2)
+   ui,si=np.unravel_index(distances.argmin(),distances.shape)
+   correction=nearest[ui,si]-v[li,0]
+   if np.linalg.norm(correction)>.025:raise ValueError('Leaf too far from any original support')
+   group[li]=ui;v[li]+=correction
+   max_repair=max(max_repair,float(np.linalg.norm(correction)))
+  unmatched[:]=False
+  before=surface(v).sum()
+  center=paths[group,0,None];vnew=center+np.einsum('nij,nkj->nki',rot[group],v-center)*extent[group,None,None]
+  vnew[unmatched]=v[unmatched]
+  leaf_guard=np.zeros(len(paths),bool)
+  if mode=="photo-direction":
+   # The actual blade tips, edges and centroids constrain pose, not only shoot centrelines.
+   # A reliable sky observation is a visibility veto; unknown/occluded is not empty.
+   old_samples=np.concatenate([v,v.mean(axis=1,keepdims=True)],axis=1)
+   new_samples=np.concatenate([vnew,vnew.mean(axis=1,keepdims=True)],axis=1)
+   for view in ['01','06']:
+    before_sky=sky_confidence(world(old_samples,m),view)>=12
+    after_sky=sky_confidence(world(new_samples,m),view)>=12
+    newly_sky=(after_sky&~before_sky).sum(axis=1)
+    np.logical_or.at(leaf_guard,group,newly_sky>0)
+   # Revert the WHOLE supported terminal shoot, never just its blade geometry.
+   for offset in [0,1]:
+    selected=indices[leaf_guard]+offset
+    source=U[key+'::path'][leaf_guard]
+    # Directly reload original selected ring vertices recorded before transformation.
+    w[selected]=original_wood[selected]
+   wood.data.vertices.foreach_set('co',w.astype('f').ravel());wood.data.update()
+   vnew[leaf_guard[group]]=v[leaf_guard[group]]
+   rot[leaf_guard]=np.eye(3);extent[leaf_guard]=1
+  # Lower resource growth units carry fewer expanded leaves at this photographed state.
+  # Persistent IDs are used for reconstruction decisions; no time animation toggles them.
+  fractions=[.42,.73,.49][label]+(1-np.array([.42,.73,.49])[label])*resources[group]
+  ids=np.arange(len(v),dtype=np.uint64)
+  random=((ids*2654435761+71991)%4294967291).astype(float)/4294967291
+  keep=np.ones(len(v),dtype=bool) if mode in ("direction","photo-direction") else ((random<fractions)|unmatched)
+  # Width/length vary by growth unit, while preserving each blade's own petiole.
+  lamina=np.ones(len(v)) if mode in ("direction","photo-direction") else (.82+.27*resources[group])
+  vnew=vnew[:,0,None]+(vnew-vnew[:,0,None])*lamina[:,None,None]
+  vnew[unmatched]=v[unmatched]
+  after=surface(vnew[keep]).sum()
+  colors=np.empty((len(v),5,4),'f');leaf.data.color_attributes.active_color.data.foreach_get('color_srgb',colors.ravel())
+  chosen=np.flatnonzero(keep)
+  leaf.data=new_leaf_mesh(leaf.data,vnew,colors,chosen);leaf['physical_blades']=len(chosen)
+  leaf['reconstruction_basis']='Terminal growth units on retained wood, with local cluster resources and photo sky limits. No field-measured leaf age.'
+  joint['leaf_area_m2']=float(joint['leaf_area_m2'])*after/before
+  extras[joint.name]={'leaf_area_m2':joint['leaf_area_m2']}
+  stride=2 if label==0 else 4 if label==1 else 3
+  web[leaf.name]=(chosen%stride==0,stride)
+  changed.extend([wood.name,leaf.name])
+  report['changes'][key]={'growthUnits':len(paths),'parentBranches':len(np.unique(parent)),'sourceBlades':len(v),'resultBlades':len(chosen),
+   'areaRatio':float(after/before),'nonUniformResources':np.quantile(resources,[.05,.5,.95]).tolist(),
+   'maxTerminalRotationDeg':float(np.max(np.degrees(np.arccos(np.clip((old_axis*target).sum(axis=1),-1,1))))),
+   'unitMotionVetoedByPhotoSky':int(guarded.sum()),'unitMotionVetoedByActualLeafBounds':int(leaf_guard.sum()),'terminalLengthScaleRange':[float(extent.min()),float(extent.max())],'repairedPreexistingLeafAttachments':repaired,'maxAttachmentRepairM':max_repair,'woodSegmentsPreserved':len(w)}
+  print('BUILT',key,report['changes'][key],flush=True)
+bpy.context.view_layer.update();bpy.context.preferences.filepaths.save_version=0
+blend=out/'shoot-clusters.blend';bpy.ops.wm.save_as_mainfile(filepath=str(blend),compress=True,copy=True)
+for name,(selected,stride) in web.items():
+ leaf=bpy.data.objects[name];mesh=leaf.data;v=vertices(mesh).reshape(-1,5,3);n=len(v)
+ colors=np.empty((n,5,4),'f');mesh.color_attributes.active_color.data.foreach_get('color_srgb',colors.ravel())
+ # Same stable web sample and prior broadleaf LOD as the baseline.
+ mid=v[:,2,None].copy()
+ for side in (1,3):v[:,side:side+1]=mid+(v[:,side:side+1]-mid)*(1.15 if stride>2 else 1.06)
+ leaf.data=new_leaf_mesh(mesh,v,colors,np.flatnonzero(selected));leaf['full_blades']=n;leaf['physical_blades']=int(selected.sum())
+ report['changes'][name]['webBlades']=int(selected.sum())
+bpy.ops.object.select_all(action='DESELECT')
+for name in changed:
+ ob=bpy.data.objects[name]
+ while ob is not None:ob.select_set(True);ob=ob.parent
+bpy.ops.export_scene.gltf(filepath=str(out/'shoot-clusters-raw.glb'),export_format='GLB',use_selection=True,export_extras=True,export_cameras=False,export_lights=False,export_animations=False)
+with blend.open('rb') as f:report['blendSha256']=hashlib.file_digest(f,'sha256').hexdigest()
+report['changedObjects']=changed;report['updatedJoints']=extras
+(out/'shoot-clusters.json').write_text(json.dumps(report,indent=2))

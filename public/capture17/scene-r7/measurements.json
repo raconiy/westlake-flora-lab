@@ -1,0 +1,53 @@
+{
+  "version": "R7",
+  "scope": "Registered scene refinement; not a reconstructed biological growth history",
+  "accepted": [
+    "E grass geometry/LOD and common wind field",
+    "77 native leaf attachments;37 visible in web LOD",
+    "Source-01 foreground-limited bark sampling with anisotropic filtering"
+  ],
+  "notAccepted": [
+    "A2/B/C/Cguard whole-crown rearrangement",
+    "Bark inverse-lighting candidates (supported highlight / angular support bounds)"
+  ],
+  "tradeoffs": [
+    "E grass has regional texture/luma regressions; not a universal non-regression pass",
+    "Bark high-frequency detail improves; mean luminance in the three inspected ROIs remains farther from photo",
+    "Photo ROIs reused after inspecting earlier candidates: not new blind data"
+  ],
+  "groundTruthLimits": [
+    "Root coordinates are fixed model positions, not survey measurements",
+    "Scene scale uses an assumed lamp height",
+    "Unknown branches, backside bark, blade sizes and stiffness remain engineering priors",
+    "MuJoCo colliders remain static under the web wind animation"
+  ],
+  "sources": [
+    {
+      "title": "Self-organizing tree models for image synthesis (2009)",
+      "url": "https://www.algorithmicbotany.org/papers/selforg.sig2009.html",
+      "use": "Research constraint; candidate shape changes rejected, not a calibrated biological simulator"
+    },
+    {
+      "title": "Real-Time Grass (2015)",
+      "url": "https://jcgt.org/published/0004/01/02/",
+      "use": "Geometric vegetation and continuous LOD reference"
+    },
+    {
+      "title": "Rich Intrinsic Image Decomposition of Outdoor Scenes from Multiple Views",
+      "url": "https://www-sop.inria.fr/reves/Basilic/2013/LBD13/LDB_TVCG12-paper.pdf",
+      "use": "Separating reflectance and illumination requires evidence absent here; simple harmonic test rejected"
+    }
+  ],
+  "evidence": [
+    "grass.json",
+    "grass-object-id.json",
+    "grass-photo-metrics.json",
+    "grass-wind.json",
+    "grass-rest.json",
+    "grass-contact.json",
+    "leaf-attachment-native.json",
+    "leaf-attachment-web.json",
+    "bark-filter.json",
+    "bark-sampling.json"
+  ]
+}

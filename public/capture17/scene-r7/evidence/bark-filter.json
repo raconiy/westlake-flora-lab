@@ -1,0 +1,77 @@
+[
+  {
+    "roi": [
+      570,
+      410,
+      581,
+      470
+    ],
+    "scope": "post-inspection fixed lower-stem crops; not blind evaluation",
+    "photo": {
+      "meanLuma": 0.534827128936423,
+      "verticalAdjacentDifference": 0.06670439832019094
+    },
+    "R6": {
+      "meanLuma": 0.4505858383838383,
+      "verticalAdjacentDifference": 0.01669118825342155
+    },
+    "A2": {
+      "meanLuma": 0.417141092097445,
+      "verticalAdjacentDifference": 0.01670791866823771
+    },
+    "A3": {
+      "meanLuma": 0.4135166856803328,
+      "verticalAdjacentDifference": 0.04077701682830297
+    }
+  },
+  {
+    "roi": [
+      571,
+      480,
+      583,
+      540
+    ],
+    "scope": "post-inspection fixed lower-stem crops; not blind evaluation",
+    "photo": {
+      "meanLuma": 0.5614322026143791,
+      "verticalAdjacentDifference": 0.05354691370333444
+    },
+    "R6": {
+      "meanLuma": 0.47401924074074075,
+      "verticalAdjacentDifference": 0.012633431926442893
+    },
+    "A2": {
+      "meanLuma": 0.43915954030501086,
+      "verticalAdjacentDifference": 0.013264621690484103
+    },
+    "A3": {
+      "meanLuma": 0.43451941503267977,
+      "verticalAdjacentDifference": 0.03121809460507367
+    }
+  },
+  {
+    "roi": [
+      576,
+      560,
+      588,
+      600
+    ],
+    "scope": "post-inspection fixed lower-stem crops; not blind evaluation",
+    "photo": {
+      "meanLuma": 0.46020541339869275,
+      "verticalAdjacentDifference": 0.06266454499748618
+    },
+    "R6": {
+      "meanLuma": 0.3051039558823529,
+      "verticalAdjacentDifference": 0.01745771577006871
+    },
+    "A2": {
+      "meanLuma": 0.29540899509803914,
+      "verticalAdjacentDifference": 0.0172845466733702
+    },
+    "A3": {
+      "meanLuma": 0.28882763071895423,
+      "verticalAdjacentDifference": 0.035934347243170774
+    }
+  }
+]

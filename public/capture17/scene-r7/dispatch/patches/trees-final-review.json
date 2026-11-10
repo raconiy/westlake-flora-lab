@@ -1,0 +1,635 @@
+{
+  "decision": "Reject broad crown transformations; retain only 77 actual connection repairs.",
+  "adoptedImplementationCredit": "Local tree engineer; model outputs supplied checks, not a validated broad shape implementation.",
+  "repair": {
+    "baseSha256": "53806f44e536a3c018b63d68378a6253a76bdd05177b59827dc25d2fbe280b1d",
+    "candidateSha256": "c59fb88a767b59eb3438b0ae7fe2c573acda4206ce32d46f95b9f0c5891d99d3",
+    "investigatedAttachments": 85,
+    "changedBlades": 77,
+    "changedWebSelectedBlades": 37,
+    "alreadyExactAfterExhaustiveAssociation": 8,
+    "allWoodGroundMaterialsOtherObjectsAndRootTransformsExact": true,
+    "wholeBladeTranslationOnly": true,
+    "rows": [
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.0",
+        "changedBladeIds": [
+          757,
+          758,
+          759,
+          760,
+          761,
+          5872,
+          5873,
+          6062,
+          6063,
+          6064,
+          6065,
+          6066,
+          6070,
+          6124,
+          6125,
+          6563,
+          6564,
+          6565,
+          6566,
+          6662,
+          6663,
+          8047,
+          8048,
+          8049,
+          8054,
+          8087,
+          8088,
+          8089,
+          8090,
+          8095,
+          8096,
+          8097,
+          8102,
+          8103,
+          8104,
+          8613,
+          8614,
+          8619,
+          8620,
+          8621,
+          8622,
+          8623,
+          8700,
+          8701,
+          8702,
+          8706,
+          8767,
+          8768,
+          8769,
+          8770,
+          8771,
+          13400,
+          21556,
+          22666,
+          23544,
+          29379,
+          29380,
+          31824,
+          31930,
+          32542
+        ],
+        "unchangedBlades": 32959,
+        "maxFixedAttachmentGapM": 1.2013700256829907e-07
+      },
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.1",
+        "changedBladeIds": [],
+        "unchangedBlades": 11810,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.2",
+        "changedBladeIds": [
+          7624
+        ],
+        "unchangedBlades": 11097,
+        "maxFixedAttachmentGapM": 0.0
+      },
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.3",
+        "changedBladeIds": [],
+        "unchangedBlades": 43880,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.4",
+        "changedBladeIds": [
+          15863,
+          28163
+        ],
+        "unchangedBlades": 45400,
+        "maxFixedAttachmentGapM": 1.1920928955078125e-07
+      },
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.5",
+        "changedBladeIds": [],
+        "unchangedBlades": 50889,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.6",
+        "changedBladeIds": [],
+        "unchangedBlades": 15604,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.foreground.forked.volume-leaves.7",
+        "changedBladeIds": [],
+        "unchangedBlades": 636,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.left-spreading.volume-leaves.0",
+        "changedBladeIds": [],
+        "unchangedBlades": 420,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.left-spreading.volume-leaves.1",
+        "changedBladeIds": [],
+        "unchangedBlades": 3112,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.left-spreading.volume-leaves.2",
+        "changedBladeIds": [
+          29253,
+          29720,
+          29938
+        ],
+        "unchangedBlades": 56932,
+        "maxFixedAttachmentGapM": 8.940696716308594e-08
+      },
+      {
+        "mesh": "tree.left-spreading.volume-leaves.3",
+        "changedBladeIds": [
+          38349
+        ],
+        "unchangedBlades": 89352,
+        "maxFixedAttachmentGapM": 8.940696716308594e-08
+      },
+      {
+        "mesh": "tree.left-spreading.volume-leaves.4",
+        "changedBladeIds": [],
+        "unchangedBlades": 63,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.left-spreading.volume-leaves.5",
+        "changedBladeIds": [
+          31763
+        ],
+        "unchangedBlades": 43627,
+        "maxFixedAttachmentGapM": 0.0
+      },
+      {
+        "mesh": "tree.mid-fork.volume-leaves.0",
+        "changedBladeIds": [
+          11425
+        ],
+        "unchangedBlades": 22589,
+        "maxFixedAttachmentGapM": 0.0
+      },
+      {
+        "mesh": "tree.mid-fork.volume-leaves.1",
+        "changedBladeIds": [],
+        "unchangedBlades": 41802,
+        "maxFixedAttachmentGapM": 0
+      },
+      {
+        "mesh": "tree.mid-fork.volume-leaves.2",
+        "changedBladeIds": [
+          20234,
+          32175
+        ],
+        "unchangedBlades": 39667,
+        "maxFixedAttachmentGapM": 1.1920928955078125e-07
+      },
+      {
+        "mesh": "tree.mid-fork.volume-leaves.3",
+        "changedBladeIds": [
+          22189,
+          61629
+        ],
+        "unchangedBlades": 94151,
+        "maxFixedAttachmentGapM": 6.143906006172983e-08
+      },
+      {
+        "mesh": "tree.mid-fork.volume-leaves.4",
+        "changedBladeIds": [
+          8847,
+          39586,
+          41450
+        ],
+        "unchangedBlades": 55014,
+        "maxFixedAttachmentGapM": 1.4901161193847656e-08
+      },
+      {
+        "mesh": "tree.mid-fork.volume-leaves.5",
+        "changedBladeIds": [
+          10546
+        ],
+        "unchangedBlades": 38682,
+        "maxFixedAttachmentGapM": 2.9802322387695312e-08
+      }
+    ]
+  },
+  "repairReportSha256": "9eeb2ef287b58c7f03d9cc34bf3c073337f487c44482c458d643fbeb5335c26a",
+  "rejectedCandidateCguard": {
+    "candidate": "Cguard",
+    "sourceBlendSha256": "ccd8e2dd2ce70925218add1854175152ca26ab9e9a06a07863313b44b15abd15",
+    "protocolSourceSha256": "a5c3f67c295ba578889170fb3d716491eb7f30fddbefe6bf1f89e7c4fe85ad7c",
+    "method": "Frozen R6 manual projected tree ROIs, mutually exclusive support eroded2px, upper216rows, confident photo gap/crown eroded1px; n>=64. Fixed classifier, no candidate-tuned thresholds or realignment. Native1280x960 uniformly Lanczos downsampled to registered1024x768. Crown includes wood+foliage; these are pixel disagreement rates, not geometric or biological truth.",
+    "limits": "All four photos have historical modelling exposure. These are common-support reference comparisons; none is claimed globally unseen. Unknown simulation pixels on known photo supports are errors; missing supports are null.",
+    "sources": {
+      "01": {
+        "photoSha256": "c0c57382d02e74e0ee05587964fe9adcba9224037d9c208a41aecd1a2b562333",
+        "R6Sha256": "1f8ccfac93b5904d6bce29399db9b4fa93ea71787c2b7267dbaa7f38d49dd80b",
+        "candidateSha256": "c8ab284aafe39612d6cd7c385cf338a5260a1b986aa23f1e2ec9cf2905c0c505",
+        "sameCameraMatrix": true,
+        "validSkyAnchors": [
+          true,
+          true,
+          true
+        ]
+      },
+      "06": {
+        "photoSha256": "435503b37a347e0487147481bad3aeacfcc0520f32437835a5c551d78d64ca69",
+        "R6Sha256": "97352bed631b512207bd5fd773861aa62c63cb9249d8d604aca89175fb66cccf",
+        "candidateSha256": "8d8d85c924dfd541ebecba2da9ce7026680b95fde855d7651f7a89794dae6c0b",
+        "sameCameraMatrix": true,
+        "validSkyAnchors": [
+          true,
+          true,
+          true
+        ]
+      },
+      "10": {
+        "photoSha256": "95fa271d85abe63b7a59ba2d2b7f299ac395ee6e3a51a1da6d574c87c1151abe",
+        "R6Sha256": "1c0d09a81b888fa30390d2f2a441a4a9f9e3f494d1754271497a3e97496a4259",
+        "candidateSha256": "9e6109debabed00a1ebb19137ed18331d0e3f98287c4f575c16607f8941f3066",
+        "sameCameraMatrix": true,
+        "validSkyAnchors": [
+          true,
+          true,
+          true
+        ]
+      },
+      "13": {
+        "photoSha256": "756f8d71a1fcd49f1008bded97f9230e09aaa788614c66fc908f227c790ee397",
+        "R6Sha256": "b2975beef61c407636839d1efe13f4cbcacea2895a0b39f9adcfd7dc7a9e5981",
+        "candidateSha256": "52742991eed9b04cf5884d0258eac78c29082b52647f7081aac698660e9355a3",
+        "sameCameraMatrix": true,
+        "validSkyAnchors": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "windows": [
+      {
+        "camera": "01",
+        "tree": "foreground",
+        "supportPixels": 80591,
+        "classes": {
+          "gap": {
+            "pixels": 6566,
+            "R6": 0.46512336277794697,
+            "Cguard": 0.46009747182455074
+          },
+          "crown": {
+            "pixels": 62150,
+            "R6": 0.08748189863234113,
+            "Cguard": 0.09021721641190672
+          }
+        }
+      },
+      {
+        "camera": "01",
+        "tree": "middle",
+        "supportPixels": 137,
+        "classes": {
+          "gap": {
+            "pixels": 119,
+            "R6": 0.9243697478991597,
+            "Cguard": 0.907563025210084
+          },
+          "crown": {
+            "pixels": 6,
+            "R6": null,
+            "Cguard": null
+          }
+        }
+      },
+      {
+        "camera": "01",
+        "tree": "left",
+        "supportPixels": 14270,
+        "classes": {
+          "gap": {
+            "pixels": 2007,
+            "R6": 0.1071250622820129,
+            "Cguard": 0.09915296462381662
+          },
+          "crown": {
+            "pixels": 9971,
+            "R6": 0.09647979139504559,
+            "Cguard": 0.1019957877845753
+          }
+        }
+      },
+      {
+        "camera": "06",
+        "tree": "foreground",
+        "supportPixels": 21909,
+        "classes": {
+          "gap": {
+            "pixels": 5805,
+            "R6": 0.39913867355727817,
+            "Cguard": 0.3922480620155039
+          },
+          "crown": {
+            "pixels": 12164,
+            "R6": 0.028033541598158518,
+            "Cguard": 0.02260769483722458
+          }
+        }
+      },
+      {
+        "camera": "06",
+        "tree": "middle",
+        "supportPixels": 18397,
+        "classes": {
+          "gap": {
+            "pixels": 181,
+            "R6": 0.6740331491712708,
+            "Cguard": 0.6519337016574586
+          },
+          "crown": {
+            "pixels": 17699,
+            "R6": 0.015481100627154132,
+            "Cguard": 0.0171196112774733
+          }
+        }
+      },
+      {
+        "camera": "06",
+        "tree": "left",
+        "supportPixels": 53581,
+        "classes": {
+          "gap": {
+            "pixels": 1271,
+            "R6": 0.28874901652242324,
+            "Cguard": 0.2879622344610543
+          },
+          "crown": {
+            "pixels": 48023,
+            "R6": 0.09122712033817126,
+            "Cguard": 0.07958686462736608
+          }
+        }
+      },
+      {
+        "camera": "10",
+        "tree": "foreground",
+        "supportPixels": 36054,
+        "classes": {
+          "gap": {
+            "pixels": 9298,
+            "R6": 0.5880834588083459,
+            "Cguard": 0.5838890083889008
+          },
+          "crown": {
+            "pixels": 19810,
+            "R6": 0.028218071680969237,
+            "Cguard": 0.02417970721857643
+          }
+        }
+      },
+      {
+        "camera": "10",
+        "tree": "middle",
+        "supportPixels": 28805,
+        "classes": {
+          "gap": {
+            "pixels": 1109,
+            "R6": 0.3408476104598738,
+            "Cguard": 0.33994589720468893
+          },
+          "crown": {
+            "pixels": 26853,
+            "R6": 0.043458831415484345,
+            "Cguard": 0.04275127546270441
+          }
+        }
+      },
+      {
+        "camera": "10",
+        "tree": "left",
+        "supportPixels": 32074,
+        "classes": {
+          "gap": {
+            "pixels": 1738,
+            "R6": 0.31645569620253167,
+            "Cguard": 0.32163406214039125
+          },
+          "crown": {
+            "pixels": 26587,
+            "R6": 0.027532252604656415,
+            "Cguard": 0.022341745966073634
+          }
+        }
+      },
+      {
+        "camera": "13",
+        "tree": "foreground",
+        "supportPixels": 36499,
+        "classes": {
+          "gap": {
+            "pixels": 10133,
+            "R6": 0.6396920951347084,
+            "Cguard": 0.6399881575051811
+          },
+          "crown": {
+            "pixels": 18116,
+            "R6": 0.03808787811879,
+            "Cguard": 0.0365422830646942
+          }
+        }
+      },
+      {
+        "camera": "13",
+        "tree": "middle",
+        "supportPixels": 34669,
+        "classes": {
+          "gap": {
+            "pixels": 856,
+            "R6": 0.49766355140186913,
+            "Cguard": 0.5105140186915889
+          },
+          "crown": {
+            "pixels": 33090,
+            "R6": 0.037685101239045005,
+            "Cguard": 0.0364762768207918
+          }
+        }
+      },
+      {
+        "camera": "13",
+        "tree": "left",
+        "supportPixels": 31622,
+        "classes": {
+          "gap": {
+            "pixels": 4564,
+            "R6": 0.42550394390885193,
+            "Cguard": 0.42966695880806305
+          },
+          "crown": {
+            "pixels": 23097,
+            "R6": 0.0385331428324025,
+            "Cguard": 0.029570939948911135
+          }
+        }
+      }
+    ],
+    "byCameraMeanOfEligibleTrees": {
+      "01": {
+        "gap": {
+          "eligibleWindows": 3,
+          "R6": 0.4988727243197066,
+          "Cguard": 0.48893782055281704
+        },
+        "crown": {
+          "eligibleWindows": 2,
+          "R6": 0.09198084501369336,
+          "Cguard": 0.09610650209824101
+        }
+      },
+      "06": {
+        "gap": {
+          "eligibleWindows": 3,
+          "R6": 0.4539736130836574,
+          "Cguard": 0.44404799937800554
+        },
+        "crown": {
+          "eligibleWindows": 3,
+          "R6": 0.04491392085449464,
+          "Cguard": 0.039771390247354654
+        }
+      },
+      "10": {
+        "gap": {
+          "eligibleWindows": 3,
+          "R6": 0.4151289218235838,
+          "Cguard": 0.4151563225779937
+        },
+        "crown": {
+          "eligibleWindows": 3,
+          "R6": 0.033069718567036666,
+          "Cguard": 0.029757576215784825
+        }
+      },
+      "13": {
+        "gap": {
+          "eligibleWindows": 3,
+          "R6": 0.5209531968151432,
+          "Cguard": 0.526723045001611
+        },
+        "crown": {
+          "eligibleWindows": 3,
+          "R6": 0.03810204073007917,
+          "Cguard": 0.03419649994479904
+        }
+      }
+    }
+  },
+  "rasterValidation": {
+    "moduleSha256": "0da409626383e3e9206a208f5ac84196d6e14b8a1ee6d43bfc068108dc087967",
+    "actualSamplesSha256": "8f4797ff51d55d03d33dd5d5308fc340a79e93b7a084284709b4f37a10bcfed8",
+    "skyMaskSha256": "e49e263249fa6f814b90e2ba3b0b8769b89fd999bee428c0d42bfbf9e0b5a42a",
+    "passed": true,
+    "cases": [
+      {
+        "unit": "tree.foreground.forked.volume-leaves.0::58",
+        "view": "01",
+        "actual": {
+          "ok": true,
+          "units": [
+            {
+              "unit": "tree.foreground.forked.volume-leaves.0::58",
+              "new_sky_pixels": [
+                [
+                  454,
+                  215
+                ],
+                [
+                  454,
+                  216
+                ]
+              ],
+              "new_sky_count": 2,
+              "veto": true,
+              "missing_evidence": false
+            }
+          ]
+        },
+        "independentReferenceNewPixels": 2,
+        "matched": true
+      },
+      {
+        "unit": "tree.foreground.forked.volume-leaves.0::58",
+        "view": "06",
+        "actual": {
+          "ok": true,
+          "units": [
+            {
+              "unit": "tree.foreground.forked.volume-leaves.0::58",
+              "new_sky_pixels": [],
+              "new_sky_count": 0,
+              "veto": false,
+              "missing_evidence": false
+            }
+          ]
+        },
+        "independentReferenceNewPixels": 0,
+        "matched": true
+      },
+      {
+        "unit": "tree.left-spreading.volume-leaves.2::80",
+        "view": "01",
+        "actual": {
+          "ok": true,
+          "units": [
+            {
+              "unit": "tree.left-spreading.volume-leaves.2::80",
+              "new_sky_pixels": [
+                [
+                  78,
+                  311
+                ]
+              ],
+              "new_sky_count": 1,
+              "veto": true,
+              "missing_evidence": false
+            }
+          ]
+        },
+        "independentReferenceNewPixels": 1,
+        "matched": true
+      },
+      {
+        "unit": "tree.left-spreading.volume-leaves.2::80",
+        "view": "06",
+        "actual": {
+          "ok": true,
+          "units": [
+            {
+              "unit": "tree.left-spreading.volume-leaves.2::80",
+              "new_sky_pixels": [],
+              "new_sky_count": 0,
+              "veto": false,
+              "missing_evidence": false
+            }
+          ]
+        },
+        "independentReferenceNewPixels": 0,
+        "matched": true
+      }
+    ],
+    "scope": "Two actual units, four unit-view combinations match independently implemented triangle rasterizer. Both units already trigger the point guard in01; these samples are not claimed as actual missed-unit counterexamples. Full candidate or full-unit validation remains necessary."
+  },
+  "limits": [
+    "10/13 are historical heldout views, already exposed by R7.",
+    "Only 37 of the 77 repaired blades belong to the existing webpage LOD.",
+    "Native and WebGL leaf sets are not equal; total leaf and branch retention alone does not imply photo match."
+  ],
+  "additionalModelRequests": 0
+}

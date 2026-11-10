@@ -1,50 +1,93 @@
 import * as THREE from 'three';
 
-// Root-plane height is measured on the decoded asset. Blade length, drag response
-// and settling time are engineering estimates for the unmeasured mown lawn.
-const shaderHeader = `
+
+
+type Scalar = {value:number};
+type Uniforms = {
+  lawnResponse:Scalar; lawnPhase:Scalar; lawnRootY:Scalar;
+};
+
+export function advanceLawnWind(response:Scalar, phase:Scalar,
+  seconds:number, speed:number):boolean {
+  if (!Number.isFinite(seconds) || seconds<=0) return false;
+  const w=Number.isFinite(speed)?THREE.MathUtils.clamp(speed,-12,12):0;
+  const target=w*Math.abs(w)/(36+w*w);
+  if (response.value===0 && target===0) {phase.value=0;return false;}
+  const dt=Math.min(seconds,.2);
+  response.value+=(target-response.value)*-Math.expm1(-dt/.22);
+  if (target===0 && Math.abs(response.value)<.0001) response.value=0;
+  phase.value=response.value===0?0:
+    (phase.value+dt*(1.5+.32*Math.abs(w)))%(2*Math.PI);
+  return true;
+}
+
+const header=`
 uniform float lawnResponse;
 uniform float lawnPhase;
 uniform float lawnRootY;
-const vec2 lawnDirection = vec2(0.9745552, 0.2241477);
-vec3 lawnOffset(vec3 rest) {
-  float height = clamp(rest.y - lawnRootY, 0.0, 0.09);
-  float wave = 0.84 + 0.16 * sin(lawnPhase - dot(rest.xz, vec2(1.7, 0.91)));
-  float slope = lawnResponse * wave * min(0.5, 7.0 * height);
-  float lateral = height * slope;
-  float loss = height * (1.0 - sqrt(max(0.0, 1.0 - slope * slope)));
-  return vec3(lawnDirection.x * lateral, -loss, lawnDirection.y * lateral);
+vec3 lawnWorld(vec3 p) {
+  #ifdef USE_INSTANCING
+    return (modelMatrix * instanceMatrix * vec4(p,1.0)).xyz;
+  #else
+    return (modelMatrix * vec4(p,1.0)).xyz;
+  #endif
+}
+float lawnBaseY() {
+  #ifdef USE_INSTANCING
+    return (modelMatrix * instanceMatrix * vec4(0.,0.,0.,1.)).y;
+  #else
+    return lawnRootY;
+  #endif
+}
+vec3 lawnOffset(vec3 p,float root) {
+  float h=clamp(p.y-root,0.,.09);
+  float wave=.84+.16*sin(lawnPhase-dot(p.xz,vec2(1.7,.91)));
+  float slope=lawnResponse*wave*min(.5,7.*h);
+  return vec3(.9745552*h*slope,
+    -h*(1.-sqrt(max(0.,1.-slope*slope))),.2241477*h*slope);
 }
 `;
 
-function attachShader(material: THREE.Material, uniforms: {
-  lawnResponse: {value: number}; lawnPhase: {value: number}; lawnRootY: {value: number};
-}, surface: boolean) {
-  const prior = material.onBeforeCompile;
-  const cacheKey = material.customProgramCacheKey();
-  material.onBeforeCompile = function(shader, renderer) {
-    prior.call(this, shader, renderer);
-    Object.assign(shader.uniforms, uniforms);
-    shader.vertexShader = shaderHeader + shader.vertexShader.replace('#include <begin_vertex>', `
+export function attachLawnWind(material:THREE.Material,
+  uniforms:Uniforms, surface:boolean) {
+  const prior=material.onBeforeCompile;
+  const key=material.customProgramCacheKey();
+  material.onBeforeCompile=function(shader,renderer) {
+    prior.call(this,shader,renderer);
+    Object.assign(shader.uniforms,uniforms);
+    shader.vertexShader=header+shader.vertexShader.replace(
+      '#include <begin_vertex>',`
       #include <begin_vertex>
-      vec3 lawnRest = (modelMatrix * vec4(transformed, 1.0)).xyz;
-      transformed += inverse(mat3(modelMatrix)) * lawnOffset(lawnRest);
+      mat3 lawnPositionBasis=mat3(modelMatrix);
+      #ifdef USE_INSTANCING
+        lawnPositionBasis=mat3(modelMatrix)*mat3(instanceMatrix);
+      #endif
+      transformed+=inverse(lawnPositionBasis)*
+        lawnOffset(lawnWorld(transformed),lawnBaseY());
     `);
-    if (surface) {
-      // Transform the normal as well as the vertex. The local derivative is in
-      // world metres even when gltfpack stores vertex positions as large integers.
-      shader.vertexShader = shader.vertexShader.replace('#include <beginnormal_vertex>', `
-        #include <beginnormal_vertex>
-        vec3 lawnBase = (modelMatrix * vec4(position, 1.0)).xyz;
-        vec3 lawnSlope = (lawnOffset(lawnBase + vec3(0.0, .0002, 0.0)) - lawnOffset(lawnBase)) / .0002;
-        mat3 lawnBasis = mat3(modelMatrix);
-        vec3 lawnNormal = transpose(inverse(lawnBasis)) * objectNormal;
-        lawnNormal.y = (lawnNormal.y - dot(lawnSlope.xz, lawnNormal.xz)) / max(.2, 1.0 + lawnSlope.y);
-        objectNormal = transpose(lawnBasis) * lawnNormal;
-      `);
-    }
+    if (surface) shader.vertexShader=shader.vertexShader.replace(
+      '#include <beginnormal_vertex>',`
+      #include <beginnormal_vertex>
+      if (lawnResponse!=0.) {
+        vec3 lp=lawnWorld(position);
+        float lr=lawnBaseY();
+        float e=.0002;
+        vec3 lo=lawnOffset(lp,lr);
+        mat3 J=mat3(
+          vec3(1.,0.,0.)+(lawnOffset(lp+vec3(e,0.,0.),lr)-lo)/e,
+          vec3(0.,1.,0.)+(lawnOffset(lp+vec3(0.,e,0.),lr)-lo)/e,
+          vec3(0.,0.,1.)+(lawnOffset(lp+vec3(0.,0.,e),lr)-lo)/e);
+        mat3 B=mat3(modelMatrix);
+        #ifdef USE_INSTANCING
+          B=mat3(modelMatrix)*mat3(instanceMatrix);
+        #endif
+        objectNormal=transpose(B)*transpose(inverse(J))*
+          transpose(inverse(B))*objectNormal;
+      }
+    `);
   };
-  material.customProgramCacheKey = () => cacheKey + (surface ? ':captured-grass' : ':captured-grass-shadow');
+  material.customProgramCacheKey=()=>key+
+    ':lawn-world-coherence-v2:'+(surface?'surface':'shadow');
 }
 
 function inCapturedVerge(node: THREE.Object3D): boolean {
@@ -78,15 +121,15 @@ export function createCaptureGrass(root: THREE.Object3D) {
       const copy = mat.clone();
       copy.onBeforeCompile = mat.onBeforeCompile;
       copy.customProgramCacheKey = mat.customProgramCacheKey.bind(mat);
-      attachShader(copy, uniforms, true);
+      attachLawnWind(copy, uniforms, true);
       return copy;
     });
     const originalDepth = object.customDepthMaterial;
     const depth = originalDepth?.clone() ?? new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking, side:materials[0].side});
-    attachShader(depth, uniforms, false);
+    attachLawnWind(depth, uniforms, false);
     const originalDistance = object.customDistanceMaterial;
     const distance = originalDistance?.clone() ?? new THREE.MeshDistanceMaterial({side:materials[0].side});
-    attachShader(distance, uniforms, false);
+    attachLawnWind(distance, uniforms, false);
     object.material = Array.isArray(original) ? patched : patched[0];
     object.customDepthMaterial = depth;
     object.customDistanceMaterial = distance;
@@ -101,16 +144,7 @@ export function createCaptureGrass(root: THREE.Object3D) {
   return {
     bladeMeshes: restore.length,
     step(seconds: number, speed: number): boolean {
-      if (!restore.length || !Number.isFinite(seconds) || seconds<=0) return false;
-      const wind = Number.isFinite(speed) ? THREE.MathUtils.clamp(speed, -12, 12) : 0;
-      const target = wind*Math.abs(wind)/(36+wind*wind);
-      const previous = strength.value;
-      if (previous===0 && target===0) return false;
-      const dt = Math.min(seconds,.2);
-      strength.value += (target-previous) * -Math.expm1(-dt/.22);
-      if (target===0 && Math.abs(strength.value)<.0001) strength.value=0;
-      phase.value = strength.value===0 ? 0 : (phase.value + dt*(1.5+Math.abs(wind)*.32))%(2*Math.PI);
-      return true;
+      return restore.length>0 && advanceLawnWind(strength,phase,seconds,speed);
     },
     dispose() { for (const undo of restore.splice(0)) undo(); }
   };

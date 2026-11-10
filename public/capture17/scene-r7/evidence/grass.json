@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "asOfUtc": "2026-11-10T20:46:36.268373+00:00",
+  "candidate": "R7 E",
+  "decision": "Candidate ready for leader integration; visual regressions disclosed, not absolute realism acceptance",
+  "baseSceneSha256": "4d00caf13362036ad338db65a3eae2782a891157d7a25452baff170bf61a8ecc",
+  "changedFiles": {
+    "lib/capture-meadow.ts": "e7b6bd9c21c6560e7fcb15ee4b32bec3de90431cc86c2b38fd9c2c750fe8b08a",
+    "lib/capture-grass.ts": "f4c36aca227e9ccf9c3c5b28e034defd0e25f1865a4de34102e5e9041c1eb3fa",
+    "lib/capture-meadow.test.mjs": "1f03995dd5f76c7e5535264beac1802bccfd49416bbb41bf7567e33e3dabc0aa",
+    "lib/capture-grass.test.mjs": "03f5c0a7e38cc45c4f64887248c75c34b5d2209e500ecb8cc8f07f73df51e73e"
+  },
+  "assets": {
+    "yungu-meadow.glb": {
+      "sha256": "31652a0af82ddd22b8a336e6f8d84359c026fa829944efda87569d584b30aa71",
+      "bytes": 13850168
+    },
+    "yungu-meadow-full.glb": {
+      "sha256": "ce1e6ceab184713340937c6c71dea4ca4cd96f30d3b149bcd1854b54fb542158",
+      "bytes": 26798752
+    }
+  },
+  "planting": {
+    "unchangedTufts": 510627,
+    "unchangedCoreTufts": 384546,
+    "layoutFingerprint": "076f30559702d67ecfe550277400ab166cab45fb486dd28beb4ab9203286216f",
+    "old162LeafSocketFingerprint": "0188cee4f064b497631c295f9cf8ec038796fb795ba87dfa3436d3f271510f7a",
+    "maxSweptRadiusM": 0.09321651880346082,
+    "reservedRadiusM": 0.108,
+    "leafHeightRangeM": [
+      0.01115458,
+      0.05176849
+    ],
+    "leafWidthRangeM": [
+      0.00171473,
+      0.00366024
+    ],
+    "basis": "Engineering mown-turf dimensions; root plane measured in decoded asset, scene scale relies on assumed lamp height."
+  },
+  "comparison": {
+    "resolution": [
+      1024,
+      768
+    ],
+    "cameraRegistrationUnchanged": true,
+    "poseFrames": {
+      "01": {
+        "R6": "5b73236fbbc654156eb905cbe62c5c0f8b4b5eb7f121a8308d7bb966c1c5fb95",
+        "candidate": "4a912f5fc6e3b4b201a40707a8fe4b03092c0e77f9cd555661017e943485b18c",
+        "baseUnchangedPixelMax": 0
+      },
+      "13": {
+        "R6": "5ec458f047815298b256346bf401f8abc76cef33e2248973a309721ff809d55d",
+        "candidate": "985b0e8e327739441f54a3c7f4a46002372a4cc13c774052889ec578fa79027c",
+        "baseUnchangedPixelMax": 0
+      }
+    },
+    "meanDirectionalGradientRelativeError": {
+      "R6": 0.5336077372805501,
+      "E": 0.44452128515611133
+    },
+    "details": "comparison.json",
+    "trueGeometryCoverage": "object-id-coverage.json",
+    "knownRegression": [
+      "Photo01 training shade gradient relative error .160 to .309",
+      "Photo01 prior held-out sun gradient relative error .614 to .649"
+    ],
+    "protocolLimit": "ROI blocks frozen in R5 and reused. The old heldout name is historical; R7 selection has seen these values, so they are not new blind verification. No 19cm-high matching photo exists."
+  },
+  "wind": {
+    "realAccountAdoption": "scene-r7-a-turf-retry1",
+    "gpuTransformFeedback": {
+      "engine": "Chrome WebGL2 transform feedback / SwiftShader",
+      "points": [
+        [
+          2,
+          0.7,
+          -1
+        ],
+        [
+          2.02,
+          0.73,
+          -0.98
+        ],
+        [
+          1.99,
+          0.76,
+          -1.01
+        ]
+      ],
+      "values": [
+        [
+          2,
+          0.699999988079071,
+          -1,
+          0.42413225769996643,
+          0.8478943705558777,
+          0.31809917092323303,
+          2.0233466625213623,
+          0.7298028469085693,
+          -0.9792302846908569,
+          0.46105626225471497,
+          0.8172313570976257,
+          0.34577441215515137,
+          2.003427505493164,
+          0.758396565914154,
+          -1.0069116353988647,
+          0.4919895827770233,
+          0.7885783910751343,
+          0.36890414357185364
+        ],
+        [
+          2,
+          0.699999988079071,
+          -0.9999998807907104,
+          0.42413225769996643,
+          0.8478942513465881,
+          0.31809917092323303,
+          2.023346424102783,
+          0.7298027873039246,
+          -0.9792301058769226,
+          0.46105635166168213,
+          0.817231297492981,
+          0.34577444195747375,
+          2.003427505493164,
+          0.758396565914154,
+          -1.0069115161895752,
+          0.49198970198631287,
+          0.7885783910751343,
+          0.368904173374176
+        ]
+      ],
+      "maxPositionRepresentationDifferenceM": 2.384185791015625e-07,
+      "maxNormalRepresentationDifference": 1.1920928955078125e-07,
+      "rootDisplacementM": 1.1920928955078125e-07,
+      "positionToleranceM": 2e-06,
+      "normalTolerance": 0.004,
+      "passed": true
+    },
+    "browserRestCheck": {
+      "fixedPixelRoi": [
+        80,
+        600,
+        860,
+        150
+      ],
+      "wind4ChangedGt2of255Fraction": 0.45830232558139533,
+      "wind4MeanAbsoluteChannelDelta": 0.014330546688959821,
+      "releasedChangedGt2of255Fraction": 0.0,
+      "releasedMaxChannelDelta": 0.0,
+      "releasedMeanAbsoluteChannelDelta": 0.0
+    },
+    "shaderModel": "common world-space field, full Jacobian normal and matching surface/depth/distance",
+    "sampleScope": "Chrome WebGL2 on SwiftShader; this receipt does not assert RTX5090 GPU utilisation"
+  },
+  "browser": {
+    "errors": [],
+    "mobile": {
+      "viewport": 390,
+      "page": 390,
+      "canvas": 352.90625,
+      "blades": "423,494"
+    },
+    "desktopImage": "E-desktop-close.png",
+    "mobileImage": "E-mobile-01.png",
+    "windImage": "E-close-gust.png"
+  },
+  "limits": [
+    "Near leaf morphology, scattering fill and wind law are engineering priors, not measured biological or mechanical constants.",
+    "Distant grass remains a geometric LOD over photographed ground. Projected blade coverage is not total biological canopy cover.",
+    "GLB attachment is a static-rest asset; shader wind is not baked into its vertices.",
+    "No public assets, deployment, tree layout or exclusions were modified by this task.",
+    "Native patch was installed and geometry arrays checked with Blender4.5.15; no new RTX render was run by this subtask."
+  ],
+  "native": {
+    "application": "native-application.json",
+    "receipt": "native-receipt.json",
+    "rootContact": "root-plane-check.json",
+    "blendSha256": "fc6296a5e5658516d4b07473a789c65034d697e266339ec1d00b8c1a020dcb8b"
+  }
+}

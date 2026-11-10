@@ -1,0 +1,220 @@
+{
+  "baseSha256": "53806f44e536a3c018b63d68378a6253a76bdd05177b59827dc25d2fbe280b1d",
+  "candidateSha256": "c59fb88a767b59eb3438b0ae7fe2c573acda4206ce32d46f95b9f0c5891d99d3",
+  "investigatedAttachments": 85,
+  "changedBlades": 77,
+  "changedWebSelectedBlades": 37,
+  "alreadyExactAfterExhaustiveAssociation": 8,
+  "allWoodGroundMaterialsOtherObjectsAndRootTransformsExact": true,
+  "wholeBladeTranslationOnly": true,
+  "rows": [
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.0",
+      "changedBladeIds": [
+        757,
+        758,
+        759,
+        760,
+        761,
+        5872,
+        5873,
+        6062,
+        6063,
+        6064,
+        6065,
+        6066,
+        6070,
+        6124,
+        6125,
+        6563,
+        6564,
+        6565,
+        6566,
+        6662,
+        6663,
+        8047,
+        8048,
+        8049,
+        8054,
+        8087,
+        8088,
+        8089,
+        8090,
+        8095,
+        8096,
+        8097,
+        8102,
+        8103,
+        8104,
+        8613,
+        8614,
+        8619,
+        8620,
+        8621,
+        8622,
+        8623,
+        8700,
+        8701,
+        8702,
+        8706,
+        8767,
+        8768,
+        8769,
+        8770,
+        8771,
+        13400,
+        21556,
+        22666,
+        23544,
+        29379,
+        29380,
+        31824,
+        31930,
+        32542
+      ],
+      "unchangedBlades": 32959,
+      "maxFixedAttachmentGapM": 1.2013700256829907e-07
+    },
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.1",
+      "changedBladeIds": [],
+      "unchangedBlades": 11810,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.2",
+      "changedBladeIds": [
+        7624
+      ],
+      "unchangedBlades": 11097,
+      "maxFixedAttachmentGapM": 0.0
+    },
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.3",
+      "changedBladeIds": [],
+      "unchangedBlades": 43880,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.4",
+      "changedBladeIds": [
+        15863,
+        28163
+      ],
+      "unchangedBlades": 45400,
+      "maxFixedAttachmentGapM": 1.1920928955078125e-07
+    },
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.5",
+      "changedBladeIds": [],
+      "unchangedBlades": 50889,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.6",
+      "changedBladeIds": [],
+      "unchangedBlades": 15604,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.foreground.forked.volume-leaves.7",
+      "changedBladeIds": [],
+      "unchangedBlades": 636,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.left-spreading.volume-leaves.0",
+      "changedBladeIds": [],
+      "unchangedBlades": 420,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.left-spreading.volume-leaves.1",
+      "changedBladeIds": [],
+      "unchangedBlades": 3112,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.left-spreading.volume-leaves.2",
+      "changedBladeIds": [
+        29253,
+        29720,
+        29938
+      ],
+      "unchangedBlades": 56932,
+      "maxFixedAttachmentGapM": 8.940696716308594e-08
+    },
+    {
+      "mesh": "tree.left-spreading.volume-leaves.3",
+      "changedBladeIds": [
+        38349
+      ],
+      "unchangedBlades": 89352,
+      "maxFixedAttachmentGapM": 8.940696716308594e-08
+    },
+    {
+      "mesh": "tree.left-spreading.volume-leaves.4",
+      "changedBladeIds": [],
+      "unchangedBlades": 63,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.left-spreading.volume-leaves.5",
+      "changedBladeIds": [
+        31763
+      ],
+      "unchangedBlades": 43627,
+      "maxFixedAttachmentGapM": 0.0
+    },
+    {
+      "mesh": "tree.mid-fork.volume-leaves.0",
+      "changedBladeIds": [
+        11425
+      ],
+      "unchangedBlades": 22589,
+      "maxFixedAttachmentGapM": 0.0
+    },
+    {
+      "mesh": "tree.mid-fork.volume-leaves.1",
+      "changedBladeIds": [],
+      "unchangedBlades": 41802,
+      "maxFixedAttachmentGapM": 0
+    },
+    {
+      "mesh": "tree.mid-fork.volume-leaves.2",
+      "changedBladeIds": [
+        20234,
+        32175
+      ],
+      "unchangedBlades": 39667,
+      "maxFixedAttachmentGapM": 1.1920928955078125e-07
+    },
+    {
+      "mesh": "tree.mid-fork.volume-leaves.3",
+      "changedBladeIds": [
+        22189,
+        61629
+      ],
+      "unchangedBlades": 94151,
+      "maxFixedAttachmentGapM": 6.143906006172983e-08
+    },
+    {
+      "mesh": "tree.mid-fork.volume-leaves.4",
+      "changedBladeIds": [
+        8847,
+        39586,
+        41450
+      ],
+      "unchangedBlades": 55014,
+      "maxFixedAttachmentGapM": 1.4901161193847656e-08
+    },
+    {
+      "mesh": "tree.mid-fork.volume-leaves.5",
+      "changedBladeIds": [
+        10546
+      ],
+      "unchangedBlades": 38682,
+      "maxFixedAttachmentGapM": 2.9802322387695312e-08
+    }
+  ]
+}

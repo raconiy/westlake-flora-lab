@@ -1,0 +1,11 @@
+{
+  "mainSHA256": "2a67a043c66556a24faf93803a0f9e4140d5cab65a44c23083c7cf72cb8877be",
+  "foregroundStemArraysExactlyUnchanged": {
+    "POSITION": true,
+    "NORMAL": true,
+    "TEXCOORD_0": true,
+    "indices": true,
+    "rootTransform": true
+  },
+  "barkMetadata": "Source photograph 01 at its native resolution, bounded lower-stem foreground sampling; unknown rear/fork remains estimated. Photographed lighting remains; attempted light separation was rejected. No measured albedo or normal map."
+}

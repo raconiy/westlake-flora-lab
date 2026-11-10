@@ -1,0 +1,16 @@
+{
+  "diagnosis": "撤回逐树根平移路径，本轮只验收不变量。画面中R6/C/Cguard接地位置看似相同，不能证明跨资产世界变换一致。C已有独立native固定根/joint/非终梢木质检查；Cguard只有实现及渲染回执，不能借用C的结构验收。最终合并WebGL/XML、逐ID接触与碰撞关联尚缺，当前跨资产裁决为insufficient。C的像素退步不支持采用；Cguard也未满足全面像素非退步。",
+  "evidenceUsed": [
+    "观察：提供的01/13下部裁图未显示明显整体根位移，但不能从像素判定完整矩阵、地下接触或碰撞变换。",
+    "几何实测：verify_native.py（69951a0f…）检查C保存产品，报告其他对象及根/风joint完全一致、非终梢木质完全一致；终梢基部漂移最大约1.923µm，叶柄附着距离均≤3mm。叶片数量相等并非独立证明稳定叶ID全部保留。",
+    "来源绑定：Cstructure的基线是53806f44…，不是题定4d00caf1…；缺少二者继承链。Cguard渲染与实现均绑定ccd8e2dd…，但未提供同哈希的独立结构验收。",
+    "像素回归：C的06 gap均值从0.453974升至0.556771；Cguard的01 crown均值从0.091981升至0.096107，13 gap从0.520953升至0.526723。旧ROI13及全部四视图均有历史曝光，不是新盲测。",
+    "草交付：声明510627个tuft/layout/root保持，提供layout/socket指纹及WebGL2风根位移约0.119µm；native草候选为fc6296a5…，不等于已交付树草合并产品。另披露01阴影梯度误差0.160→0.309、旧留出日照区0.614→0.649。",
+    "先验而非实测：场景尺度依赖假定灯高，草形态和风律为工程先验；26段碰撞代理只能称近似支架代理，不能称终梢精确碰撞。"
+  ],
+  "targetFiles": [
+    "infra/reconstruction/r7/registration/audit_asset_invariants.py",
+    "infra/reconstruction/r7/trees/verify_native.py"
+  ],
+  "integrationChange": "只增加保存后门禁，不修改构建器或任何根。外部提取器解码native、完整WebGL及XML，统一为米制Y-up静风世界矩阵后传入。ids为冻结完整native清单；每行是[id,role,ownerRootID,renderAssetID,4×4矩阵]，role取root/grass/joint/wood/ground/collision，碰撞代理逐段列入native及XML。web必须覆盖全部非collision行。contacts为[基线列表,候选列表]，每项[id,groundID,植物接触世界点,支持面最近世界点,单位外法线]，不得用对象原点冒充。fixed三个键分别给出非终梢木质、全部草layout、全部草root稳定ID及坐标的基线/候选摘要。pins[阶段]与receipt均为[基线场景SHA256,候选场景SHA256,该阶段证据包SHA256]；pins须来自独立冻结清单。函数仅比较摘要，不重新计算字节哈希。先运行native门禁，再验完整WebGL/XML；选择性叶片GLB不满足此契约。",
+  "pythonModule": "import numpy as np\n\ndef audit_assets(d):\n    states, issues, native = {}, [], None\n    def sha(s):\n        return isinstance(s, str) and len(s) == 64 and all(c in '0123456789abcdef' for c in s)\n    def rows(xs):\n        out = {}\n        for r in xs:\n            if len(r) != 5 or not all(isinstance(s, str) and s for s in r[:4]): raise ValueError('record')\n            if r[0] in out: raise ValueError('duplicate_id')\n            m = np.asarray(r[4], float)\n            if m.shape != (4, 4) or not np.isfinite(m).all(): raise ValueError('matrix')\n            if not np.array_equal(m[3], [0, 0, 0, 1]) or abs(np.linalg.det(m[:3, :3])) < 1e-12: raise ValueError('affine')\n            out[r[0]] = (r[:4], m)\n        return out\n    for stage in ('native', 'web', 'collision'):\n        try:\n            x = d[stage]; a, b = rows(x['baseline']), rows(x['candidate'])\n            if set(a) != set(b): raise ValueError('id_set')\n            if any(a[k][0] != b[k][0] for k in a): raise ValueError('association_changed')\n            if any(not np.array_equal(a[k][1], b[k][1]) for k in a): raise ValueError('world_changed')\n            if stage == 'native':\n                ids = d['ids']\n                if len(set(ids)) != len(ids): raise ValueError('duplicate_id')\n                if not ids or set(ids) != set(a): raise KeyError('inventory')\n                anchors = {k for k in a if a[k][0][1] in ('root', 'grass')}\n                ground = {k for k in a if a[k][0][1] == 'ground'}\n                if not anchors or not ground: raise KeyError('support')\n                for k, (r, m) in a.items():\n                    if r[1] not in ('root', 'grass', 'joint', 'wood', 'ground', 'collision'): raise ValueError('role')\n                    if r[1] != 'ground' and r[2] not in anchors: raise ValueError('

@@ -1,0 +1,504 @@
+{
+  "revision": "R7",
+  "assets": {
+    "yungu-lawn.glb": {
+      "bytes": 57439972,
+      "sha256": "2a67a043c66556a24faf93803a0f9e4140d5cab65a44c23083c7cf72cb8877be"
+    },
+    "yungu-meadow.glb": {
+      "bytes": 13850168,
+      "sha256": "31652a0af82ddd22b8a336e6f8d84359c026fa829944efda87569d584b30aa71"
+    },
+    "yungu-meadow-full.glb": {
+      "bytes": 26798752,
+      "sha256": "ce1e6ceab184713340937c6c71dea4ca4cd96f30d3b149bcd1854b54fb542158"
+    },
+    "contact-world.xml": {
+      "bytes": 48048,
+      "sha256": "a7b80bb86dc1c7b1932ffd29802d5528ed80688bc00776a0946b803510e3c1f4"
+    }
+  },
+  "tests": {
+    "frontend": {
+      "passed": 56,
+      "failed": 0
+    },
+    "infrastructure": {
+      "passed": 88,
+      "failed": 0
+    },
+    "grassStaticMergeNegativeCases": {
+      "passed": 5
+    },
+    "browser": {
+      "localScene": {
+        "observedUtc": "2026-11-10T21:23:44.880Z",
+        "address": "http://127.0.0.1:16622/westlake-flora-lab/#reconstruction",
+        "uiSequence": [
+          "近看草坪",
+          "照片机位 13",
+          "施加 3 秒阵风"
+        ],
+        "cameraCount": 13,
+        "closeView": {
+          "air": "0.0 m/s",
+          "blades": "848,349",
+          "maxTip": "0.0 cm",
+          "selected": "01"
+        },
+        "gustView": {
+          "air": "4.7 m/s",
+          "blades": "437,647",
+          "maxTip": "1.9 cm",
+          "selected": "13"
+        },
+        "publicGeometryResponses": [
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=0&end=2097151",
+            "http": 206,
+            "contentRange": "bytes 0-2097151/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=2097152&end=4194303",
+            "http": 206,
+            "contentRange": "bytes 2097152-4194303/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=4194304&end=6291455",
+            "http": 206,
+            "contentRange": "bytes 4194304-6291455/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=6291456&end=8388607",
+            "http": 206,
+            "contentRange": "bytes 6291456-8388607/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=10485760&end=12582911",
+            "http": 206,
+            "contentRange": "bytes 10485760-12582911/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=12582912&end=14680063",
+            "http": 206,
+            "contentRange": "bytes 12582912-14680063/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=8388608&end=10485759",
+            "http": 206,
+            "contentRange": "bytes 8388608-10485759/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=14680064&end=16777215",
+            "http": 206,
+            "contentRange": "bytes 14680064-16777215/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=16777216&end=18874367",
+            "http": 206,
+            "contentRange": "bytes 16777216-18874367/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=18874368&end=20971519",
+            "http": 206,
+            "contentRange": "bytes 18874368-20971519/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=23068672&end=25165823",
+            "http": 206,
+            "contentRange": "bytes 23068672-25165823/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=20971520&end=23068671",
+            "http": 206,
+            "contentRange": "bytes 20971520-23068671/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=25165824&end=27262975",
+            "http": 206,
+            "contentRange": "bytes 25165824-27262975/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=27262976&end=29360127",
+            "http": 206,
+            "contentRange": "bytes 27262976-29360127/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=29360128&end=31457279",
+            "http": 206,
+            "contentRange": "bytes 29360128-31457279/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=31457280&end=33554431",
+            "http": 206,
+            "contentRange": "bytes 31457280-33554431/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=33554432&end=35651583",
+            "http": 206,
+            "contentRange": "bytes 33554432-35651583/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=37748736&end=39845887",
+            "http": 206,
+            "contentRange": "bytes 37748736-39845887/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=35651584&end=37748735",
+            "http": 206,
+            "contentRange": "bytes 35651584-37748735/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=39845888&end=41943039",
+            "http": 206,
+            "contentRange": "bytes 39845888-41943039/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=41943040&end=44040191",
+            "http": 206,
+            "contentRange": "bytes 41943040-44040191/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=44040192&end=46137343",
+            "http": 206,
+            "contentRange": "bytes 44040192-46137343/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=46137344&end=48234495",
+            "http": 206,
+            "contentRange": "bytes 46137344-48234495/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=48234496&end=50331647",
+            "http": 206,
+            "contentRange": "bytes 48234496-50331647/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=50331648&end=52428799",
+            "http": 206,
+            "contentRange": "bytes 50331648-52428799/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=52428800&end=54525951",
+            "http": 206,
+            "contentRange": "bytes 52428800-54525951/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=54525952&end=56623103",
+            "http": 206,
+            "contentRange": "bytes 54525952-56623103/57439972"
+          },
+          {
+            "url": "http://127.0.0.1:16622/westlake-flora-lab/capture17/yungu-lawn.glb?v=7&part=56623104&end=57439971",
+            "http": 206,
+            "contentRange": "bytes 56623104-57439971/57439972"
+          }
+        ],
+        "screenshots": {
+          "r7-public-grass-close.png": {
+            "sha256": "2dcb8722f6267dd3233a56f778c84b52a4571982415e2b028fa560da39e96991",
+            "bytes": 1277138
+          },
+          "r7-public-photo13-gust.png": {
+            "sha256": "03ab85f6b11fd4d2cb7d80deb7d3bd9e5128d313c1ef79fb57a306160416036d",
+            "bytes": 1277287
+          }
+        },
+        "runtimeErrors": []
+      },
+      "comparison": {
+        "target": "http://127.0.0.1:16622/westlake-flora-lab/capture17/scene-r7/index.html",
+        "checks": [
+          {
+            "width": 390,
+            "cam": "01",
+            "ref": "r6",
+            "x": 390,
+            "uri": "views/01-r6.webp",
+            "val": "78%",
+            "photoDisabled": false
+          },
+          {
+            "width": 390,
+            "cam": "06",
+            "ref": "photo",
+            "x": 390,
+            "uri": "views/06-photo.webp",
+            "val": "78%",
+            "photoDisabled": false
+          },
+          {
+            "width": 390,
+            "cam": "10",
+            "ref": "cycles",
+            "x": 390,
+            "uri": "views/10-cycles.webp",
+            "val": "78%",
+            "photoDisabled": false
+          },
+          {
+            "width": 390,
+            "cam": "13",
+            "ref": "photo",
+            "x": 390,
+            "uri": "views/13-photo.webp",
+            "val": "78%",
+            "photoDisabled": false
+          },
+          {
+            "width": 1280,
+            "cam": "01",
+            "ref": "r6",
+            "x": 1280,
+            "uri": "views/01-r6.webp",
+            "val": "78%",
+            "photoDisabled": false
+          },
+          {
+            "width": 1280,
+            "cam": "06",
+            "ref": "photo",
+            "x": 1280,
+            "uri": "views/06-photo.webp",
+            "val": "78%",
+            "photoDisabled": false
+          },
+          {
+            "width": 1280,
+            "cam": "10",
+            "ref": "cycles",
+            "x": 1280,
+            "uri": "views/10-cycles.webp",
+            "val": "78%",
+            "photoDisabled": false
+          },
+          {
+            "width": 1280,
+            "cam": "13",
+            "ref": "photo",
+            "x": 1280,
+            "uri": "views/13-photo.webp",
+            "val": "78%",
+            "photoDisabled": false
+          }
+        ],
+        "warnings": []
+      }
+    }
+  },
+  "visualDecision": {
+    "grassE": "adopted limited tradeoff, not all-regions non-regression",
+    "crownA2BCguard": "withheld",
+    "barkInverseLighting": "withheld",
+    "barkRawSamplingAndAnisotropy": "adopted; photo brightness mismatch remains"
+  },
+  "leafAttachment": {
+    "nativeMoved": 77,
+    "webMoved": 37,
+    "originallyCorrect": 8,
+    "maximumTranslationM": 0.00523
+  },
+  "gpu": {
+    "sourceBlendSha256": "4c88eada9eb424d7b82b76579d0ef29750d9c796e04b200d735baf728c33a17f",
+    "engine": "Cycles OptiX",
+    "samples": 64,
+    "seed": 871,
+    "size": [
+      1280,
+      960
+    ],
+    "views": [
+      {
+        "view": "01",
+        "file": "final-01.png",
+        "sha256": "bafd8e075084740b6cf5672feab60c982921fea1bb47dbece1b4ecb0c66441a3",
+        "seconds": 10.93,
+        "cameraMatrixWorld": [
+          [
+            0.9979948401451111,
+            0.031495001167058945,
+            0.05490278825163841,
+            -0.1542363315820694
+          ],
+          [
+            0.05769307538866997,
+            -0.09586771577596664,
+            -0.9937207102775574,
+            -13.380438804626465
+          ],
+          [
+            -0.026033831760287285,
+            0.9948956966400146,
+            -0.0974925309419632,
+            1.8432326316833496
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "gpuProcessPeakMiBPerIndex": {
+          "0": 2866,
+          "1": 2866,
+          "2": 2866,
+          "3": 2866,
+          "4": 2866,
+          "5": 2866,
+          "6": 2866,
+          "7": 3090
+        }
+      },
+      {
+        "view": "06",
+        "file": "final-06.png",
+        "sha256": "c1d1b666c873e58c8b1b4a6db3c5721fdb4aaa879728e6b3fdf1d798cc55575f",
+        "seconds": 12.72,
+        "cameraMatrixWorld": [
+          [
+            0.9998391270637512,
+            0.017917979508638382,
+            0.0008323730435222387,
+            -1.554270625114441
+          ],
+          [
+            0.00067502650199458,
+            0.008785746060311794,
+            -0.9999611973762512,
+            -12.52591609954834
+          ],
+          [
+            -0.0179245974868536,
+            0.9998008608818054,
+            0.008772238157689571,
+            1.8456557989120483
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "gpuProcessPeakMiBPerIndex": {
+          "0": 3864,
+          "1": 3802,
+          "2": 3802,
+          "3": 3798,
+          "4": 3798,
+          "5": 3732,
+          "6": 3734,
+          "7": 3732
+        }
+      },
+      {
+        "view": "10",
+        "file": "final-10.png",
+        "sha256": "1d14ac205faa1ed38478f21f55b7cf8d183b6c52dc22d1d970416237cee1f791",
+        "seconds": 10.69,
+        "cameraMatrixWorld": [
+          [
+            0.9905027747154236,
+            0.027498535811901093,
+            -0.1347147524356842,
+            -3.1568963527679443
+          ],
+          [
+            -0.13472026586532593,
+            -0.0016604315023869276,
+            -0.9908822774887085,
+            -11.43704891204834
+          ],
+          [
+            -0.027471495792269707,
+            0.9996204376220703,
+            0.0020599481649696827,
+            1.8833951950073242
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "gpuProcessPeakMiBPerIndex": {
+          "0": 4300,
+          "1": 4300,
+          "2": 4300,
+          "3": 4302,
+          "4": 4302,
+          "5": 4302,
+          "6": 4302,
+          "7": 4302
+        }
+      },
+      {
+        "view": "13",
+        "file": "final-13.png",
+        "sha256": "fb2e83f7d8299c9528139194616faa853ced9c137125a98c996a548916764940",
+        "seconds": 10.81,
+        "cameraMatrixWorld": [
+          [
+            0.9848683476448059,
+            0.050429075956344604,
+            -0.1658048778772354,
+            -3.744441270828247
+          ],
+          [
+            -0.16535525023937225,
+            -0.012990226969122887,
+            -0.9861485362052917,
+            -11.04694938659668
+          ],
+          [
+            -0.051884401589632034,
+            0.998643159866333,
+            -0.0044549512676894665,
+            1.9168812036514282
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "gpuProcessPeakMiBPerIndex": {
+          "0": 4300,
+          "1": 4300,
+          "2": 4300,
+          "3": 4300,
+          "4": 4300,
+          "5": 4300,
+          "6": 4300,
+          "7": 4300
+        }
+      }
+    ]
+  },
+  "physicalLimits": [
+    "Static contact XML unchanged by this release",
+    "Web grass and tree wind are reduced engineering models, not measured biomechanical material models"
+  ],
+  "failedChecksResolvedOrWithheld": [
+    "First integration run saw old grass export statistics until actual assets were installed",
+    "Strengthened bark test follows active primitive, not an unused legacy material; permits Blender numeric name suffix",
+    "First local browser URLs omitted repository base path; rerun at /westlake-flora-lab/",
+    "Five first GPT requests client-timed-out, recovered only after terminal status; a final registration reply remains incomplete"
+  ],
+  "accounts": {
+    "distinctCredentialCount": 5,
+    "requests": 15,
+    "completeReplies": 9,
+    "clientTimeouts": 5,
+    "budgetIncomplete": 1,
+    "reportedOutputTokens": 99284,
+    "completeReplyOutputTokens": 89284,
+    "incompleteReplyOutputTokens": 10000,
+    "timeoutTokens": "unknown",
+    "recordsSha256": "0374bad31bdc76076cb6027ac53adf323dfb1b90620020e05e8f177b2952549e"
+  },
+  "stage": "Pre-publication checks of the release artifact. Public URL validation is saved separately after deployment."
+}

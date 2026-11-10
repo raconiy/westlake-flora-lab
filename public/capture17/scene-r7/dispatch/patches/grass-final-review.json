@@ -1,0 +1,4115 @@
+{
+  "decision": "Shared wind adopted; E is a documented trade-off, not all-metric photo acceptance.",
+  "wind": {
+    "engine": "Chrome WebGL2 transform feedback / SwiftShader",
+    "points": [
+      [
+        2,
+        0.7,
+        -1
+      ],
+      [
+        2.02,
+        0.73,
+        -0.98
+      ],
+      [
+        1.99,
+        0.76,
+        -1.01
+      ]
+    ],
+    "values": [
+      [
+        2,
+        0.699999988079071,
+        -1,
+        0.42413225769996643,
+        0.8478943705558777,
+        0.31809917092323303,
+        2.0233466625213623,
+        0.7298028469085693,
+        -0.9792302846908569,
+        0.46105626225471497,
+        0.8172313570976257,
+        0.34577441215515137,
+        2.003427505493164,
+        0.758396565914154,
+        -1.0069116353988647,
+        0.4919895827770233,
+        0.7885783910751343,
+        0.36890414357185364
+      ],
+      [
+        2,
+        0.699999988079071,
+        -0.9999998807907104,
+        0.42413225769996643,
+        0.8478942513465881,
+        0.31809917092323303,
+        2.023346424102783,
+        0.7298027873039246,
+        -0.9792301058769226,
+        0.46105635166168213,
+        0.817231297492981,
+        0.34577444195747375,
+        2.003427505493164,
+        0.758396565914154,
+        -1.0069115161895752,
+        0.49198970198631287,
+        0.7885783910751343,
+        0.368904173374176
+      ]
+    ],
+    "maxPositionRepresentationDifferenceM": 2.384185791015625e-07,
+    "maxNormalRepresentationDifference": 1.1920928955078125e-07,
+    "rootDisplacementM": 1.1920928955078125e-07,
+    "positionToleranceM": 2e-06,
+    "normalTolerance": 0.004,
+    "passed": true,
+    "receiptSha256": "7193ff9dd1c3586148597ac24bf56dac87f20a9a496d21bdf5b54c316d3edc5f",
+    "sourceFiles": {
+      "lib/capture-grass.ts": "f4c36aca227e9ccf9c3c5b28e034defd0e25f1865a4de34102e5e9041c1eb3fa",
+      "lib/capture-meadow.ts": "e7b6bd9c21c6560e7fcb15ee4b32bec3de90431cc86c2b38fd9c2c750fe8b08a"
+    },
+    "bufferValuesIndependentlyRecomputed": true
+  },
+  "handoff": {
+    "schema": 1,
+    "asOfUtc": "2026-11-10T20:46:36.268373+00:00",
+    "candidate": "R7 E",
+    "decision": "Candidate ready for leader integration; visual regressions disclosed, not absolute realism acceptance",
+    "baseSceneSha256": "4d00caf13362036ad338db65a3eae2782a891157d7a25452baff170bf61a8ecc",
+    "changedFiles": {
+      "lib/capture-meadow.ts": "e7b6bd9c21c6560e7fcb15ee4b32bec3de90431cc86c2b38fd9c2c750fe8b08a",
+      "lib/capture-grass.ts": "f4c36aca227e9ccf9c3c5b28e034defd0e25f1865a4de34102e5e9041c1eb3fa",
+      "lib/capture-meadow.test.mjs": "1f03995dd5f76c7e5535264beac1802bccfd49416bbb41bf7567e33e3dabc0aa",
+      "lib/capture-grass.test.mjs": "03f5c0a7e38cc45c4f64887248c75c34b5d2209e500ecb8cc8f07f73df51e73e"
+    },
+    "assets": {
+      "yungu-meadow.glb": {
+        "sha256": "31652a0af82ddd22b8a336e6f8d84359c026fa829944efda87569d584b30aa71",
+        "bytes": 13850168
+      },
+      "yungu-meadow-full.glb": {
+        "sha256": "ce1e6ceab184713340937c6c71dea4ca4cd96f30d3b149bcd1854b54fb542158",
+        "bytes": 26798752
+      }
+    },
+    "planting": {
+      "unchangedTufts": 510627,
+      "unchangedCoreTufts": 384546,
+      "layoutFingerprint": "076f30559702d67ecfe550277400ab166cab45fb486dd28beb4ab9203286216f",
+      "old162LeafSocketFingerprint": "0188cee4f064b497631c295f9cf8ec038796fb795ba87dfa3436d3f271510f7a",
+      "maxSweptRadiusM": 0.09321651880346082,
+      "reservedRadiusM": 0.108,
+      "leafHeightRangeM": [
+        0.01115458,
+        0.05176849
+      ],
+      "leafWidthRangeM": [
+        0.00171473,
+        0.00366024
+      ],
+      "basis": "Engineering mown-turf dimensions; root plane measured in decoded asset, scene scale relies on assumed lamp height."
+    },
+    "comparison": {
+      "resolution": [
+        1024,
+        768
+      ],
+      "cameraRegistrationUnchanged": true,
+      "poseFrames": {
+        "01": {
+          "R6": "5b73236fbbc654156eb905cbe62c5c0f8b4b5eb7f121a8308d7bb966c1c5fb95",
+          "candidate": "4a912f5fc6e3b4b201a40707a8fe4b03092c0e77f9cd555661017e943485b18c",
+          "baseUnchangedPixelMax": 0
+        },
+        "13": {
+          "R6": "5ec458f047815298b256346bf401f8abc76cef33e2248973a309721ff809d55d",
+          "candidate": "985b0e8e327739441f54a3c7f4a46002372a4cc13c774052889ec578fa79027c",
+          "baseUnchangedPixelMax": 0
+        }
+      },
+      "meanDirectionalGradientRelativeError": {
+        "R6": 0.5336077372805501,
+        "E": 0.44452128515611133
+      },
+      "details": "comparison.json",
+      "trueGeometryCoverage": "object-id-coverage.json",
+      "knownRegression": [
+        "Photo01 training shade gradient relative error .160 to .309",
+        "Photo01 prior held-out sun gradient relative error .614 to .649"
+      ],
+      "protocolLimit": "ROI blocks frozen in R5 and reused. The old heldout name is historical; R7 selection has seen these values, so they are not new blind verification. No 19cm-high matching photo exists.",
+      "sameRoiMeasurement": "paired-roi.json",
+      "strictAllRoiNoRegressionPass": false,
+      "decision": "Leader explicitly accepts geometry coverage/dark-point and wind benefits with disclosed individual photometric/texture regressions."
+    },
+    "wind": {
+      "realAccountAdoption": "scene-r7-a-turf-retry1",
+      "gpuTransformFeedback": {
+        "engine": "Chrome WebGL2 transform feedback / SwiftShader",
+        "points": [
+          [
+            2,
+            0.7,
+            -1
+          ],
+          [
+            2.02,
+            0.73,
+            -0.98
+          ],
+          [
+            1.99,
+            0.76,
+            -1.01
+          ]
+        ],
+        "values": [
+          [
+            2,
+            0.699999988079071,
+            -1,
+            0.42413225769996643,
+            0.8478943705558777,
+            0.31809917092323303,
+            2.0233466625213623,
+            0.7298028469085693,
+            -0.9792302846908569,
+            0.46105626225471497,
+            0.8172313570976257,
+            0.34577441215515137,
+            2.003427505493164,
+            0.758396565914154,
+            -1.0069116353988647,
+            0.4919895827770233,
+            0.7885783910751343,
+            0.36890414357185364
+          ],
+          [
+            2,
+            0.699999988079071,
+            -0.9999998807907104,
+            0.42413225769996643,
+            0.8478942513465881,
+            0.31809917092323303,
+            2.023346424102783,
+            0.7298027873039246,
+            -0.9792301058769226,
+            0.46105635166168213,
+            0.817231297492981,
+            0.34577444195747375,
+            2.003427505493164,
+            0.758396565914154,
+            -1.0069115161895752,
+            0.49198970198631287,
+            0.7885783910751343,
+            0.368904173374176
+          ]
+        ],
+        "maxPositionRepresentationDifferenceM": 2.384185791015625e-07,
+        "maxNormalRepresentationDifference": 1.1920928955078125e-07,
+        "rootDisplacementM": 1.1920928955078125e-07,
+        "positionToleranceM": 2e-06,
+        "normalTolerance": 0.004,
+        "passed": true
+      },
+      "browserRestCheck": {
+        "fixedPixelRoi": [
+          80,
+          600,
+          860,
+          150
+        ],
+        "wind4ChangedGt2of255Fraction": 0.45830232558139533,
+        "wind4MeanAbsoluteChannelDelta": 0.014330546688959821,
+        "releasedChangedGt2of255Fraction": 0.0,
+        "releasedMaxChannelDelta": 0.0,
+        "releasedMeanAbsoluteChannelDelta": 0.0
+      },
+      "shaderModel": "common world-space field, full Jacobian normal and matching surface/depth/distance",
+      "sampleScope": "Chrome WebGL2 on SwiftShader; this receipt does not assert RTX5090 GPU utilisation"
+    },
+    "browser": {
+      "errors": [],
+      "mobile": {
+        "viewport": 390,
+        "page": 390,
+        "canvas": 352.90625,
+        "blades": "423,494"
+      },
+      "desktopImage": "E-desktop-close.png",
+      "mobileImage": "E-mobile-01.png",
+      "windImage": "E-close-gust.png"
+    },
+    "limits": [
+      "Near leaf morphology, scattering fill and wind law are engineering priors, not measured biological or mechanical constants.",
+      "Distant grass remains a geometric LOD over photographed ground. Projected blade coverage is not total biological canopy cover.",
+      "GLB attachment is a static-rest asset; shader wind is not baked into its vertices.",
+      "No public assets, deployment, tree layout or exclusions were modified by this task.",
+      "Native patch was installed and geometry arrays checked with Blender4.5.15; no new RTX render was run by this subtask."
+    ],
+    "native": {
+      "application": "native-application.json",
+      "receipt": "native-receipt.json",
+      "rootContact": "root-plane-check.json",
+      "blendSha256": "fc6296a5e5658516d4b07473a789c65034d697e266339ec1d00b8c1a020dcb8b"
+    },
+    "finalMerge": {
+      "receipt": "merged/merge-receipt.json",
+      "sha256": "1c4b2a7a3ce31a2b438d17096b786eaec7ea04799c5e0f5d8fde37c96fc91ef5",
+      "base": "R7 tree attachment repair only",
+      "tests": {
+        "mergeSafetyFixtures": 5,
+        "candidateAssetAndLayoutTests": 11
+      },
+      "publicFilesWritten": false
+    }
+  },
+  "sameRoiEvidence": {
+    "schema": 1,
+    "candidate": "E",
+    "resolution": [
+      1024,
+      768
+    ],
+    "sourcesSha256": {
+      "photo-01-registered.png": "7b31bab3cf0b5873d858b577dd3073a0785d7fe4dea534e9049a259051890ee6",
+      "R6-01-blades.png": "5b73236fbbc654156eb905cbe62c5c0f8b4b5eb7f121a8308d7bb966c1c5fb95",
+      "R6-01-coverage.png": "70e694185a01118187727dd6081624aab26e1e87e881f5735d580f832b5f04d6",
+      "E-01-blades.png": "4a912f5fc6e3b4b201a40707a8fe4b03092c0e77f9cd555661017e943485b18c",
+      "E-01-coverage.png": "0dc1e29de451b6766fef63d8f13d022a2c1687ba0490f3d28671d311753c926a",
+      "photo-13-registered.png": "1501fd6de67567552dd1cca488320fa1ccc443813990f905ffdda39ed6e5f6be",
+      "R6-13-blades.png": "5ec458f047815298b256346bf401f8abc76cef33e2248973a309721ff809d55d",
+      "R6-13-coverage.png": "f2ce26e8badba340352a859be4f66334df692b3123fe1735f721f24da9402a3d",
+      "E-13-blades.png": "985b0e8e327739441f54a3c7f4a46002372a4cc13c774052889ec578fa79027c",
+      "E-13-coverage.png": "60bfe4c059a306fc24f2fd32efc46117007b94d07db7842f2b66a93b45771de0",
+      "R6-close-blades.png": "b1dc78d6a9f52136d7e5e81d07fcfff951d372455f6a7e2d2bb415c904ef5e55",
+      "R6-close-coverage.png": "b362a36291d740d30dd14193648701fe91ac5e00dfcbc382013d02f89fb4a698",
+      "E-close-blades.png": "dbbc1c35679aadef76e8e7ae12d8263a23b104971b78c5d37336845c2bd3960e",
+      "E-close-coverage.png": "d846e62b0278012a94352f7bdc6b5efa8059efcfd29a65dbd3d72ab4bb184fb0"
+    },
+    "protocolSha256": "337a47b9dd53d86cebcb153afd99e6b4502420eb377ef4fe099a0ee51843e1c7",
+    "method": {
+      "registration": "Same registered cameras, same 1024x768 raster and same rectangle for all four channels: photo, RGB render, ID coverage, baseline.",
+      "coverage": "White geometry against actual occluding depth, MSAA/alpha coverage retained. Mean encoded gray /255 gives sample coverage. It is not biological percent cover or a photo segmentation ground truth.",
+      "luma": "Median linear Rec.709 luma after sRGB decoding. Error is absolute log ratio to the photograph.",
+      "texture": "Per-ROI average absolute horizontal and vertical luma gradients. Relative L1 error uses max(photo gradient sum,.001).",
+      "darkOutlier": "Per-ROI shadow-depth contrast against 5px local median, threshold max(.006,.12*ROI median luma). Error is absolute difference to photo frequency.",
+      "split": "Existing R5 training/heldout names retained only as provenance; all have been revealed by R7 and are not a new blind acceptance set."
+    },
+    "summary": {
+      "roiCount": 30,
+      "perMetric": {
+        "lumaLogError": {
+          "improved": 15,
+          "regressed": 11,
+          "unchanged": 4
+        },
+        "gradientRelativeError": {
+          "improved": 21,
+          "regressed": 9,
+          "unchanged": 0
+        },
+        "darkOutlierAbsoluteError": {
+          "improved": 17,
+          "regressed": 12,
+          "unchanged": 1
+        }
+      },
+      "geometrySampleCoverageIncreased": 28,
+      "noPhotometricOrTextureRegressionCount": 6,
+      "strictAllRoiNoRegressionPass": false
+    },
+    "rows": [
+      {
+        "id": "01-training-shade-1",
+        "camera": "01",
+        "originalSplit": "training",
+        "lightZone": "shade",
+        "boxXYXY": [
+          202,
+          612,
+          245,
+          622
+        ],
+        "pixelCount": 430,
+        "photo": {
+          "medianLinearLuma": 0.030186525985176522,
+          "gradientXY": [
+            0.005603044188348058,
+            0.005977992888222669
+          ],
+          "darkOutlierFraction": 0.06976744186046512
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.028624416401685622,
+            "gradientXY": [
+              0.0026694238097279763,
+              0.006766927005655966
+            ],
+            "darkOutlierFraction": 0.16279069767441862,
+            "sampleCoverage": 0.019835841313269494,
+            "coveredPixelFraction": 0.06744186046511629,
+            "errors": {
+              "lumaLogError": 0.05313559143831804,
+              "gradientRelativeError": 0.32143533186543155,
+              "darkOutlierAbsoluteError": 0.0930232558139535
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.028624416401685622,
+            "gradientXY": [
+              0.0025405504579950663,
+              0.006568158876926098
+            ],
+            "darkOutlierFraction": 0.14186046511627906,
+            "sampleCoverage": 0.049247606019151846,
+            "coveredPixelFraction": 0.15813953488372093,
+            "errors": {
+              "lumaLogError": 0.05313559143831804,
+              "gradientRelativeError": 0.315400053976687,
+              "darkOutlierAbsoluteError": 0.07209302325581395
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.0,
+          "gradientRelativeError": -0.006035277888744528,
+          "darkOutlierAbsoluteError": -0.020930232558139555,
+          "sampleCoverage": 0.029411764705882353
+        },
+        "regressions": [],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": true
+      },
+      {
+        "id": "01-training-shade-2",
+        "camera": "01",
+        "originalSplit": "training",
+        "lightZone": "shade",
+        "boxXYXY": [
+          289,
+          623,
+          331,
+          637
+        ],
+        "pixelCount": 588,
+        "photo": {
+          "medianLinearLuma": 0.02901622599338376,
+          "gradientXY": [
+            0.004371935086815304,
+            0.004935476836060311
+          ],
+          "darkOutlierFraction": 0.05442176870748299
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.02691414230802568,
+            "gradientXY": [
+              0.0030568195350654057,
+              0.0034764195879064407
+            ],
+            "darkOutlierFraction": 0.08843537414965986,
+            "sampleCoverage": 0.04222355608910231,
+            "coveredPixelFraction": 0.1292517006802721,
+            "errors": {
+              "lumaLogError": 0.07520330571374102,
+              "gradientRelativeError": 0.29806060190432193,
+              "darkOutlierAbsoluteError": 0.034013605442176874
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.02688212583904284,
+            "gradientXY": [
+              0.0026230374926506407,
+              0.002927032407746197
+            ],
+            "darkOutlierFraction": 0.034013605442176874,
+            "sampleCoverage": 0.0772375616913432,
+            "coveredPixelFraction": 0.2227891156462585,
+            "errors": {
+              "lumaLogError": 0.07639359172671649,
+              "gradientRelativeError": 0.4036935351753412,
+              "darkOutlierAbsoluteError": 0.020408163265306117
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.0011902860129754667,
+          "gradientRelativeError": 0.10563293327101925,
+          "darkOutlierAbsoluteError": -0.013605442176870756,
+          "sampleCoverage": 0.03501400560224089
+        },
+        "regressions": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "improvements": [
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-training-shade-3",
+        "camera": "01",
+        "originalSplit": "training",
+        "lightZone": "shade",
+        "boxXYXY": [
+          720,
+          661,
+          764,
+          682
+        ],
+        "pixelCount": 924,
+        "photo": {
+          "medianLinearLuma": 0.023775170107999857,
+          "gradientXY": [
+            0.004403723655573306,
+            0.004929247570381364
+          ],
+          "darkOutlierFraction": 0.048701298701298704
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.024220613653726634,
+            "gradientXY": [
+              0.00522853756391172,
+              0.005078480069492316
+            ],
+            "darkOutlierFraction": 0.1645021645021645,
+            "sampleCoverage": 0.1738689415160003,
+            "coveredPixelFraction": 0.4393939393939394,
+            "errors": {
+              "lumaLogError": 0.018562311140133753,
+              "gradientRelativeError": 0.10436616420080429,
+              "darkOutlierAbsoluteError": 0.11580086580086581
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.025234623555457393,
+            "gradientXY": [
+              0.0039357225232795725,
+              0.0038279787740840136
+            ],
+            "darkOutlierFraction": 0.07900432900432901,
+            "sampleCoverage": 0.2533273915626857,
+            "coveredPixelFraction": 0.5876623376623377,
+            "errors": {
+              "lumaLogError": 0.05957523880781419,
+              "gradientRelativeError": 0.16814258724242054,
+              "darkOutlierAbsoluteError": 0.030303030303030304
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.04101292766768044,
+          "gradientRelativeError": 0.06377642304161625,
+          "darkOutlierAbsoluteError": -0.0854978354978355,
+          "sampleCoverage": 0.07945845004668539
+        },
+        "regressions": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "improvements": [
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-training-sun-1",
+        "camera": "01",
+        "originalSplit": "training",
+        "lightZone": "sun",
+        "boxXYXY": [
+          690,
+          558,
+          740,
+          566
+        ],
+        "pixelCount": 400,
+        "photo": {
+          "medianLinearLuma": 0.4063882957041269,
+          "gradientXY": [
+            0.05898624011072142,
+            0.05976064667347787
+          ],
+          "darkOutlierFraction": 0.17
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.3627877643280774,
+            "gradientXY": [
+              0.019395377311492563,
+              0.027834907972740186
+            ],
+            "darkOutlierFraction": 0.09,
+            "sampleCoverage": 0.016941176470588234,
+            "coveredPixelFraction": 0.0625,
+            "errors": {
+              "lumaLogError": 0.1134911039034755,
+              "gradientRelativeError": 0.6022608544671564,
+              "darkOutlierAbsoluteError": 0.08000000000000002
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.36655145574421305,
+            "gradientXY": [
+              0.023074140250260125,
+              0.03208051068567414
+            ],
+            "darkOutlierFraction": 0.04,
+            "sampleCoverage": 0.0497843137254902,
+            "coveredPixelFraction": 0.165,
+            "errors": {
+              "lumaLogError": 0.1031701867720626,
+              "gradientRelativeError": 0.5355276047264487,
+              "darkOutlierAbsoluteError": 0.13
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.010320917131412893,
+          "gradientRelativeError": -0.06673324974070771,
+          "darkOutlierAbsoluteError": 0.04999999999999999,
+          "sampleCoverage": 0.03284313725490197
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-training-sun-2",
+        "camera": "01",
+        "originalSplit": "training",
+        "lightZone": "sun",
+        "boxXYXY": [
+          390,
+          558,
+          439,
+          565
+        ],
+        "pixelCount": 343,
+        "photo": {
+          "medianLinearLuma": 0.3138351877705074,
+          "gradientXY": [
+            0.036222221048146624,
+            0.09807705720475624
+          ],
+          "darkOutlierFraction": 0.16034985422740525
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.38863129217950343,
+            "gradientXY": [
+              0.023791329187459898,
+              0.025204843222728122
+            ],
+            "darkOutlierFraction": 0.061224489795918366,
+            "sampleCoverage": 0.02268335905790888,
+            "coveredPixelFraction": 0.07871720116618076,
+            "errors": {
+              "lumaLogError": 0.2137630907257478,
+              "gradientRelativeError": 0.6351717369774549,
+              "darkOutlierAbsoluteError": 0.09912536443148688
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.3926787216112014,
+            "gradientXY": [
+              0.03313153265923932,
+              0.03394819669454612
+            ],
+            "darkOutlierFraction": 0.008746355685131196,
+            "sampleCoverage": 0.07575601669239124,
+            "coveredPixelFraction": 0.24198250728862974,
+            "errors": {
+              "lumaLogError": 0.22412380687156924,
+              "gradientRelativeError": 0.5005205521099997,
+              "darkOutlierAbsoluteError": 0.15160349854227406
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.01036071614582143,
+          "gradientRelativeError": -0.1346511848674552,
+          "darkOutlierAbsoluteError": 0.05247813411078718,
+          "sampleCoverage": 0.05307265763448236
+        },
+        "regressions": [
+          "lumaLogError",
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-training-sun-3",
+        "camera": "01",
+        "originalSplit": "training",
+        "lightZone": "sun",
+        "boxXYXY": [
+          810,
+          615,
+          857,
+          623
+        ],
+        "pixelCount": 376,
+        "photo": {
+          "medianLinearLuma": 0.3674972370665298,
+          "gradientXY": [
+            0.06545979861407798,
+            0.07316710526099691
+          ],
+          "darkOutlierFraction": 0.1595744680851064
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.13732898538809069,
+            "gradientXY": [
+              0.007501664775802281,
+              0.015693458893012404
+            ],
+            "darkOutlierFraction": 0.1196808510638298,
+            "sampleCoverage": 0.04603671255736337,
+            "coveredPixelFraction": 0.14627659574468085,
+            "errors": {
+              "lumaLogError": 0.9843364000535375,
+              "gradientRelativeError": 0.8326794942364347,
+              "darkOutlierAbsoluteError": 0.0398936170212766
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.14009234410366353,
+            "gradientXY": [
+              0.01403206894549286,
+              0.020104829010206743
+            ],
+            "darkOutlierFraction": 0.031914893617021274,
+            "sampleCoverage": 0.09064455569461827,
+            "coveredPixelFraction": 0.26595744680851063,
+            "errors": {
+              "lumaLogError": 0.9644139945295156,
+              "gradientRelativeError": 0.7537498349781914,
+              "darkOutlierAbsoluteError": 0.12765957446808512
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.019922405524021913,
+          "gradientRelativeError": -0.07892965925824336,
+          "darkOutlierAbsoluteError": 0.08776595744680853,
+          "sampleCoverage": 0.044607843137254896
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-heldout-shade-1",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          105,
+          585,
+          127,
+          593
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.033788954164261926,
+          "gradientXY": [
+            0.001508367365932579,
+            0.0021351203533859723
+          ],
+          "darkOutlierFraction": 0.0
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.03202431620093942,
+            "gradientXY": [
+              0.0019639003902621748,
+              0.0020225297029488774
+            ],
+            "darkOutlierFraction": 0.03977272727272727,
+            "sampleCoverage": 0.00998217468805704,
+            "coveredPixelFraction": 0.03977272727272727,
+            "errors": {
+              "lumaLogError": 0.05363845368887247,
+              "gradientRelativeError": 0.15592852742562502,
+              "darkOutlierAbsoluteError": 0.03977272727272727
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.03113940317068759,
+            "gradientXY": [
+              0.0031572717657525604,
+              0.0025595752941116375
+            ],
+            "darkOutlierFraction": 0.045454545454545456,
+            "sampleCoverage": 0.05102495543672014,
+            "coveredPixelFraction": 0.16477272727272727,
+            "errors": {
+              "lumaLogError": 0.0816599489844933,
+              "gradientRelativeError": 0.5690589622553829,
+              "darkOutlierAbsoluteError": 0.045454545454545456
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.028021495295620834,
+          "gradientRelativeError": 0.41313043482975786,
+          "darkOutlierAbsoluteError": 0.005681818181818184,
+          "sampleCoverage": 0.041042780748663105
+        },
+        "regressions": [
+          "lumaLogError",
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-heldout-shade-2",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          337,
+          609,
+          359,
+          617
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.03249440720923051,
+          "gradientXY": [
+            0.005191948687909779,
+            0.0069462872156120965
+          ],
+          "darkOutlierFraction": 0.06818181818181818
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.02585710577103259,
+            "gradientXY": [
+              0.0017526112728119315,
+              0.004816321583321222
+            ],
+            "darkOutlierFraction": 0.045454545454545456,
+            "sampleCoverage": 0.00570409982174688,
+            "coveredPixelFraction": 0.017045454545454544,
+            "errors": {
+              "lumaLogError": 0.2284825407173631,
+              "gradientRelativeError": 0.45882310177979024,
+              "darkOutlierAbsoluteError": 0.02272727272727272
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.02585710577103259,
+            "gradientXY": [
+              0.0024232319906769212,
+              0.005181676298409605
+            ],
+            "darkOutlierFraction": 0.05113636363636364,
+            "sampleCoverage": 0.058444741532976824,
+            "coveredPixelFraction": 0.16477272727272727,
+            "errors": {
+              "lumaLogError": 0.2284825407173631,
+              "gradientRelativeError": 0.3734749967349058,
+              "darkOutlierAbsoluteError": 0.017045454545454537
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.0,
+          "gradientRelativeError": -0.08534810504488444,
+          "darkOutlierAbsoluteError": -0.005681818181818184,
+          "sampleCoverage": 0.05274064171122994
+        },
+        "regressions": [],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": true
+      },
+      {
+        "id": "01-heldout-shade-3",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          446,
+          624,
+          468,
+          632
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.027678546016001445,
+          "gradientXY": [
+            0.004205503158897927,
+            0.004272724000562747
+          ],
+          "darkOutlierFraction": 0.056818181818181816
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.027150595820136524,
+            "gradientXY": [
+              0.004540251377894909,
+              0.00435326256701696
+            ],
+            "darkOutlierFraction": 0.125,
+            "sampleCoverage": 0.0712789661319073,
+            "coveredPixelFraction": 0.22727272727272727,
+            "errors": {
+              "lumaLogError": 0.019258609413957312,
+              "gradientRelativeError": 0.048982738683497715,
+              "darkOutlierAbsoluteError": 0.06818181818181818
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.027150595820136524,
+            "gradientXY": [
+              0.003225646860056896,
+              0.0038916837472498873
+            ],
+            "darkOutlierFraction": 0.056818181818181816,
+            "sampleCoverage": 0.13783422459893047,
+            "coveredPixelFraction": 0.3352272727272727,
+            "errors": {
+              "lumaLogError": 0.019258609413957312,
+              "gradientRelativeError": 0.16051664181176076,
+              "darkOutlierAbsoluteError": 0.0
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.0,
+          "gradientRelativeError": 0.11153390312826304,
+          "darkOutlierAbsoluteError": -0.06818181818181818,
+          "sampleCoverage": 0.06655525846702316
+        },
+        "regressions": [
+          "gradientRelativeError"
+        ],
+        "improvements": [
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-heldout-shade-4",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          650,
+          651,
+          672,
+          659
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.023322674890820853,
+          "gradientXY": [
+            0.001826416662235492,
+            0.0024283456471532166
+          ],
+          "darkOutlierFraction": 0.005681818181818182
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.02030934992498086,
+            "gradientXY": [
+              0.005831301147653521,
+              0.006742096069223905
+            ],
+            "darkOutlierFraction": 0.21022727272727273,
+            "sampleCoverage": 0.19948752228163993,
+            "coveredPixelFraction": 0.5284090909090909,
+            "errors": {
+              "lumaLogError": 0.1383446911799565,
+              "gradientRelativeError": 1.9551350469408184,
+              "darkOutlierAbsoluteError": 0.20454545454545456
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.023759452459507037,
+            "gradientXY": [
+              0.004340909317875795,
+              0.004262600550461643
+            ],
+            "darkOutlierFraction": 0.09090909090909091,
+            "sampleCoverage": 0.28709893048128343,
+            "coveredPixelFraction": 0.6590909090909091,
+            "errors": {
+              "lumaLogError": 0.018554390968026486,
+              "gradientRelativeError": 1.0220894242088752,
+              "darkOutlierAbsoluteError": 0.08522727272727273
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.11979030021193003,
+          "gradientRelativeError": -0.9330456227319432,
+          "darkOutlierAbsoluteError": -0.11931818181818182,
+          "sampleCoverage": 0.0876114081996435
+        },
+        "regressions": [],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": true
+      },
+      {
+        "id": "01-heldout-shade-5",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          819,
+          681,
+          841,
+          689
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.02190202008105146,
+          "gradientXY": [
+            0.0021997544178462914,
+            0.00205481436137571
+          ],
+          "darkOutlierFraction": 0.0
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.024425879019098293,
+            "gradientXY": [
+              0.005578571166886425,
+              0.005452326420238955
+            ],
+            "darkOutlierFraction": 0.14204545454545456,
+            "sampleCoverage": 0.14104278074866308,
+            "coveredPixelFraction": 0.39204545454545453,
+            "errors": {
+              "lumaLogError": 0.10906431206828975,
+              "gradientRelativeError": 1.5927181248066486,
+              "darkOutlierAbsoluteError": 0.14204545454545456
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.025446300295123205,
+            "gradientXY": [
+              0.004173424606547039,
+              0.004242528381346845
+            ],
+            "darkOutlierFraction": 0.0625,
+            "sampleCoverage": 0.24217914438502675,
+            "coveredPixelFraction": 0.5397727272727273,
+            "errors": {
+              "lumaLogError": 0.1499914872087362,
+              "gradientRelativeError": 0.9780977637486546,
+              "darkOutlierAbsoluteError": 0.0625
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.040927175140446456,
+          "gradientRelativeError": -0.614620361057994,
+          "darkOutlierAbsoluteError": -0.07954545454545456,
+          "sampleCoverage": 0.10113636363636366
+        },
+        "regressions": [
+          "lumaLogError"
+        ],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-heldout-sun-1",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          664,
+          566,
+          686,
+          574
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.40758911889208216,
+          "gradientXY": [
+            0.06973912449314747,
+            0.06619862179177878
+          ],
+          "darkOutlierFraction": 0.1590909090909091
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.2515732120037223,
+            "gradientXY": [
+              0.023630719999130984,
+              0.07397803069352929
+            ],
+            "darkOutlierFraction": 0.2215909090909091,
+            "sampleCoverage": 0.034224598930481284,
+            "coveredPixelFraction": 0.10795454545454546,
+            "errors": {
+              "lumaLogError": 0.4825255568535228,
+              "gradientRelativeError": 0.3964153803375396,
+              "darkOutlierAbsoluteError": 0.0625
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.2784064121456069,
+            "gradientXY": [
+              0.022937521366473326,
+              0.07686071658847932
+            ],
+            "darkOutlierFraction": 0.19886363636363635,
+            "sampleCoverage": 0.04380570409982174,
+            "coveredPixelFraction": 0.125,
+            "errors": {
+              "lumaLogError": 0.3811776451107357,
+              "gradientRelativeError": 0.4227206901233338,
+              "darkOutlierAbsoluteError": 0.039772727272727265
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.10134791174278707,
+          "gradientRelativeError": 0.026305309785794206,
+          "darkOutlierAbsoluteError": -0.022727272727272735,
+          "sampleCoverage": 0.009581105169340458
+        },
+        "regressions": [
+          "gradientRelativeError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-heldout-sun-2",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          925,
+          608,
+          947,
+          616
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.36933824013522476,
+          "gradientXY": [
+            0.061943077241359897,
+            0.06629741678068488
+          ],
+          "darkOutlierFraction": 0.17045454545454544
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.1429422251733567,
+            "gradientXY": [
+              0.00784403938824351,
+              0.013656630671335095
+            ],
+            "darkOutlierFraction": 0.09090909090909091,
+            "sampleCoverage": 0.04420677361853832,
+            "coveredPixelFraction": 0.1534090909090909,
+            "errors": {
+              "lumaLogError": 0.9492723352603597,
+              "gradientRelativeError": 0.832341022829477,
+              "darkOutlierAbsoluteError": 0.07954545454545453
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.14524116391512723,
+            "gradientXY": [
+              0.01289636891343439,
+              0.016342355757897678
+            ],
+            "darkOutlierFraction": 0.0,
+            "sampleCoverage": 0.05409982174688057,
+            "coveredPixelFraction": 0.16477272727272727,
+            "errors": {
+              "lumaLogError": 0.9333173038647684,
+              "gradientRelativeError": 0.7720008419001733,
+              "darkOutlierAbsoluteError": 0.17045454545454544
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.01595503139559129,
+          "gradientRelativeError": -0.06034018092930371,
+          "darkOutlierAbsoluteError": 0.09090909090909091,
+          "sampleCoverage": 0.009893048128342248
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-heldout-sun-3",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          481,
+          576,
+          503,
+          584
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.43692780723198055,
+          "gradientXY": [
+            0.06586452959557246,
+            0.06149362748637026
+          ],
+          "darkOutlierFraction": 0.1534090909090909
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.3697821507724668,
+            "gradientXY": [
+              0.02272678765837828,
+              0.025068069247395245
+            ],
+            "darkOutlierFraction": 0.09090909090909091,
+            "sampleCoverage": 0.027094474153297684,
+            "coveredPixelFraction": 0.09090909090909091,
+            "errors": {
+              "lumaLogError": 0.16685393006405305,
+              "gradientRelativeError": 0.6247208816391546,
+              "darkOutlierAbsoluteError": 0.0625
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.3707839387045441,
+            "gradientXY": [
+              0.019144870777937046,
+              0.01806817773582362
+            ],
+            "darkOutlierFraction": 0.011363636363636364,
+            "sampleCoverage": 0.0501336898395722,
+            "coveredPixelFraction": 0.17613636363636365,
+            "errors": {
+              "lumaLogError": 0.16414846310474918,
+              "gradientRelativeError": 0.7078078910185734,
+              "darkOutlierAbsoluteError": 0.14204545454545456
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.002705466959303876,
+          "gradientRelativeError": 0.08308700937941882,
+          "darkOutlierAbsoluteError": 0.07954545454545456,
+          "sampleCoverage": 0.023039215686274515
+        },
+        "regressions": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "01-heldout-sun-4",
+        "camera": "01",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          896,
+          555,
+          918,
+          563
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.37008587665624526,
+          "gradientXY": [
+            0.041159854354080684,
+            0.06363688878184504
+          ],
+          "darkOutlierFraction": 0.11363636363636363
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.3602975520746752,
+            "gradientXY": [
+              0.02668997272684552,
+              0.027960239751598955
+            ],
+            "darkOutlierFraction": 0.08522727272727272,
+            "sampleCoverage": 0.0285204991087344,
+            "coveredPixelFraction": 0.09659090909090909,
+            "errors": {
+              "lumaLogError": 0.026804854178206897,
+              "gradientRelativeError": 0.4785123006393349,
+              "darkOutlierAbsoluteError": 0.02840909090909091
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.3614127820126631,
+            "gradientXY": [
+              0.033554706303672126,
+              0.030262457086161872
+            ],
+            "darkOutlierFraction": 0.011363636363636364,
+            "sampleCoverage": 0.06619875222816399,
+            "coveredPixelFraction": 0.21022727272727273,
+            "errors": {
+              "lumaLogError": 0.023714332197366805,
+              "gradientRelativeError": 0.3910386765831025,
+              "darkOutlierAbsoluteError": 0.10227272727272727
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.003090521980840092,
+          "gradientRelativeError": -0.08747362405623244,
+          "darkOutlierAbsoluteError": 0.07386363636363635,
+          "sampleCoverage": 0.037678253119429586
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-training-shade-1",
+        "camera": "13",
+        "originalSplit": "training",
+        "lightZone": "shade",
+        "boxXYXY": [
+          280,
+          560,
+          324,
+          577
+        ],
+        "pixelCount": 748,
+        "photo": {
+          "medianLinearLuma": 0.0224690712400477,
+          "gradientXY": [
+            0.0034599126565274608,
+            0.0031769476578471056
+          ],
+          "darkOutlierFraction": 0.03074866310160428
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.023635477265802906,
+            "gradientXY": [
+              0.004470794088415964,
+              0.006231151607043018
+            ],
+            "darkOutlierFraction": 0.21390374331550802,
+            "sampleCoverage": 0.11401384083044983,
+            "coveredPixelFraction": 0.3422459893048128,
+            "errors": {
+              "lumaLogError": 0.05060910520926809,
+              "gradientRelativeError": 0.6125012714641553,
+              "darkOutlierAbsoluteError": 0.18315508021390373
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.024455088483701037,
+            "gradientXY": [
+              0.0034860113844507276,
+              0.0050812070100319535
+            ],
+            "darkOutlierFraction": 0.11898395721925134,
+            "sampleCoverage": 0.19102443116283946,
+            "coveredPixelFraction": 0.4893048128342246,
+            "errors": {
+              "lumaLogError": 0.08469856019834741,
+              "gradientRelativeError": 0.2908541070131027,
+              "darkOutlierAbsoluteError": 0.08823529411764706
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.034089454989079324,
+          "gradientRelativeError": -0.3216471644510526,
+          "darkOutlierAbsoluteError": -0.09491978609625666,
+          "sampleCoverage": 0.07701059033238963
+        },
+        "regressions": [
+          "lumaLogError"
+        ],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-training-shade-2",
+        "camera": "13",
+        "originalSplit": "training",
+        "lightZone": "shade",
+        "boxXYXY": [
+          386,
+          565,
+          435,
+          581
+        ],
+        "pixelCount": 784,
+        "photo": {
+          "medianLinearLuma": 0.021363430605593103,
+          "gradientXY": [
+            0.004320725433767139,
+            0.005141460974552332
+          ],
+          "darkOutlierFraction": 0.047193877551020405
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.024825098898915116,
+            "gradientXY": [
+              0.0039938720549824456,
+              0.004415425618454774
+            ],
+            "darkOutlierFraction": 0.1326530612244898,
+            "sampleCoverage": 0.10743797519007603,
+            "coveredPixelFraction": 0.2780612244897959,
+            "errors": {
+              "lumaLogError": 0.15017458369495915,
+              "gradientRelativeError": 0.11127330296056266,
+              "darkOutlierAbsoluteError": 0.0854591836734694
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.025235311324656232,
+            "gradientXY": [
+              0.0027151361000335127,
+              0.0028422071182427474
+            ],
+            "darkOutlierFraction": 0.044642857142857144,
+            "sampleCoverage": 0.1270658263305322,
+            "coveredPixelFraction": 0.34183673469387754,
+            "errors": {
+              "lumaLogError": 0.16656364666255194,
+              "gradientRelativeError": 0.4126787426857224,
+              "darkOutlierAbsoluteError": 0.002551020408163261
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.016389062967592793,
+          "gradientRelativeError": 0.30140543972515976,
+          "darkOutlierAbsoluteError": -0.08290816326530615,
+          "sampleCoverage": 0.019627851140456176
+        },
+        "regressions": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "improvements": [
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-training-shade-3",
+        "camera": "13",
+        "originalSplit": "training",
+        "lightZone": "shade",
+        "boxXYXY": [
+          820,
+          592,
+          856,
+          613
+        ],
+        "pixelCount": 756,
+        "photo": {
+          "medianLinearLuma": 0.02175393482978579,
+          "gradientXY": [
+            0.0025072951681224965,
+            0.002413183680347615
+          ],
+          "darkOutlierFraction": 0.003968253968253968
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.02541709083052046,
+            "gradientXY": [
+              0.0027218174226278373,
+              0.003303590094899442
+            ],
+            "darkOutlierFraction": 0.0873015873015873,
+            "sampleCoverage": 0.07064529515509907,
+            "coveredPixelFraction": 0.18253968253968253,
+            "errors": {
+              "lumaLogError": 0.1556271622076494,
+              "gradientRelativeError": 0.22455714231973897,
+              "darkOutlierAbsoluteError": 0.08333333333333333
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.025446300295123205,
+            "gradientXY": [
+              0.0024000763392742403,
+              0.0028128909286713128
+            ],
+            "darkOutlierFraction": 0.05026455026455026,
+            "sampleCoverage": 0.10268181346612719,
+            "coveredPixelFraction": 0.23148148148148148,
+            "errors": {
+              "lumaLogError": 0.1567757080347093,
+              "gradientRelativeError": 0.10302372854007269,
+              "darkOutlierAbsoluteError": 0.046296296296296294
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.0011485458270598936,
+          "gradientRelativeError": -0.12153341377966628,
+          "darkOutlierAbsoluteError": -0.037037037037037035,
+          "sampleCoverage": 0.03203651831102812
+        },
+        "regressions": [
+          "lumaLogError"
+        ],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-training-sun-1",
+        "camera": "13",
+        "originalSplit": "training",
+        "lightZone": "sun",
+        "boxXYXY": [
+          548,
+          486,
+          605,
+          494
+        ],
+        "pixelCount": 456,
+        "photo": {
+          "medianLinearLuma": 0.3799819354479293,
+          "gradientXY": [
+            0.07353720257692989,
+            0.08256823574967923
+          ],
+          "darkOutlierFraction": 0.21271929824561403
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.3480308520330363,
+            "gradientXY": [
+              0.02045769468837307,
+              0.031970744726842394
+            ],
+            "darkOutlierFraction": 0.06798245614035088,
+            "sampleCoverage": 0.006045751633986928,
+            "coveredPixelFraction": 0.017543859649122806,
+            "errors": {
+              "lumaLogError": 0.0878325821833539,
+              "gradientRelativeError": 0.6641472585630047,
+              "darkOutlierAbsoluteError": 0.14473684210526316
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.348270928133687,
+            "gradientXY": [
+              0.0268243309403072,
+              0.03620724405311506
+            ],
+            "darkOutlierFraction": 0.05263157894736842,
+            "sampleCoverage": 0.023357413140694876,
+            "coveredPixelFraction": 0.07894736842105263,
+            "errors": {
+              "lumaLogError": 0.08714300729785965,
+              "gradientRelativeError": 0.5962243489458359,
+              "darkOutlierAbsoluteError": 0.1600877192982456
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.0006895748854942457,
+          "gradientRelativeError": -0.06792290961716885,
+          "darkOutlierAbsoluteError": 0.015350877192982448,
+          "sampleCoverage": 0.01731166150670795
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-training-sun-2",
+        "camera": "13",
+        "originalSplit": "training",
+        "lightZone": "sun",
+        "boxXYXY": [
+          765,
+          477,
+          806,
+          484
+        ],
+        "pixelCount": 287,
+        "photo": {
+          "medianLinearLuma": 0.3908167466519377,
+          "gradientXY": [
+            0.06320400816686142,
+            0.06975641538564027
+          ],
+          "darkOutlierFraction": 0.16376306620209058
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.15147662526578648,
+            "gradientXY": [
+              0.009139055149699326,
+              0.03244615099125885
+            ],
+            "darkOutlierFraction": 0.07317073170731707,
+            "sampleCoverage": 0.0008744961399193824,
+            "coveredPixelFraction": 0.003484320557491289,
+            "errors": {
+              "lumaLogError": 0.9478074471106328,
+              "gradientRelativeError": 0.6872362088667868,
+              "darkOutlierAbsoluteError": 0.09059233449477351
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.15669030284450317,
+            "gradientXY": [
+              0.01452384899727677,
+              0.03551770908678749
+            ],
+            "darkOutlierFraction": 0.041811846689895474,
+            "sampleCoverage": 0.017776866844298692,
+            "coveredPixelFraction": 0.0627177700348432,
+            "errors": {
+              "lumaLogError": 0.9139675076050469,
+              "gradientRelativeError": 0.6236356898765105,
+              "darkOutlierAbsoluteError": 0.1219512195121951
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.03383993950558595,
+          "gradientRelativeError": -0.0636005189902763,
+          "darkOutlierAbsoluteError": 0.031358885017421595,
+          "sampleCoverage": 0.016902370704379308
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-training-sun-3",
+        "camera": "13",
+        "originalSplit": "training",
+        "lightZone": "sun",
+        "boxXYXY": [
+          560,
+          504,
+          600,
+          513
+        ],
+        "pixelCount": 360,
+        "photo": {
+          "medianLinearLuma": 0.4450599784602541,
+          "gradientXY": [
+            0.07092037426354902,
+            0.08031097518405197
+          ],
+          "darkOutlierFraction": 0.19722222222222222
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.23969819121997282,
+            "gradientXY": [
+              0.019823684614857208,
+              0.06453101360843438
+            ],
+            "darkOutlierFraction": 0.17777777777777778,
+            "sampleCoverage": 0.005577342047930283,
+            "coveredPixelFraction": 0.022222222222222223,
+            "errors": {
+              "lumaLogError": 0.61882846074467,
+              "gradientRelativeError": 0.4422142067011112,
+              "darkOutlierAbsoluteError": 0.01944444444444443
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.2486883577432911,
+            "gradientXY": [
+              0.0200765331224687,
+              0.06487491107660522
+            ],
+            "darkOutlierFraction": 0.16944444444444445,
+            "sampleCoverage": 0.016013071895424835,
+            "coveredPixelFraction": 0.05,
+            "errors": {
+              "lumaLogError": 0.5820085188785328,
+              "gradientRelativeError": 0.4382682921935568,
+              "darkOutlierAbsoluteError": 0.027777777777777762
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.03681994186613724,
+          "gradientRelativeError": -0.003945914507554438,
+          "darkOutlierAbsoluteError": 0.008333333333333331,
+          "sampleCoverage": 0.010435729847494551
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-heldout-shade-1",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          79,
+          562,
+          101,
+          570
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.02227745218988598,
+          "gradientXY": [
+            0.0017802225865557457,
+            0.0018342292423170824
+          ],
+          "darkOutlierFraction": 0.0
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.028460050512566608,
+            "gradientXY": [
+              0.0027575544788409566,
+              0.0027569474868001207
+            ],
+            "darkOutlierFraction": 0.045454545454545456,
+            "sampleCoverage": 0.025668449197860963,
+            "coveredPixelFraction": 0.09090909090909091,
+            "errors": {
+              "lumaLogError": 0.24492631313615418,
+              "gradientRelativeError": 0.5256814108270417,
+              "darkOutlierAbsoluteError": 0.045454545454545456
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.028267391946166842,
+            "gradientXY": [
+              0.00275529346492995,
+              0.0029166626742692142
+            ],
+            "darkOutlierFraction": 0.017045454545454544,
+            "sampleCoverage": 0.08008021390374331,
+            "coveredPixelFraction": 0.2215909090909091,
+            "errors": {
+              "lumaLogError": 0.23813385788768893,
+              "gradientRelativeError": 0.5692438045212436,
+              "darkOutlierAbsoluteError": 0.017045454545454544
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.006792455248465251,
+          "gradientRelativeError": 0.043562393694201895,
+          "darkOutlierAbsoluteError": -0.02840909090909091,
+          "sampleCoverage": 0.054411764705882354
+        },
+        "regressions": [
+          "gradientRelativeError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-heldout-shade-2",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          333,
+          565,
+          355,
+          573
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.024842551111457414,
+          "gradientXY": [
+            0.003932841539419631,
+            0.0029159847411462784
+          ],
+          "darkOutlierFraction": 0.028409090909090908
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.024608346294161365,
+            "gradientXY": [
+              0.0040853752527997625,
+              0.004652133752245798
+            ],
+            "darkOutlierFraction": 0.18181818181818182,
+            "sampleCoverage": 0.11827094474153298,
+            "coveredPixelFraction": 0.3125,
+            "errors": {
+              "lumaLogError": 0.00947228789505778,
+              "gradientRelativeError": 0.2757673573702605,
+              "darkOutlierAbsoluteError": 0.1534090909090909
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.024825098898915116,
+            "gradientXY": [
+              0.003091100612802943,
+              0.0028932669969198846
+            ],
+            "darkOutlierFraction": 0.03409090909090909,
+            "sampleCoverage": 0.18794563279857399,
+            "coveredPixelFraction": 0.4659090909090909,
+            "errors": {
+              "lumaLogError": 0.0007027597744976679,
+              "gradientRelativeError": 0.12621997338376822,
+              "darkOutlierAbsoluteError": 0.00568181818181818
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.008769528120560113,
+          "gradientRelativeError": -0.14954738398649225,
+          "darkOutlierAbsoluteError": -0.14772727272727273,
+          "sampleCoverage": 0.06967468805704101
+        },
+        "regressions": [],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": true
+      },
+      {
+        "id": "13-heldout-shade-3",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          487,
+          570,
+          509,
+          578
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.024605423429146785,
+          "gradientXY": [
+            0.004208727390361215,
+            0.004578695361833414
+          ],
+          "darkOutlierFraction": 0.07954545454545454
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.02485570266827372,
+            "gradientXY": [
+              0.005252836582063504,
+              0.0056021454962517665
+            ],
+            "darkOutlierFraction": 0.1590909090909091,
+            "sampleCoverage": 0.16804812834224597,
+            "coveredPixelFraction": 0.4034090909090909,
+            "errors": {
+              "lumaLogError": 0.010120326609010613,
+              "gradientRelativeError": 0.23528620215799623,
+              "darkOutlierAbsoluteError": 0.07954545454545454
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.02588912224001543,
+            "gradientXY": [
+              0.004371174712558967,
+              0.004216652168862282
+            ],
+            "darkOutlierFraction": 0.08522727272727272,
+            "sampleCoverage": 0.27455436720142606,
+            "coveredPixelFraction": 0.6079545454545454,
+            "errors": {
+              "lumaLogError": 0.0508560065126557,
+              "gradientRelativeError": 0.05968650080456108,
+              "darkOutlierAbsoluteError": 0.005681818181818177
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.040735679903645086,
+          "gradientRelativeError": -0.17559970135343514,
+          "darkOutlierAbsoluteError": -0.07386363636363637,
+          "sampleCoverage": 0.10650623885918009
+        },
+        "regressions": [
+          "lumaLogError"
+        ],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-heldout-shade-4",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          582,
+          586,
+          604,
+          594
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.020075460339076152,
+          "gradientXY": [
+            0.004087012029883417,
+            0.0032077911457668823
+          ],
+          "darkOutlierFraction": 0.03409090909090909
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.02585710577103259,
+            "gradientXY": [
+              0.004402753168859923,
+              0.004910263213758433
+            ],
+            "darkOutlierFraction": 0.1590909090909091,
+            "sampleCoverage": 0.10265151515151515,
+            "coveredPixelFraction": 0.3181818181818182,
+            "errors": {
+              "lumaLogError": 0.2530872574074137,
+              "gradientRelativeError": 0.2766645183388573,
+              "darkOutlierAbsoluteError": 0.125
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.02588912224001543,
+            "gradientXY": [
+              0.003886403711201558,
+              0.0038856147684435457
+            ],
+            "darkOutlierFraction": 0.11363636363636363,
+            "sampleCoverage": 0.19652406417112298,
+            "coveredPixelFraction": 0.4602272727272727,
+            "errors": {
+              "lumaLogError": 0.2543246992190747,
+              "gradientRelativeError": 0.12041886809101116,
+              "darkOutlierAbsoluteError": 0.07954545454545454
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.0012374418116609665,
+          "gradientRelativeError": -0.15624565024784615,
+          "darkOutlierAbsoluteError": -0.045454545454545456,
+          "sampleCoverage": 0.09387254901960783
+        },
+        "regressions": [
+          "lumaLogError"
+        ],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-heldout-shade-5",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "shade",
+        "boxXYXY": [
+          904,
+          613,
+          926,
+          621
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.01869793311208712,
+          "gradientXY": [
+            0.001176068464616009,
+            0.0020042012677061257
+          ],
+          "darkOutlierFraction": 0.0
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.0242484475799317,
+            "gradientXY": [
+              0.0038967537337912172,
+              0.004623483855912713
+            ],
+            "darkOutlierFraction": 0.14772727272727273,
+            "sampleCoverage": 0.1197192513368984,
+            "coveredPixelFraction": 0.32386363636363635,
+            "errors": {
+              "lumaLogError": 0.2599396090254997,
+              "gradientRelativeError": 1.6790927521366927,
+              "darkOutlierAbsoluteError": 0.14772727272727273
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.024856922074529223,
+            "gradientXY": [
+              0.002195750780677743,
+              0.002601763426812032
+            ],
+            "darkOutlierFraction": 0.03977272727272727,
+            "sampleCoverage": 0.1375668449197861,
+            "coveredPixelFraction": 0.3465909090909091,
+            "errors": {
+              "lumaLogError": 0.2847232790742087,
+              "gradientRelativeError": 0.5085243112340595,
+              "darkOutlierAbsoluteError": 0.03977272727272727
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.024783670048709017,
+          "gradientRelativeError": -1.1705684409026333,
+          "darkOutlierAbsoluteError": -0.10795454545454547,
+          "sampleCoverage": 0.017847593582887705
+        },
+        "regressions": [
+          "lumaLogError"
+        ],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-heldout-sun-1",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          610,
+          494,
+          632,
+          502
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.3728993099042067,
+          "gradientXY": [
+            0.06712944178675787,
+            0.06314346702050187
+          ],
+          "darkOutlierFraction": 0.16477272727272727
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.3565726017930697,
+            "gradientXY": [
+              0.014515787136774658,
+              0.02909998097266387
+            ],
+            "darkOutlierFraction": 0.03977272727272727,
+            "sampleCoverage": 0.0,
+            "coveredPixelFraction": 0.0,
+            "errors": {
+              "lumaLogError": 0.04477056585050474,
+              "gradientRelativeError": 0.6651969430269762,
+              "darkOutlierAbsoluteError": 0.125
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.3614768431781745,
+            "gradientXY": [
+              0.02853173306135652,
+              0.04184956242608533
+            ],
+            "darkOutlierFraction": 0.03977272727272727,
+            "sampleCoverage": 0.0,
+            "coveredPixelFraction": 0.0,
+            "errors": {
+              "lumaLogError": 0.03111045461551504,
+              "gradientRelativeError": 0.45973958721093905,
+              "darkOutlierAbsoluteError": 0.125
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.0136601112349897,
+          "gradientRelativeError": -0.20545735581603713,
+          "darkOutlierAbsoluteError": 0.0,
+          "sampleCoverage": 0.0
+        },
+        "regressions": [],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": true
+      },
+      {
+        "id": "13-heldout-sun-2",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          772,
+          514,
+          794,
+          522
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.36731141453079436,
+          "gradientXY": [
+            0.07100074991062041,
+            0.06868762218024964
+          ],
+          "darkOutlierFraction": 0.16477272727272727
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.3568815523879044,
+            "gradientXY": [
+              0.01453653536052437,
+              0.042249690555147164
+            ],
+            "darkOutlierFraction": 0.028409090909090908,
+            "sampleCoverage": 0.0,
+            "coveredPixelFraction": 0.0,
+            "errors": {
+              "lumaLogError": 0.0288060885048645,
+              "gradientRelativeError": 0.5934792204555798,
+              "darkOutlierAbsoluteError": 0.13636363636363635
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.3568815523879044,
+            "gradientXY": [
+              0.02349347736800001,
+              0.048609685545077136
+            ],
+            "darkOutlierFraction": 0.03409090909090909,
+            "sampleCoverage": 0.0,
+            "coveredPixelFraction": 0.0,
+            "errors": {
+              "lumaLogError": 0.0288060885048645,
+              "gradientRelativeError": 0.4838284544817187,
+              "darkOutlierAbsoluteError": 0.13068181818181818
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": 0.0,
+          "gradientRelativeError": -0.10965076597386109,
+          "darkOutlierAbsoluteError": -0.005681818181818177,
+          "sampleCoverage": 0.0
+        },
+        "regressions": [],
+        "improvements": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "noPhotometricOrTextureRegression": true
+      },
+      {
+        "id": "13-heldout-sun-3",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          548,
+          522,
+          570,
+          530
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.42011760282139476,
+          "gradientXY": [
+            0.07195316944362141,
+            0.0734576900020234
+          ],
+          "darkOutlierFraction": 0.21022727272727273
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.3638542885504893,
+            "gradientXY": [
+              0.02006672140293994,
+              0.0332862377412736
+            ],
+            "darkOutlierFraction": 0.07386363636363637,
+            "sampleCoverage": 0.027094474153297684,
+            "coveredPixelFraction": 0.09090909090909091,
+            "errors": {
+              "lumaLogError": 0.14378119748759735,
+              "gradientRelativeError": 0.6330882071145649,
+              "darkOutlierAbsoluteError": 0.13636363636363635
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.3672219895706442,
+            "gradientXY": [
+              0.02696624161483983,
+              0.03531477851628352
+            ],
+            "darkOutlierFraction": 0.005681818181818182,
+            "sampleCoverage": 0.07961229946524064,
+            "coveredPixelFraction": 0.21022727272727273,
+            "errors": {
+              "lumaLogError": 0.13456813739547727,
+              "gradientRelativeError": 0.5716893472154723,
+              "darkOutlierAbsoluteError": 0.20454545454545456
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.009213060092120084,
+          "gradientRelativeError": -0.06139885989909266,
+          "darkOutlierAbsoluteError": 0.0681818181818182,
+          "sampleCoverage": 0.05251782531194295
+        },
+        "regressions": [
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError",
+          "gradientRelativeError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      },
+      {
+        "id": "13-heldout-sun-4",
+        "camera": "13",
+        "originalSplit": "heldout",
+        "lightZone": "sun",
+        "boxXYXY": [
+          880,
+          525,
+          902,
+          533
+        ],
+        "pixelCount": 176,
+        "photo": {
+          "medianLinearLuma": 0.41164277112998726,
+          "gradientXY": [
+            0.07386729476562755,
+            0.07635207842487504
+          ],
+          "darkOutlierFraction": 0.14204545454545456
+        },
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.36259566987870695,
+            "gradientXY": [
+              0.036107292203788985,
+              0.06549580196899638
+            ],
+            "darkOutlierFraction": 0.13068181818181818,
+            "sampleCoverage": 0.08545008912655971,
+            "coveredPixelFraction": 0.19318181818181818,
+            "errors": {
+              "lumaLogError": 0.1268675564895887,
+              "gradientRelativeError": 0.3236352141881452,
+              "darkOutlierAbsoluteError": 0.011363636363636381
+            }
+          },
+          "E": {
+            "medianLinearLuma": 0.3681240532218698,
+            "gradientXY": [
+              0.035415857291625906,
+              0.06275836789168121
+            ],
+            "darkOutlierFraction": 0.10795454545454546,
+            "sampleCoverage": 0.1607397504456328,
+            "coveredPixelFraction": 0.4147727272727273,
+            "errors": {
+              "lumaLogError": 0.11173593036166474,
+              "gradientRelativeError": 0.34646095840909785,
+              "darkOutlierAbsoluteError": 0.0340909090909091
+            }
+          }
+        },
+        "deltaEminusR6": {
+          "lumaLogError": -0.015131626127923958,
+          "gradientRelativeError": 0.022825744220952626,
+          "darkOutlierAbsoluteError": 0.02272727272727272,
+          "sampleCoverage": 0.07528966131907308
+        },
+        "regressions": [
+          "gradientRelativeError",
+          "darkOutlierAbsoluteError"
+        ],
+        "improvements": [
+          "lumaLogError"
+        ],
+        "noPhotometricOrTextureRegression": false
+      }
+    ],
+    "nearDiagnostics": [
+      {
+        "id": "close-engineering-1",
+        "boxXYXY": [
+          75,
+          610,
+          270,
+          730
+        ],
+        "photo": null,
+        "limits": "No same-view close campus photo; raw diagnostic only.",
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.007253076993099785,
+            "gradientXY": [
+              0.003980888398203523,
+              0.003649112494259501
+            ],
+            "darkOutlierFraction": 0.040170940170940174,
+            "sampleCoverage": 0.7795642701525054,
+            "coveredPixelFraction": 0.8661965811965812
+          },
+          "E": {
+            "medianLinearLuma": 0.009700632894273368,
+            "gradientXY": [
+              0.0033610649978838302,
+              0.0030246152794856855
+            ],
+            "darkOutlierFraction": 0.035854700854700855,
+            "sampleCoverage": 0.9001516675046086,
+            "coveredPixelFraction": 0.9407264957264957
+          }
+        }
+      },
+      {
+        "id": "close-engineering-2",
+        "boxXYXY": [
+          393,
+          622,
+          586,
+          728
+        ],
+        "photo": null,
+        "limits": "No same-view close campus photo; raw diagnostic only.",
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.00857713847455523,
+            "gradientXY": [
+              0.004090152074378571,
+              0.00379284027339049
+            ],
+            "darkOutlierFraction": 0.057336983087300813,
+            "sampleCoverage": 0.703422411099546,
+            "coveredPixelFraction": 0.8064326913676801
+          },
+          "E": {
+            "medianLinearLuma": 0.009700632894273368,
+            "gradientXY": [
+              0.003379064608258606,
+              0.0029332514866261096
+            ],
+            "darkOutlierFraction": 0.03812689412454785,
+            "sampleCoverage": 0.8281261082006369,
+            "coveredPixelFraction": 0.8915827549125037
+          }
+        }
+      },
+      {
+        "id": "close-engineering-3",
+        "boxXYXY": [
+          700,
+          595,
+          878,
+          708
+        ],
+        "photo": null,
+        "limits": "No same-view close campus photo; raw diagnostic only.",
+        "models": {
+          "R6": {
+            "medianLinearLuma": 0.014956091439570447,
+            "gradientXY": [
+              0.009856802262051994,
+              0.010040306665988024
+            ],
+            "darkOutlierFraction": 0.13279307944715124,
+            "sampleCoverage": 0.7443433214988292,
+            "coveredPixelFraction": 0.8439395445958039
+          },
+          "E": {
+            "medianLinearLuma": 0.01752535913450201,
+            "gradientXY": [
+              0.0067265856469553515,
+              0.006195424876273289
+            ],
+            "darkOutlierFraction": 0.08889330814358158,
+            "sampleCoverage": 0.8978812923200502,
+            "coveredPixelFraction": 0.9454111564084717
+          }
+        }
+      }
+    ],
+    "decision": "Strict all-metric/per-ROI no-regression criterion fails. This is a documented trade-off candidate for isolated dark-point reduction, near geometric coverage and shared wind. It does not achieve complete photo texture/photometric agreement."
+  },
+  "actualModelFunctionValidation": {
+    "actualReportSha256": "822bedeb69f2efd88064b1286043cb0568ab696e0e716b3288a6453a2f7dfe47",
+    "moduleSha256": "1040b5e0a665783ee00bf016b4919638722d296275a5579ece8f9b006806af19",
+    "sourceImagesHashVerified": 14,
+    "independentPixelStatsMaxAbsDifference": 5.551115123125783e-17,
+    "input": {
+      "controls": {
+        "bareMaxDelta": 0,
+        "releasedMaxDelta": 0,
+        "cameraConsistent": true
+      },
+      "regions": [
+        {
+          "id": "01-training-shade-1",
+          "roi": [
+            202,
+            612,
+            245,
+            622
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              202,
+              612,
+              245,
+              622
+            ],
+            "R6": [
+              0.019835841313269494
+            ],
+            "E": [
+              0.049247606019151846
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              202,
+              612,
+              245,
+              622
+            ],
+            "R6": [
+              0.32143533186543155,
+              0.05313559143831804
+            ],
+            "E": [
+              0.315400053976687,
+              0.05313559143831804
+            ]
+          }
+        },
+        {
+          "id": "01-training-shade-2",
+          "roi": [
+            289,
+            623,
+            331,
+            637
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              289,
+              623,
+              331,
+              637
+            ],
+            "R6": [
+              0.04222355608910231
+            ],
+            "E": [
+              0.0772375616913432
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              289,
+              623,
+              331,
+              637
+            ],
+            "R6": [
+              0.29806060190432193,
+              0.07520330571374102
+            ],
+            "E": [
+              0.4036935351753412,
+              0.07639359172671649
+            ]
+          }
+        },
+        {
+          "id": "01-training-shade-3",
+          "roi": [
+            720,
+            661,
+            764,
+            682
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              720,
+              661,
+              764,
+              682
+            ],
+            "R6": [
+              0.1738689415160003
+            ],
+            "E": [
+              0.2533273915626857
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              720,
+              661,
+              764,
+              682
+            ],
+            "R6": [
+              0.10436616420080429,
+              0.018562311140133753
+            ],
+            "E": [
+              0.16814258724242054,
+              0.05957523880781419
+            ]
+          }
+        },
+        {
+          "id": "01-training-sun-1",
+          "roi": [
+            690,
+            558,
+            740,
+            566
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              690,
+              558,
+              740,
+              566
+            ],
+            "R6": [
+              0.016941176470588234
+            ],
+            "E": [
+              0.0497843137254902
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              690,
+              558,
+              740,
+              566
+            ],
+            "R6": [
+              0.6022608544671564,
+              0.1134911039034755
+            ],
+            "E": [
+              0.5355276047264487,
+              0.1031701867720626
+            ]
+          }
+        },
+        {
+          "id": "01-training-sun-2",
+          "roi": [
+            390,
+            558,
+            439,
+            565
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              390,
+              558,
+              439,
+              565
+            ],
+            "R6": [
+              0.02268335905790888
+            ],
+            "E": [
+              0.07575601669239124
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              390,
+              558,
+              439,
+              565
+            ],
+            "R6": [
+              0.6351717369774549,
+              0.2137630907257478
+            ],
+            "E": [
+              0.5005205521099997,
+              0.22412380687156924
+            ]
+          }
+        },
+        {
+          "id": "01-training-sun-3",
+          "roi": [
+            810,
+            615,
+            857,
+            623
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              810,
+              615,
+              857,
+              623
+            ],
+            "R6": [
+              0.04603671255736337
+            ],
+            "E": [
+              0.09064455569461827
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              810,
+              615,
+              857,
+              623
+            ],
+            "R6": [
+              0.8326794942364347,
+              0.9843364000535375
+            ],
+            "E": [
+              0.7537498349781914,
+              0.9644139945295156
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-shade-1",
+          "roi": [
+            105,
+            585,
+            127,
+            593
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              105,
+              585,
+              127,
+              593
+            ],
+            "R6": [
+              0.00998217468805704
+            ],
+            "E": [
+              0.05102495543672014
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              105,
+              585,
+              127,
+              593
+            ],
+            "R6": [
+              0.15592852742562502,
+              0.05363845368887247
+            ],
+            "E": [
+              0.5690589622553829,
+              0.0816599489844933
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-shade-2",
+          "roi": [
+            337,
+            609,
+            359,
+            617
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              337,
+              609,
+              359,
+              617
+            ],
+            "R6": [
+              0.00570409982174688
+            ],
+            "E": [
+              0.058444741532976824
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              337,
+              609,
+              359,
+              617
+            ],
+            "R6": [
+              0.45882310177979024,
+              0.2284825407173631
+            ],
+            "E": [
+              0.3734749967349058,
+              0.2284825407173631
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-shade-3",
+          "roi": [
+            446,
+            624,
+            468,
+            632
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              446,
+              624,
+              468,
+              632
+            ],
+            "R6": [
+              0.0712789661319073
+            ],
+            "E": [
+              0.13783422459893047
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              446,
+              624,
+              468,
+              632
+            ],
+            "R6": [
+              0.048982738683497715,
+              0.019258609413957312
+            ],
+            "E": [
+              0.16051664181176076,
+              0.019258609413957312
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-shade-4",
+          "roi": [
+            650,
+            651,
+            672,
+            659
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              650,
+              651,
+              672,
+              659
+            ],
+            "R6": [
+              0.19948752228163993
+            ],
+            "E": [
+              0.28709893048128343
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              650,
+              651,
+              672,
+              659
+            ],
+            "R6": [
+              1.9551350469408184,
+              0.1383446911799565
+            ],
+            "E": [
+              1.0220894242088752,
+              0.018554390968026486
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-shade-5",
+          "roi": [
+            819,
+            681,
+            841,
+            689
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              819,
+              681,
+              841,
+              689
+            ],
+            "R6": [
+              0.14104278074866308
+            ],
+            "E": [
+              0.24217914438502675
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              819,
+              681,
+              841,
+              689
+            ],
+            "R6": [
+              1.5927181248066486,
+              0.10906431206828975
+            ],
+            "E": [
+              0.9780977637486546,
+              0.1499914872087362
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-sun-1",
+          "roi": [
+            664,
+            566,
+            686,
+            574
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              664,
+              566,
+              686,
+              574
+            ],
+            "R6": [
+              0.034224598930481284
+            ],
+            "E": [
+              0.04380570409982174
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              664,
+              566,
+              686,
+              574
+            ],
+            "R6": [
+              0.3964153803375396,
+              0.4825255568535228
+            ],
+            "E": [
+              0.4227206901233338,
+              0.3811776451107357
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-sun-2",
+          "roi": [
+            925,
+            608,
+            947,
+            616
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              925,
+              608,
+              947,
+              616
+            ],
+            "R6": [
+              0.04420677361853832
+            ],
+            "E": [
+              0.05409982174688057
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              925,
+              608,
+              947,
+              616
+            ],
+            "R6": [
+              0.832341022829477,
+              0.9492723352603597
+            ],
+            "E": [
+              0.7720008419001733,
+              0.9333173038647684
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-sun-3",
+          "roi": [
+            481,
+            576,
+            503,
+            584
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              481,
+              576,
+              503,
+              584
+            ],
+            "R6": [
+              0.027094474153297684
+            ],
+            "E": [
+              0.0501336898395722
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              481,
+              576,
+              503,
+              584
+            ],
+            "R6": [
+              0.6247208816391546,
+              0.16685393006405305
+            ],
+            "E": [
+              0.7078078910185734,
+              0.16414846310474918
+            ]
+          }
+        },
+        {
+          "id": "01-heldout-sun-4",
+          "roi": [
+            896,
+            555,
+            918,
+            563
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              896,
+              555,
+              918,
+              563
+            ],
+            "R6": [
+              0.0285204991087344
+            ],
+            "E": [
+              0.06619875222816399
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              896,
+              555,
+              918,
+              563
+            ],
+            "R6": [
+              0.4785123006393349,
+              0.026804854178206897
+            ],
+            "E": [
+              0.3910386765831025,
+              0.023714332197366805
+            ]
+          }
+        },
+        {
+          "id": "13-training-shade-1",
+          "roi": [
+            280,
+            560,
+            324,
+            577
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              280,
+              560,
+              324,
+              577
+            ],
+            "R6": [
+              0.11401384083044983
+            ],
+            "E": [
+              0.19102443116283946
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              280,
+              560,
+              324,
+              577
+            ],
+            "R6": [
+              0.6125012714641553,
+              0.05060910520926809
+            ],
+            "E": [
+              0.2908541070131027,
+              0.08469856019834741
+            ]
+          }
+        },
+        {
+          "id": "13-training-shade-2",
+          "roi": [
+            386,
+            565,
+            435,
+            581
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              386,
+              565,
+              435,
+              581
+            ],
+            "R6": [
+              0.10743797519007603
+            ],
+            "E": [
+              0.1270658263305322
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              386,
+              565,
+              435,
+              581
+            ],
+            "R6": [
+              0.11127330296056266,
+              0.15017458369495915
+            ],
+            "E": [
+              0.4126787426857224,
+              0.16656364666255194
+            ]
+          }
+        },
+        {
+          "id": "13-training-shade-3",
+          "roi": [
+            820,
+            592,
+            856,
+            613
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              820,
+              592,
+              856,
+              613
+            ],
+            "R6": [
+              0.07064529515509907
+            ],
+            "E": [
+              0.10268181346612719
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              820,
+              592,
+              856,
+              613
+            ],
+            "R6": [
+              0.22455714231973897,
+              0.1556271622076494
+            ],
+            "E": [
+              0.10302372854007269,
+              0.1567757080347093
+            ]
+          }
+        },
+        {
+          "id": "13-training-sun-1",
+          "roi": [
+            548,
+            486,
+            605,
+            494
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              548,
+              486,
+              605,
+              494
+            ],
+            "R6": [
+              0.006045751633986928
+            ],
+            "E": [
+              0.023357413140694876
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              548,
+              486,
+              605,
+              494
+            ],
+            "R6": [
+              0.6641472585630047,
+              0.0878325821833539
+            ],
+            "E": [
+              0.5962243489458359,
+              0.08714300729785965
+            ]
+          }
+        },
+        {
+          "id": "13-training-sun-2",
+          "roi": [
+            765,
+            477,
+            806,
+            484
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              765,
+              477,
+              806,
+              484
+            ],
+            "R6": [
+              0.0008744961399193824
+            ],
+            "E": [
+              0.017776866844298692
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              765,
+              477,
+              806,
+              484
+            ],
+            "R6": [
+              0.6872362088667868,
+              0.9478074471106328
+            ],
+            "E": [
+              0.6236356898765105,
+              0.9139675076050469
+            ]
+          }
+        },
+        {
+          "id": "13-training-sun-3",
+          "roi": [
+            560,
+            504,
+            600,
+            513
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              560,
+              504,
+              600,
+              513
+            ],
+            "R6": [
+              0.005577342047930283
+            ],
+            "E": [
+              0.016013071895424835
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              560,
+              504,
+              600,
+              513
+            ],
+            "R6": [
+              0.4422142067011112,
+              0.61882846074467
+            ],
+            "E": [
+              0.4382682921935568,
+              0.5820085188785328
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-shade-1",
+          "roi": [
+            79,
+            562,
+            101,
+            570
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              79,
+              562,
+              101,
+              570
+            ],
+            "R6": [
+              0.025668449197860963
+            ],
+            "E": [
+              0.08008021390374331
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              79,
+              562,
+              101,
+              570
+            ],
+            "R6": [
+              0.5256814108270417,
+              0.24492631313615418
+            ],
+            "E": [
+              0.5692438045212436,
+              0.23813385788768893
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-shade-2",
+          "roi": [
+            333,
+            565,
+            355,
+            573
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              333,
+              565,
+              355,
+              573
+            ],
+            "R6": [
+              0.11827094474153298
+            ],
+            "E": [
+              0.18794563279857399
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              333,
+              565,
+              355,
+              573
+            ],
+            "R6": [
+              0.2757673573702605,
+              0.00947228789505778
+            ],
+            "E": [
+              0.12621997338376822,
+              0.0007027597744976679
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-shade-3",
+          "roi": [
+            487,
+            570,
+            509,
+            578
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              487,
+              570,
+              509,
+              578
+            ],
+            "R6": [
+              0.16804812834224597
+            ],
+            "E": [
+              0.27455436720142606
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              487,
+              570,
+              509,
+              578
+            ],
+            "R6": [
+              0.23528620215799623,
+              0.010120326609010613
+            ],
+            "E": [
+              0.05968650080456108,
+              0.0508560065126557
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-shade-4",
+          "roi": [
+            582,
+            586,
+            604,
+            594
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              582,
+              586,
+              604,
+              594
+            ],
+            "R6": [
+              0.10265151515151515
+            ],
+            "E": [
+              0.19652406417112298
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              582,
+              586,
+              604,
+              594
+            ],
+            "R6": [
+              0.2766645183388573,
+              0.2530872574074137
+            ],
+            "E": [
+              0.12041886809101116,
+              0.2543246992190747
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-shade-5",
+          "roi": [
+            904,
+            613,
+            926,
+            621
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              904,
+              613,
+              926,
+              621
+            ],
+            "R6": [
+              0.1197192513368984
+            ],
+            "E": [
+              0.1375668449197861
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              904,
+              613,
+              926,
+              621
+            ],
+            "R6": [
+              1.6790927521366927,
+              0.2599396090254997
+            ],
+            "E": [
+              0.5085243112340595,
+              0.2847232790742087
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-sun-1",
+          "roi": [
+            610,
+            494,
+            632,
+            502
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              610,
+              494,
+              632,
+              502
+            ],
+            "R6": [
+              0.0
+            ],
+            "E": [
+              0.0
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              610,
+              494,
+              632,
+              502
+            ],
+            "R6": [
+              0.6651969430269762,
+              0.04477056585050474
+            ],
+            "E": [
+              0.45973958721093905,
+              0.03111045461551504
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-sun-2",
+          "roi": [
+            772,
+            514,
+            794,
+            522
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              772,
+              514,
+              794,
+              522
+            ],
+            "R6": [
+              0.0
+            ],
+            "E": [
+              0.0
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              772,
+              514,
+              794,
+              522
+            ],
+            "R6": [
+              0.5934792204555798,
+              0.0288060885048645
+            ],
+            "E": [
+              0.4838284544817187,
+              0.0288060885048645
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-sun-3",
+          "roi": [
+            548,
+            522,
+            570,
+            530
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              548,
+              522,
+              570,
+              530
+            ],
+            "R6": [
+              0.027094474153297684
+            ],
+            "E": [
+              0.07961229946524064
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              548,
+              522,
+              570,
+              530
+            ],
+            "R6": [
+              0.6330882071145649,
+              0.14378119748759735
+            ],
+            "E": [
+              0.5716893472154723,
+              0.13456813739547727
+            ]
+          }
+        },
+        {
+          "id": "13-heldout-sun-4",
+          "roi": [
+            880,
+            525,
+            902,
+            533
+          ],
+          "coverage": {
+            "kind": "object_id_scene_depth_aa",
+            "roi": [
+              880,
+              525,
+              902,
+              533
+            ],
+            "R6": [
+              0.08545008912655971
+            ],
+            "E": [
+              0.1607397504456328
+            ]
+          },
+          "texture": {
+            "kind": "photo_error",
+            "roi": [
+              880,
+              525,
+              902,
+              533
+            ],
+            "R6": [
+              0.3236352141881452,
+              0.1268675564895887
+            ],
+            "E": [
+              0.34646095840909785,
+              0.11173593036166474
+            ]
+          }
+        }
+      ]
+    },
+    "actualFunctionOutput": {
+      "controls": {
+        "bare": "pass",
+        "release": "pass",
+        "camera": "pass"
+      },
+      "regions": [
+        {
+          "id": "01-training-shade-1",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "unchanged"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "01-training-shade-2",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-training-shade-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-training-sun-1",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "01-training-sun-2",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-training-sun-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "01-heldout-shade-1",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-heldout-shade-2",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "unchanged"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "01-heldout-shade-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "unchanged"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-heldout-shade-4",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "01-heldout-shade-5",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-heldout-sun-1",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "improved"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-heldout-sun-2",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "01-heldout-sun-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "improved"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "01-heldout-sun-4",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-training-shade-1",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "13-training-shade-2",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "13-training-shade-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "13-training-sun-1",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-training-sun-2",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-training-sun-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-heldout-shade-1",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "improved"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "13-heldout-shade-2",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-heldout-shade-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "13-heldout-shade-4",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "13-heldout-shade-5",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "regressed"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        },
+        {
+          "id": "13-heldout-sun-1",
+          "coverage": [
+            "unchanged"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-heldout-sun-2",
+          "coverage": [
+            "unchanged"
+          ],
+          "texture": [
+            "improved",
+            "unchanged"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-heldout-sun-3",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "improved",
+            "improved"
+          ],
+          "status": "accept",
+          "reasons": []
+        },
+        {
+          "id": "13-heldout-sun-4",
+          "coverage": [
+            "improved"
+          ],
+          "texture": [
+            "regressed",
+            "improved"
+          ],
+          "status": "reject",
+          "reasons": [
+            "texture_regression"
+          ]
+        }
+      ]
+    },
+    "decisionCounts": {
+      "accept": 14,
+      "reject": 16
+    },
+    "allRegionsAccepted": false,
+    "threeMetricSourceSummary": {
+      "roiCount": 30,
+      "perMetric": {
+        "lumaLogError": {
+          "improved": 15,
+          "regressed": 11,
+          "unchanged": 4
+        },
+        "gradientRelativeError": {
+          "improved": 21,
+          "regressed": 9,
+          "unchanged": 0
+        },
+        "darkOutlierAbsoluteError": {
+          "improved": 17,
+          "regressed": 12,
+          "unchanged": 1
+        }
+      },
+      "geometrySampleCoverageIncreased": 28,
+      "noPhotometricOrTextureRegressionCount": 6,
+      "strictAllRoiNoRegressionPass": false
+    },
+    "limits": [
+      "The returned module evaluates gradient and luma error, with geometry coverage. Dark-outlier frequency is separately retained from the source report.",
+      "The original R5 heldout label is provenance only: these ROIs were already exposed before R7.",
+      "Near frames lack a matched campus close photograph and are engineering diagnostics."
+    ],
+    "controlEvidenceSha256": {
+      "handoff": "792bff930b3e7a752a5668171cfebf88d2dc9b329aa15c4ade1fe4d14a1d18c6",
+      "windTransformFeedback": "7193ff9dd1c3586148597ac24bf56dac87f20a9a496d21bdf5b54c316d3edc5f"
+    },
+    "additionalModelRequests": 0
+  },
+  "strictAllRoiNoRegressionPass": false,
+  "additionalModelRequests": 0
+}

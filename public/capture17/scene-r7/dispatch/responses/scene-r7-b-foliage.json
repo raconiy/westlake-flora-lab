@@ -1,0 +1,54 @@
+{
+  "diagnosis": "Cguard仍比较叶片采样点，而不是同一屏幕像素的覆盖；顶点和中心全部避开天空，也可能由三角形内部封住孔洞。实测并非全面改善：13视图gap均值由R6的0.520953升至0.526723，01视图crown误差也上升。本补丁仅修复该guard，不据此接受整棵树候选。",
+  "evidenceUsed": [
+    "源码photo-direction分支使用五顶点加叶片中心，并对after_sky & ~before_sky逐样本计数；没有光栅化实际四个叶片三角形。",
+    "源码实际面索引为[[0,1,2],[0,2,3],[1,4,2],[2,4,3]]；已有按unit回退整条末梢及木环的路径。",
+    "提供的投影数组属于被否决C、不是最终Cguard；有顶点和深度，但没有free-sky.npz掩膜数组，不能计算真实新增天空像素。",
+    "Cguard的01/06 gap均值优于R6，10近乎持平，13退步；这些是冻结支持域内的图像分类误差，不是几何覆盖证明。",
+    "源码先保存完整native集合，再按2/4/3步长抽取并加宽web叶片。没有最终WebGL候选证据，不能沿用native guard结果。",
+    "工程规则而非照片结论：像素中心采样、闭边三角形、任一新增可信天空像素否决，以及无效投影保守否决。"
+  ],
+  "targetFiles": [
+    "infra/reconstruction/r7/trees/triangle_sky_guard.py",
+    "infra/reconstruction/r7/trees/build_shoot_clusters.py"
+  ],
+  "integrationChange": "新增下列函数，替换photo-direction内old_samples/new_samples及逐点布尔比较。每个视图单独传入同一稳定三角形清单的原/新投影；unit_ids使用mesh名::稳定unit，四个面均继承所属叶片unit。sky为固定threshold12可信天空二值掩膜，不随候选调整；坐标原点在左上，像素(x,y)中心为(x+0.5,y+0.5)，边界包含，零面积面不覆盖。\nold_valid/new_valid必须由投影端明确认证：有限投影、未跨近裁剪面且所有顶点depth>0.05；禁止丢弃无效面或把无效坐标替成背景。缺少valid默认无证据；任一顶点越过[0,W]×[0,H]也保守返回无证据。每unit先分别合并所有旧/新三角形，再差集；不借其他unit的旧覆盖抵消风险。\n对01/06结果按unit取veto并集，沿用整unit木环和全部叶片回退；missing_evidence也必须回退，ok=false则本批全部回退。native完整集合、web既有抽样且加宽后的集合分别与各自原集合比较，再合并veto；不得改成同集合或只检查加宽前。回退后重新检查最终集合。",
+  "pythonModule": "import numpy as np\n\n\ndef triangle_sky_guard(data):\n    \"\"\"Same-unit coverage delta; closed edges, centres (x+.5,y+.5).\"\"\"\n    try:\n        sky = np.asarray(data['sky'])\n        units = data['unit_ids']; n = len(units)\n        if not isinstance(units, list) or not n: raise ValueError()\n        if any(not isinstance(u, str) or not u for u in units): raise ValueError()\n        if sky.ndim != 2 or not sky.size or sky.dtype.kind not in 'biu': raise ValueError()\n        if not np.all((sky == 0) | (sky == 1)): raise ValueError()\n        h, w = sky.shape\n        old = np.asarray(data['old_triangles'], dtype=float)\n        new = np.asarray(data['new_triangles'], dtype=float)\n        ov = np.asarray(data.get('old_valid', [False]*n))\n        nv = np.asarray(data.get('new_valid', [False]*n))\n        if old.shape != (n, 3, 2) or new.shape != old.shape: raise ValueError()\n        if ov.shape != (n,) or nv.shape != (n,): raise ValueError()\n        if ov.dtype.kind != 'b' or nv.dtype.kind != 'b': raise ValueError()\n        bad = ~(ov & nv)\n        for t in (old, new):\n            bad |= ~np.isfinite(t).all(axis=(1, 2))\n            bad |= (t < 0).any(axis=(1, 2)) | (t > [w, h]).any(axis=(1, 2))\n        groups = {}\n        for i, u in enumerate(units): groups.setdefault(u, []).append(i)\n        rows = []\n        for u in sorted(groups):\n            idx = groups[u]; missing = bool(bad[idx].any()); pixels = None\n            if not missing:\n                coverage = []\n                for triangles in (old[idx], new[idx]):\n                    parts = [np.empty(0, dtype=np.int64)]\n                    for t in triangles:\n                        a, b = t[1]-t[0], t[2]-t[0]\n                        area = a[0]*b[1]-a[1]*b[0]\n                        if area == 0: continue\n                        lo = np.maximum(0, np.ceil(t.min(axis=0)-.5)).astype(int)\n                        hi = np.minimum([w-1, h-1], np.floor(t.max(axis=0)-.5)).astype(int)\n                        xx, yy = np.meshgrid(np.arange(lo[0], hi[0]+1),\n                                             np.arange(lo[1], hi[1]+1))\n                        hit = np.ones(xx.shape, dtype=bool)\n                        for p, q in zip(t, np.roll(t, -1, axis=0)):\n                            edge = (q[0]-p[0])*(yy+.5-p[1])-(q[1]-p[1])*(xx+.5-p[0])\n                            hit &= (edge >= 0) if area > 0 else (edge <= 0)\n                        parts.append(yy[hit]*w+xx[hit])\n                    coverage.append(np.unique(np.concatenate(parts)))\n                delta = np.setdiff1d(coverage[1], coverage[0], assume_unique=True)\n                delta = delta[sky.ravel()[delta].astype(bool)]\n                pixels = np.column_stack((delta % w, delta // w)).tolist()\n            rows.append({'unit': u, 'new_sky_pixels': pixels,\n                         'new_sky_count': None if missing else len(pixels),\n                         'veto': missing or bool(pixels), 'missing_evidence': missing})\n        return {'ok': True, 'units': rows}\n    except (KeyError, TypeError, ValueError, OverflowError, AttributeError):\n        return {'ok': False, 'veto_all': True, 'error': 'missing_or_invalid_input'}\n",
+  "entryPoint": "triangle_sky_guard",
+  "tests": [
+    {
+      "name": "interior_sky_missed_by_vertices_and_centroid",
+      "inputJSON": "{\"sky\":[[0,0,0,0,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],\"unit_ids\":[\"u\"],\"old_triangles\":[[[0,0],[1,0],[0,1]]],\"new_triangles\":[[[0.5,0.5],[4.5,0.5],[0.5,4.5]]],\"old_valid\":[true],\"new_valid\":[true]}",
+      "expectedJSON": "{\"ok\":true,\"units\":[{\"unit\":\"u\",\"new_sky_pixels\":[[2,1]],\"new_sky_count\":1,\"veto\":true,\"missing_evidence\":false}]}",
+      "purpose": "新三角形顶点及中心，无论floor还是最近像素取样都不落在唯一天空格；内部却覆盖其中心(2.5,1.5)。"
+    },
+    {
+      "name": "existing_sky_coverage_is_not_new",
+      "inputJSON": "{\"sky\":[[1,0],[0,0]],\"unit_ids\":[\"u\"],\"old_triangles\":[[[0,0],[2,0],[0,2]]],\"new_triangles\":[[[0,2],[2,0],[0,0]]],\"old_valid\":[true],\"new_valid\":[true]}",
+      "expectedJSON": "{\"ok\":true,\"units\":[{\"unit\":\"u\",\"new_sky_pixels\":[],\"new_sky_count\":0,\"veto\":false,\"missing_evidence\":false}]}",
+      "purpose": "原来已覆盖天空，反转绕序但覆盖不变，不应误否决。"
+    },
+    {
+      "name": "sky_to_sky_motion_still_adds_screen_pixels",
+      "inputJSON": "{\"sky\":[[1,1,1]],\"unit_ids\":[\"u\"],\"old_triangles\":[[[0,0],[1,0],[0,1]]],\"new_triangles\":[[[2,0],[3,0],[2,1]]],\"old_valid\":[true],\"new_valid\":[true]}",
+      "expectedJSON": "{\"ok\":true,\"units\":[{\"unit\":\"u\",\"new_sky_pixels\":[[2,0]],\"new_sky_count\":1,\"veto\":true,\"missing_evidence\":false}]}",
+      "purpose": "旧、新位置均属天空仍有新增屏幕像素；同时验证中心恰在三角形边上时包含。"
+    },
+    {
+      "name": "invalid_old_and_outside_new_are_not_empty",
+      "inputJSON": "{\"sky\":[[1]],\"unit_ids\":[\"clip\",\"off\"],\"old_triangles\":[[[0,0],[1,0],[0,1]],[[0,0],[1,0],[0,1]]],\"new_triangles\":[[[0,0],[1,0],[0,1]],[[-1,0],[0,0],[0,1]]],\"old_valid\":[false,true],\"new_valid\":[true,true]}",
+      "expectedJSON": "{\"ok\":true,\"units\":[{\"unit\":\"clip\",\"new_sky_pixels\":null,\"new_sky_count\":null,\"veto\":true,\"missing_evidence\":true},{\"unit\":\"off\",\"new_sky_pixels\":null,\"new_sky_count\":null,\"veto\":true,\"missing_evidence\":true}]}",
+      "purpose": "原投影无效及新投影越界均保守否决；新增量为null而非伪造零覆盖。"
+    }
+  ],
+  "falsifiableValidation": "先逐项精确比较四个夹具输出。真实集成须固定相机、掩膜、完整三角形清单及unit映射，分别保存native/web各视图的回退前后结果；最终每个有效unit必须new_sky_count=0，无证据unit必须确实回退。用独立逐像素重心坐标实现复核并集差分，要求坐标集合完全一致。再按原冻结图像协议重渲染01/06/10/13，公开gap与crown各窗口变化；几何guard通过不替代图像验收。",
+  "adoptionConditions": "有条件采用guard，暂不接受整场景候选。必须确认投影有效标志来自真实深度检查、无无效面被删除、native/web分别检查最终几何，并验证整unit回退及最终复检。不得沿用此前同集合导出或alpha/LOD方案扩大本补丁范围。",
+  "uncertainties": [
+    "没有实际天空掩膜数组、最终Cguard全量投影及最终WebGL结果；真实新增像素数尚未计算，夹具也未在外部运行。",
+    "调用者须保证三角形清单完整且稳定unit映射正确；函数不能发现被上游静默删除的面。",
+    "越界面即使能够正确画内裁剪，也在此保守标为缺证据，会增加回退；这是明确的功能退让。",
+    "闭边、双面、像素中心几何覆盖不包含深度遮挡、透明度、抗锯齿积分或镜头畸变曲边，不等同Cycles或WebGL最终着色覆盖。",
+    "sky=0不是空背景证明；缺证据标志仅针对本函数输入，不能解释为照片其他区域已可观测。"
+  ],
+  "decision": "conditional"
+}
