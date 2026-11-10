@@ -1,0 +1,6 @@
+{
+  "sunLinearRgb": [1, 1, 0.94],
+  "oldShadeLinearRgb": [0.17115117, 0.21408550, 0.24869586],
+  "shadeGain": 0.55,
+  "calibration": "Camera 01 fixed grass windows, linear photo shade/sun 0.07005, R4 WebGL 0.1533. Full-confidence ratio, limited to [0.55,1.25] by the illumination job. Relative display calibration under the captured conditions; not a measured irradiance."
+}

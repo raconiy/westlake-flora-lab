@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4f3ec">
+<title>草坪重建 · 五账号工作记录</title>
+<link rel="stylesheet" href="style.css">
+<script src="viewer.js" type="module"></script>
+</head>
+<body>
+<header class="top"><div class="wrap top-inner"><a class="back" href="../index.html"><span aria-hidden="true">←</span> 草坪实拍对照</a><span class="project">云谷校园 / R5</span></div></header>
+<main class="wrap">
+<header class="intro"><div><p class="kicker">校园草坪重建 · 推理工作记录</p><h1>五账号工作记录</h1><p class="deck">从草叶形态、阴阳照度到同机位验收，查看每次派发的完整输入、实际答复和采用依据。</p></div><a class="file-button" href="records.json" download>下载完整记录 <span aria-hidden="true">↓</span></a></header>
+<div id="loading" role="status">正在读取工作记录…</div>
+<div id="data" hidden>
+<section class="metrics" id="metrics" aria-label="推理汇总"></section>
+<section class="overview" aria-label="调度与用量">
+<div class="card"><h2>分轮并发</h2><p class="guide">网关成功尝试的实际交集 · 北京时间</p><div id="stages"></div></div>
+<div class="card"><h2>账号用量</h2><p class="guide">匿名凭据编号 · 上游成功推理</p><div id="accounts"></div></div>
+</section>
+<section class="jobs" aria-labelledby="jobs-heading">
+<div class="section-title"><div><h2 id="jobs-heading">逐笔任务与原文</h2><p class="guide">展开任务查看分工、输入图片、输出和核验值。</p></div><span id="count" aria-live="polite"></span></div>
+<div class="filters"><label>轮次<select id="stage-filter"><option value="">全部轮次</option></select></label><label>账号<select id="account-filter"><option value="">全部账号</option></select></label><label>岗位<select id="role-filter"><option value="">全部岗位</option></select></label><button type="button" id="clear">清除筛选</button></div>
+<div id="rows"></div></section>
+<footer><a href="evidence.json" download>下载采用依据与实测摘要</a><span>SHA-256 · UTF-8 原始字节</span></footer>
+</div></main>
+</body></html>

@@ -1,0 +1,728 @@
+{
+  "revision": "R5",
+  "taskEvidence": {
+    "lawn-r5-a-contact_motion": [
+      "C新增叶与原基部几何的最大差约0.00000208毫米，见解码比较。",
+      "最终同机位三个草地区在4米/秒时变化比例为26.1%、29.7%、43.3%（≥5个sRGB码值），等风幅值与相位归零后逐像素一致。"
+    ],
+    "lawn-r5-a-density": [
+      "原生成根点共510,687株；模型密度与现场实际生物密度分别记录。",
+      "0.25、0.5、1米样方分别取5470、1339、322个合格窗口；生成根点方均比0.308、0.425、1.043。"
+    ],
+    "lawn-r5-a-illumination": [
+      "共享配置实物位于 lib/capture-turf-light.json；静态地表411个顶点中调整57个。",
+      "浏览器独立留出01阴阳比0.1590→0.0760（实拍0.0682），13为0.1587→0.0750（实拍0.0551）。"
+    ],
+    "lawn-r5-a-morphology": [
+      "实物为 lib/capture-meadow.ts / tuftGeometry 及网页、全密度草叶导出。",
+      "R5首候选162片近景叶的中位叶长43.49毫米、中位最大宽2.009毫米；R4分别47.41与2.365毫米。"
+    ],
+    "lawn-r5-a-texture_qa": [
+      "训练用12个草地框；独立测量人另封存18个草地框和10个保护区。",
+      "独立留出阴草纹理误差01从3.931降到1.019、13从1.737降到0.276。留出13阳草从0.560升至0.609。"
+    ],
+    "lawn-r5-b-contact_motion": [
+      "C新增叶与原基部几何的最大差约0.00000208毫米，见解码比较。",
+      "最终同机位三个草地区在4米/秒时变化比例为26.1%、29.7%、43.3%（≥5个sRGB码值），等风幅值与相位归零后逐像素一致。"
+    ],
+    "lawn-r5-b-density": [
+      "原生成根点共510,687株；模型密度与现场实际生物密度分别记录。",
+      "0.25、0.5、1米样方分别取5470、1339、322个合格窗口；生成根点方均比0.308、0.425、1.043。",
+      "附加反例中真实差值1,000,001，原表达式截断为1,000,000。实际样方范围的结论复算通过，任意输入上的通式未采用。"
+    ],
+    "lawn-r5-b-illumination": [
+      "共享配置实物位于 lib/capture-turf-light.json；静态地表411个顶点中调整57个。",
+      "浏览器独立留出01阴阳比0.1590→0.0760（实拍0.0682），13为0.1587→0.0750（实拍0.0551）。"
+    ],
+    "lawn-r5-b-morphology": [
+      "实物为 lib/capture-meadow.ts / tuftGeometry 及网页、全密度草叶导出。",
+      "R5首候选162片近景叶的中位叶长43.49毫米、中位最大宽2.009毫米；R4分别47.41与2.365毫米。"
+    ],
+    "lawn-r5-b-texture_qa": [
+      "训练用12个草地框；独立测量人另封存18个草地框和10个保护区。",
+      "独立留出阴草纹理误差01从3.931降到1.019、13从1.737降到0.276。留出13阳草从0.560升至0.609。"
+    ],
+    "lawn-r5-c-contact_motion": [
+      "本次推理收到的是几何C早期回静止帧，均差0.83/255，对照有风时4.67/255。",
+      "C新增叶与原基部几何的最大差约0.00000208毫米，见解码比较。",
+      "最终同机位三个草地区在4米/秒时变化比例为26.1%、29.7%、43.3%（≥5个sRGB码值），等风幅值与相位归零后逐像素一致。"
+    ],
+    "lawn-r5-c-density": [
+      "原生成根点共510,687株；模型密度与现场实际生物密度分别记录。",
+      "0.25、0.5、1米样方分别取5470、1339、322个合格窗口；生成根点方均比0.308、0.425、1.043。"
+    ],
+    "lawn-r5-c-illumination": [
+      "共享配置实物位于 lib/capture-turf-light.json；静态地表411个顶点中调整57个。",
+      "浏览器独立留出01阴阳比0.1590→0.0760（实拍0.0682），13为0.1587→0.0750（实拍0.0551）。"
+    ],
+    "lawn-r5-c-morphology": [
+      "实物为 lib/capture-meadow.ts / tuftGeometry 及网页、全密度草叶导出。",
+      "R5首候选162片近景叶的中位叶长43.49毫米、中位最大宽2.009毫米；R4分别47.41与2.365毫米。"
+    ],
+    "lawn-r5-c-texture_qa": [
+      "训练用12个草地框；独立测量人另封存18个草地框和10个保护区。",
+      "独立留出阴草纹理误差01从3.931降到1.019、13从1.737降到0.276。留出13阳草从0.560升至0.609。"
+    ]
+  },
+  "artifacts": {
+    "candidate_final_glb": {
+      "filename": "yungu-lawn.glb",
+      "bytes": 29927688,
+      "sha256": "ab5db9bc31ccd5e5de9251fe790b3d1f42232cfccb83ead41e3e58ede8253e96"
+    },
+    "candidate_ground_binding": {
+      "filename": "ground-binding.json",
+      "bytes": 247,
+      "sha256": "9c04eb2892c912c7be973f2fceb747639acb50c6b6efdad77af669a590212929"
+    },
+    "independent_report": {
+      "filename": "R5-independent-report.json",
+      "bytes": 16375,
+      "sha256": "a787e6c378784c06629f22ed91f6a9c6b00b87da575d60dd18297ffd77737398"
+    },
+    "prototype_comparison": {
+      "filename": "C-decoded-blade-comparison.json",
+      "bytes": 4243,
+      "sha256": "379f999c2044d956494b4caafd18f6b770bb3a2f8d0ccb73da815abd91e8cbb0"
+    },
+    "frozen_candidate_source": {
+      "filename": "FINAL-capture-meadow.ts",
+      "bytes": 17265,
+      "sha256": "b7a04fe7ad081a3f350f8142950cc58909735cd7c31e8a68c469fc2dd401f622"
+    },
+    "frozen_light_configuration": {
+      "filename": "FINAL-capture-turf-light.json",
+      "bytes": 375,
+      "sha256": "9996435c8e27a96061a2aad9e2f4e6f0d2b9c912f4bad1435f2fcb9f6df97105"
+    }
+  },
+  "nearView": {
+    "R4": {
+      "changedFractionAt0_015": 0.8337131076388888,
+      "changedFractionAt0_03": 0.7794777199074074,
+      "meanAbsLinearYChange": 0.069713101043661,
+      "bladeImageMeanXGrad": 0.01624414384172919,
+      "bladeImageMeanYGrad": 0.009828643540924203
+    },
+    "geometryB": {
+      "changedFractionAt0_015": 0.6829065393518517,
+      "changedFractionAt0_03": 0.6104058159722222,
+      "meanAbsLinearYChange": 0.054949043494079974,
+      "bladeImageMeanXGrad": 0.017599837886326103,
+      "bladeImageMeanYGrad": 0.01600330871749545
+    },
+    "geometryC": {
+      "changedFractionAt0_015": 0.8331163194444444,
+      "changedFractionAt0_03": 0.7954644097222222,
+      "meanAbsLinearYChange": 0.07049059324752441,
+      "bladeImageMeanXGrad": 0.014270079507863444,
+      "bladeImageMeanYGrad": 0.013291754708985795
+    }
+  },
+  "modelRootQuadrats": {
+    "coreWorldXZ": [
+      -8,
+      8,
+      -28,
+      -4
+    ],
+    "sitesInWholeScene": 510687,
+    "scope": "Deterministic scene root counts. Candidate quadrat masking uses 25 uniformly spaced sample locations and additional clearance; results describe the model, not measured field species or biomass.",
+    "regions": {
+      "1": {
+        "areaPerQuadratM2": 1,
+        "eligibleQuadrats": 322,
+        "sampleMeanCount": 204.8975155279503,
+        "sampleVariance": 213.76828041253071,
+        "observedRange": [
+          170,
+          239
+        ],
+        "densityRootsPerM2": 204.8975155279503,
+        "dispersion": 1.0432936673815858
+      },
+      "0.25": {
+        "areaPerQuadratM2": 0.0625,
+        "eligibleQuadrats": 5470,
+        "sampleMeanCount": 12.785374771480804,
+        "sampleVariance": 3.9382025931099744,
+        "observedRange": [
+          4,
+          19
+        ],
+        "densityRootsPerM2": 204.56599634369286,
+        "dispersion": 0.30802402459836936
+      },
+      "0.5": {
+        "areaPerQuadratM2": 0.25,
+        "eligibleQuadrats": 1339,
+        "sampleMeanCount": 51.18371919342793,
+        "sampleVariance": 21.761438773106704,
+        "observedRange": [
+          35,
+          64
+        ],
+        "densityRootsPerM2": 204.73487677371173,
+        "dispersion": 0.4251632963768859
+      }
+    }
+  },
+  "firstGeometryVsR4": {
+    "R4": {
+      "sha256": "980b3ee316686056c30c0de74979d64ee146d474dca4c6b3943abff7c5a50f72",
+      "nearBladeCount": 162,
+      "note": "Local coordinates of four representative near-detail blade variants; metrics measured from decoded geometric side-edge midpoint cross-sections. Excludes instance scale and animation.",
+      "height": {
+        "min": 0.023436665534973145,
+        "median": 0.04079177603125572,
+        "max": 0.06662990897893906
+      },
+      "tipReach": {
+        "min": 0.011274643862821615,
+        "median": 0.021136606607223034,
+        "max": 0.042898308151100795
+      },
+      "arc": {
+        "min": 0.026706377458257307,
+        "median": 0.04740566496905022,
+        "max": 0.08059048082840416
+      },
+      "maxWidth": {
+        "min": 0.0015996374061599543,
+        "median": 0.0023652037889088503,
+        "max": 0.003346005478231651
+      },
+      "tipWidth": {
+        "min": 7.334673474933853e-05,
+        "median": 0.0005644076190141833,
+        "max": 0.0009405462918079454
+      },
+      "tipFraction": {
+        "min": 0.04517489650774648,
+        "median": 0.2810952162860454,
+        "max": 0.2810964332420972
+      }
+    },
+    "R5": {
+      "sha256": "c42107ad01d5dc393c6b0cda5e7aeb95b302a835ea79d1730192a60fc11deca3",
+      "nearBladeCount": 162,
+      "note": "Local coordinates of four representative near-detail blade variants; metrics measured from decoded geometric side-edge midpoint cross-sections. Excludes instance scale and animation.",
+      "height": {
+        "min": 0.002891586162149906,
+        "median": 0.02192641142755747,
+        "max": 0.040982864797115326
+      },
+      "tipReach": {
+        "min": 0.01103369638732519,
+        "median": 0.035853981366818825,
+        "max": 0.054361323708363274
+      },
+      "arc": {
+        "min": 0.0243413507776729,
+        "median": 0.04348846323090807,
+        "max": 0.06059561169926576
+      },
+      "maxWidth": {
+        "min": 0.001558437716903928,
+        "median": 0.002009421803892246,
+        "max": 0.002611053530601405
+      },
+      "tipWidth": {
+        "min": 5.846029490429732e-05,
+        "median": 0.0013046893093388587,
+        "max": 0.002276243016359167
+      },
+      "tipFraction": {
+        "min": 0.03751121328125265,
+        "median": 0.6560767372364679,
+        "max": 0.9399332880452254
+      }
+    },
+    "paired": {
+      "allIdsMatch": true,
+      "maxPlanarSocketDriftM": 1.9199706733309015e-09,
+      "maxVerticalSocketDriftM": 0.0
+    }
+  },
+  "selectionAndHoldout": {
+    "frozenProtocolSha": "337a47b9dd53d86cebcb153afd99e6b4502420eb377ef4fe099a0ee51843e1c7",
+    "finalScene": "ab5db9bc31ccd5e5de9251fe790b3d1f42232cfccb83ead41e3e58ede8253e96",
+    "cameras": {
+      "01": {
+        "browser": {
+          "training": {
+            "ratioPhoto": 0.07005291838112043,
+            "ratioR4": 0.1533214500945568,
+            "ratioFinal": 0.07341697451448917,
+            "absoluteErrorR4": 0.08326853171343637,
+            "absoluteErrorFinal": 0.003364056133368737,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.026790000214149144,
+                0.05484947253234042,
+                0.0262735072630394
+              ],
+              "chromaL1Error_R4_R5": [
+                0.08750158287957446,
+                0.08554680344385421
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.25927342309083434,
+                0.40145393570549437,
+                0.4208623171189915
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.3824251841786104,
+                0.35774167605715645,
+                0.357866929777312
+              ],
+              "chromaL1Error_R4_R5": [
+                0.01781170483460559,
+                0.01781170483460559
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.22221375084382294,
+                0.17616351404156289,
+                0.15129436378797867
+              ]
+            }
+          },
+          "heldout": {
+            "ratioPhoto": 0.06818452482820217,
+            "ratioR4": 0.15901540116458202,
+            "ratioFinal": 0.07597260652668292,
+            "absoluteErrorR4": 0.09083087633637985,
+            "absoluteErrorFinal": 0.007788081698480748,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.026891092473254833,
+                0.05480729795496671,
+                0.0262735072630394
+              ],
+              "chromaL1Error_R4_R5": [
+                0.10413755392186652,
+                0.09820882481432958
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.1572755272899137,
+                0.4581152519458141,
+                0.38074607069053085
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.3943870334362477,
+                0.34466660181073144,
+                0.3458286935806485
+              ],
+              "chromaL1Error_R4_R5": [
+                0.008667221265646369,
+                0.010728481932670314
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.19681740826849983,
+                0.1096053820584168,
+                0.08131927544332203
+              ]
+            }
+          },
+          "protectedMedianRGB255Change": {
+            "foreground-trunk": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "lamp-pole": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "green-cover": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "paving": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "clearSky": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "GPU": {
+          "training": {
+            "ratioPhoto": 0.07005291838112043,
+            "ratioR4": 0.2492568223703256,
+            "ratioFinal": 0.20496105306154772,
+            "absoluteErrorR4": 0.17920390398920516,
+            "absoluteErrorFinal": 0.13490813468042728,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.026790000214149144,
+                0.03087346364579314,
+                0.024874084169069367
+              ],
+              "chromaL1Error_R4_R5": [
+                0.14777358490566037,
+                0.18605206591831872
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.25927342309083434,
+                0.2853772937685203,
+                0.26226919497137446
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.3824251841786104,
+                0.12386206063368589,
+                0.12136005254422622
+              ],
+              "chromaL1Error_R4_R5": [
+                0.1575167640060566,
+                0.10057308394735179
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.22221375084382294,
+                0.20990254828843757,
+                0.19252190097948374
+              ]
+            }
+          },
+          "heldout": {
+            "ratioPhoto": 0.06818452482820217,
+            "ratioR4": 0.5494863177721316,
+            "ratioFinal": 0.4374234562773134,
+            "absoluteErrorR4": 0.4813017929439295,
+            "absoluteErrorFinal": 0.36923893144911124,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.026891092473254833,
+                0.030737682719048875,
+                0.024725117380485
+              ],
+              "chromaL1Error_R4_R5": [
+                0.11023971589227585,
+                0.15425283781682478
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.1572755272899137,
+                0.26952541582059936,
+                0.24307118446582163
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.3943870334362477,
+                0.05593894101617211,
+                0.056524443364120866
+              ],
+              "chromaL1Error_R4_R5": [
+                0.20252040897202184,
+                0.14991494991494986
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.19681740826849983,
+                0.28769892148148113,
+                0.260320206608811
+              ]
+            }
+          },
+          "protectedMedianRGB255Change": {
+            "foreground-trunk": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "lamp-pole": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "green-cover": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "paving": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "clearSky": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "heldoutTextureError": {
+          "shade": {
+            "R4": 3.9314136611918524,
+            "final": 1.0188575863549834
+          },
+          "sun": {
+            "R4": 0.6212696367998811,
+            "final": 0.6167293174634519
+          }
+        }
+      },
+      "13": {
+        "browser": {
+          "training": {
+            "ratioPhoto": 0.05524634922845126,
+            "ratioR4": 0.18864561430141025,
+            "ratioFinal": 0.08871129386676348,
+            "absoluteErrorR4": 0.133399265072959,
+            "absoluteErrorFinal": 0.03346494463831222,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.022150957710275754,
+                0.05199063619850684,
+                0.02463755575876411
+              ],
+              "chromaL1Error_R4_R5": [
+                0.07886056971514249,
+                0.08782608695652183
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.22557098184463867,
+                0.3332201594038413,
+                0.3515464848034537
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.4009488051179363,
+                0.2755994958644431,
+                0.2777273860503888
+              ],
+              "chromaL1Error_R4_R5": [
+                0.052130781053514014,
+                0.04952598546959125
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.20779388572884663,
+                0.19455701964296568,
+                0.2182714411733086
+              ]
+            }
+          },
+          "heldout": {
+            "ratioPhoto": 0.055129102041566555,
+            "ratioR4": 0.1586739389450873,
+            "ratioFinal": 0.07497070611029698,
+            "absoluteErrorR4": 0.10354483690352075,
+            "absoluteErrorFinal": 0.019841604068730423,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.021663677687563106,
+                0.05366982308360939,
+                0.02563384343527422
+              ],
+              "chromaL1Error_R4_R5": [
+                0.10723228752393577,
+                0.10901735334823814
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.2229696331871142,
+                0.3283292252658421,
+                0.3475400516963701
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.3929626437816637,
+                0.3382396847297214,
+                0.34191812729576915
+              ],
+              "chromaL1Error_R4_R5": [
+                0.03953840686778751,
+                0.04023740565481901
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.20543477505750707,
+                0.3236090048866234,
+                0.318370471767716
+              ]
+            }
+          },
+          "protectedMedianRGB255Change": {
+            "foreground-trunk": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "lamp-pole": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "green-cover": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "paving": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "clearSky": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "GPU": {
+          "training": {
+            "ratioPhoto": 0.05524634922845126,
+            "ratioR4": 0.26376765095043,
+            "ratioFinal": 0.2067969348261247,
+            "absoluteErrorR4": 0.20852130172197872,
+            "absoluteErrorFinal": 0.15155058559767345,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.022150957710275754,
+                0.035672210600394834,
+                0.026863702125217676
+              ],
+              "chromaL1Error_R4_R5": [
+                0.16774821544451662,
+                0.21002661934338956
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.22557098184463867,
+                0.31821272933235334,
+                0.31127435965193595
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.4009488051179363,
+                0.13524103684381955,
+                0.12990377322470825
+              ],
+              "chromaL1Error_R4_R5": [
+                0.1424981027192715,
+                0.09605894614377819
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.20779388572884663,
+                0.20012738172125058,
+                0.19318174763982626
+              ]
+            }
+          },
+          "heldout": {
+            "ratioPhoto": 0.055129102041566555,
+            "ratioR4": 0.24316042563544094,
+            "ratioFinal": 0.19537805331753852,
+            "absoluteErrorR4": 0.18803132359387437,
+            "absoluteErrorFinal": 0.14024895127597198,
+            "shade": {
+              "linearY_SRC_R4_R5": [
+                0.021663677687563106,
+                0.03307854899264007,
+                0.025664485922364755
+              ],
+              "chromaL1Error_R4_R5": [
+                0.11852963240810194,
+                0.18113105682278313
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.2229696331871142,
+                0.2862724437331947,
+                0.2396689820270673
+              ]
+            },
+            "sun": {
+              "linearY_SRC_R4_R5": [
+                0.3929626437816637,
+                0.1360359067730585,
+                0.13135807981796965
+              ],
+              "chromaL1Error_R4_R5": [
+                0.14249810271927144,
+                0.09364632117476224
+              ],
+              "robustContrast_SRC_R4_R5": [
+                0.20543477505750707,
+                0.329499575957353,
+                0.28369082399095735
+              ]
+            }
+          },
+          "protectedMedianRGB255Change": {
+            "foreground-trunk": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "lamp-pole": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "green-cover": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "paving": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "clearSky": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "heldoutTextureError": {
+          "shade": {
+            "R4": 1.737263786223753,
+            "final": 0.2757673573702605
+          },
+          "sun": {
+            "R4": 0.5599319861609587,
+            "final": 0.6094408135457214
+          }
+        }
+      }
+    },
+    "grassWindImageDiff": {
+      "0": {
+        "fractionChangedDuring4mps_ge5sRGB": 0.26098290598290597,
+        "fractionChangedAfterRest_ge5sRGB": 0.0,
+        "meanSrgbAbsAfterRest255": 0.0
+      },
+      "1": {
+        "fractionChangedDuring4mps_ge5sRGB": 0.29729201290448726,
+        "fractionChangedAfterRest_ge5sRGB": 0.0,
+        "meanSrgbAbsAfterRest255": 0.0
+      },
+      "2": {
+        "fractionChangedDuring4mps_ge5sRGB": 0.43328030227702097,
+        "fractionChangedAfterRest_ge5sRGB": 0.0,
+        "meanSrgbAbsAfterRest255": 0.0
+      }
+    },
+    "fixedWebProjectionsMatchR4": {
+      "01": true,
+      "13": true,
+      "close": true
+    }
+  },
+  "notes": "Training and held-out observations have separate data provenance. The isolated geometry-C return frame was captured during decay. The final return-to-rest check waits for zero shader amplitude and phase. The mask-sampled geometry and pixel metrics are not field measurements of species, blade width, irradiance, or displacement."
+}

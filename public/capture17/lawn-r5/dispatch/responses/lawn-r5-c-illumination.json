@@ -1,0 +1,57 @@
+{
+  "decision": "adopt_with_limits",
+  "diagnosis": "处置：可将FINAL的0.55阴区增益保留为受控的相对显示校准，但不能据此宣布整套草坪外观或物理照度验收通过。保留当前成功的照明改动，暂不继续修改根点、草叶几何或底材反射率；完整发布仍需解决13机位阴阳比残差和日照纹理倒退。\n\n【最终候选，而非前序B】前序handoff证明geometryB的草叶增量归因退化，但那不是当前FINAL的验收结果。按当前配准数据，01的photo/R4/C/FINAL带草叶阴阳比分别为0.070052918、0.153321450、0.153934772、0.073416975；13分别为0.055246349、0.188645614、0.188186317、0.088711294。两个冻结检查的reference实际对应C，而非R4：01绝对误差0.083881854→0.003364057，减少0.080517797；13为0.132939968→0.033464945，减少0.099475023。两项严格小于比较均通过。但是最终误差相对照片分别约4.80%和60.57%，不能用01的通过覆盖13的失配。\n\n【跨机位与日照漂移】照片的13减01阴阳比为-0.014806569，FINAL则为+0.015294319，方向仍相反；这表明01训练得到的相对校准尚不能证明跨机位保真，不能解释为已经测出了相机曝光或真实入射光差异。另一方面，C→FINAL的六个日照窗，其Y中位数、水平梯度、垂直梯度全部逐项相同，照明改动没有在这些登记日照窗中引入漂移。相对R4，带草叶日照窗最大Y中位数变化约为01的+0.374%、13的+0.0179%，来自C几何阶段，均小于1%。日照本身仍明显失配：01窗[810,615,857,623]最终Y=0.137329，照片为0.367497；13窗[765,477,806,484]最终Y=0.153795，照片为0.390817。日照不漂移并不等于日照正确。\n\n【下层叶片与照明/底材交互】当前C解码的模型局部叶高p50为24.258 mm，R4为40.792 mm；叶尖/基部宽度p50为0.743192，R4为0.358974；向下拱尖由0/162变为53/260。它不是前序B的21.926 mm版本，也不是仅增加下层叶片的单因素试验。场景根点仍为510687，实例平移、旋转、缩放散列一致，配对原型根点最大漂移仅3.72529e-6 mm；没有根位增密证据。R4→C裸地图像散列不变，C→FINAL裸地图像散列改变；供给的接线记录还明确说明同一0.55增益进入草叶和受影响地面顶点，地面调整57/411个顶点。因此最终改善不能归功于低叶几何或草叶颜色一条路径。\n\n具体地，裸地阴阳比在01从0.157649553降到0.075309334，在13从0.187590351降到0.087735513，大部分共同残差无需草叶便已改善。草叶相对裸地的比值绝对误差增量，在01为R4 -0.004328103、C -0.003714781、FINAL -0.001892359；FINAL相对R4的贡献差为+0.002435744，草叶增量改善反而缩小。13对应为+0.001055263、+0.000595966、+0.000975781，FINAL相对R4为-0.000079482，但草叶仍略劣于最终裸地。不能把总体比值成功等同于下层叶片受光正确。\n\n【纹理成功与回归】按当前12窗residual等窗口平均，01阴区带草叶R4/C/FINAL为0.927155/0.952840/0.242844，13为1.713141/1.910570/0.316111；最终六个阴区带草叶窗均优于R4。日照则为01的0.646704→0.691789，三个窗全退；13为0.593205→0.596931，两个退、一个改善。最差日照局部倒退为01第一窗+0.058185875，超过前序建议的0.05工程门槛。裸地阴区纹理也不是一致改善：01均值0.400190→0.531679，13为0.504479→0.479565，六窗各有三项改善和退化。最终带草叶全12窗为7改善、5退化，不能沿用B的5/7计数。\n\n所附真实来源缩略图支持最终阴区明显变暗、日照仍较平滑的粗略观察；具体判断采用登记完整帧统计，不从缩略图取样。",
+  "checks": [
+    {
+      "id": "ratio_error_01",
+      "pass": true,
+      "explanation": "重算actual=abs(0.073416975-0.070052918)=0.003364057；reference=abs(0.153934772-0.070052918)=0.083881854。0.003364057 < 0.083881854成立。"
+    },
+    {
+      "id": "ratio_error_13",
+      "pass": true,
+      "explanation": "重算actual=abs(0.088711294-0.055246349)=0.033464945；reference=abs(0.188186317-0.055246349)=0.132939968。0.033464945 < 0.132939968成立。"
+    },
+    {
+      "id": "negative_control_geometry_bare_unchanged",
+      "pass": true,
+      "explanation": "几何负对照：01和13的R4_bare与C_bare登记SHA分别完全相同，两个阴阳比分别保持0.157649553和0.187590351，全部12窗裸地测量不变。该结论不延伸到施加照明增益后的FINAL。"
+    },
+    {
+      "id": "negative_control_sun_lighting_01",
+      "pass": true,
+      "explanation": "照明负对照：01的三个日照窗，C→FINAL在bare和blades两层的全部Y中位数、水平梯度、垂直梯度均相同；18项最大绝对差为0。"
+    },
+    {
+      "id": "negative_control_sun_lighting_13",
+      "pass": true,
+      "explanation": "照明负对照：13的三个日照窗，C→FINAL在bare和blades两层的18项测量最大绝对差为0。"
+    },
+    {
+      "id": "release_relative_ratio_01",
+      "pass": true,
+      "explanation": "沿用前序建议的≤10%工程发布门槛，非新增冻结检查：0.003364057/0.070052918≈4.80%，通过。"
+    },
+    {
+      "id": "release_relative_ratio_13",
+      "pass": false,
+      "explanation": "沿用前序建议的≤10%工程发布门槛：0.033464945/0.055246349≈60.57%，失败；绝对误差改善不能替代该项验收。"
+    },
+    {
+      "id": "sun_texture_no_regression_01",
+      "pass": false,
+      "explanation": "补充回归检查，非冻结比值检查：日照带草叶平均residual从0.646704306升至0.691788695，增加0.045084388。三个窗分别增加0.058185875、0.042547155、0.034520134；第一窗还超过0.05局部退化门槛。"
+    },
+    {
+      "id": "sun_texture_no_regression_13",
+      "pass": false,
+      "explanation": "补充回归检查：日照带草叶平均residual从0.593204839升至0.596931072，增加0.003726233；逐窗变化为-0.009382550、+0.009885080、+0.010676170，不能称为全窗改善。"
+    }
+  ],
+  "specificChangeOrTest": {
+    "file": "infra/reconstruction/check_lawn_lighting.py",
+    "proposedImplementation": "建议新增以下可执行证据门禁，而非直接再调暗13或改变底材反射率。输入为本任务JSON：python infra/reconstruction/check_lawn_lighting.py evidence.json。保持lib/capture-meadow.ts登记版本b7a04fe7ad081a3f350f8142950cc58909735cd7c31e8a68c469fc2dd401f622及当前资产作为本轮基线，不把前序旧源码SHA用于本候选。以下是待实现代码，本回答没有运行：\n\nimport json\nimport math\nimport sys\n\nwith open(sys.argv[1], encoding='utf-8') as f:\n    e = json.load(f)['evidence']\n\nfailures = []\nfor camera in ('01', '13'):\n    final = e['frozenTrainingCropsCandidate'][camera]\n    before = e['geometryCBeforeLight'][camera]\n    r = final['shadowSunRatio']\n    c = before['shadowSunRatio']\n    actual = abs(r['R5_blades'] - r['photo'])\n    reference = abs(c['R5_blades'] - c['photo'])\n    key = f'ratio_error_{camera}'\n    frozen = e['frozenDecisionChecks'][key]\n    assert frozen['op'] == '<'\n    assert math.isclose(actual, frozen['actual'], rel_tol=0, abs_tol=1e-12)\n    assert math.isclose(reference, frozen['reference'], rel_tol=0, abs_tol=1e-12)\n    if not actual < reference:\n        failures.append((camera, 'frozen_ratio'))\n    relative = actual / r['photo']\n    if relative > 0.10:\n        failures.append((camera, 'relative_ratio', relative))\n    assert len(final['windows']) == len(before['windows']) == 6\n    old_sun, new_sun = [], []\n    for w, b in zip(final['windows'], before['windows']):\n        assert (w['xyxy'], w['class']) == (b['xyxy'], b['class'])\n        if w['class'] != 'sun':\n            continue\n        for layer in ('R5_bare', 'R5_blades'):\n            if w['measurements'][layer] != b['measurements'][layer]:\n                failures.append((camera, 'sun_lighting_control', w['xyxy'], layer))\n        old = w['residual']['R4_blades']\n        new = w['residual']['R5_blades']\n        old_sun.append(old)\n        new_sun.append(new)\n        if new - old > 0.05:\n            failures.append((camera, 'local_texture', w['xyxy'], new-old))\n    assert len(old_sun) == 3\n    mean_old = sum(old_sun) / 3\n    mean_new = sum(new_sun) / 3\n    if mean_new > mean_old:\n        failures.append((camera, 'sun_texture_group', mean_new-mean_old))\n    print(camera, {'absolute_error': actual, 'relative_error': relative,\n                   'sun_residual_old': mean_old, 'sun_residual_new': mean_new})\n\nprint(json.dumps({'release_failures': failures}, ensure_ascii=False))\nsys.exit(1 if failures else 0)\n\n后续若修改源级照明接线，必须继续让live viewer、static meadow与受影响地面颜色共享同一增益，并防止已烘焙地面资产再次乘0.55。当前地面输出资产SHA为ab5db9bc31ccd5e5de9251fe790b3d1f42232cfccb83ead41e3e58ede8253e96；应以输入/输出资产身份区分是否已应用增益，不能仅凭文件名重复处理。源码片段没有展示完整照明调用点，因此这里不编造替换行号或现有函数名。",
+    "failureCondition": "按所给数据，两个冻结比值检查及日照照明负对照应通过；完整发布门禁应因13相对比值误差约60.57%、两个机位日照纹理组均值退化，以及01第一日照窗residual增加0.058185875而失败。若脚本对此候选返回发布成功，或把C→FINAL日照负对照判为变化，应检查实现、输入身份或ROI配对，不得修改阈值以追认通过。"
+  },
+  "observationalLimit": "未调用工具或网络，未读取本地源码、核验实际文件散列、运行所提脚本或重新渲染；以上为对提供数字的复算，散列和接线状态是输入证据。handoff的externalValidation仅验证前序交付，不能充当FINAL的独立验收。没有披露独立保留窗或其分数，也没有该19 cm机位的匹配厘米尺度照片，因此不能声明独立泛化、真实叶形或物理照度正确。0.55来自原训练窗的相对显示校准；照片亮度、渲染顶点色和模型根点密度分别不等于入射照度、底材反射率和现场生物量。发布说明必须保留13机位阴区仍相对偏亮、日照绝对亮度与纹理仍失配，以及未经过独立保留集验收这三项限制。"
+}

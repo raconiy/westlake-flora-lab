@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import turfLight from './capture-turf-light.json' with {type:'json'};
 import {isMeadowPoint, meadowBounds, meadowCoreBounds, meadowFringeWeight} from './capture-meadow-layout.ts';
 
 const cell = .065;                        // metres between candidate tiller groups
@@ -24,6 +25,9 @@ export function meadowDetailMix(distance:number,near:number,far:number) {
 }
 
 // The independent scene-light field comes from the photo-01/02/13 lawn fit.
+const [sunR,sunG,sunB] = turfLight.sunLinearRgb;
+const [shadeR,shadeG,shadeB] = turfLight.oldShadeLinearRgb.map(v=>v*turfLight.shadeGain);
+
 function captureLight(x:number,z:number) {
   const a=x-.36903619,b=-z-.00876927;
   const s=.77264685*a+.63483608*b, t=.63483608*a-.77264685*b;
@@ -75,39 +79,78 @@ function tuftGeometry(tier:Tier,variant:number,seed:number) {
   // Generate one physical tuft. Coarser meshes retain a nested subset of the
   // same blades, their shoot sockets, centerlines, widths and pigmentation.
   const next=random(hash(0,variant,seed^0x4c351));
-  const allBlades=Array.from({length:39+variant},(_,i)=>i);
+  const original=Array.from({length:39+variant},(_,i)=>i);
+  const understorey=Array.from({length:23+variant},(_,i)=>original.length+i);
+  const allBlades=[...original,...understorey];
   const sample=(ids:number[],count:number)=>Array.from({length:count},(_,i)=>ids[Math.floor((i+.5)*ids.length/count)]);
-  const mid=sample(allBlades,10+variant);
-  const sourceBladeIds=tier===0?allBlades:tier===1?mid:sample(mid,5+variant);
+  const previousMiddle=sample(original,10+variant),lowerMiddle=sample(understorey,5);
+  const mid=[...previousMiddle,...lowerMiddle];
+  const far=[...sample(previousMiddle,5+variant),...sample(lowerMiddle,2)];
+  const sourceBladeIds=tier===0?allBlades:tier===1?mid:far;
   const retained=new Set(sourceBladeIds);
   const position:number[]=[],color:number[]=[],index:number[]=[];
-  const rows=tier===0?[0,.44,.77,1]:tier===1?[0,.44,1]:[0,1];
+  const rows=tier===0?[0,.22,.48,.76,1]:tier===1?[0,.48,1]:[0,1];
   const columns=tier===0?3:2;
-  const shoots=Array.from({length:Math.ceil(allBlades.length/1.5)},()=>{
+  const originalSockets:{x:number;z:number}[]=[];
+  const shoots=Array.from({length:Math.ceil(original.length/1.5)},()=>{
     const angle=next()*Math.PI*2,r=Math.sqrt(next())*.036;
     // A runner's position and the azimuth of its grass shoot are independent.
     return {x:Math.cos(angle)*r,z:Math.sin(angle)*r,a:next()*Math.PI*2};
   });
   for(const k of allBlades){
-    const shoot=shoots[k%shoots.length], angle=shoot.a+(k%3)*2.17+(next()-.5)*1.05;
-    const cx=Math.cos(angle),cz=Math.sin(angle),sx=-cz,sz=cx;
-    // Short secondary leaves fill the space beneath the mower-cut upper tips.
-    const shortLeaf=k%5<2;
-    const height=shortLeaf?.023+.018*next():.036+.031*next();
-    const lean=shortLeaf?.39+.35*next():.21+.42*next(),curl=(next()-.5)*.26;
-    const halfWidth=.00079+.00089*next();
+    const isLower=k>=original.length;
+    const shoot=shoots[k%shoots.length], originalAngle=shoot.a+(k%3)*2.17+(next()-.5)*1.05;
+    // Keep the same random draws through the root socket across revisions.
+    // The photos resolve a low, continuous sward. Blade dimensions come
+    // from a fine-textured turf prior, not a species ID or campus caliper.
+    const young=!isLower && k%5<2;
+    const length=young?.025+.019*next():.042+.021*next();
+    const initialAngle=young?.16+.38*next():.32+.41*next();
+    const twist=(next()-.5)*1.12;
+    const halfWidth=.00084+.00055*next();
     const tint=next(),clipped=next()<.74;
-    const rootX=shoot.x+(next()-.5)*.004,rootZ=shoot.z+(next()-.5)*.004;
+    const sampledX=shoot.x+(next()-.5)*.004,sampledZ=shoot.z+(next()-.5)*.004;
+    if(!isLower)originalSockets.push({x:sampledX,z:sampledZ});
+    // A second leaf fans from the same shoot. Preserve every underlying
+    // planting point and previously established leaf socket.
+    const socket=originalSockets[isLower?(k*7+variant)%original.length:k];
+    const rootX=socket.x,rootZ=socket.z;
     if(!retained.has(k))continue;
+    const shape=random(hash(k,variant,seed^0x4cf69));
+    const angle=isLower?Math.atan2(rootZ,rootX)+(shape()-.5)*1.65:originalAngle;
+    const cx=Math.cos(angle),cz=Math.sin(angle),sx=-cz,sz=cx;
+    const emergence=isLower?.55+.22*shape():initialAngle;
+    const sweep=young?.38+.50*shape():isLower?.70+.64*shape():.61+.69*shape();
+    const cutWidth=clipped?.46+.37*shape():.035;
+    const cutSlant=clipped?(shape()-.5)*1.15:0;
+    const dry=shape()<.09?.5+.38*shape():.05*shape();
     const offset=position.length/3;
     for(let j=0;j<rows.length;j++){
-      const t=rows[j],arc=height*(.045*t+lean*t*t),turn=height*curl*t*t*t;
-      const width=halfWidth*(j===rows.length-1?(clipped?.28:.045):.78+.22*Math.sin(Math.PI*t));
-      const value=.56+.51*t+.18*tint;
+      const t=rows[j],angleAt=emergence+sweep*t;
+      // Integrate the centreline tangent by arc length. Mature outer blades
+      // can return towards the ground beyond their crown; young blades arch less.
+      const reach=length*(Math.cos(emergence)-Math.cos(angleAt))/sweep;
+      const lift=length*(Math.sin(angleAt)-Math.sin(emergence))/sweep;
+      const crossTurn=twist*t*t;
+      const sideX=sx*Math.cos(crossTurn)-cx*Math.sin(crossTurn)*Math.cos(angleAt);
+      const sideZ=sz*Math.cos(crossTurn)-cz*Math.sin(crossTurn)*Math.cos(angleAt);
+      const sideY=Math.sin(crossTurn)*Math.sin(angleAt);
+      // Narrow sheath opens by the lower third. The lamina then narrows
+      // continuously toward its intact point or a wider, obliquely cut tip.
+      const sheath=.82+.18*Math.sin(.5*Math.PI*Math.min(1,t/.32));
+      const width=halfWidth*sheath*(1-(1-cutWidth)*t*t);
+      const light=.75+.22*t+.12*tint;
+      const tipDry=dry*(.12+.88*t*t*t);
       for(let l=0;l<columns;l++){
         const u=2*l/(columns-1)-1;
-        position.push(rootX+cx*arc+sx*(turn+u*width),height*t+(1-Math.abs(u))*width*.29,rootZ+cz*arc+sz*(turn+u*width));
-        color.push((.082+.077*tint)*value,(.205+.11*tint)*value,(.029+.029*tint)*value);
+        const midrib=(1-Math.abs(u))*width*.20*Math.sin(Math.PI*t);
+        const along=t===1?width*u*cutSlant:0;
+        position.push(rootX+cx*(reach+along*Math.sin(angleAt))+sideX*u*width,
+          lift+along*Math.cos(angleAt)+sideY*u*width+midrib,
+          rootZ+cz*(reach+along*Math.sin(angleAt))+sideZ*u*width);
+        const lamina=light*(1-.065*Math.sin(Math.PI*t)*(1-Math.abs(u)));
+        color.push((.115+.077*tint+.105*tipDry)*lamina,
+          (.204+.096*tint+.021*tipDry)*lamina,(.028+.025*tint+.013*tipDry)*lamina);
       }
       if(j>0)for(let l=0;l<columns-1;l++){
         const a=offset+(j-1)*columns+l,b=a+1,c=a+columns,d=c+1;
@@ -120,7 +163,7 @@ function tuftGeometry(tier:Tier,variant:number,seed:number) {
   geometry.setAttribute('color',new THREE.Float32BufferAttribute(color,3));
   geometry.setIndex(index);geometry.computeVertexNormals();geometry.computeBoundingSphere();
   geometry.name=`Turf blades ${tierName[tier]} ${variant+1}`;
-  geometry.userData={bladesPerTuft:sourceBladeIds.length,detailTier:tierName[tier],sourceBladeIds};
+  geometry.userData={bladesPerTuft:sourceBladeIds.length,detailTier:tierName[tier],sourceBladeIds,sampleRows:rows};
   return geometry;
 }
 
@@ -200,7 +243,7 @@ export function createCaptureMeadow(seed=meadowSeed) {
         const co=sw*Math.cos(yaw),si=sw*Math.sin(yaw);
         matrix.set(co,0,si,x, 0,sy,0,rootY, -si,0,co,z, 0,0,0,1);mesh.setMatrixAt(q,matrix);
         const shade=captureLight(x,z),v=.88+.20*unit(hash(traits,2,seed));
-        instanceColor.setRGB(v*(1-.82885*shade),v*(1-.78591*shade),v*(.94-.69130*shade));mesh.setColorAt(q,instanceColor);
+        instanceColor.setRGB(v*THREE.MathUtils.lerp(sunR,shadeR,shade),v*THREE.MathUtils.lerp(sunG,shadeG,shade),v*THREE.MathUtils.lerp(sunB,shadeB,shade));mesh.setColorAt(q,instanceColor);
       }
       mesh.instanceMatrix.addUpdateRange(0,n*16);mesh.instanceMatrix.needsUpdate=true;
       if(mesh.instanceColor){mesh.instanceColor.addUpdateRange(0,n*3);mesh.instanceColor.needsUpdate=true;}
