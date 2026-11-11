@@ -74,7 +74,12 @@ export default function CampusScene({wind,day,motion,onError}: Props) {
         ? buildAdditionalPlant(item.species as 'camphor'|'acer'|'ophiopogon',params)
         : buildPlant(item.species as 'ginkgo'|'osmanthus'|'iris'|'oxalis',params);
       const base = new THREE.Vector3(item.x,0,item.z);
-      model.group.position.copy(base); model.group.scale.setScalar(item.scale);
+      // Individual trees keep their own seed-driven crown geometry, but a
+      // planted stand also has deterministic whole-tree azimuth variation.
+      // This changes exposure and silhouette without moving the root collar,
+      // branch sockets or any growth-time material node.
+      const azimuth = (((item.seed * 37) % 360) - 180) * Math.PI / 180;
+      model.group.position.copy(base); model.group.rotation.y = azimuth; model.group.scale.setScalar(item.scale);
       model.group.traverse(object => { if (object instanceof THREE.Mesh) { object.castShadow=true; object.receiveShadow=true; } });
       scene.add(model.group); models.push({model,base,scale:item.scale});
     }
