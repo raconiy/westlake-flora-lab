@@ -62,7 +62,7 @@ export const progressTasks: ProgressTask[] = [
     status: 'done',
     progress: 100,
     updatedAt: '2026-11-10 21:42',
-    summary: '实拍草坪保留原有几何。R7.1 为布局实验加入 111,433 个固定草根、弯曲草叶与步道排除区；实拍枝条加入持续阵风载荷，停止风后弹性回位。',
+    summary: '实拍草坪保留原有几何。R7.1 为布局实验加入 445,454 个固定草根、弯曲草叶与步道排除区；实拍枝条加入持续阵风载荷，停止风后弹性回位。',
     evidence: [
       { label: '草叶近景', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/index.html#grass', kind: 'comparison' },
       { label: '公网操作记录', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/dispatch/index.html', kind: 'dispatch' },

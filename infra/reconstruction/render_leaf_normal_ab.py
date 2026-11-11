@@ -58,7 +58,17 @@ for d in prefs.devices:d.use=d.id in ids
 scene.render.engine='CYCLES';scene.cycles.device='GPU';scene.cycles.samples=32;scene.cycles.use_denoising=True
 scene.cycles.transparent_max_bounces=10;scene.render.resolution_x=1024;scene.render.resolution_y=768;scene.render.resolution_percentage=100
 scene.render.image_settings.file_format='PNG'
+scene.cycles.seed=17;scene.cycles.use_animated_seed=False
+scene.render.use_border=False;scene.render.use_crop_to_border=False
+closeup=os.environ.get('YUNGU_LEAF_CLOSEUP')=='1'
+if closeup:
+ scene.render.resolution_x=4096;scene.render.resolution_y=3072
+ scene.render.use_border=True;scene.render.use_crop_to_border=True
+ scene.render.border_min_x=350/1024;scene.render.border_max_x=606/1024
+ scene.render.border_min_y=512/768;scene.render.border_max_y=1
 receipt={'scope':'Offline Cycles rendering of actual decoded delivered GLBs; not a browser screenshot','grassImport':'Exact blade geometry and instance transforms through existing import_meadow.py Geometry Nodes; same native material in both passes, not browser shader','renderer':'Cycles','backend':kind,'blender':bpy.app.version_string,'devicesEnabled':len(devices),'devices':[d.name for d in devices],'samples':32,'camera':camera.name,'resolution':[1024,768],'startedAtEpoch':time.time(),'passes':[]}
+if closeup:
+ receipt.update(resolution=[1024,1024],fullFrameResolution=[4096,3072],cropPixelBoxInOriginal1024Frame=[350,0,606,256],cropMethod='Same registered camera; render a 4x resolution border, no image enlargement')
 for label,path in [('before',baseline),('after',candidate)]:
  before=set(bpy.data.objects)
  prepared=out/(label+'-without-instancers.glb')

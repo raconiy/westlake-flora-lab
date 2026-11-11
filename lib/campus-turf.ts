@@ -38,19 +38,28 @@ export function isCampusTurfPoint(x:number,z:number,margin=campusTurfReach) {
 }
 
 /** Immutable world-space roots; camera changes only choose mesh detail. */
-export function createCampusTurfLayout(seed=campusTurfSeed) {
+export function createCampusTurfLayout(seed=campusTurfSeed,layers=4) {
+  if(!Number.isInteger(layers)||layers<1||layers>4)throw new RangeError('Expected 1–4 persistent turf layers');
   const b=campusTurfBounds,cols=Math.ceil((b.maxX-b.minX)/step),rows=Math.ceil((b.maxZ-b.minZ)/step);
   const roots:{id:number;x:number;z:number;traits:number}[]=[];
-  for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){
-    const traits=hash(i,j,seed),jitter=hash(j,i,seed^0x61fa2c);
-    const x=b.minX+(i+.08+.84*(jitter&65535)/65535)*step;
-    const z=b.minZ+(j+.08+.84*(jitter>>>16)/65535)*step;
+  let originalRoots=0;
+  // Layer zero is byte-for-byte unchanged. Additional layers populate the
+  // inter-tuft gaps at half-cell offsets with independent deterministic jitter.
+  const offsets=[[0,0],[.5,0],[0,.5],[.5,.5]];
+  for(let layer=0;layer<layers;layer++){
+   const layerSeed=layer===0?seed:hash(layer,0,seed^0x94c613);
+   for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){
+    const traits=hash(i,j,layerSeed),jitter=hash(j,i,layerSeed^0x61fa2c);
+    const x=b.minX+(i+offsets[layer][0]+.08+.84*(jitter&65535)/65535)*step;
+    const z=b.minZ+(j+offsets[layer][1]+.08+.84*(jitter>>>16)/65535)*step;
     // Smooth low-amplitude density variation avoids rectangular patch borders.
     const density=.95+.025*Math.sin(.47*x+.31*z)+.02*Math.cos(.71*z-.2*x);
-    if(unit(hash(i,j,seed^0x315ec1))>density||!isCampusTurfPoint(x,z))continue;
-    roots.push({id:j*cols+i,x,z,traits});
+    if(unit(hash(i,j,layerSeed^0x315ec1))>density||!isCampusTurfPoint(x,z))continue;
+    roots.push({id:layer*cols*rows+j*cols+i,x,z,traits});
+   }
+   if(layer===0)originalRoots=roots.length;
   }
-  return {seed,roots};
+  return {seed,roots,originalRoots,layers};
 }
 
 type Tier = 0|1|2;
@@ -128,7 +137,7 @@ export function createCampusTurf(seed=campusTurfSeed) {
         const d=Math.hypot(eye.x-p.x,eye.y,eye.z-p.z);
         // Stagger transitions per persistent tuft, not per square chunk.
         const stagger=((p.traits>>>8)&255)/255;
-        const tier:Tier=d<5.5+2*stagger?0:d<13+4*stagger?1:2;
+        const tier:Tier=d<2.5+1.5*stagger?0:d<7+3*stagger?1:2;
         beds[tier*variants+(p.traits&3)].ids.push(i);
       }
       stats.blades=0;stats.drawCalls=0;

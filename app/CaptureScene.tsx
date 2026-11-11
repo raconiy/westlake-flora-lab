@@ -363,7 +363,7 @@ export default function CaptureScene() {
   return <section className="capture" aria-label="云谷草坪实拍重建">
     <div className="capture-layout">
       <div className="capture-stage">
-        <img className="capture-poster" src={media + 'near-reference.webp?v=7'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
+        <img className="capture-poster" src={media + 'refine-20261111/after.webp?v=7.1'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
         {open && <div className={'capture-webgl' + (ready ? ' loaded' : '')} ref={mount}/>}
         {!open && <div className="capture-start"><button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/>进入三维场景</button><button className="capture-enter capture-wind-start" onClick={()=>{startAtTurf.current=true; setOpen(true);}}>近看草坪</button><button className="capture-enter capture-wind-start" onClick={gust}><Wind size={17}/>试一次阵风</button></div>}
         {open && !ready && <div className="capture-loading" role="status">{message || (progress >= 98 ? '正在准备三维网格…' : '正在读取场景' + (progress ? ' '+progress+'%' : '…'))}

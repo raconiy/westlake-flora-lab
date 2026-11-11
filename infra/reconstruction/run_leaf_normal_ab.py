@@ -4,6 +4,7 @@ python3 run_leaf_normal_ab.py frozen.blend output-dir baseline.glb candidate.glb
 """
 from pathlib import Path
 import json
+import os
 import subprocess
 import sys
 import time
@@ -16,7 +17,8 @@ telemetry = subprocess.Popen([
     'nvidia-smi', '--query-gpu=timestamp,index,name,memory.used,utilization.gpu,power.draw',
     '--format=csv,noheader,nounits', '--loop=2', '--filename=' + str(telemetry_path),
 ])
-command = ['/usr/bin/blender', '-b', str(blend), '-P', str(render_script), '--',
+blender = os.environ.get('YUNGU_BLENDER', '/opt/westlake-campus-recon/runtime/bin45/blender')
+command = [blender, '-b', str(blend), '-P', str(render_script), '--',
            str(output), str(before), str(after)]
 start = time.time()
 try:

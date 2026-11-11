@@ -1,9 +1,26 @@
 [
   {
+    "taskId": "scene-r8-20261111-contact-focused-recovery",
+    "role": "Physical contact and rendering",
+    "promptSha256": "faaa8143dec22e282c5b007e99af0c32b6d65356f2572debb1ab0f413414643f",
+    "promptUrl": "prompts/scene-r8-20261111-contact-focused-recovery.txt",
+    "referenceImages": []
+  },
+  {
     "taskId": "scene-r8-20261111-contact",
     "role": "Physical contact and rendering",
     "promptSha256": "aab5231b34c065f574e561c0247c75a61595c0e8b83a6981db7f4275e52f38c3",
     "promptUrl": "prompts/scene-r8-20261111-contact.txt",
+    "referenceImages": [
+      "../../scene-r7/views/01-photo.webp",
+      "../../scene-r7/views/01-r7.webp"
+    ]
+  },
+  {
+    "taskId": "scene-r8-20261111-crown-focused-recovery",
+    "role": "Plant morphology and crown structure",
+    "promptSha256": "ea182f2bae260575854e8599dab58b165976fee745d2f79c37e4262d7a95d572",
+    "promptUrl": "prompts/scene-r8-20261111-crown-focused-recovery.txt",
     "referenceImages": [
       "../../scene-r7/views/01-photo.webp",
       "../../scene-r7/views/01-r7.webp"

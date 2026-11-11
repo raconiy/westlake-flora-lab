@@ -1,0 +1,142 @@
+```python
+import hashlib
+import heapq
+import operator
+import numpy as np
+
+
+def allocate_new_foliage(shoot_xyz, stable_ids, lobe_centers, lobe_radii,
+                         frozen_weights, previous_counts, target_total, seed):
+    """Allocate zero-based (stable_shoot_id, leaf_ordinal) pairs."""
+    p = np.asarray(shoot_xyz, dtype=float)
+    ids = np.asarray(stable_ids)
+    centers = np.asarray(lobe_centers, dtype=float)
+    radii = np.asarray(lobe_radii, dtype=float)
+    weights = np.asarray(frozen_weights, dtype=float)
+    old = np.asarray(previous_counts)
+
+    if p.ndim != 2 or p.shape[1] != 3:
+        raise ValueError("shoot_xyz must have shape (N, 3)")
+    n = len(p)
+    if ids.ndim != 1 or len(ids) != n:
+        raise ValueError("stable_ids must have length N")
+    if old.ndim != 1 or len(old) != n or not np.issubdtype(old.dtype, np.integer):
+        raise ValueError("previous_counts must be integer-valued")
+    if weights.shape != (n,):
+        raise ValueError("frozen_weights must have length N")
+    if centers.ndim != 2 or centers.shape[1] != 3:
+        raise ValueError("lobe_centers must have shape (L, 3)")
+    if radii.ndim == 1:
+        if len(radii) != len(centers):
+            raise ValueError("lobe_radii length mismatch")
+        rr = radii[:, None]
+    elif radii.ndim == 2 and radii.shape == centers.shape:
+        rr = radii
+    else:
+        raise ValueError("lobe_radii must have shape (L,) or (L, 3)")
+    if not all(np.all(np.isfinite(x)) for x in (p, centers, rr, weights)):
+        raise ValueError("non-finite numeric input")
+    if np.any(rr <= 0) or np.any(weights < 0) or np.any(old < 0):
+        raise ValueError("radii, weights, and counts must be nonnegative")
+    try:
+        target = operator.index(target_total)
+        seed = operator.index(seed)
+    except TypeError as exc:
+        raise TypeError("target_total and seed must be integers") from exc
+    if target < int(np.asarray(old, dtype=object).sum()):
+        raise ValueError("target_total is smaller than previous total")
+    id_values = ids.tolist()
+    idkeys = [type(x).__name__ + ":" + repr(x) for x in id_values]
+    if len(set(idkeys)) != n:
+        raise ValueError("stable_ids must be unique")
+
+    if len(centers):
+        with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
+            z = (p[:, None, :] - centers[None, :, :]) / rr[None, :, :]
+            support = np.exp(-0.5 * np.sum(z * z, axis=2)).sum(axis=1)
+    else:
+        support = np.zeros(n)
+    base = 1e-3 + weights * support
+    if not np.all(np.isfinite(base)) or np.any(base <= 0):
+        raise ValueError("invalid computed priorities")
+
+    counts = old.astype(np.int64, copy=True)
+    added = []
+    heap = []
+
+    def push(i, ordinal):
+        key = f"{seed}\0{idkeys[i]}\0{ordinal}".encode()
+        tie = int.from_bytes(hashlib.blake2b(key, digest_size=8).digest(), "little")
+        priority = float(np.log1p(ordinal) - np.log(base[i]))
+        heapq.heappush(heap, (priority, tie, idkeys[i], ordinal, i))
+
+    for i in range(n):
+        push(i, int(counts[i]))
+    need = target - int(np.asarray(old, dtype=object).sum())
+    if need and not n:
+        raise ValueError("cannot allocate leaves without shoots")
+    for _ in range(need):
+        _, _, _, ordinal, i = heapq.heappop(heap)
+        counts[i] += 1
+        added.append((id_values[i], int(ordinal)))
+        push(i, int(counts[i]))
+    return counts, added
+```
+
+```python
+import numpy as np
+import pytest
+
+def _case():
+    return (
+        np.array([[0., 0., 0.], [1., 0., 0.], [3., 1., 0.]]),
+        np.array([11, 22, 33]),
+        np.array([[0., 0., 0.], [2., 0., 0.]]),
+        np.array([[1., .5, 1.], [.7, 1.2, .8]]),
+        np.array([1., .6, 1.4]),
+        np.array([1, 0, 2]),
+    )
+
+def test_incremental_equals_one_shot():
+    a = _case()
+    c10, x10 = allocate_new_foliage(*a, 10, 7)
+    c20, x20 = allocate_new_foliage(*a, 20, 7)
+    ci, xi = allocate_new_foliage(a[0], a[1], a[2], a[3], a[4], c10, 20, 7)
+    assert np.array_equal(c20, ci)
+    assert x20[:len(x10)] == x10 and x20[len(x10):] == xi
+
+def test_shuffled_input_order_is_equivalent():
+    a = _case()
+    perm = np.array([2, 0, 1])
+    c, x = allocate_new_foliage(*a, 20, 7)
+    cs, xs = allocate_new_foliage(a[0][perm], a[1][perm], a[2], a[3],
+                                  a[4][perm], a[5][perm], 20, 7)
+    assert dict(zip(a[1], c)) == dict(zip(a[1][perm], cs))
+    assert x == xs
+
+def test_existing_counts_persist():
+    a = _case()
+    before = a[5].copy()
+    c, added = allocate_new_foliage(*a, 7, 7)
+    assert np.all(c >= before) and len(added) == 4
+    assert np.array_equal(a[5], before)
+
+def test_rejects_invalid_target_and_nonfinite_input():
+    a = _case()
+    with pytest.raises(ValueError):
+        allocate_new_foliage(*a, 2, 7)
+    bad = list(a)
+    bad[0] = bad[0].copy()
+    bad[0][0, 0] = np.nan
+    with pytest.raises(ValueError):
+        allocate_new_foliage(*bad, 7, 7)
+
+def test_outside_support_keeps_prior():
+    c, _ = allocate_new_foliage(
+        np.array([[100., 0., 0.]]), np.array([9]),
+        np.array([[0., 0., 0.]]), np.array([[.1, .1, .1]]),
+        np.array([1.]), np.array([0]), 1, 3)
+    assert c.tolist() == [1]
+```
+
+Integration: `fit_resource_clusters.py` supplies lobe centers, radii, and frozen resource weights. Call this allocator after loading those arrays; pass existing terminal-shoot counts and IDs. `build_shoot_clusters.py` can instantiate only returned ordinal pairs at their existing shoot supports, leaving wood paths, roots, structural nodes, and established organ IDs unchanged.

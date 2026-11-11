@@ -1,0 +1,175 @@
+{
+  "method": "Offline Cycles A/B of decoded delivered GLB; normal-only change. Native grass shader identical in both; not browser screenshot.",
+  "gpuSamplingSeconds": 2,
+  "gpuTelemetry": {
+    "0": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2664.0,
+      "maxUtilizationPercent": 3.0,
+      "maxPowerW": 59.86
+    },
+    "1": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2664.0,
+      "maxUtilizationPercent": 5.0,
+      "maxPowerW": 63.88
+    },
+    "2": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2666.0,
+      "maxUtilizationPercent": 8.0,
+      "maxPowerW": 62.73
+    },
+    "3": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2664.0,
+      "maxUtilizationPercent": 2.0,
+      "maxPowerW": 67.65
+    },
+    "4": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2664.0,
+      "maxUtilizationPercent": 10.0,
+      "maxPowerW": 70.33
+    },
+    "5": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2664.0,
+      "maxUtilizationPercent": 1.0,
+      "maxPowerW": 72.15
+    },
+    "6": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2664.0,
+      "maxUtilizationPercent": 2.0,
+      "maxPowerW": 73.09
+    },
+    "7": {
+      "name": "NVIDIA GeForce RTX 5090",
+      "samples": 19,
+      "maxMemoryMiB": 2682.0,
+      "maxUtilizationPercent": 4.0,
+      "maxPowerW": 64.16
+    }
+  },
+  "rgbMeanAbsoluteDifference": [
+    0.7673594156901041,
+    0.7376124064127604,
+    0.4260520935058594
+  ],
+  "differentPixelBoundingBox": [
+    0,
+    0,
+    1024,
+    768
+  ],
+  "candidateWebGlbSha256": "23b49752dc7c21d9197368253588b1efb38f7db4cc5a8c9f94c52821c0e94dc5",
+  "limitations": [
+    "Normal smoothing reduces blade shading seams only; it does not correct sparse/repeated crown architecture or ground density.",
+    "Short render with 2-second sampling may not observe each GPU busy during every render."
+  ],
+  "artifacts": [
+    {
+      "file": "before.png",
+      "bytes": 1569049,
+      "sha256": "ddfa00990f58ee4731f80871ab16dcbcace66caf636366d5dfa7bc3a1cb54c38"
+    },
+    {
+      "file": "after.png",
+      "bytes": 1568607,
+      "sha256": "0dda03f7fa7e12cd22313522244805e614b68baed519afb387311f2ada4fd9f9"
+    },
+    {
+      "file": "leaf-normals-ab.png",
+      "bytes": 2217675,
+      "sha256": "335a04121f48ba10be76f89952b0dcac47b33f18a64c7c6e6699f02ea70f02d4"
+    },
+    {
+      "file": "leaf-normals-crop-ab.png",
+      "bytes": 645287,
+      "sha256": "48249c31235af9bd5abf58d747ddb021ee1d5d5920c2454e17ee302d552cdfed"
+    },
+    {
+      "file": "gpu-render-receipt.json",
+      "bytes": 2018,
+      "sha256": "6203097e9df9c08afd26f82284cc763cf493d06dd6cf77d5fb058876b456da52"
+    },
+    {
+      "file": "gpu-utilization.csv",
+      "bytes": 10052,
+      "sha256": "26d4945de24e172cf4df167bf6e59cc07c14f7dd7ce6dee7ed20c77312b1675b"
+    },
+    {
+      "file": "decoded-render-inputs.json",
+      "bytes": 581,
+      "sha256": "7d4c11f7a822a9b03e8678ec1b8686c182664ca9d5eea423819f280f3fd75f43"
+    },
+    {
+      "file": "closeup-before.png",
+      "bytes": 2458222,
+      "sha256": "a97daa47449cd5cda9fba4290088ed3cb71aadc8440cb8cef2f77cc23927a523"
+    },
+    {
+      "file": "closeup-after.png",
+      "bytes": 2441584,
+      "sha256": "f62c2839c37d9f72d7556a3d9013e8ff1a7b7d6196cb2881816d5a23d91e1ffb"
+    },
+    {
+      "file": "closeup-ab.webp",
+      "bytes": 828716,
+      "sha256": "c99a63084f02d193d8a82fa948153a7792308ab8366c12a601ffc8337e21c54e"
+    },
+    {
+      "file": "closeup-gpu-render-receipt.json",
+      "bytes": 2243,
+      "sha256": "6c869a955a70a90aa4bf2feb2e6aa6d725307c1bdb30c8547bfbfeb4d7160592"
+    },
+    {
+      "file": "closeup-gpu-utilization.csv",
+      "bytes": 11092,
+      "sha256": "317fef5772328b66726a162feba6fdccafc0dfebb7063848883b4bab1c48ff60"
+    }
+  ],
+  "visualReview": {
+    "finding": "Leaf-internal shading change is subtle at the full scene scale. Sparse, repeated background crown architecture remains visible.",
+    "scope": "This comparison validates a normal-only shading correction, not photorealism or biological/structural reconstruction accuracy.",
+    "onlyNormalsChangedVerifiedSeparately": true
+  },
+  "failedAttempt": {
+    "blender": "4.0.2",
+    "stage": "CUDA kernel compilation",
+    "error": "Unknown or unsupported CUDA architecture sm_120; no supported denoising device",
+    "imageProduced": false,
+    "resolution": "Reused existing Blender 4.5.15 LTS with OptiX and successfully rendered both passes",
+    "rawFailureLogsRetainedLocally": true
+  },
+  "closeup": {
+    "camera": "Photo 01 registered",
+    "fullFrameResolution": [
+      4096,
+      3072
+    ],
+    "outputResolution": [
+      1024,
+      1024
+    ],
+    "cropPixelBoxInOriginal1024Frame": [
+      350,
+      0,
+      606,
+      256
+    ],
+    "method": "Same registered camera; render 4x resolution border, not image enlargement",
+    "visualFinding": "Leaf-local shading seams soften, but polygonal blade outlines and repeated shoots remain visible; further geometry work is required."
+  },
+  "scopeLimits": [
+    "The static GLB includes its 265,564 exported grass instances. Runtime browser near-grass generation and wind shaders are not evaluated in this offline normal-only comparison."
+  ]
+}

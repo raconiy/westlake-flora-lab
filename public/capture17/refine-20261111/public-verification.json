@@ -1,0 +1,49 @@
+{
+  "verifiedAt": "2026-11-11T14:19:33.261129+00:00",
+  "commit": "4201c0407e290fc5fd8762b2e197a3080b5a2a31",
+  "pagesWorkflow": 43034634353,
+  "checks": [
+    {
+      "path": "?release=4201c04",
+      "httpStatus": 200,
+      "bytes": 641,
+      "sha256": "c3e7f1f9131c47fc819d7f490779e9f7a2c512e59195f9b7ba64d200f58b0ab4"
+    },
+    {
+      "path": "capture17/refine-20261111/release.json?release=4201c04",
+      "httpStatus": 200,
+      "bytes": 1013,
+      "sha256": "c8fb2ca28f17f563aa7c1af0e267050968e6a04d95dcbb41a1c499af9c2b4592",
+      "version": "R7.1",
+      "accountsAttempted": null
+    },
+    {
+      "path": "capture17/refine-20261111/accounts/final-account-receipts.json?release=4201c04",
+      "httpStatus": 200,
+      "bytes": 8774,
+      "sha256": "e79ff56e05fef96139f79ba02198235bae9040616cd431d8eb2a30c13baaac9e",
+      "version": null,
+      "accountsAttempted": 5
+    },
+    {
+      "path": "capture17/yungu-lawn.glb?v=7.1",
+      "httpStatus": 200,
+      "bytes": 75782828,
+      "sha256": "23b49752dc7c21d9197368253588b1efb38f7db4cc5a8c9f94c52821c0e94dc5"
+    }
+  ],
+  "communityHealth": {
+    "checkedAt": "2026-11-11T14:28:19.198978+00:00",
+    "httpStatus": 200,
+    "ok": true,
+    "relay": {
+      "availableAccounts": null,
+      "transport": "durable",
+      "online": false,
+      "lastSeen": null
+    }
+  },
+  "communityHealthInitial": {
+    "error": "HTTP Error 403: Forbidden"
+  }
+}

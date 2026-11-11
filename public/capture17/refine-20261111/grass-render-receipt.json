@@ -1,0 +1,248 @@
+{
+  "purpose": "Layout-experiment grass geometry offline QA; not a new capture reconstruction",
+  "sourceGlbSha256": "45824a76ce3826437634d99a91d6046da9a010bf3cc87b5042e3266d11f72888",
+  "imageSha256": "15161fec2732a4cb8ac2c6916c5061a6104c029ef3d698d70e15bd563b20db8c",
+  "image": "campus-grass-close.png",
+  "blender": "4.5.15 LTS",
+  "engine": "Cycles OptiX",
+  "samples": 32,
+  "resolution": [
+    1280,
+    960
+  ],
+  "camera": "Campus grass close",
+  "windSpeed": 0,
+  "tuftGroups": {
+    "Campus turf near 0": 111133,
+    "Campus turf near 1": 111457,
+    "Campus turf near 2": 111655,
+    "Campus turf near 3": 111209
+  },
+  "persistentRoots": 445454,
+  "configuredGPUCount": 8,
+  "observedGpuUuids": [
+    "GPU 0",
+    "GPU 1",
+    "GPU 2",
+    "GPU 3",
+    "GPU 4",
+    "GPU 5",
+    "GPU 6",
+    "GPU 7"
+  ],
+  "elapsedSeconds": 7.0,
+  "gpuSamples": [
+    {
+      "seconds": 0.13,
+      "devices": []
+    },
+    {
+      "seconds": 1.22,
+      "devices": [
+        {
+          "gpuUuid": "GPU 3",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 0",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 2",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 6",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 1",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 4",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 7",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 5",
+          "processMiB": "518"
+        }
+      ]
+    },
+    {
+      "seconds": 2.31,
+      "devices": [
+        {
+          "gpuUuid": "GPU 3",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 0",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 2",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 6",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 1",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 4",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 7",
+          "processMiB": "520"
+        },
+        {
+          "gpuUuid": "GPU 5",
+          "processMiB": "520"
+        }
+      ]
+    },
+    {
+      "seconds": 3.4,
+      "devices": [
+        {
+          "gpuUuid": "GPU 3",
+          "processMiB": "2230"
+        },
+        {
+          "gpuUuid": "GPU 0",
+          "processMiB": "2230"
+        },
+        {
+          "gpuUuid": "GPU 2",
+          "processMiB": "2230"
+        },
+        {
+          "gpuUuid": "GPU 6",
+          "processMiB": "2230"
+        },
+        {
+          "gpuUuid": "GPU 1",
+          "processMiB": "2230"
+        },
+        {
+          "gpuUuid": "GPU 4",
+          "processMiB": "2230"
+        },
+        {
+          "gpuUuid": "GPU 7",
+          "processMiB": "2230"
+        },
+        {
+          "gpuUuid": "GPU 5",
+          "processMiB": "2230"
+        }
+      ]
+    },
+    {
+      "seconds": 4.49,
+      "devices": [
+        {
+          "gpuUuid": "GPU 3",
+          "processMiB": "3762"
+        },
+        {
+          "gpuUuid": "GPU 0",
+          "processMiB": "3762"
+        },
+        {
+          "gpuUuid": "GPU 2",
+          "processMiB": "3766"
+        },
+        {
+          "gpuUuid": "GPU 6",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 1",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 4",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 7",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 5",
+          "processMiB": "3760"
+        }
+      ]
+    },
+    {
+      "seconds": 5.58,
+      "devices": [
+        {
+          "gpuUuid": "GPU 3",
+          "processMiB": "3762"
+        },
+        {
+          "gpuUuid": "GPU 0",
+          "processMiB": "3762"
+        },
+        {
+          "gpuUuid": "GPU 2",
+          "processMiB": "3766"
+        },
+        {
+          "gpuUuid": "GPU 6",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 1",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 4",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 7",
+          "processMiB": "3760"
+        },
+        {
+          "gpuUuid": "GPU 5",
+          "processMiB": "3760"
+        }
+      ]
+    },
+    {
+      "seconds": 6.73,
+      "devices": []
+    }
+  ],
+  "visibleSoilFractionBottomHalf": 0.26939908646820415,
+  "coverageMethod": "Cycles object-index soil mask; fixed camera bottom-half ROI; not a colour or shadow threshold",
+  "limits": "Full-detail blades at all roots; web view uses camera LOD. No tree occluders in this isolated grass render. Lighting and AgX differ from the browser renderer.",
+  "visualReview": {
+    "result": "coverage_improved_remaining_refinement",
+    "baselineImage": "campus-grass-close.png",
+    "denseImage": "campus-grass-close-dense.png",
+    "sameCameraAndLighting": true,
+    "originalPersistentRoots": 111433,
+    "densePersistentRoots": 445454,
+    "findings": [
+      "Four-layer grass visibly fills most former large soil gaps in the middle distance.",
+      "Near camera still shows soil between discrete tufts; this is not photorealistic campus turf acceptance.",
+      "Large deliberate exclusion pocket is a tree root clearance region; isolated preview omits tree occluders.",
+      "Blades and root anchoring are explicit geometry; this is a layout experiment, not reconstructed measured grass."
+    ],
+    "baselineSoilFraction": null,
+    "baselineSoilFractionReason": "Baseline did not have an object-index mask; no colour-threshold estimate invented."
+  }
+}

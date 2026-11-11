@@ -1,0 +1,78 @@
+{
+  "observedAt": "2026-11-11T14:56:51.989007+00:00",
+  "scope": "Read-only diagnosis; no new model requests, no service restart, no credential or proxy configuration change.",
+  "publicEndpoint": "https://westlake-flora-lab-yungu.sableborage.chatgpt.site/api/community/health",
+  "requestHeaders": {
+    "Origin": "https://raconiy.github.io",
+    "User-Agent": "Mozilla/5.0"
+  },
+  "firstPublicObservation": {
+    "ok": true,
+    "storage": "D1",
+    "relay": {
+      "availableAccounts": null,
+      "transport": "durable",
+      "online": false,
+      "lastSeen": null
+    }
+  },
+  "lastPublicObservation": {
+    "ok": true,
+    "storage": "D1",
+    "relay": {
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "availableAccounts": 5,
+      "transport": "durable",
+      "online": true,
+      "lastSeen": 1794408754771
+    }
+  },
+  "remoteLocalRelayObservation": {
+    "ok": true,
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high",
+    "availableAccounts": 5,
+    "capacitySource": "gpt-load-management",
+    "asyncJobs": true
+  },
+  "services": {
+    "consumer": "active",
+    "relay": "active",
+    "restartsSinceServiceStart": 0
+  },
+  "consumerErrors": [
+    {
+      "at": "2026-11-11T14:29:13Z",
+      "error": "curl_35",
+      "meaning": "TLS connection error"
+    },
+    {
+      "at": "2026-11-11T14:33:33Z",
+      "error": "curl_28",
+      "meaning": "Heartbeat/poll transport timeout"
+    },
+    {
+      "at": "2026-11-11T14:48:41Z",
+      "error": "curl_28",
+      "meaning": "Heartbeat/poll transport timeout"
+    }
+  ],
+  "transportProbe": {
+    "existingLoopbackProxy": {
+      "httpStatus": 200,
+      "seconds": 1.32172
+    },
+    "directConnection": {
+      "httpStatus": 403,
+      "seconds": 2.918881
+    }
+  },
+  "diagnosis": "本地relay及consumer进程均运行；consumer经现有服务器代理向D1发送心跳时出现间歇TLS错误/超时，导致公网助手被标为离线。当前原有重试已恢复心跳，但未完成网络线路稳定性修复。",
+  "resolution": "Recovered via existing retry; not a permanent fix.",
+  "limitations": [
+    "Health checks do not perform GPT inference.",
+    "Current online snapshot does not prove continuous uptime or future availability.",
+    "Proxy route stability and end-to-end reply success need follow-up; no unsupported permanent-online claim."
+  ]
+}

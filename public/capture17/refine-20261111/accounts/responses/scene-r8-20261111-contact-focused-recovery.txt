@@ -1,0 +1,152 @@
+Uses only explicit target subtrees/IDs and never moves geometry. It samples finite position vertices after world and instance transforms. Mesh/AABB sampling is not continuous surface intersection, so sloped-ground contact can be misclassified; `groundY` is a flat-world engineering prior. Reducing `.025 normalBias` changes biasing, not transforms or overlap, so it cannot physically repair contact.
+
+```ts
+function inspectGroundContacts(
+  root: THREE.Object3D,
+  targets: { id: string; node: THREE.Object3D; groundY: number }[],
+  tolerance = 0.005
+): Array<{
+  id: string;
+  status: "gap" | "penetration" | "contacting" | "invalid" | "no-geometry";
+  lowestY: number | null;
+  offset: number | null;
+  invalidCount: number;
+}> {
+  root.updateWorldMatrix(true, true);
+  const eps = Number.isFinite(tolerance) ? Math.max(0, tolerance) : 0;
+
+  return targets.map((target) => {
+    let underRoot = false;
+    let inheritedVisible = true;
+
+    for (let p: THREE.Object3D | null = target.node; p; p = p.parent) {
+      inheritedVisible = inheritedVisible && p.visible;
+      if (p === root) underRoot = true;
+    }
+
+    let lowestY: number | null = null;
+    let invalidCount = 0;
+
+    if (underRoot) {
+      const stack: Array<[THREE.Object3D, boolean]> = [
+        [target.node, inheritedVisible],
+      ];
+      const vertex = new THREE.Vector3();
+      const world = new THREE.Matrix4();
+      const instance = new THREE.Matrix4();
+
+      while (stack.length) {
+        const [obj, parentVisible] = stack.pop()!;
+        const visible = parentVisible && obj.visible;
+        if (!visible) continue;
+
+        const mesh = obj as THREE.Mesh;
+        if (mesh.isMesh) {
+          const position = mesh.geometry.getAttribute("position") as
+            | THREE.BufferAttribute
+            | undefined;
+
+          if (position) {
+            const instanced = (mesh as THREE.InstancedMesh).isInstancedMesh === true;
+            const copies = instanced ? (mesh as THREE.InstancedMesh).count : 1;
+
+            for (let copy = 0; copy < copies; copy++) {
+              if (instanced) {
+                (mesh as THREE.InstancedMesh).getMatrixAt(copy, instance);
+                world.multiplyMatrices(mesh.matrixWorld, instance);
+              } else {
+                world.copy(mesh.matrixWorld);
+              }
+
+              for (let i = 0; i < position.count; i++) {
+                vertex.fromBufferAttribute(position, i);
+                if (!Number.isFinite(vertex.x) ||
+                    !Number.isFinite(vertex.y) ||
+                    !Number.isFinite(vertex.z)) {
+                  invalidCount++;
+                  continue;
+                }
+
+                vertex.applyMatrix4(world);
+                if (!Number.isFinite(vertex.x) ||
+                    !Number.isFinite(vertex.y) ||
+                    !Number.isFinite(vertex.z)) {
+                  invalidCount++;
+                  continue;
+                }
+
+                lowestY = lowestY === null ? vertex.y : Math.min(lowestY, vertex.y);
+              }
+            }
+          }
+        }
+
+        for (const child of obj.children) stack.push([child, visible]);
+      }
+    }
+
+    if (!Number.isFinite(target.groundY))
+      return { id: target.id, status: "invalid" as const, lowestY, offset: null, invalidCount };
+    if (lowestY === null)
+      return { id: target.id, status: "no-geometry" as const, lowestY, offset: null, invalidCount };
+
+    const offset = lowestY - target.groundY;
+    const status = offset > eps ? "gap" : offset < -eps ? "penetration" : "contacting";
+    return { id: target.id, status, lowestY, offset, invalidCount };
+  });
+}
+```
+
+Tests (not run here):
+
+```ts
+import * as THREE from "three";
+import { strict as assert } from "node:assert";
+
+// 1. Translated mesh
+{
+  const root = new THREE.Group(), g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0], 3));
+  const m = new THREE.Mesh(g); m.position.y = 1; root.add(m);
+  assert.equal(inspectGroundContacts(root, [{ id: "stem", node: m, groundY: 0 }])[0].status, "gap");
+}
+
+// 2. Rotated/nonuniform nested parents
+{
+  const root = new THREE.Group(), a = new THREE.Group(), b = new THREE.Group();
+  a.position.y = -3; a.rotation.z = Math.PI / 2; a.scale.set(2, 3, 1);
+  b.position.y = .5; b.scale.set(1, 2, 1);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute([1, 0, 0], 3));
+  const m = new THREE.Mesh(g); b.add(m); a.add(b); root.add(a);
+  assert.equal(inspectGroundContacts(root, [{ id: "lamp", node: m, groundY: -1 }])[0].status, "contacting");
+}
+
+// 3. InstancedMesh
+{
+  const root = new THREE.Group(), g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0], 3));
+  const m = new THREE.InstancedMesh(g, new THREE.MeshBasicMaterial(), 2);
+  const a = new THREE.Matrix4().makeTranslation(0, 2, 0);
+  const b = new THREE.Matrix4().makeTranslation(0, .25, 0);
+  m.setMatrixAt(0, a); m.setMatrixAt(1, b); root.add(m);
+  assert.equal(inspectGroundContacts(root, [{ id: "stem", node: m, groundY: 0 }])[0].lowestY, .25);
+}
+
+// 4. Hidden ancestor
+{
+  const root = new THREE.Group(), hidden = new THREE.Group(), g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0], 3));
+  const m = new THREE.Mesh(g); hidden.visible = false; hidden.add(m); root.add(hidden);
+  assert.equal(inspectGroundContacts(root, [{ id: "stem", node: m, groundY: 0 }])[0].status, "no-geometry");
+}
+
+// 5. NaN vertex
+{
+  const root = new THREE.Group(), g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute([0, NaN, 0, 0, 1, 0], 3));
+  const m = new THREE.Mesh(g); root.add(m);
+  const r = inspectGroundContacts(root, [{ id: "stem", node: m, groundY: 0 }])[0];
+  assert.equal(r.invalidCount, 1); assert.equal(r.status, "gap");
+}
+```
