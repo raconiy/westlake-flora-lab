@@ -113,3 +113,62 @@
 .campus-meta b{display:block;margin-top:7px;color:var(--ink);font-size:15px;font-weight:600}
 .campus-meta p{margin:7px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
 @media(max-width:850px){.campus-heading{display:grid}.campus-view{min-height:480px}.campus-meta{grid-template-columns:1fr}}
+
+
+/* Public progress tracker. The live coordinator may enrich these cards on localhost;
+   the public page remains useful as a read-only release snapshot. */
+.progress-workspace{display:grid;gap:20px}
+.progress-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:28px 30px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,#f3f8ed,#fbfcf8 58%,#eef5ef);box-shadow:0 18px 36px rgba(40,58,46,.06)}
+.progress-hero .eyebrow{display:flex;align-items:center;gap:7px}
+.progress-hero h2{margin:9px 0 8px;font-family:var(--display);font-size:clamp(30px,3.7vw,48px);font-weight:500;letter-spacing:-.04em;color:var(--ink)}
+.progress-hero p{max-width:720px;margin:0;color:var(--muted);line-height:1.75;font-size:14px}
+.progress-hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.progress-live{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid #dddcc8;border-radius:999px;color:#76613e;background:#fbf4df;font-size:12px;white-space:nowrap}
+.progress-live.is-online{color:#315c46;background:#e8f2e5;border-color:#bfd3b9}
+.progress-live>span{width:7px;height:7px;border-radius:999px;background:#b98638;box-shadow:0 0 0 3px rgba(185,134,56,.13)}
+.progress-live.is-online>span{background:#4b965d;box-shadow:0 0 0 3px rgba(75,150,93,.14)}
+.progress-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.progress-kpis article{min-width:0;padding:17px 18px;border:1px solid var(--line);border-radius:13px;background:rgba(250,251,247,.82)}
+.progress-kpis article.is-warning{border-color:#e2b7a7;background:#fff7f1}
+.progress-kpis span,.progress-kpis small{display:block;color:var(--muted);font-size:11px;line-height:1.5}
+.progress-kpis b{display:block;margin:6px 0 3px;font-family:var(--display);font-size:30px;font-weight:500;letter-spacing:-.03em;color:var(--ink)}
+.progress-main-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.8fr);gap:18px;align-items:start}
+.progress-timeline,.progress-card{border:1px solid var(--line);border-radius:15px;background:rgba(250,251,247,.78)}
+.progress-timeline{padding:24px 25px}
+.progress-section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:15px}
+.progress-section-heading h3{margin:8px 0 0;color:var(--ink);font-size:22px;font-weight:600}
+.last-verified{color:var(--muted);font-size:11px;white-space:nowrap}
+.progress-stage-list{display:grid;gap:2px}
+.progress-stage{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;position:relative;padding:17px 0}
+.progress-stage:not(:last-child)::after{content:"";position:absolute;left:14px;top:49px;bottom:-2px;width:1px;background:#dce6d8}
+.progress-stage-marker{position:relative;z-index:1;width:30px;height:30px;display:grid;place-items:center;border-radius:999px;color:#6f8068;background:#e9eee4}
+.progress-stage.done .progress-stage-marker{color:#fff;background:#3d6d4e}
+.progress-stage.active .progress-stage-marker{color:#315c46;background:#dbead6;box-shadow:0 0 0 4px #eff6ed}
+.progress-stage-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.progress-stage-top h4{margin:0;color:var(--ink);font-size:15px;font-weight:600}
+.progress-stage-top span{display:block;margin-top:4px;color:var(--muted);font-size:11px}
+.progress-stage-top strong{color:#315c46;font-size:15px;font-weight:600}
+.progress-bar{height:6px;margin:11px 0 8px;overflow:hidden;border-radius:99px;background:#e7ece3}
+.progress-bar span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#4f805b,#94b477)}
+.progress-stage.active .progress-bar span{background:linear-gradient(90deg,#a47a35,#d1af62)}
+.progress-stage p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+.progress-stage a{display:inline-flex;align-items:center;gap:4px;margin-top:8px;color:#3b6b50;font-size:12px;text-decoration:none}
+.progress-stage a:hover{text-decoration:underline}
+.progress-sidebar{display:grid;gap:12px}
+.progress-card{padding:21px}
+.progress-card-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#557053}
+.progress-card-heading>svg{color:#47704c}
+.priority-pill{padding:4px 8px;border-radius:99px;color:#7a5928;background:#f8eed8;font-size:11px}
+.progress-next h3{margin:11px 0 8px;font-family:var(--display);font-size:25px;line-height:1.15;font-weight:500;letter-spacing:-.03em;color:var(--ink)}
+.progress-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.75}
+.progress-next .primary-button{display:inline-flex;align-items:center;gap:7px;margin-top:16px;min-height:42px;padding:10px 13px;border:0;border-radius:7px;background:#315c46;color:#fff;font-size:13px;cursor:pointer}
+.progress-next .primary-button:hover{background:#24472c}
+.progress-evidence{display:grid;gap:1px}
+.progress-evidence a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #e4ebdf;color:#315c46;font-size:13px;text-decoration:none}
+.progress-evidence a:hover{text-decoration:underline}
+.progress-evidence p{margin-top:12px;font-size:12px}
+.progress-policy ul{display:grid;gap:9px;margin:13px 0 15px;padding-left:18px;color:var(--muted);font-size:12px;line-height:1.6}
+.progress-caution{display:flex;align-items:flex-start;gap:7px;padding:10px 11px;border-radius:8px;background:#f8f1df;color:#80663d;font-size:11px;line-height:1.6}
+.progress-caution svg{flex:none;margin-top:2px}
+@media(max-width:900px){.progress-hero{display:grid}.progress-hero-actions{justify-content:flex-start}.progress-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.progress-main-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.progress-hero{padding:21px}.progress-kpis{grid-template-columns:1fr 1fr;gap:8px}.progress-kpis article{padding:13px}.progress-kpis b{font-size:26px}.progress-timeline{padding:18px 16px}.progress-section-heading{display:grid;gap:5px}.last-verified{white-space:normal}.progress-stage{grid-template-columns:26px minmax(0,1fr);gap:9px}.progress-stage-marker{width:26px;height:26px}.progress-stage:not(:last-child)::after{left:12px;top:45px}.progress-stage-top strong{font-size:14px}}
