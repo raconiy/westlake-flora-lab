@@ -135,18 +135,19 @@ export const progressTasks: ProgressTask[] = [
   {
     id: 'next-refine',
     phase: '06 · 下一轮派发',
-    title: '按证据派发下一轮 refine',
+    title: '下一轮 refine：冠形、草地与接地',
     owner: '任务协调 · 交互设计',
     status: 'queued',
     progress: 0,
     updatedAt: '等待建议',
-    summary: '收集公开建议后，按“可复现缺陷 → 负责角色 → 验证指标 → 是否采纳”派发；失败任务保留，未经验收不标记完成。',
+    summary: '把当前最明显的三类缺陷拆成可复现任务：树枝曲率与冠形、草叶覆盖密度、根—干—地面接触。每项都绑定对照图、几何指标和回归测试；失败任务保留，未经验收不标记完成。',
     evidence: [
       { label: '进入协作中枢', href: 'https://raconiy.github.io/westlake-flora-lab/#swarm', kind: 'site' },
       { label: '查看真实派发记录', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/dispatch/index.html', kind: 'dispatch' },
     ],
     metrics: [
       { label: '分派规则', value: '建议→任务→验证' },
+      { label: '本轮缺陷', value: '冠形 / 草地 / 接地' },
       { label: '失败记录', value: '保留' },
       { label: '公开口径', value: '证据优先' },
     ],
