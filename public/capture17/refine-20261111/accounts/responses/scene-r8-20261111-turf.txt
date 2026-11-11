@@ -1,0 +1,264 @@
+## Observed defects / constraints
+
+- **`CampusScene()` — lawn/turf creation:** the supplied code includes a soil plane **and** `createCampusTurf()`. Its implementation was not supplied, so actual blade geometry cannot be verified from these inputs.
+- **`CampusScene()` — `createCampusTurf()` call:** no paving rectangles or root-flare envelopes are passed explicitly. The supplied interface does not establish clearance from either.
+- **`campusPaving`:** walkway, joint and curb all require exclusion. Testing only blade roots against the unexpanded rectangles permits bent blades to overhang paving.
+- **`capture-grass.ts` — `createCaptureGrass()`:** operates only on specifically named captured meshes/materials; it neither distributes campus grass nor establishes persistent tuft identities.
+- **`CampusScene()` — tree transforms:** existing positions, seed-derived azimuths and scales are frozen for this change. The implementation below does not modify them or existing organ IDs.
+
+## Implementation
+
+Core plus adapter below are **under 170 implementation lines**, excluding tests. No dependency is required for the core.
+
+### `lib/persistent-grass.ts`
+
+```ts
+export type GrassBounds = {minX:number; maxX:number; minZ:number; maxZ:number};
+export type GrassRect = {x:number; z:number; width:number; depth:number};
+export type GrassRoot = {id:string; x:number; z:number; radius:number};
+export type GrassTuft = {id:string; x:number; z:number; key:number};
+export type GrassBlade = {id:string; x:number; z:number; height:number; bend:number; width:number; azimuth:number};
+export const GRASS_SWEEP = .062; // .0585 bend + .002 half-width + Float32 margin.
+export const GRASS_MAX_CELLS = 16000;
+function range(v:number, lo:number, hi:number):number {
+  if (!Number.isFinite(v) || v < lo || v > hi) throw new RangeError('Invalid finite/range input');
+  return v;
+}
+function integer(v:number, lo:number, hi:number):number {
+  range(v,lo,hi); if (!Number.isInteger(v)) throw new RangeError('Expected integer'); return v;
+}
+function hash(x:number, z:number, seed:number, channel:number):number {
+  let v = Math.imul(x,0x9e3779b1)^Math.imul(z,0x85ebca77)^seed^Math.imul(channel,0xc2b2ae3d);
+  v = Math.imul(v^(v>>>16),0x7feb352d);
+  v = Math.imul(v^(v>>>15),0x846ca68b);
+  return (v^(v>>>16))>>>0;
+}
+const unit = (x:number,z:number,s:number,c:number) => (hash(x,z,s,c)+.5)/4294967296;
+export function layoutGrass(b:GrassBounds, paving:readonly GrassRect[], roots:readonly GrassRoot[],
+  density:number, seed=1, spacing=.375):GrassTuft[] {
+  [b.minX,b.maxX,b.minZ,b.maxZ].forEach(v=>range(v,-10000,10000));
+  range(density,0,1); integer(seed,0,0xffffffff); range(spacing,.05,10);
+  if (!(b.maxX>b.minX && b.maxZ>b.minZ)) throw new RangeError('Empty/reversed bounds');
+  if (!Array.isArray(paving)||!Array.isArray(roots)||paving.length>256||roots.length>256)
+    throw new RangeError('Exclusion list limit');
+  for (const p of paving) {
+    range(p.x,-10000,10000); range(p.z,-10000,10000);
+    range(p.width,Number.MIN_VALUE,20000); range(p.depth,Number.MIN_VALUE,20000);
+  }
+  const rootIds = new Set<string>();
+  for (const r of roots) {
+    if (typeof r.id!=='string'||!r.id.length||r.id.length>128||rootIds.has(r.id))
+      throw new RangeError('Invalid/duplicate root ID');
+    rootIds.add(r.id); range(r.x,-10000,10000); range(r.z,-10000,10000); range(r.radius,0,1000);
+  }
+  const x0=Math.floor(b.minX/spacing), x1=Math.ceil(b.maxX/spacing);
+  const z0=Math.floor(b.minZ/spacing), z1=Math.ceil(b.maxZ/spacing);
+  if ((x1-x0)*(z1-z0)>GRASS_MAX_CELLS) throw new RangeError('Candidate budget exceeded');
+  const out:GrassTuft[]=[];
+  for (let i=x0;i<x1;i++) for (let j=z0;j<z1;j++) {
+    const x=(i+unit(i,j,seed,0))*spacing, z=(j+unit(i,j,seed,1))*spacing;
+    if (x<b.minX||x>=b.maxX||z<b.minZ||z>=b.maxZ||unit(i,j,seed,2)>=density) continue;
+    if (paving.some(p=>Math.abs(x-p.x)<=p.width/2+GRASS_SWEEP &&
+      Math.abs(z-p.z)<=p.depth/2+GRASS_SWEEP)) continue;
+    if (roots.some(r=>Math.hypot(x-r.x,z-r.z)<=r.radius+GRASS_SWEEP)) continue;
+    out.push({id:`grass:${seed}:${i}:${j}`,x,z,key:hash(i,j,seed,3)});
+  }
+  return out;
+}
+export function grassBlade(t:GrassTuft, index:number):GrassBlade {
+  integer(index,0,2); integer(t.key,0,0xffffffff);
+  range(t.x,-10000,10000); range(t.z,-10000,10000);
+  if (typeof t.id!=='string'||!t.id.length||t.id.length>128) throw new RangeError('Invalid tuft ID');
+  const u=(c:number)=>unit(t.key,index,0,c), height=.035+.055*u(0);
+  return {id:`${t.id}/b${index}`,x:t.x,z:t.z,height,
+    bend:height*(.15+.5*u(1)),width:.001+.001*u(2),azimuth:2*Math.PI*(index+u(3))/3};
+}
+export function sampleGrassBlade(b:GrassBlade, t:number) {
+  range(t,0,1); range(b.x,-10000,10000); range(b.z,-10000,10000);
+  range(b.height,.035,.09); range(b.bend,0,.0585); range(b.width,.001,.002);
+  range(b.azimuth,-2*Math.PI,2*Math.PI);
+  const c=Math.cos(b.azimuth), s=Math.sin(b.azimuth);
+  const dx=2*b.bend*t, dy=b.height*(1.4-.8*t), length=Math.hypot(dx,dy);
+  return {
+    position:[b.x+c*b.bend*t*t,b.height*(1.4*t-.4*t*t),b.z+s*b.bend*t*t],
+    tangent:[c*dx,dy,s*dx],
+    side:[-s,0,c],
+    normal:[-c*dy/length,dx/length,-s*dy/length],
+    halfWidth:b.width*(1-t)
+  };
+}
+export function buildGrassGeometry(tufts:readonly GrassTuft[], segments=4) {
+  integer(segments,2,8);
+  if (!Array.isArray(tufts)||tufts.length>GRASS_MAX_CELLS) throw new RangeError('Tuft budget exceeded');
+  if (new Set(tufts.map(t=>t.id)).size!==tufts.length) throw new RangeError('Duplicate tuft ID');
+  const blades=tufts.length*3, perBlade=2*segments+1;
+  const positions=new Float32Array(blades*perBlade*3), normals=new Float32Array(positions.length);
+  const indices=new Uint32Array(blades*(6*segments-3)), bladeIds:string[]=[];
+  let vertex=0, at=0;
+  for (const tuft of tufts) for (let k=0;k<3;k++) {
+    const b=grassBlade(tuft,k), base=vertex; bladeIds.push(b.id);
+    for (let r=0;r<=segments;r++) {
+      const q=sampleGrassBlade(b,r/segments);
+      for (let edge=0;edge<(r===segments?1:2);edge++) {
+        const offset=(edge===0?-1:1)*q.halfWidth;
+        for (let axis=0;axis<3;axis++) {
+          positions[3*vertex+axis]=q.position[axis]+offset*q.side[axis];
+          normals[3*vertex+axis]=q.normal[axis];
+        }
+        vertex++;
+      }
+    }
+    for (let r=0;r<segments;r++) {
+      const a=base+2*r;
+      indices[at++]=a; indices[at++]=a+1;
+      indices[at++]=r===segments-1?base+2*segments:a+2;
+      if (r<segments-1) {
+        indices[at++]=a+1; indices[at++]=a+3; indices[at++]=a+2;
+      }
+    }
+  }
+  return {positions,normals,indices,bladeIds,verticesPerBlade:perBlade,indicesPerBlade:6*segments-3};
+}
+```
+
+### Replacement `lib/campus-turf.ts`
+
+Root radii are required **world-space exclusion priors**, not inferred measurements. This adapter rejects missing tree envelopes instead of guessing from age/species.
+
+```ts
+import * as THREE from 'three';
+import {campusPaving,yunguCampusLayout} from './campus-layout';
+import {layoutGrass,buildGrassGeometry,type GrassRoot} from './persistent-grass';
+
+export function createCampusTurf(roots:readonly GrassRoot[]) {
+  const trees=yunguCampusLayout.filter(p=>['ginkgo','osmanthus','camphor','acer'].includes(p.species));
+  if (trees.some(t=>!roots.some(r=>r.id===t.id&&r.x===t.x&&r.z===t.z)))
+    throw new RangeError('Supply a world-space root-flare envelope at every frozen tree position');
+  const tufts=layoutGrass({minX:-21,maxX:21,minZ:-18,maxZ:18},campusPaving,roots,.75,401);
+  const data=buildGrassGeometry(tufts), geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.BufferAttribute(data.positions,3));
+  geometry.setAttribute('normal',new THREE.BufferAttribute(data.normals,3));
+  geometry.setIndex(new THREE.BufferAttribute(data.indices,1));
+  geometry.userData.grass={bladeIds:data.bladeIds,indicesPerBlade:data.indicesPerBlade};
+  geometry.computeBoundingSphere();
+  const material=new THREE.MeshStandardMaterial({color:'#667548',roughness:1,side:THREE.DoubleSide});
+  const mesh=new THREE.Mesh(geometry,material), group=new THREE.Group();
+  mesh.receiveShadow=true; group.name='campus-persistent-grass'; group.add(mesh);
+  return {
+    group,
+    update(_camera:unknown,_seconds:number,_wind:number) {},
+    dispose() {group.remove(mesh); geometry.dispose(); material.dispose();}
+  };
+}
+```
+
+## Input / expected-output tests
+
+Standalone test file using Node’s assertions. These are supplied tests, **not execution results**.
+
+```ts
+import assert from 'node:assert/strict';
+import {
+  layoutGrass,grassBlade,sampleGrassBlade,buildGrassGeometry,GRASS_SWEEP,
+  type GrassBlade
+} from './persistent-grass';
+
+const cell={minX:0,maxX:.375,minZ:0,maxZ:.375};
+const grid={minX:0,maxX:1.5,minZ:0,maxZ:1.5};
+const near=(a:number,b:number)=>assert.ok(Math.abs(a-b)<1e-10,`${a} != ${b}`);
+const one=layoutGrass(cell,[],[],1,7);
+
+// 1. One complete global cell, full density → one persistent coordinate-based ID.
+assert.deepEqual(one.map(t=>t.id),['grass:7:0:0']);
+assert.ok(one[0].x>0&&one[0].x<.375&&one[0].z>0&&one[0].z<.375);
+
+// 2. Zero density → no tufts; complete 4×4 grid at density 1 → 16 tufts.
+assert.deepEqual(layoutGrass(grid,[],[],0,7),[]);
+assert.equal(layoutGrass(grid,[],[],1,7).length,16);
+
+// 3. Density increase → retained IDs, positions and blade shapes unchanged.
+const low=layoutGrass(grid,[],[],.35,7), high=layoutGrass(grid,[],[],.8,7);
+assert.equal(low.every(t=>high.some(h=>h.id===t.id)),true);
+for (const t of low) {
+  const retained=high.find(h=>h.id===t.id)!;
+  assert.deepEqual(retained,t);
+  assert.deepEqual(grassBlade(retained,2),grassBlade(t,2));
+}
+
+// 4. Adjacent tiles → exactly the same candidates as their combined bounds.
+const left=layoutGrass(cell,[],[],1,7);
+const right=layoutGrass({...cell,minX:.375,maxX:.75},[],[],1,7);
+assert.deepEqual(
+  [...left,...right],
+  layoutGrass({...cell,maxX:.75},[],[],1,7)
+);
+
+// 5. Root is outside raw paving but inside sweep-expanded paving → excluded.
+const q=one[0];
+const slab={x:q.x+GRASS_SWEEP+.005-1e-6,z:q.z,width:.01,depth:.01};
+assert.ok(Math.abs(q.x-slab.x)>slab.width/2);
+assert.deepEqual(layoutGrass(cell,[slab],[],1,7),[]);
+
+// 6. Root is outside raw root-flare disc but inside expanded disc → excluded.
+const flare={id:'tree-A',x:q.x+GRASS_SWEEP+.02-1e-6,z:q.z,radius:.02};
+assert.ok(Math.hypot(q.x-flare.x,q.z-flare.z)>flare.radius);
+assert.deepEqual(layoutGrass(cell,[],[flare],1,7),[]);
+
+// 7. Explicit centerline → root contact, curved midpoint, tapered tip.
+const b:GrassBlade={id:'test/b0',x:1,z:2,height:.08,bend:.04,width:.002,azimuth:0};
+assert.deepEqual(sampleGrassBlade(b,0).position,[1,0,2]);
+const middle=sampleGrassBlade(b,.5), tip=sampleGrassBlade(b,1);
+near(middle.position[0],1.01); near(middle.position[1],.048);
+near(middle.halfWidth,.001);
+near(tip.position[0],1.04); near(tip.position[1],.08);
+assert.equal(tip.halfWidth,0);
+near(Math.hypot(...middle.normal),1);
+near(middle.normal.reduce((sum,n,i)=>sum+n*middle.tangent[i],0),0);
+
+// 8. One tuft, three blades, four segments → 27 vertices and 21 triangles.
+const mesh=buildGrassGeometry(one,4);
+assert.equal(mesh.positions.length,81);
+assert.equal(mesh.normals.length,81);
+assert.equal(mesh.indices.length,63);
+assert.deepEqual(mesh.bladeIds,[
+  'grass:7:0:0/b0','grass:7:0:0/b1','grass:7:0:0/b2'
+]);
+assert.ok(mesh.indices.every(i=>i<27));
+for (let k=0;k<3;k++) {
+  assert.equal(mesh.positions[(k*9)*3+1],0);
+  assert.equal(mesh.positions[(k*9+1)*3+1],0);
+}
+assert.deepEqual(buildGrassGeometry(one,4),mesh);
+
+// 9. Invalid numeric inputs / oversized work → exceptions, never silent truncation.
+assert.throws(()=>layoutGrass(cell,[],[],NaN));
+assert.throws(()=>layoutGrass(cell,[],[],1,Infinity));
+assert.throws(()=>layoutGrass(cell,[{x:0,z:0,width:Infinity,depth:1}],[],1));
+assert.throws(()=>layoutGrass(cell,[],[{id:'bad',x:0,z:0,radius:-1}],1));
+assert.throws(()=>sampleGrassBlade(b,NaN));
+assert.throws(()=>sampleGrassBlade(b,1.01));
+assert.throws(()=>buildGrassGeometry(one,9));
+assert.throws(()=>layoutGrass({minX:-100,maxX:100,minZ:-100,maxZ:100},[],[],1));
+```
+
+## Integration
+
+1. Add the core module and replace the turf adapter.
+2. Supply a `readonly GrassRoot[]` configuration covering all nine woody placements. Each entry must retain the existing placement ID and exact `x/z`; radius must encompass that tree’s root flare **after its existing scale**. Label supplied radii as engineering priors unless measured. Do not derive them from the supplied ages.
+3. Change only the turf call to:
+   ```ts
+   const turf=createCampusTurf(grassRootFlares);scene.add(turf.group);
+   ```
+   Import that explicit configuration. The existing `update` and `dispose` calls remain compatible.
+4. Keep the grass group at identity transform. Do not alter tree/root transforms or apply `attachLawnWind()` to these meshes: its additional displacement is not covered by this clearance bound.
+5. Identify blades through `geometry.userData.grass.bladeIds`, **not** vertex offsets. Packing offsets change with density; IDs and retained blade shapes do not.
+
+## Bounds / assumptions / limits
+
+- **Determinism:** fixed seed, spacing, exclusions and coordinates produce identical outputs. Density is a stable hash threshold—not a regenerated sample count. Global cell coordinates prevent tile-local reseeding seams.
+- **Clearance:** rectangles expand by `.062` on both axes; root discs expand radially by `.062`. Maximum bend plus half-width is `.0605`; the remainder accommodates Float32 position rounding within the accepted coordinate range.
+- **Geometry:** three independently shaped blades per tuft; quadratic centerlines, height variation, stratified azimuth variation, linear taper and a shared pointed tip. No textures substitute for blades.
+- **Hard limits:** 16,000 candidate cells, 256 paving rectangles, 256 root discs, 2–8 segments. Over-budget input throws rather than dropping IDs.
+- **Maximum buffers:** 816,000 vertices and 720,000 triangles at eight segments; **28,224,000 bytes** of typed geometry buffers, excluding object/string overhead.
+- **Campus configuration upper bound:** 10,752 candidates before exclusions/density; at four segments, at most 225,792 triangles and 9,676,800 buffer bytes.
+- Species, root radii, mowing dimensions, spacing, color and roughness remain **unmeasured rendering/layout priors**. This static implementation adds no historical-growth claims or wind simulation. Tile bounds own roots half-open; blade geometry may extend across tile boundaries intentionally.

@@ -1,0 +1,461 @@
+## Observed defects / coverage gaps
+
+These are gaps visible in the supplied tests—not claims that unprovided implementation code has a particular bug.
+
+| Source function/test | Missing regression |
+|---|---|
+| `capture-meadow.test.mjs`: `deterministic world-space planting…`, `fine-detail population tapers…` | Counts and scalar taper do not establish that increasing density retains every previously selected persistent site unchanged. |
+| `coarser LOD retains…`, `nearBladeRange()` | Attribute correspondence and width extrema do not reject duplicate, nonfinite or zero-area triangles. |
+| `capture-wind.test.mjs`: `wind loads a branch at a fixed socket…` | Local socket position is checked; nested world-space root/anchor drift and persistent-ID replacement are not. |
+| `campus-layout.ts`: `yunguCampusLayout` | Different seeds/scales are not evidence of different crown architecture. No yaw-copy rejection is supplied. |
+| `published meadow attachment stores…` | Transform export comparison does not test contact against transformed support geometry. |
+| Supplied test files | No crown-only photo/model metric, building/person exclusion, or views 10/13 holdout gate. |
+
+Below are two standalone files. No production transforms, IDs, services, or generators are changed.
+
+## 1. Pure regression functions — `real2sim-regression.mjs`
+
+**Interfaces**
+
+- Matrices: finite, column-major affine arrays of length 16; local-to-parent.
+- Nodes: `{id, parentId: string|null, local: matrix}`.
+- All IDs supplied by the caller are preserved; none are generated or renumbered.
+- Invalid/nonfinite inputs throw `TypeError` or `RangeError`. Valid but regressing inputs return `ok:false`.
+- Coordinates use the project’s existing scene units.
+
+```js
+// real2sim-regression.mjs
+// No runtime dependencies. No mutation of caller-owned arrays.
+
+function list(x, label, max = 100_000) {
+  if (!Array.isArray(x)) throw new TypeError(`${label}: expected array`);
+  if (x.length > max) throw new RangeError(`${label}: budget exceeded`);
+  return x;
+}
+
+function numericArray(x, label, max) {
+  if (!(Array.isArray(x) || (ArrayBuffer.isView(x) && !(x instanceof DataView)))) {
+    throw new TypeError(`${label}: expected numeric array`);
+  }
+  if (x.length > max) throw new RangeError(`${label}: budget exceeded`);
+  return x;
+}
+
+function finite(x, label) {
+  if (typeof x !== "number" || !Number.isFinite(x)) {
+    throw new TypeError(`${label}: expected finite number`);
+  }
+  return x;
+}
+
+function nonnegative(x, label) {
+  finite(x, label);
+  if (x < 0) throw new RangeError(`${label}: expected >= 0`);
+  return x;
+}
+
+function identifier(x, label = "id") {
+  if (typeof x !== "string" || x.length === 0 || x.length > 256) {
+    throw new TypeError(`${label}: expected nonempty string, <=256 characters`);
+  }
+  return x;
+}
+
+function vector(x, n, label) {
+  numericArray(x, label, n);
+  if (x.length !== n) throw new TypeError(`${label}: expected length ${n}`);
+  for (const value of x) finite(value, label);
+  return x;
+}
+
+function records(x, label, max = 100_000) {
+  const out = new Map();
+  for (const record of list(x, label, max)) {
+    if (!record || typeof record !== "object") {
+      throw new TypeError(`${label}: expected records`);
+    }
+    identifier(record.id);
+    if (out.has(record.id)) throw new TypeError(`${label}: duplicate id ${record.id}`);
+    out.set(record.id, record);
+  }
+  return out;
+}
+
+function result(failures, extra = {}) {
+  return {ok: failures.length === 0, failures, ...extra};
+}
+
+/**
+ * tiers: increasing density, each:
+ * {density: number in [0,1], sites: [{id, values: finite numeric array}]}
+ *
+ * values contains every immutable numeric field to protect:
+ * e.g. position, traits, tint and/or the established transform.
+ */
+export function densitySubsetMetric(tiers) {
+  list(tiers, "tiers", 16);
+  if (tiers.length < 2) throw new RangeError("need at least two density tiers");
+
+  const failures = [];
+  let previous = null, previousDensity = -1, total = 0;
+
+  for (let t = 0; t < tiers.length; t++) {
+    const tier = tiers[t];
+    finite(tier.density, "density");
+    if (tier.density < 0 || tier.density > 1 || tier.density <= previousDensity) {
+      throw new RangeError("densities must be strictly increasing within [0,1]");
+    }
+
+    const current = records(tier.sites, "sites", 1_000_000);
+    total += current.size;
+    if (total > 4_000_000) throw new RangeError("total site budget exceeded");
+
+    for (const site of current.values()) {
+      numericArray(site.values, "site.values", 256);
+      if (!site.values.length) throw new TypeError("site.values must not be empty");
+      for (const value of site.values) finite(value, "site.values");
+    }
+
+    if (previous) {
+      for (const [id, oldSite] of previous) {
+        const newSite = current.get(id);
+        if (!newSite) {
+          failures.push({code: "density-site-removed", id, tier: t});
+        } else if (
+          oldSite.values.length !== newSite.values.length ||
+          oldSite.values.some((value, i) => value !== newSite.values[i])
+        ) {
+          failures.push({code: "density-site-changed", id, tier: t});
+        }
+      }
+    }
+    previous = current;
+    previousDensity = tier.density;
+  }
+  return result(failures);
+}
+
+/**
+ * blades: [{id, sections: [[leftXYZ, rightXYZ], ...]}]
+ * faces:  [{id, bladeId, vertices: [aXYZ,bXYZ,cXYZ]}]
+ *
+ * Supply occupied triangles, not unused preallocated index capacity.
+ * A tapered tip section may have width zero; a whole zero-width blade may not.
+ * Duplicate detection is geometric, exact, and winding-independent.
+ */
+export function bladeFaceMetric(
+  blades,
+  faces,
+  {minWidth = 1e-9, minArea = 1e-12} = {}
+) {
+  nonnegative(minWidth, "minWidth");
+  nonnegative(minArea, "minArea");
+
+  const bladeMap = records(blades, "blades");
+  const faceMap = records(faces, "faces");
+  if (!bladeMap.size || !faceMap.size) throw new RangeError("empty geometry");
+
+  const failures = [], seenFaces = new Map(), counts = new Map();
+  let totalSections = 0, minimumArea = Infinity;
+
+  for (const blade of bladeMap.values()) {
+    list(blade.sections, "sections", 256);
+    if (!blade.sections.length) throw new RangeError("blade has no sections");
+    totalSections += blade.sections.length;
+    if (totalSections > 1_000_000) throw new RangeError("section budget exceeded");
+
+    let width = 0;
+    for (const section of blade.sections) {
+      list(section, "section", 2);
+      if (section.length !== 2) throw new TypeError("section needs left/right");
+      const a = vector(section[0], 3, "section.left");
+      const b = vector(section[1], 3, "section.right");
+      width = Math.max(width, finite(
+        Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]),
+        "computed blade width"
+      ));
+    }
+    if (width <= minWidth) failures.push({code: "zero-width-blade", id: blade.id});
+  }
+
+  for (const face of faceMap.values()) {
+    identifier(face.bladeId, "bladeId");
+    if (!bladeMap.has(face.bladeId)) throw new TypeError("unknown bladeId");
+    list(face.vertices, "face.vertices", 3);
+    if (face.vertices.length !== 3) throw new TypeError("triangle needs 3 vertices");
+    const [a, b, c] = face.vertices.map(v => vector(v, 3, "face vertex"));
+
+    const u = b.map((v, i) => finite(v - a[i], "triangle edge"));
+    const v = c.map((value, i) => finite(value - a[i], "triangle edge"));
+    const cross = [
+      u[1] * v[2] - u[2] * v[1],
+      u[2] * v[0] - u[0] * v[2],
+      u[0] * v[1] - u[1] * v[0]
+    ];
+    const area = finite(Math.hypot(...cross) / 2, "triangle area");
+    minimumArea = Math.min(minimumArea, area);
+    if (area <= minArea) failures.push({code: "zero-area-face", id: face.id});
+
+    const key = face.vertices.map(p =>
+      Array.from(p, x => String(x === 0 ? 0 : x)).join(",")
+    ).sort().join(";");
+    if (seenFaces.has(key)) {
+      failures.push({
+        code: "duplicate-face", id: face.id, duplicateOf: seenFaces.get(key)
+      });
+    } else {
+      seenFaces.set(key, face.id);
+    }
+    counts.set(face.bladeId, (counts.get(face.bladeId) ?? 0) + 1);
+  }
+
+  for (const id of bladeMap.keys()) {
+    if (!counts.has(id)) failures.push({code: "blade-without-faces", id});
+  }
+  return result(failures, {minimumArea});
+}
+
+function matrix(x) {
+  vector(x, 16, "matrix");
+  // Reject projective matrices rather than silently dropping homogeneous w.
+  if (x[3] !== 0 || x[7] !== 0 || x[11] !== 0 || x[15] !== 1) {
+    throw new TypeError("expected affine column-major matrix");
+  }
+  return Array.from(x);
+}
+
+function multiply(a, b) {
+  const out = new Array(16).fill(0);
+  for (let c = 0; c < 4; c++) {
+    for (let r = 0; r < 4; r++) {
+      for (let k = 0; k < 4; k++) {
+        out[c * 4 + r] += a[k * 4 + r] * b[c * 4 + k];
+      }
+      finite(out[c * 4 + r], "matrix product");
+    }
+  }
+  return matrix(out);
+}
+
+function transform(m, p) {
+  return [0, 1, 2].map(r => finite(
+    m[r] * p[0] + m[4 + r] * p[1] + m[8 + r] * p[2] + m[12 + r],
+    "transformed point"
+  ));
+}
+
+/**
+ * Validates missing parents, cycles, nonfinite matrices and hierarchy depth.
+ * Returns Maps; input records are not modified.
+ */
+export function worldMatrices(nodes) {
+  const source = records(nodes, "nodes");
+  const local = new Map(), parents = new Map(), world = new Map();
+
+  for (const node of source.values()) {
+    local.set(node.id, matrix(node.local));
+    const parent = node.parentId ?? null;
+    if (parent !== null) identifier(parent, "parentId");
+    if (parent !== null && !source.has(parent)) throw new TypeError("missing parent");
+    parents.set(node.id, parent);
+  }
+
+  // Iterative resolution avoids dependence on JS recursion depth.
+  for (const id of source.keys()) {
+    const chain = [], visiting = new Set();
+    let cursor = id;
+    while (cursor !== null && !world.has(cursor)) {
+      if (visiting.has(cursor)) throw new TypeError("transform cycle");
+      visiting.add(cursor);
+      chain.push(cursor);
+      if (chain.length > 256) throw new RangeError("hierarchy depth exceeds 256");
+      cursor = parents.get(cursor);
+    }
+    while (chain.length) {
+      const next = chain.pop(), parent = parents.get(next);
+      world.set(next, parent === null
+        ? local.get(next)
+        : multiply(world.get(parent), local.get(next)));
+    }
+  }
+  return {local, world};
+}
+
+function anchorsMap(anchors, label) {
+  const out = records(anchors, label, 4096);
+  for (const anchor of out.values()) {
+    identifier(anchor.nodeId, "nodeId");
+    vector(anchor.point, 3, "anchor.point");
+  }
+  return out;
+}
+
+/**
+ * before/after: complete node snapshots, including persistent organ nodes.
+ * anchors: [{id,nodeId,point}] local points that must remain fixed in world space.
+ * lockedLocalIds: nodes whose complete local matrix must remain unchanged.
+ *
+ * For rest-geometry regression: lock all established wood/root nodes.
+ * For wind frames: lock roots; branch sockets can be anchors while branch
+ * rotation remains permitted.
+ */
+export function fixedAnchorMetric({
+  before, after, anchors, lockedLocalIds = [],
+  anchorTolerance = 1e-8, matrixTolerance = 0
+}) {
+  nonnegative(anchorTolerance, "anchorTolerance");
+  nonnegative(matrixTolerance, "matrixTolerance");
+
+  const a = worldMatrices(before), b = worldMatrices(after);
+  const anchorMap = anchorsMap(anchors, "anchors");
+  list(lockedLocalIds, "lockedLocalIds");
+  const locks = new Set();
+  for (const id of lockedLocalIds) {
+    identifier(id);
+    if (locks.has(id)) throw new TypeError("duplicate locked id");
+    if (!a.local.has(id)) throw new TypeError("unknown locked id");
+    locks.add(id);
+  }
+  for (const anchor of anchorMap.values()) {
+    if (!a.world.has(anchor.nodeId)) throw new TypeError("unknown anchor node");
+  }
+
+  const missing = [...a.local.keys()].filter(id => !b.local.has(id)).sort();
+  const added = [...b.local.keys()].filter(id => !a.local.has(id)).sort();
+  if (missing.length || added.length) {
+    return result([{code: "persistent-ids", missing, added}], {maxAnchorDrift: null});
+  }
+
+  const failures = [];
+  for (const id of locks) {
+    if (a.local.get(id).some(
+      (value, i) => Math.abs(value - b.local.get(id)[i]) > matrixTolerance
+    )) {
+      failures.push({code: "locked-transform-changed", id});
+    }
+  }
+
+  let maxAnchorDrift = 0;
+  for (const anchor of anchorMap.values()) {
+    const p = transform(a.world.get(anchor.nodeId), anchor.point);
+    const q = transform(b.world.get(anchor.nodeId), anchor.point);
+    const drift = finite(Math.hypot(...p.map((v, i) => v - q[i])), "anchor drift");
+    maxAnchorDrift = Math.max(maxAnchorDrift, drift);
+    if (drift > anchorTolerance) {
+      failures.push({code: "fixed-anchor-moved", id: anchor.id, drift});
+    }
+  }
+  return result(failures, {maxAnchorDrift});
+}
+
+/**
+ * specimens: [{id, root: worldXYZ, points: world-space crown boundary samples}]
+ *
+ * Conservative yaw-copy gate:
+ *   profile[heightBand] = maximum horizontal distance from root axis / crownHeight
+ *
+ * Translation, arbitrary yaw and uniform scale do not change this descriptor.
+ * Every specimen pair must have a different envelope by minDifference.
+ * Empty height bands fail closed.
+ */
+export function crownEnvelopeMetric(
+  specimens,
+  {bins = 8, minDifference = 0.02} = {}
+) {
+  if (!Number.isInteger(bins) || bins < 2 || bins > 64) {
+    throw new RangeError("bins must be integer 2..64");
+  }
+  nonnegative(minDifference, "minDifference");
+  const entries = records(specimens, "specimens", 128);
+  if (entries.size < 2) throw new RangeError("need at least two specimens");
+
+  const profiles = [], failures = [];
+  let totalPoints = 0;
+  for (const specimen of entries.values()) {
+    const root = vector(specimen.root, 3, "root");
+    list(specimen.points, "crown points", 100_000);
+    totalPoints += specimen.points.length;
+    if (totalPoints > 1_000_000) throw new RangeError("crown point budget exceeded");
+
+    let low = Infinity, high = -Infinity;
+    for (const point of specimen.points) {
+      vector(point, 3, "crown point");
+      low = Math.min(low, point[1]);
+      high = Math.max(high, point[1]);
+    }
+    const height = high - low;
+    if (!Number.isFinite(height) || height <= 0) {
+      failures.push({code: "invalid-crown-height", id: specimen.id});
+      continue;
+    }
+
+    const profile = new Array(bins).fill(-1);
+    for (const point of specimen.points) {
+      const t = finite((point[1] - low) / height, "normalized crown height");
+      const band = Math.min(bins - 1, Math.floor(t * bins));
+      const radius = finite(
+        Math.hypot(point[0] - root[0], point[2] - root[2]) / height,
+        "normalized crown radius"
+      );
+      profile[band] = Math.max(profile[band], radius);
+    }
+    if (profile.some(value => value < 0)) {
+      failures.push({code: "unsampled-crown-band", id: specimen.id});
+    } else {
+      profiles.push({id: specimen.id, profile});
+    }
+  }
+
+  const pairs = [];
+  for (let i = 0; i < profiles.length; i++) {
+    for (let j = i + 1; j < profiles.length; j++) {
+      const a = profiles[i], b = profiles[j];
+      const difference = Math.max(...a.profile.map(
+        (value, band) => Math.abs(value - b.profile[band])
+      ));
+      pairs.push({a: a.id, b: b.id, difference});
+      if (difference <= minDifference) {
+        failures.push({code: "yaw-equivalent-envelope", a: a.id, b: b.id, difference});
+      }
+    }
+  }
+  return result(failures, {profiles, pairs});
+}
+
+/**
+ * contacts: [{id,nodeId,point}] local contact/foot samples.
+ * surfaces: [{id,nodeId,vertices:[a,b,c]}] designated support triangles.
+ *
+ * Computes signed vertical gap in world Y after ALL parent transforms.
+ * Positive = floating; negative = penetration.
+ * The highest covering designated support triangle wins.
+ */
+export function contactGapMetric({
+  nodes, contacts, surfaces, maxGap = 1e-3, maxPenetration = 1e-3
+}) {
+  nonnegative(maxGap, "maxGap");
+  nonnegative(maxPenetration, "maxPenetration");
+
+  const {world} = worldMatrices(nodes);
+  const contactMap = anchorsMap(contacts, "contacts");
+  const surfaceMap = records(surfaces, "surfaces");
+  if (!contactMap.size || !surfaceMap.size) throw new RangeError("empty contact input");
+  if (contactMap.size * surfaceMap.size > 2_000_000) {
+    throw new RangeError("contact/triangle comparison budget exceeded");
+  }
+
+  let nonHeightFieldTriangles = 0;
+  const triangles = [];
+  for (const surface of surfaceMap.values()) {
+    identifier(surface.nodeId, "surface.nodeId");
+    if (!world.has(surface.nodeId)) throw new TypeError("unknown surface node");
+    list(surface.vertices, "surface.vertices", 3);
+    if (surface.vertices.length !== 3) throw new TypeError("surface needs 3 vertices");
+    const [a, b, c] = surface.vertices.map(p =>
+      transform(world.get(surface.nodeId), vector(p, 3, "surface vertex"))
+    );
+    const e1x = finite(b[0] - a[0], "surface edge");
+    const e1z = finite(b[2] - a[2], "surface edge");
+    const e2x = finite(c[0] - a[0], "surface edge");
+    const e2z = finite(c[2] - a[2], "surface edge");
+    const determinant = finite(e1x * e2z -

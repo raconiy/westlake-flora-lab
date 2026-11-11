@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {buildPlant} from '../lib/plant-engine';
 import {buildAdditionalPlant} from '../lib/additional-species';
+import {createCampusTurf} from '../lib/campus-turf';
 
 import {campusLamps, campusPaving, lampRadii, yunguCampusLayout} from '../lib/campus-layout';
 export {yunguCampusLayout} from '../lib/campus-layout';
@@ -45,17 +46,23 @@ export default function CampusScene({wind,day,motion,onError}: Props) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#b9d6ee');
     const camera = new THREE.PerspectiveCamera(42,1,.05,160);
-    camera.position.set(19,13,22);
+    camera.position.set(18,7.5,20);
     const controls = new OrbitControls(camera,renderer.domElement);
     controls.enableDamping = true;
+    controls.minDistance = .4;
+    controls.maxPolarAngle = Math.PI/2-.01;
     controls.target.set(0,2,3);
     const hemi = new THREE.HemisphereLight('#edf6ff','#6e7658',1.1);
     const sun = new THREE.DirectionalLight('#fff4da',3.2);
     sun.position.set(-14,26,12); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
+    Object.assign(sun.shadow.camera,{left:-25,right:25,top:24,bottom:-24,near:.1,far:80});
+    sun.shadow.camera.updateProjectionMatrix();sun.shadow.normalBias=.018;
     scene.add(hemi,sun,sun.target);
 
-    const lawn = new THREE.Mesh(new THREE.PlaneGeometry(42,36),new THREE.MeshStandardMaterial({color:'#4c813d',roughness:1}));
+    // Soil/thatch underneath real blade geometry, not a green lawn substitute.
+    const lawn = new THREE.Mesh(new THREE.PlaneGeometry(42,36),new THREE.MeshStandardMaterial({color:'#535c3f',roughness:1}));
     lawn.rotation.x=-Math.PI/2; lawn.receiveShadow=true; scene.add(lawn);
+    const turf=createCampusTurf();scene.add(turf.group);
     for (const slab of campusPaving) {
       const mesh = new THREE.Mesh(
         new THREE.BoxGeometry(slab.width,slab.height,slab.depth),
@@ -92,11 +99,19 @@ export default function CampusScene({wind,day,motion,onError}: Props) {
     const bounds = new THREE.Box3(new THREE.Vector3(-16,0,-9),new THREE.Vector3(16,10,17));
     const center=bounds.getCenter(new THREE.Vector3());
     controls.target.set(center.x,2.5,center.z);
-    const clock = new THREE.Clock(); let frame=0; let disposed=false;
+    const clock = new THREE.Clock(); let frame=0; let disposed=false; let previousTime=0;
     const resize=()=>{if(!container||disposed)return;const width=Math.max(1,container.clientWidth),height=Math.max(1,container.clientHeight);renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();};
-    const animate=()=>{if(disposed)return; frame=requestAnimationFrame(animate);const t=clock.getElapsedTime();const current=live.current;for(const entry of models){entry.model.group.position.copy(entry.base);entry.model.update(current.motion?t:0,current.wind,1,1);entry.model.group.position.copy(entry.base);}controls.update();renderer.render(scene,camera);};
+    const animate=()=>{if(disposed)return; frame=requestAnimationFrame(animate);const t=clock.getElapsedTime();const dt=Math.min(.2,t-previousTime);previousTime=t;const current=live.current;for(const entry of models){entry.model.group.position.copy(entry.base);entry.model.update(current.motion?t:0,current.wind,1,1);entry.model.group.position.copy(entry.base);}controls.update();turf.update(camera,current.motion?dt:0,current.wind);renderer.render(scene,camera);};
     const observer=new ResizeObserver(resize);observer.observe(container);resize();animate();
-    return ()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();controls.dispose();for(const entry of models){scene.remove(entry.model.group);entry.model.dispose();}renderer.dispose();renderer.domElement.remove();};
+    return ()=>{
+      disposed=true;cancelAnimationFrame(frame);observer.disconnect();controls.dispose();
+      for(const entry of models){scene.remove(entry.model.group);entry.model.dispose();}
+      turf.dispose();
+      const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>();
+      scene.traverse(o=>{if(o instanceof THREE.Mesh){geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])materials.add(m);}});
+      geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());sun.shadow.dispose();
+      renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();
+    };
   },[onError]);
   return <div ref={holder} className="campus-scene-canvas" aria-label="云谷校区植物与路灯场景"/>;
 }

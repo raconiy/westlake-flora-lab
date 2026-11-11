@@ -29,7 +29,7 @@ export default function ProgressTracker({tasks,online,health,onRefresh,onOpenSwa
     <div className="progress-hero">
       <div>
         <span className="eyebrow"><Activity size={13}/> PUBLIC PROJECT TRACKER / {progressMeta.version}</span>
-        <h2>每一次 refine，都留下证据。</h2>
+        <h2>修复进度与验证记录</h2>
         <p>这里展示已经完成、正在迭代和等待现场校准的工作。公开页面只显示任务摘要、状态和证据链接，不显示密码、授权令牌或本地桥接凭据。</p>
       </div>
       <div className="progress-hero-actions">
@@ -41,7 +41,7 @@ export default function ProgressTracker({tasks,online,health,onRefresh,onOpenSwa
     <section className="progress-overall" aria-label="交付总进度">
       <div className="progress-overall-top"><div><span className="eyebrow">DELIVERY HEALTH</span><h3>当前交付进度</h3></div><strong>{overallProgress}%</strong></div>
       <div className="progress-overall-bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={overallProgress} aria-label={`当前交付进度 ${overallProgress}%`}><span style={{width:`${overallProgress}%`}}/></div>
-      <p>{publishedStages}/{progressTasks.length} 个阶段已记录；{staticBlockers} 个台账阻塞项，{online?`${liveTasks.length} 条实时任务已读取`:'实时队列未连接，使用 R7 发布快照'}。阶段完成不等于照片级真实。</p>
+      <p>{publishedStages}/{progressTasks.length} 个阶段已记录；{staticBlockers} 个台账阻塞项，{online?`${liveTasks.length} 条实时任务已读取`:'实时队列未连接，使用已发布快照'}。阶段完成不等于照片级真实。</p>
     </section>
 
     <div className="progress-kpis" aria-label="项目概览指标">
@@ -72,12 +72,13 @@ export default function ProgressTracker({tasks,online,health,onRefresh,onOpenSwa
       <aside className="progress-sidebar">
         <section className="progress-card progress-next">
           <div className="progress-card-heading"><span className="eyebrow">NEXT REFINEMENT</span><span className="priority-pill">优先</span></div>
-          <h3>把“看起来像”变成“可校准”。</h3>
+          <h3>待解决：冠形、覆盖与接地</h3>
           <p>下一轮建议先补现场个体数据，再调整树冠、草地密度和枝叶物理。这样能避免只靠静态图片继续放大误差。</p>
           <button className="primary-button" onClick={onOpenSwarm}><Send size={14}/>进入协作中枢派发</button>
         </section>
         <section className="progress-card progress-evidence">
           <div className="progress-card-heading"><span className="eyebrow">PUBLIC EVIDENCE</span><ShieldCheck size={16}/></div>
+          <a href="https://raconiy.github.io/westlake-flora-lab/capture17/refine-20261111/" target="_blank" rel="noreferrer"><span>R7.1 修复与本轮调用记录</span><ExternalLink size={13}/></a>
           <a href="https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/" target="_blank" rel="noreferrer"><span>照片对照页</span><ExternalLink size={13}/></a>
           <a href="https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/dispatch/" target="_blank" rel="noreferrer"><span>五账号派工记录</span><ExternalLink size={13}/></a>
           <a href="https://github.com/raconiy/westlake-flora-lab/releases/tag/yungu-capture17-v7" target="_blank" rel="noreferrer"><span>R7 工程包与 CI</span><ExternalLink size={13}/></a>
@@ -90,7 +91,7 @@ export default function ProgressTracker({tasks,online,health,onRefresh,onOpenSwa
         </section>
         <section className="progress-card progress-live-queue">
           <div className="progress-card-heading"><span className="eyebrow">LIVE QUEUE</span><Clock3 size={16}/></div>
-          {liveTasks.length ? <ul>{liveTasks.slice(0,6).map((task:any)=><li key={String(task.id||task.title)}><span><i className={`queue-dot ${liveStatus(task)}`}/>{task.title||task.id}</span><b>{liveStatusLabel(liveStatus(task))}</b></li>)}</ul> : <p>{online?'当前队列没有可公开任务。':'协调服务未连接；这里保留 R7 台账，不把静态记录伪装成实时执行。'}</p>}
+          {liveTasks.length ? <ul>{liveTasks.slice(0,6).map((task:any)=><li key={String(task.id||task.title)}><span><i className={`queue-dot ${liveStatus(task)}`}/>{task.title||task.id}</span><b>{liveStatusLabel(liveStatus(task))}</b></li>)}</ul> : <p>{online?'当前队列没有可公开任务。':'协调服务未连接；这里保留发布台账，不把静态记录伪装成实时执行。'}</p>}
         </section>
       </aside>
     </div>

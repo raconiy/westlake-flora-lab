@@ -26,10 +26,10 @@ export type ProgressTask = {
  * Account-level proof remains in the redacted dispatch record linked below.
  */
 export const progressMeta = {
-  version: 'R7',
+  version: 'R7.1',
   campus: '西湖大学·云谷校区',
-  updatedAt: '2026-11-11T05:56:00+08:00',
-  release: '1a5b58e3ba556feb9a49ecdba5c32f8753dc9309',
+  updatedAt: '2026-11-11T21:43:53+08:00',
+  release: '23b49752dc7c21d9197368253588b1efb38f7db4cc5a8c9f94c52821c0e94dc5',
   model: 'gpt-6.1-sol / high',
   publicNote: '状态来自已发布证据与可复核测试；“完成”表示本阶段交付，不代表照片级真实。',
 };
@@ -62,7 +62,7 @@ export const progressTasks: ProgressTask[] = [
     status: 'done',
     progress: 100,
     updatedAt: '2026-11-10 21:42',
-    summary: '近景草叶覆盖、远景 LOD 和共享世界空间风场已接入；风动使用同一位置场，避免草面与叶片各自漂移。',
+    summary: '实拍草坪保留原有几何。R7.1 为布局实验加入 111,433 个固定草根、弯曲草叶与步道排除区；实拍枝条加入持续阵风载荷，停止风后弹性回位。',
     evidence: [
       { label: '草叶近景', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/index.html#grass', kind: 'comparison' },
       { label: '公网操作记录', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/dispatch/index.html', kind: 'dispatch' },
@@ -82,21 +82,21 @@ export const progressTasks: ProgressTask[] = [
     status: 'done',
     progress: 100,
     updatedAt: '2026-11-10 20:56',
-    summary: '77 片叶片已重新挂接到已有小枝，保留根、干、木质节点与已存在的枝序，避免生长滑杆过程中凭空消失。',
+    summary: '实拍重建的 77 片悬空叶已重新挂接；R7.1 进一步修复 430 个叶网格的内部分面法线。位置、叶柄与木质节点保持不变。这是静态资产修复，不表示已验证整株生长历史。',
     evidence: [
       { label: '五账号派发记录', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/dispatch/index.html', kind: 'dispatch' },
       { label: '下载源工程', href: 'https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v7/yungu-campus-scene-source-v7.zip', kind: 'release' },
     ],
     metrics: [
-      { label: '重新挂接', value: '77' },
-      { label: '涉及 Web LOD', value: '37' },
+      { label: '修复叶网格', value: '430' },
+      { label: '原有顶点移动', value: '0' },
       { label: '木质节点移动', value: '0' },
     ],
   },
   {
     id: 'bark-material',
     phase: '04 · 材质与光照',
-    title: '树皮纹理与各向异性过滤',
+    title: '树皮纹理与叶面连续受光',
     owner: '材质与光照',
     status: 'done',
     progress: 100,
@@ -135,15 +135,15 @@ export const progressTasks: ProgressTask[] = [
   {
     id: 'next-refine',
     phase: '06 · 下一轮派发',
-    title: '下一轮 refine：冠形、草地与接地',
+    title: '继续修复冠形、草地与接地',
     owner: '任务协调 · 交互设计',
-    status: 'queued',
+    status: 'active',
     progress: 0,
-    updatedAt: '等待建议',
+    updatedAt: '2026-11-11',
     summary: '把当前最明显的三类缺陷拆成可复现任务：树枝曲率与冠形、草叶覆盖密度、根—干—地面接触。每项都绑定对照图、几何指标和回归测试；失败任务保留，未经验收不标记完成。',
     evidence: [
       { label: '进入协作中枢', href: 'https://raconiy.github.io/westlake-flora-lab/#swarm', kind: 'site' },
-      { label: '查看真实派发记录', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/scene-r7/dispatch/index.html', kind: 'dispatch' },
+      { label: '查看本轮修复与真实派发记录', href: 'https://raconiy.github.io/westlake-flora-lab/capture17/refine-20261111/index.html', kind: 'dispatch' },
     ],
     metrics: [
       { label: '分派规则', value: '建议→任务→验证' },

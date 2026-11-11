@@ -1,0 +1,3938 @@
+{
+  "sourceSha256": "2a67a043c66556a24faf93803a0f9e4140d5cab65a44c23083c7cf72cb8877be",
+  "candidateSha256": "23b49752dc7c21d9197368253588b1efb38f7db4cc5a8c9f94c52821c0e94dc5",
+  "checks": {
+    "existingBinaryPrefixUnchanged": true,
+    "nodeTransformsAndHierarchyUnchanged": true,
+    "materialsTexturesUVColorMetadataUnchanged": true,
+    "positionsAndIndicesUnchanged": true,
+    "nonLeafNormalsUnchanged": true,
+    "finiteUnitLeafNormalsWithinByteQuantization": true,
+    "independentSharedEdgeComponentNormals": true
+  },
+  "changedLeafPrimitives": 430,
+  "leafPrimitives": 430,
+  "leafComponents": 383202,
+  "skippedComponentFaces": {
+    "1": 1514,
+    "18": 4,
+    "20": 20,
+    "21": 1,
+    "24": 7,
+    "28": 1,
+    "32": 1
+  },
+  "verticesChecked": 4567494,
+  "maxNormalLengthError": 0.0065625465909049385,
+  "maxExpectedComponentNormalError": 0.003937017901752993,
+  "componentFaceHistogram": {
+    "1": 1514,
+    "2": 12385,
+    "3": 850,
+    "4": 364006,
+    "5": 4,
+    "6": 262,
+    "7": 57,
+    "8": 3588,
+    "10": 43,
+    "11": 4,
+    "12": 375,
+    "14": 14,
+    "16": 66,
+    "18": 4,
+    "20": 20,
+    "21": 1,
+    "24": 7,
+    "28": 1,
+    "32": 1
+  },
+  "materialNames": [
+    "Living broadleaf blades",
+    "Broadleaf 01",
+    "Broadleaf 02",
+    "Broadleaf 03",
+    "Broadleaf 04",
+    "Broadleaf 05",
+    "Broadleaf 06",
+    "Broadleaf 07",
+    "Broadleaf 00",
+    "Foliage.0",
+    "Foliage.1",
+    "Foliage.2",
+    "Foliage.3",
+    "Foliage.4"
+  ],
+  "details": [
+    {
+      "mesh": 40,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 16510,
+      "vertices": 198120,
+      "maxExpectedError": 0.0039369774400593305,
+      "maxNormalLengthError": 0.006188158993891468
+    },
+    {
+      "mesh": 43,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 5899,
+      "vertices": 70788,
+      "maxExpectedError": 0.003937007366943357,
+      "maxNormalLengthError": 0.006180910572273657
+    },
+    {
+      "mesh": 46,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 5549,
+      "vertices": 66588,
+      "maxExpectedError": 0.003936926244392458,
+      "maxNormalLengthError": 0.006150100470128317
+    },
+    {
+      "mesh": 49,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 21940,
+      "vertices": 263280,
+      "maxExpectedError": 0.003937016073024213,
+      "maxNormalLengthError": 0.006219352573239911
+    },
+    {
+      "mesh": 52,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 22701,
+      "vertices": 272412,
+      "maxExpectedError": 0.00393700388042563,
+      "maxNormalLengthError": 0.006344136683152701
+    },
+    {
+      "mesh": 55,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 25445,
+      "vertices": 305340,
+      "maxExpectedError": 0.003936999885454262,
+      "maxNormalLengthError": 0.006375335159221507
+    },
+    {
+      "mesh": 58,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 7840,
+      "vertices": 94080,
+      "maxExpectedError": 0.0039370014266392195,
+      "maxNormalLengthError": 0.006406534614911585
+    },
+    {
+      "mesh": 61,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 315,
+      "vertices": 3780,
+      "maxExpectedError": 0.003936694948125138,
+      "maxNormalLengthError": 0.005657010462337242
+    },
+    {
+      "mesh": 65,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 5648,
+      "vertices": 67776,
+      "maxExpectedError": 0.003936966699195077,
+      "maxNormalLengthError": 0.006188158993891468
+    },
+    {
+      "mesh": 68,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 10452,
+      "vertices": 125424,
+      "maxExpectedError": 0.003936984254696019,
+      "maxNormalLengthError": 0.006468936465523156
+    },
+    {
+      "mesh": 71,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 9918,
+      "vertices": 119016,
+      "maxExpectedError": 0.003936990554174374,
+      "maxNormalLengthError": 0.006312939186612021
+    },
+    {
+      "mesh": 74,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 23539,
+      "vertices": 282468,
+      "maxExpectedError": 0.003937017901752993,
+      "maxNormalLengthError": 0.006312939186612243
+    },
+    {
+      "mesh": 77,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 13755,
+      "vertices": 165060,
+      "maxExpectedError": 0.003937010025831356,
+      "maxNormalLengthError": 0.006375335159221729
+    },
+    {
+      "mesh": 80,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 9671,
+      "vertices": 116052,
+      "maxExpectedError": 0.003936935661194796,
+      "maxNormalLengthError": 0.006219352573239911
+    },
+    {
+      "mesh": 85,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 140,
+      "vertices": 1680,
+      "maxExpectedError": 0.003936246127083987,
+      "maxNormalLengthError": 0.005317870789156132
+    },
+    {
+      "mesh": 88,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 1038,
+      "vertices": 12456,
+      "maxExpectedError": 0.003936354003786724,
+      "maxNormalLengthError": 0.0058450942192391775
+    },
+    {
+      "mesh": 91,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 18979,
+      "vertices": 227748,
+      "maxExpectedError": 0.003936989357116394,
+      "maxNormalLengthError": 0.0063349469336990705
+    },
+    {
+      "mesh": 94,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 29785,
+      "vertices": 357420,
+      "maxExpectedError": 0.003936994092571033,
+      "maxNormalLengthError": 0.0065625465909049385
+    },
+    {
+      "mesh": 97,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 21,
+      "vertices": 252,
+      "maxExpectedError": 0.003931572407742306,
+      "maxNormalLengthError": 0.005194518902705392
+    },
+    {
+      "mesh": 100,
+      "primitive": 0,
+      "material": "Living broadleaf blades",
+      "components": 14543,
+      "vertices": 174516,
+      "maxExpectedError": 0.0039370008442375926,
+      "maxNormalLengthError": 0.006188158993891579
+    },
+    {
+      "mesh": 103,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 209,
+      "vertices": 2388,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 103,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 222,
+      "vertices": 2568,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 103,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 426,
+      "vertices": 4884,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 103,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 416,
+      "vertices": 4776,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 103,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 462,
+      "vertices": 5220,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 103,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 203,
+      "vertices": 2280,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 103,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 198,
+      "vertices": 2340,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.0050969998718671805
+    },
+    {
+      "mesh": 107,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 226,
+      "vertices": 2532,
+      "maxExpectedError": 0.0038833186372115303,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 107,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 200,
+      "vertices": 2292,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 107,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 410,
+      "vertices": 4716,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 107,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 468,
+      "vertices": 5316,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 107,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 483,
+      "vertices": 5484,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 107,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 212,
+      "vertices": 2424,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 107,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 207,
+      "vertices": 2388,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 111,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 204,
+      "vertices": 2316,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 111,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 201,
+      "vertices": 2268,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.00491006416105233
+    },
+    {
+      "mesh": 111,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 405,
+      "vertices": 4632,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 111,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 452,
+      "vertices": 5160,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 111,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 465,
+      "vertices": 5280,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 111,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 226,
+      "vertices": 2556,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 111,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 229,
+      "vertices": 2484,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 115,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 216,
+      "vertices": 2412,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 115,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 232,
+      "vertices": 2628,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 115,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 427,
+      "vertices": 4872,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 115,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 470,
+      "vertices": 5376,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 115,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 474,
+      "vertices": 5376,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 115,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 216,
+      "vertices": 2460,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.00491006416105233
+    },
+    {
+      "mesh": 115,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 220,
+      "vertices": 2460,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 119,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 229,
+      "vertices": 2580,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 119,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 218,
+      "vertices": 2376,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 119,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 406,
+      "vertices": 4584,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 119,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 454,
+      "vertices": 5112,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005159319581291566
+    },
+    {
+      "mesh": 119,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 429,
+      "vertices": 4968,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 119,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 222,
+      "vertices": 2496,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 119,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 197,
+      "vertices": 2196,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 123,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 188,
+      "vertices": 2100,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 123,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 232,
+      "vertices": 2616,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 123,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 453,
+      "vertices": 5292,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 123,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 411,
+      "vertices": 4800,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 123,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 430,
+      "vertices": 5016,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 123,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 229,
+      "vertices": 2472,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 123,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 210,
+      "vertices": 2424,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 128,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 244,
+      "vertices": 2832,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 128,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 202,
+      "vertices": 2280,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 128,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 461,
+      "vertices": 5232,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004947769707480676
+    },
+    {
+      "mesh": 128,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 426,
+      "vertices": 4824,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 128,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 409,
+      "vertices": 4680,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 128,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 224,
+      "vertices": 2460,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 128,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 226,
+      "vertices": 2460,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 132,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 232,
+      "vertices": 2640,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 132,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 215,
+      "vertices": 2412,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004855223138158671
+    },
+    {
+      "mesh": 132,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 405,
+      "vertices": 4548,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 132,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 426,
+      "vertices": 5028,
+      "maxExpectedError": 0.00387396438025156,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 132,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 420,
+      "vertices": 4884,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 132,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 234,
+      "vertices": 2688,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 132,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 224,
+      "vertices": 2592,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 136,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 226,
+      "vertices": 2556,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004660871160003688
+    },
+    {
+      "mesh": 136,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 242,
+      "vertices": 2688,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 136,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 431,
+      "vertices": 4944,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 136,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 401,
+      "vertices": 4536,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 136,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 459,
+      "vertices": 5400,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 136,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 231,
+      "vertices": 2568,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 136,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 256,
+      "vertices": 2844,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 140,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 210,
+      "vertices": 2280,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 140,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 224,
+      "vertices": 2568,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 140,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 417,
+      "vertices": 4872,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 140,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 416,
+      "vertices": 4824,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 140,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 454,
+      "vertices": 5136,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 140,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 251,
+      "vertices": 2856,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 140,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 208,
+      "vertices": 2424,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 145,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 219,
+      "vertices": 2460,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 145,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 441,
+      "vertices": 5064,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 145,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 437,
+      "vertices": 5016,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005159319581291566
+    },
+    {
+      "mesh": 145,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 447,
+      "vertices": 5220,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 145,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 228,
+      "vertices": 2616,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 145,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 215,
+      "vertices": 2448,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005194518902705614
+    },
+    {
+      "mesh": 145,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 214,
+      "vertices": 2400,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 149,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 226,
+      "vertices": 2568,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 149,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 445,
+      "vertices": 5028,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 149,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 460,
+      "vertices": 5256,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 149,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 415,
+      "vertices": 4848,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 149,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 231,
+      "vertices": 2688,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 149,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 185,
+      "vertices": 2076,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 149,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 221,
+      "vertices": 2472,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 153,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 225,
+      "vertices": 2448,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 153,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 466,
+      "vertices": 5352,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 153,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 438,
+      "vertices": 4932,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 153,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 397,
+      "vertices": 4632,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 153,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 213,
+      "vertices": 2424,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 153,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 230,
+      "vertices": 2664,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 153,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 210,
+      "vertices": 2460,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 157,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 236,
+      "vertices": 2640,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 157,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 448,
+      "vertices": 5124,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.0050969998718671805
+    },
+    {
+      "mesh": 157,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 430,
+      "vertices": 4956,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 157,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 438,
+      "vertices": 5016,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 157,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 211,
+      "vertices": 2388,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004855223138158671
+    },
+    {
+      "mesh": 157,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 263,
+      "vertices": 2940,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 157,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 216,
+      "vertices": 2448,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 161,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 230,
+      "vertices": 2652,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 161,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 434,
+      "vertices": 5112,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 161,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 381,
+      "vertices": 4476,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 161,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 464,
+      "vertices": 5232,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 161,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 226,
+      "vertices": 2592,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 161,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 204,
+      "vertices": 2160,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004916921798035823
+    },
+    {
+      "mesh": 161,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 217,
+      "vertices": 2520,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004660871160003688
+    },
+    {
+      "mesh": 166,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 239,
+      "vertices": 2736,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 166,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 437,
+      "vertices": 5052,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 166,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 427,
+      "vertices": 4848,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 166,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 476,
+      "vertices": 5256,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 166,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 191,
+      "vertices": 2124,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 166,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 219,
+      "vertices": 2496,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 166,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 240,
+      "vertices": 2640,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 170,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 219,
+      "vertices": 2388,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 170,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 420,
+      "vertices": 4764,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 170,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 437,
+      "vertices": 5160,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 170,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 455,
+      "vertices": 5088,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 170,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 204,
+      "vertices": 2328,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 170,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 205,
+      "vertices": 2268,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 170,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 220,
+      "vertices": 2580,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 174,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 221,
+      "vertices": 2436,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 174,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 450,
+      "vertices": 5064,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 174,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 433,
+      "vertices": 4968,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 174,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 406,
+      "vertices": 4608,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 174,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 221,
+      "vertices": 2496,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 174,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 230,
+      "vertices": 2484,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 174,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 224,
+      "vertices": 2640,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 178,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 231,
+      "vertices": 2616,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 178,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 424,
+      "vertices": 4788,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 178,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 410,
+      "vertices": 4692,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 178,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 484,
+      "vertices": 5292,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 178,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 239,
+      "vertices": 2532,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 178,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 245,
+      "vertices": 2832,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 178,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 204,
+      "vertices": 2328,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 182,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 224,
+      "vertices": 2376,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 182,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 442,
+      "vertices": 5100,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 182,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 407,
+      "vertices": 4764,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 182,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 444,
+      "vertices": 5112,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 182,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 243,
+      "vertices": 2652,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004660871160003688
+    },
+    {
+      "mesh": 182,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 236,
+      "vertices": 2616,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 182,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 232,
+      "vertices": 2532,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 187,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 238,
+      "vertices": 2628,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 187,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 438,
+      "vertices": 5052,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 187,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 421,
+      "vertices": 4992,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.00491006416105233
+    },
+    {
+      "mesh": 187,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 432,
+      "vertices": 5040,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005194518902705614
+    },
+    {
+      "mesh": 187,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 250,
+      "vertices": 2856,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 187,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 225,
+      "vertices": 2592,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 187,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 189,
+      "vertices": 2136,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 191,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 225,
+      "vertices": 2604,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 191,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 434,
+      "vertices": 5268,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.0049786166700465095
+    },
+    {
+      "mesh": 191,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 432,
+      "vertices": 5040,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 191,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 397,
+      "vertices": 4716,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 191,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 223,
+      "vertices": 2472,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 191,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 198,
+      "vertices": 2280,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 191,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 203,
+      "vertices": 2484,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 195,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 225,
+      "vertices": 2580,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 195,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 398,
+      "vertices": 4644,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 195,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 400,
+      "vertices": 4824,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 195,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 403,
+      "vertices": 4740,
+      "maxExpectedError": 0.0038331649404663715,
+      "maxNormalLengthError": 0.004947769707480676
+    },
+    {
+      "mesh": 195,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 247,
+      "vertices": 2712,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 195,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 221,
+      "vertices": 2664,
+      "maxExpectedError": 0.003921572814172075,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 195,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 242,
+      "vertices": 2724,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 199,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 217,
+      "vertices": 2496,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 199,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 437,
+      "vertices": 5172,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 199,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 411,
+      "vertices": 4788,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 199,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 451,
+      "vertices": 5196,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.00491006416105233
+    },
+    {
+      "mesh": 199,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 188,
+      "vertices": 2280,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 199,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 211,
+      "vertices": 2460,
+      "maxExpectedError": 0.0038833186372115303,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 199,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 237,
+      "vertices": 2688,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004947769707480676
+    },
+    {
+      "mesh": 203,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 195,
+      "vertices": 2244,
+      "maxExpectedError": 0.0038990347585909912,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 203,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 425,
+      "vertices": 4968,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 203,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 457,
+      "vertices": 5232,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 203,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 392,
+      "vertices": 4512,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 203,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 225,
+      "vertices": 2592,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 203,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 230,
+      "vertices": 2544,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 203,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 225,
+      "vertices": 2580,
+      "maxExpectedError": 0.0038833186372115303,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 207,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 207,
+      "vertices": 2304,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005159319581291566
+    },
+    {
+      "mesh": 207,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 408,
+      "vertices": 4716,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 207,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 404,
+      "vertices": 4692,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 207,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 454,
+      "vertices": 5268,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 207,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 240,
+      "vertices": 2784,
+      "maxExpectedError": 0.003921572814172075,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 207,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 239,
+      "vertices": 2664,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 207,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 242,
+      "vertices": 2844,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 212,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 186,
+      "vertices": 2196,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 212,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 453,
+      "vertices": 5376,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 212,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 460,
+      "vertices": 5520,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 212,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 441,
+      "vertices": 5124,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 212,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 212,
+      "vertices": 2412,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 212,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 229,
+      "vertices": 2640,
+      "maxExpectedError": 0.0038833186372115303,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 212,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 206,
+      "vertices": 2316,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 216,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 213,
+      "vertices": 2460,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 216,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 427,
+      "vertices": 5076,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 216,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 404,
+      "vertices": 4788,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 216,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 420,
+      "vertices": 4956,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 216,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 190,
+      "vertices": 2196,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 216,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 213,
+      "vertices": 2340,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291566
+    },
+    {
+      "mesh": 216,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 224,
+      "vertices": 2664,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 220,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 203,
+      "vertices": 2400,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 220,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 442,
+      "vertices": 5136,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 220,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 462,
+      "vertices": 5472,
+      "maxExpectedError": 0.0038833186372115303,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 220,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 405,
+      "vertices": 4800,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 220,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 220,
+      "vertices": 2616,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 220,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 241,
+      "vertices": 2748,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 220,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 205,
+      "vertices": 2364,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004692016873187765
+    },
+    {
+      "mesh": 224,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 206,
+      "vertices": 2376,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 224,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 414,
+      "vertices": 4908,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 224,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 399,
+      "vertices": 4800,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 224,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 412,
+      "vertices": 4884,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 224,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 216,
+      "vertices": 2508,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 224,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 198,
+      "vertices": 2280,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004660871160003688
+    },
+    {
+      "mesh": 224,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 217,
+      "vertices": 2532,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 229,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 202,
+      "vertices": 2412,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 229,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 403,
+      "vertices": 4932,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 229,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 396,
+      "vertices": 5184,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 229,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 394,
+      "vertices": 4932,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 229,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 190,
+      "vertices": 2328,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 229,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 230,
+      "vertices": 2664,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 229,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 221,
+      "vertices": 2580,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 233,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 212,
+      "vertices": 2484,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 233,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 397,
+      "vertices": 4596,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.005256196737947194
+    },
+    {
+      "mesh": 233,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 388,
+      "vertices": 4740,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 233,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 390,
+      "vertices": 4956,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 233,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 226,
+      "vertices": 2664,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 233,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 238,
+      "vertices": 2844,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 233,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 202,
+      "vertices": 2364,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 237,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 208,
+      "vertices": 2532,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 237,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 387,
+      "vertices": 4788,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 237,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 396,
+      "vertices": 4848,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 237,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 380,
+      "vertices": 4764,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.0050969998718671805
+    },
+    {
+      "mesh": 237,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 225,
+      "vertices": 2568,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 237,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 227,
+      "vertices": 2640,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 237,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 188,
+      "vertices": 2220,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 241,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 188,
+      "vertices": 2244,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 241,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 408,
+      "vertices": 5220,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005256196737947194
+    },
+    {
+      "mesh": 241,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 414,
+      "vertices": 5256,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 241,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 390,
+      "vertices": 4740,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 241,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 206,
+      "vertices": 2484,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 241,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 208,
+      "vertices": 2568,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 241,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 222,
+      "vertices": 2592,
+      "maxExpectedError": 0.0038990347585909912,
+      "maxNormalLengthError": 0.0049786166700465095
+    },
+    {
+      "mesh": 245,
+      "primitive": 0,
+      "material": "Broadleaf 00",
+      "components": 233,
+      "vertices": 2760,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 245,
+      "primitive": 1,
+      "material": "Broadleaf 01",
+      "components": 364,
+      "vertices": 4752,
+      "maxExpectedError": 0.003921572814172075,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 245,
+      "primitive": 2,
+      "material": "Broadleaf 02",
+      "components": 368,
+      "vertices": 4776,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 245,
+      "primitive": 3,
+      "material": "Broadleaf 03",
+      "components": 420,
+      "vertices": 5184,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004947769707480676
+    },
+    {
+      "mesh": 245,
+      "primitive": 4,
+      "material": "Broadleaf 04",
+      "components": 217,
+      "vertices": 2532,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 245,
+      "primitive": 5,
+      "material": "Broadleaf 05",
+      "components": 208,
+      "vertices": 2532,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 245,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 211,
+      "vertices": 2496,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 250,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 205,
+      "vertices": 2376,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 250,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 192,
+      "vertices": 2328,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 250,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 378,
+      "vertices": 4920,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 250,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 425,
+      "vertices": 5472,
+      "maxExpectedError": 0.0038833186372115303,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 250,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 380,
+      "vertices": 5004,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 250,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 223,
+      "vertices": 2556,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 250,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 209,
+      "vertices": 2592,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 254,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 225,
+      "vertices": 2484,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 254,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 222,
+      "vertices": 2700,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 254,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 413,
+      "vertices": 5352,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 254,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 392,
+      "vertices": 5052,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 254,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 381,
+      "vertices": 4680,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.0050969998718671805
+    },
+    {
+      "mesh": 254,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 216,
+      "vertices": 2604,
+      "maxExpectedError": 0.003910058818672235,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 254,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 212,
+      "vertices": 2472,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 258,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 204,
+      "vertices": 2448,
+      "maxExpectedError": 0.003910058818672235,
+      "maxNormalLengthError": 0.0049786166700462875
+    },
+    {
+      "mesh": 258,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 190,
+      "vertices": 2268,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 258,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 444,
+      "vertices": 5256,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 258,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 415,
+      "vertices": 5160,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 258,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 359,
+      "vertices": 4548,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 258,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 221,
+      "vertices": 2592,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 258,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 229,
+      "vertices": 2688,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 262,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 217,
+      "vertices": 2592,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 262,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 227,
+      "vertices": 2676,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 262,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 422,
+      "vertices": 5484,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 262,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 363,
+      "vertices": 4596,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.00491006416105233
+    },
+    {
+      "mesh": 262,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 387,
+      "vertices": 4788,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 262,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 231,
+      "vertices": 2736,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 262,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 216,
+      "vertices": 2448,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004754311223624574
+    },
+    {
+      "mesh": 266,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 191,
+      "vertices": 2364,
+      "maxExpectedError": 0.0038331649404663715,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 266,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 187,
+      "vertices": 2256,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004660871160003688
+    },
+    {
+      "mesh": 266,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 446,
+      "vertices": 5592,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 266,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 396,
+      "vertices": 5076,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004947769707480676
+    },
+    {
+      "mesh": 266,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 406,
+      "vertices": 5160,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004947769707480676
+    },
+    {
+      "mesh": 266,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 214,
+      "vertices": 2472,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 266,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 214,
+      "vertices": 2424,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 270,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 187,
+      "vertices": 2304,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004660871160003688
+    },
+    {
+      "mesh": 270,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 208,
+      "vertices": 2400,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 270,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 418,
+      "vertices": 5016,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 270,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 425,
+      "vertices": 5256,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 270,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 416,
+      "vertices": 5124,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 270,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 200,
+      "vertices": 2376,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 270,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 201,
+      "vertices": 2340,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005009462685819921
+    },
+    {
+      "mesh": 275,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 208,
+      "vertices": 2412,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 275,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 226,
+      "vertices": 2544,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 275,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 401,
+      "vertices": 5124,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 275,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 385,
+      "vertices": 4752,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 275,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 400,
+      "vertices": 4680,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 275,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 212,
+      "vertices": 2508,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005159319581291455
+    },
+    {
+      "mesh": 275,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 208,
+      "vertices": 2292,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 279,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 237,
+      "vertices": 2796,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 279,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 207,
+      "vertices": 2376,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.0049786166700462875
+    },
+    {
+      "mesh": 279,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 405,
+      "vertices": 4920,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 279,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 394,
+      "vertices": 4908,
+      "maxExpectedError": 0.003877367542910126,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 279,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 415,
+      "vertices": 4932,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 279,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 215,
+      "vertices": 2436,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 279,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 233,
+      "vertices": 2568,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 283,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 207,
+      "vertices": 2424,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004660871160003688
+    },
+    {
+      "mesh": 283,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 230,
+      "vertices": 2556,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 283,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 390,
+      "vertices": 4716,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 283,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 467,
+      "vertices": 5448,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005252806465905091
+    },
+    {
+      "mesh": 283,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 432,
+      "vertices": 5100,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 283,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 219,
+      "vertices": 2532,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 283,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 236,
+      "vertices": 2688,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.0050969998718671805
+    },
+    {
+      "mesh": 287,
+      "primitive": 0,
+      "material": "Broadleaf 01",
+      "components": 229,
+      "vertices": 2664,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 287,
+      "primitive": 1,
+      "material": "Broadleaf 02",
+      "components": 229,
+      "vertices": 2556,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 287,
+      "primitive": 2,
+      "material": "Broadleaf 03",
+      "components": 424,
+      "vertices": 5100,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.005315135937035809
+    },
+    {
+      "mesh": 287,
+      "primitive": 3,
+      "material": "Broadleaf 04",
+      "components": 421,
+      "vertices": 4884,
+      "maxExpectedError": 0.003921107857632555,
+      "maxNormalLengthError": 0.005194518902705614
+    },
+    {
+      "mesh": 287,
+      "primitive": 4,
+      "material": "Broadleaf 05",
+      "components": 425,
+      "vertices": 5136,
+      "maxExpectedError": 0.003919659216071569,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 287,
+      "primitive": 5,
+      "material": "Broadleaf 06",
+      "components": 213,
+      "vertices": 2556,
+      "maxExpectedError": 0.0038014082867342536,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 287,
+      "primitive": 6,
+      "material": "Broadleaf 07",
+      "components": 204,
+      "vertices": 2352,
+      "maxExpectedError": 0.0038181060637013653,
+      "maxNormalLengthError": 0.004878911623333648
+    },
+    {
+      "mesh": 303,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 660,
+      "vertices": 7920,
+      "maxExpectedError": 0.003936410844091021,
+      "maxNormalLengthError": 0.006188158993891579
+    },
+    {
+      "mesh": 303,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 319,
+      "vertices": 3828,
+      "maxExpectedError": 0.00393536181884524,
+      "maxNormalLengthError": 0.006188158993891579
+    },
+    {
+      "mesh": 303,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 748,
+      "vertices": 8976,
+      "maxExpectedError": 0.003936257205827465,
+      "maxNormalLengthError": 0.006396554876879179
+    },
+    {
+      "mesh": 303,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 352,
+      "vertices": 4224,
+      "maxExpectedError": 0.003936921012140049,
+      "maxNormalLengthError": 0.005907460826733102
+    },
+    {
+      "mesh": 303,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 198,
+      "vertices": 2376,
+      "maxExpectedError": 0.0039365700682855165,
+      "maxNormalLengthError": 0.0058450942192392885
+    },
+    {
+      "mesh": 304,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 715,
+      "vertices": 8580,
+      "maxExpectedError": 0.0039368188484596445,
+      "maxNormalLengthError": 0.005876277033913024
+    },
+    {
+      "mesh": 304,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 385,
+      "vertices": 4620,
+      "maxExpectedError": 0.003934855660002623,
+      "maxNormalLengthError": 0.005751551643174979
+    },
+    {
+      "mesh": 304,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 737,
+      "vertices": 8844,
+      "maxExpectedError": 0.003936986926814712,
+      "maxNormalLengthError": 0.006180910572273657
+    },
+    {
+      "mesh": 304,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 253,
+      "vertices": 3036,
+      "maxExpectedError": 0.003936812896030151,
+      "maxNormalLengthError": 0.006150100470128317
+    },
+    {
+      "mesh": 304,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 187,
+      "vertices": 2244,
+      "maxExpectedError": 0.00393693205506096,
+      "maxNormalLengthError": 0.00615696639361063
+    },
+    {
+      "mesh": 306,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 737,
+      "vertices": 8844,
+      "maxExpectedError": 0.003936810953701242,
+      "maxNormalLengthError": 0.0059652200409554546
+    },
+    {
+      "mesh": 306,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 363,
+      "vertices": 4356,
+      "maxExpectedError": 0.003936997460643632,
+      "maxNormalLengthError": 0.005965220040955677
+    },
+    {
+      "mesh": 306,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 737,
+      "vertices": 8844,
+      "maxExpectedError": 0.00393639434843307,
+      "maxNormalLengthError": 0.00615696639361063
+    },
+    {
+      "mesh": 306,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 264,
+      "vertices": 3168,
+      "maxExpectedError": 0.0039369202313492835,
+      "maxNormalLengthError": 0.0062425279464439765
+    },
+    {
+      "mesh": 306,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 176,
+      "vertices": 2112,
+      "maxExpectedError": 0.003934578872315436,
+      "maxNormalLengthError": 0.005595666904072982
+    },
+    {
+      "mesh": 308,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 825,
+      "vertices": 9900,
+      "maxExpectedError": 0.00393664784451353,
+      "maxNormalLengthError": 0.0059652200409554546
+    },
+    {
+      "mesh": 308,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 352,
+      "vertices": 4224,
+      "maxExpectedError": 0.003936963320900544,
+      "maxNormalLengthError": 0.005626841896888668
+    },
+    {
+      "mesh": 308,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 528,
+      "vertices": 6336,
+      "maxExpectedError": 0.0039369231216327405,
+      "maxNormalLengthError": 0.006180910572273435
+    },
+    {
+      "mesh": 308,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 407,
+      "vertices": 4884,
+      "maxExpectedError": 0.003936713079585985,
+      "maxNormalLengthError": 0.0062117197310165295
+    },
+    {
+      "mesh": 308,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 165,
+      "vertices": 1980,
+      "maxExpectedError": 0.00393167011935891,
+      "maxNormalLengthError": 0.005472039366607229
+    },
+    {
+      "mesh": 311,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 781,
+      "vertices": 9372,
+      "maxExpectedError": 0.00393631621229984,
+      "maxNormalLengthError": 0.006188158993891579
+    },
+    {
+      "mesh": 311,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 418,
+      "vertices": 5016,
+      "maxExpectedError": 0.003935430857041178,
+      "maxNormalLengthError": 0.006188158993891579
+    },
+    {
+      "mesh": 311,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 649,
+      "vertices": 7788,
+      "maxExpectedError": 0.003936627029878403,
+      "maxNormalLengthError": 0.005751551643174979
+    },
+    {
+      "mesh": 311,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 286,
+      "vertices": 3432,
+      "maxExpectedError": 0.003934152374472449,
+      "maxNormalLengthError": 0.005969831347180654
+    },
+    {
+      "mesh": 311,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 143,
+      "vertices": 1716,
+      "maxExpectedError": 0.003936371022320251,
+      "maxNormalLengthError": 0.005472039366607007
+    },
+    {
+      "mesh": 312,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 583,
+      "vertices": 6996,
+      "maxExpectedError": 0.003936651865561469,
+      "maxNormalLengthError": 0.0063349469336990705
+    },
+    {
+      "mesh": 312,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 385,
+      "vertices": 4620,
+      "maxExpectedError": 0.003935742151237209,
+      "maxNormalLengthError": 0.005969831347180765
+    },
+    {
+      "mesh": 312,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 737,
+      "vertices": 8844,
+      "maxExpectedError": 0.003936969381953037,
+      "maxNormalLengthError": 0.005751551643174979
+    },
+    {
+      "mesh": 312,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 407,
+      "vertices": 4884,
+      "maxExpectedError": 0.003937010304278843,
+      "maxNormalLengthError": 0.006219352573239911
+    },
+    {
+      "mesh": 312,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 165,
+      "vertices": 1980,
+      "maxExpectedError": 0.003936166164487942,
+      "maxNormalLengthError": 0.005841947542478909
+    },
+    {
+      "mesh": 313,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 550,
+      "vertices": 6600,
+      "maxExpectedError": 0.003936449542867648,
+      "maxNormalLengthError": 0.00655055823741546
+    },
+    {
+      "mesh": 313,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 154,
+      "vertices": 1848,
+      "maxExpectedError": 0.003935989225653691,
+      "maxNormalLengthError": 0.005595666904072871
+    },
+    {
+      "mesh": 313,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 407,
+      "vertices": 4884,
+      "maxExpectedError": 0.003936853632470122,
+      "maxNormalLengthError": 0.005751551643174979
+    },
+    {
+      "mesh": 313,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 1067,
+      "vertices": 12804,
+      "maxExpectedError": 0.003936585304001344,
+      "maxNormalLengthError": 0.006088477435284512
+    },
+    {
+      "mesh": 313,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 99,
+      "vertices": 1188,
+      "maxExpectedError": 0.00393480019588377,
+      "maxNormalLengthError": 0.0056891948148432014
+    },
+    {
+      "mesh": 314,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 319,
+      "vertices": 3828,
+      "maxExpectedError": 0.003935920766423573,
+      "maxNormalLengthError": 0.005969831347180765
+    },
+    {
+      "mesh": 314,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 253,
+      "vertices": 3036,
+      "maxExpectedError": 0.0039352664108141255,
+      "maxNormalLengthError": 0.0058450942192391775
+    },
+    {
+      "mesh": 314,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 561,
+      "vertices": 6732,
+      "maxExpectedError": 0.003936923054750907,
+      "maxNormalLengthError": 0.005718659934300874
+    },
+    {
+      "mesh": 314,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 1012,
+      "vertices": 12144,
+      "maxExpectedError": 0.003936763545934752,
+      "maxNormalLengthError": 0.006088477435284512
+    },
+    {
+      "mesh": 314,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 132,
+      "vertices": 1584,
+      "maxExpectedError": 0.0039358740676945225,
+      "maxNormalLengthError": 0.005194518902705614
+    },
+    {
+      "mesh": 316,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 517,
+      "vertices": 6204,
+      "maxExpectedError": 0.003936764782587421,
+      "maxNormalLengthError": 0.005626841896888779
+    },
+    {
+      "mesh": 316,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 209,
+      "vertices": 2508,
+      "maxExpectedError": 0.003936545827521232,
+      "maxNormalLengthError": 0.006088477435284512
+    },
+    {
+      "mesh": 316,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 572,
+      "vertices": 6864,
+      "maxExpectedError": 0.0039368027840571695,
+      "maxNormalLengthError": 0.005811127057186116
+    },
+    {
+      "mesh": 316,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 814,
+      "vertices": 9768,
+      "maxExpectedError": 0.003936765956035315,
+      "maxNormalLengthError": 0.005687835670714403
+    },
+    {
+      "mesh": 316,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 165,
+      "vertices": 1980,
+      "maxExpectedError": 0.003936197043635126,
+      "maxNormalLengthError": 0.006406534614911585
+    },
+    {
+      "mesh": 319,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 572,
+      "vertices": 6864,
+      "maxExpectedError": 0.003936993090782992,
+      "maxNormalLengthError": 0.006344136683152479
+    },
+    {
+      "mesh": 319,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 352,
+      "vertices": 4224,
+      "maxExpectedError": 0.003936890521491709,
+      "maxNormalLengthError": 0.006088477435284512
+    },
+    {
+      "mesh": 319,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 715,
+      "vertices": 8580,
+      "maxExpectedError": 0.003936940073636652,
+      "maxNormalLengthError": 0.005811127057185894
+    },
+    {
+      "mesh": 319,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 407,
+      "vertices": 4884,
+      "maxExpectedError": 0.003936831800461005,
+      "maxNormalLengthError": 0.0059652200409552325
+    },
+    {
+      "mesh": 319,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 231,
+      "vertices": 2772,
+      "maxExpectedError": 0.003936471425623034,
+      "maxNormalLengthError": 0.0056580178671148396
+    },
+    {
+      "mesh": 321,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 682,
+      "vertices": 8184,
+      "maxExpectedError": 0.003936603322413135,
+      "maxNormalLengthError": 0.005907460826733435
+    },
+    {
+      "mesh": 321,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 297,
+      "vertices": 3564,
+      "maxExpectedError": 0.003936943786301772,
+      "maxNormalLengthError": 0.0056580178671147285
+    },
+    {
+      "mesh": 321,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 638,
+      "vertices": 7656,
+      "maxExpectedError": 0.003936696996355571,
+      "maxNormalLengthError": 0.00605766450241263
+    },
+    {
+      "mesh": 321,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 484,
+      "vertices": 5808,
+      "maxExpectedError": 0.003936726381482791,
+      "maxNormalLengthError": 0.005841947542478687
+    },
+    {
+      "mesh": 321,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 176,
+      "vertices": 2110,
+      "maxExpectedError": 0.003936245772570457,
+      "maxNormalLengthError": 0.005470976705075459
+    },
+    {
+      "mesh": 324,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 550,
+      "vertices": 6600,
+      "maxExpectedError": 0.003936903241402126,
+      "maxNormalLengthError": 0.006344136683152479
+    },
+    {
+      "mesh": 324,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 308,
+      "vertices": 3696,
+      "maxExpectedError": 0.003936351044395603,
+      "maxNormalLengthError": 0.0056891948148432014
+    },
+    {
+      "mesh": 324,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 770,
+      "vertices": 9240,
+      "maxExpectedError": 0.003936221645492899,
+      "maxNormalLengthError": 0.006219352573239911
+    },
+    {
+      "mesh": 324,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 484,
+      "vertices": 5808,
+      "maxExpectedError": 0.003936627091538858,
+      "maxNormalLengthError": 0.0056891948148433125
+    },
+    {
+      "mesh": 324,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 165,
+      "vertices": 1980,
+      "maxExpectedError": 0.0039368564842745535,
+      "maxNormalLengthError": 0.005502870245552183
+    },
+    {
+      "mesh": 326,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 616,
+      "vertices": 7392,
+      "maxExpectedError": 0.0039361241984426365,
+      "maxNormalLengthError": 0.006180910572273657
+    },
+    {
+      "mesh": 326,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 341,
+      "vertices": 4092,
+      "maxExpectedError": 0.00393687671428955,
+      "maxNormalLengthError": 0.00605766450241263
+    },
+    {
+      "mesh": 326,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 836,
+      "vertices": 10032,
+      "maxExpectedError": 0.003936855705799325,
+      "maxNormalLengthError": 0.005938645597791781
+    },
+    {
+      "mesh": 326,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 363,
+      "vertices": 4356,
+      "maxExpectedError": 0.003935000072698092,
+      "maxNormalLengthError": 0.006188158993891468
+    },
+    {
+      "mesh": 326,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 121,
+      "vertices": 1452,
+      "maxExpectedError": 0.0039345344858581766,
+      "maxNormalLengthError": 0.005470976705075348
+    },
+    {
+      "mesh": 328,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 616,
+      "vertices": 7392,
+      "maxExpectedError": 0.003936882715034201,
+      "maxNormalLengthError": 0.006406534614911585
+    },
+    {
+      "mesh": 328,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 374,
+      "vertices": 4488,
+      "maxExpectedError": 0.003935808646047423,
+      "maxNormalLengthError": 0.0058450942192392885
+    },
+    {
+      "mesh": 328,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 792,
+      "vertices": 9504,
+      "maxExpectedError": 0.003936803253124899,
+      "maxNormalLengthError": 0.005938645597791781
+    },
+    {
+      "mesh": 328,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 352,
+      "vertices": 4224,
+      "maxExpectedError": 0.00393615674074263,
+      "maxNormalLengthError": 0.006180910572273657
+    },
+    {
+      "mesh": 328,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 143,
+      "vertices": 1716,
+      "maxExpectedError": 0.003936125070078511,
+      "maxNormalLengthError": 0.006057664502412408
+    },
+    {
+      "mesh": 329,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 682,
+      "vertices": 8184,
+      "maxExpectedError": 0.003936681673192832,
+      "maxNormalLengthError": 0.0063349469336990705
+    },
+    {
+      "mesh": 329,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 385,
+      "vertices": 4620,
+      "maxExpectedError": 0.003936928108765669,
+      "maxNormalLengthError": 0.0059960358053345875
+    },
+    {
+      "mesh": 329,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 660,
+      "vertices": 7920,
+      "maxExpectedError": 0.003936850950121529,
+      "maxNormalLengthError": 0.005751551643174979
+    },
+    {
+      "mesh": 329,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 396,
+      "vertices": 4752,
+      "maxExpectedError": 0.003936392990958826,
+      "maxNormalLengthError": 0.006188158993891579
+    },
+    {
+      "mesh": 329,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 154,
+      "vertices": 1848,
+      "maxExpectedError": 0.003936049639396311,
+      "maxNormalLengthError": 0.00615696639361063
+    },
+    {
+      "mesh": 331,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 671,
+      "vertices": 8052,
+      "maxExpectedError": 0.003936262548898173,
+      "maxNormalLengthError": 0.006188158993891468
+    },
+    {
+      "mesh": 331,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 374,
+      "vertices": 4488,
+      "maxExpectedError": 0.0039368246594442685,
+      "maxNormalLengthError": 0.005841947542478909
+    },
+    {
+      "mesh": 331,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 627,
+      "vertices": 7524,
+      "maxExpectedError": 0.003936728668508582,
+      "maxNormalLengthError": 0.005720372740166013
+    },
+    {
+      "mesh": 331,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 440,
+      "vertices": 5280,
+      "maxExpectedError": 0.00393617871306623,
+      "maxNormalLengthError": 0.0060633944662509265
+    },
+    {
+      "mesh": 331,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 165,
+      "vertices": 1980,
+      "maxExpectedError": 0.003935716896096619,
+      "maxNormalLengthError": 0.005472039366607007
+    },
+    {
+      "mesh": 334,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 759,
+      "vertices": 9108,
+      "maxExpectedError": 0.003936958794064749,
+      "maxNormalLengthError": 0.005813912382619635
+    },
+    {
+      "mesh": 334,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 330,
+      "vertices": 3960,
+      "maxExpectedError": 0.003936397393601798,
+      "maxNormalLengthError": 0.0058450942192392885
+    },
+    {
+      "mesh": 334,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 660,
+      "vertices": 7920,
+      "maxExpectedError": 0.003936298804353644,
+      "maxNormalLengthError": 0.006057664502412408
+    },
+    {
+      "mesh": 334,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 374,
+      "vertices": 4488,
+      "maxExpectedError": 0.003936644523015231,
+      "maxNormalLengthError": 0.005749483253183696
+    },
+    {
+      "mesh": 334,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 154,
+      "vertices": 1848,
+      "maxExpectedError": 0.00393622754346501,
+      "maxNormalLengthError": 0.005907460826733324
+    },
+    {
+      "mesh": 337,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 726,
+      "vertices": 8712,
+      "maxExpectedError": 0.003936691008905452,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 337,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 418,
+      "vertices": 5016,
+      "maxExpectedError": 0.003936769585267896,
+      "maxNormalLengthError": 0.005811127057185894
+    },
+    {
+      "mesh": 337,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 704,
+      "vertices": 8448,
+      "maxExpectedError": 0.003936940014241386,
+      "maxNormalLengthError": 0.005564492888575745
+    },
+    {
+      "mesh": 337,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 341,
+      "vertices": 4092,
+      "maxExpectedError": 0.003936487462124161,
+      "maxNormalLengthError": 0.005564492888575745
+    },
+    {
+      "mesh": 337,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 88,
+      "vertices": 1056,
+      "maxExpectedError": 0.003936256125302129,
+      "maxNormalLengthError": 0.006001018074992204
+    },
+    {
+      "mesh": 338,
+      "primitive": 0,
+      "material": "Foliage.0",
+      "components": 781,
+      "vertices": 9368,
+      "maxExpectedError": 0.003936939972080555,
+      "maxNormalLengthError": 0.005751551643174868
+    },
+    {
+      "mesh": 338,
+      "primitive": 1,
+      "material": "Foliage.1",
+      "components": 363,
+      "vertices": 4356,
+      "maxExpectedError": 0.003936575398895359,
+      "maxNormalLengthError": 0.0056891948148432014
+    },
+    {
+      "mesh": 338,
+      "primitive": 2,
+      "material": "Foliage.2",
+      "components": 704,
+      "vertices": 8448,
+      "maxExpectedError": 0.00393694241711684,
+      "maxNormalLengthError": 0.006427357434231951
+    },
+    {
+      "mesh": 338,
+      "primitive": 3,
+      "material": "Foliage.3",
+      "components": 275,
+      "vertices": 3300,
+      "maxExpectedError": 0.003936096893465052,
+      "maxNormalLengthError": 0.005811127057185894
+    },
+    {
+      "mesh": 338,
+      "primitive": 4,
+      "material": "Foliage.4",
+      "components": 154,
+      "vertices": 1848,
+      "maxExpectedError": 0.003936027149964549,
+      "maxNormalLengthError": 0.006188158993891579
+    }
+  ],
+  "status": "passed"
+}

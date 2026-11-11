@@ -125,7 +125,7 @@ export default function CaptureScene() {
 
     const controller = new AbortController();
     async function load() {
-      const buffer = await readCaptureAsset(media+'yungu-lawn.glb?v=7',controller.signal,
+      const buffer = await readCaptureAsset(media+'yungu-lawn.glb?v=7.1',controller.signal,
         fraction=>{if(active)setProgress(Math.min(99,Math.round(100*fraction)));});
       if (!active) return;
       const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(buffer, media);
@@ -373,14 +373,15 @@ export default function CaptureScene() {
       <div className="capture-info">
         <h2>草坪与步道</h2>
         <p>沿步道看前树的弯曲分叉、中树的密冠、左树的侧枝和右侧复干树。进入三维后可切换实拍机位、侧看分枝，也可以贴近地面检查草叶。</p>
+        <p><a className="capture-contact-link" href={media+'refine-20261111/index.html'}>R7.1：叶面、草叶和风载修复，以及本轮调用记录 →</a></p>
         <p><a className="capture-contact-link" href={media+'scene-r7/index.html'}>拖动对照实拍与模型，查看五个账号的工作记录 →</a></p>
         <dl><dt>采集素材</dt><dd>13 张照片 · 4 段视频</dd><dt>相机配准</dt><dd>29 个视角 · 7,674 个稀疏点</dd><dt>重建范围</dt><dd>乔木、草坪、步道与灯具</dd><dt>可见性</dt><dd>前树冠顶和左树侧缘超出取景，遮挡部分的分枝和叶片按可见范围推断。</dd><dt>尺度与动力</dt><dd>模型尺寸使用工程估计。树种、地下根形与枝条刚度尚待现场核对。</dd></dl>
-        <a className="capture-download" href={media+'yungu-lawn.glb?v=7'} download><Download size={16}/> 下载校园场景 <span>GLB</span></a>
+        <a className="capture-download" href={media+'yungu-lawn.glb?v=7.1'} download><Download size={16}/> 下载校园场景 <span>GLB</span></a>
         <a className="capture-contact-link" href={media+'contact-world.xml'} download>下载碰撞模型（MuJoCo）</a>
         <a className="capture-contact-link" href={media+'yungu-meadow.glb?v=7'} download>单独下载草叶实例（GLB）</a>
         <a className="capture-contact-link" href={media+'yungu-meadow-full.glb?v=7'} download>下载全密度草坪（离线渲染）</a>
-        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v7/yungu-campus-scene-source-v7.zip">下载 Blender 工程及生成脚本</a>
-        <a className="capture-contact-link" href={media+'scene-r7/dispatch/index.html'}>查看本版五个账号的完整派工与回执</a>
+        <a className="capture-contact-link" href="https://github.com/raconiy/westlake-flora-lab/releases/download/yungu-capture17-v7/yungu-campus-scene-source-v7.zip">下载 R7 基线 Blender 工程及生成脚本</a>
+        <a className="capture-contact-link" href={media+'scene-r7/dispatch/index.html'}>查看 R7 基线五个账号的派工与回执</a>
       </div>
     </div>
     {ready && <div className="capture-tools">

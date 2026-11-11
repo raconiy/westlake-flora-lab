@@ -1,0 +1,601 @@
+## Observed defects
+
+- **`captureGustMultiplier()` already varies spatially.** The supplied source does **not** give every branch an identical phase. However, it accepts non-finite coordinates/time, and its phase arguments grow without bound.
+- **`createCaptureWind().step()`** accumulates simulation time indefinitely. Fixed integration ticks are already present and should be retained.
+- **`advance()`** approaches rest asymptotically without explicitly resetting sufficiently small zero-load residuals.
+- **`createCaptureWind()` traversal** can animate the supplied root if it carries `wind_joint: true`.
+- **`beam()`** validates input dimensions but not all derived stiffness/inertia values. Finite inputs can still overflow intermediate calculations.
+- **`capture-grass.ts`** has a separate field and clock. This patch deliberately leaves it unchanged; it does not claim branch/grass field synchronization.
+
+## Replacement `lib/capture-wind.ts`
+
+This is a complete replacement. It retains the existing material priors, beam integration, load arms, inertia calculation, joint composition order, and aerodynamic reconfiguration law.
+
+```ts
+import * as THREE from 'three';
+
+// Retained project priors, NOT measured species/material properties.
+const woodE = 8e9;
+const woodDensity = 550;
+const airDensity = 1.225;
+const leafMassPerArea = .12;
+
+const windWorld = new THREE.Vector3(1, 0, .23).normalize();
+const downWorld = new THREE.Vector3(0, -1, 0);
+const maxAngle = .25;
+const physicsStep = 1 / 120;
+
+const TAU = 2 * Math.PI;
+// Both temporal harmonics repeat over this period:
+// .9 * PERIOD = 9 * TAU; 2.3 * PERIOD = 23 * TAU.
+const FIELD_PERIOD = 20 * Math.PI;
+
+export interface WindPoint {
+  readonly x: number;
+  readonly y: number;
+  readonly z: number;
+}
+
+function boundedSpeed(speed: number): number {
+  return Number.isFinite(speed) ? Math.max(-12, Math.min(12, speed)) : 0;
+}
+
+// Reduce before multiplication, including for very large finite inputs.
+function phaseTerm(value: number, rate: number): number {
+  return (value % (TAU / Math.abs(rate))) * rate;
+}
+
+/**
+ * Deterministic, spatially correlated engineering field.
+ * Invalid point/time => zero multiplier.
+ * Valid inputs => multiplier in [.72, 1], so wind sign cannot reverse.
+ *
+ * Coordinates are resting WORLD coordinates, in the project's meter units.
+ * Wavelengths and periods are retained priors, not measured turbulence.
+ */
+export function captureGustMultiplier(
+  point: WindPoint,
+  seconds: number
+): number {
+  if (!point || ![point.x, point.y, point.z, seconds].every(Number.isFinite)) {
+    return 0;
+  }
+
+  const a = phaseTerm(seconds, .9)
+    - phaseTerm(point.x, .17)
+    - phaseTerm(point.z, .08);
+
+  const b = phaseTerm(seconds, 2.3)
+    - phaseTerm(point.x, .70)
+    - phaseTerm(point.z, .31)
+    + phaseTerm(point.y, .19);
+
+  return Math.max(.72, Math.min(1, .86 + .10 * Math.sin(a) + .04 * Math.sin(b)));
+}
+
+/**
+ * Signed scalar speed along windWorld.
+ * Same world point/time/speed => same result; no mutable sampler state.
+ */
+export function sampleCaptureWind(
+  point: WindPoint,
+  seconds: number,
+  speed: number
+): number {
+  const v = boundedSpeed(speed);
+  return v === 0 ? 0 : v * captureGustMultiplier(point, seconds);
+}
+
+/**
+ * Signed aerodynamic loading factor.
+ * First form v|v|, then apply the existing high-speed reconfiguration factor.
+ * The existing airMoment supplies density, area, coefficient and lever arm.
+ */
+export function captureWindLoad(speed: number): number {
+  const v = boundedSpeed(speed);
+  const quadratic = v * Math.abs(v);
+  return quadratic / (1 + Math.abs(v) / 12);
+}
+
+interface AxisResponse {
+  angle: number;
+  velocity: number;
+}
+
+const response = (): AxisResponse => ({ angle: 0, velocity: 0 });
+
+function advance(
+  state: AxisResponse,
+  target: number,
+  omega: number,
+  dt: number
+): void {
+  // Exact constant-target underdamped response, using existing damping prior.
+  const zeta = .28;
+  const q = Math.sqrt(1 - zeta * zeta);
+  const decay = Math.exp(-zeta * omega * dt);
+
+  if (decay === 0) {
+    state.angle = target;
+    state.velocity = 0;
+  } else {
+    const offset = state.angle - target;
+    const velocity = state.velocity;
+    const phase = omega * q * dt;
+    const c = Math.cos(phase);
+    const s = Math.sin(phase);
+
+    // Avoid explicitly forming omega².
+    state.angle = target + decay * (
+      offset * c + (velocity / omega + zeta * offset) * s / q
+    );
+    state.velocity = decay * (
+      velocity * c - (zeta * velocity + omega * offset) * s / q
+    );
+  }
+
+  // Fail closed if pathological metadata exceeds representable arithmetic.
+  if (!Number.isFinite(state.angle) || !Number.isFinite(state.velocity)) {
+    state.angle = 0;
+    state.velocity = 0;
+  }
+
+  // Numerical rest threshold, not a physical calibration.
+  // Release remains elastic; zero input does not teleport a loaded joint.
+  if (
+    target === 0 &&
+    Math.abs(state.angle) < 1e-10 &&
+    Math.abs(state.velocity) < 1e-9
+  ) {
+    state.angle = 0;
+    state.velocity = 0;
+  }
+}
+
+function metadataNumber(value: unknown): number {
+  if (typeof value === 'number') return value;
+  if (typeof value === 'string' && value.trim() !== '') return Number(value);
+  return NaN;
+}
+
+function beam(node: THREE.Object3D) {
+  const m = node.userData ?? {};
+  const length = metadataNumber(m.beam_length_m);
+  const base = metadataNumber(m.beam_base_radius_m);
+  const tip = metadataNumber(m.beam_tip_radius_m);
+  const leaves = metadataNumber(m.leaf_area_m2);
+  const offset = m.tip_offset_blender_m;
+
+  if (
+    ![length, base, tip].every(v => Number.isFinite(v) && v > 0) ||
+    !Number.isFinite(leaves) || leaves < 0 ||
+    !Array.isArray(offset) || offset.length !== 3 ||
+    !offset.every(v => typeof v === 'number' && Number.isFinite(v))
+  ) return null;
+
+  const tipVector = new THREE.Vector3(offset[0], offset[2], -offset[1]);
+  const tipLengthSq = tipVector.lengthSq();
+  if (!Number.isFinite(tipLengthSq) || tipLengthSq < 1e-8) return null;
+
+  const rest = node.quaternion.clone();
+  const worldRotation = node.getWorldQuaternion(new THREE.Quaternion());
+  if (
+    !rest.toArray().every(Number.isFinite) ||
+    !worldRotation.toArray().every(Number.isFinite) ||
+    Math.abs(rest.lengthSq() - 1) > 1e-6 ||
+    Math.abs(worldRotation.lengthSq() - 1) > 1e-6
+  ) return null;
+
+  const axis = tipVector.clone().normalize();
+  const inverseRest = worldRotation.invert();
+  const air = windWorld.clone().applyQuaternion(inverseRest);
+  const gravity = downWorld.clone().applyQuaternion(inverseRest);
+  const airAxis = axis.clone().cross(air);
+  const gravityAxis = axis.clone().cross(gravity);
+  const leafArm = length * .72;
+
+  let compliance = 0;
+  let inertia = leaves * leafMassPerArea * leafArm ** 2;
+  const slices = 24;
+
+  for (let j = 0; j < slices; j++) {
+    const x = length * (j + .5) / slices;
+    const r = base + (tip - base) * x / length;
+    const area = Math.PI * r * r;
+    const I = area * r * r / 4;
+    const dx = length / slices;
+
+    inertia += woodDensity * area * x * x * dx;
+    if (x < leafArm) {
+      compliance += (length - x) * (leafArm - x) * dx / (woodE * I);
+    }
+  }
+
+  const spring = length * leafArm / compliance;
+  const omega = Math.sqrt(spring / inertia);
+  const broadsideWood = length * (base + tip) * airAxis.length();
+  const airMoment = .5 * airDensity * .8 *
+    (leaves * leafArm + broadsideWood * .5 * length);
+  const foliagePoint = node.localToWorld(tipVector.clone().multiplyScalar(.72));
+
+  if (
+    ![compliance, spring, inertia, omega, inertia + 2 * length * length]
+      .every(v => Number.isFinite(v) && v > 0) ||
+    !Number.isFinite(airMoment) || airMoment < 0 ||
+    !foliagePoint.toArray().every(Number.isFinite) ||
+    !airAxis.toArray().every(Number.isFinite) ||
+    !gravityAxis.toArray().every(Number.isFinite)
+  ) return null;
+
+  return {
+    node, rest, restTip: tipVector,
+    spring, inertia, omega, length, foliagePoint,
+    airAxis, gravityAxis, airMoment,
+    wind: response(), load: response(),
+    windTarget: 0, weightTarget: 0, limited: false
+  };
+}
+
+type Beam = NonNullable<ReturnType<typeof beam>>;
+
+function setTargets(
+  b: Beam,
+  speed: number,
+  testMass: number,
+  seconds: number,
+  gusts: boolean
+): void {
+  const localWind = gusts
+    ? sampleCaptureWind(b.foliagePoint, seconds, speed)
+    : speed;
+
+  let w = b.airMoment * captureWindLoad(localWind) / b.spring;
+  let g = testMass * 9.81 * b.length / b.spring;
+
+  if (!Number.isFinite(w) || !Number.isFinite(g)) {
+    w = 0;
+    g = 0;
+  }
+
+  const magnitude = Math.hypot(
+    b.airAxis.x * w + b.gravityAxis.x * g,
+    b.airAxis.y * w + b.gravityAxis.y * g,
+    b.airAxis.z * w + b.gravityAxis.z * g
+  );
+  const scale = magnitude > maxAngle ? maxAngle / magnitude : 1;
+
+  b.windTarget = w * scale;
+  b.weightTarget = g * scale;
+  b.limited = scale < 1;
+}
+
+export function createCaptureWind(
+  root: THREE.Object3D,
+  options: { gusts?: boolean } = {}
+) {
+  // Includes ancestors when the supplied capture is itself parented.
+  root.updateWorldMatrix(true, true);
+
+  const branches: Beam[] = [];
+  root.traverse(o => {
+    // The supplied root is never an animated joint.
+    if (o !== root && o.userData?.wind_joint === true) {
+      const b = beam(o);
+      if (b) branches.push(b);
+    }
+  });
+
+  const compliance = (b: Beam) =>
+    b.gravityAxis.length() * b.length * b.restTip.length() / b.spring;
+
+  const sample = branches.filter(b => /foreground/i.test(b.node.name))
+    .sort((a, b) => compliance(b) - compliance(a))[0] ?? branches[0];
+
+  const rotation = new THREE.Quaternion();
+  const tangent = new THREE.Vector3();
+  const moved = new THREE.Vector3();
+  const gusts = options.gusts !== false;
+
+  const stats = {
+    branchCount: branches.length,
+    maxTipCm: 0,
+    testTipCm: 0,
+    moving: false,
+    limited: 0
+  };
+
+  let accumulated = 0;
+  let time = 0; // Always bounded to [0, FIELD_PERIOD).
+
+  function step(dt: number, speed: number, mass: number) {
+    const elapsed = Number.isFinite(dt) ? Math.max(0, Math.min(.2, dt)) : 0;
+    const v = boundedSpeed(speed);
+    const load = Number.isFinite(mass) ? Math.max(0, Math.min(2, mass)) : 0;
+
+    let ticks = 0;
+    if (elapsed > 0) {
+      accumulated += elapsed;
+      ticks = Math.floor((accumulated + 1e-12) / physicsStep);
+      accumulated = Math.max(0, accumulated - ticks * physicsStep);
+    }
+
+    // At most 24 fixed integration ticks per call.
+    for (let tick = 0; tick < ticks; tick++) {
+      time = (time + physicsStep) % FIELD_PERIOD;
+
+      for (const b of branches) {
+        const testMass = b === sample ? load : 0;
+        const omega = testMass
+          ? Math.sqrt(b.spring / (b.inertia + testMass * b.length * b.length))
+          : b.omega;
+
+        setTargets(b, v, testMass, time, gusts);
+        advance(b.wind, b.windTarget, omega, physicsStep);
+        advance(b.load, b.weightTarget, omega, physicsStep);
+      }
+    }
+
+    stats.maxTipCm = 0;
+    stats.testTipCm = 0;
+    stats.limited = 0;
+    stats.moving = branches.length > 0 && v !== 0 && gusts;
+
+    for (const b of branches) {
+      setTargets(b, v, b === sample ? load : 0, time, gusts);
+      if (b.limited) stats.limited++;
+
+      tangent.copy(b.airAxis).multiplyScalar(b.wind.angle)
+        .addScaledVector(b.gravityAxis, b.load.angle);
+
+      const angle = Math.hypot(tangent.x, tangent.y, tangent.z);
+      if (Number.isFinite(angle) && angle > 1e-15) {
+        rotation.setFromAxisAngle(
+          tangent.multiplyScalar(1 / angle),
+          Math.min(angle, maxAngle)
+        );
+      } else {
+        rotation.identity();
+      }
+
+      // One joint transform drives wood and all attached descendants.
+      // No positions, scales, parents, geometry or userData/IDs are changed.
+      b.node.quaternion.copy(b.rest).multiply(rotation);
+
+      const cm = 100 * moved.copy(b.restTip)
+        .applyQuaternion(rotation).distanceTo(b.restTip);
+      stats.maxTipCm = Math.max(stats.maxTipCm, cm);
+      if (b === sample) stats.testTipCm = cm;
+
+      if (
+        Math.abs(b.wind.velocity) + Math.abs(b.load.velocity) > 1e-6 ||
+        Math.abs(b.wind.angle - b.windTarget) +
+          Math.abs(b.load.angle - b.weightTarget) > 1e-7
+      ) stats.moving = true;
+    }
+
+    return stats;
+  }
+
+  return { step, stats, sample };
+}
+```
+
+## Tests: inputs and expected outputs
+
+Replace `lib/capture-wind.test.mjs` with the following. These are supplied tests, **not claimed execution results**.
+
+```js
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as THREE from 'three';
+import {
+  captureGustMultiplier,
+  sampleCaptureWind,
+  captureWindLoad,
+  createCaptureWind
+} from './capture-wind.ts';
+
+const metadata = () => ({
+  wind_joint: true,
+  beam_length_m: 2.2,
+  beam_base_radius_m: .029,
+  beam_tip_radius_m: .009,
+  leaf_area_m2: .62,
+  tip_offset_blender_m: [0, 1.4, 1.2],
+  organ_id: 'persistent-limb-01'
+});
+
+function scene(options, separated = false) {
+  const model = new THREE.Group();
+  const tree = new THREE.Group();
+  const lamp = new THREE.Object3D();
+  const limb = new THREE.Object3D();
+  const foliage = new THREE.Object3D();
+
+  model.add(tree, lamp);
+  tree.add(limb);
+  limb.add(foliage);
+  lamp.position.x = 4;
+  limb.name = 'tree.foreground.limb01';
+  limb.position.set(.1, 3.5, -.1);
+  Object.assign(limb.userData, metadata());
+  foliage.position.set(0, 1.2, -1.4);
+  foliage.userData.organ_id = 'persistent-foliage-01';
+
+  let other;
+  if (separated) {
+    other = limb.clone(true);
+    other.position.x += 8;
+    other.userData.organ_id = 'persistent-limb-02';
+    tree.add(other);
+  }
+
+  return {
+    model, tree, lamp, limb, foliage, other,
+    wind: createCaptureWind(model, options)
+  };
+}
+
+function run(wind, ticks, speed, mass = 0) {
+  for (let i = 0; i < ticks; i++) wind.step(1 / 120, speed, mass);
+}
+
+function pose(object) {
+  return {
+    position: object.position.toArray(),
+    quaternion: object.quaternion.toArray(),
+    scale: object.scale.toArray()
+  };
+}
+
+test('origin/time zero: multiplier .86; signed speed retained; zero is exact', () => {
+  const p = { x: 0, y: 0, z: 0 };
+  assert.equal(captureGustMultiplier(p, 0), .86);
+  assert.equal(sampleCaptureWind(p, 0, 10), 8.6);
+  assert.equal(sampleCaptureWind(p, 0, -10), -8.6);
+  assert.equal(sampleCaptureWind(p, 0, 0), 0);
+  assert.equal(sampleCaptureWind(p, 0, 10), sampleCaptureWind(p, 0, 10));
+});
+
+test('invalid inputs fail closed; huge finite arguments remain bounded', () => {
+  const p = { x: 0, y: 0, z: 0 };
+  assert.equal(sampleCaptureWind(p, NaN, 6), 0);
+  assert.equal(sampleCaptureWind(p, 1, Infinity), 0);
+  assert.equal(sampleCaptureWind({ ...p, x: Infinity }, 1, 6), 0);
+  assert.equal(captureWindLoad(NaN), 0);
+
+  const huge = sampleCaptureWind({
+    x: Number.MAX_VALUE,
+    y: -Number.MAX_VALUE,
+    z: Number.MAX_VALUE
+  }, Number.MAX_VALUE, -6);
+  assert.ok(Number.isFinite(huge));
+  assert.ok(huge >= -6 && huge <= -4.32);
+
+  const s = scene();
+  s.wind.step(NaN, Infinity, NaN);
+  assert.equal(s.wind.stats.maxTipCm, 0);
+  assert.deepEqual(s.limb.quaternion.toArray(), [0, 0, 0, 1]);
+});
+
+test('quadratic loading precedes the retained reconfiguration factor', () => {
+  for (const v of [-12, -6, -2, 0, 2, 6, 12]) {
+    const recovered = captureWindLoad(v) * (1 + Math.abs(v) / 12);
+    assert.ok(Math.abs(recovered - v * Math.abs(v)) < 1e-12);
+  }
+  assert.equal(captureWindLoad(12), 72);
+  assert.equal(captureWindLoad(-12), -72);
+});
+
+test('nearby points correlate; separated points and different times vary', () => {
+  const a = new THREE.Vector3(0, 4, 0);
+  const near = a.clone().addScalar(.0001);
+  const far = new THREE.Vector3(8, 4, -5);
+  let separation = 0;
+
+  for (let i = 0; i < 600; i++) {
+    const t = i / 30;
+    const ga = captureGustMultiplier(a, t);
+    assert.ok(ga >= .72 && ga <= 1);
+    assert.ok(Math.abs(ga - captureGustMultiplier(near, t)) < .00002);
+    separation += Math.abs(ga - captureGustMultiplier(far, t));
+  }
+  assert.ok(separation > 10);
+  assert.notEqual(captureGustMultiplier(a, 0), captureGustMultiplier(a, 1));
+
+  const t = 3.25;
+  assert.ok(Math.abs(
+    captureGustMultiplier(a, t) -
+    captureGustMultiplier(a, t + 20 * Math.PI)
+  ) < 1e-12);
+});
+
+test('separated identical joints receive different gust histories', () => {
+  const s = scene(undefined, true);
+  const sockets = [s.limb.position.clone(), s.other.position.clone()];
+  let difference = 0;
+
+  for (let i = 0; i < 1200; i++) {
+    s.wind.step(1 / 120, 5, 0);
+    difference = Math.max(
+      difference, s.limb.quaternion.angleTo(s.other.quaternion)
+    );
+  }
+
+  assert.ok(difference > .0001);
+  assert.deepEqual(s.limb.position, sockets[0]);
+  assert.deepEqual(s.other.position, sockets[1]);
+});
+
+test('zero-duration read preserves deflection; release reaches exact rest', () => {
+  const s = scene();
+  const rest = s.limb.quaternion.toArray();
+  run(s.wind, 120, 0);
+  assert.equal(s.wind.stats.maxTipCm, 0);
+
+  run(s.wind, 480, 6);
+  const loaded = s.wind.stats.maxTipCm;
+  assert.ok(loaded > .1);
+
+  s.wind.step(0, 0, 0);
+  assert.equal(s.wind.stats.maxTipCm, loaded);
+  run(s.wind, 1, 0);
+  assert.ok(s.wind.stats.maxTipCm > 0);
+
+  run(s.wind, 6000, 0);
+  assert.equal(s.wind.stats.maxTipCm, 0);
+  assert.deepEqual(s.limb.quaternion.toArray(), rest);
+  assert.equal(s.wind.stats.moving, false);
+});
+
+test('30/60/120/240 Hz splitting gives the same gust-driven joint state', () => {
+  const scenes = [scene(), scene(), scene(), scene()];
+  [30, 60, 120, 240].forEach((fps, i) => {
+    for (let frame = 0; frame < fps * 5; frame++) {
+      scenes[i].wind.step(1 / fps, 6, 0);
+    }
+  });
+
+  const expected = scenes[0];
+  for (const s of scenes.slice(1)) {
+    assert.ok(Math.abs(
+      s.wind.stats.maxTipCm - expected.wind.stats.maxTipCm
+    ) < 1e-9);
+    assert.deepEqual(
+      s.limb.quaternion.toArray(), expected.limb.quaternion.toArray()
+    );
+  }
+});
+
+test('root, sockets, local foliage transforms and persistent IDs stay fixed', () => {
+  const s = scene();
+  const before = [s.model, s.tree, s.lamp].map(pose);
+  const socket = s.limb.position.toArray();
+  const scale = s.limb.scale.toArray();
+  const foliageLocal = pose(s.foliage);
+  const limbData = JSON.stringify(s.limb.userData);
+  const foliageData = JSON.stringify(s.foliage.userData);
+
+  s.model.updateWorldMatrix(true, true);
+  const foliageWorld = s.foliage.getWorldPosition(new THREE.Vector3());
+  run(s.wind, 480, 6);
+  s.model.updateWorldMatrix(true, true);
+
+  assert.deepEqual([s.model, s.tree, s.lamp].map(pose), before);
+  assert.deepEqual(s.limb.position.toArray(), socket);
+  assert.deepEqual(s.limb.scale.toArray(), scale);
+  assert.deepEqual(pose(s.foliage), foliageLocal);
+  assert.equal(JSON.stringify(s.limb.userData), limbData);
+  assert.equal(JSON.stringify(s.foliage.userData), foliageData);
+  assert.ok(
+    s.foliage.getWorldPosition(new THREE.Vector3()).distanceTo(foliageWorld) > 0
+  );
+});
+
+test('supplied root is excluded even if marked as a valid wind joint', () => {
+  const root = new THREE.Group();
+  Object.assign(root.userData, metadata());
+  const before = pose(root);
+  const wind = createCaptureWind(root);
+  run(wind, 240, 6);
+  assert.equal

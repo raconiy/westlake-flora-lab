@@ -1,0 +1,56 @@
+[
+  {
+    "taskId": "scene-r8-20261111-contact",
+    "role": "Physical contact and rendering",
+    "promptSha256": "aab5231b34c065f574e561c0247c75a61595c0e8b83a6981db7f4275e52f38c3",
+    "promptUrl": "prompts/scene-r8-20261111-contact.txt",
+    "referenceImages": [
+      "../../scene-r7/views/01-photo.webp",
+      "../../scene-r7/views/01-r7.webp"
+    ]
+  },
+  {
+    "taskId": "scene-r8-20261111-crown",
+    "role": "Plant morphology and crown structure",
+    "promptSha256": "4533642ef5bb095d21d1dda9d0311c419ef5b5cb4f5124e7fe4843fa1a518840",
+    "promptUrl": "prompts/scene-r8-20261111-crown.txt",
+    "referenceImages": [
+      "../../scene-r7/views/01-photo.webp",
+      "../../scene-r7/views/01-r7.webp"
+    ]
+  },
+  {
+    "taskId": "scene-r8-20261111-turf",
+    "role": "Grass geometry and distribution",
+    "promptSha256": "7a3ae05001d46471492d72792754e4cfee198355007035b189311aadbb0e9c49",
+    "promptUrl": "prompts/scene-r8-20261111-turf.txt",
+    "referenceImages": []
+  },
+  {
+    "taskId": "scene-r8-20261111-validation-retry1",
+    "role": "Cross-module regression implementation",
+    "promptSha256": "1b624f55ec623f7840a47619762bd66e7398eb9626078f5ffd25e9242fcdf795",
+    "promptUrl": "prompts/scene-r8-20261111-validation-retry1.txt",
+    "referenceImages": [
+      "../../scene-r7/views/01-photo.webp",
+      "../../scene-r7/views/01-r7.webp"
+    ]
+  },
+  {
+    "taskId": "scene-r8-20261111-validation",
+    "role": "Cross-module regression implementation",
+    "promptSha256": "1b624f55ec623f7840a47619762bd66e7398eb9626078f5ffd25e9242fcdf795",
+    "promptUrl": "prompts/scene-r8-20261111-validation.txt",
+    "referenceImages": [
+      "../../scene-r7/views/01-photo.webp",
+      "../../scene-r7/views/01-r7.webp"
+    ]
+  },
+  {
+    "taskId": "scene-r8-20261111-wind",
+    "role": "Branch and grass physics",
+    "promptSha256": "d06f7591bb9e2b627a80e3af39f1531872f440570b644167c57c5ce97eb194d4",
+    "promptUrl": "prompts/scene-r8-20261111-wind.txt",
+    "referenceImages": []
+  }
+]
