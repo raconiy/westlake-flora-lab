@@ -5,6 +5,7 @@ import * as THREE from 'three';
  * attachment or collision geometry moves, so the mechanics read the same mesh.
  */
 
+const leafGain = new THREE.Color(2.6, 2.2, 1.2);
 const dirBlock = '#if ( NUM_DIR_LIGHTS > 0 ) && defined( RE_Direct )';
 const dirCall = 'RE_Direct( directLight, geometryPosition, geometryNormal, geometryViewDir, geometryClearcoatNormal, material, reflectedLight );';
 
@@ -44,7 +45,9 @@ const noise = /* glsl */`
  * they are not measured on the campus trees.
  */
 export function shadeAsLeaf(material: THREE.MeshStandardMaterial,
-  transmission = new THREE.Color(.92, 1.18, .28)) {
+  options: {transmission?: THREE.Color; gain?: THREE.Color; outline?: boolean} = {}) {
+  const transmission = options.transmission ?? new THREE.Color(.92, 1.18, .28);
+  const gain = options.gain ?? leafGain, outline = options.outline === true;
   if (material.userData.captureLeaf) return;
   material.userData.captureLeaf = true;
   material.side = THREE.DoubleSide;
@@ -58,18 +61,36 @@ export function shadeAsLeaf(material: THREE.MeshStandardMaterial,
   `);
   material.onBeforeCompile = shader => {
     shader.uniforms.captureLeafTransmission = {value: transmission};
-    shader.vertexShader = 'varying vec3 vCaptureLeafWorld;\n' + shader.vertexShader.replace('#include <project_vertex>', /* glsl */`
+    shader.uniforms.captureLeafGain = {value: gain};
+    shader.vertexShader = 'varying vec3 vCaptureLeafWorld;\nvarying vec2 vCaptureLeafUv;\n' + shader.vertexShader.replace('#include <project_vertex>', /* glsl */`
       #include <project_vertex>
-      vCaptureLeafWorld = ( modelMatrix * vec4( transformed, 1.0 ) ).xyz;
+      #ifdef USE_INSTANCING
+        vCaptureLeafWorld = ( modelMatrix * instanceMatrix * vec4( transformed, 1.0 ) ).xyz;
+      #else
+        vCaptureLeafWorld = ( modelMatrix * vec4( transformed, 1.0 ) ).xyz;
+      #endif
+      vCaptureLeafUv = uv;
     `);
-    shader.fragmentShader = 'uniform vec3 captureLeafTransmission;\nvarying vec3 vCaptureLeafWorld;\n' + noise + shader.fragmentShader
+    shader.fragmentShader = 'uniform vec3 captureLeafTransmission, captureLeafGain;\nvarying vec3 vCaptureLeafWorld;\nvarying vec2 vCaptureLeafUv;\n' + noise + shader.fragmentShader
       .replace('#include <color_fragment>', /* glsl */`
         #include <color_fragment>
+        ${outline ? /* glsl */`{
+          // Ovate outline with an acute tip, cut from the lamina quad; the
+          // midrib is paler than the blade.
+          float along = vCaptureLeafUv.y, across = abs( vCaptureLeafUv.x - .5 );
+          float half_ = .5 * pow( sin( 3.14159265 * pow( along, .72 ) ), .8 );
+          if ( across > half_ ) discard;
+          diffuseColor.rgb *= mix( 1.22, 1., smoothstep( .0, .035, across ) ) * mix( .92, 1.06, along );
+        }` : ''}
         {
           // Shoot-to-shoot pigment variation at the scale of a leaf cluster.
           float cluster = captureNoise( vCaptureLeafWorld * 5.5 );
           float crown = captureNoise( vCaptureLeafWorld * .7 + 11. );
           diffuseColor.rgb *= mix( vec3( .78, .82, .70 ), vec3( 1.22, 1.16, 1.10 ), cluster ) * mix( .9, 1.1, crown );
+          // The exported blade colours were picked from display pixels and are
+          // about a third of the reflectance the photographed crown needs under
+          // this sun. Gain per channel from the sunlit crown of photograph 01.
+          diffuseColor.rgb = min( diffuseColor.rgb * captureLeafGain, vec3( .66, .62, .30 ) );
         }
       `)
       .replace('#include <lights_fragment_begin>', lights)
@@ -81,7 +102,7 @@ export function shadeAsLeaf(material: THREE.MeshStandardMaterial,
         reflectedLight.indirectDiffuse += irradiance * captureLeafTransmission * material.diffuseColor * RECIPROCAL_PI * .55;
       `);
   };
-  material.customProgramCacheKey = () => 'capture-leaf-v1';
+  material.customProgramCacheKey = () => 'capture-leaf-v3-' + outline;
   material.needsUpdate = true;
 }
 
@@ -125,11 +146,11 @@ export function shadeAsBark(material: THREE.MeshStandardMaterial, options: {phot
             // taken, and its unseen rear is black. Keep its local contrast but
             // pull the level toward one bark albedo so the scene lights it.
             float level = dot( diffuseColor.rgb, vec3( .2126, .7152, .0722 ) );
-            diffuseColor.rgb = mix( diffuseColor.rgb, vec3( .27, .235, .19 ) * clamp( level / .2, .62, 1.4 ), .8 );
+            diffuseColor.rgb = mix( diffuseColor.rgb, vec3( .40, .34, .26 ) * clamp( level / .2, .7, 1.3 ), .8 );
           }
           vec3 plain = diffuseColor.rgb * mix( .72, 1.42, patches );
           plain = mix( plain, vec3( .33, .35, .30 ) * mix( .7, 1.1, patches ), lichen * .35 * captureBarkTint );
-          diffuseColor.rgb = mix( diffuseColor.rgb, plain, .25 + .75 * captureBarkTint ) * mix( .42, 1.12, captureBark );
+          diffuseColor.rgb = mix( diffuseColor.rgb, plain, .25 + .75 * captureBarkTint ) * mix( .6, 1.15, captureBark );
         }
       `)
       .replace('#include <roughnessmap_fragment>', /* glsl */`
@@ -156,7 +177,7 @@ export function shadeAsBark(material: THREE.MeshStandardMaterial, options: {phot
         }
       `);
   };
-  material.customProgramCacheKey = () => 'capture-bark-v1-' + tint;
+  material.customProgramCacheKey = () => 'capture-bark-v2-' + tint;
   material.needsUpdate = true;
 }
 

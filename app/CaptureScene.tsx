@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import {createCaptureAtmosphere} from '../lib/capture-atmosphere';
 import {applyCaptureMaterials} from '../lib/capture-materials';
 import {loadCaptureBackdrop} from '../lib/capture-backdrop';
+import {createCaptureFoliage} from '../lib/capture-foliage';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -72,6 +73,7 @@ export default function CaptureScene() {
     let generation=0;
     let weight: THREE.Group | undefined;
     let meadow: ReturnType<typeof createCaptureMeadow> | undefined;
+    let foliage: ReturnType<typeof createCaptureFoliage> | undefined;
     let backdrop: Awaited<ReturnType<typeof loadCaptureBackdrop>> | undefined;
     let renderer: THREE.WebGLRenderer;
     const fail = (text: string) => {
@@ -135,10 +137,20 @@ export default function CaptureScene() {
       });
       applyCaptureMaterials(model, renderer.capabilities.getMaxAnisotropy());
       scene.add(model);
+      foliage = createCaptureFoliage(model);
       // The distant scene is appearance only; the lawn stays usable without it.
       loadCaptureBackdrop(media+'backdrop/', controller.signal, renderer.capabilities.getMaxAnisotropy()).then(loaded => {
         if (!active) { loaded.dispose(); return; }
-        backdrop = loaded; scene.add(loaded.mesh); dirty = true;
+        backdrop = loaded; scene.add(loaded.mesh);
+        // Trees past the backdrop's near limit are already in the photographs;
+        // drawing the stand-in models as well would show each of them twice.
+        const {centre, azimuth} = loaded.mesh.userData.placement;
+        for (const tree of model?.children ?? []) {
+          if (!/^tree/i.test(tree.name)) continue;
+          const dx = tree.position.x - centre[0], dz = tree.position.z - centre[2], bearing = Math.atan2(dx, -dz);
+          if (Math.hypot(dx, dz) > 50 && bearing > azimuth[0] && bearing < azimuth[1]) tree.visible = false;
+        }
+        renderer.shadowMap.needsUpdate = true; dirty = true;
       }).catch(() => {});
       scene.updateMatrixWorld(true);
       const center = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
@@ -333,6 +345,7 @@ export default function CaptureScene() {
       if (weight) disposeModel(weight);
       meadow?.dispose();
       backdrop?.dispose();
+      foliage?.dispose();
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);
       comparisonCache.forEach(disposeModel);
