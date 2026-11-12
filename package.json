@@ -10,7 +10,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test --test-concurrency=2 lib/acer-juvenile-leaves.test.mjs lib/capture-asset.test.mjs lib/read-capture-asset.test.mjs lib/capture-grass.test.mjs lib/capture-meadow-layout.test.mjs lib/capture-meadow.test.mjs lib/capture-turf.test.mjs lib/capture-wind.test.mjs lib/capture-leaf-normals.test.mjs lib/capture-atmosphere.test.mjs lib/capture-backdrop.test.mjs lib/capture-foliage.test.mjs lib/campus-turf.test.mjs lib/feedback-client.test.mjs lib/ophiopogon-material.test.mjs lib/root-collar-bridge.test.mjs lib/root-junction.test.mjs",
+    "test": "node --test --test-concurrency=2 lib/acer-juvenile-leaves.test.mjs lib/capture-asset.test.mjs lib/read-capture-asset.test.mjs lib/capture-grass.test.mjs lib/capture-meadow-layout.test.mjs lib/capture-meadow.test.mjs lib/capture-turf.test.mjs lib/capture-wind.test.mjs lib/capture-leaf-normals.test.mjs lib/capture-atmosphere.test.mjs lib/capture-backdrop.test.mjs lib/capture-foliage.test.mjs lib/capture-quality.test.mjs lib/campus-turf.test.mjs lib/feedback-client.test.mjs lib/ophiopogon-material.test.mjs lib/root-collar-bridge.test.mjs lib/root-junction.test.mjs",
     "test:full": "node --test --test-concurrency=2 lib/*.test.mjs"
   },
   "dependencies": {

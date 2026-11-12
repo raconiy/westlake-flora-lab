@@ -58,3 +58,68 @@ export async function loadCaptureBackdrop(base: string, signal: AbortSignal, max
     dispose() { mesh.geometry.dispose(); material.dispose(); map.dispose(); bitmap.close(); },
   };
 }
+
+/**
+ * Generic far tree line for the bearings no photograph covers. Without it the
+ * lawn runs to a bare horizon as soon as the view leaves the photographed arc.
+ * It is a prior, not a reconstruction: a continuous canopy silhouette 8 to 16 m
+ * tall at 150 m, in the display colours of the photographed far trees, lit from
+ * the scene's sun bearing and hazed like them. The photographed backdrop stands
+ * in front of it and replaces it wherever photographs exist.
+ */
+export function createDistantTreeLine(centre: [number, number, number], sunDirection: THREE.Vector3, radius = 150) {
+  const geometry = backdropGeometry({centre, radius, azimuth: [-Math.PI, Math.PI], y: [-2, 20]}, 192);
+  const material = new THREE.ShaderMaterial({
+    uniforms: {sunBearing: {value: Math.atan2(sunDirection.x, -sunDirection.z)}},
+    vertexShader: /* glsl */`
+      varying vec2 vLine;
+      void main() {
+        vLine = vec2(uv.x * 6.2831853, position.y);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.);
+      }`,
+    fragmentShader: /* glsl */`
+      varying vec2 vLine;
+      uniform float sunBearing;
+      float hash(float n) { return fract(sin(n * 127.1) * 43758.5453); }
+      // Periodic in bearing, so the line closes on itself without a seam.
+      float lumps(float bearing, float cells) {
+        float x = bearing / 6.2831853 * cells, i = floor(x), f = fract(x);
+        f = f * f * (3. - 2. * f);
+        return mix(hash(mod(i, cells) + cells), hash(mod(i + 1., cells) + cells), f);
+      }
+      // Crown-sized mottling in bearing and height; periodic in bearing.
+      float mottle(vec2 p, float cells) {
+        vec2 i = floor(p), f = fract(p);
+        f = f * f * (3. - 2. * f);
+        float a = hash(mod(i.x, cells) + i.y * 57.), b = hash(mod(i.x + 1., cells) + i.y * 57.);
+        float c = hash(mod(i.x, cells) + (i.y + 1.) * 57.), d = hash(mod(i.x + 1., cells) + (i.y + 1.) * 57.);
+        return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+      }
+      float canopy(float bearing) {
+        return 8. + 5. * lumps(bearing, 90.) + 2.2 * lumps(bearing, 330.) + .8 * lumps(bearing, 1100.);
+      }
+      void main() {
+        float top = canopy(vLine.x), y = vLine.y;
+        vec2 crown = vec2(vLine.x / 6.2831853 * 420., y * .45);
+        float cover = 1. - smoothstep(top - .9, top, y + 1.1 * mottle(crown * 2.3, 966.));
+        if (cover < .02) discard;
+        // Crowns facing the sun bearing are lit; the slope of the silhouette
+        // stands in for the crown surface.
+        float slope = canopy(vLine.x + .004) - canopy(vLine.x - .004);
+        float facing = .5 + .5 * cos(vLine.x - sunBearing);
+        float lit = clamp(.35 + .5 * facing + .25 * slope * sign(sin(sunBearing - vLine.x)), 0., 1.) * smoothstep(1., top, y + 3.);
+        vec3 colour = mix(vec3(.19, .25, .16), vec3(.42, .46, .24), lit);
+        // Sunlit crown tops over shaded undersides, crown by crown.
+        colour *= .62 + .55 * mottle(crown, 420.) + .18 * mottle(crown * 3.7, 1554.);
+        // The same haze the photographed far trees carry at this range.
+        colour = mix(colour, vec3(.74, .82, .9), .3);
+        gl_FragColor = vec4(colour, cover);
+      }`,
+    transparent: true, depthWrite: false, fog: false, toneMapped: false, side: THREE.DoubleSide,
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.name = 'Generic distant tree line';
+  mesh.renderOrder = -60;
+  mesh.userData = {basis: 'Prior, not reconstructed: continuous canopy silhouette for bearings without photographs'};
+  return {mesh, dispose() { geometry.dispose(); material.dispose(); }};
+}

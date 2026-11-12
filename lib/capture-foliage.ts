@@ -60,6 +60,12 @@ export interface FoliageOptions {
   seed?: number;
 }
 
+/** Flutter amplitude in lamina lengths for a wind speed in m/s; saturates in strong wind. */
+export function flutterAmplitude(speed: number) {
+  const v = Number.isFinite(speed) ? Math.abs(speed) : 0;
+  return .32 * v / (v + 4);
+}
+
 /**
  * Choose which exported blade vertices carry a lamina. Evenly strided with a
  * seeded offset, so the subset is stable between sessions and proportional to
@@ -74,14 +80,23 @@ export function laminaSites(vertexCount: number, wanted: number, seed: number) {
   return sites;
 }
 
+/** Fraction of light kept at a normalised depth (0 shell, 1 centre) inside a foliage mass. */
+export function crownOcclusion(depth: number) {
+  const d = THREE.MathUtils.clamp(depth, 0, 1);
+  return 1 - .55 * d * d * (3 - 2 * d);
+}
+
 export function createCaptureFoliage(root: THREE.Object3D, options: FoliageOptions = {}) {
   const perTree = options.perTree ?? 40000, length = options.length ?? .095, seed = options.seed ?? 0x51f0a3;
   root.updateMatrixWorld(true);
   const geometry = laminaGeometry();
   const material = new THREE.MeshStandardMaterial({name: 'Leaf laminae', roughness: .46, metalness: 0, side: THREE.DoubleSide});
-  shadeAsLeaf(material, {outline: true, gain: new THREE.Color(3.6, 2.5, 2.4)});
+  const flutter = {value: new THREE.Vector2()};
+  // Gain from the sunlit crown of photograph 01, which is olive rather than
+  // the lime the exported display colours give under this sun.
+  shadeAsLeaf(material, {outline: true, gain: new THREE.Color(3.5, 2.25, 2.3), flutter});
   const meshes: THREE.InstancedMesh[] = [];
-  let laminae = 0, treeIndex = 0;
+  let laminae = 0, treeIndex = 0, seconds = 0;
   const point = new THREE.Vector3(), colour = new THREE.Color(), toLimb = new THREE.Matrix4();
   const matrix = new THREE.Matrix4(), quaternion = new THREE.Quaternion(), scale = new THREE.Vector3();
   const tilt = new THREE.Euler();
@@ -122,6 +137,7 @@ export function createCaptureFoliage(root: THREE.Object3D, options: FoliageOptio
       instanced.castShadow = false; instanced.receiveShadow = true;
       const next = random(seed ^ Math.imul(treeIndex, 0x9e3779b1) ^ Math.imul(limbIndex, 0x85ebca6b));
       let written = 0;
+      const seats: number[] = [];
       for (const source of sources) {
         const position = source.geometry.getAttribute('position'), vertexColour = source.geometry.getAttribute('color');
         const flat = (Array.isArray(source.material) ? source.material[0] : source.material) as THREE.MeshStandardMaterial;
@@ -139,10 +155,23 @@ export function createCaptureFoliage(root: THREE.Object3D, options: FoliageOptio
           if (vertexColour) colour.fromBufferAttribute(vertexColour, site);
           else colour.copy(flat.color);
           instanced.setColorAt(written, colour.multiplyScalar(.85 + .3 * next()));
+          seats.push(point.x, point.y, point.z);
           written++;
         }
       }
       instanced.count = written;
+      // Depth inside the crown. A blade near the centre of its limb's foliage
+      // sees little sky and less sun than one on the shell; without this the
+      // crown is evenly lit through and reads flat.
+      const centre = new THREE.Vector3(); let reach = 0;
+      for (let i = 0; i < written; i++) centre.add(point.set(seats[i*3], seats[i*3+1], seats[i*3+2]));
+      centre.multiplyScalar(1 / Math.max(1, written));
+      for (let i = 0; i < written; i++) reach = Math.max(reach, point.set(seats[i*3], seats[i*3+1], seats[i*3+2]).distanceTo(centre));
+      for (let i = 0; i < written; i++) {
+        const depth = 1 - point.set(seats[i*3], seats[i*3+1], seats[i*3+2]).distanceTo(centre) / Math.max(reach, 1e-6);
+        instanced.getColorAt(i, colour);
+        instanced.setColorAt(i, colour.multiplyScalar(crownOcclusion(depth)));
+      }
       instanced.instanceMatrix.needsUpdate = true;
       if (instanced.instanceColor) instanced.instanceColor.needsUpdate = true;
       instanced.computeBoundingSphere();
@@ -153,6 +182,16 @@ export function createCaptureFoliage(root: THREE.Object3D, options: FoliageOptio
   }
   return {
     meshes, stats: {laminae},
+    /** Advance flutter. Returns true while leaves are moving and a redraw is needed. */
+    update(delta: number, speed: number) {
+      const amplitude = flutterAmplitude(speed);
+      const was = flutter.value.y;
+      if (amplitude === 0 && was === 0) return false;
+      seconds += Number.isFinite(delta) ? Math.max(0, Math.min(.2, delta)) : 0;
+      flutter.value.set(seconds, amplitude);
+      // The frame on which the wind stops must still be drawn, at rest.
+      return amplitude > 0 || was > 0;
+    },
     dispose() {
       for (const mesh of meshes) { mesh.removeFromParent(); mesh.dispose(); }
       geometry.dispose(); material.dispose();

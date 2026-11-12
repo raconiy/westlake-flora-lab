@@ -1,10 +1,11 @@
 import {useEffect, useRef, useState} from 'react';
 import {Box, Camera, Download, Layers3, Orbit, Wind, RotateCcw} from 'lucide-react';
 import * as THREE from 'three';
-import {createCaptureAtmosphere} from '../lib/capture-atmosphere';
+import {createCaptureAtmosphere, captureSunDirection} from '../lib/capture-atmosphere';
 import {applyCaptureMaterials} from '../lib/capture-materials';
-import {loadCaptureBackdrop} from '../lib/capture-backdrop';
+import {loadCaptureBackdrop, createDistantTreeLine} from '../lib/capture-backdrop';
 import {createCaptureFoliage} from '../lib/capture-foliage';
+import {chooseCaptureQuality} from '../lib/capture-quality';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -74,6 +75,7 @@ export default function CaptureScene() {
     let weight: THREE.Group | undefined;
     let meadow: ReturnType<typeof createCaptureMeadow> | undefined;
     let foliage: ReturnType<typeof createCaptureFoliage> | undefined;
+    let treeLine: ReturnType<typeof createDistantTreeLine> | undefined;
     let backdrop: Awaited<ReturnType<typeof loadCaptureBackdrop>> | undefined;
     let renderer: THREE.WebGLRenderer;
     const fail = (text: string) => {
@@ -85,7 +87,14 @@ export default function CaptureScene() {
       fail('浏览器未能启动 3D 视图。下方可下载模型，或重试。');
       return;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    const gl = renderer.getContext(), info = gl.getExtension('WEBGL_debug_renderer_info');
+    const quality = chooseCaptureQuality({
+      renderer: info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : undefined,
+      mobile: /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.userAgent)),
+      devicePixelRatio: window.devicePixelRatio, maxTextureSize: renderer.capabilities.maxTextureSize,
+      override: new URLSearchParams(window.location.search).get('quality'),
+    });
+    renderer.setPixelRatio(quality.pixelRatio);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = .95;
@@ -94,7 +103,7 @@ export default function CaptureScene() {
     renderer.shadowMap.autoUpdate = false;
     renderer.shadowMap.needsUpdate = true;
     const scene = new THREE.Scene();
-    const atmosphere = createCaptureAtmosphere(renderer, scene);
+    const atmosphere = createCaptureAtmosphere(renderer, scene, quality.shadowMapSize);
     const sun = atmosphere.sun;
     if (import.meta.env.DEV) Object.assign(window, {captureDebug: {renderer, scene, atmosphere, THREE, redraw: () => { dirty = true; renderer.shadowMap.needsUpdate = true; }}});
     const camera = new THREE.PerspectiveCamera(47, 4/3, 0.05, 260);
@@ -137,11 +146,13 @@ export default function CaptureScene() {
       });
       applyCaptureMaterials(model, renderer.capabilities.getMaxAnisotropy());
       scene.add(model);
-      foliage = createCaptureFoliage(model);
+      foliage = createCaptureFoliage(model, {perTree: quality.laminaePerTree});
       // The distant scene is appearance only; the lawn stays usable without it.
       loadCaptureBackdrop(media+'backdrop/', controller.signal, renderer.capabilities.getMaxAnisotropy()).then(loaded => {
         if (!active) { loaded.dispose(); return; }
         backdrop = loaded; scene.add(loaded.mesh);
+        treeLine = createDistantTreeLine(loaded.mesh.userData.placement.centre, captureSunDirection);
+        scene.add(treeLine.mesh);
         // Trees past the backdrop's near limit are already in the photographs;
         // drawing the stand-in models as well would show each of them twice.
         const {centre, azimuth} = loaded.mesh.userData.placement;
@@ -312,6 +323,7 @@ export default function CaptureScene() {
           renderer.shadowMap.needsUpdate=true;
           dirty=true;
         }
+        if (foliage?.update(delta, airSpeed)) dirty = true;
         if (meadow?.update(camera, delta, airSpeed)) {
           dirty = true;
         }
@@ -345,6 +357,7 @@ export default function CaptureScene() {
       if (weight) disposeModel(weight);
       meadow?.dispose();
       backdrop?.dispose();
+      treeLine?.dispose();
       foliage?.dispose();
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);

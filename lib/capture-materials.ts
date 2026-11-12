@@ -45,9 +45,10 @@ const noise = /* glsl */`
  * they are not measured on the campus trees.
  */
 export function shadeAsLeaf(material: THREE.MeshStandardMaterial,
-  options: {transmission?: THREE.Color; gain?: THREE.Color; outline?: boolean} = {}) {
+  options: {transmission?: THREE.Color; gain?: THREE.Color; outline?: boolean; flutter?: {value: THREE.Vector2}} = {}) {
   const transmission = options.transmission ?? new THREE.Color(.92, 1.18, .28);
   const gain = options.gain ?? leafGain, outline = options.outline === true;
+  const flutter = options.flutter ?? {value: new THREE.Vector2()};
   if (material.userData.captureLeaf) return;
   material.userData.captureLeaf = true;
   material.side = THREE.DoubleSide;
@@ -62,7 +63,21 @@ export function shadeAsLeaf(material: THREE.MeshStandardMaterial,
   material.onBeforeCompile = shader => {
     shader.uniforms.captureLeafTransmission = {value: transmission};
     shader.uniforms.captureLeafGain = {value: gain};
-    shader.vertexShader = 'varying vec3 vCaptureLeafWorld;\nvarying vec2 vCaptureLeafUv;\n' + shader.vertexShader.replace('#include <project_vertex>', /* glsl */`
+    shader.uniforms.captureLeafFlutter = flutter;
+    shader.vertexShader = 'uniform vec2 captureLeafFlutter;\nvarying vec3 vCaptureLeafWorld;\nvarying vec2 vCaptureLeafUv;\n' + shader.vertexShader.replace('#include <project_vertex>', /* glsl */`
+      #ifdef USE_INSTANCING
+        ${outline ? /* glsl */`{
+          // Flutter: the lamina rocks about its petiole end, tip moving most.
+          // x is elapsed seconds, y the amplitude in lamina lengths. Each leaf
+          // has its own phase and a frequency near 3 Hz from where it stands.
+          vec3 seat = instanceMatrix[3].xyz;
+          float phase = dot( seat, vec3( 12.9898, 78.233, 37.719 ) );
+          float rate = 16. + 9. * fract( phase * .37 );
+          float swing = sin( captureLeafFlutter.x * rate + phase ) + .5 * sin( captureLeafFlutter.x * rate * 1.73 + phase * 1.3 );
+          transformed.z += swing * captureLeafFlutter.y * uv.y * uv.y;
+          transformed.x += swing * captureLeafFlutter.y * .35 * uv.y * ( uv.x - .5 );
+        }` : ''}
+      #endif
       #include <project_vertex>
       #ifdef USE_INSTANCING
         vCaptureLeafWorld = ( modelMatrix * instanceMatrix * vec4( transformed, 1.0 ) ).xyz;
@@ -102,7 +117,7 @@ export function shadeAsLeaf(material: THREE.MeshStandardMaterial,
         reflectedLight.indirectDiffuse += irradiance * captureLeafTransmission * material.diffuseColor * RECIPROCAL_PI * .55;
       `);
   };
-  material.customProgramCacheKey = () => 'capture-leaf-v3-' + outline;
+  material.customProgramCacheKey = () => 'capture-leaf-v4-' + outline;
   material.needsUpdate = true;
 }
 

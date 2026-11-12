@@ -71,7 +71,7 @@ function skyTexture(width: number, height: number, gain: number, ground?: THREE.
   return texture;
 }
 
-export function createCaptureAtmosphere(renderer: THREE.WebGLRenderer, scene: THREE.Scene) {
+export function createCaptureAtmosphere(renderer: THREE.WebGLRenderer, scene: THREE.Scene, shadowMapSize = 4096) {
   // Visible dome: the photographed colours, shown as photographed.
   const domeMap = skyTexture(1024, 512, 1);
   const sky = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.ShaderMaterial({
@@ -123,7 +123,7 @@ export function createCaptureAtmosphere(renderer: THREE.WebGLRenderer, scene: TH
   sun.castShadow = true;
   Object.assign(sun.shadow.camera, {left: -30, right: 30, top: 28, bottom: -28, near: 1, far: 120});
   sun.shadow.camera.updateProjectionMatrix();
-  const size = Math.min(4096, renderer.capabilities.maxTextureSize);
+  const size = Math.min(shadowMapSize, renderer.capabilities.maxTextureSize);
   sun.shadow.mapSize.set(size, size);
   sun.shadow.bias = -.00012;
   sun.shadow.normalBias = .018;
