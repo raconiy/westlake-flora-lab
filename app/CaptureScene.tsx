@@ -1,7 +1,8 @@
 import {useEffect, useRef, useState} from 'react';
 import {Box, Camera, Download, Layers3, Orbit, Wind, RotateCcw} from 'lucide-react';
 import * as THREE from 'three';
-import {createCaptureSky} from '../lib/capture-scene-sky';
+import {createCaptureAtmosphere} from '../lib/capture-atmosphere';
+import {applyCaptureMaterials} from '../lib/capture-materials';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -83,14 +84,15 @@ export default function CaptureScene() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    renderer.toneMappingExposure = .95;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.shadowMap.autoUpdate = false;
     renderer.shadowMap.needsUpdate = true;
     const scene = new THREE.Scene();
-    const sky = createCaptureSky();
-    scene.add(sky);
+    const atmosphere = createCaptureAtmosphere(renderer, scene);
+    const sun = atmosphere.sun;
+    if (import.meta.env.DEV) Object.assign(window, {captureDebug: {renderer, scene, atmosphere, THREE, redraw: () => { dirty = true; renderer.shadowMap.needsUpdate = true; }}});
     const camera = new THREE.PerspectiveCamera(47, 4/3, 0.05, 260);
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -102,15 +104,6 @@ export default function CaptureScene() {
     const onLost = (ev: Event) => { ev.preventDefault(); fail('浏览器中断了 3D 渲染，可重试或下载模型。'); };
     renderer.domElement.addEventListener('webglcontextlost', onLost);
     node.appendChild(renderer.domElement);
-    const lighting = new THREE.HemisphereLight(0xfff7e4, 0x738061, 1.65);
-    const sun = new THREE.DirectionalLight(0xffedc7, 2.7);
-    sun.position.set(-18, 24, 9);
-    sun.castShadow = true;
-    Object.assign(sun.shadow.camera, {left: -27, right: 27, top: 25, bottom: -25, near: 0.5, far: 105});
-    sun.shadow.camera.updateProjectionMatrix();
-    sun.shadow.mapSize.set(2048, 2048);
-    sun.shadow.normalBias = 0.025;
-    scene.add(lighting, sun, sun.target);
     const resize = () => {
       const {width, height} = node.getBoundingClientRect();
       if (width <= 0 || height <= 0) return;
@@ -136,16 +129,9 @@ export default function CaptureScene() {
         if (['turfnearvergeblades','capturemeadowstatic'].includes(o.name.replace(/[^a-z0-9]/gi,'').toLowerCase())) o.visible = false;
         if (o instanceof THREE.Mesh) {
           o.castShadow = true; o.receiveShadow = true;
-          // A curved stem stretches one texture axis near its silhouette.
-          // Isotropic mipmaps otherwise erase the photographed vertical grain.
-          for (const material of Array.isArray(o.material) ? o.material : [o.material]) {
-            if (material.name.startsWith('Foreground bark') && 'map' in material && material.map instanceof THREE.Texture) {
-              material.map.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-              material.map.needsUpdate = true;
-            }
-          }
         }
       });
+      applyCaptureMaterials(model, renderer.capabilities.getMaxAnisotropy());
       scene.add(model);
       scene.updateMatrixWorld(true);
       const center = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
@@ -342,9 +328,7 @@ export default function CaptureScene() {
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);
       comparisonCache.forEach(disposeModel);
-      sky.geometry.dispose();
-      sky.material.dispose();
-      sun.shadow.dispose();
+      atmosphere.dispose();
       renderer.dispose();
       renderer.forceContextLoss();
       renderer.domElement.remove();
