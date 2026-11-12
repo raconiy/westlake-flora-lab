@@ -1,0 +1,20 @@
+{
+ "views": 13,
+ "basis": "Monocular multi-view metric depth fused per pixel; unobserved surfaces are absent",
+ "frame": "scene",
+ "scale": 0.8876029396045547,
+ "cameraCentreResidualM": {
+  "mean": 0.04936771440809818,
+  "max": 0.07885137753151117
+ },
+ "viewDirectionResidualDeg": {
+  "mean": 0.1862534360528801,
+  "max": 0.3655555603860984
+ },
+ "points": 2398297,
+ "cellsM": [
+  0.022,
+  0.06,
+  0.14
+ ]
+}

@@ -2,14 +2,14 @@ import * as THREE from 'three';
 
 type PointFile = {file: string; count: number; diameter: number};
 
-export async function readCrownSamples(media: string, signal: AbortSignal) {
-  const index = await fetch(media + 'crown-samples.json', {signal});
+export async function readCrownSamples(media: string, signal: AbortSignal, list = 'crown-samples.json') {
+  const index = await fetch(media + list, {signal});
   if (!index.ok) throw new Error('Crown sample index unavailable');
-  const list: PointFile[] = await index.json();
+  const files: PointFile[] = await index.json();
   const group = new THREE.Group();
   let count = 0;
   try {
-    for (const item of list) {
+    for (const item of files) {
       const response = await fetch(media + item.file, {signal});
       if (!response.ok) throw new Error('Crown samples unavailable');
       const data = new DataView(await response.arrayBuffer());

@@ -17,7 +17,7 @@ import {readCaptureAsset} from './readCaptureAsset';
 import './capture.css';
 
 const media = import.meta.env.BASE_URL + 'capture17/';
-type Actions = { turf: () => void; side: () => void; reset: () => void; photograph: (id: string) => void; overhead: () => void; samples: () => Promise<void>; projection: (id:string) => Promise<void>; free: () => void };
+type Actions = { turf: () => void; side: () => void; reset: () => void; photograph: (id: string) => void; overhead: () => void; samples: () => Promise<void>; dense: () => Promise<void>; projection: (id:string) => Promise<void>; free: () => void };
 
 function disposeModel(root: THREE.Object3D) {
   const textures = new Set<THREE.Texture>();
@@ -55,6 +55,8 @@ export default function CaptureScene() {
   const [photo, setPhoto] = useState('01');
   const [pointCount, setPointCount] = useState(0);
   const [blades, setBlades] = useState(0);
+  const [densePoints, setDensePoints] = useState(0);
+  const [denseBusy, setDenseBusy] = useState(false);
   const [sampleBusy, setSampleBusy] = useState(false);
   const [sampleError, setSampleError] = useState(false);
   const [projected,setProjected] = useState(false);
@@ -69,6 +71,7 @@ export default function CaptureScene() {
     let dirty = true;
     let matchedPose: THREE.Quaternion | undefined;
     let samples: Awaited<ReturnType<typeof readCrownSamples>> | undefined;
+    let dense: Awaited<ReturnType<typeof readCrownSamples>> | undefined;
     let model: THREE.Object3D | undefined;
     const comparisonCache=new Map<string,THREE.Object3D>();
     let comparison:THREE.Object3D|undefined;
@@ -220,13 +223,38 @@ export default function CaptureScene() {
         }
         dirty = true;
       }
+      const home = () => { setView(refPosition, target, reference instanceof THREE.PerspectiveCamera ? reference : undefined); setPhoto('01'); };
+      // The dense set is the photographs themselves in 3D, buildings and people
+      // included. It replaces every modelled layer while shown.
+      const showDense = (on: boolean) => {
+        if (dense) dense.group.visible = on;
+        if (model) model.visible = !on;
+        if (meadow) meadow.group.visible = !on;
+        if (litter) litter.mesh.visible = !on;
+        if (backdrop) backdrop.mesh.visible = !on;
+        if (treeLine) treeLine.mesh.visible = !on;
+        // Every photograph was taken from one side of the lawn. Seen from there
+        // the fused pixels are the scene; seen from elsewhere they are thin
+        // shells. Keep the view inside the arc the photographs cover.
+        if (on) {
+          home();
+          const bearing = controls.getAzimuthalAngle();
+          controls.minAzimuthAngle = bearing - .3; controls.maxAzimuthAngle = bearing + .3;
+          controls.minPolarAngle = 1.15; controls.maxPolarAngle = 1.6; controls.maxDistance = 26;
+        } else {
+          controls.minAzimuthAngle = -Infinity; controls.maxAzimuthAngle = Infinity;
+          controls.minPolarAngle = 0; controls.maxPolarAngle = Math.PI - 0.015; controls.maxDistance = 130;
+        }
+        setDensePoints(on && dense ? dense.count : 0);
+        renderer.shadowMap.needsUpdate = true; dirty = true;
+      };
       const returnToMesh = () => {
+        if (dense?.group.visible) showDense(false);
         clearProjection();
         if (samples) samples.group.visible=false;
         matchedTrees.forEach(tree=>{tree.visible=true;});
         setPointCount(0);
       };
-      const home = () => { setView(refPosition, target, reference instanceof THREE.PerspectiveCamera ? reference : undefined); setPhoto('01'); };
       home();
       controls.saveState();
       actions.current = {
@@ -263,7 +291,22 @@ export default function CaptureScene() {
           } catch {if(active&&version===generation)setSampleError(true);}
           finally {if(active&&version===generation)setProjectBusy(false);}
         },
+        dense: async () => {
+          if (dense?.group.visible) { showDense(false); return; }
+          returnToMesh(); setSampleError(false);
+          if (!dense) {
+            setDenseBusy(true);
+            try {
+              const loaded = await readCrownSamples(media + 'dense/', controller.signal, 'dense-samples.json');
+              if (!active) { disposeSamples(loaded.group); return; }
+              dense = loaded; dense.group.visible = false; scene.add(dense.group);
+            } catch { if (active) setSampleError(true); return; }
+            finally { if (active) setDenseBusy(false); }
+          }
+          showDense(true);
+        },
         samples: async () => {
+          showDense(false);
           clearProjection();
           setSampleError(false);
           if (!samples) {
@@ -289,7 +332,7 @@ export default function CaptureScene() {
           dirty = true;
         },
         photograph: id => {
-          clearProjection();
+          if (!dense?.group.visible) clearProjection();
           const view = cameras.get(id);
           if (!view) return;
           const pos = view.getWorldPosition(new THREE.Vector3());
@@ -299,6 +342,7 @@ export default function CaptureScene() {
         },
         overhead: () => {returnToMesh();setView(new THREE.Vector3(target.x + 3, 36, target.z + 7), new THREE.Vector3(target.x, 0, target.z));}
       };
+      const openOnModel = startAtTurf.current || experiment.current.startOnLoad;
       if (startAtTurf.current) { actions.current.turf(); startAtTurf.current=false; }
       const dynamics = createCaptureWind(model);
       meadow = createCaptureMeadow();
@@ -348,6 +392,9 @@ export default function CaptureScene() {
       });
       setReady(true);
       setProgress(100);
+      // Open on the photographs themselves; the movable model is one click away.
+      // The close-up lawn and gust entries need the model, so they stay on it.
+      if (!openOnModel) void actions.current?.dense();
     }
     load().catch(() => fail('模型加载失败，可重试或下载 GLB 文件。'));
     return () => {
@@ -366,6 +413,7 @@ export default function CaptureScene() {
       foliage?.dispose();
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);
+      if (dense) disposeSamples(dense.group);
       comparisonCache.forEach(disposeModel);
       atmosphere.dispose();
       renderer.dispose();
@@ -377,7 +425,7 @@ export default function CaptureScene() {
   const close = () => {
     startAtTurf.current=false;
     setOpen(false); setReady(false); setMessage(''); setSpeed(0);setHanging(false);setHasWind(false);setReadout({speed:0,maxTipCm:0,testTipCm:0,limited:0});
-    experiment.current={speed:0,hanging:false,gustRemaining:0,startOnLoad:false}; setProgress(0); setPhotos([]); setPointCount(0); setSampleBusy(false); setSampleError(false); setProjected(false);setProjectBusy(false);
+    experiment.current={speed:0,hanging:false,gustRemaining:0,startOnLoad:false}; setProgress(0); setPhotos([]); setPointCount(0); setDensePoints(0); setDenseBusy(false); setSampleBusy(false); setSampleError(false); setProjected(false);setProjectBusy(false);
   };
   const gust = () => {
     if(ready){actions.current?.free();experiment.current.gustRemaining=3;}
@@ -386,9 +434,9 @@ export default function CaptureScene() {
   return <section className="capture" aria-label="云谷草坪实拍重建">
     <div className="capture-layout">
       <div className="capture-stage">
-        <img className="capture-poster" src={media + 'refine-20261111/after.webp?v=7.1'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
+        <img className="capture-poster" src={media + 'poster-r8.jpg'} alt="同一场景的三维渲染，前景路灯与主树分立于步道旁的草坪"/>
         {open && <div className={'capture-webgl' + (ready ? ' loaded' : '')} ref={mount}/>}
-        {!open && <div className="capture-start"><button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/>进入三维场景</button><button className="capture-enter capture-wind-start" onClick={()=>{startAtTurf.current=true; setOpen(true);}}>近看草坪</button><button className="capture-enter capture-wind-start" onClick={gust}><Wind size={17}/>试一次阵风</button></div>}
+        {!open && <div className="capture-start"><button className="capture-enter" onClick={()=>setOpen(true)}><Orbit size={18}/>进入实拍三维重建</button><button className="capture-enter capture-wind-start" onClick={()=>{startAtTurf.current=true; setOpen(true);}}>近看草坪</button><button className="capture-enter capture-wind-start" onClick={gust}><Wind size={17}/>试一次阵风</button></div>}
         {open && !ready && <div className="capture-loading" role="status">{message || (progress >= 98 ? '正在准备三维网格…' : '正在读取场景' + (progress ? ' '+progress+'%' : '…'))}
           {message && <button onClick={()=>{setMessage('');setProgress(0);setAttempt(a=>a+1);}}>重试</button>}
           <button onClick={close}>返回渲染图</button></div>}
@@ -398,7 +446,7 @@ export default function CaptureScene() {
         <p>沿步道看前树的弯曲分叉、中树的密冠、左树的侧枝和右侧复干树。进入三维后可切换实拍机位、侧看分枝，也可以贴近地面检查草叶。</p>
         <p><a className="capture-contact-link" href={media+'refine-20261111/index.html'}>R7.1：叶面、草叶和风载修复，以及本轮调用记录 →</a></p>
         <p><a className="capture-contact-link" href={media+'scene-r7/index.html'}>拖动对照实拍与模型，查看五个账号的工作记录 →</a></p>
-        <dl><dt>采集素材</dt><dd>13 张照片 · 4 段视频</dd><dt>相机配准</dt><dd>29 个视角 · 7,674 个稀疏点</dd><dt>重建范围</dt><dd>乔木、草坪、步道与灯具</dd><dt>可见性</dt><dd>前树冠顶和左树侧缘超出取景，遮挡部分的分枝和叶片按可见范围推断。</dd><dt>尺度与动力</dt><dd>模型尺寸使用工程估计。树种、地下根形与枝条刚度尚待现场核对。</dd></dl>
+        <dl><dt>采集素材</dt><dd>13 张照片 · 4 段视频</dd><dt>相机配准</dt><dd>29 个视角 · 7,674 个稀疏点</dd><dt>重建范围</dt><dd>乔木、草坪、步道与灯具为可动模型；远处建筑来自实拍照片；另有 13 张照片的稠密实拍重建</dd><dt>可见性</dt><dd>前树冠顶和左树侧缘超出取景，遮挡部分的分枝和叶片按可见范围推断。</dd><dt>尺度与动力</dt><dd>模型尺寸使用工程估计。树种、地下根形与枝条刚度尚待现场核对。</dd></dl>
         <a className="capture-download" href={media+'yungu-lawn.glb?v=7.1'} download><Download size={16}/> 下载校园场景 <span>GLB</span></a>
         <a className="capture-contact-link" href={media+'contact-world.xml'} download>下载碰撞模型（MuJoCo）</a>
         <a className="capture-contact-link" href={media+'yungu-meadow.glb?v=7'} download>单独下载草叶实例（GLB）</a>
@@ -413,18 +461,19 @@ export default function CaptureScene() {
       <button onClick={()=>actions.current?.turf()}>贴近草叶</button>
       <button onClick={()=>actions.current?.side()}>侧看主树</button>
       <button onClick={()=>actions.current?.overhead()}><Layers3 size={16}/>俯看布局</button>
+      <button disabled={denseBusy} aria-pressed={densePoints>0} onClick={()=>void actions.current?.dense()}>{denseBusy?'读取实拍重建…':densePoints?'切换到可动模型（风与受力）':'实拍稠密重建（含建筑）'}</button>
       <button disabled={sampleBusy} aria-pressed={pointCount>0} onClick={()=>void actions.current?.samples()}>{sampleBusy?'读取实拍点…':pointCount?'还原三维树冠':'查看实拍采样点'}</button>
       <button disabled={sampleBusy||projectBusy} aria-pressed={projected} onClick={()=>void actions.current?.projection(photo)}>{projectBusy?'读取照片纹理…':projected?'返回可动冠层':'对照实拍冠层'}</button>
       {sampleError && <span role="status">实拍对照文件读取失败，请重试。</span>}
 
       <button onClick={close}><RotateCcw size={15}/>返回渲染图</button>
     </div>}
-    {ready && hasWind && !projected && !pointCount && <div className="capture-forces">
+    {ready && hasWind && !projected && !pointCount && !densePoints && <div className="capture-forces">
       <label>背景风速 <input aria-label="背景风速" type="range" min="0" max="10" step=".5" value={speed} onChange={e=>{const v=Number(e.target.value);experiment.current.speed=v;setSpeed(v);}}/><output>{speed.toFixed(1)} m/s</output></label>
       <button onClick={gust}><Wind size={15}/>施加 3 秒阵风</button>
       <button aria-pressed={hanging} onClick={()=>{experiment.current.hanging=!hanging;setHanging(!hanging);}}>{hanging?'卸下砝码':'前树枝端挂载 1 kg'}</button>
       <div className="capture-telemetry">当前气流 <b data-air>{readout.speed.toFixed(1)} m/s</b> · 当前视野草叶 <b data-blades>{blades.toLocaleString()}</b> · 最大枝端位移 <b data-tip>{readout.maxTipCm.toFixed(1)} cm</b>{hanging && <> · 挂载枝端 <b>{readout.testTipCm.toFixed(1)} cm</b></>}{!!readout.limited && <small> · {readout.limited} 个枝组达到小角度模型上限</small>}</div>
     </div>}
-    <div className="capture-footer"><Box size={15}/><span>{projected ? '照片 '+photo+' · 纹理来自实拍，局部深度由立体点插值；转动后回到可动模型' : pointCount ? '三株近景树 · '+pointCount.toLocaleString()+' 个多视图采样点，空白处缺少观测' : open&&ready?'可交互三维网格':'实拍机位 · 三维渲染'}</span></div>
+    <div className="capture-footer"><Box size={15}/><span>{densePoints ? densePoints.toLocaleString()+' 个实拍点 · 13 张照片逐像素按估计深度放回三维，没拍到的面是空的' : projected ? '照片 '+photo+' · 纹理来自实拍，局部深度由立体点插值；转动后回到可动模型' : pointCount ? '三株近景树 · '+pointCount.toLocaleString()+' 个多视图采样点，空白处缺少观测' : open&&ready?'可交互三维网格':'实拍机位 · 三维渲染'}</span></div>
   </section>;
 }
