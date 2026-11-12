@@ -6,6 +6,7 @@ import {applyCaptureMaterials} from '../lib/capture-materials';
 import {loadCaptureBackdrop, createDistantTreeLine} from '../lib/capture-backdrop';
 import {createCaptureFoliage} from '../lib/capture-foliage';
 import {chooseCaptureQuality} from '../lib/capture-quality';
+import {createCaptureLitter} from '../lib/capture-litter';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -75,6 +76,7 @@ export default function CaptureScene() {
     let weight: THREE.Group | undefined;
     let meadow: ReturnType<typeof createCaptureMeadow> | undefined;
     let foliage: ReturnType<typeof createCaptureFoliage> | undefined;
+    let litter: ReturnType<typeof createCaptureLitter> | undefined;
     let treeLine: ReturnType<typeof createDistantTreeLine> | undefined;
     let backdrop: Awaited<ReturnType<typeof loadCaptureBackdrop>> | undefined;
     let renderer: THREE.WebGLRenderer;
@@ -147,6 +149,8 @@ export default function CaptureScene() {
       applyCaptureMaterials(model, renderer.capabilities.getMaxAnisotropy());
       scene.add(model);
       foliage = createCaptureFoliage(model, {perTree: quality.laminaePerTree});
+      litter = createCaptureLitter(model);
+      scene.add(litter.mesh);
       // The distant scene is appearance only; the lawn stays usable without it.
       loadCaptureBackdrop(media+'backdrop/', controller.signal, renderer.capabilities.getMaxAnisotropy()).then(loaded => {
         if (!active) { loaded.dispose(); return; }
@@ -358,6 +362,7 @@ export default function CaptureScene() {
       meadow?.dispose();
       backdrop?.dispose();
       treeLine?.dispose();
+      litter?.dispose();
       foliage?.dispose();
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);

@@ -2,7 +2,15 @@ import * as THREE from 'three';
 
 // The captured branch architecture sets the length, load arm, taper and inertia.
 // Field context: https://pmc.ncbi.nlm.nih.gov/articles/PMC6597771/
-const woodE = 8e9, woodDensity = 550, airDensity = 1.225, leafMassPerArea = .12;
+// Living limbs are green wood: saturated, so far denser than the air-dry
+// timber figure (about 550 kg/m3) while the green modulus of temperate
+// hardwoods stays near 8 GPa (USDA Wood Handbook, green condition). Using dry
+// density with green stiffness overstates every natural frequency by about
+// sqrt(900/550) = 1.28. Species are unresolved, so both remain priors.
+const woodE = 8e9, woodDensity = 900, airDensity = 1.225, leafMassPerArea = .12;
+// Damping ratio of a limb in leaf. Reported values for broadleaf limbs span
+// roughly 0.1 to 0.25, most of it aerodynamic drag on foliage; not measured here.
+const branchDamping = .18;
 const windWorld = new THREE.Vector3(1, 0, .23).normalize();
 const downWorld = new THREE.Vector3(0, -1, 0);
 const maxAngle = .25;
@@ -99,8 +107,8 @@ export function createCaptureWind(root: THREE.Object3D, options:{gusts?:boolean}
         const weightTarget=testMass*9.81*b.length/b.spring;
         const magnitude=tangent.copy(b.airAxis).multiplyScalar(windTarget).addScaledVector(b.gravityAxis,weightTarget).length();
         const limit=magnitude>maxAngle?maxAngle/magnitude:1;
-        advance(b.wind,windTarget*limit,omega,.28,physicsStep);
-        advance(b.load,weightTarget*limit,omega,.28,physicsStep);
+        advance(b.wind,windTarget*limit,omega,branchDamping,physicsStep);
+        advance(b.load,weightTarget*limit,omega,branchDamping,physicsStep);
       }
     }
     stats.maxTipCm=0; stats.testTipCm=0; stats.limited=0;

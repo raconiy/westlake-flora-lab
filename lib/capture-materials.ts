@@ -105,7 +105,7 @@ export function shadeAsLeaf(material: THREE.MeshStandardMaterial,
           // The exported blade colours were picked from display pixels and are
           // about a third of the reflectance the photographed crown needs under
           // this sun. Gain per channel from the sunlit crown of photograph 01.
-          diffuseColor.rgb = min( diffuseColor.rgb * captureLeafGain, vec3( .66, .62, .30 ) );
+          diffuseColor.rgb = min( diffuseColor.rgb * captureLeafGain, vec3( .74, .66, .34 ) );
         }
       `)
       .replace('#include <lights_fragment_begin>', lights)

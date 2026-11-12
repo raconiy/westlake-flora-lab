@@ -83,18 +83,18 @@ export function laminaSites(vertexCount: number, wanted: number, seed: number) {
 /** Fraction of light kept at a normalised depth (0 shell, 1 centre) inside a foliage mass. */
 export function crownOcclusion(depth: number) {
   const d = THREE.MathUtils.clamp(depth, 0, 1);
-  return 1 - .55 * d * d * (3 - 2 * d);
+  return 1 - .5 * d * d * (3 - 2 * d);
 }
 
 export function createCaptureFoliage(root: THREE.Object3D, options: FoliageOptions = {}) {
   const perTree = options.perTree ?? 40000, length = options.length ?? .095, seed = options.seed ?? 0x51f0a3;
   root.updateMatrixWorld(true);
   const geometry = laminaGeometry();
-  const material = new THREE.MeshStandardMaterial({name: 'Leaf laminae', roughness: .46, metalness: 0, side: THREE.DoubleSide});
+  const material = new THREE.MeshStandardMaterial({name: 'Leaf laminae', roughness: .38, metalness: 0, side: THREE.DoubleSide});
   const flutter = {value: new THREE.Vector2()};
   // Gain from the sunlit crown of photograph 01, which is olive rather than
   // the lime the exported display colours give under this sun.
-  shadeAsLeaf(material, {outline: true, gain: new THREE.Color(3.5, 2.25, 2.3), flutter});
+  shadeAsLeaf(material, {outline: true, gain: new THREE.Color(4.4, 2.8, 2.9), flutter});
   const meshes: THREE.InstancedMesh[] = [];
   let laminae = 0, treeIndex = 0, seconds = 0;
   const point = new THREE.Vector3(), colour = new THREE.Color(), toLimb = new THREE.Matrix4();
