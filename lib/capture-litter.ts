@@ -9,6 +9,9 @@ import {isMeadowPoint, meadowCoreBounds} from './capture-meadow-layout.ts';
  * synthetic. Leaves lie on the grass tips, inside the lawn only (never on
  * paving or inside a stem), with a fixed seed.
  *
+ * They rest above the tallest blade tips: seated lower, the grass shadows
+ * them and a sunlit yellow leaf renders nearly black.
+ *
  * Counts and the fall-off with distance from each stem are priors read off the
  * photographs by eye; no leaf was counted. Litter is static and has no
  * collision or wind response.
@@ -54,17 +57,18 @@ export function createCaptureLitter(root: THREE.Object3D, options: LitterOptions
   const sites = litterSites(stems, options), count = sites.length / 2;
   const geometry = laminaGeometry();
   const material = new THREE.MeshStandardMaterial({name: 'Fallen leaves', roughness: .7, metalness: 0, side: THREE.DoubleSide});
-  // Senescent laminae: chlorophyll gone, so little green-shifted transmission.
-  shadeAsLeaf(material, {outline: true, gain: new THREE.Color(1, 1, 1), transmission: new THREE.Color(.5, .42, .12)});
+  // Senescent laminae: chlorophyll gone, so they pass yellow light freely
+  // and stay legible in a crown's shadow instead of going black.
+  shadeAsLeaf(material, {outline: true, gain: new THREE.Color(1, 1, 1), transmission: new THREE.Color(.85, .72, .26)});
   const mesh = new THREE.InstancedMesh(geometry, material, Math.max(1, count));
   mesh.name = 'Fallen leaves';
   mesh.count = count;
   mesh.castShadow = false; mesh.receiveShadow = true;
-  const next = random((options.seed ?? 0x1eaf17) ^ 0x5bd1e995), rest = options.restHeight ?? .055;
+  const next = random((options.seed ?? 0x1eaf17) ^ 0x5bd1e995), rest = options.restHeight ?? .085;
   const matrix = new THREE.Matrix4(), quaternion = new THREE.Quaternion(), scale = new THREE.Vector3(), tilt = new THREE.Euler();
   const colour = new THREE.Color();
   // Yellow through tan to brown, as linear reflectance.
-  const palette = [new THREE.Color(.40, .33, .09), new THREE.Color(.34, .25, .08), new THREE.Color(.24, .17, .07), new THREE.Color(.30, .31, .10)];
+  const palette = [new THREE.Color(.27, .235, .11), new THREE.Color(.23, .19, .095), new THREE.Color(.17, .135, .08), new THREE.Color(.21, .22, .10)];
   for (let i = 0; i < count; i++) {
     // Lying nearly flat on the grass tips, slightly propped.
     tilt.set(-Math.PI/2 + (next() - .5) * .5, next() * Math.PI * 2, (next() - .5) * .4, 'YXZ');
