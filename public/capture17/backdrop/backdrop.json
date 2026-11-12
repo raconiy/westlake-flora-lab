@@ -1,0 +1,38 @@
+{
+ "centre": [
+  -1.9804,
+  0.0,
+  12.2142
+ ],
+ "radius": 110.0,
+ "azimuth": [
+  -0.5678839438580479,
+  0.6478586931045087
+ ],
+ "y": [
+  -2.0,
+  24.0
+ ],
+ "size": [
+  1394,
+  271
+ ],
+ "coverage": 0.3843,
+ "nearLimitDepthModelM": 54.0,
+ "views": {
+  "01": 4229,
+  "02": 9131,
+  "03": 48512,
+  "04": 5257,
+  "05": 2935,
+  "06": 2565,
+  "07": 3504,
+  "08": 4483,
+  "09": 7066,
+  "10": 7836,
+  "11": 913,
+  "12": 2664,
+  "13": 46090
+ },
+ "basis": "13 registered photographs; monocular metric depth for the near/far split; single-radius cylinder, parallax not modelled"
+}

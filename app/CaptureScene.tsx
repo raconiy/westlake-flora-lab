@@ -3,6 +3,7 @@ import {Box, Camera, Download, Layers3, Orbit, Wind, RotateCcw} from 'lucide-rea
 import * as THREE from 'three';
 import {createCaptureAtmosphere} from '../lib/capture-atmosphere';
 import {applyCaptureMaterials} from '../lib/capture-materials';
+import {loadCaptureBackdrop} from '../lib/capture-backdrop';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -71,6 +72,7 @@ export default function CaptureScene() {
     let generation=0;
     let weight: THREE.Group | undefined;
     let meadow: ReturnType<typeof createCaptureMeadow> | undefined;
+    let backdrop: Awaited<ReturnType<typeof loadCaptureBackdrop>> | undefined;
     let renderer: THREE.WebGLRenderer;
     const fail = (text: string) => {
       if (active) { setMessage(text); setReady(false); }
@@ -133,6 +135,11 @@ export default function CaptureScene() {
       });
       applyCaptureMaterials(model, renderer.capabilities.getMaxAnisotropy());
       scene.add(model);
+      // The distant scene is appearance only; the lawn stays usable without it.
+      loadCaptureBackdrop(media+'backdrop/', controller.signal, renderer.capabilities.getMaxAnisotropy()).then(loaded => {
+        if (!active) { loaded.dispose(); return; }
+        backdrop = loaded; scene.add(loaded.mesh); dirty = true;
+      }).catch(() => {});
       scene.updateMatrixWorld(true);
       const center = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
       const matchedTrees: THREE.Object3D[] = [];
@@ -325,6 +332,7 @@ export default function CaptureScene() {
       renderer.domElement.removeEventListener('webglcontextlost', onLost);
       if (weight) disposeModel(weight);
       meadow?.dispose();
+      backdrop?.dispose();
       if (model) disposeModel(model);
       if (samples) disposeSamples(samples.group);
       comparisonCache.forEach(disposeModel);
