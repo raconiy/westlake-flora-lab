@@ -8,6 +8,22 @@ async function sceneReady() {
   return window.__agentb.scene;
 }
 
+async function fetchRefineConfig() {
+  const candidates = [
+    new URL('../refine/refine.json', import.meta.url),
+    new URL('./refine/refine.json', import.meta.url),
+  ];
+  for (const candidate of candidates) {
+    try {
+      const response = await fetch(candidate, { cache: 'no-cache' });
+      if (response.ok) return response.json();
+    } catch (error) {
+      // The first path is used by the source tree; the second by the public bundle.
+    }
+  }
+  throw new Error('Agent B refine config is unavailable');
+}
+
 function seeded(seed) {
   let value = seed >>> 0;
   return () => {
@@ -241,10 +257,7 @@ function installToggle(group) {
 async function addRefinement() {
   const scene = await sceneReady();
   if (scene.getObjectByName('agent_b_refine_layer')) return;
-  const config = await fetch(new URL('../refine/refine.json', import.meta.url), { cache: 'no-cache' }).then(response => {
-    if (!response.ok) throw new Error(`refine manifest ${response.status}`);
-    return response.json();
-  });
+  const config = await fetchRefineConfig();
   const centralZone = config.zones.find(zone => zone.id === 'central-lawn') ?? {
     center: [180.76, -4.995], radius: [30.0, 22.0], ground_y: -0.155,
   };
