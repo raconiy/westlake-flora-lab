@@ -1,0 +1,15 @@
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -30,9 +30,11 @@
+ }
+ function ComparisonScene(){
+  const [loaded,setLoaded]=useState(false);
+- const source=`${import.meta.env.BASE_URL}real2sim/scene-20261113/agent-a/index.html`;
++ const [agent,setAgent]=useState<'agent-a'|'agent-b'>(()=>window.location.hash==='#comparison-b'?'agent-b':'agent-a');
++ const source=`${import.meta.env.BASE_URL}real2sim/scene-20261113/${agent}/index.html`;
+  return <section aria-label="新场景对比" style={{width:'100%',minWidth:0}}>
+   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:'12px',flexWrap:'wrap',marginBottom:'16px'}}>
++   <div role="group" aria-label="选择重建结果" style={{display:'flex',gap:'6px'}}>{([['agent-a','Agent A'],['agent-b','Agent B · Opus 5.5']] as const).map(([id,label])=><button key={id} className="subtle-button" aria-pressed={agent===id} onClick={()=>{setLoaded(false);setAgent(id);}}>{label}</button>)}</div>
+    <p role="status" aria-live="polite" style={{margin:0}}>{loaded?'可在下方查看场景对比。':'正在加载新场景对比…'}</p>
+    <a className="subtle-button" href={source} target="_blank" rel="noreferrer">单独打开对比页 <ExternalLink size={14}/></a>
+   </div>

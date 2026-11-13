@@ -1,0 +1,75 @@
+{
+ "_doc": "Agent B (Opus 5.5) ground parameters. ring_center/plaza radii: circle fit to the camera loop and the plaza band in the orthophoto; rotunda centre/radius: measured (runs/layout/rotunda_measured.json).",
+ "ring_center": [
+  167.13,
+  5.67
+ ],
+ "plaza_mid_r": 104.9,
+ "plaza_inner_r": 98.5,
+ "plaza_outer_r": 113.0,
+ "rotunda_center": [
+  106.26,
+  -1.13
+ ],
+ "rotunda_radius": 38.83,
+ "rotunda_apron_m": 5.0,
+ "spur_x_max": 55.0,
+ "spur_far": [
+  20.0,
+  0.0
+ ],
+ "site_radius": 1500.0,
+ "height_smooth_m": 3.0,
+ "z_offsets": {
+  "road": -0.12,
+  "curb": 0.03,
+  "plaza": 0.0,
+  "path": 0.005,
+  "lawn": 0.03,
+  "base": -0.25,
+  "sidewalk": 0.03,
+  "far": -0.6
+ },
+ "min_region_m2": {
+  "road": 6.0,
+  "curb": 0.6,
+  "plaza": 6.0,
+  "path": 2.0,
+  "lawn": 6.0
+ },
+ "max_tri_area": {
+  "road": 1.5,
+  "curb": 0.5,
+  "plaza": 1.5,
+  "path": 1.0,
+  "lawn": 1.5,
+  "base": 4.0,
+  "sidewalk": 0.6,
+  "far": 2000.0
+ },
+ "skirted": [
+  "lawn",
+  "sidewalk"
+ ],
+ "marking_white_lum": 165,
+ "yellow_offset": 0.3,
+ "sw_road": {
+  "_doc": "parametric road along the observed lawn-side kerb line (polar around ring_center); far half and far sidewalk are INFERRED",
+  "phi_deg": [
+   -166,
+   -62
+  ],
+  "sidewalk_w": 1.8,
+  "kerb_w": 0.15,
+  "road_w": 7.0,
+  "far_sidewalk_w": 2.5
+ },
+ "rotunda_road": {
+  "_doc": "road hugging the rotunda apron (polar around rotunda centre); kerb radius measured ~46-47 m",
+  "phi_deg": [
+   -180,
+   -148
+  ]
+ },
+ "near_site_radius": 220.0
+}

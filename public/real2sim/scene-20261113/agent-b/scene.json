@@ -1,0 +1,5948 @@
+{
+ "scene_id": "real2sim/scene-20261113/agent-b",
+ "groups": [
+  {
+   "instance_id": "grp_ground",
+   "asset_id": null,
+   "category": "group",
+   "parent": null,
+   "position": [
+    0,
+    0,
+    0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "grp_buildings",
+   "asset_id": null,
+   "category": "group",
+   "parent": null,
+   "position": [
+    0,
+    0,
+    0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "grp_trees",
+   "asset_id": null,
+   "category": "group",
+   "parent": null,
+   "position": [
+    0,
+    0,
+    0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "grp_props",
+   "asset_id": null,
+   "category": "group",
+   "parent": null,
+   "position": [
+    0,
+    0,
+    0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "instances": [
+  {
+   "instance_id": "inst_road_01",
+   "asset_id": "road_01",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    130.012,
+    -76.645,
+    -0.537
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/road_01/road_01_research.blend",
+    "research_glb": "assets/ground/road_01/road_01_research.glb",
+    "web_blend": "assets/ground/road_01/road_01_web.blend",
+    "web_gltf": "assets/web/road_01.gltf",
+    "source_json": "assets/ground/road_01/road_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_road_02",
+   "asset_id": "road_02",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    26.459,
+    -2.727,
+    0.305
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/road_02/road_02_research.blend",
+    "research_glb": "assets/ground/road_02/road_02_research.glb",
+    "web_blend": "assets/ground/road_02/road_02_web.blend",
+    "web_gltf": "assets/web/road_02.gltf",
+    "source_json": "assets/ground/road_02/road_02_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_road_03",
+   "asset_id": "road_03",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    58.653,
+    -14.686,
+    -0.658
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/road_03/road_03_research.blend",
+    "research_glb": "assets/ground/road_03/road_03_research.glb",
+    "web_blend": "assets/ground/road_03/road_03_web.blend",
+    "web_gltf": "assets/web/road_03.gltf",
+    "source_json": "assets/ground/road_03/road_03_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_road_04",
+   "asset_id": "road_04",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    97.091,
+    71.74,
+    -0.386
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/road_04/road_04_research.blend",
+    "research_glb": "assets/ground/road_04/road_04_research.glb",
+    "web_blend": "assets/ground/road_04/road_04_web.blend",
+    "web_gltf": "assets/web/road_04.gltf",
+    "source_json": "assets/ground/road_04/road_04_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_road_05",
+   "asset_id": "road_05",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    55.802,
+    0.564,
+    -0.227
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/road_05/road_05_research.blend",
+    "research_glb": "assets/ground/road_05/road_05_research.glb",
+    "web_blend": "assets/ground/road_05/road_05_web.blend",
+    "web_gltf": "assets/web/road_05.gltf",
+    "source_json": "assets/ground/road_05/road_05_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_road_06",
+   "asset_id": "road_06",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    217.405,
+    -84.905,
+    -0.227
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/road_06/road_06_research.blend",
+    "research_glb": "assets/ground/road_06/road_06_research.glb",
+    "web_blend": "assets/ground/road_06/road_06_web.blend",
+    "web_gltf": "assets/web/road_06.gltf",
+    "source_json": "assets/ground/road_06/road_06_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_01",
+   "asset_id": "curb_01",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    128.765,
+    -79.448,
+    -0.374
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_01/curb_01_research.blend",
+    "research_glb": "assets/ground/curb_01/curb_01_research.glb",
+    "web_blend": "assets/ground/curb_01/curb_01_web.blend",
+    "web_gltf": "assets/web/curb_01.gltf",
+    "source_json": "assets/ground/curb_01/curb_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_02",
+   "asset_id": "curb_02",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    131.288,
+    -73.78,
+    -0.398
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_02/curb_02_research.blend",
+    "research_glb": "assets/ground/curb_02/curb_02_research.glb",
+    "web_blend": "assets/ground/curb_02/curb_02_web.blend",
+    "web_gltf": "assets/web/curb_02.gltf",
+    "source_json": "assets/ground/curb_02/curb_02_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_03",
+   "asset_id": "curb_03",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    33.073,
+    3.108,
+    0.346
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_03/curb_03_research.blend",
+    "research_glb": "assets/ground/curb_03/curb_03_research.glb",
+    "web_blend": "assets/ground/curb_03/curb_03_web.blend",
+    "web_gltf": "assets/web/curb_03.gltf",
+    "source_json": "assets/ground/curb_03/curb_03_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_04",
+   "asset_id": "curb_04",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    9.316,
+    -3.787,
+    0.498
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_04/curb_04_research.blend",
+    "research_glb": "assets/ground/curb_04/curb_04_research.glb",
+    "web_blend": "assets/ground/curb_04/curb_04_web.blend",
+    "web_gltf": "assets/web/curb_04.gltf",
+    "source_json": "assets/ground/curb_04/curb_04_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_05",
+   "asset_id": "curb_05",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    61.691,
+    -11.746,
+    -0.755
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_05/curb_05_research.blend",
+    "research_glb": "assets/ground/curb_05/curb_05_research.glb",
+    "web_blend": "assets/ground/curb_05/curb_05_web.blend",
+    "web_gltf": "assets/web/curb_05.gltf",
+    "source_json": "assets/ground/curb_05/curb_05_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_06",
+   "asset_id": "curb_06",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    55.339,
+    -15.637,
+    -0.123
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_06/curb_06_research.blend",
+    "research_glb": "assets/ground/curb_06/curb_06_research.glb",
+    "web_blend": "assets/ground/curb_06/curb_06_web.blend",
+    "web_gltf": "assets/web/curb_06.gltf",
+    "source_json": "assets/ground/curb_06/curb_06_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_07",
+   "asset_id": "curb_07",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    35.72,
+    -7.939,
+    0.743
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_07/curb_07_research.blend",
+    "research_glb": "assets/ground/curb_07/curb_07_research.glb",
+    "web_blend": "assets/ground/curb_07/curb_07_web.blend",
+    "web_gltf": "assets/web/curb_07.gltf",
+    "source_json": "assets/ground/curb_07/curb_07_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_08",
+   "asset_id": "curb_08",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    264.745,
+    -14.677,
+    -0.001
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_08/curb_08_research.blend",
+    "research_glb": "assets/ground/curb_08/curb_08_research.glb",
+    "web_blend": "assets/ground/curb_08/curb_08_web.blend",
+    "web_gltf": "assets/web/curb_08.gltf",
+    "source_json": "assets/ground/curb_08/curb_08_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_09",
+   "asset_id": "curb_09",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    62.122,
+    -13.692,
+    -0.746
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_09/curb_09_research.blend",
+    "research_glb": "assets/ground/curb_09/curb_09_research.glb",
+    "web_blend": "assets/ground/curb_09/curb_09_web.blend",
+    "web_gltf": "assets/web/curb_09.gltf",
+    "source_json": "assets/ground/curb_09/curb_09_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_10",
+   "asset_id": "curb_10",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    135.026,
+    98.667,
+    -0.383
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_10/curb_10_research.blend",
+    "research_glb": "assets/ground/curb_10/curb_10_research.glb",
+    "web_blend": "assets/ground/curb_10/curb_10_web.blend",
+    "web_gltf": "assets/web/curb_10.gltf",
+    "source_json": "assets/ground/curb_10/curb_10_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_11",
+   "asset_id": "curb_11",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    60.079,
+    -3.347,
+    -0.143
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_11/curb_11_research.blend",
+    "research_glb": "assets/ground/curb_11/curb_11_research.glb",
+    "web_blend": "assets/ground/curb_11/curb_11_web.blend",
+    "web_gltf": "assets/web/curb_11.gltf",
+    "source_json": "assets/ground/curb_11/curb_11_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_12",
+   "asset_id": "curb_12",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    29.831,
+    -7.841,
+    0.611
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_12/curb_12_research.blend",
+    "research_glb": "assets/ground/curb_12/curb_12_research.glb",
+    "web_blend": "assets/ground/curb_12/curb_12_web.blend",
+    "web_gltf": "assets/web/curb_12.gltf",
+    "source_json": "assets/ground/curb_12/curb_12_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_13",
+   "asset_id": "curb_13",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    265.843,
+    -6.136,
+    -0.049
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_13/curb_13_research.blend",
+    "research_glb": "assets/ground/curb_13/curb_13_research.glb",
+    "web_blend": "assets/ground/curb_13/curb_13_web.blend",
+    "web_gltf": "assets/web/curb_13.gltf",
+    "source_json": "assets/ground/curb_13/curb_13_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_curb_14",
+   "asset_id": "curb_14",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    265.633,
+    -8.546,
+    -0.041
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/curb_14/curb_14_research.blend",
+    "research_glb": "assets/ground/curb_14/curb_14_research.glb",
+    "web_blend": "assets/ground/curb_14/curb_14_web.blend",
+    "web_gltf": "assets/web/curb_14.gltf",
+    "source_json": "assets/ground/curb_14/curb_14_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_plaza_01",
+   "asset_id": "plaza_01",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    123.615,
+    10.622,
+    -0.1
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/plaza_01/plaza_01_research.blend",
+    "research_glb": "assets/ground/plaza_01/plaza_01_research.glb",
+    "web_blend": "assets/ground/plaza_01/plaza_01_web.blend",
+    "web_gltf": "assets/web/plaza_01.gltf",
+    "source_json": "assets/ground/plaza_01/plaza_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_plaza_02",
+   "asset_id": "plaza_02",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    207.126,
+    -85.527,
+    -0.22
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/plaza_02/plaza_02_research.blend",
+    "research_glb": "assets/ground/plaza_02/plaza_02_research.glb",
+    "web_blend": "assets/ground/plaza_02/plaza_02_web.blend",
+    "web_gltf": "assets/web/plaza_02.gltf",
+    "source_json": "assets/ground/plaza_02/plaza_02_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_plaza_03",
+   "asset_id": "plaza_03",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    170.149,
+    -93.557,
+    -0.424
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/plaza_03/plaza_03_research.blend",
+    "research_glb": "assets/ground/plaza_03/plaza_03_research.glb",
+    "web_blend": "assets/ground/plaza_03/plaza_03_web.blend",
+    "web_gltf": "assets/web/plaza_03.gltf",
+    "source_json": "assets/ground/plaza_03/plaza_03_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_01",
+   "asset_id": "path_01",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    228.187,
+    70.024,
+    -0.086
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_01/path_01_research.blend",
+    "research_glb": "assets/ground/path_01/path_01_research.glb",
+    "web_blend": "assets/ground/path_01/path_01_web.blend",
+    "web_gltf": "assets/web/path_01.gltf",
+    "source_json": "assets/ground/path_01/path_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_02",
+   "asset_id": "path_02",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    128.289,
+    90.976,
+    -0.279
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_02/path_02_research.blend",
+    "research_glb": "assets/ground/path_02/path_02_research.glb",
+    "web_blend": "assets/ground/path_02/path_02_web.blend",
+    "web_gltf": "assets/web/path_02.gltf",
+    "source_json": "assets/ground/path_02/path_02_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_03",
+   "asset_id": "path_03",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    258.879,
+    12.841,
+    -0.109
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_03/path_03_research.blend",
+    "research_glb": "assets/ground/path_03/path_03_research.glb",
+    "web_blend": "assets/ground/path_03/path_03_web.blend",
+    "web_gltf": "assets/web/path_03.gltf",
+    "source_json": "assets/ground/path_03/path_03_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_04",
+   "asset_id": "path_04",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    82.596,
+    -40.828,
+    -0.891
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_04/path_04_research.blend",
+    "research_glb": "assets/ground/path_04/path_04_research.glb",
+    "web_blend": "assets/ground/path_04/path_04_web.blend",
+    "web_gltf": "assets/web/path_04.gltf",
+    "source_json": "assets/ground/path_04/path_04_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_05",
+   "asset_id": "path_05",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    254.761,
+    -30.236,
+    0.135
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_05/path_05_research.blend",
+    "research_glb": "assets/ground/path_05/path_05_research.glb",
+    "web_blend": "assets/ground/path_05/path_05_web.blend",
+    "web_gltf": "assets/web/path_05.gltf",
+    "source_json": "assets/ground/path_05/path_05_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_06",
+   "asset_id": "path_06",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    100.432,
+    70.439,
+    -0.231
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_06/path_06_research.blend",
+    "research_glb": "assets/ground/path_06/path_06_research.glb",
+    "web_blend": "assets/ground/path_06/path_06_web.blend",
+    "web_gltf": "assets/web/path_06.gltf",
+    "source_json": "assets/ground/path_06/path_06_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_07",
+   "asset_id": "path_07",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    237.705,
+    -60.598,
+    -0.034
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_07/path_07_research.blend",
+    "research_glb": "assets/ground/path_07/path_07_research.glb",
+    "web_blend": "assets/ground/path_07/path_07_web.blend",
+    "web_gltf": "assets/web/path_07.gltf",
+    "source_json": "assets/ground/path_07/path_07_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_08",
+   "asset_id": "path_08",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    205.886,
+    -82.758,
+    -0.148
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_08/path_08_research.blend",
+    "research_glb": "assets/ground/path_08/path_08_research.glb",
+    "web_blend": "assets/ground/path_08/path_08_web.blend",
+    "web_gltf": "assets/web/path_08.gltf",
+    "source_json": "assets/ground/path_08/path_08_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_09",
+   "asset_id": "path_09",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    170.566,
+    -91.815,
+    -0.362
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_09/path_09_research.blend",
+    "research_glb": "assets/ground/path_09/path_09_research.glb",
+    "web_blend": "assets/ground/path_09/path_09_web.blend",
+    "web_gltf": "assets/web/path_09.gltf",
+    "source_json": "assets/ground/path_09/path_09_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_path_10",
+   "asset_id": "path_10",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    248.33,
+    11.628,
+    0.033
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_10/path_10_research.blend",
+    "research_glb": "assets/ground/path_10/path_10_research.glb",
+    "web_blend": "assets/ground/path_10/path_10_web.blend",
+    "web_gltf": "assets/web/path_10.gltf",
+    "source_json": "assets/ground/path_10/path_10_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_lawn_01",
+   "asset_id": "lawn_01",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    180.761,
+    4.995,
+    -0.155
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/lawn_01/lawn_01_research.blend",
+    "research_glb": "assets/ground/lawn_01/lawn_01_research.glb",
+    "web_blend": "assets/ground/lawn_01/lawn_01_web.blend",
+    "web_gltf": "assets/web/lawn_01.gltf",
+    "source_json": "assets/ground/lawn_01/lawn_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_lawn_02",
+   "asset_id": "lawn_02",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    32.482,
+    -13.661,
+    0.856
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/lawn_02/lawn_02_research.blend",
+    "research_glb": "assets/ground/lawn_02/lawn_02_research.glb",
+    "web_blend": "assets/ground/lawn_02/lawn_02_web.blend",
+    "web_gltf": "assets/web/lawn_02.gltf",
+    "source_json": "assets/ground/lawn_02/lawn_02_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_lawn_03",
+   "asset_id": "lawn_03",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    37.087,
+    5.326,
+    0.336
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/lawn_03/lawn_03_research.blend",
+    "research_glb": "assets/ground/lawn_03/lawn_03_research.glb",
+    "web_blend": "assets/ground/lawn_03/lawn_03_web.blend",
+    "web_gltf": "assets/web/lawn_03.gltf",
+    "source_json": "assets/ground/lawn_03/lawn_03_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_lawn_04",
+   "asset_id": "lawn_04",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    11.903,
+    -6.845,
+    0.532
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/lawn_04/lawn_04_research.blend",
+    "research_glb": "assets/ground/lawn_04/lawn_04_research.glb",
+    "web_blend": "assets/ground/lawn_04/lawn_04_web.blend",
+    "web_gltf": "assets/web/lawn_04.gltf",
+    "source_json": "assets/ground/lawn_04/lawn_04_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_sidewalk_01",
+   "asset_id": "sidewalk_01",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    128.295,
+    -80.502,
+    -0.353
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/sidewalk_01/sidewalk_01_research.blend",
+    "research_glb": "assets/ground/sidewalk_01/sidewalk_01_research.glb",
+    "web_blend": "assets/ground/sidewalk_01/sidewalk_01_web.blend",
+    "web_gltf": "assets/web/sidewalk_01.gltf",
+    "source_json": "assets/ground/sidewalk_01/sidewalk_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_sidewalk_02",
+   "asset_id": "sidewalk_02",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    131.631,
+    -73.009,
+    -0.349
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/sidewalk_02/sidewalk_02_research.blend",
+    "research_glb": "assets/ground/sidewalk_02/sidewalk_02_research.glb",
+    "web_blend": "assets/ground/sidewalk_02/sidewalk_02_web.blend",
+    "web_gltf": "assets/web/sidewalk_02.gltf",
+    "source_json": "assets/ground/sidewalk_02/sidewalk_02_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_sidewalk_03",
+   "asset_id": "sidewalk_03",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    54.073,
+    -16.0,
+    0.169
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/sidewalk_03/sidewalk_03_research.blend",
+    "research_glb": "assets/ground/sidewalk_03/sidewalk_03_research.glb",
+    "web_blend": "assets/ground/sidewalk_03/sidewalk_03_web.blend",
+    "web_gltf": "assets/web/sidewalk_03.gltf",
+    "source_json": "assets/ground/sidewalk_03/sidewalk_03_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_terrain_base",
+   "asset_id": "terrain_base",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    167.13,
+    5.67,
+    -0.26
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/terrain_base/terrain_base_research.blend",
+    "research_glb": "assets/ground/terrain_base/terrain_base_research.glb",
+    "web_blend": "assets/ground/terrain_base/terrain_base_web.blend",
+    "web_gltf": "assets/web/terrain_base.gltf",
+    "source_json": "assets/ground/terrain_base/terrain_base_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_terrain_far",
+   "asset_id": "terrain_far",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    167.13,
+    5.67,
+    -0.534
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/terrain_far/terrain_far_research.blend",
+    "research_glb": "assets/ground/terrain_far/terrain_far_research.glb",
+    "web_blend": "assets/ground/terrain_far/terrain_far_web.blend",
+    "web_gltf": "assets/web/terrain_far.gltf",
+    "source_json": "assets/ground/terrain_far/terrain_far_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_road_markings",
+   "asset_id": "road_markings",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    20.0,
+    0.0,
+    0.0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/road_markings/road_markings_research.blend",
+    "research_glb": "assets/ground/road_markings/road_markings_research.glb",
+    "web_blend": "assets/ground/road_markings/road_markings_web.blend",
+    "web_gltf": "assets/web/road_markings.gltf",
+    "source_json": "assets/ground/road_markings/road_markings_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_bldg_far_01",
+   "asset_id": "bldg_far_01",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position": [
+    152.742,
+    -182.395,
+    0.124
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/buildings/bldg_far_01/bldg_far_01_research.blend",
+    "research_glb": "assets/buildings/bldg_far_01/bldg_far_01_research.glb",
+    "web_blend": "assets/buildings/bldg_far_01/bldg_far_01_web.blend",
+    "web_gltf": "assets/web/bldg_far_01.gltf",
+    "source_json": "assets/buildings/bldg_far_01/bldg_far_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_bldg_far_02",
+   "asset_id": "bldg_far_02",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position": [
+    97.646,
+    -123.701,
+    0.124
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/buildings/bldg_far_02/bldg_far_02_research.blend",
+    "research_glb": "assets/buildings/bldg_far_02/bldg_far_02_research.glb",
+    "web_blend": "assets/buildings/bldg_far_02/bldg_far_02_web.blend",
+    "web_gltf": "assets/web/bldg_far_02.gltf",
+    "source_json": "assets/buildings/bldg_far_02/bldg_far_02_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_bldg_far_03",
+   "asset_id": "bldg_far_03",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position": [
+    76.804,
+    -106.457,
+    0.124
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/buildings/bldg_far_03/bldg_far_03_research.blend",
+    "research_glb": "assets/buildings/bldg_far_03/bldg_far_03_research.glb",
+    "web_blend": "assets/buildings/bldg_far_03/bldg_far_03_web.blend",
+    "web_gltf": "assets/web/bldg_far_03.gltf",
+    "source_json": "assets/buildings/bldg_far_03/bldg_far_03_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_bldg_near_01",
+   "asset_id": "bldg_near_01",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position": [
+    49.961,
+    28.282,
+    -0.378
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/buildings/bldg_near_01/bldg_near_01_research.blend",
+    "research_glb": "assets/buildings/bldg_near_01/bldg_near_01_research.glb",
+    "web_blend": "assets/buildings/bldg_near_01/bldg_near_01_web.blend",
+    "web_gltf": "assets/web/bldg_near_01.gltf",
+    "source_json": "assets/buildings/bldg_near_01/bldg_near_01_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_bldg_rotunda",
+   "asset_id": "bldg_rotunda",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position": [
+    106.259,
+    -1.131,
+    -0.534
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/buildings/bldg_rotunda/bldg_rotunda_research.blend",
+    "research_glb": "assets/buildings/bldg_rotunda/bldg_rotunda_research.glb",
+    "web_blend": "assets/buildings/bldg_rotunda/bldg_rotunda_web.blend",
+    "web_gltf": "assets/web/bldg_rotunda.gltf",
+    "source_json": "assets/buildings/bldg_rotunda/bldg_rotunda_research.json"
+   }
+  },
+  {
+   "instance_id": "inst_tree_00_broadleaf",
+   "asset_id": "tree_00_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    41.72037124633789,
+    4.341140270233154,
+    0.446480929851532
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_00_broadleaf/tree_00_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_00_broadleaf/tree_00_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_00_broadleaf/tree_00_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_00_broadleaf.gltf",
+    "source_json": "assets/trees/tree_00_broadleaf/tree_00_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.71
+  },
+  {
+   "instance_id": "inst_tree_01_purple_plum",
+   "asset_id": "tree_01_purple_plum",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    31.32388687133789,
+    -9.070048332214355,
+    0.5643749237060547
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_01_purple_plum/tree_01_purple_plum_research.blend",
+    "research_glb": "assets/trees/tree_01_purple_plum/tree_01_purple_plum_research.glb",
+    "web_blend": "assets/trees/tree_01_purple_plum/tree_01_purple_plum_web.blend",
+    "web_gltf": "assets/web/tree_01_purple_plum.gltf",
+    "source_json": "assets/trees/tree_01_purple_plum/tree_01_purple_plum_research.json"
+   },
+   "species_preset": "purple_plum",
+   "height_m": 9.77
+  },
+  {
+   "instance_id": "inst_tree_02_purple_plum",
+   "asset_id": "tree_02_purple_plum",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    38.40626525878906,
+    -9.988578796386719,
+    0.7078492045402527
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_02_purple_plum/tree_02_purple_plum_research.blend",
+    "research_glb": "assets/trees/tree_02_purple_plum/tree_02_purple_plum_research.glb",
+    "web_blend": "assets/trees/tree_02_purple_plum/tree_02_purple_plum_web.blend",
+    "web_gltf": "assets/web/tree_02_purple_plum.gltf",
+    "source_json": "assets/trees/tree_02_purple_plum/tree_02_purple_plum_research.json"
+   },
+   "species_preset": "purple_plum",
+   "height_m": 9.87
+  },
+  {
+   "instance_id": "inst_tree_03_purple_plum",
+   "asset_id": "tree_03_purple_plum",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    47.8531494140625,
+    -11.934036254882812,
+    0.7532951235771179
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_03_purple_plum/tree_03_purple_plum_research.blend",
+    "research_glb": "assets/trees/tree_03_purple_plum/tree_03_purple_plum_research.glb",
+    "web_blend": "assets/trees/tree_03_purple_plum/tree_03_purple_plum_web.blend",
+    "web_gltf": "assets/web/tree_03_purple_plum.gltf",
+    "source_json": "assets/trees/tree_03_purple_plum/tree_03_purple_plum_research.json"
+   },
+   "species_preset": "purple_plum",
+   "height_m": 9.98
+  },
+  {
+   "instance_id": "inst_tree_04_ginkgo_young",
+   "asset_id": "tree_04_ginkgo_young",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    95.68910217285156,
+    -52.604469299316406,
+    -0.4993615448474884
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_04_ginkgo_young/tree_04_ginkgo_young_research.blend",
+    "research_glb": "assets/trees/tree_04_ginkgo_young/tree_04_ginkgo_young_research.glb",
+    "web_blend": "assets/trees/tree_04_ginkgo_young/tree_04_ginkgo_young_web.blend",
+    "web_gltf": "assets/web/tree_04_ginkgo_young.gltf",
+    "source_json": "assets/trees/tree_04_ginkgo_young/tree_04_ginkgo_young_research.json"
+   },
+   "species_preset": "ginkgo_young",
+   "height_m": 13.97
+  },
+  {
+   "instance_id": "inst_tree_05_ginkgo_young",
+   "asset_id": "tree_05_ginkgo_young",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    98.23619842529297,
+    -58.26738357543945,
+    -0.3883056044578552
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_05_ginkgo_young/tree_05_ginkgo_young_research.blend",
+    "research_glb": "assets/trees/tree_05_ginkgo_young/tree_05_ginkgo_young_research.glb",
+    "web_blend": "assets/trees/tree_05_ginkgo_young/tree_05_ginkgo_young_web.blend",
+    "web_gltf": "assets/web/tree_05_ginkgo_young.gltf",
+    "source_json": "assets/trees/tree_05_ginkgo_young/tree_05_ginkgo_young_research.json"
+   },
+   "species_preset": "ginkgo_young",
+   "height_m": 10.92
+  },
+  {
+   "instance_id": "inst_tree_06_ginkgo_young",
+   "asset_id": "tree_06_ginkgo_young",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    108.54389953613281,
+    -61.83046340942383,
+    -0.15366655588150024
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_06_ginkgo_young/tree_06_ginkgo_young_research.blend",
+    "research_glb": "assets/trees/tree_06_ginkgo_young/tree_06_ginkgo_young_research.glb",
+    "web_blend": "assets/trees/tree_06_ginkgo_young/tree_06_ginkgo_young_web.blend",
+    "web_gltf": "assets/web/tree_06_ginkgo_young.gltf",
+    "source_json": "assets/trees/tree_06_ginkgo_young/tree_06_ginkgo_young_research.json"
+   },
+   "species_preset": "ginkgo_young",
+   "height_m": 13.45
+  },
+  {
+   "instance_id": "inst_tree_07_ginkgo_young",
+   "asset_id": "tree_07_ginkgo_young",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    110.10285186767578,
+    -72.06718444824219,
+    -0.14063557982444763
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.blend",
+    "research_glb": "assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.glb",
+    "web_blend": "assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_web.blend",
+    "web_gltf": "assets/web/tree_07_ginkgo_young.gltf",
+    "source_json": "assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.json"
+   },
+   "species_preset": "ginkgo_young",
+   "height_m": 6.84
+  },
+  {
+   "instance_id": "inst_tree_08_ginkgo_young",
+   "asset_id": "tree_08_ginkgo_young",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    114.57429504394531,
+    -66.92572784423828,
+    -0.033621013164520264
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.blend",
+    "research_glb": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.glb",
+    "web_blend": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_web.blend",
+    "web_gltf": "assets/web/tree_08_ginkgo_young.gltf",
+    "source_json": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.json"
+   },
+   "species_preset": "ginkgo_young",
+   "height_m": 10.92
+  },
+  {
+   "instance_id": "inst_tree_09_red_maple",
+   "asset_id": "tree_09_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    177.76266479492188,
+    -86.32107543945312,
+    -0.012987155467271805
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_09_red_maple/tree_09_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_09_red_maple/tree_09_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_09_red_maple/tree_09_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_09_red_maple.gltf",
+    "source_json": "assets/trees/tree_09_red_maple/tree_09_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 3.99
+  },
+  {
+   "instance_id": "inst_tree_10_red_maple",
+   "asset_id": "tree_10_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    175.7815704345703,
+    -78.70263671875,
+    0.273864209651947
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_10_red_maple/tree_10_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_10_red_maple/tree_10_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_10_red_maple/tree_10_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_10_red_maple.gltf",
+    "source_json": "assets/trees/tree_10_red_maple/tree_10_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 6.72
+  },
+  {
+   "instance_id": "inst_tree_11_red_maple",
+   "asset_id": "tree_11_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    179.44424438476562,
+    -85.5559310913086,
+    0.05434936657547951
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_11_red_maple/tree_11_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_11_red_maple/tree_11_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_11_red_maple/tree_11_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_11_red_maple.gltf",
+    "source_json": "assets/trees/tree_11_red_maple/tree_11_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 6.09
+  },
+  {
+   "instance_id": "inst_tree_12_red_maple",
+   "asset_id": "tree_12_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    178.56219482421875,
+    -74.07372283935547,
+    0.48054492473602295
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_12_red_maple/tree_12_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_12_red_maple/tree_12_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_12_red_maple/tree_12_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_12_red_maple.gltf",
+    "source_json": "assets/trees/tree_12_red_maple/tree_12_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 5.65
+  },
+  {
+   "instance_id": "inst_tree_13_red_maple",
+   "asset_id": "tree_13_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    181.03656005859375,
+    -76.83828735351562,
+    0.4423369765281677
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_13_red_maple/tree_13_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_13_red_maple/tree_13_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_13_red_maple/tree_13_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_13_red_maple.gltf",
+    "source_json": "assets/trees/tree_13_red_maple/tree_13_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 7.35
+  },
+  {
+   "instance_id": "inst_tree_14_red_maple",
+   "asset_id": "tree_14_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    187.3842010498047,
+    -75.31578063964844,
+    0.45168164372444153
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_14_red_maple/tree_14_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_14_red_maple/tree_14_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_14_red_maple/tree_14_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_14_red_maple.gltf",
+    "source_json": "assets/trees/tree_14_red_maple/tree_14_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 6.98
+  },
+  {
+   "instance_id": "inst_tree_15_red_maple",
+   "asset_id": "tree_15_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    186.395263671875,
+    -72.93284606933594,
+    0.5172314643859863
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_15_red_maple/tree_15_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_15_red_maple/tree_15_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_15_red_maple/tree_15_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_15_red_maple.gltf",
+    "source_json": "assets/trees/tree_15_red_maple/tree_15_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 7.43
+  },
+  {
+   "instance_id": "inst_tree_16_red_maple",
+   "asset_id": "tree_16_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    193.7664794921875,
+    -84.74571228027344,
+    0.09023726731538773
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_16_red_maple/tree_16_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_16_red_maple/tree_16_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_16_red_maple/tree_16_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_16_red_maple.gltf",
+    "source_json": "assets/trees/tree_16_red_maple/tree_16_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 7.14
+  },
+  {
+   "instance_id": "inst_tree_17_red_maple",
+   "asset_id": "tree_17_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    196.18544006347656,
+    -79.00491333007812,
+    0.20545810461044312
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_17_red_maple/tree_17_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_17_red_maple/tree_17_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_17_red_maple/tree_17_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_17_red_maple.gltf",
+    "source_json": "assets/trees/tree_17_red_maple/tree_17_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 8.09
+  },
+  {
+   "instance_id": "inst_tree_18_red_maple",
+   "asset_id": "tree_18_red_maple",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    210.583984375,
+    -82.94914245605469,
+    -0.179396852850914
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_18_red_maple/tree_18_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_18_red_maple/tree_18_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_18_red_maple/tree_18_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_18_red_maple.gltf",
+    "source_json": "assets/trees/tree_18_red_maple/tree_18_red_maple_research.json"
+   },
+   "species_preset": "red_maple",
+   "height_m": 6.09
+  },
+  {
+   "instance_id": "inst_tree_19_broadleaf",
+   "asset_id": "tree_19_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    209.6305694580078,
+    -81.2162094116211,
+    -0.0728619396686554
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_19_broadleaf.gltf",
+    "source_json": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 11.13
+  },
+  {
+   "instance_id": "inst_tree_20_camphor",
+   "asset_id": "tree_20_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    203.37213134765625,
+    -66.98396301269531,
+    0.28749948740005493
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_20_camphor/tree_20_camphor_research.blend",
+    "research_glb": "assets/trees/tree_20_camphor/tree_20_camphor_research.glb",
+    "web_blend": "assets/trees/tree_20_camphor/tree_20_camphor_web.blend",
+    "web_gltf": "assets/web/tree_20_camphor.gltf",
+    "source_json": "assets/trees/tree_20_camphor/tree_20_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 12.82
+  },
+  {
+   "instance_id": "inst_tree_21_camphor",
+   "asset_id": "tree_21_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    207.09864807128906,
+    -67.7550277709961,
+    0.4368976950645447
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_21_camphor/tree_21_camphor_research.blend",
+    "research_glb": "assets/trees/tree_21_camphor/tree_21_camphor_research.glb",
+    "web_blend": "assets/trees/tree_21_camphor/tree_21_camphor_web.blend",
+    "web_gltf": "assets/web/tree_21_camphor.gltf",
+    "source_json": "assets/trees/tree_21_camphor/tree_21_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 9.16
+  },
+  {
+   "instance_id": "inst_tree_22_camphor",
+   "asset_id": "tree_22_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    217.35818481445312,
+    -71.4891357421875,
+    0.38004034757614136
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_22_camphor/tree_22_camphor_research.blend",
+    "research_glb": "assets/trees/tree_22_camphor/tree_22_camphor_research.glb",
+    "web_blend": "assets/trees/tree_22_camphor/tree_22_camphor_web.blend",
+    "web_gltf": "assets/web/tree_22_camphor.gltf",
+    "source_json": "assets/trees/tree_22_camphor/tree_22_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 12.5
+  },
+  {
+   "instance_id": "inst_tree_23_camphor",
+   "asset_id": "tree_23_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    223.0930938720703,
+    -77.56263732910156,
+    -0.13433220982551575
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_23_camphor/tree_23_camphor_research.blend",
+    "research_glb": "assets/trees/tree_23_camphor/tree_23_camphor_research.glb",
+    "web_blend": "assets/trees/tree_23_camphor/tree_23_camphor_web.blend",
+    "web_gltf": "assets/web/tree_23_camphor.gltf",
+    "source_json": "assets/trees/tree_23_camphor/tree_23_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 7.35
+  },
+  {
+   "instance_id": "inst_tree_24_broadleaf",
+   "asset_id": "tree_24_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    228.64303588867188,
+    -68.40381622314453,
+    0.2302737683057785
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_24_broadleaf/tree_24_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_24_broadleaf.gltf",
+    "source_json": "assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 13.03
+  },
+  {
+   "instance_id": "inst_tree_25_broadleaf",
+   "asset_id": "tree_25_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    241.923828125,
+    -53.40222930908203,
+    0.09082090109586716
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_25_broadleaf/tree_25_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_25_broadleaf.gltf",
+    "source_json": "assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 13.24
+  },
+  {
+   "instance_id": "inst_tree_26_broadleaf",
+   "asset_id": "tree_26_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    232.54515075683594,
+    -46.7744140625,
+    0.218634694814682
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_26_broadleaf/tree_26_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_26_broadleaf/tree_26_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_26_broadleaf/tree_26_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_26_broadleaf.gltf",
+    "source_json": "assets/trees/tree_26_broadleaf/tree_26_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 14.08
+  },
+  {
+   "instance_id": "inst_tree_27_broadleaf",
+   "asset_id": "tree_27_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    251.32635498046875,
+    -47.01268768310547,
+    -0.021701611578464508
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_27_broadleaf/tree_27_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_27_broadleaf/tree_27_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_27_broadleaf/tree_27_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_27_broadleaf.gltf",
+    "source_json": "assets/trees/tree_27_broadleaf/tree_27_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 6.34
+  },
+  {
+   "instance_id": "inst_tree_28_broadleaf",
+   "asset_id": "tree_28_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    251.51414489746094,
+    -37.24910354614258,
+    0.41973140835762024
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_28_broadleaf/tree_28_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_28_broadleaf/tree_28_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_28_broadleaf/tree_28_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_28_broadleaf.gltf",
+    "source_json": "assets/trees/tree_28_broadleaf/tree_28_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.92
+  },
+  {
+   "instance_id": "inst_tree_29_broadleaf",
+   "asset_id": "tree_29_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    246.54808044433594,
+    -34.892539978027344,
+    0.5249016880989075
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_29_broadleaf/tree_29_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_29_broadleaf.gltf",
+    "source_json": "assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.92
+  },
+  {
+   "instance_id": "inst_tree_30_broadleaf",
+   "asset_id": "tree_30_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    250.6929931640625,
+    -26.38400650024414,
+    0.243258997797966
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_30_broadleaf/tree_30_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_30_broadleaf.gltf",
+    "source_json": "assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 9.98
+  },
+  {
+   "instance_id": "inst_tree_31_broadleaf",
+   "asset_id": "tree_31_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    250.95074462890625,
+    -23.879316329956055,
+    0.2815147936344147
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_31_broadleaf/tree_31_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_31_broadleaf.gltf",
+    "source_json": "assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.08
+  },
+  {
+   "instance_id": "inst_tree_32_broadleaf",
+   "asset_id": "tree_32_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    243.33131408691406,
+    -20.04648208618164,
+    0.5721944570541382
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_32_broadleaf/tree_32_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_32_broadleaf.gltf",
+    "source_json": "assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 9.45
+  },
+  {
+   "instance_id": "inst_tree_33_broadleaf",
+   "asset_id": "tree_33_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    257.56439208984375,
+    -19.255258560180664,
+    0.16526669263839722
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_33_broadleaf/tree_33_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_33_broadleaf.gltf",
+    "source_json": "assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 9.87
+  },
+  {
+   "instance_id": "inst_tree_34_broadleaf",
+   "asset_id": "tree_34_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    255.4920654296875,
+    -4.142900466918945,
+    0.21758456528186798
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_34_broadleaf/tree_34_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_34_broadleaf/tree_34_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_34_broadleaf/tree_34_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_34_broadleaf.gltf",
+    "source_json": "assets/trees/tree_34_broadleaf/tree_34_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.63
+  },
+  {
+   "instance_id": "inst_tree_35_broadleaf",
+   "asset_id": "tree_35_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    260.0015869140625,
+    0.6751713752746582,
+    0.1535438746213913
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_35_broadleaf/tree_35_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_35_broadleaf.gltf",
+    "source_json": "assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.71
+  },
+  {
+   "instance_id": "inst_tree_36_broadleaf",
+   "asset_id": "tree_36_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    247.75155639648438,
+    3.643106460571289,
+    0.1794322282075882
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_36_broadleaf/tree_36_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_36_broadleaf.gltf",
+    "source_json": "assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.71
+  },
+  {
+   "instance_id": "inst_tree_37_broadleaf",
+   "asset_id": "tree_37_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    263.9779052734375,
+    19.450824737548828,
+    -0.1247536689043045
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_37_broadleaf/tree_37_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_37_broadleaf.gltf",
+    "source_json": "assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 6.31
+  },
+  {
+   "instance_id": "inst_tree_38_broadleaf",
+   "asset_id": "tree_38_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    258.6279602050781,
+    25.34210968017578,
+    0.0714554563164711
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_38_broadleaf/tree_38_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_38_broadleaf.gltf",
+    "source_json": "assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 13.34
+  },
+  {
+   "instance_id": "inst_tree_39_broadleaf",
+   "asset_id": "tree_39_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    258.62933349609375,
+    29.903202056884766,
+    0.014109496027231216
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_39_broadleaf/tree_39_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_39_broadleaf.gltf",
+    "source_json": "assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.29
+  },
+  {
+   "instance_id": "inst_tree_40_broadleaf",
+   "asset_id": "tree_40_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    246.27072143554688,
+    28.284454345703125,
+    0.23924733698368073
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_40_broadleaf/tree_40_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_40_broadleaf.gltf",
+    "source_json": "assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 13.24
+  },
+  {
+   "instance_id": "inst_tree_41_broadleaf",
+   "asset_id": "tree_41_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    239.16970825195312,
+    40.88457107543945,
+    0.41178709268569946
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_41_broadleaf/tree_41_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_41_broadleaf.gltf",
+    "source_json": "assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 12.61
+  },
+  {
+   "instance_id": "inst_tree_42_broadleaf",
+   "asset_id": "tree_42_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    249.69253540039062,
+    47.0351676940918,
+    0.07969623059034348
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_42_broadleaf/tree_42_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_42_broadleaf.gltf",
+    "source_json": "assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 9.24
+  },
+  {
+   "instance_id": "inst_tree_43_broadleaf",
+   "asset_id": "tree_43_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    236.9814453125,
+    58.44995880126953,
+    0.31697848439216614
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_43_broadleaf/tree_43_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_43_broadleaf.gltf",
+    "source_json": "assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 11.76
+  },
+  {
+   "instance_id": "inst_tree_44_broadleaf",
+   "asset_id": "tree_44_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    223.96385192871094,
+    78.19361877441406,
+    0.07682672142982483
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_44_broadleaf/tree_44_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_44_broadleaf.gltf",
+    "source_json": "assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.71
+  },
+  {
+   "instance_id": "inst_tree_45_broadleaf",
+   "asset_id": "tree_45_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    205.5901336669922,
+    90.57360076904297,
+    -0.005267869681119919
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_45_broadleaf/tree_45_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_45_broadleaf.gltf",
+    "source_json": "assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 12.61
+  },
+  {
+   "instance_id": "inst_tree_46_broadleaf",
+   "asset_id": "tree_46_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    193.37762451171875,
+    84.68238067626953,
+    -0.028842147439718246
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_46_broadleaf/tree_46_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_46_broadleaf.gltf",
+    "source_json": "assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 12.18
+  },
+  {
+   "instance_id": "inst_tree_47_broadleaf",
+   "asset_id": "tree_47_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    185.51043701171875,
+    100.16259765625,
+    -0.37976986169815063
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_47_broadleaf/tree_47_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_47_broadleaf.gltf",
+    "source_json": "assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 6.25
+  },
+  {
+   "instance_id": "inst_tree_48_broadleaf",
+   "asset_id": "tree_48_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    182.50601196289062,
+    97.07811737060547,
+    -0.15080027282238007
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_48_broadleaf/tree_48_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_48_broadleaf.gltf",
+    "source_json": "assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 11.76
+  },
+  {
+   "instance_id": "inst_tree_49_broadleaf",
+   "asset_id": "tree_49_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    175.37020874023438,
+    89.34127807617188,
+    0.3013663589954376
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_49_broadleaf/tree_49_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_49_broadleaf.gltf",
+    "source_json": "assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 11.55
+  },
+  {
+   "instance_id": "inst_tree_50_broadleaf",
+   "asset_id": "tree_50_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    167.37997436523438,
+    98.77946472167969,
+    -0.015310979448258877
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_50_broadleaf.gltf",
+    "source_json": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 14.29
+  },
+  {
+   "instance_id": "inst_tree_51_broadleaf",
+   "asset_id": "tree_51_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    152.32382202148438,
+    98.42945098876953,
+    -0.09339617937803268
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_51_broadleaf.gltf",
+    "source_json": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 8.3
+  },
+  {
+   "instance_id": "inst_tree_52_broadleaf",
+   "asset_id": "tree_52_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    149.08282470703125,
+    97.60503387451172,
+    -0.08219698816537857
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_52_broadleaf/tree_52_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_52_broadleaf.gltf",
+    "source_json": "assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 8.61
+  },
+  {
+   "instance_id": "inst_tree_53_camphor",
+   "asset_id": "tree_53_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    126.45433044433594,
+    79.35533905029297,
+    0.21153120696544647
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_53_camphor/tree_53_camphor_research.blend",
+    "research_glb": "assets/trees/tree_53_camphor/tree_53_camphor_research.glb",
+    "web_blend": "assets/trees/tree_53_camphor/tree_53_camphor_web.blend",
+    "web_gltf": "assets/web/tree_53_camphor.gltf",
+    "source_json": "assets/trees/tree_53_camphor/tree_53_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 12.39
+  },
+  {
+   "instance_id": "inst_tree_54_camphor",
+   "asset_id": "tree_54_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    125.49095916748047,
+    81.88628387451172,
+    0.12220857292413712
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_54_camphor/tree_54_camphor_research.blend",
+    "research_glb": "assets/trees/tree_54_camphor/tree_54_camphor_research.glb",
+    "web_blend": "assets/trees/tree_54_camphor/tree_54_camphor_web.blend",
+    "web_gltf": "assets/web/tree_54_camphor.gltf",
+    "source_json": "assets/trees/tree_54_camphor/tree_54_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 11.34
+  },
+  {
+   "instance_id": "inst_tree_55_broadleaf",
+   "asset_id": "tree_55_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    109.11830139160156,
+    79.30730438232422,
+    0.1293153613805771
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_55_broadleaf/tree_55_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_55_broadleaf.gltf",
+    "source_json": "assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 12.39
+  },
+  {
+   "instance_id": "inst_tree_56_broadleaf",
+   "asset_id": "tree_56_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    106.80824279785156,
+    68.45149230957031,
+    0.13957175612449646
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_56_broadleaf/tree_56_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_56_broadleaf.gltf",
+    "source_json": "assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 14.5
+  },
+  {
+   "instance_id": "inst_tree_57_broadleaf",
+   "asset_id": "tree_57_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    94.81034851074219,
+    65.47618103027344,
+    -0.17872749269008636
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_57_broadleaf/tree_57_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_57_broadleaf.gltf",
+    "source_json": "assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 13.87
+  },
+  {
+   "instance_id": "inst_tree_58_broadleaf",
+   "asset_id": "tree_58_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    90.906005859375,
+    67.84420013427734,
+    -0.38653162121772766
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_58_broadleaf/tree_58_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_58_broadleaf.gltf",
+    "source_json": "assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 9.03
+  },
+  {
+   "instance_id": "inst_tree_59_broadleaf",
+   "asset_id": "tree_59_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    101.45537567138672,
+    56.25055694580078,
+    0.31105828285217285
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_59_broadleaf/tree_59_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_59_broadleaf.gltf",
+    "source_json": "assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 12.39
+  },
+  {
+   "instance_id": "inst_tree_60_broadleaf",
+   "asset_id": "tree_60_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    91.42237854003906,
+    63.62696838378906,
+    -0.13081513345241547
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_60_broadleaf/tree_60_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_60_broadleaf.gltf",
+    "source_json": "assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.71
+  },
+  {
+   "instance_id": "inst_tree_61_broadleaf",
+   "asset_id": "tree_61_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    90.31964874267578,
+    61.96276092529297,
+    -0.031078051775693893
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_61_broadleaf/tree_61_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_61_broadleaf.gltf",
+    "source_json": "assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.71
+  },
+  {
+   "instance_id": "inst_tree_62_broadleaf",
+   "asset_id": "tree_62_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    87.98184204101562,
+    59.386531829833984,
+    -0.04590515419840813
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_62_broadleaf/tree_62_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_62_broadleaf.gltf",
+    "source_json": "assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.71
+  },
+  {
+   "instance_id": "inst_tree_63_broadleaf",
+   "asset_id": "tree_63_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    90.49385070800781,
+    56.84381866455078,
+    0.27924853563308716
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_63_broadleaf/tree_63_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_63_broadleaf.gltf",
+    "source_json": "assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 10.92
+  },
+  {
+   "instance_id": "inst_tree_64_broadleaf",
+   "asset_id": "tree_64_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    86.14519500732422,
+    55.134498596191406,
+    0.14287680387496948
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_64_broadleaf/tree_64_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_64_broadleaf.gltf",
+    "source_json": "assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 9.45
+  },
+  {
+   "instance_id": "inst_tree_65_broadleaf",
+   "asset_id": "tree_65_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    81.53390502929688,
+    54.58052062988281,
+    -0.24547457695007324
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_65_broadleaf/tree_65_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_65_broadleaf.gltf",
+    "source_json": "assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 7.35
+  },
+  {
+   "instance_id": "inst_tree_66_broadleaf",
+   "asset_id": "tree_66_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    75.14372253417969,
+    26.65967559814453,
+    0.1855202466249466
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_66_broadleaf/tree_66_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_66_broadleaf.gltf",
+    "source_json": "assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 11.76
+  },
+  {
+   "instance_id": "inst_tree_67_broadleaf",
+   "asset_id": "tree_67_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    18.421232223510742,
+    7.804438591003418,
+    0.2353111207485199
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_67_broadleaf.gltf",
+    "source_json": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 9.56
+  },
+  {
+   "instance_id": "inst_tree_68_broadleaf",
+   "asset_id": "tree_68_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    25.65411376953125,
+    6.455910682678223,
+    0.33138591051101685
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_68_broadleaf.gltf",
+    "source_json": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 11.34
+  },
+  {
+   "instance_id": "inst_tree_69_broadleaf",
+   "asset_id": "tree_69_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    32.61008071899414,
+    5.270612716674805,
+    0.36318644881248474
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_69_broadleaf.gltf",
+    "source_json": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 11.87
+  },
+  {
+   "instance_id": "inst_prop_lamp_street_01",
+   "asset_id": "prop_lamp_street",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    139.745,
+    -89.391,
+    -0.555
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_street/prop_lamp_street_research.blend",
+    "research_glb": "assets/props/prop_lamp_street/prop_lamp_street_research.glb",
+    "web_blend": "assets/props/prop_lamp_street/prop_lamp_street_web.blend",
+    "web_gltf": "assets/web/prop_lamp_street.gltf",
+    "source_json": "assets/props/prop_lamp_street/prop_lamp_street_research.json"
+   },
+   "evidence": {
+    "n_frames": 9,
+    "n_points": 16694,
+    "measured_height": 6.41,
+    "sample_frames": [
+     698,
+     699,
+     700,
+     701,
+     702,
+     703,
+     704,
+     705,
+     706
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_01",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    219.702,
+    -83.834,
+    -0.04
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    30.4
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 6,
+    "n_points": 10390,
+    "measured_height": 0.45,
+    "sample_frames": [
+     605,
+     606,
+     607,
+     608,
+     609,
+     610
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_01",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    124.423,
+    -79.212,
+    0.114
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 12,
+    "n_points": 7880,
+    "measured_height": 3.58,
+    "sample_frames": [
+     725,
+     727,
+     729,
+     731,
+     733,
+     735
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_02",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    61.919,
+    18.041,
+    -0.02
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    263.3
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 20,
+    "n_points": 6911,
+    "measured_height": 0.57,
+    "sample_frames": [
+     68,
+     72,
+     75,
+     78,
+     81,
+     84,
+     87
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_02",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    137.17,
+    -83.472,
+    0.019
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 6,
+    "n_points": 6594,
+    "measured_height": 3.87,
+    "sample_frames": [
+     715,
+     716,
+     717,
+     718,
+     719,
+     720
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_03",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    141.859,
+    -90.643,
+    -0.481
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 5,
+    "n_points": 6538,
+    "measured_height": 3.93,
+    "sample_frames": [
+     699,
+     700,
+     701,
+     702,
+     703
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_bin_01",
+   "asset_id": "prop_bin",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    265.049,
+    19.173,
+    -0.16
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    97.9
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_bin/prop_bin_research.blend",
+    "research_glb": "assets/props/prop_bin/prop_bin_research.glb",
+    "web_blend": "assets/props/prop_bin/prop_bin_web.blend",
+    "web_gltf": "assets/web/prop_bin.gltf",
+    "source_json": "assets/props/prop_bin/prop_bin_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 6013,
+    "measured_height": 0.9,
+    "sample_frames": [
+     452,
+     453,
+     454,
+     455,
+     456,
+     457,
+     458,
+     459,
+     460,
+     461,
+     462
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_04",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    151.791,
+    -93.187,
+    -0.561
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 5885,
+    "measured_height": 3.68,
+    "sample_frames": [
+     682,
+     683,
+     684,
+     685,
+     686,
+     687,
+     688,
+     689,
+     690,
+     691,
+     692
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_05",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    196.184,
+    -90.529,
+    -0.335
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 10,
+    "n_points": 5094,
+    "measured_height": 3.74,
+    "sample_frames": [
+     630,
+     631,
+     632,
+     633,
+     634,
+     635,
+     636,
+     637,
+     638,
+     639
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_06",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    163.578,
+    -94.427,
+    -0.571
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 10,
+    "n_points": 4805,
+    "measured_height": 3.58,
+    "sample_frames": [
+     669,
+     670,
+     671,
+     672,
+     673,
+     674,
+     675,
+     676,
+     677,
+     678
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_07",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    75.562,
+    43.517,
+    -0.359
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 17,
+    "n_points": 4631,
+    "measured_height": 3.94,
+    "sample_frames": [
+     106,
+     108,
+     110,
+     112,
+     114,
+     116,
+     118,
+     120,
+     122
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_08",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    183.483,
+    -93.226,
+    -0.391
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 8,
+    "n_points": 4625,
+    "measured_height": 3.52,
+    "sample_frames": [
+     647,
+     648,
+     649,
+     650,
+     651,
+     652,
+     653,
+     654
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_09",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    222.856,
+    -77.622,
+    -0.132
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 13,
+    "n_points": 4278,
+    "measured_height": 3.5,
+    "sample_frames": [
+     588,
+     592,
+     594,
+     596,
+     598,
+     600,
+     602
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_10",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    110.048,
+    -72.199,
+    -0.149
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 12,
+    "n_points": 4220,
+    "measured_height": 3.53,
+    "sample_frames": [
+     742,
+     744,
+     746,
+     748,
+     750,
+     753
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_11",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    264.884,
+    -6.27,
+    -0.102
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 12,
+    "n_points": 4033,
+    "measured_height": 3.66,
+    "sample_frames": [
+     481,
+     483,
+     485,
+     487,
+     489,
+     491
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_12",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    81.368,
+    54.599,
+    -0.253
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 26,
+    "n_points": 3728,
+    "measured_height": 3.66,
+    "sample_frames": [
+     111,
+     115,
+     121,
+     126,
+     133,
+     138,
+     142
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_bin_02",
+   "asset_id": "prop_bin",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    127.44,
+    89.707,
+    -0.287
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    205.3
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_bin/prop_bin_research.blend",
+    "research_glb": "assets/props/prop_bin/prop_bin_research.glb",
+    "web_blend": "assets/props/prop_bin/prop_bin_web.blend",
+    "web_gltf": "assets/web/prop_bin.gltf",
+    "source_json": "assets/props/prop_bin/prop_bin_research.json"
+   },
+   "evidence": {
+    "n_frames": 23,
+    "n_points": 3623,
+    "measured_height": 0.85,
+    "sample_frames": [
+     202,
+     205,
+     208,
+     211,
+     214,
+     217,
+     220,
+     223
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_13",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    265.681,
+    5.665,
+    -0.096
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 13,
+    "n_points": 3393,
+    "measured_height": 3.57,
+    "sample_frames": [
+     465,
+     467,
+     469,
+     471,
+     473,
+     475,
+     477
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_14",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    261.949,
+    -21.74,
+    -0.033
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 12,
+    "n_points": 3008,
+    "measured_height": 3.78,
+    "sample_frames": [
+     500,
+     502,
+     504,
+     507,
+     509,
+     511
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_15",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    147.577,
+    99.274,
+    -0.201
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 17,
+    "n_points": 2989,
+    "measured_height": 3.72,
+    "sample_frames": [
+     237,
+     239,
+     241,
+     243,
+     245,
+     247,
+     249,
+     251,
+     253
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_16",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    231.557,
+    -69.583,
+    -0.012
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 22,
+    "n_points": 2962,
+    "measured_height": 3.47,
+    "sample_frames": [
+     567,
+     570,
+     573,
+     576,
+     579,
+     582,
+     585,
+     588
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_17",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    246.147,
+    -55.073,
+    -0.177
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 17,
+    "n_points": 2850,
+    "measured_height": 3.74,
+    "sample_frames": [
+     545,
+     547,
+     549,
+     551,
+     553,
+     555,
+     557,
+     559,
+     562
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_18",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    160.517,
+    102.243,
+    -0.263
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 17,
+    "n_points": 2800,
+    "measured_height": 3.65,
+    "sample_frames": [
+     256,
+     258,
+     260,
+     262,
+     264,
+     266,
+     268,
+     270,
+     272
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_19",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    263.936,
+    19.478,
+    -0.132
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 10,
+    "n_points": 2785,
+    "measured_height": 3.76,
+    "sample_frames": [
+     451,
+     452,
+     453,
+     455,
+     456,
+     457,
+     458,
+     459,
+     460,
+     461
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_20",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    256.616,
+    -37.274,
+    0.059
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 13,
+    "n_points": 2730,
+    "measured_height": 3.51,
+    "sample_frames": [
+     523,
+     525,
+     527,
+     529,
+     531,
+     533,
+     535
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_21",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    218.138,
+    87.772,
+    -0.095
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 2627,
+    "measured_height": 3.56,
+    "sample_frames": [
+     341,
+     343,
+     345,
+     347,
+     349,
+     351,
+     353
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_03",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    171.762,
+    -91.33,
+    -0.178
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    2.7
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 19,
+    "n_points": 2427,
+    "measured_height": 0.13,
+    "sample_frames": [
+     650,
+     653,
+     656,
+     659,
+     662,
+     665,
+     668
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_22",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    251.417,
+    -47.016,
+    -0.031
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 13,
+    "n_points": 2379,
+    "measured_height": 3.64,
+    "sample_frames": [
+     535,
+     538,
+     540,
+     542,
+     545,
+     547,
+     549
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_bin_03",
+   "asset_id": "prop_bin",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    239.155,
+    63.731,
+    0.036
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    128.9
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_bin/prop_bin_research.blend",
+    "research_glb": "assets/props/prop_bin/prop_bin_research.glb",
+    "web_blend": "assets/props/prop_bin/prop_bin_web.blend",
+    "web_gltf": "assets/web/prop_bin.gltf",
+    "source_json": "assets/props/prop_bin/prop_bin_research.json"
+   },
+   "evidence": {
+    "n_frames": 23,
+    "n_points": 2254,
+    "measured_height": 0.74,
+    "sample_frames": [
+     373,
+     376,
+     379,
+     382,
+     385,
+     388,
+     391,
+     395
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_23",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    98.54,
+    -63.818,
+    -0.359
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 2182,
+    "measured_height": 3.55,
+    "sample_frames": [
+     759,
+     760,
+     761,
+     762,
+     763,
+     764,
+     765,
+     766,
+     767,
+     768,
+     769
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_24",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    228.392,
+    79.297,
+    -0.1
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 13,
+    "n_points": 2061,
+    "measured_height": 3.57,
+    "sample_frames": [
+     357,
+     360,
+     363,
+     365,
+     367,
+     369,
+     371
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_25",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    210.818,
+    -83.08,
+    -0.187
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 2046,
+    "measured_height": 3.63,
+    "sample_frames": [
+     602,
+     607,
+     609,
+     611,
+     614,
+     616,
+     618
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_26",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    91.396,
+    67.921,
+    -0.381
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 17,
+    "n_points": 2039,
+    "measured_height": 3.76,
+    "sample_frames": [
+     113,
+     154,
+     156,
+     158,
+     160,
+     162,
+     164,
+     166,
+     168
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_27",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    103.131,
+    78.636,
+    -0.261
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 2034,
+    "measured_height": 3.61,
+    "sample_frames": [
+     173,
+     177,
+     179,
+     181,
+     183,
+     185,
+     187
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_28",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    256.454,
+    43.682,
+    -0.213
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 2017,
+    "measured_height": 3.91,
+    "sample_frames": [
+     416,
+     418,
+     420,
+     423,
+     425,
+     427,
+     429
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_29",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    130.877,
+    89.64,
+    -0.27
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 25,
+    "n_points": 1907,
+    "measured_height": 3.69,
+    "sample_frames": [
+     203,
+     207,
+     211,
+     215,
+     219,
+     223,
+     227
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_04",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    65.488,
+    17.568,
+    0.025
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    263.3
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 21,
+    "n_points": 1851,
+    "measured_height": 0.39,
+    "sample_frames": [
+     66,
+     69,
+     72,
+     75,
+     78,
+     81,
+     84
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_30",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    172.257,
+    102.396,
+    -0.125
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 1848,
+    "measured_height": 3.57,
+    "sample_frames": [
+     275,
+     276,
+     277,
+     278,
+     279,
+     280,
+     281,
+     282,
+     283,
+     284,
+     285
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_31",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    203.313,
+    95.195,
+    -0.183
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 1823,
+    "measured_height": 3.56,
+    "sample_frames": [
+     317,
+     320,
+     324,
+     326,
+     328,
+     330,
+     332
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_32",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    70.521,
+    27.395,
+    -0.084
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 21,
+    "n_points": 1722,
+    "measured_height": 3.9,
+    "sample_frames": [
+     71,
+     80,
+     83,
+     87,
+     92,
+     95,
+     98
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_05",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    55.487,
+    19.289,
+    -0.038
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    263.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 10,
+    "n_points": 1650,
+    "measured_height": 0.66,
+    "sample_frames": [
+     70,
+     71,
+     72,
+     73,
+     74,
+     75,
+     76,
+     77,
+     78,
+     79
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_06",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    119.502,
+    -70.834,
+    -0.135
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    -31.9
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 21,
+    "n_points": 1526,
+    "measured_height": 0.27,
+    "sample_frames": [
+     723,
+     727,
+     730,
+     733,
+     736,
+     739,
+     742
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_33",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    185.415,
+    100.236,
+    -0.385
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 1522,
+    "measured_height": 3.68,
+    "sample_frames": [
+     290,
+     291,
+     296,
+     297,
+     298,
+     299,
+     300,
+     301,
+     302,
+     303,
+     304
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_34",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    118.755,
+    82.603,
+    -0.185
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 19,
+    "n_points": 1329,
+    "measured_height": 3.63,
+    "sample_frames": [
+     191,
+     196,
+     199,
+     202,
+     205,
+     208,
+     211
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_07",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    205.134,
+    -81.417,
+    -0.18
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    23.6
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 19,
+    "n_points": 1157,
+    "measured_height": 0.37,
+    "sample_frames": [
+     606,
+     609,
+     614,
+     617,
+     620,
+     623,
+     626
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_35",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    248.933,
+    51.687,
+    0.046
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 17,
+    "n_points": 926,
+    "measured_height": 3.57,
+    "sample_frames": [
+     395,
+     398,
+     402,
+     404,
+     406,
+     409,
+     412,
+     414,
+     416
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_36",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    258.801,
+    30.143,
+    -0.0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 770,
+    "measured_height": 3.51,
+    "sample_frames": [
+     433,
+     434,
+     435,
+     436,
+     437,
+     438,
+     439,
+     441,
+     442,
+     443,
+     449
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_37",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    241.196,
+    56.281,
+    0.095
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 26,
+    "n_points": 647,
+    "measured_height": 3.5,
+    "sample_frames": [
+     381,
+     385,
+     391,
+     395,
+     399,
+     403,
+     408
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_38",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    234.61,
+    64.445,
+    0.074
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 20,
+    "n_points": 641,
+    "measured_height": 3.51,
+    "sample_frames": [
+     362,
+     365,
+     380,
+     383,
+     386,
+     389,
+     393
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_39",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    86.632,
+    -48.749,
+    -0.915
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 16,
+    "n_points": 540,
+    "measured_height": 3.28,
+    "sample_frames": [
+     763,
+     766,
+     774,
+     779,
+     782,
+     784,
+     786,
+     788
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_08",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    89.338,
+    -44.626,
+    -0.954
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    -57.1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 424,
+    "measured_height": 0.68,
+    "sample_frames": [
+     767,
+     768,
+     769,
+     774,
+     776,
+     777,
+     778,
+     779,
+     781,
+     782,
+     783
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_09",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    90.495,
+    -42.196,
+    -0.88
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    -58.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 8,
+    "n_points": 235,
+    "measured_height": 0.75,
+    "sample_frames": [
+     769,
+     774,
+     776,
+     777,
+     778,
+     779,
+     782,
+     783
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_10",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    41.84,
+    3.275,
+    0.419
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    -88.9
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 3,
+    "n_points": 228,
+    "measured_height": 0.68,
+    "sample_frames": [
+     38,
+     41,
+     42
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_40",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    50.725,
+    -12.113,
+    0.78
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 7,
+    "n_points": 118,
+    "measured_height": 3.6,
+    "sample_frames": [
+     31,
+     33,
+     35,
+     36,
+     37,
+     38,
+     39
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_41",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    78.689,
+    22.799,
+    0.179
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 10,
+    "n_points": 106,
+    "measured_height": 3.75,
+    "sample_frames": [
+     72,
+     79,
+     80,
+     81,
+     82,
+     83,
+     86,
+     87,
+     88,
+     89
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_11",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    91.934,
+    -39.191,
+    -0.9
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    -59.2
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 5,
+    "n_points": 40,
+    "measured_height": 0.7,
+    "sample_frames": [
+     774,
+     777,
+     778,
+     782,
+     783
+    ]
+   }
+  }
+ ],
+ "frame": {
+  "units": "metre",
+  "up": "+Z",
+  "handedness": "right",
+  "origin": "ground under the first video camera (approx.)",
+  "scale": {
+   "method": "assumed hand-held camera height 1.51 m, checked against crosswalk stripe period (~1.0 m, GB 5768.3)",
+   "uncertainty": "about +-5 %",
+   "note": "DA3 metric depth suggested +23 %, rejected (inconsistent with road markings)"
+  },
+  "gltf_note": "web/GLB exports are Y-up (glTF convention): x_gltf = x, y_gltf = z, z_gltf = -y"
+ }
+}
