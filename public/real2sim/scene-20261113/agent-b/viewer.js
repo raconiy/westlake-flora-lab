@@ -102,7 +102,7 @@ function select(id, focus) {
   $('info-body').innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join(''); $('info').classList.remove('hidden');
   renderList(); if (focus) frame(box.box);
 }
-function frame(b) { const c = b.getCenter(new THREE.Vector3()); const s = b.getSize(new THREE.Vector3()).length();
+function frame(b) { exitCam(); const c = b.getCenter(new THREE.Vector3()); const s = b.getSize(new THREE.Vector3()).length();
   exitCam(); controls.target.copy(c); const dir = camera.position.clone().sub(controls.target).normalize(); if (dir.y < 0.15) dir.y = 0.35; dir.normalize();
   camera.position.copy(c).addScaledVector(dir, Math.max(s * 1.3, 8)); controls.update(); }
 $('info-close').onclick = () => select(null);
@@ -127,26 +127,65 @@ const camBox = $('cams');
 manifest.reference_views.forEach((v, i) => { const b = document.createElement('button'); b.title = `视频帧 ${v.frame}`; b.innerHTML = `<img loading="lazy" src="${url(v.image)}" alt="frame ${v.frame}">`; b.onclick = () => enterCam(i); camBox.appendChild(b); });
 function enterCam(i) {
   camIdx = (i + manifest.reference_views.length) % manifest.reference_views.length; const v = manifest.reference_views[camIdx];
-  controls.enabled = false; camera.position.fromArray(v.position_gltf); camera.quaternion.fromArray(v.quaternion_gltf);
+  controls.enabled = false; camera.position.fromArray(v.position_gltf); camera.quaternion.fromArray(v.quaternion_gltf).normalize();
   camera.fov = K.vfov_deg; camera.updateProjectionMatrix();
   $('refimg').src = url(v.image); $('refwrap').classList.remove('hidden'); $('campanel').classList.remove('hidden');
-  $('camtitle').textContent = `实拍机位 · 帧 ${v.frame}`; applyOverlay(); resize(); updateTriad(v);
+  $('camtitle').textContent = `实拍机位 · 帧 ${v.frame}`; applyOverlay(); resize(); updateTriad(camIdx);
 }
-// three-way strip: video frame | Agent A (only if its page publishes a matching render) | Agent B Cycles render
-async function updateTriad(v) {
-  $('triad-ref').src = url(v.image);
-  if (v.cg_render) $('triad-b').src = url(v.cg_render);
-  const a = $('triad-a'); const aUrl = new URL(`../agent-a/renders/${v.frame}.jpg`, BASE).href;
-  let ok = false; try { ok = (await fetch(aUrl, { method: 'HEAD' })).ok; } catch { ok = false; }
-  if (ok) { a.src = aUrl; a.style.display = ''; $('triad-a-cap').textContent = 'Agent A'; const p = a.parentElement.querySelector('.pending'); if (p) p.remove(); }
-  else { a.style.display = 'none'; if (!a.parentElement.querySelector('.pending')) { const d = document.createElement('div'); d.className = 'pending'; d.textContent = 'Agent A：待接入（同机位结果由 Agent A 主控页提供）'; a.parentElement.prepend(d); } }
+// Use one selected frame for the preview and the enlarged comparison.
+const triad = $('triad');
+const triadLarge = $('triad-large');
+const triadDialog = $('triad-dialog');
+const views = manifest.reference_views;
+let triadIndex = Math.floor(views.length / 2);
+for (const container of [triad, triadLarge]) {
+  container.append($('triad-images').content.cloneNode(true));
+  for (const img of container.querySelectorAll('img[data-image]')) {
+    const fallback = container.querySelector(`[data-fallback="${img.dataset.image}"]`);
+    if (fallback) img.addEventListener('error', () => {
+      img.hidden = true;
+      fallback.hidden = false;
+    });
+  }
 }
+function showTriadImages(container, view) {
+  const sources = {
+    ref: url(view.image),
+    a: new URL(`../agent-a/renders/${view.frame}.jpg`, BASE).href,
+    b: view.cg_render && url(view.cg_render),
+  };
+  for (const img of container.querySelectorAll('img[data-image]')) {
+    const source = sources[img.dataset.image];
+    const fallback = container.querySelector(`[data-fallback="${img.dataset.image}"]`);
+    img.hidden = !source;
+    if (fallback) fallback.hidden = Boolean(source);
+    if (source) img.src = source;
+    else img.removeAttribute('src');
+  }
+}
+function updateTriad(index) {
+  triadIndex = index;
+  const view = views[index];
+  $('triad-frame').textContent = `帧 ${view.frame}`;
+  $('triad-title').textContent = `三方对比 · 帧 ${view.frame}`;
+  showTriadImages(triad, view);
+  if (triadDialog.open) showTriadImages(triadLarge, view);
+}
+$('triad-open').onclick = () => {
+  triadDialog.showModal();
+  showTriadImages(triadLarge, views[triadIndex]);
+};
+$('triad-prev').onclick = () => enterCam(triadIndex - 1);
+$('triad-next').onclick = () => enterCam(triadIndex + 1);
 function exitCam() { if (camIdx < 0) return; camIdx = -1; controls.enabled = true; camera.fov = 55; $('refwrap').classList.add('hidden'); $('campanel').classList.add('hidden');
   const f = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion); controls.target.copy(camera.position).addScaledVector(f, 20); controls.update(); resize(); }
 function applyOverlay() { $('refimg').style.opacity = $('refopacity').value; }
 $('refopacity').addEventListener('input', applyOverlay);
 $('btn-exitcam').onclick = exitCam; $('btn-prevcam').onclick = () => enterCam(camIdx - 1); $('btn-nextcam').onclick = () => enterCam(camIdx + 1);
-if (manifest.reference_views.length) updateTriad(manifest.reference_views[Math.floor(manifest.reference_views.length / 2)]);
+if (views.length) {
+  updateTriad(triadIndex);
+  $('triad-open').disabled = false;
+}
 function overview() { exitCam(); controls.target.copy(center); camera.position.copy(center).add(new THREE.Vector3(-150, 140, 160)); controls.update(); }
 $('btn-overview').onclick = overview;
 // ---------- resize / loop ----------
@@ -156,7 +195,7 @@ function resize() {
   const img = $('refimg'); img.style.height = h + 'px'; img.style.width = (h * (K.width / K.fx) / (K.height / K.fy)) + 'px';
 }
 new ResizeObserver(resize).observe(canvas); resize(); overview();
-renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+renderer.setAnimationLoop(() => { if (controls.enabled) controls.update(); renderer.render(scene, camera); });
 // ---------- progressive load: ground, buildings, props, trees ----------
 const order = ['ground', 'building', 'prop', 'tree'];
 const todo = [...manifest.instances].sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category));

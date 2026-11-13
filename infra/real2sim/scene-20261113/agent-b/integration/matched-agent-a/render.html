@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Render Agent A from the Plan B cameras</title>
+<script type="importmap">
+{"imports":{"three":"/agent-a/vendor/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from '/agent-a/vendor/GLTFLoader.js';
+import { DRACOLoader } from '/agent-a/vendor/DRACOLoader.js';
+
+const read = async url => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url}: ${response.status}`);
+  return response.json();
+};
+
+async function prepare() {
+  const [manifest, registration] = await Promise.all([
+    read('/agent-b/manifest.json'),
+    read('./registration.json'),
+  ]);
+  if (manifest.source_video.sha256 !== registration.source_video_sha256) {
+    throw new Error('The reference video does not match the registration');
+  }
+
+  const { width, height, fx, fy, cx, cy } = manifest.camera_intrinsics;
+  const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+  renderer.setSize(width, height);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  document.body.append(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const draco = new DRACOLoader().setDecoderPath('/agent-a/vendor/draco/');
+  const loader = new GLTFLoader().setDRACOLoader(draco);
+  const [{ scene: model }, sky] = await Promise.all([
+    loader.loadAsync('/agent-a/scene.glb'),
+    new THREE.TextureLoader().loadAsync('/agent-a/environment.jpg'),
+  ]);
+  draco.dispose();
+  const bounds = new THREE.Box3().setFromObject(model);
+  const center = bounds.getCenter(new THREE.Vector3());
+  const size = bounds.getSize(new THREE.Vector3());
+  const span = Math.max(size.x, size.y, size.z);
+  const groundRoots = new Set(['central_lawn', 'stone_plaza', 'asphalt_road', 'paths']);
+  for (const root of model.children) {
+    root.traverse(object => {
+      if (!object.isMesh) return;
+      object.receiveShadow = true;
+      object.castShadow = !groundRoots.has(root.name);
+    });
+  }
+  scene.add(model);
+
+  // Reuse the lighting and support plane of the published Agent A viewer.
+  sky.mapping = THREE.EquirectangularReflectionMapping;
+  sky.colorSpace = THREE.SRGBColorSpace;
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromEquirectangular(sky).texture;
+  pmrem.dispose();
+  scene.environmentIntensity = 0.75;
+  scene.background = sky;
+  scene.backgroundBlurriness = 0.035;
+  scene.fog = new THREE.Fog('#d9e0dc', span * 4, span * 18);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
+  const sun = new THREE.DirectionalLight(0xfff9ef, 2.1);
+  sun.position.copy(center).add(new THREE.Vector3(-0.5, 1.1, 0.65).multiplyScalar(span));
+  sun.target.position.copy(center);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.bias = -0.00008;
+  sun.shadow.normalBias = span * 0.00025;
+  const shadow = sun.shadow.camera;
+  shadow.left = shadow.bottom = -span * 0.65;
+  shadow.right = shadow.top = span * 0.65;
+  shadow.near = span * 0.01;
+  shadow.far = span * 4;
+  shadow.updateProjectionMatrix();
+  scene.add(sun, sun.target);
+  const fill = new THREE.DirectionalLight(0xe8f0ff, 0.4);
+  fill.position.set(50, 35, -60);
+  scene.add(fill);
+
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(span * 10, span * 10),
+    new THREE.MeshStandardMaterial({ color: '#aab1a1', roughness: 1 }),
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.set(center.x, bounds.min.y - span * 0.0015, center.z);
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  const camera = new THREE.PerspectiveCamera();
+  const near = 0.02;
+  const far = span * 100;
+  // Use both focal lengths of the undistorted video in pixel units.
+  camera.projectionMatrix.makePerspective(
+    -cx * near / fx, (width - cx) * near / fx,
+    cy * near / fy, -(height - cy) * near / fy,
+    near, far,
+  );
+  camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+  const positions = new Map(manifest.reference_views.map(view => [view.frame, view]));
+  const inverseRotation = new THREE.Quaternion().fromArray(registration.rotation_a_to_b_xyzw).invert();
+  const translation = new THREE.Vector3().fromArray(registration.translation_a_to_b_m);
+
+  return {
+    frames: [...positions.keys()],
+    render(frame) {
+      const view = positions.get(frame);
+      if (!view) throw new Error(`Unknown frame ${frame}`);
+      camera.position.fromArray(view.position_gltf)
+        .sub(translation).applyQuaternion(inverseRotation).divideScalar(registration.scale_a_to_b);
+      camera.quaternion.fromArray(view.quaternion_gltf).normalize().premultiply(inverseRotation);
+      renderer.render(scene, camera);
+      return renderer.domElement.toDataURL('image/jpeg', 0.93).split(',')[1];
+    },
+  };
+}
+window.matchedAgentA = prepare();
+</script>
+</html>
