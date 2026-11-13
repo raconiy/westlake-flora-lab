@@ -54,6 +54,9 @@ h1,h2,h3,.specimen-title h2{font-family:'Songti SC','Noto Serif SC',Georgia,seri
 
 .scene-bottom{background:transparent;border-top:0;pointer-events:none}.scene-bottom>span{background:#f5f8eec9;border-radius:4px;padding:3px 6px}
 
+.comparison-switch { display:flex; gap:6px; }
+.comparison-switch .subtle-button[aria-pressed="true"] { background:#274e3c; border-color:#274e3c; color:#fff; }
+
 /* Short portrait presentation: captions must not cover the root/canopy centre. */
 @media(max-width:700px) and (max-height:700px){
  .viewer-expanded .specimen-title{top:10px;bottom:auto;left:14px;max-width:205px;pointer-events:none}

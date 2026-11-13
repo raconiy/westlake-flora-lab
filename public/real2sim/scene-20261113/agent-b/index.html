@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>新场景 · Agent B（Opus 5.5）可编辑 CG 场景 | Real2Sim</title>
+  <meta name="description" content="Agent B (Claude Opus 5.5) — video-to-CG outdoor scene with independent, editable assets">
+  <script type="importmap">
+    {"imports": {
+      "three": "./vendor/three.module.js",
+      "three/addons/": "./vendor/jsm/"
+    }}
+  </script>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./viewer.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="bar">
+      <div class="brand"><b>Agent B</b><span>Claude Opus 5.5 · 视频 → 可编辑 CG 场景</span></div>
+      <div class="status" id="status" role="status" aria-live="polite">正在读取场景清单…</div>
+      <div class="bar-actions">
+        <button id="btn-overview" title="总览">总览</button>
+        <button id="btn-showall" title="显示全部资产">显示全部</button>
+        <button id="btn-panel" title="资产面板" aria-expanded="true">资产面板</button>
+      </div>
+    </header>
+    <main class="stage">
+      <canvas id="view" aria-label="Agent B 三维场景视窗"></canvas>
+      <div id="refwrap" class="refwrap hidden" aria-hidden="true"><img id="refimg" alt="同机位实拍参考帧"></div>
+      <div id="campanel" class="campanel hidden">
+        <div class="row"><b id="camtitle">实拍机位</b><button id="btn-exitcam" title="退出机位">退出</button></div>
+        <label>实拍叠加 <input id="refopacity" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+        <div class="row small"><button id="btn-prevcam">◀ 上一机位</button><button id="btn-nextcam">下一机位 ▶</button></div>
+        <p class="note">机位来自 pycolmap 对视频的求解（859/859 帧注册）；叠加图为去畸变后的原始视频帧。</p>
+      </div>
+      <aside id="panel" class="panel">
+        <section>
+          <h2>实拍机位对照 <small>（点击进入同机位，叠加原视频帧）</small></h2>
+          <div id="cams" class="cams"></div>
+        </section>
+        <section>
+          <h2>三方对比 · 当前机位</h2>
+          <div id="triad" class="triad">
+            <figure><img id="triad-ref" alt="原始视频参考帧"><figcaption>原始视频</figcaption></figure>
+            <figure><img id="triad-a" alt="Agent A"><figcaption id="triad-a-cap">Agent A</figcaption></figure>
+            <figure><img id="triad-b" alt="Agent B 同机位离线渲染"><figcaption>Agent B（Cycles）</figcaption></figure>
+          </div>
+        </section>
+        <section>
+          <h2>评估证据</h2>
+          <div class="evid">
+            <a href="./evidence/compare_latest_sheet.jpg" target="_blank" rel="noreferrer" id="ev-latest">同机位对照（最新）</a>
+            <a href="./evidence/compare_iter01_sheet.jpg" target="_blank" rel="noreferrer">首轮对照</a>
+            <a href="./evidence/novel_orbit.mp4" target="_blank" rel="noreferrer">新视角：环绕</a>
+            <a href="./evidence/novel_inner.mp4" target="_blank" rel="noreferrer">新视角：内圈步行</a>
+            <a href="./evidence/asset_details.jpg" target="_blank" rel="noreferrer">资产细节</a>
+            <a href="./manifest.json" target="_blank" rel="noreferrer">manifest</a>
+            <a href="./scene.json" target="_blank" rel="noreferrer">场景配置</a>
+          </div>
+        </section>
+        <section>
+          <h2>资产分类</h2>
+          <div id="cats" class="cats"></div>
+        </section>
+        <section class="grow">
+          <h2>独立资产 <small id="assetcount"></small></h2>
+          <input id="search" type="search" placeholder="搜索 asset_id / 物种 / 类型">
+          <ul id="assets" class="assets"></ul>
+        </section>
+      </aside>
+      <div id="info" class="info hidden">
+        <div class="row"><b id="info-title"></b><button id="info-close" title="关闭">×</button></div>
+        <div class="row small"><button id="btn-isolate">单独查看</button><button id="btn-hide">隐藏</button><button id="btn-focus">聚焦</button></div>
+        <dl id="info-body"></dl>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

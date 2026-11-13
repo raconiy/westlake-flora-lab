@@ -1,0 +1,7 @@
+{
+ "_doc": "Agent B (Opus 5.5) look/exposure calibration against the video (iterated from same-camera comparisons)",
+ "sky_strength": 1.2,
+ "sun_strength": 1.8,
+ "view_transform": "Standard",
+ "exposure": 0.0
+}
