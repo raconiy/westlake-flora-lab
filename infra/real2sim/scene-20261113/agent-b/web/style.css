@@ -51,6 +51,5 @@ button.on { background:var(--acc); color:#fff; border-color:var(--acc); }
 #triad-dialog .triad img, #triad-dialog .pending { max-height:68dvh; }
 #triad-dialog figcaption { font-size:12px; }
 .triad-dialog-bar { flex-wrap:wrap; }
-.triad-dialog-bar:last-child { margin-top:10px; }
 .evid { display:flex; flex-wrap:wrap; gap:4px 10px; font-size:12px; } .evid a { color:var(--acc); }
 .assets { min-height:220px; }

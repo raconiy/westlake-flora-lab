@@ -92,13 +92,14 @@
   <dialog id="triad-dialog" aria-labelledby="triad-title">
     <div class="row triad-dialog-bar">
       <h2 id="triad-title" aria-live="polite"></h2>
-      <form method="dialog"><button autofocus>关闭</button></form>
+      <div class="row">
+        <button id="triad-prev" type="button">上一帧</button>
+        <button id="triad-next" type="button">下一帧</button>
+        <form method="dialog"><button autofocus>关闭</button></form>
+      </div>
     </div>
     <div id="triad-large" class="triad"></div>
-    <div class="row triad-dialog-bar">
-      <p class="note">Agent A 使用同一视频机位，场景坐标为近似配准。</p>
-      <div class="row"><button id="triad-prev" type="button">上一帧</button><button id="triad-next" type="button">下一帧</button></div>
-    </div>
+    <p class="note">Agent A 使用同一视频机位，场景坐标为近似配准。</p>
   </dialog>
 </body>
 </html>
