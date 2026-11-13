@@ -1,0 +1,39 @@
+{
+  "schema": "agentb-refine/1",
+  "version": "refine-01",
+  "base_scene": "../manifest.json",
+  "source": "additive-web-refine",
+  "seed": 20261113,
+  "coordinate_frame": "glTF Y-up, metres",
+  "notes": [
+    "This layer is an additive visual refinement. It does not edit the original Agent B CG generators or replace their assets.",
+    "Central lawn planting positions are an explicit approximation pending a new field capture.",
+    "Grass blades are instanced in the browser and keep the original scene interactive."
+  ],
+  "zones": [
+    { "id": "central-lawn", "center": [180.76, -4.99], "radius": [30.0, 22.0], "ground_y": -0.155, "grass_blades": 9000, "planting_clusters": 28 },
+    { "id": "southwest-lawn", "center": [105.0, -66.5], "radius": [24.0, 17.0], "ground_y": -0.10, "grass_blades": 1500, "planting_clusters": 11 },
+    { "id": "north-lawn", "center": [185.0, 78.0], "radius": [24.0, 16.0], "ground_y": -0.03, "grass_blades": 1300, "planting_clusters": 10 },
+    { "id": "front-lawn", "center": [38.0, 2.5], "radius": [14.0, 10.0], "ground_y": 0.18, "grass_blades": 900, "planting_clusters": 7 }
+  ],
+  "central_planting": {
+    "inferred": true,
+    "small_trees": [
+      { "position": [159.0, -13.0], "height": 3.3, "crown": "upright" },
+      { "position": [176.0, 9.0], "height": 3.8, "crown": "round" },
+      { "position": [198.0, -9.0], "height": 3.5, "crown": "round" },
+      { "position": [188.0, -22.0], "height": 3.1, "crown": "upright" }
+    ],
+    "flower_beds": [
+      { "position": [166.0, -2.0], "radius": 2.1, "color": "#b77a68" },
+      { "position": [190.0, 4.0], "radius": 2.3, "color": "#d4a24a" },
+      { "position": [203.0, -18.0], "radius": 1.8, "color": "#8e789e" },
+      { "position": [151.0, 5.0], "radius": 1.7, "color": "#b77a68" }
+    ],
+    "benches": [
+      { "position": [169.0, -13.5], "rotation": 0.18 },
+      { "position": [191.0, -13.5], "rotation": 2.98 },
+      { "position": [181.0, 14.0], "rotation": 1.56 }
+    ]
+  }
+}
