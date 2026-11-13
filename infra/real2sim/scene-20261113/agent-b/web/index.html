@@ -11,8 +11,8 @@
       "three/addons/": "./vendor/jsm/"
     }}
   </script>
-  <link rel="stylesheet" href="./style.css">
-  <script type="module" src="./viewer.js"></script>
+  <link rel="stylesheet" href="./style.css?v=matched-a">
+  <script type="module" src="./viewer.js?v=matched-a"></script>
 </head>
 <body>
   <div id="app">
@@ -40,12 +40,12 @@
           <div id="cams" class="cams"></div>
         </section>
         <section>
-          <h2>三方对比 · 当前机位</h2>
-          <div id="triad" class="triad">
-            <figure><img id="triad-ref" alt="原始视频参考帧"><figcaption>原始视频</figcaption></figure>
-            <figure><img id="triad-a" alt="Agent A"><figcaption id="triad-a-cap">Agent A</figcaption></figure>
-            <figure><img id="triad-b" alt="Agent B 同机位离线渲染"><figcaption>Agent B（Cycles）</figcaption></figure>
+          <div class="row">
+            <h2>三方对比 · <span id="triad-frame"></span></h2>
+            <button id="triad-open" type="button" disabled>放大对比</button>
           </div>
+          <div id="triad" class="triad" aria-label="当前帧三方对比"></div>
+          <p class="note">Agent A 使用同一视频机位，场景坐标为近似配准。</p>
         </section>
         <section>
           <h2>评估证据</h2>
@@ -76,5 +76,29 @@
       </div>
     </main>
   </div>
+  <template id="triad-images">
+    <figure><img data-image="ref" alt="去畸变实拍帧"><figcaption>实拍</figcaption></figure>
+    <figure>
+      <img data-image="a" alt="Agent A 近似配准渲染">
+      <span data-fallback="a" class="pending" hidden>此帧暂无 Agent A 渲染</span>
+      <figcaption>Agent A（近似配准）</figcaption>
+    </figure>
+    <figure>
+      <img data-image="b" alt="Agent B 同机位离线渲染">
+      <span data-fallback="b" class="pending" hidden>此帧暂无 Agent B 渲染</span>
+      <figcaption>Agent B（Cycles）</figcaption>
+    </figure>
+  </template>
+  <dialog id="triad-dialog" aria-labelledby="triad-title">
+    <div class="row triad-dialog-bar">
+      <h2 id="triad-title" aria-live="polite"></h2>
+      <form method="dialog"><button autofocus>关闭</button></form>
+    </div>
+    <div id="triad-large" class="triad"></div>
+    <div class="row triad-dialog-bar">
+      <p class="note">Agent A 使用同一视频机位，场景坐标为近似配准。</p>
+      <div class="row"><button id="triad-prev" type="button">上一帧</button><button id="triad-next" type="button">下一帧</button></div>
+    </div>
+  </dialog>
 </body>
 </html>

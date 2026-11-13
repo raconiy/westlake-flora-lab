@@ -39,9 +39,18 @@ button.on { background:var(--acc); color:#fff; border-color:var(--acc); }
 .refwrap img { height:100%; width:auto; max-width:100%; object-fit:contain; }
 .flag { display:inline-block; font-size:10px; padding:0 5px; border-radius:6px; background:#f6e7c8; color:#7a5310; margin-left:4px; }
 @media (max-width: 760px) { .panel { width:auto; left:10px; top:auto; height:45%; } .info { width:auto; right:10px; bottom:calc(45% + 20px); } }
-.triad { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; }
-.triad figure { margin:0; } .triad img { width:100%; aspect-ratio:534/941; object-fit:cover; border-radius:6px; background:#dfe5dc; display:block; }
+.triad { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; margin-top:6px; }
+.triad figure { margin:0; } .triad img { width:100%; aspect-ratio:534/941; object-fit:contain; border-radius:6px; background:#dfe5dc; display:block; }
 .triad figcaption { font-size:10px; color:var(--muted); text-align:center; }
 .pending { display:flex; align-items:center; justify-content:center; aspect-ratio:534/941; border-radius:6px; background:#ece9df; color:#8a7a52; font-size:11px; text-align:center; padding:4px; }
+.triad [hidden] { display:none; }
+#triad-dialog { width:min(1000px, calc(100% - 24px)); max-height:calc(100% - 24px); padding:clamp(8px, 2vw, 18px); border:1px solid var(--line); border-radius:12px; background:var(--bg); color:var(--ink); }
+#triad-dialog::backdrop { background:rgba(15,24,19,.7); }
+#triad-dialog h2 { margin:0; font-size:16px; }
+#triad-dialog .triad { gap:clamp(4px, 1vw, 12px); }
+#triad-dialog .triad img, #triad-dialog .pending { max-height:68dvh; }
+#triad-dialog figcaption { font-size:12px; }
+.triad-dialog-bar { flex-wrap:wrap; }
+.triad-dialog-bar:last-child { margin-top:10px; }
 .evid { display:flex; flex-wrap:wrap; gap:4px 10px; font-size:12px; } .evid a { color:var(--acc); }
 .assets { min-height:220px; }
