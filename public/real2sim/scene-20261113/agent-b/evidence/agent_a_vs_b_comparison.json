@@ -1,0 +1,55 @@
+{
+  "scene_id": "real2sim/scene-20261113",
+  "comparison_basis": "server-side render and source inspection; Agent A files read-only",
+  "agent_a": {
+    "asset_glb_count": 28,
+    "render_references": [
+      "renders/architecture.png",
+      "renders/overview.png"
+    ],
+    "strengths": [
+      "near architectural facade has floor bands, mullions and recessed glazing",
+      "broad campus composition and fuller tree silhouettes"
+    ],
+    "limitations_observed": [
+      "vegetation individuals are fewer and less individually measured than Agent B",
+      "same-camera metric was not available in the checked Agent A evidence"
+    ]
+  },
+  "agent_b": {
+    "commit": "61f869f",
+    "latest_iteration": "iter17",
+    "web_asset_count": 124,
+    "instance_count": 173,
+    "camera_count": 18,
+    "strengths": [
+      "70 individually parameterized trees with separate trunk and foliage layers",
+      "measured circular building, road bands, paving and 18 same-camera renders",
+      "independent asset IDs, scene transforms, editable source generators"
+    ],
+    "limitations_observed": [
+      "leaf geometry is still card-and-cluster based at macro close range",
+      "distant buildings remain lower detail than near circular building"
+    ]
+  },
+  "render_evidence": {
+    "iter10_mean_abs_diff": 37.04,
+    "iter11_mean_abs_diff": 36.53,
+    "iter12_mean_abs_diff": 36.62,
+    "iter13_mean_abs_diff": 38.6,
+    "iter14_mean_abs_diff": 36.66,
+    "note": "mean absolute sRGB pixel difference over 18 selected same-camera frames; lower is better; not a perceptual score",
+    "iter15_mean_abs_diff": 36.53,
+    "iter16_mean_abs_diff": 36.53,
+    "iter17_mean_abs_diff": 36.64
+  },
+  "decision": "keep Agent B for measured independent asset library and same-camera evaluation; use Agent A architecture render as a visual reference for facade detailing and vegetation fullness.",
+  "latest_iteration": "iter17",
+  "latest_changes": [
+    "rotunda apron expanded from 5.0m to 10.5m to remove unobserved grass band",
+    "inferred concrete rotunda-road join fills the undersurface gap",
+    "yellow edge lines use a continuous join-aware height and 3.2m adjacency threshold",
+    "low-concurrency 2-process render validation"
+  ],
+  "latest_observation": "iter17 single-frame 00840 removes the black road-plaza trench and keeps the main yellow edge line continuous; the full 18-camera mean is slightly higher than iter15, so visual ground evidence is retained with the metric tradeoff recorded."
+}

@@ -69,8 +69,10 @@ def build(i):
     for lod in ("research", "web"):
         q = dict(p); q["leaf_mode"] = "leaf" if lod == "research" else "twig"
         if lod == "web": q["leaf_material"] = f"twig_{sp}"; q["twig_size"] = p["twig_size"] * 2.0   # web budget: 1/4 cards
-        wood, leaves, stats, white = treegen.build(q)
-        parts = [(wood, None, (0, 0, 0)), (leaves, None, (0, 0, 0))] + ([(white, None, (0, 0, 0))] if white is not None and white.n else [])
+        q["mass_clusters"] = max(32, int(q.get("mass_clusters", 80) * (0.7 if lod == "web" else 1.0)))
+        q["mass_material"] = f"leafmass_{sp}"
+        wood, leaves, stats, white, mass = treegen.build(q)
+        parts = [(wood, None, (0, 0, 0)), (mass, None, (0, 0, 0)), (leaves, None, (0, 0, 0))] + ([(white, None, (0, 0, 0))] if white is not None and white.n else [])
         meta = dict(asset_id=aid, lod=lod, category="tree", species_preset=sp, species_label=SP[sp]["label"],
                     generator="cg/trees/treegen.py (space colonisation + pipe model)", params=q, stats=stats,
                     pivot="root collar (ground contact), +Z up, metres", world_azimuth_preserved=True,

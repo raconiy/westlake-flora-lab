@@ -18,6 +18,7 @@ for g in json.load(open(A / "ground/ground_index.json")):
                      position=g["pivot"], rotation_euler_deg=[0, 0, 0], scale=[1, 1, 1], files=files("ground", g["asset_id"])))
 for bi in sorted((A / "buildings").glob("*/")):
     j = json.load(open(next(bi.glob("*_research.json"))))
+    if j["asset_id"] == "bldg_near_01": continue
     inst.append(dict(instance_id=f"inst_{j['asset_id']}", asset_id=j["asset_id"], category="building", parent="grp_buildings",
                      position=j["world_pivot"], rotation_euler_deg=[0, 0, j.get("world_rotation_z_deg", 0)], scale=[1, 1, 1], files=files("buildings", j["asset_id"])))
 for t in json.load(open(A / "trees/trees_index.json")):

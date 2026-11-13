@@ -89,6 +89,14 @@ def get(name):
         except Exception: pass
         m.use_backface_culling = False
         m["agentb_translucency"] = s.get("translucency", 0.3)
+    elif kind == "leafmass":
+        # vertex-tinted inner crown volume; no alpha texture, so it fills the low-frequency silhouette gaps
+        bs.inputs["Base Color"].default_value = (0.12, 0.28, 0.055, 1)
+        bs.inputs["Roughness"].default_value = 0.88
+        try:
+            va = nt.nodes.new("ShaderNodeVertexColor"); va.layer_name = "Col"; nt.links.new(va.outputs["Color"], bs.inputs["Base Color"])
+            bs.inputs["Subsurface Weight"].default_value = 0.035
+        except Exception: pass
     else:
         bs.inputs["Base Color"].default_value = (0.5, 0.5, 0.5, 1)
     m["agentb_material_id"] = name

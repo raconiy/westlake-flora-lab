@@ -175,6 +175,47 @@ def leaf_card(shape):
     UV = np.array([[0, 0], [0.5, 0], [1, 0], [0, 1], [0.5, 1], [1, 1]], np.float32)
     return V, F, UV
 
+def foliage_mass_mesh(part, nodes, r, p, rng):
+    """Low frequency inner foliage volume. It closes the gaps between individual cards while
+    retaining a separately editable leaf-card layer. Each blob is a small UV sphere with a
+    different scale, tilt and vertex tint, so the crown reads as layered foliage rather than
+    a repeated billboard shell."""
+    prof = np.asarray(p["crown_profile"], float)
+    zb, zt = p["crown_base"], p["height"]
+    n_target = int(p.get("mass_clusters", 0))
+    if n_target <= 0: return 0
+    twig = [i for i in range(len(nodes)) if nodes[i][2] > zb * 0.95 and r[i] < p.get("mass_radius_max", 0.045)]
+    if not twig: return 0
+    # stratified subset avoids a single dense band and follows the measured crown envelope
+    rng.shuffle(twig); twig = twig[:min(n_target, len(twig))]
+    pal = np.asarray(p.get("leaf_palette", [[0.12,0.25,0.06]]), float)
+    col = np.clip(np.mean(pal, axis=0), 0.03, 0.45)
+    seg, rings = 8, 4; made = 0
+    for i in twig:
+        z = float(nodes[i][2]); t = np.clip((z-zb)/max(zt-zb, 1e-3), 0, 1)
+        az = float(np.arctan2(nodes[i][1], nodes[i][0])); row = min(len(prof)-1, max(0, int(t*(len(prof)-1))))
+        rr = float(np.max(prof[row]))
+        s = rng.uniform(0.075, 0.18) * (0.78 + 0.35 * min(rr/3.0, 1.5))
+        center = nodes[i] + rng.normal(0, s*0.22, 3)
+        scale = np.array([rng.uniform(.85,1.45)*s, rng.uniform(.72,1.25)*s, rng.uniform(.55,.95)*s])
+        V=[]; UV=[]; F=[]
+        V.append(center + np.array([0,0,scale[2]])); UV.append((.5,1))
+        for q in range(1, rings):
+            ph=np.pi*q/rings; zc=np.cos(ph); rad=np.sin(ph)
+            for j in range(seg):
+                a=2*np.pi*j/seg; V.append(center + scale*np.array([rad*np.cos(a),rad*np.sin(a),zc])); UV.append((j/seg,q/rings))
+        bot=len(V); V.append(center - np.array([0,0,scale[2]])); UV.append((.5,0))
+        for j in range(seg): F.append((0,1+j,1+(j+1)%seg))
+        for q in range(1,rings-1):
+            a0=1+(q-1)*seg; b0=1+q*seg
+            for j in range(seg):
+                a=a0+j; b=a0+(j+1)%seg; c=b0+j; d=b0+(j+1)%seg; F += [(a,c,b),(b,c,d)]
+        a0=1+(rings-2)*seg
+        for j in range(seg): F.append((a0+j,bot,a0+(j+1)%seg))
+        tint=np.clip(col*rng.uniform(.72,1.25,3),0,1); COL=np.tile(np.r_[tint,1.0],(len(V),1));
+        part.add(np.asarray(V,np.float32),np.asarray(F,np.int32),np.asarray(UV,np.float32),COL); made+=1
+    return made
+
 def leaves_mesh(part, nodes, r, ch, depth, p, rng):
     shape = p["leaf_shape"]; ls = p["leaf_size"]; per = p.get("leaves_per_node", 10); dens = p.get("leaf_density", 1.0)
     if p.get("leaf_mode") == "twig":   # web LOD: one card = a twig carrying ~6 leaves (twig atlas)
@@ -232,5 +273,7 @@ def build(p):
     tube_mesh(wood, nodes, r, cl, p, rng, white)
     leaves = Part("leaves", p.get("leaf_material", "leaf"))
     nl = leaves_mesh(leaves, nodes, r, ch, depth, p, rng)
-    stats = dict(nodes=int(n), chains=len(cl), leaves=int(nl), max_z=float(nodes[:, 2].max()))
-    return wood, leaves, stats, white
+    mass = Part("foliage_volume", p.get("mass_material", "leafmass"))
+    nmass = foliage_mass_mesh(mass, nodes, r, p, rng)
+    stats = dict(nodes=int(n), chains=len(cl), leaves=int(nl), foliage_clusters=int(nmass), max_z=float(nodes[:, 2].max()))
+    return wood, leaves, stats, white, mass

@@ -93,8 +93,8 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    130.012,
-    -76.645,
+    129.999,
+    -76.644,
     -0.537
    ],
    "rotation_euler_deg": [
@@ -149,9 +149,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    58.653,
-    -14.686,
-    -0.658
+    58.633,
+    -14.703,
+    -0.655
    ],
    "rotation_euler_deg": [
     0,
@@ -261,9 +261,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    128.765,
-    -79.448,
-    -0.374
+    128.751,
+    -79.447,
+    -0.365
    ],
    "rotation_euler_deg": [
     0,
@@ -289,9 +289,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    131.288,
-    -73.78,
-    -0.398
+    131.274,
+    -73.778,
+    -0.419
    ],
    "rotation_euler_deg": [
     0,
@@ -373,9 +373,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    61.691,
-    -11.746,
-    -0.755
+    55.318,
+    -15.653,
+    -0.121
    ],
    "rotation_euler_deg": [
     0,
@@ -401,9 +401,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    55.339,
-    -15.637,
-    -0.123
+    35.72,
+    -7.939,
+    0.743
    ],
    "rotation_euler_deg": [
     0,
@@ -429,9 +429,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    35.72,
-    -7.939,
-    0.743
+    264.745,
+    -14.677,
+    -0.001
    ],
    "rotation_euler_deg": [
     0,
@@ -457,9 +457,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    264.745,
-    -14.677,
-    -0.001
+    62.102,
+    -13.708,
+    -0.742
    ],
    "rotation_euler_deg": [
     0,
@@ -485,9 +485,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    62.122,
-    -13.692,
-    -0.746
+    135.026,
+    98.667,
+    -0.383
    ],
    "rotation_euler_deg": [
     0,
@@ -513,9 +513,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    135.026,
-    98.667,
-    -0.383
+    29.831,
+    -7.841,
+    0.611
    ],
    "rotation_euler_deg": [
     0,
@@ -541,9 +541,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    60.079,
-    -3.347,
-    -0.143
+    265.843,
+    -6.136,
+    -0.049
    ],
    "rotation_euler_deg": [
     0,
@@ -569,9 +569,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    29.831,
-    -7.841,
-    0.611
+    265.633,
+    -8.546,
+    -0.041
    ],
    "rotation_euler_deg": [
     0,
@@ -592,70 +592,14 @@
    }
   },
   {
-   "instance_id": "inst_curb_13",
-   "asset_id": "curb_13",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position": [
-    265.843,
-    -6.136,
-    -0.049
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/ground/curb_13/curb_13_research.blend",
-    "research_glb": "assets/ground/curb_13/curb_13_research.glb",
-    "web_blend": "assets/ground/curb_13/curb_13_web.blend",
-    "web_gltf": "assets/web/curb_13.gltf",
-    "source_json": "assets/ground/curb_13/curb_13_research.json"
-   }
-  },
-  {
-   "instance_id": "inst_curb_14",
-   "asset_id": "curb_14",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position": [
-    265.633,
-    -8.546,
-    -0.041
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/ground/curb_14/curb_14_research.blend",
-    "research_glb": "assets/ground/curb_14/curb_14_research.glb",
-    "web_blend": "assets/ground/curb_14/curb_14_web.blend",
-    "web_gltf": "assets/web/curb_14.gltf",
-    "source_json": "assets/ground/curb_14/curb_14_research.json"
-   }
-  },
-  {
    "instance_id": "inst_plaza_01",
    "asset_id": "plaza_01",
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    123.615,
-    10.622,
-    -0.1
+    122.879,
+    9.371,
+    -0.106
    ],
    "rotation_euler_deg": [
     0,
@@ -737,9 +681,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    228.187,
-    70.024,
-    -0.086
+    228.203,
+    70.02,
+    -0.085
    ],
    "rotation_euler_deg": [
     0,
@@ -765,9 +709,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    128.289,
-    90.976,
-    -0.279
+    128.287,
+    90.96,
+    -0.278
    ],
    "rotation_euler_deg": [
     0,
@@ -821,9 +765,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    82.596,
-    -40.828,
-    -0.891
+    254.761,
+    -30.236,
+    0.135
    ],
    "rotation_euler_deg": [
     0,
@@ -849,9 +793,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    254.761,
-    -30.236,
-    0.135
+    100.432,
+    70.439,
+    -0.231
    ],
    "rotation_euler_deg": [
     0,
@@ -877,9 +821,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    100.432,
-    70.439,
-    -0.231
+    237.705,
+    -60.598,
+    -0.034
    ],
    "rotation_euler_deg": [
     0,
@@ -905,9 +849,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    237.705,
-    -60.598,
-    -0.034
+    62.803,
+    -13.591,
+    -0.765
    ],
    "rotation_euler_deg": [
     0,
@@ -989,9 +933,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    248.33,
-    11.628,
-    0.033
+    83.869,
+    -45.843,
+    -0.912
    ],
    "rotation_euler_deg": [
     0,
@@ -1012,14 +956,42 @@
    }
   },
   {
+   "instance_id": "inst_path_11",
+   "asset_id": "path_11",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position": [
+    248.33,
+    11.628,
+    0.033
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/ground/path_11/path_11_research.blend",
+    "research_glb": "assets/ground/path_11/path_11_research.glb",
+    "web_blend": "assets/ground/path_11/path_11_web.blend",
+    "web_gltf": "assets/web/path_11.gltf",
+    "source_json": "assets/ground/path_11/path_11_research.json"
+   }
+  },
+  {
    "instance_id": "inst_lawn_01",
    "asset_id": "lawn_01",
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    180.761,
-    4.995,
-    -0.155
+    183.771,
+    5.122,
+    0.346
    ],
    "rotation_euler_deg": [
     0,
@@ -1129,9 +1101,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    128.295,
-    -80.502,
-    -0.353
+    128.282,
+    -80.501,
+    -0.351
    ],
    "rotation_euler_deg": [
     0,
@@ -1157,9 +1129,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    131.631,
-    -73.009,
-    -0.349
+    131.617,
+    -73.008,
+    -0.35
    ],
    "rotation_euler_deg": [
     0,
@@ -1185,9 +1157,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    54.073,
-    -16.0,
-    0.169
+    54.052,
+    -16.016,
+    0.162
    ],
    "rotation_euler_deg": [
     0,
@@ -1292,6 +1264,34 @@
    }
   },
   {
+   "instance_id": "inst_bldg_academic_block",
+   "asset_id": "bldg_academic_block",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position": [
+    0.0,
+    130.0,
+    0.0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/buildings/bldg_academic_block/bldg_academic_block_research.blend",
+    "research_glb": "assets/buildings/bldg_academic_block/bldg_academic_block_research.glb",
+    "web_blend": "assets/buildings/bldg_academic_block/bldg_academic_block_web.blend",
+    "web_gltf": "assets/web/bldg_academic_block.gltf",
+    "source_json": "assets/buildings/bldg_academic_block/bldg_academic_block_research.json"
+   }
+  },
+  {
    "instance_id": "inst_bldg_far_01",
    "asset_id": "bldg_far_01",
    "category": "building",
@@ -1373,34 +1373,6 @@
     "web_blend": "assets/buildings/bldg_far_03/bldg_far_03_web.blend",
     "web_gltf": "assets/web/bldg_far_03.gltf",
     "source_json": "assets/buildings/bldg_far_03/bldg_far_03_research.json"
-   }
-  },
-  {
-   "instance_id": "inst_bldg_near_01",
-   "asset_id": "bldg_near_01",
-   "category": "building",
-   "parent": "grp_buildings",
-   "position": [
-    49.961,
-    28.282,
-    -0.378
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/buildings/bldg_near_01/bldg_near_01_research.blend",
-    "research_glb": "assets/buildings/bldg_near_01/bldg_near_01_research.glb",
-    "web_blend": "assets/buildings/bldg_near_01/bldg_near_01_web.blend",
-    "web_gltf": "assets/web/bldg_near_01.gltf",
-    "source_json": "assets/buildings/bldg_near_01/bldg_near_01_research.json"
    }
   },
   {

@@ -75,6 +75,40 @@
   }
  ],
  "assets": {
+  "bldg_academic_block": {
+   "file": "assets/bldg_academic_block.glb",
+   "bytes": 506932,
+   "category": "building",
+   "label": "bldg_academic_block",
+   "short": "building",
+   "pivot": "centre of footprint at ground, +Z up, metres",
+   "provenance": "cg/buildings/academic.py",
+   "inferred": [
+    "floor count and rear depth inferred from Agent A comparison and visible video bands",
+    "far elevation and interior unseen",
+    "straight ribbon plan approximates the curved academic block visible in video"
+   ],
+   "facts": [
+    [
+     "centroid",
+     "[0.0, 130.0, 0.0]"
+    ],
+    [
+     "facade_height_m",
+     "16.4"
+    ],
+    [
+     "footprint_m",
+     "[84, 16]"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_academic_block/bldg_academic_block_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_academic_block/bldg_academic_block_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_academic_block/bldg_academic_block_research.json"
+   ],
+   "generator": "cg/buildings/academic.py"
+  },
   "bldg_far_01": {
    "file": "assets/bldg_far_01.glb",
    "bytes": 469228,
@@ -253,7 +287,7 @@
   },
   "curb_01": {
    "file": "assets/curb_01.glb",
-   "bytes": 584392,
+   "bytes": 584320,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -263,7 +297,7 @@
    "facts": [
     [
      "面积",
-     "29.41 m²"
+     "29.42 m²"
     ],
     [
      "材质",
@@ -357,7 +391,7 @@
   },
   "curb_05": {
    "file": "assets/curb_05.glb",
-   "bytes": 573272,
+   "bytes": 576412,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -367,7 +401,7 @@
    "facts": [
     [
      "面积",
-     "8.58 m²"
+     "4.5 m²"
     ],
     [
      "材质",
@@ -383,32 +417,6 @@
   },
   "curb_06": {
    "file": "assets/curb_06.glb",
-   "bytes": 576408,
-   "category": "ground",
-   "label": "curb",
-   "short": "curb",
-   "pivot": "region centroid at median ground height, +Z up, metres",
-   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
-   "inferred": [],
-   "facts": [
-    [
-     "面积",
-     "4.49 m²"
-    ],
-    [
-     "材质",
-     "curb"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_06/curb_06_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_06/curb_06_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_06/curb_06_research.json"
-   ],
-   "generator": "cg/ground/build_ground.py"
-  },
-  "curb_07": {
-   "file": "assets/curb_07.glb",
    "bytes": 572476,
    "category": "ground",
    "label": "curb",
@@ -427,14 +435,14 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_07/curb_07_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_07/curb_07_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_07/curb_07_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_06/curb_06_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_06/curb_06_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_06/curb_06_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "curb_08": {
-   "file": "assets/curb_08.glb",
+  "curb_07": {
+   "file": "assets/curb_07.glb",
    "bytes": 572212,
    "category": "ground",
    "label": "curb",
@@ -453,15 +461,15 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_08/curb_08_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_08/curb_08_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_08/curb_08_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_07/curb_07_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_07/curb_07_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_07/curb_07_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "curb_09": {
-   "file": "assets/curb_09.glb",
-   "bytes": 576428,
+  "curb_08": {
+   "file": "assets/curb_08.glb",
+   "bytes": 576204,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -479,14 +487,14 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_09/curb_09_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_09/curb_09_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_09/curb_09_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_08/curb_08_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_08/curb_08_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_08/curb_08_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "curb_10": {
-   "file": "assets/curb_10.glb",
+  "curb_09": {
+   "file": "assets/curb_09.glb",
    "bytes": 572112,
    "category": "ground",
    "label": "curb",
@@ -505,15 +513,15 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_10/curb_10_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_10/curb_10_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_10/curb_10_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_09/curb_09_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_09/curb_09_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_09/curb_09_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "curb_11": {
-   "file": "assets/curb_11.glb",
-   "bytes": 572560,
+  "curb_10": {
+   "file": "assets/curb_10.glb",
+   "bytes": 572008,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -523,7 +531,33 @@
    "facts": [
     [
      "面积",
-     "2.2 m²"
+     "1.48 m²"
+    ],
+    [
+     "材质",
+     "curb"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_10/curb_10_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_10/curb_10_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_10/curb_10_research.json"
+   ],
+   "generator": "cg/ground/build_ground.py"
+  },
+  "curb_11": {
+   "file": "assets/curb_11.glb",
+   "bytes": 571988,
+   "category": "ground",
+   "label": "curb",
+   "short": "curb",
+   "pivot": "region centroid at median ground height, +Z up, metres",
+   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
+   "inferred": [],
+   "facts": [
+    [
+     "面积",
+     "1.26 m²"
     ],
     [
      "材质",
@@ -539,7 +573,7 @@
   },
   "curb_12": {
    "file": "assets/curb_12.glb",
-   "bytes": 572008,
+   "bytes": 571968,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -549,7 +583,7 @@
    "facts": [
     [
      "面积",
-     "1.48 m²"
+     "1.05 m²"
     ],
     [
      "材质",
@@ -617,7 +651,7 @@
   },
   "lawn_01": {
    "file": "assets/lawn_01.glb",
-   "bytes": 803536,
+   "bytes": 901836,
    "category": "ground",
    "label": "lawn",
    "short": "lawn",
@@ -627,7 +661,7 @@
    "facts": [
     [
      "面积",
-     "23768.82 m²"
+     "22613.58 m²"
     ],
     [
      "材质",
@@ -721,7 +755,7 @@
   },
   "path_01": {
    "file": "assets/path_01.glb",
-   "bytes": 530896,
+   "bytes": 530840,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -731,7 +765,7 @@
    "facts": [
     [
      "面积",
-     "522.33 m²"
+     "522.31 m²"
     ],
     [
      "材质",
@@ -747,7 +781,7 @@
   },
   "path_02": {
    "file": "assets/path_02.glb",
-   "bytes": 527456,
+   "bytes": 527452,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -757,7 +791,7 @@
    "facts": [
     [
      "面积",
-     "263.21 m²"
+     "262.38 m²"
     ],
     [
      "材质",
@@ -799,32 +833,6 @@
   },
   "path_04": {
    "file": "assets/path_04.glb",
-   "bytes": 525112,
-   "category": "ground",
-   "label": "path",
-   "short": "path",
-   "pivot": "region centroid at median ground height, +Z up, metres",
-   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
-   "inferred": [],
-   "facts": [
-    [
-     "面积",
-     "44.43 m²"
-    ],
-    [
-     "材质",
-     "path_concrete"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_04/path_04_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_04/path_04_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_04/path_04_research.json"
-   ],
-   "generator": "cg/ground/build_ground.py"
-  },
-  "path_05": {
-   "file": "assets/path_05.glb",
    "bytes": 525232,
    "category": "ground",
    "label": "path",
@@ -843,14 +851,14 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_05/path_05_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_05/path_05_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_05/path_05_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_04/path_04_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_04/path_04_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_04/path_04_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "path_06": {
-   "file": "assets/path_06.glb",
+  "path_05": {
+   "file": "assets/path_05.glb",
    "bytes": 525784,
    "category": "ground",
    "label": "path",
@@ -869,14 +877,14 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_06/path_06_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_06/path_06_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_06/path_06_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_05/path_05_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_05/path_05_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_05/path_05_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "path_07": {
-   "file": "assets/path_07.glb",
+  "path_06": {
+   "file": "assets/path_06.glb",
    "bytes": 524980,
    "category": "ground",
    "label": "path",
@@ -888,6 +896,32 @@
     [
      "面积",
      "24.69 m²"
+    ],
+    [
+     "材质",
+     "path_concrete"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_06/path_06_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_06/path_06_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_06/path_06_research.json"
+   ],
+   "generator": "cg/ground/build_ground.py"
+  },
+  "path_07": {
+   "file": "assets/path_07.glb",
+   "bytes": 524836,
+   "category": "ground",
+   "label": "path",
+   "short": "path",
+   "pivot": "region centroid at median ground height, +Z up, metres",
+   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
+   "inferred": [],
+   "facts": [
+    [
+     "面积",
+     "19.44 m²"
     ],
     [
      "材质",
@@ -955,6 +989,32 @@
   },
   "path_10": {
    "file": "assets/path_10.glb",
+   "bytes": 524644,
+   "category": "ground",
+   "label": "path",
+   "short": "path",
+   "pivot": "region centroid at median ground height, +Z up, metres",
+   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
+   "inferred": [],
+   "facts": [
+    [
+     "面积",
+     "2.61 m²"
+    ],
+    [
+     "材质",
+     "path_concrete"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_10/path_10_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_10/path_10_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_10/path_10_research.json"
+   ],
+   "generator": "cg/ground/build_ground.py"
+  },
+  "path_11": {
+   "file": "assets/path_11.glb",
    "bytes": 524652,
    "category": "ground",
    "label": "path",
@@ -973,15 +1033,15 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_10/path_10_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_10/path_10_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_10/path_10_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_11/path_11_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_11/path_11_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_11/path_11_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
   "plaza_01": {
    "file": "assets/plaza_01.glb",
-   "bytes": 255844,
+   "bytes": 261368,
    "category": "ground",
    "label": "plaza",
    "short": "plaza",
@@ -991,7 +1051,7 @@
    "facts": [
     [
      "面积",
-     "8682.15 m²"
+     "9937.63 m²"
     ],
     [
      "材质",
@@ -1147,7 +1207,7 @@
   },
   "road_01": {
    "file": "assets/road_01.glb",
-   "bytes": 694840,
+   "bytes": 694836,
    "category": "ground",
    "label": "road",
    "short": "road",
@@ -1157,7 +1217,7 @@
    "facts": [
     [
      "面积",
-     "1327.2 m²"
+     "1327.31 m²"
     ],
     [
      "材质",
@@ -1199,7 +1259,7 @@
   },
   "road_03": {
    "file": "assets/road_03.glb",
-   "bytes": 689068,
+   "bytes": 689048,
    "category": "ground",
    "label": "road",
    "short": "road",
@@ -1209,7 +1269,7 @@
    "facts": [
     [
      "面积",
-     "195.75 m²"
+     "195.85 m²"
     ],
     [
      "材质",
@@ -1303,7 +1363,7 @@
   },
   "road_markings": {
    "file": "assets/road_markings.glb",
-   "bytes": 12996,
+   "bytes": 14308,
    "category": "ground",
    "label": "markings",
    "short": "markings",
@@ -1329,7 +1389,7 @@
   },
   "sidewalk_01": {
    "file": "assets/sidewalk_01.glb",
-   "bytes": 587232,
+   "bytes": 587216,
    "category": "ground",
    "label": "sidewalk",
    "short": "sidewalk",
@@ -1339,7 +1399,7 @@
    "facts": [
     [
      "面积",
-     "496.24 m²"
+     "496.27 m²"
     ],
     [
      "材质",
@@ -1355,7 +1415,7 @@
   },
   "sidewalk_02": {
    "file": "assets/sidewalk_02.glb",
-   "bytes": 585356,
+   "bytes": 585332,
    "category": "ground",
    "label": "sidewalk",
    "short": "sidewalk",
@@ -1365,7 +1425,7 @@
    "facts": [
     [
      "面积",
-     "326.42 m²"
+     "326.44 m²"
     ],
     [
      "材质",
@@ -1391,7 +1451,7 @@
    "facts": [
     [
      "面积",
-     "76.75 m²"
+     "76.79 m²"
     ],
     [
      "材质",
@@ -1463,7 +1523,7 @@
   },
   "tree_00_broadleaf": {
    "file": "assets/tree_00_broadleaf.glb",
-   "bytes": 387436,
+   "bytes": 399968,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -1503,7 +1563,7 @@
   },
   "tree_01_purple_plum": {
    "file": "assets/tree_01_purple_plum.glb",
-   "bytes": 406028,
+   "bytes": 418560,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1543,7 +1603,7 @@
   },
   "tree_02_purple_plum": {
    "file": "assets/tree_02_purple_plum.glb",
-   "bytes": 515056,
+   "bytes": 527572,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1583,7 +1643,7 @@
   },
   "tree_03_purple_plum": {
    "file": "assets/tree_03_purple_plum.glb",
-   "bytes": 1023572,
+   "bytes": 1036088,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1623,7 +1683,7 @@
   },
   "tree_04_ginkgo_young": {
    "file": "assets/tree_04_ginkgo_young.glb",
-   "bytes": 474440,
+   "bytes": 486904,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1663,7 +1723,7 @@
   },
   "tree_05_ginkgo_young": {
    "file": "assets/tree_05_ginkgo_young.glb",
-   "bytes": 394376,
+   "bytes": 406872,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1703,7 +1763,7 @@
   },
   "tree_06_ginkgo_young": {
    "file": "assets/tree_06_ginkgo_young.glb",
-   "bytes": 394848,
+   "bytes": 407256,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1743,7 +1803,7 @@
   },
   "tree_07_ginkgo_young": {
    "file": "assets/tree_07_ginkgo_young.glb",
-   "bytes": 449648,
+   "bytes": 462296,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1783,7 +1843,7 @@
   },
   "tree_08_ginkgo_young": {
    "file": "assets/tree_08_ginkgo_young.glb",
-   "bytes": 525592,
+   "bytes": 538136,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1823,7 +1883,7 @@
   },
   "tree_09_red_maple": {
    "file": "assets/tree_09_red_maple.glb",
-   "bytes": 231144,
+   "bytes": 243936,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1863,7 +1923,7 @@
   },
   "tree_10_red_maple": {
    "file": "assets/tree_10_red_maple.glb",
-   "bytes": 336476,
+   "bytes": 349108,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1903,7 +1963,7 @@
   },
   "tree_11_red_maple": {
    "file": "assets/tree_11_red_maple.glb",
-   "bytes": 291084,
+   "bytes": 303696,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1943,7 +2003,7 @@
   },
   "tree_12_red_maple": {
    "file": "assets/tree_12_red_maple.glb",
-   "bytes": 571480,
+   "bytes": 584076,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1983,7 +2043,7 @@
   },
   "tree_13_red_maple": {
    "file": "assets/tree_13_red_maple.glb",
-   "bytes": 603940,
+   "bytes": 616532,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2023,7 +2083,7 @@
   },
   "tree_14_red_maple": {
    "file": "assets/tree_14_red_maple.glb",
-   "bytes": 487112,
+   "bytes": 499740,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2063,7 +2123,7 @@
   },
   "tree_15_red_maple": {
    "file": "assets/tree_15_red_maple.glb",
-   "bytes": 710096,
+   "bytes": 722596,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2103,7 +2163,7 @@
   },
   "tree_16_red_maple": {
    "file": "assets/tree_16_red_maple.glb",
-   "bytes": 514412,
+   "bytes": 527044,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2143,7 +2203,7 @@
   },
   "tree_17_red_maple": {
    "file": "assets/tree_17_red_maple.glb",
-   "bytes": 451808,
+   "bytes": 464420,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2183,7 +2243,7 @@
   },
   "tree_18_red_maple": {
    "file": "assets/tree_18_red_maple.glb",
-   "bytes": 515824,
+   "bytes": 528380,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2223,7 +2283,7 @@
   },
   "tree_19_broadleaf": {
    "file": "assets/tree_19_broadleaf.glb",
-   "bytes": 425444,
+   "bytes": 437920,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2263,7 +2323,7 @@
   },
   "tree_20_camphor": {
    "file": "assets/tree_20_camphor.glb",
-   "bytes": 859000,
+   "bytes": 871520,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2303,7 +2363,7 @@
   },
   "tree_21_camphor": {
    "file": "assets/tree_21_camphor.glb",
-   "bytes": 822988,
+   "bytes": 835488,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2343,7 +2403,7 @@
   },
   "tree_22_camphor": {
    "file": "assets/tree_22_camphor.glb",
-   "bytes": 685476,
+   "bytes": 697968,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2383,7 +2443,7 @@
   },
   "tree_23_camphor": {
    "file": "assets/tree_23_camphor.glb",
-   "bytes": 694528,
+   "bytes": 707040,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2423,7 +2483,7 @@
   },
   "tree_24_broadleaf": {
    "file": "assets/tree_24_broadleaf.glb",
-   "bytes": 678196,
+   "bytes": 690696,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2463,7 +2523,7 @@
   },
   "tree_25_broadleaf": {
    "file": "assets/tree_25_broadleaf.glb",
-   "bytes": 671696,
+   "bytes": 684184,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2503,7 +2563,7 @@
   },
   "tree_26_broadleaf": {
    "file": "assets/tree_26_broadleaf.glb",
-   "bytes": 930780,
+   "bytes": 943208,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2543,7 +2603,7 @@
   },
   "tree_27_broadleaf": {
    "file": "assets/tree_27_broadleaf.glb",
-   "bytes": 550104,
+   "bytes": 562632,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2583,7 +2643,7 @@
   },
   "tree_28_broadleaf": {
    "file": "assets/tree_28_broadleaf.glb",
-   "bytes": 482800,
+   "bytes": 495312,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2623,7 +2683,7 @@
   },
   "tree_29_broadleaf": {
    "file": "assets/tree_29_broadleaf.glb",
-   "bytes": 521136,
+   "bytes": 533656,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2663,7 +2723,7 @@
   },
   "tree_30_broadleaf": {
    "file": "assets/tree_30_broadleaf.glb",
-   "bytes": 563660,
+   "bytes": 576196,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2703,7 +2763,7 @@
   },
   "tree_31_broadleaf": {
    "file": "assets/tree_31_broadleaf.glb",
-   "bytes": 401836,
+   "bytes": 414344,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2743,7 +2803,7 @@
   },
   "tree_32_broadleaf": {
    "file": "assets/tree_32_broadleaf.glb",
-   "bytes": 495808,
+   "bytes": 508384,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2783,7 +2843,7 @@
   },
   "tree_33_broadleaf": {
    "file": "assets/tree_33_broadleaf.glb",
-   "bytes": 436400,
+   "bytes": 448988,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2823,7 +2883,7 @@
   },
   "tree_34_broadleaf": {
    "file": "assets/tree_34_broadleaf.glb",
-   "bytes": 688872,
+   "bytes": 701372,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2863,7 +2923,7 @@
   },
   "tree_35_broadleaf": {
    "file": "assets/tree_35_broadleaf.glb",
-   "bytes": 572288,
+   "bytes": 584804,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2903,7 +2963,7 @@
   },
   "tree_36_broadleaf": {
    "file": "assets/tree_36_broadleaf.glb",
-   "bytes": 527288,
+   "bytes": 539848,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2943,7 +3003,7 @@
   },
   "tree_37_broadleaf": {
    "file": "assets/tree_37_broadleaf.glb",
-   "bytes": 508608,
+   "bytes": 521172,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2983,7 +3043,7 @@
   },
   "tree_38_broadleaf": {
    "file": "assets/tree_38_broadleaf.glb",
-   "bytes": 491896,
+   "bytes": 504372,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3023,7 +3083,7 @@
   },
   "tree_39_broadleaf": {
    "file": "assets/tree_39_broadleaf.glb",
-   "bytes": 284348,
+   "bytes": 296804,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3063,7 +3123,7 @@
   },
   "tree_40_broadleaf": {
    "file": "assets/tree_40_broadleaf.glb",
-   "bytes": 857612,
+   "bytes": 870076,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3103,7 +3163,7 @@
   },
   "tree_41_broadleaf": {
    "file": "assets/tree_41_broadleaf.glb",
-   "bytes": 817424,
+   "bytes": 829920,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3143,7 +3203,7 @@
   },
   "tree_42_broadleaf": {
    "file": "assets/tree_42_broadleaf.glb",
-   "bytes": 604992,
+   "bytes": 617536,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3183,7 +3243,7 @@
   },
   "tree_43_broadleaf": {
    "file": "assets/tree_43_broadleaf.glb",
-   "bytes": 657400,
+   "bytes": 669940,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3223,7 +3283,7 @@
   },
   "tree_44_broadleaf": {
    "file": "assets/tree_44_broadleaf.glb",
-   "bytes": 487004,
+   "bytes": 499532,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3263,7 +3323,7 @@
   },
   "tree_45_broadleaf": {
    "file": "assets/tree_45_broadleaf.glb",
-   "bytes": 563992,
+   "bytes": 576484,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3303,7 +3363,7 @@
   },
   "tree_46_broadleaf": {
    "file": "assets/tree_46_broadleaf.glb",
-   "bytes": 522620,
+   "bytes": 535072,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3343,7 +3403,7 @@
   },
   "tree_47_broadleaf": {
    "file": "assets/tree_47_broadleaf.glb",
-   "bytes": 280340,
+   "bytes": 292956,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3383,7 +3443,7 @@
   },
   "tree_48_broadleaf": {
    "file": "assets/tree_48_broadleaf.glb",
-   "bytes": 763528,
+   "bytes": 776020,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3423,7 +3483,7 @@
   },
   "tree_49_broadleaf": {
    "file": "assets/tree_49_broadleaf.glb",
-   "bytes": 620740,
+   "bytes": 633256,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3463,7 +3523,7 @@
   },
   "tree_50_broadleaf": {
    "file": "assets/tree_50_broadleaf.glb",
-   "bytes": 520772,
+   "bytes": 533228,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3503,7 +3563,7 @@
   },
   "tree_51_broadleaf": {
    "file": "assets/tree_51_broadleaf.glb",
-   "bytes": 336676,
+   "bytes": 349220,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3543,7 +3603,7 @@
   },
   "tree_52_broadleaf": {
    "file": "assets/tree_52_broadleaf.glb",
-   "bytes": 564884,
+   "bytes": 577448,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3583,7 +3643,7 @@
   },
   "tree_53_camphor": {
    "file": "assets/tree_53_camphor.glb",
-   "bytes": 1017528,
+   "bytes": 1030004,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -3623,7 +3683,7 @@
   },
   "tree_54_camphor": {
    "file": "assets/tree_54_camphor.glb",
-   "bytes": 713572,
+   "bytes": 726088,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -3663,7 +3723,7 @@
   },
   "tree_55_broadleaf": {
    "file": "assets/tree_55_broadleaf.glb",
-   "bytes": 464812,
+   "bytes": 477304,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3703,7 +3763,7 @@
   },
   "tree_56_broadleaf": {
    "file": "assets/tree_56_broadleaf.glb",
-   "bytes": 1036404,
+   "bytes": 1048868,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3743,7 +3803,7 @@
   },
   "tree_57_broadleaf": {
    "file": "assets/tree_57_broadleaf.glb",
-   "bytes": 821392,
+   "bytes": 833876,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3783,7 +3843,7 @@
   },
   "tree_58_broadleaf": {
    "file": "assets/tree_58_broadleaf.glb",
-   "bytes": 380644,
+   "bytes": 393188,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3823,7 +3883,7 @@
   },
   "tree_59_broadleaf": {
    "file": "assets/tree_59_broadleaf.glb",
-   "bytes": 639468,
+   "bytes": 651972,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3863,7 +3923,7 @@
   },
   "tree_60_broadleaf": {
    "file": "assets/tree_60_broadleaf.glb",
-   "bytes": 494056,
+   "bytes": 506600,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3903,7 +3963,7 @@
   },
   "tree_61_broadleaf": {
    "file": "assets/tree_61_broadleaf.glb",
-   "bytes": 489404,
+   "bytes": 501952,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3943,7 +4003,7 @@
   },
   "tree_62_broadleaf": {
    "file": "assets/tree_62_broadleaf.glb",
-   "bytes": 443200,
+   "bytes": 455740,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3983,7 +4043,7 @@
   },
   "tree_63_broadleaf": {
    "file": "assets/tree_63_broadleaf.glb",
-   "bytes": 717012,
+   "bytes": 729524,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4023,7 +4083,7 @@
   },
   "tree_64_broadleaf": {
    "file": "assets/tree_64_broadleaf.glb",
-   "bytes": 507512,
+   "bytes": 520048,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4063,7 +4123,7 @@
   },
   "tree_65_broadleaf": {
    "file": "assets/tree_65_broadleaf.glb",
-   "bytes": 346060,
+   "bytes": 358628,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4103,7 +4163,7 @@
   },
   "tree_66_broadleaf": {
    "file": "assets/tree_66_broadleaf.glb",
-   "bytes": 886680,
+   "bytes": 899136,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4143,7 +4203,7 @@
   },
   "tree_67_broadleaf": {
    "file": "assets/tree_67_broadleaf.glb",
-   "bytes": 462900,
+   "bytes": 475420,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4183,7 +4243,7 @@
   },
   "tree_68_broadleaf": {
    "file": "assets/tree_68_broadleaf.glb",
-   "bytes": 414280,
+   "bytes": 426772,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4223,7 +4283,7 @@
   },
   "tree_69_broadleaf": {
    "file": "assets/tree_69_broadleaf.glb",
-   "bytes": 611956,
+   "bytes": 624464,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4269,9 +4329,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    130.012,
+    129.999,
     -0.537,
-    76.645
+    76.644
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4311,9 +4371,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    58.653,
-    -0.658,
-    14.686
+    58.633,
+    -0.655,
+    14.703
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4395,9 +4455,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    128.765,
-    -0.374,
-    79.448
+    128.751,
+    -0.365,
+    79.447
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4416,9 +4476,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    131.288,
-    -0.398,
-    73.78
+    131.274,
+    -0.419,
+    73.778
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4479,9 +4539,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    61.691,
-    -0.755,
-    11.746
+    55.318,
+    -0.121,
+    15.653
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4497,27 +4557,6 @@
   {
    "instance_id": "inst_curb_06",
    "asset_id": "curb_06",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position_gltf": [
-    55.339,
-    -0.123,
-    15.637
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_curb_07",
-   "asset_id": "curb_07",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4537,8 +4576,8 @@
    ]
   },
   {
-   "instance_id": "inst_curb_08",
-   "asset_id": "curb_08",
+   "instance_id": "inst_curb_07",
+   "asset_id": "curb_07",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4558,14 +4597,14 @@
    ]
   },
   {
-   "instance_id": "inst_curb_09",
-   "asset_id": "curb_09",
+   "instance_id": "inst_curb_08",
+   "asset_id": "curb_08",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    62.122,
-    -0.746,
-    13.692
+    62.102,
+    -0.742,
+    13.708
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4579,8 +4618,8 @@
    ]
   },
   {
-   "instance_id": "inst_curb_10",
-   "asset_id": "curb_10",
+   "instance_id": "inst_curb_09",
+   "asset_id": "curb_09",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4600,29 +4639,8 @@
    ]
   },
   {
-   "instance_id": "inst_curb_11",
-   "asset_id": "curb_11",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position_gltf": [
-    60.079,
-    -0.143,
-    3.347
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_curb_12",
-   "asset_id": "curb_12",
+   "instance_id": "inst_curb_10",
+   "asset_id": "curb_10",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4642,8 +4660,8 @@
    ]
   },
   {
-   "instance_id": "inst_curb_13",
-   "asset_id": "curb_13",
+   "instance_id": "inst_curb_11",
+   "asset_id": "curb_11",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4663,8 +4681,8 @@
    ]
   },
   {
-   "instance_id": "inst_curb_14",
-   "asset_id": "curb_14",
+   "instance_id": "inst_curb_12",
+   "asset_id": "curb_12",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4689,9 +4707,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    123.615,
-    -0.1,
-    -10.622
+    122.879,
+    -0.106,
+    -9.371
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4752,9 +4770,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    228.187,
-    -0.086,
-    -70.024
+    228.203,
+    -0.085,
+    -70.02
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4773,9 +4791,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    128.289,
-    -0.279,
-    -90.976
+    128.287,
+    -0.278,
+    -90.96
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4815,27 +4833,6 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    82.596,
-    -0.891,
-    40.828
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_path_05",
-   "asset_id": "path_05",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position_gltf": [
     254.761,
     0.135,
     30.236
@@ -4852,8 +4849,8 @@
    ]
   },
   {
-   "instance_id": "inst_path_06",
-   "asset_id": "path_06",
+   "instance_id": "inst_path_05",
+   "asset_id": "path_05",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4873,14 +4870,35 @@
    ]
   },
   {
-   "instance_id": "inst_path_07",
-   "asset_id": "path_07",
+   "instance_id": "inst_path_06",
+   "asset_id": "path_06",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
     237.705,
     -0.034,
     60.598
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_path_07",
+   "asset_id": "path_07",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position_gltf": [
+    62.803,
+    -0.765,
+    13.591
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4941,6 +4959,27 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
+    83.869,
+    -0.912,
+    45.843
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_path_11",
+   "asset_id": "path_11",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position_gltf": [
     248.33,
     0.033,
     -11.628
@@ -4962,9 +5001,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    180.761,
-    -0.155,
-    -4.995
+    183.771,
+    0.346,
+    -5.122
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5046,9 +5085,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    128.295,
-    -0.353,
-    80.502
+    128.282,
+    -0.351,
+    80.501
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5067,9 +5106,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    131.631,
-    -0.349,
-    73.009
+    131.617,
+    -0.35,
+    73.008
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5088,9 +5127,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    54.073,
-    0.169,
-    16.0
+    54.052,
+    0.162,
+    16.016
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5167,6 +5206,27 @@
    ]
   },
   {
+   "instance_id": "inst_bldg_academic_block",
+   "asset_id": "bldg_academic_block",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position_gltf": [
+    0.0,
+    0.0,
+    -130.0
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
    "instance_id": "inst_bldg_far_01",
    "asset_id": "bldg_far_01",
    "category": "building",
@@ -5217,27 +5277,6 @@
     76.804,
     0.124,
     106.457
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_bldg_near_01",
-   "asset_id": "bldg_near_01",
-   "category": "building",
-   "parent": "grp_buildings",
-   "position_gltf": [
-    49.961,
-    -0.378,
-    -28.282
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -8209,9 +8248,9 @@
   }
  ],
  "totals": {
-  "assets": 122,
-  "instances": 174,
-  "bytes": 65758932
+  "assets": 124,
+  "instances": 173,
+  "bytes": 67770048
  },
  "notes": [
   "Scale is estimated (camera height + crosswalk), about +-5 %.",

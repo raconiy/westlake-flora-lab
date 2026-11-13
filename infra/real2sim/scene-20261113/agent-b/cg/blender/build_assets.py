@@ -20,7 +20,7 @@ def mk_mesh(name, a, matname):
     me.polygons.foreach_set("loop_start", np.arange(0, F.size, nl)); me.polygons.foreach_set("loop_total", np.full(len(F), nl))
     me.update(calc_edges=True)
     uv = me.uv_layers.new(name="UVMap"); uv.data.foreach_set("uv", UV[F.ravel()].ravel())
-    if not np.allclose(COL, 1.0) or matname in ("lawn", "paving", "path_concrete") or matname.startswith(("leaf_", "twig_")):
+    if not np.allclose(COL, 1.0) or matname in ("lawn", "paving", "path_concrete") or matname.startswith(("leaf_", "twig_", "leafmass_")):
         ca = me.color_attributes.new("Col", "FLOAT_COLOR", "POINT"); ca.data.foreach_set("color", COL.ravel())
     me.materials.append(materials.get(matname))
     me.validate(clean_customdata=False)

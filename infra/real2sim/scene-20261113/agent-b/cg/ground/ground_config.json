@@ -12,7 +12,7 @@
   -1.13
  ],
  "rotunda_radius": 38.83,
- "rotunda_apron_m": 5.0,
+ "rotunda_apron_m": 10.5,
  "spur_x_max": 55.0,
  "spur_far": [
   20.0,
@@ -71,5 +71,6 @@
    -148
   ]
  },
- "near_site_radius": 220.0
+ "near_site_radius": 220.0,
+ "yellow_keep_distance_m": 3.2
 }

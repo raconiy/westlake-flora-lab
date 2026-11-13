@@ -12,12 +12,14 @@
     "nodes": 650,
     "chains": 127,
     "leaves": 18238,
+    "foliage_clusters": 80,
     "max_z": 10.45488218019808
    },
    "web": {
     "nodes": 650,
     "chains": 127,
     "leaves": 911,
+    "foliage_clusters": 56,
     "max_z": 10.45488218019808
    }
   }
@@ -35,12 +37,14 @@
     "nodes": 1371,
     "chains": 263,
     "leaves": 58528,
+    "foliage_clusters": 80,
     "max_z": 9.734497350301515
    },
    "web": {
     "nodes": 1371,
     "chains": 263,
     "leaves": 1574,
+    "foliage_clusters": 56,
     "max_z": 9.734497350301515
    }
   }
@@ -58,12 +62,14 @@
     "nodes": 2171,
     "chains": 416,
     "leaves": 72918,
+    "foliage_clusters": 80,
     "max_z": 9.833053282737977
    },
    "web": {
     "nodes": 2171,
     "chains": 416,
     "leaves": 2008,
+    "foliage_clusters": 56,
     "max_z": 9.833053282737977
    }
   }
@@ -81,12 +87,14 @@
     "nodes": 4140,
     "chains": 747,
     "leaves": 272694,
+    "foliage_clusters": 80,
     "max_z": 9.967206552356718
    },
    "web": {
     "nodes": 4140,
     "chains": 747,
     "leaves": 7498,
+    "foliage_clusters": 56,
     "max_z": 9.967206552356718
    }
   }
@@ -104,12 +112,14 @@
     "nodes": 1724,
     "chains": 357,
     "leaves": 14200,
+    "foliage_clusters": 80,
     "max_z": 13.982850712752079
    },
    "web": {
     "nodes": 1724,
     "chains": 357,
     "leaves": 666,
+    "foliage_clusters": 56,
     "max_z": 13.982850712752079
    }
   }
@@ -127,12 +137,14 @@
     "nodes": 1219,
     "chains": 272,
     "leaves": 10107,
+    "foliage_clusters": 80,
     "max_z": 10.935721539381039
    },
    "web": {
     "nodes": 1219,
     "chains": 272,
     "leaves": 515,
+    "foliage_clusters": 56,
     "max_z": 10.935721539381039
    }
   }
@@ -150,12 +162,14 @@
     "nodes": 1167,
     "chains": 264,
     "leaves": 5486,
+    "foliage_clusters": 80,
     "max_z": 13.469850288334404
    },
    "web": {
     "nodes": 1167,
     "chains": 264,
     "leaves": 272,
+    "foliage_clusters": 56,
     "max_z": 13.469850288334404
    }
   }
@@ -173,12 +187,14 @@
     "nodes": 1733,
     "chains": 372,
     "leaves": 19659,
+    "foliage_clusters": 80,
     "max_z": 7.111235941467054
    },
    "web": {
     "nodes": 1733,
     "chains": 372,
     "leaves": 989,
+    "foliage_clusters": 56,
     "max_z": 7.111235941467054
    }
   }
@@ -196,12 +212,14 @@
     "nodes": 2291,
     "chains": 467,
     "leaves": 20981,
+    "foliage_clusters": 80,
     "max_z": 11.187815099187416
    },
    "web": {
     "nodes": 2291,
     "chains": 467,
     "leaves": 1076,
+    "foliage_clusters": 56,
     "max_z": 11.187815099187416
    }
   }
@@ -219,12 +237,14 @@
     "nodes": 260,
     "chains": 51,
     "leaves": 9731,
+    "foliage_clusters": 80,
     "max_z": 4.006448724215693
    },
    "web": {
     "nodes": 260,
     "chains": 51,
     "leaves": 773,
+    "foliage_clusters": 56,
     "max_z": 4.006448724215693
    }
   }
@@ -242,12 +262,14 @@
     "nodes": 933,
     "chains": 176,
     "leaves": 18777,
+    "foliage_clusters": 80,
     "max_z": 6.729024604816984
    },
    "web": {
     "nodes": 933,
     "chains": 176,
     "leaves": 1398,
+    "foliage_clusters": 56,
     "max_z": 6.729024604816984
    }
   }
@@ -265,12 +287,14 @@
     "nodes": 636,
     "chains": 122,
     "leaves": 15826,
+    "foliage_clusters": 80,
     "max_z": 6.010240098612258
    },
    "web": {
     "nodes": 636,
     "chains": 122,
     "leaves": 1130,
+    "foliage_clusters": 56,
     "max_z": 6.010240098612258
    }
   }
@@ -288,12 +312,14 @@
     "nodes": 1896,
     "chains": 333,
     "leaves": 54295,
+    "foliage_clusters": 80,
     "max_z": 5.6781840474433105
    },
    "web": {
     "nodes": 1896,
     "chains": 333,
     "leaves": 4064,
+    "foliage_clusters": 56,
     "max_z": 5.6781840474433105
    }
   }
@@ -311,12 +337,14 @@
     "nodes": 2060,
     "chains": 390,
     "leaves": 56968,
+    "foliage_clusters": 80,
     "max_z": 7.270608744451584
    },
    "web": {
     "nodes": 2060,
     "chains": 390,
     "leaves": 4202,
+    "foliage_clusters": 56,
     "max_z": 7.270608744451584
    }
   }
@@ -334,12 +362,14 @@
     "nodes": 1408,
     "chains": 266,
     "leaves": 43875,
+    "foliage_clusters": 80,
     "max_z": 6.777121644519983
    },
    "web": {
     "nodes": 1408,
     "chains": 266,
     "leaves": 3185,
+    "foliage_clusters": 56,
     "max_z": 6.777121644519983
    }
   }
@@ -357,12 +387,14 @@
     "nodes": 2562,
     "chains": 473,
     "leaves": 71752,
+    "foliage_clusters": 80,
     "max_z": 7.329006416282936
    },
    "web": {
     "nodes": 2562,
     "chains": 473,
     "leaves": 5229,
+    "foliage_clusters": 56,
     "max_z": 7.329006416282936
    }
   }
@@ -380,12 +412,14 @@
     "nodes": 1545,
     "chains": 304,
     "leaves": 45965,
+    "foliage_clusters": 80,
     "max_z": 7.177041437873087
    },
    "web": {
     "nodes": 1545,
     "chains": 304,
     "leaves": 3392,
+    "foliage_clusters": 56,
     "max_z": 7.177041437873087
    }
   }
@@ -403,12 +437,14 @@
     "nodes": 1510,
     "chains": 302,
     "leaves": 32195,
+    "foliage_clusters": 80,
     "max_z": 7.898155005749956
    },
    "web": {
     "nodes": 1510,
     "chains": 302,
     "leaves": 2309,
+    "foliage_clusters": 56,
     "max_z": 7.898155005749956
    }
   }
@@ -426,12 +462,14 @@
     "nodes": 1690,
     "chains": 324,
     "leaves": 47200,
+    "foliage_clusters": 80,
     "max_z": 6.000457267491256
    },
    "web": {
     "nodes": 1690,
     "chains": 324,
     "leaves": 3389,
+    "foliage_clusters": 56,
     "max_z": 6.000457267491256
    }
   }
@@ -449,12 +487,14 @@
     "nodes": 882,
     "chains": 183,
     "leaves": 22432,
+    "foliage_clusters": 80,
     "max_z": 11.124854581013546
    },
    "web": {
     "nodes": 882,
     "chains": 183,
     "leaves": 1087,
+    "foliage_clusters": 56,
     "max_z": 11.124854581013546
    }
   }
@@ -472,12 +512,14 @@
     "nodes": 3516,
     "chains": 711,
     "leaves": 80405,
+    "foliage_clusters": 80,
     "max_z": 12.686489160115821
    },
    "web": {
     "nodes": 3516,
     "chains": 711,
     "leaves": 3295,
+    "foliage_clusters": 56,
     "max_z": 12.686489160115821
    }
   }
@@ -495,12 +537,14 @@
     "nodes": 3450,
     "chains": 709,
     "leaves": 83160,
+    "foliage_clusters": 80,
     "max_z": 9.014882214227345
    },
    "web": {
     "nodes": 3450,
     "chains": 709,
     "leaves": 3458,
+    "foliage_clusters": 56,
     "max_z": 9.014882214227345
    }
   }
@@ -518,12 +562,14 @@
     "nodes": 2617,
     "chains": 531,
     "leaves": 49942,
+    "foliage_clusters": 80,
     "max_z": 12.405399639522074
    },
    "web": {
     "nodes": 2617,
     "chains": 531,
     "leaves": 2042,
+    "foliage_clusters": 56,
     "max_z": 12.405399639522074
    }
   }
@@ -541,12 +587,14 @@
     "nodes": 2884,
     "chains": 587,
     "leaves": 67222,
+    "foliage_clusters": 80,
     "max_z": 7.397623280258207
    },
    "web": {
     "nodes": 2884,
     "chains": 587,
     "leaves": 2786,
+    "foliage_clusters": 56,
     "max_z": 7.397623280258207
    }
   }
@@ -564,12 +612,14 @@
     "nodes": 1918,
     "chains": 391,
     "leaves": 64722,
+    "foliage_clusters": 80,
     "max_z": 12.964613840177334
    },
    "web": {
     "nodes": 1918,
     "chains": 391,
     "leaves": 3193,
+    "foliage_clusters": 56,
     "max_z": 12.964613840177334
    }
   }
@@ -587,12 +637,14 @@
     "nodes": 1852,
     "chains": 380,
     "leaves": 65024,
+    "foliage_clusters": 80,
     "max_z": 13.121913005482998
    },
    "web": {
     "nodes": 1852,
     "chains": 380,
     "leaves": 3170,
+    "foliage_clusters": 56,
     "max_z": 13.121913005482998
    }
   }
@@ -610,12 +662,14 @@
     "nodes": 2718,
     "chains": 533,
     "leaves": 118721,
+    "foliage_clusters": 80,
     "max_z": 13.966821411750969
    },
    "web": {
     "nodes": 2718,
     "chains": 533,
     "leaves": 5915,
+    "foliage_clusters": 56,
     "max_z": 13.966821411750969
    }
   }
@@ -633,12 +687,14 @@
     "nodes": 1451,
     "chains": 304,
     "leaves": 56767,
+    "foliage_clusters": 80,
     "max_z": 6.214595742165102
    },
    "web": {
     "nodes": 1451,
     "chains": 304,
     "leaves": 2681,
+    "foliage_clusters": 56,
     "max_z": 6.214595742165102
    }
   }
@@ -656,12 +712,14 @@
     "nodes": 1100,
     "chains": 227,
     "leaves": 35581,
+    "foliage_clusters": 80,
     "max_z": 10.75483866691128
    },
    "web": {
     "nodes": 1100,
     "chains": 227,
     "leaves": 1697,
+    "foliage_clusters": 56,
     "max_z": 10.75483866691128
    }
   }
@@ -679,12 +737,14 @@
     "nodes": 1235,
     "chains": 227,
     "leaves": 41035,
+    "foliage_clusters": 80,
     "max_z": 10.708819523890373
    },
    "web": {
     "nodes": 1235,
     "chains": 227,
     "leaves": 2069,
+    "foliage_clusters": 56,
     "max_z": 10.708819523890373
    }
   }
@@ -702,12 +762,14 @@
     "nodes": 1385,
     "chains": 289,
     "leaves": 53339,
+    "foliage_clusters": 80,
     "max_z": 9.911044280545958
    },
    "web": {
     "nodes": 1385,
     "chains": 289,
     "leaves": 2613,
+    "foliage_clusters": 56,
     "max_z": 9.911044280545958
    }
   }
@@ -725,12 +787,14 @@
     "nodes": 781,
     "chains": 163,
     "leaves": 18926,
+    "foliage_clusters": 80,
     "max_z": 9.911123418990128
    },
    "web": {
     "nodes": 781,
     "chains": 163,
     "leaves": 940,
+    "foliage_clusters": 56,
     "max_z": 9.911123418990128
    }
   }
@@ -748,12 +812,14 @@
     "nodes": 1142,
     "chains": 245,
     "leaves": 38453,
+    "foliage_clusters": 80,
     "max_z": 9.172533306243055
    },
    "web": {
     "nodes": 1142,
     "chains": 245,
     "leaves": 1902,
+    "foliage_clusters": 56,
     "max_z": 9.172533306243055
    }
   }
@@ -771,12 +837,14 @@
     "nodes": 915,
     "chains": 200,
     "leaves": 26161,
+    "foliage_clusters": 80,
     "max_z": 9.631149016054447
    },
    "web": {
     "nodes": 915,
     "chains": 200,
     "leaves": 1311,
+    "foliage_clusters": 56,
     "max_z": 9.631149016054447
    }
   }
@@ -794,12 +862,14 @@
     "nodes": 1712,
     "chains": 367,
     "leaves": 83129,
+    "foliage_clusters": 80,
     "max_z": 10.512431880303891
    },
    "web": {
     "nodes": 1712,
     "chains": 367,
     "leaves": 4032,
+    "foliage_clusters": 56,
     "max_z": 10.512431880303891
    }
   }
@@ -817,12 +887,14 @@
     "nodes": 1396,
     "chains": 291,
     "leaves": 54438,
+    "foliage_clusters": 80,
     "max_z": 10.507120447836646
    },
    "web": {
     "nodes": 1396,
     "chains": 291,
     "leaves": 2681,
+    "foliage_clusters": 56,
     "max_z": 10.507120447836646
    }
   }
@@ -840,12 +912,14 @@
     "nodes": 1425,
     "chains": 289,
     "leaves": 39100,
+    "foliage_clusters": 80,
     "max_z": 10.426601659270581
    },
    "web": {
     "nodes": 1425,
     "chains": 289,
     "leaves": 1854,
+    "foliage_clusters": 56,
     "max_z": 10.426601659270581
    }
   }
@@ -863,12 +937,14 @@
     "nodes": 1283,
     "chains": 289,
     "leaves": 47540,
+    "foliage_clusters": 80,
     "max_z": 6.239841802223993
    },
    "web": {
     "nodes": 1283,
     "chains": 289,
     "leaves": 2220,
+    "foliage_clusters": 56,
     "max_z": 6.239841802223993
    }
   }
@@ -886,12 +962,14 @@
     "nodes": 1037,
     "chains": 216,
     "leaves": 32600,
+    "foliage_clusters": 80,
     "max_z": 13.222742855131894
    },
    "web": {
     "nodes": 1037,
     "chains": 216,
     "leaves": 1638,
+    "foliage_clusters": 56,
     "max_z": 13.222742855131894
    }
   }
@@ -909,12 +987,14 @@
     "nodes": 191,
     "chains": 33,
     "leaves": 3806,
+    "foliage_clusters": 80,
     "max_z": 10.12669992753896
    },
    "web": {
     "nodes": 191,
     "chains": 33,
     "leaves": 203,
+    "foliage_clusters": 56,
     "max_z": 10.12669992753896
    }
   }
@@ -932,12 +1012,14 @@
     "nodes": 2420,
     "chains": 490,
     "leaves": 109037,
+    "foliage_clusters": 80,
     "max_z": 12.925381544179295
    },
    "web": {
     "nodes": 2420,
     "chains": 490,
     "leaves": 5345,
+    "foliage_clusters": 56,
     "max_z": 12.925381544179295
    }
   }
@@ -955,12 +1037,14 @@
     "nodes": 2392,
     "chains": 484,
     "leaves": 99035,
+    "foliage_clusters": 80,
     "max_z": 12.40250173640709
    },
    "web": {
     "nodes": 2392,
     "chains": 484,
     "leaves": 4832,
+    "foliage_clusters": 56,
     "max_z": 12.40250173640709
    }
   }
@@ -978,12 +1062,14 @@
     "nodes": 1586,
     "chains": 350,
     "leaves": 60265,
+    "foliage_clusters": 80,
     "max_z": 9.249245206918129
    },
    "web": {
     "nodes": 1586,
     "chains": 350,
     "leaves": 3054,
+    "foliage_clusters": 56,
     "max_z": 9.249245206918129
    }
   }
@@ -1001,12 +1087,14 @@
     "nodes": 1890,
     "chains": 380,
     "leaves": 63436,
+    "foliage_clusters": 80,
     "max_z": 11.46597901267042
    },
    "web": {
     "nodes": 1890,
     "chains": 380,
     "leaves": 3138,
+    "foliage_clusters": 56,
     "max_z": 11.46597901267042
    }
   }
@@ -1024,12 +1112,14 @@
     "nodes": 1059,
     "chains": 211,
     "leaves": 38626,
+    "foliage_clusters": 80,
     "max_z": 10.594577938063365
    },
    "web": {
     "nodes": 1059,
     "chains": 211,
     "leaves": 1815,
+    "foliage_clusters": 56,
     "max_z": 10.594577938063365
    }
   }
@@ -1047,12 +1137,14 @@
     "nodes": 1266,
     "chains": 262,
     "leaves": 51089,
+    "foliage_clusters": 80,
     "max_z": 12.564310237680369
    },
    "web": {
     "nodes": 1266,
     "chains": 262,
     "leaves": 2483,
+    "foliage_clusters": 56,
     "max_z": 12.564310237680369
    }
   }
@@ -1070,12 +1162,14 @@
     "nodes": 1279,
     "chains": 286,
     "leaves": 37606,
+    "foliage_clusters": 80,
     "max_z": 11.966376310336074
    },
    "web": {
     "nodes": 1279,
     "chains": 286,
     "leaves": 1823,
+    "foliage_clusters": 56,
     "max_z": 11.966376310336074
    }
   }
@@ -1093,12 +1187,14 @@
     "nodes": 182,
     "chains": 35,
     "leaves": 4722,
+    "foliage_clusters": 80,
     "max_z": 6.140283989445729
    },
    "web": {
     "nodes": 182,
     "chains": 35,
     "leaves": 240,
+    "foliage_clusters": 56,
     "max_z": 6.140283989445729
    }
   }
@@ -1116,12 +1212,14 @@
     "nodes": 2130,
     "chains": 443,
     "leaves": 88103,
+    "foliage_clusters": 80,
     "max_z": 11.717366936748876
    },
    "web": {
     "nodes": 2130,
     "chains": 443,
     "leaves": 4489,
+    "foliage_clusters": 56,
     "max_z": 11.717366936748876
    }
   }
@@ -1139,12 +1237,14 @@
     "nodes": 1821,
     "chains": 361,
     "leaves": 53397,
+    "foliage_clusters": 80,
     "max_z": 11.304185224359646
    },
    "web": {
     "nodes": 1821,
     "chains": 361,
     "leaves": 2601,
+    "foliage_clusters": 56,
     "max_z": 11.304185224359646
    }
   }
@@ -1162,12 +1262,14 @@
     "nodes": 1299,
     "chains": 268,
     "leaves": 35921,
+    "foliage_clusters": 80,
     "max_z": 14.093983672140165
    },
    "web": {
     "nodes": 1299,
     "chains": 268,
     "leaves": 1667,
+    "foliage_clusters": 56,
     "max_z": 14.093983672140165
    }
   }
@@ -1185,12 +1287,14 @@
     "nodes": 397,
     "chains": 87,
     "leaves": 13744,
+    "foliage_clusters": 80,
     "max_z": 8.033928582877625
    },
    "web": {
     "nodes": 397,
     "chains": 87,
     "leaves": 686,
+    "foliage_clusters": 56,
     "max_z": 8.033928582877625
    }
   }
@@ -1208,12 +1312,14 @@
     "nodes": 1397,
     "chains": 298,
     "leaves": 56347,
+    "foliage_clusters": 80,
     "max_z": 8.605639104214765
    },
    "web": {
     "nodes": 1397,
     "chains": 298,
     "leaves": 2750,
+    "foliage_clusters": 56,
     "max_z": 8.605639104214765
    }
   }
@@ -1231,12 +1337,14 @@
     "nodes": 4099,
     "chains": 802,
     "leaves": 112287,
+    "foliage_clusters": 80,
     "max_z": 12.469536569728575
    },
    "web": {
     "nodes": 4099,
     "chains": 802,
     "leaves": 4817,
+    "foliage_clusters": 56,
     "max_z": 12.469536569728575
    }
   }
@@ -1254,12 +1362,14 @@
     "nodes": 2673,
     "chains": 515,
     "leaves": 61048,
+    "foliage_clusters": 80,
     "max_z": 11.19553591676579
    },
    "web": {
     "nodes": 2673,
     "chains": 515,
     "leaves": 2552,
+    "foliage_clusters": 56,
     "max_z": 11.19553591676579
    }
   }
@@ -1277,12 +1387,14 @@
     "nodes": 912,
     "chains": 209,
     "leaves": 31653,
+    "foliage_clusters": 80,
     "max_z": 11.965800202068273
    },
    "web": {
     "nodes": 912,
     "chains": 209,
     "leaves": 1570,
+    "foliage_clusters": 56,
     "max_z": 11.965800202068273
    }
   }
@@ -1300,12 +1412,14 @@
     "nodes": 2936,
     "chains": 550,
     "leaves": 149440,
+    "foliage_clusters": 80,
     "max_z": 14.233065333674505
    },
    "web": {
     "nodes": 2936,
     "chains": 550,
     "leaves": 7384,
+    "foliage_clusters": 56,
     "max_z": 14.233065333674505
    }
   }
@@ -1323,12 +1437,14 @@
     "nodes": 2556,
     "chains": 533,
     "leaves": 90462,
+    "foliage_clusters": 80,
     "max_z": 13.628984588494953
    },
    "web": {
     "nodes": 2556,
     "chains": 533,
     "leaves": 4480,
+    "foliage_clusters": 56,
     "max_z": 13.628984588494953
    }
   }
@@ -1346,12 +1462,14 @@
     "nodes": 629,
     "chains": 129,
     "leaves": 19000,
+    "foliage_clusters": 80,
     "max_z": 8.885970319463235
    },
    "web": {
     "nodes": 629,
     "chains": 129,
     "leaves": 981,
+    "foliage_clusters": 56,
     "max_z": 8.885970319463235
    }
   }
@@ -1369,12 +1487,14 @@
     "nodes": 1779,
     "chains": 366,
     "leaves": 60015,
+    "foliage_clusters": 80,
     "max_z": 12.399998191487411
    },
    "web": {
     "nodes": 1779,
     "chains": 366,
     "leaves": 2874,
+    "foliage_clusters": 56,
     "max_z": 12.399998191487411
    }
   }
@@ -1392,12 +1512,14 @@
     "nodes": 1171,
     "chains": 244,
     "leaves": 34471,
+    "foliage_clusters": 80,
     "max_z": 10.50248272760183
    },
    "web": {
     "nodes": 1171,
     "chains": 244,
     "leaves": 1745,
+    "foliage_clusters": 56,
     "max_z": 10.50248272760183
    }
   }
@@ -1415,12 +1537,14 @@
     "nodes": 1207,
     "chains": 251,
     "leaves": 31912,
+    "foliage_clusters": 80,
     "max_z": 10.200742392257224
    },
    "web": {
     "nodes": 1207,
     "chains": 251,
     "leaves": 1552,
+    "foliage_clusters": 56,
     "max_z": 10.200742392257224
    }
   }
@@ -1438,12 +1562,14 @@
     "nodes": 963,
     "chains": 195,
     "leaves": 25341,
+    "foliage_clusters": 80,
     "max_z": 10.658187392044374
    },
    "web": {
     "nodes": 963,
     "chains": 195,
     "leaves": 1309,
+    "foliage_clusters": 56,
     "max_z": 10.658187392044374
    }
   }
@@ -1461,12 +1587,14 @@
     "nodes": 2162,
     "chains": 438,
     "leaves": 75563,
+    "foliage_clusters": 80,
     "max_z": 10.748288445055588
    },
    "web": {
     "nodes": 2162,
     "chains": 438,
     "leaves": 3727,
+    "foliage_clusters": 56,
     "max_z": 10.748288445055588
    }
   }
@@ -1484,12 +1612,14 @@
     "nodes": 1120,
     "chains": 226,
     "leaves": 44264,
+    "foliage_clusters": 80,
     "max_z": 9.289486054024344
    },
    "web": {
     "nodes": 1120,
     "chains": 226,
     "leaves": 2149,
+    "foliage_clusters": 56,
     "max_z": 9.289486054024344
    }
   }
@@ -1507,12 +1637,14 @@
     "nodes": 471,
     "chains": 98,
     "leaves": 15944,
+    "foliage_clusters": 80,
     "max_z": 7.395760004759648
    },
    "web": {
     "nodes": 471,
     "chains": 98,
     "leaves": 751,
+    "foliage_clusters": 56,
     "max_z": 7.395760004759648
    }
   }
@@ -1530,12 +1662,14 @@
     "nodes": 2727,
     "chains": 537,
     "leaves": 116777,
+    "foliage_clusters": 80,
     "max_z": 11.75311208014291
    },
    "web": {
     "nodes": 2727,
     "chains": 537,
     "leaves": 5605,
+    "foliage_clusters": 56,
     "max_z": 11.75311208014291
    }
   }
@@ -1553,12 +1687,14 @@
     "nodes": 1058,
     "chains": 213,
     "leaves": 30879,
+    "foliage_clusters": 80,
     "max_z": 9.506507667064872
    },
    "web": {
     "nodes": 1058,
     "chains": 213,
     "leaves": 1560,
+    "foliage_clusters": 56,
     "max_z": 9.506507667064872
    }
   }
@@ -1576,12 +1712,14 @@
     "nodes": 763,
     "chains": 155,
     "leaves": 22589,
+    "foliage_clusters": 80,
     "max_z": 11.117116036278517
    },
    "web": {
     "nodes": 763,
     "chains": 155,
     "leaves": 1113,
+    "foliage_clusters": 56,
     "max_z": 11.117116036278517
    }
   }
@@ -1599,12 +1737,14 @@
     "nodes": 1523,
     "chains": 333,
     "leaves": 58698,
+    "foliage_clusters": 80,
     "max_z": 11.764044966880702
    },
    "web": {
     "nodes": 1523,
     "chains": 333,
     "leaves": 2936,
+    "foliage_clusters": 56,
     "max_z": 11.764044966880702
    }
   }

@@ -116,6 +116,11 @@ for k in order:
 SIDEWALK = "sidewalk"; geo[SIDEWALK] = []
 for gg in (sw_geo, rot_geo):
     geo[ROAD].append(gg["road"]); geo[CURB] += [gg["kerb"], gg["kerb_far"]]; geo[SIDEWALK] += [gg[k] for k in ("sidewalk", "sidewalk_far") if k in gg]
+# inferred concrete gutter/join at the observed rotunda road interface; fills the narrow undersurface gap
+ph = np.radians(np.linspace(RR["phi_deg"][0], RR["phi_deg"][1], 192))
+A = np.c_[ROT[0] + 45.42*np.cos(ph), ROT[1] + 45.42*np.sin(ph)]
+B_ = np.c_[ROT[0] + 46.18*np.cos(ph), ROT[1] + 46.18*np.sin(ph)]
+geo[PATH].append(Polygon(np.r_[A, B_[::-1]]).buffer(0))
 # ---------------- meshing ----------------
 def _clean_ring(coords, tol=0.02):
     out = []
@@ -217,14 +222,14 @@ for P in geo[ROAD]:
     for g in (inner.geoms if hasattr(inner, "geoms") else [inner]):
         ln = g.exterior
         segs = [ln.interpolate(t) for t in np.arange(0, ln.length, 0.5)]
-        keep = [nonroad.distance(Point(p.x, p.y)) < CFG["yellow_offset"] + 1.2 for p in segs]
+        keep = [nonroad.distance(Point(p.x, p.y)) < CFG.get("yellow_keep_distance_m", CFG["yellow_offset"] + 1.2) for p in segs]
         run = []
         for p, k in zip(segs + [None], keep + [False]):
             if k: run.append((p.x, p.y))
             elif len(run) > 4:
                 line = LineString(run).buffer(0.075, cap_style=2)
                 for gg in (line.geoms if hasattr(line, "geoms") else [line]):
-                    V2, T = tri_polygon(gg, 0.5); ye.add(np.c_[V2, z_at(V2[:, 0], V2[:, 1]) + OFF[ROAD] + 0.006], T, V2)
+                    V2, T = tri_polygon(gg, 0.5); ye.add(np.c_[V2, z_at(V2[:, 0], V2[:, 1]) + max(OFF[ROAD] + 0.006, OFF[PATH] + 0.012)], T, V2)
                 run = []
             else: run = []
 cen = np.array([CFG["spur_far"][0], CFG["spur_far"][1], 0.0])
