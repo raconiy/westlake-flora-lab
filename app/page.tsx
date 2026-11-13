@@ -28,21 +28,45 @@ function readSavedWorkspace():{scenario:Scenario;versions:Version[];bridge:strin
   return {scenario:validateScenario(saved.scenario),versions:Array.isArray(saved.versions)?saved.versions.filter((v:Version)=>v&&v.local):[],bridge:typeof saved.bridge==='string'&&saved.bridge?saved.bridge:defaults.bridge};
  }catch{return defaults;}
 }
+const comparisonOptions = [
+ {agent:'agent-a', hash:'#comparison', label:'Agent A'},
+ {agent:'agent-b', hash:'#comparison-b', label:'Agent B · Opus 5.5'},
+] as const;
+
+function getComparisonAgent(hash:string){
+ return comparisonOptions.find(option=>option.hash===hash)?.agent;
+}
+
 function ComparisonScene(){
- const [loaded,setLoaded]=useState(false);
- const source=`${import.meta.env.BASE_URL}real2sim/scene-20261113/agent-a/index.html`;
+ const [{agent,loaded},setScene]=useState(()=>({
+  agent:getComparisonAgent(window.location.hash)??'agent-a',
+  loaded:false,
+ }));
+ useEffect(()=>{
+  const syncAgent=()=>{
+   const selected=getComparisonAgent(window.location.hash);
+   if(selected) setScene(current=>current.agent===selected?current:{agent:selected,loaded:false});
+  };
+  window.addEventListener('hashchange',syncAgent);
+  syncAgent();
+  return ()=>window.removeEventListener('hashchange',syncAgent);
+ },[]);
+ const source=`${import.meta.env.BASE_URL}real2sim/scene-20261113/${agent}/index.html`;
  return <section aria-label="新场景对比" style={{width:'100%',minWidth:0}}>
   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:'12px',flexWrap:'wrap',marginBottom:'16px'}}>
+   <div className="comparison-switch" role="group" aria-label="选择重建结果">
+    {comparisonOptions.map(option=><button key={option.agent} type="button" className="subtle-button" aria-pressed={agent===option.agent} onClick={()=>{window.location.hash=option.hash;}}>{option.label}</button>)}
+   </div>
    <p role="status" aria-live="polite" style={{margin:0}}>{loaded?'可在下方查看场景对比。':'正在加载新场景对比…'}</p>
    <a className="subtle-button" href={source} target="_blank" rel="noreferrer">单独打开对比页 <ExternalLink size={14}/></a>
   </div>
-  <iframe title="新场景：实拍参考与重建结果对比" src={source} onLoad={()=>setLoaded(true)} allowFullScreen style={{display:'block',width:'100%',height:'min(100vh, 1000px)',minHeight:'420px',border:'1px solid #dce4d9',borderRadius:'16px',background:'#f4f6f0'}}/>
+  <iframe key={agent} title="新场景：实拍参考与重建结果对比" src={source} onLoad={()=>setScene(current=>current.agent===agent?{agent,loaded:true}:current)} allowFullScreen style={{display:'block',width:'100%',height:'min(100vh, 1000px)',minHeight:'420px',border:'1px solid #dce4d9',borderRadius:'16px',background:'#f4f6f0'}}/>
  </section>;
 }
 export default function Home(){
  const [savedWorkspace]=useState(readSavedWorkspace);
- const [scenario,setScenario]=useState<Scenario>(savedWorkspace.scenario);const [tab,setTab]=useState(() => {const hash=window.location.hash;return (hash==='#reconstruction'||hash==='#layout')?'campus':hash==='#comparison'?'comparison':hash==='#progress'?'progress':hash==='#swarm'?'swarm':hash==='#species'?'species':hash==='#research'?'research':'lab';});const [captureMode,setCaptureMode]=useState(()=>window.location.hash!=='#layout');
- useEffect(()=>{const route=()=>{const hash=window.location.hash;if(hash==='#reconstruction'){setTab('campus');setCaptureMode(true);}else if(hash==='#layout'){setTab('campus');setCaptureMode(false);}else if(hash==='#comparison')setTab('comparison');else if(hash==='#progress')setTab('progress');else if(hash==='#swarm')setTab('swarm');else if(hash==='#species')setTab('species');else if(hash==='#research')setTab('research');else if(hash==='#lab')setTab('lab');};window.addEventListener('hashchange',route);return()=>window.removeEventListener('hashchange',route);},[]);
+ const [scenario,setScenario]=useState<Scenario>(savedWorkspace.scenario);const [tab,setTab]=useState(() => {const hash=window.location.hash;return (hash==='#reconstruction'||hash==='#layout')?'campus':getComparisonAgent(hash)?'comparison':hash==='#progress'?'progress':hash==='#swarm'?'swarm':hash==='#species'?'species':hash==='#research'?'research':'lab';});const [captureMode,setCaptureMode]=useState(()=>window.location.hash!=='#layout');
+ useEffect(()=>{const route=()=>{const hash=window.location.hash;if(hash==='#reconstruction'){setTab('campus');setCaptureMode(true);}else if(hash==='#layout'){setTab('campus');setCaptureMode(false);}else if(getComparisonAgent(hash))setTab('comparison');else if(hash==='#progress')setTab('progress');else if(hash==='#swarm')setTab('swarm');else if(hash==='#species')setTab('species');else if(hash==='#research')setTab('research');else if(hash==='#lab')setTab('lab');};window.addEventListener('hashchange',route);return()=>window.removeEventListener('hashchange',route);},[]);
  const [mode,setMode]=useState('natural');const [organView,setOrganView]=useState<'plant'|'section'|'root'|'leaf'|'stem'>('plant');const [physicsStats,setPhysicsStats]=useState({windForceN:0,estimatedMassKg:0,maxDeflectionRad:0,youngModulusPa:8e9,dragCoefficient:.8,outOfRange:false});const [rootStats,setRootStats]=useState({rootDepth:0,rootLength:0,rootTips:0,waterStress:0,profileDepth:0,profileScope:'local-root-zone-window-not-bedrock' as const,availableSoilDepth:scenario.soilDepth});const [reset,setReset]=useState(0);const [motion,setMotion]=useState(true);const [playing,setPlaying]=useState(false);const [clock,setClock]=useState<'life'|'age'|'day'>('life');const [stats,setStats]=useState({leaves:0,height:0,fps:0});const [error,setError]=useState('');const [campusError,setCampusError]=useState('');const [toast,setToast]=useState('');const [versions,setVersions]=useState<Version[]>(savedWorkspace.versions);const [versionOpen,setVersionOpen]=useState(false);const [settingsOpen,setSettingsOpen]=useState(false);const [bridge,setBridge]=useState(savedWorkspace.bridge);const [bridgeInput,setBridgeInput]=useState(savedWorkspace.bridge);const [bridgeToken,setBridgeToken]=useState('');const [tokenInput,setTokenInput]=useState('');const [online,setOnline]=useState(false);const [bridgeState,setBridgeState]=useState('正在检测本地协调服务');const [workers,setWorkers]=useState<any[]>([]);const [tasks,setTasks]=useState<QueueTask[]>([]);const [messages,setMessages]=useState<Msg[]>([{role:'assistant',content:'你好，我是生境助手。连接本地协调服务后，可以一起讨论当前植物、整理修改意见，并将建议交给协作队列。当前模拟仍需校园实测校准。'}]);const [input,setInput]=useState('');const [busy,setBusy]=useState(false);const [note,setNote]=useState('');const [autoEnqueue,setAutoEnqueue]=useState(true);const [search,setSearch]=useState('');const [showSources,setShowSources]=useState(false);
  const [viewerExpanded,setViewerExpanded]=useState(false);
  useEffect(()=>{if(!viewerExpanded)return;const previous=document.body.style.overflow;document.body.style.overflow='hidden';const escape=(event:KeyboardEvent)=>{if(event.key==='Escape')setViewerExpanded(false);};document.addEventListener('keydown',escape);return()=>{document.body.style.overflow=previous;document.removeEventListener('keydown',escape);};},[viewerExpanded]);
