@@ -1463,7 +1463,7 @@
   },
   "tree_00_broadleaf": {
    "file": "assets/tree_00_broadleaf.glb",
-   "bytes": 387264,
+   "bytes": 387436,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -1503,7 +1503,7 @@
   },
   "tree_01_purple_plum": {
    "file": "assets/tree_01_purple_plum.glb",
-   "bytes": 405852,
+   "bytes": 406028,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1543,7 +1543,7 @@
   },
   "tree_02_purple_plum": {
    "file": "assets/tree_02_purple_plum.glb",
-   "bytes": 514880,
+   "bytes": 515056,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1583,7 +1583,7 @@
   },
   "tree_03_purple_plum": {
    "file": "assets/tree_03_purple_plum.glb",
-   "bytes": 1023396,
+   "bytes": 1023572,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1623,7 +1623,7 @@
   },
   "tree_04_ginkgo_young": {
    "file": "assets/tree_04_ginkgo_young.glb",
-   "bytes": 474268,
+   "bytes": 474440,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1663,7 +1663,7 @@
   },
   "tree_05_ginkgo_young": {
    "file": "assets/tree_05_ginkgo_young.glb",
-   "bytes": 394200,
+   "bytes": 394376,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1703,7 +1703,7 @@
   },
   "tree_06_ginkgo_young": {
    "file": "assets/tree_06_ginkgo_young.glb",
-   "bytes": 394676,
+   "bytes": 394848,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1743,7 +1743,7 @@
   },
   "tree_07_ginkgo_young": {
    "file": "assets/tree_07_ginkgo_young.glb",
-   "bytes": 449476,
+   "bytes": 449648,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1783,7 +1783,7 @@
   },
   "tree_08_ginkgo_young": {
    "file": "assets/tree_08_ginkgo_young.glb",
-   "bytes": 525420,
+   "bytes": 525592,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1823,7 +1823,7 @@
   },
   "tree_09_red_maple": {
    "file": "assets/tree_09_red_maple.glb",
-   "bytes": 230972,
+   "bytes": 231144,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1863,7 +1863,7 @@
   },
   "tree_10_red_maple": {
    "file": "assets/tree_10_red_maple.glb",
-   "bytes": 336304,
+   "bytes": 336476,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1903,7 +1903,7 @@
   },
   "tree_11_red_maple": {
    "file": "assets/tree_11_red_maple.glb",
-   "bytes": 290912,
+   "bytes": 291084,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1943,7 +1943,7 @@
   },
   "tree_12_red_maple": {
    "file": "assets/tree_12_red_maple.glb",
-   "bytes": 571304,
+   "bytes": 571480,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1983,7 +1983,7 @@
   },
   "tree_13_red_maple": {
    "file": "assets/tree_13_red_maple.glb",
-   "bytes": 603764,
+   "bytes": 603940,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2023,7 +2023,7 @@
   },
   "tree_14_red_maple": {
    "file": "assets/tree_14_red_maple.glb",
-   "bytes": 486936,
+   "bytes": 487112,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2063,7 +2063,7 @@
   },
   "tree_15_red_maple": {
    "file": "assets/tree_15_red_maple.glb",
-   "bytes": 709920,
+   "bytes": 710096,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2103,7 +2103,7 @@
   },
   "tree_16_red_maple": {
    "file": "assets/tree_16_red_maple.glb",
-   "bytes": 514240,
+   "bytes": 514412,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2143,7 +2143,7 @@
   },
   "tree_17_red_maple": {
    "file": "assets/tree_17_red_maple.glb",
-   "bytes": 451636,
+   "bytes": 451808,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2183,7 +2183,7 @@
   },
   "tree_18_red_maple": {
    "file": "assets/tree_18_red_maple.glb",
-   "bytes": 515648,
+   "bytes": 515824,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2223,7 +2223,7 @@
   },
   "tree_19_broadleaf": {
    "file": "assets/tree_19_broadleaf.glb",
-   "bytes": 425272,
+   "bytes": 425444,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2263,7 +2263,7 @@
   },
   "tree_20_camphor": {
    "file": "assets/tree_20_camphor.glb",
-   "bytes": 858828,
+   "bytes": 859000,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2303,7 +2303,7 @@
   },
   "tree_21_camphor": {
    "file": "assets/tree_21_camphor.glb",
-   "bytes": 822816,
+   "bytes": 822988,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2343,7 +2343,7 @@
   },
   "tree_22_camphor": {
    "file": "assets/tree_22_camphor.glb",
-   "bytes": 685300,
+   "bytes": 685476,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2383,7 +2383,7 @@
   },
   "tree_23_camphor": {
    "file": "assets/tree_23_camphor.glb",
-   "bytes": 694352,
+   "bytes": 694528,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -2423,7 +2423,7 @@
   },
   "tree_24_broadleaf": {
    "file": "assets/tree_24_broadleaf.glb",
-   "bytes": 678024,
+   "bytes": 678196,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2463,7 +2463,7 @@
   },
   "tree_25_broadleaf": {
    "file": "assets/tree_25_broadleaf.glb",
-   "bytes": 671524,
+   "bytes": 671696,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2503,7 +2503,7 @@
   },
   "tree_26_broadleaf": {
    "file": "assets/tree_26_broadleaf.glb",
-   "bytes": 930604,
+   "bytes": 930780,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2543,7 +2543,7 @@
   },
   "tree_27_broadleaf": {
    "file": "assets/tree_27_broadleaf.glb",
-   "bytes": 549932,
+   "bytes": 550104,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2583,7 +2583,7 @@
   },
   "tree_28_broadleaf": {
    "file": "assets/tree_28_broadleaf.glb",
-   "bytes": 482624,
+   "bytes": 482800,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2623,7 +2623,7 @@
   },
   "tree_29_broadleaf": {
    "file": "assets/tree_29_broadleaf.glb",
-   "bytes": 520964,
+   "bytes": 521136,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2663,7 +2663,7 @@
   },
   "tree_30_broadleaf": {
    "file": "assets/tree_30_broadleaf.glb",
-   "bytes": 563488,
+   "bytes": 563660,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2703,7 +2703,7 @@
   },
   "tree_31_broadleaf": {
    "file": "assets/tree_31_broadleaf.glb",
-   "bytes": 401660,
+   "bytes": 401836,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2743,7 +2743,7 @@
   },
   "tree_32_broadleaf": {
    "file": "assets/tree_32_broadleaf.glb",
-   "bytes": 495636,
+   "bytes": 495808,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2783,7 +2783,7 @@
   },
   "tree_33_broadleaf": {
    "file": "assets/tree_33_broadleaf.glb",
-   "bytes": 436228,
+   "bytes": 436400,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2823,7 +2823,7 @@
   },
   "tree_34_broadleaf": {
    "file": "assets/tree_34_broadleaf.glb",
-   "bytes": 688700,
+   "bytes": 688872,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2863,7 +2863,7 @@
   },
   "tree_35_broadleaf": {
    "file": "assets/tree_35_broadleaf.glb",
-   "bytes": 572116,
+   "bytes": 572288,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2903,7 +2903,7 @@
   },
   "tree_36_broadleaf": {
    "file": "assets/tree_36_broadleaf.glb",
-   "bytes": 527116,
+   "bytes": 527288,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2943,7 +2943,7 @@
   },
   "tree_37_broadleaf": {
    "file": "assets/tree_37_broadleaf.glb",
-   "bytes": 508436,
+   "bytes": 508608,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2983,7 +2983,7 @@
   },
   "tree_38_broadleaf": {
    "file": "assets/tree_38_broadleaf.glb",
-   "bytes": 491720,
+   "bytes": 491896,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3023,7 +3023,7 @@
   },
   "tree_39_broadleaf": {
    "file": "assets/tree_39_broadleaf.glb",
-   "bytes": 284172,
+   "bytes": 284348,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3063,7 +3063,7 @@
   },
   "tree_40_broadleaf": {
    "file": "assets/tree_40_broadleaf.glb",
-   "bytes": 857440,
+   "bytes": 857612,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3103,7 +3103,7 @@
   },
   "tree_41_broadleaf": {
    "file": "assets/tree_41_broadleaf.glb",
-   "bytes": 817252,
+   "bytes": 817424,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3143,7 +3143,7 @@
   },
   "tree_42_broadleaf": {
    "file": "assets/tree_42_broadleaf.glb",
-   "bytes": 604816,
+   "bytes": 604992,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3183,7 +3183,7 @@
   },
   "tree_43_broadleaf": {
    "file": "assets/tree_43_broadleaf.glb",
-   "bytes": 657224,
+   "bytes": 657400,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3223,7 +3223,7 @@
   },
   "tree_44_broadleaf": {
    "file": "assets/tree_44_broadleaf.glb",
-   "bytes": 486828,
+   "bytes": 487004,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3263,7 +3263,7 @@
   },
   "tree_45_broadleaf": {
    "file": "assets/tree_45_broadleaf.glb",
-   "bytes": 563816,
+   "bytes": 563992,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3303,7 +3303,7 @@
   },
   "tree_46_broadleaf": {
    "file": "assets/tree_46_broadleaf.glb",
-   "bytes": 522448,
+   "bytes": 522620,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3343,7 +3343,7 @@
   },
   "tree_47_broadleaf": {
    "file": "assets/tree_47_broadleaf.glb",
-   "bytes": 280168,
+   "bytes": 280340,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3383,7 +3383,7 @@
   },
   "tree_48_broadleaf": {
    "file": "assets/tree_48_broadleaf.glb",
-   "bytes": 763356,
+   "bytes": 763528,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3423,7 +3423,7 @@
   },
   "tree_49_broadleaf": {
    "file": "assets/tree_49_broadleaf.glb",
-   "bytes": 620568,
+   "bytes": 620740,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3463,7 +3463,7 @@
   },
   "tree_50_broadleaf": {
    "file": "assets/tree_50_broadleaf.glb",
-   "bytes": 520600,
+   "bytes": 520772,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3503,7 +3503,7 @@
   },
   "tree_51_broadleaf": {
    "file": "assets/tree_51_broadleaf.glb",
-   "bytes": 336504,
+   "bytes": 336676,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3543,7 +3543,7 @@
   },
   "tree_52_broadleaf": {
    "file": "assets/tree_52_broadleaf.glb",
-   "bytes": 564712,
+   "bytes": 564884,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3583,7 +3583,7 @@
   },
   "tree_53_camphor": {
    "file": "assets/tree_53_camphor.glb",
-   "bytes": 1017356,
+   "bytes": 1017528,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -3623,7 +3623,7 @@
   },
   "tree_54_camphor": {
    "file": "assets/tree_54_camphor.glb",
-   "bytes": 713400,
+   "bytes": 713572,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
@@ -3663,7 +3663,7 @@
   },
   "tree_55_broadleaf": {
    "file": "assets/tree_55_broadleaf.glb",
-   "bytes": 464640,
+   "bytes": 464812,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3703,7 +3703,7 @@
   },
   "tree_56_broadleaf": {
    "file": "assets/tree_56_broadleaf.glb",
-   "bytes": 1036232,
+   "bytes": 1036404,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3743,7 +3743,7 @@
   },
   "tree_57_broadleaf": {
    "file": "assets/tree_57_broadleaf.glb",
-   "bytes": 821216,
+   "bytes": 821392,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3783,7 +3783,7 @@
   },
   "tree_58_broadleaf": {
    "file": "assets/tree_58_broadleaf.glb",
-   "bytes": 380472,
+   "bytes": 380644,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3823,7 +3823,7 @@
   },
   "tree_59_broadleaf": {
    "file": "assets/tree_59_broadleaf.glb",
-   "bytes": 639292,
+   "bytes": 639468,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3863,7 +3863,7 @@
   },
   "tree_60_broadleaf": {
    "file": "assets/tree_60_broadleaf.glb",
-   "bytes": 493884,
+   "bytes": 494056,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3903,7 +3903,7 @@
   },
   "tree_61_broadleaf": {
    "file": "assets/tree_61_broadleaf.glb",
-   "bytes": 489232,
+   "bytes": 489404,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3943,7 +3943,7 @@
   },
   "tree_62_broadleaf": {
    "file": "assets/tree_62_broadleaf.glb",
-   "bytes": 443024,
+   "bytes": 443200,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3983,7 +3983,7 @@
   },
   "tree_63_broadleaf": {
    "file": "assets/tree_63_broadleaf.glb",
-   "bytes": 716836,
+   "bytes": 717012,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4023,7 +4023,7 @@
   },
   "tree_64_broadleaf": {
    "file": "assets/tree_64_broadleaf.glb",
-   "bytes": 507340,
+   "bytes": 507512,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4063,7 +4063,7 @@
   },
   "tree_65_broadleaf": {
    "file": "assets/tree_65_broadleaf.glb",
-   "bytes": 345888,
+   "bytes": 346060,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4103,7 +4103,7 @@
   },
   "tree_66_broadleaf": {
    "file": "assets/tree_66_broadleaf.glb",
-   "bytes": 886508,
+   "bytes": 886680,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4143,7 +4143,7 @@
   },
   "tree_67_broadleaf": {
    "file": "assets/tree_67_broadleaf.glb",
-   "bytes": 462724,
+   "bytes": 462900,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4183,7 +4183,7 @@
   },
   "tree_68_broadleaf": {
    "file": "assets/tree_68_broadleaf.glb",
-   "bytes": 414108,
+   "bytes": 414280,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4223,7 +4223,7 @@
   },
   "tree_69_broadleaf": {
    "file": "assets/tree_69_broadleaf.glb",
-   "bytes": 611784,
+   "bytes": 611956,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -8211,7 +8211,7 @@
  "totals": {
   "assets": 122,
   "instances": 174,
-  "bytes": 65746792
+  "bytes": 65758932
  },
  "notes": [
   "Scale is estimated (camera height + crosswalk), about +-5 %.",

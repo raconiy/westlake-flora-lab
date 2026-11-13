@@ -16,7 +16,7 @@ STATIC = {
     "wood":          ("wood_panel", None, 0.6, 0.0, {}),
     "grey_stone":    ("grey_stone_panel", None, 0.7, 0.0, {}),
     "facade_bands":  ("facade_bands", None, 0.35, 0.0, {}),
-    "ground_far":    (None, (0.16, 0.19, 0.13), 1.0, 0.0, {"spec": 0.05}),
+    "ground_far":    (None, (0.22, 0.24, 0.18), 1.0, 0.0, {"spec": 0.02}),
     "glass":         (None, (0.02, 0.025, 0.03), 0.05, 0.0, {"glass": True}),
     "metal_light":   (None, (0.62, 0.63, 0.63), 0.35, 0.8, {}),
     "metal_dark":    (None, (0.06, 0.065, 0.07), 0.4, 0.7, {}),
@@ -77,7 +77,13 @@ def get(name):
         s = SPECIES[sp]; _tex(nt, bs, s["bark"], tint=s["bark_tint"]); bs.inputs["Roughness"].default_value = 0.92
     elif kind in ("leaf", "twig") and sp in SPECIES:
         s = SPECIES[sp]; _tex(nt, bs, f"{kind}_{s['leaf_shape']}", vcol=True, alpha=True, normal=False)
-        bs.inputs["Roughness"].default_value = 0.7; bs.inputs["Specular IOR Level"].default_value = 0.15
+        bs.inputs["Roughness"].default_value = 0.72; bs.inputs["Specular IOR Level"].default_value = 0.12
+        # Weak diffuse lift matches daylight backscatter visible through captured crowns.
+        try:
+            bs.inputs["Emission Strength"].default_value = 0.055
+            mix = next((n for n in nt.nodes if n.bl_idname == "ShaderNodeMix"), None)
+            if mix: nt.links.new(mix.outputs[2], bs.inputs["Emission Color"])
+        except Exception: pass
         m.blend_method = "CLIP" if hasattr(m, "blend_method") else None
         try: m.surface_render_method = "DITHERED"
         except Exception: pass
