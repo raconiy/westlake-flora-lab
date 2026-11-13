@@ -15,3 +15,6 @@
 }
 
 .asset-panel a.download-link{display:inline-flex;font-size:11px;color:var(--sage);margin-top:8px;text-decoration:underline;text-underline-offset:3px}
+
+
+.simulation-video-card{margin-top:17px;padding:14px 0 0;border-top:1px solid #e0e4da}.simulation-video-card h3{font-size:12px;font-weight:570;margin:0 0 9px;color:#596a53}.simulation-video-card video{display:block;width:100%;max-height:230px;object-fit:contain;background:#263034;border:1px solid #d6ddd0;border-radius:4px}.simulation-video-card>p:last-child{font-size:9px;line-height:1.75;color:#899184;margin:8px 0 0}.compare-layout .simulation-video-card video{max-height:185px}@media(max-width:960px){.workspace:not(.compare-layout) .simulation-video-card{display:none}}@media(max-width:640px){.simulation-video-card video{max-height:320px}}

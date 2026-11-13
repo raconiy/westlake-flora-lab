@@ -1310,5 +1310,29 @@
     "建筑、每株植物、地面与设施独立管理，可下载和重新装配。",
     "原视频544×960；未观察区域和微观材质包含工程补全。",
     "外观优先；碰撞与物理仿真尚未接入。"
-  ]
+  ],
+  "simulation_video": {
+    "file": "agent-a-sim-same-duration-preview.mp4",
+    "duration_seconds": 286.325,
+    "fps": 30,
+    "resolution": [
+      544,
+      960
+    ],
+    "sample_fps": 2,
+    "interpolation": false,
+    "camera_path": "inferred_smooth_orbit_site_bounds",
+    "status": "server-rendered-time-aligned",
+    "note": "Final-scene render. Disconnected COLMAP components mean this is a time-aligned inferred camera path, not exact pose recovery; the sky/environment shell is excluded from path bounds.",
+    "receipt": "video-receipt.json",
+    "artifact_sha256": "e84c859d38d6ff035b4ef1bafc742b504e61e962702d6f0d9a7b52f18721507c"
+  },
+  "final_scene": {
+    "blend": "server:revision2/integration/final-scene/appearance-scene.blend",
+    "glb": "server:revision2/integration/final-scene/appearance-scene.glb",
+    "review_views": [
+      "renders/agent-a-final-ref260.png",
+      "renders/agent-a-final-ref270.png"
+    ]
+  }
 }
