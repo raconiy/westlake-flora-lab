@@ -1321,11 +1321,11 @@
     ],
     "sample_fps": 2,
     "interpolation": false,
-    "camera_path": "inferred_smooth_orbit_site_bounds",
+    "camera_path": "anchored_ref260_ref270_cycle",
     "status": "server-rendered-time-aligned",
-    "note": "Final-scene render. Disconnected COLMAP components mean this is a time-aligned inferred camera path, not exact pose recovery; the sky/environment shell is excluded from path bounds.",
+    "note": "Final-scene render anchored to solved ref260/ref270 poses and smoothly cycled between them. Disconnected COLMAP components mean this is an inferred time-aligned path, not exact pose recovery.",
     "receipt": "video-receipt.json",
-    "artifact_sha256": "e84c859d38d6ff035b4ef1bafc742b504e61e962702d6f0d9a7b52f18721507c"
+    "artifact_sha256": "6b55dfe29bab798090de2e9098d07dfd89e8ef1d70c33aeb8dddab2cf077ade8"
   },
   "final_scene": {
     "blend": "server:revision2/integration/final-scene/appearance-scene.blend",

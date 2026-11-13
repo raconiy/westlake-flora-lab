@@ -92,28 +92,49 @@ def prepare_camera(scene, lo, hi):
 
 
 def build_orbit(cam, lo, hi, duration):
+    # Prefer the two solved review cameras that are already in final-scene.
+    # They share the scene frame and keep the delivery preview in a useful
+    # close range; the repeated segment remains explicitly inferred.
+    c0 = find_camera(["ref260"])
+    c1 = find_camera(["ref270"])
+    if c0 is not None and c1 is not None:
+        m0 = c0.matrix_world.copy()
+        m1 = c1.matrix_world.copy()
+        q0 = m0.to_quaternion()
+        q1 = m1.to_quaternion()
+        p0 = m0.translation.copy()
+        p1 = m1.translation.copy()
+        def anchored_pose(t):
+            cycle = (t % 42.0) / 42.0
+            if cycle <= 0.5:
+                f = 0.5 - 0.5 * math.cos(math.pi * (cycle * 2.0))
+                loc = p0.lerp(p1, f)
+                quat = q0.slerp(q1, f)
+            else:
+                f = 0.5 - 0.5 * math.cos(math.pi * ((cycle - 0.5) * 2.0))
+                loc = p1.lerp(p0, f)
+                quat = q1.slerp(q0, f)
+            mat = quat.to_matrix().to_4x4()
+            mat.translation = loc
+            return mat
+        return anchored_pose, "anchored_ref260_ref270_cycle"
+
     center = (lo + hi) * 0.5
     span = max(hi.x - lo.x, hi.y - lo.y, 1.0)
-    radius = max(span * 0.90, 18.0)
-    zbase = max(lo.z + (hi.z - lo.z) * 0.34, 2.0)
-    zamp = max((hi.z - lo.z) * 0.10, 0.35)
-    # Preserve existing reference camera height/orientation as a soft starting cue.
+    radius = max(span * 0.28, 4.0)
+    zbase = max(lo.z + (hi.z - lo.z) * 0.34, 1.25)
+    zamp = max((hi.z - lo.z) * 0.06, 0.18)
     original_location = cam.matrix_world.translation.copy()
-    if original_location.length > 0.01:
-        start_angle = math.atan2(original_location.y - center.y, original_location.x - center.x)
-    else:
-        start_angle = math.radians(35.0)
+    start_angle = math.atan2(original_location.y - center.y, original_location.x - center.x)
     turns = 0.86
-    def pose(t):
+    def fallback_pose(t):
         u = max(0.0, min(1.0, t / duration))
         angle = start_angle + 2.0 * math.pi * turns * u
-        # Small breathing motion prevents a robotic constant-radius path.
         r = radius * (1.0 + 0.035 * math.sin(2.0 * math.pi * u))
         eye = Vector((center.x + r * math.cos(angle), center.y + r * math.sin(angle), zbase + zamp * math.sin(2.0 * math.pi * u + 0.7)))
         target = center + Vector((0, 0, (hi.z - lo.z) * 0.05))
         return eye, target
-    return pose, center
-
+    return fallback_pose, "inferred_smooth_orbit_site_bounds"
 
 def configure_render(scene, args):
     engines = {item.identifier for item in bpy.types.RenderSettings.bl_rna.properties["engine"].enum_items}
@@ -145,8 +166,12 @@ def render_samples(scene, cam, pose, args, frames_dir):
         frame_path = frames_dir / f"frame_{i:05d}.jpg"
         if args.resume and frame_path.exists() and frame_path.stat().st_size > 1000:
             continue
-        eye, target = pose(t)
-        look_at(cam, eye, target)
+        pose_value = pose(t)
+        if isinstance(pose_value, tuple):
+            eye, target = pose_value
+            look_at(cam, eye, target)
+        else:
+            cam.matrix_world = pose_value
         scene.frame_set(min(int(round(t * args.fps)), int(round(args.duration * args.fps))))
         scene.render.filepath = str(frame_path)
         bpy.ops.render.render(write_still=True)
@@ -176,7 +201,7 @@ def main():
     scene = bpy.context.scene
     lo, hi = world_bbox()
     cam = prepare_camera(scene, lo, hi)
-    pose, center = build_orbit(cam, lo, hi, args.duration)
+    pose, camera_path = build_orbit(cam, lo, hi, args.duration)
     configure_render(scene, args)
     count = render_samples(scene, cam, pose, args, frames)
     out_mp4 = out / "agent-a-sim-same-duration-preview.mp4"
@@ -194,7 +219,7 @@ def main():
         "sample_fps": args.sample_fps,
         "sample_count": count,
         "render_engine": scene.render.engine,
-        "camera_path": "inferred_smooth_orbit",
+        "camera_path": camera_path,
         "camera_registration_note": "The available registration contains disconnected COLMAP components; this preview is time-aligned and duration-matched, but its camera path is inferred and is not claimed as exact pose recovery.",
         "scene_bbox_min": list(lo),
         "scene_bbox_max": list(hi),

@@ -14,7 +14,7 @@
   "sample_fps": 2.0,
   "sample_count": 573,
   "render_engine": "BLENDER_EEVEE",
-  "camera_path": "inferred_smooth_orbit",
+  "camera_path": "anchored_ref260_ref270_cycle",
   "camera_registration_note": "The available registration contains disconnected COLMAP components; this preview is time-aligned and duration-matched, but its camera path is inferred and is not claimed as exact pose recovery.",
   "scene_bbox_min": [
     -0.9069367051124573,
