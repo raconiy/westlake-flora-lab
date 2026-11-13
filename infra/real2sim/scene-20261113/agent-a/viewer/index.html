@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#252e32">
+  <title>室外场景 · CG 对比 | Real2Sim</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23252e32'/%3E%3Cpath d='m9 15 11-6 11 6v13l-11 6-11-6Zm0 0 11 6 11-6M20 21v13' fill='none' stroke='%23b4c7a7' stroke-width='2'/%3E%3C/svg%3E">
+  <script type="importmap">
+    {"imports": {
+      "three": "./vendor/three.module.js",
+      "three/addons/controls/OrbitControls.js": "./vendor/OrbitControls.js",
+      "three/addons/loaders/GLTFLoader.js": "./vendor/GLTFLoader.js",
+      "three/addons/utils/BufferGeometryUtils.js": "./vendor/BufferGeometryUtils.js"
+    }}
+  </script>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./viewer.js"></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 9 5v9l-9 5-9-5V8Zm0 10 9-5M12 13 3 8m9 5v9M8 5l9 5"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m-3-9v2"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M8 6 9.5 3h5L16 6h4a2 2 0 0 1 2 2v11H2V8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></symbol>
+  </svg>
+  <div class="app-shell" id="app-shell">
+    <header class="masthead">
+      <a class="brand" href="./" aria-label="Real2Sim 场景查看器首页"><span class="brand-mark"><svg class="icon"><use href="#i-cube"/></svg></span><span>REAL2SIM<span class="brand-sub">SCENE STUDY / 01</span></span></a>
+      <div class="project-heading"><h1>室外场景 <span>·</span> CG 对比</h1><p><span>Agent A</span><span class="divider">/</span><span id="scene-id">scene-20261113</span></p></div>
+      <div class="header-note"><span class="status-dot"></span>外观重建研究<span class="small-label">APPEARANCE FIRST</span></div>
+    </header>
+
+    <main>
+      <section class="workspace-top" aria-label="查看模式">
+        <div class="agent-tabs"><button type="button" class="agent-tab active" aria-current="page">Agent A <span>当前场景</span></button><button type="button" class="agent-tab pending" disabled title="Agent B 待接入，当前没有可用场景">Agent B <span>待接入</span></button></div>
+        <div class="mode-switch" role="group" aria-label="场景布局"><button type="button" data-layout="scene" aria-pressed="true">场景为主</button><button type="button" data-layout="compare" aria-pressed="false"><span class="split-icon" aria-hidden="true"></span>实拍 / 3D 并排</button></div>
+      </section>
+
+      <div class="workspace" id="workspace">
+        <aside class="asset-panel" id="asset-panel" aria-labelledby="asset-heading">
+          <div class="panel-heading"><div><p class="eyebrow">SCENE COLLECTION</p><h2 id="asset-heading">场景资产 <span id="asset-count">—</span></h2></div><button class="icon-button mobile-close" id="close-assets" type="button" aria-label="收起资产列表"><svg class="icon"><use href="#i-close"/></svg></button></div>
+          <label class="search-box"><svg class="icon"><use href="#i-search"/></svg><input id="asset-search" type="search" placeholder="搜索资产名称" aria-label="搜索资产名称" autocomplete="off"></label>
+          <div class="category-filters" role="group" aria-label="按资产类别筛选">
+            <button type="button" data-category="all" aria-pressed="true">全部</button><button type="button" data-category="buildings" aria-pressed="false">建筑</button><button type="button" data-category="plants" aria-pressed="false">植物</button><button type="button" data-category="ground" aria-pressed="false">地面</button><button type="button" data-category="facilities" aria-pressed="false">设施</button>
+          </div>
+          <div class="asset-list" id="asset-list" aria-live="polite"><p class="list-message">正在读取资产清单…</p></div>
+          <div class="asset-panel-footer"><button class="text-button" id="restore-assets" type="button" disabled><svg class="icon"><use href="#i-reset"/></svg>恢复全部可见</button><a class="text-button" href="./source.zip" download><svg class="icon"><use href="#i-download"/></svg>CG 源码与材质</a><a href="./scene-blend.zip" download class="download-link">Blender 源场景</a><span>勾选控制显隐 · 点击定位</span></div>
+        </aside>
+
+        <section class="stage" id="stage" aria-label="交互式三维场景">
+          <div class="stage-backdrop" id="stage-backdrop"><img id="overview-image" src="./renders/overview.jpg" alt="CG 场景预览" decoding="async"><div></div></div>
+          <div class="canvas-host" id="canvas-host"></div>
+          <div class="stage-topbar">
+            <div class="stage-tools"><button class="stage-button" id="toggle-assets" type="button" aria-label="切换资产列表" aria-expanded="true" aria-controls="asset-panel" title="资产列表"><svg class="icon"><use href="#i-panel"/></svg></button><span class="stage-caption"><span class="live-dot" id="live-dot"></span>CG 场景<span class="stage-subcaption">/ AGENT A</span></span></div>
+            <div class="stage-tools"><button class="stage-button" id="reset-view" type="button" disabled title="重置视角" aria-label="重置视角"><svg class="icon"><use href="#i-reset"/></svg></button><button class="stage-button" id="capture-view" type="button" disabled title="保存当前 3D 画面" aria-label="保存当前 3D 画面"><svg class="icon"><use href="#i-camera"/></svg></button><button class="stage-button" id="fullscreen" type="button" title="场景全屏" aria-label="场景全屏"><svg class="icon"><use href="#i-expand"/></svg></button></div>
+          </div>
+
+          <div class="load-card" id="load-card" role="status" aria-live="polite"><div class="load-glyph"><svg class="icon"><use href="#i-cube"/></svg></div><p class="eyebrow">BUILDING THE SCENE</p><h2 id="load-title">正在准备三维场景</h2><p id="load-detail">读取本地渲染模块…</p><progress id="load-progress" aria-label="场景加载进度"></progress><button type="button" class="retry-button" id="retry-load" hidden>重新加载</button></div>
+
+          <div class="selection-card" id="selection-card" hidden><div class="selection-copy"><span class="eyebrow">已选资产</span><strong id="selected-name"></strong><span id="selected-category"></span></div><div class="selection-actions"><button type="button" id="isolate-asset">仅显示此项</button><button type="button" class="icon-button" id="clear-selection" aria-label="取消选择"><svg class="icon"><use href="#i-close"/></svg></button></div></div>
+          <div class="stage-bottombar"><div class="view-presets" id="view-presets" role="group" aria-label="预设视角"><button type="button" disabled>主视角</button><button type="button" disabled>庭院</button><button type="button" disabled>鸟瞰</button></div><div class="orbit-hint" id="orbit-hint">拖动旋转 <span>·</span> 滚轮缩放 <span>·</span> 右键平移</div></div>
+          <div class="stage-corner"><span class="axis-mark" aria-hidden="true"><i></i><b></b><em></em></span><span>Y UP</span><label class="shadow-toggle"><input id="shadows" type="checkbox" checked disabled>阴影</label></div>
+          <div class="toast" id="toast" role="status" hidden></div>
+        </section>
+
+        <aside class="reference-panel" aria-labelledby="reference-heading">
+          <div class="reference-heading"><div><p class="eyebrow">REAL-WORLD REFERENCE</p><h2 id="reference-heading">实拍参考</h2></div><span class="reference-tag">原始输入</span></div>
+          <div class="reference-media" id="reference-media"><video id="reference-video" controls playsinline preload="metadata" poster="./reference-poster.jpg" aria-label="实拍参考视频"><source src="./reference.mp4" type="video/mp4"></video><img id="reference-fallback" src="./reference-poster.jpg" alt="实拍参考画面" hidden><div class="reference-empty" id="reference-empty" hidden><svg class="icon"><use href="#i-play"/></svg><span>参考画面暂不可用</span></div></div>
+          <p class="video-error" id="video-error" role="status" hidden></p>
+          <div class="reference-details"><div class="source-meta"><span id="source-size">544 × 960</span><span id="source-duration">实拍视频</span></div><p class="reference-copy">观察建筑轮廓、铺地与绿化关系。拖动视频进度条，手动选择参考画面。</p><label class="local-file-button" for="local-video"><svg class="icon"><use href="#i-play"/></svg>使用本地参考视频<input id="local-video" type="file" accept="video/*"></label><p class="local-file-note" id="local-file-note">仅在此浏览器播放，不上传文件。</p><button class="revert-video text-button" id="revert-video" type="button" hidden>恢复原始参考</button></div>
+          <div class="alignment-note"><span class="note-symbol">i</span><div><strong>人工对照 · 自由视角</strong><p>当前未提供相机标定。两侧独立浏览，不代表同机位或逐帧同步。</p><button type="button" disabled title="需要真实参考相机标定数据后才能启用">同帧叠加 <span>待标定</span></button></div></div>
+        </aside>
+      </div>
+
+      <section class="study-footer" aria-label="场景说明"><div class="scope-notes"><span class="scope-pill">外观优先</span><span>布局为估计重建</span><span class="footer-divider"></span><span>输入 <strong id="footer-input">544 × 960</strong></span></div><p id="scene-status" role="status">正在准备场景</p><button class="notes-button" id="toggle-notes" type="button" aria-expanded="false" aria-controls="scene-notes">重建说明 <span aria-hidden="true">＋</span></button></section>
+      <section class="scene-notes" id="scene-notes" hidden><div><p class="eyebrow">RECONSTRUCTION NOTES</p><h2>从实拍到可浏览的场景</h2><p>以可见外观、空间层次及建筑与植被关系为重点。尺度、遮挡区域和布局依据画面估计；当前不包含物理仿真，也不声明像素级一致。</p></div><div><a href="./registration-evidence.jpg" target="_blank" rel="noopener">查看视频相机求解记录</a><p>357 / 358 帧注册为两个独立片段；当前 CG 尚未完成坐标对齐。</p></div><ul id="manifest-notes"><li>具体资产与预设视角由场景清单提供。</li></ul></section>
+    </main>
+    <footer class="page-footer"><span>REAL2SIM <span class="footer-divider"></span> ENVIRONMENT RECONSTRUCTION</span><span>实拍观察 / 场景重建 / 交互检查</span></footer>
+  </div>
+  <noscript><div class="noscript-note">请启用 JavaScript 以加载三维场景与交互控件。参考视频仍可直接播放。</div></noscript>
+</body>
+</html>

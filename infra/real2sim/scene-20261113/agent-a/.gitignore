@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env*
+scenes/
+exports/
+renders/
+frames/
+source/
+cache/
+logs/
+runs/
+envs/
+node_modules/
+*.blend*
+*.mp4

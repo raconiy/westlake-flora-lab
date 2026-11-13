@@ -1,0 +1,32 @@
+{
+  "module": "build_architecture.py",
+  "assets": [
+    {
+      "asset_id": "architecture.main_colonnade.v1",
+      "root_name": "ARCH_MainColonnade",
+      "category": "architecture",
+      "description": "Low pale elliptical colonnade with detached round columns, recessed dark glazing, layered fascia, entrance, raised roof and stone apron.",
+      "estimated_center_m": [4.0, 36.0, 0.0],
+      "estimated_plan_m": [52.0, 24.0],
+      "estimated_height_m": 9.8,
+      "uncertainty_notes": "Plan radii and column count are visual estimates from the contact sheet; the rear ellipse is procedural and may be hidden by scene dressing. Door positions are inferred from the close approach view."
+    },
+    {
+      "asset_id": "architecture.west_academic.v1",
+      "root_name": "ARCH_WestAcademic",
+      "category": "architecture",
+      "description": "Long gently curved academic background block made from repeated silver floor slabs, dark blue glass ribbons, mullions and roof trims.",
+      "estimated_center_m": [-53.0, 22.0, 0.0],
+      "estimated_plan_m": [16.0, 72.0],
+      "estimated_height_m": 16.7,
+      "uncertainty_notes": "The source imagery only exposes portions of the west building; curvature, floor spacing and depth are deliberately approximate and should be tuned by the scene compositor."
+    }
+  ],
+  "coordinate_contract": {
+    "up_axis": "Z",
+    "ground_plane": "XY",
+    "units": "metres (estimated)",
+    "deterministic_seed": 0,
+    "build_side_effects": "Creates and returns asset roots only; does not clear scene, set camera/world, render, or export."
+  }
+}

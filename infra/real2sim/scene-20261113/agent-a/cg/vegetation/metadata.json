@@ -1,0 +1,330 @@
+{
+  "build_seconds": 13.998657464981079,
+  "root_count": 20,
+  "tree_count": 14,
+  "shrub_count": 6,
+  "total_triangles": 1460616,
+  "total_leaves": 281896,
+  "plants": [
+    {
+      "id": "Tree_01",
+      "position": [
+        -22.0,
+        -7.0,
+        0.0
+      ],
+      "leaf_count": 25065,
+      "triangles": 122758,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 10.399999618530273,
+      "crown_radius": 2.9809152830940104,
+      "opaque": true
+    },
+    {
+      "id": "Tree_02",
+      "position": [
+        -17.0,
+        10.0,
+        0.0
+      ],
+      "leaf_count": 23492,
+      "triangles": 116466,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 9.399999618530273,
+      "crown_radius": 2.949766038622385,
+      "opaque": true
+    },
+    {
+      "id": "Tree_03",
+      "position": [
+        -7.0,
+        15.0,
+        0.0
+      ],
+      "leaf_count": 23535,
+      "triangles": 116638,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 10.800000190734863,
+      "crown_radius": 2.9815441990951967,
+      "opaque": true
+    },
+    {
+      "id": "Tree_04",
+      "position": [
+        8.0,
+        14.0,
+        0.0
+      ],
+      "leaf_count": 23444,
+      "triangles": 116274,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 9.800000190734863,
+      "crown_radius": 2.952168421444984,
+      "opaque": true
+    },
+    {
+      "id": "Tree_05",
+      "position": [
+        21.0,
+        9.0,
+        0.0
+      ],
+      "leaf_count": 23926,
+      "triangles": 118202,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 11.0,
+      "crown_radius": 2.9901518601854686,
+      "opaque": true
+    },
+    {
+      "id": "Tree_06",
+      "position": [
+        23.0,
+        -8.0,
+        0.0
+      ],
+      "leaf_count": 24932,
+      "triangles": 122226,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 9.199999809265137,
+      "crown_radius": 2.9415667928770026,
+      "opaque": true
+    },
+    {
+      "id": "Tree_07",
+      "position": [
+        8.0,
+        -13.0,
+        0.0
+      ],
+      "leaf_count": 23776,
+      "triangles": 117602,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 8.800000190734863,
+      "crown_radius": 2.9508580701808595,
+      "opaque": true
+    },
+    {
+      "id": "Tree_08",
+      "position": [
+        -6.0,
+        -12.0,
+        0.0
+      ],
+      "leaf_count": 25122,
+      "triangles": 122986,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 10.100000381469727,
+      "crown_radius": 2.967006229230574,
+      "opaque": true
+    },
+    {
+      "id": "Tree_09",
+      "position": [
+        -25.0,
+        5.0,
+        0.0
+      ],
+      "leaf_count": 23250,
+      "triangles": 115498,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 9.0,
+      "crown_radius": 2.952518974286013,
+      "opaque": true
+    },
+    {
+      "id": "Tree_10",
+      "position": [
+        17.0,
+        -13.0,
+        0.0
+      ],
+      "leaf_count": 22824,
+      "triangles": 113794,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 8.600000381469727,
+      "crown_radius": 2.933732845460761,
+      "opaque": true
+    },
+    {
+      "id": "AutumnTree_01",
+      "position": [
+        -15.0,
+        22.0,
+        0.0
+      ],
+      "leaf_count": 8560,
+      "triangles": 56738,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 7.0,
+      "crown_radius": 2.0625396902894058,
+      "opaque": true
+    },
+    {
+      "id": "AutumnTree_02",
+      "position": [
+        -6.0,
+        23.0,
+        0.0
+      ],
+      "leaf_count": 8457,
+      "triangles": 56326,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 6.599999904632568,
+      "crown_radius": 1.907388976394413,
+      "opaque": true
+    },
+    {
+      "id": "AutumnTree_03",
+      "position": [
+        8.0,
+        24.0,
+        0.0
+      ],
+      "leaf_count": 8577,
+      "triangles": 56806,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 7.400000095367432,
+      "crown_radius": 2.214961662403719,
+      "opaque": true
+    },
+    {
+      "id": "AutumnTree_04",
+      "position": [
+        18.0,
+        23.0,
+        0.0
+      ],
+      "leaf_count": 8327,
+      "triangles": 55806,
+      "branches": 1023,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 6.800000190734863,
+      "crown_radius": 1.973049654582597,
+      "opaque": true
+    },
+    {
+      "id": "Shrub_01",
+      "position": [
+        -24.0,
+        -1.0,
+        0.0
+      ],
+      "leaf_count": 1435,
+      "triangles": 8750,
+      "branches": 145,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 1.2649328708648682,
+      "crown_radius": 1.003231372663415,
+      "opaque": true
+    },
+    {
+      "id": "Shrub_02",
+      "position": [
+        -20.0,
+        16.0,
+        0.0
+      ],
+      "leaf_count": 1630,
+      "triangles": 9530,
+      "branches": 145,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 1.3038908243179321,
+      "crown_radius": 0.9885614837892527,
+      "opaque": true
+    },
+    {
+      "id": "Shrub_03",
+      "position": [
+        25.0,
+        2.0,
+        0.0
+      ],
+      "leaf_count": 1505,
+      "triangles": 9030,
+      "branches": 145,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 1.2459440231323242,
+      "crown_radius": 1.049472454876825,
+      "opaque": true
+    },
+    {
+      "id": "Shrub_04",
+      "position": [
+        14.0,
+        -17.0,
+        0.0
+      ],
+      "leaf_count": 1251,
+      "triangles": 8014,
+      "branches": 145,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 1.320055603981018,
+      "crown_radius": 1.0757657817459327,
+      "opaque": true
+    },
+    {
+      "id": "Shrub_05",
+      "position": [
+        -3.0,
+        19.0,
+        0.0
+      ],
+      "leaf_count": 1282,
+      "triangles": 8138,
+      "branches": 145,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 1.2788453102111816,
+      "crown_radius": 1.106444098272243,
+      "opaque": true
+    },
+    {
+      "id": "Shrub_06",
+      "position": [
+        4.0,
+        -19.0,
+        0.0
+      ],
+      "leaf_count": 1506,
+      "triangles": 9034,
+      "branches": 145,
+      "children": 2,
+      "material_slots": 2,
+      "max_height": 1.2447426319122314,
+      "crown_radius": 1.1641609548419352,
+      "opaque": true
+    }
+  ]
+}
