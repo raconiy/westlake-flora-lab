@@ -110,7 +110,41 @@
    "generator": "cg/buildings/academic.py"
   },
   "bldg_far_01": {
-   "file": "assets/bldg_far_01.glb",
+   "file": "assets/bldg_far_01.gltf",
+   "bytes": 74292,
+   "category": "building",
+   "label": "background massing",
+   "short": "building",
+   "pivot": "footprint centroid at ground, +Z up, metres",
+   "provenance": "cg/buildings/gen_far.py",
+   "inferred": [
+    "building depth away from the site",
+    "roof shape (flat)",
+    "facade pattern (generic floor bands)"
+   ],
+   "facts": [
+    [
+     "height_m",
+     "18.67"
+    ],
+    [
+     "facade_points",
+     "12"
+    ],
+    [
+     "source",
+     "sparse SfM (multi-view triangulated)"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_01/bldg_far_01_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_01/bldg_far_01_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_01/bldg_far_01_research.json"
+   ],
+   "generator": "cg/buildings/gen_far.py"
+  },
+  "bldg_far_02": {
+   "file": "assets/bldg_far_02.gltf",
    "bytes": 469228,
    "category": "building",
    "label": "background massing",
@@ -137,40 +171,6 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_01/bldg_far_01_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_01/bldg_far_01_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_01/bldg_far_01_research.json"
-   ],
-   "generator": "cg/buildings/gen_far.py"
-  },
-  "bldg_far_02": {
-   "file": "assets/bldg_far_02.glb",
-   "bytes": 74368,
-   "category": "building",
-   "label": "background massing",
-   "short": "building",
-   "pivot": "footprint centroid at ground, +Z up, metres",
-   "provenance": "cg/buildings/gen_far.py",
-   "inferred": [
-    "building depth away from the site",
-    "roof shape (flat)",
-    "facade pattern (generic floor bands)"
-   ],
-   "facts": [
-    [
-     "height_m",
-     "19.12"
-    ],
-    [
-     "facade_points",
-     "101"
-    ],
-    [
-     "source",
-     "sparse SfM (multi-view triangulated)"
-    ]
-   ],
-   "research_files": [
     "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_02/bldg_far_02_research.blend",
     "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_02/bldg_far_02_research.glb",
     "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_02/bldg_far_02_research.json"
@@ -178,8 +178,8 @@
    "generator": "cg/buildings/gen_far.py"
   },
   "bldg_far_03": {
-   "file": "assets/bldg_far_03.glb",
-   "bytes": 74328,
+   "file": "assets/bldg_far_03.gltf",
+   "bytes": 74396,
    "category": "building",
    "label": "background massing",
    "short": "building",
@@ -193,11 +193,11 @@
    "facts": [
     [
      "height_m",
-     "11.48"
+     "19.45"
     ],
     [
      "facade_points",
-     "15"
+     "92"
     ],
     [
      "source",
@@ -211,9 +211,9 @@
    ],
    "generator": "cg/buildings/gen_far.py"
   },
-  "bldg_near_01": {
-   "file": "assets/bldg_near_01.glb",
-   "bytes": 74476,
+  "bldg_far_04": {
+   "file": "assets/bldg_far_04.gltf",
+   "bytes": 74364,
    "category": "building",
    "label": "background massing",
    "short": "building",
@@ -227,11 +227,45 @@
    "facts": [
     [
      "height_m",
-     "9.38"
+     "11.53"
     ],
     [
      "facade_points",
-     "46223"
+     "19"
+    ],
+    [
+     "source",
+     "sparse SfM (multi-view triangulated)"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_04/bldg_far_04_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_04/bldg_far_04_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/buildings/bldg_far_04/bldg_far_04_research.json"
+   ],
+   "generator": "cg/buildings/gen_far.py"
+  },
+  "bldg_near_01": {
+   "file": "assets/bldg_near_01.glb",
+   "bytes": 74480,
+   "category": "building",
+   "label": "background massing",
+   "short": "building",
+   "pivot": "footprint centroid at ground, +Z up, metres",
+   "provenance": "cg/buildings/gen_far.py",
+   "inferred": [
+    "building depth away from the site",
+    "roof shape (flat)",
+    "facade pattern (generic floor bands)"
+   ],
+   "facts": [
+    [
+     "height_m",
+     "9.37"
+    ],
+    [
+     "facade_points",
+     "46215"
     ],
     [
      "source",
@@ -247,7 +281,7 @@
   },
   "bldg_rotunda": {
    "file": "assets/bldg_rotunda.glb",
-   "bytes": 1317892,
+   "bytes": 1317572,
    "category": "building",
    "label": "bldg_rotunda",
    "short": "building",
@@ -263,15 +297,15 @@
    "facts": [
     [
      "outer_radius",
-     "38.835"
+     "39.667"
     ],
     [
      "upper_radius",
-     "25.657"
+     "25.497"
     ],
     [
      "upper_center",
-     "[99.444, -8.715]"
+     "[99.217, -8.898]"
     ],
     [
      "top_h",
@@ -286,8 +320,8 @@
    "generator": "cg/buildings/rotunda.py"
   },
   "curb_01": {
-   "file": "assets/curb_01.glb",
-   "bytes": 584320,
+   "file": "assets/curb_01.gltf",
+   "bytes": 584364,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -297,7 +331,7 @@
    "facts": [
     [
      "面积",
-     "29.42 m²"
+     "29.81 m²"
     ],
     [
      "材质",
@@ -312,8 +346,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_02": {
-   "file": "assets/curb_02.glb",
-   "bytes": 584284,
+   "file": "assets/curb_02.gltf",
+   "bytes": 584200,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -323,7 +357,7 @@
    "facts": [
     [
      "面积",
-     "27.47 m²"
+     "27.86 m²"
     ],
     [
      "材质",
@@ -338,8 +372,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_03": {
-   "file": "assets/curb_03.glb",
-   "bytes": 573528,
+   "file": "assets/curb_03.gltf",
+   "bytes": 573588,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -364,8 +398,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_04": {
-   "file": "assets/curb_04.glb",
-   "bytes": 572908,
+   "file": "assets/curb_04.gltf",
+   "bytes": 572964,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -390,8 +424,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_05": {
-   "file": "assets/curb_05.glb",
-   "bytes": 576412,
+   "file": "assets/curb_05.gltf",
+   "bytes": 576468,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -416,8 +450,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_06": {
-   "file": "assets/curb_06.glb",
-   "bytes": 572476,
+   "file": "assets/curb_06.gltf",
+   "bytes": 572536,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -442,8 +476,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_07": {
-   "file": "assets/curb_07.glb",
-   "bytes": 572212,
+   "file": "assets/curb_07.gltf",
+   "bytes": 572196,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -453,7 +487,7 @@
    "facts": [
     [
      "面积",
-     "4.27 m²"
+     "4.42 m²"
     ],
     [
      "材质",
@@ -468,8 +502,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_08": {
-   "file": "assets/curb_08.glb",
-   "bytes": 576204,
+   "file": "assets/curb_08.gltf",
+   "bytes": 576260,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -494,8 +528,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_09": {
-   "file": "assets/curb_09.glb",
-   "bytes": 572112,
+   "file": "assets/curb_09.gltf",
+   "bytes": 572160,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -505,7 +539,7 @@
    "facts": [
     [
      "面积",
-     "3.42 m²"
+     "3.51 m²"
     ],
     [
      "材质",
@@ -520,8 +554,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_10": {
-   "file": "assets/curb_10.glb",
-   "bytes": 572008,
+   "file": "assets/curb_10.gltf",
+   "bytes": 572068,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -546,8 +580,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_11": {
-   "file": "assets/curb_11.glb",
-   "bytes": 571988,
+   "file": "assets/curb_11.gltf",
+   "bytes": 572076,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -557,7 +591,7 @@
    "facts": [
     [
      "面积",
-     "1.26 m²"
+     "1.29 m²"
     ],
     [
      "材质",
@@ -572,8 +606,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "curb_12": {
-   "file": "assets/curb_12.glb",
-   "bytes": 571968,
+   "file": "assets/curb_12.gltf",
+   "bytes": 572088,
    "category": "ground",
    "label": "curb",
    "short": "curb",
@@ -583,7 +617,7 @@
    "facts": [
     [
      "面积",
-     "1.05 m²"
+     "1.21 m²"
     ],
     [
      "材质",
@@ -597,61 +631,201 @@
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "curb_13": {
-   "file": "assets/curb_13.glb",
-   "bytes": 571988,
-   "category": "ground",
-   "label": "curb",
-   "short": "curb",
-   "pivot": "region centroid at median ground height, +Z up, metres",
-   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
-   "inferred": [],
+  "grass_tuft_01": {
+   "file": "assets/grass_tuft_01.gltf",
+   "bytes": 4444,
+   "category": "grass",
+   "label": "turf",
+   "short": "turf",
+   "pivot": "tuft centre at soil level, +Z up, metres",
+   "provenance": "blade geometry generated by code; height/colour chosen to match the mown sod in the video (blades are below the 544x960 video resolution)",
+   "inferred": [
+    "individual blade shape and count (not resolvable in the video)"
+   ],
    "facts": [
     [
-     "面积",
-     "1.26 m²"
+     "尺度",
+     "blade height 4.5-7.0 cm, tuft radius 7 cm"
     ],
     [
-     "材质",
-     "curb"
+     "草叶数",
+     "14"
+    ],
+    [
+     "seed",
+     "20261114"
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_13/curb_13_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_13/curb_13_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_13/curb_13_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_01/grass_tuft_01_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_01/grass_tuft_01_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_01/grass_tuft_01_research.json"
    ],
-   "generator": "cg/ground/build_ground.py"
+   "generator": "cg/grass/gen_grass.py"
   },
-  "curb_14": {
-   "file": "assets/curb_14.glb",
-   "bytes": 571968,
-   "category": "ground",
-   "label": "curb",
-   "short": "curb",
-   "pivot": "region centroid at median ground height, +Z up, metres",
-   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
-   "inferred": [],
+  "grass_tuft_02": {
+   "file": "assets/grass_tuft_02.gltf",
+   "bytes": 4324,
+   "category": "grass",
+   "label": "turf",
+   "short": "turf",
+   "pivot": "tuft centre at soil level, +Z up, metres",
+   "provenance": "blade geometry generated by code; height/colour chosen to match the mown sod in the video (blades are below the 544x960 video resolution)",
+   "inferred": [
+    "individual blade shape and count (not resolvable in the video)"
+   ],
    "facts": [
     [
-     "面积",
-     "1.05 m²"
+     "尺度",
+     "blade height 4.0-6.5 cm, tuft radius 6 cm"
     ],
     [
-     "材质",
-     "curb"
+     "草叶数",
+     "12"
+    ],
+    [
+     "seed",
+     "20261115"
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_14/curb_14_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_14/curb_14_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/curb_14/curb_14_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_02/grass_tuft_02_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_02/grass_tuft_02_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_02/grass_tuft_02_research.json"
    ],
-   "generator": "cg/ground/build_ground.py"
+   "generator": "cg/grass/gen_grass.py"
+  },
+  "grass_tuft_03": {
+   "file": "assets/grass_tuft_03.gltf",
+   "bytes": 4580,
+   "category": "grass",
+   "label": "turf",
+   "short": "turf",
+   "pivot": "tuft centre at soil level, +Z up, metres",
+   "provenance": "blade geometry generated by code; height/colour chosen to match the mown sod in the video (blades are below the 544x960 video resolution)",
+   "inferred": [
+    "individual blade shape and count (not resolvable in the video)"
+   ],
+   "facts": [
+    [
+     "尺度",
+     "blade height 5.0-7.5 cm, tuft radius 8 cm"
+    ],
+    [
+     "草叶数",
+     "17"
+    ],
+    [
+     "seed",
+     "20261116"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_03/grass_tuft_03_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_03/grass_tuft_03_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_03/grass_tuft_03_research.json"
+   ],
+   "generator": "cg/grass/gen_grass.py"
+  },
+  "grass_tuft_04": {
+   "file": "assets/grass_tuft_04.gltf",
+   "bytes": 4312,
+   "category": "grass",
+   "label": "turf_dry",
+   "short": "turf_dry",
+   "pivot": "tuft centre at soil level, +Z up, metres",
+   "provenance": "blade geometry generated by code; height/colour chosen to match the mown sod in the video (blades are below the 544x960 video resolution)",
+   "inferred": [
+    "individual blade shape and count (not resolvable in the video)"
+   ],
+   "facts": [
+    [
+     "尺度",
+     "blade height 3.5-6.0 cm, tuft radius 7 cm"
+    ],
+    [
+     "草叶数",
+     "11"
+    ],
+    [
+     "seed",
+     "20261117"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_04/grass_tuft_04_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_04/grass_tuft_04_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_04/grass_tuft_04_research.json"
+   ],
+   "generator": "cg/grass/gen_grass.py"
+  },
+  "grass_tuft_05": {
+   "file": "assets/grass_tuft_05.gltf",
+   "bytes": 4388,
+   "category": "grass",
+   "label": "fringe",
+   "short": "fringe",
+   "pivot": "tuft centre at soil level, +Z up, metres",
+   "provenance": "blade geometry generated by code; height/colour chosen to match the mown sod in the video (blades are below the 544x960 video resolution)",
+   "inferred": [
+    "individual blade shape and count (not resolvable in the video)"
+   ],
+   "facts": [
+    [
+     "尺度",
+     "blade height 8.0-14.0 cm, tuft radius 6 cm"
+    ],
+    [
+     "草叶数",
+     "13"
+    ],
+    [
+     "seed",
+     "20261118"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_05/grass_tuft_05_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_05/grass_tuft_05_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_05/grass_tuft_05_research.json"
+   ],
+   "generator": "cg/grass/gen_grass.py"
+  },
+  "grass_tuft_06": {
+   "file": "assets/grass_tuft_06.gltf",
+   "bytes": 4212,
+   "category": "grass",
+   "label": "fringe",
+   "short": "fringe",
+   "pivot": "tuft centre at soil level, +Z up, metres",
+   "provenance": "blade geometry generated by code; height/colour chosen to match the mown sod in the video (blades are below the 544x960 video resolution)",
+   "inferred": [
+    "individual blade shape and count (not resolvable in the video)"
+   ],
+   "facts": [
+    [
+     "尺度",
+     "blade height 6.0-11.0 cm, tuft radius 5 cm"
+    ],
+    [
+     "草叶数",
+     "10"
+    ],
+    [
+     "seed",
+     "20261119"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_06/grass_tuft_06_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_06/grass_tuft_06_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/grass/grass_tuft_06/grass_tuft_06_research.json"
+   ],
+   "generator": "cg/grass/gen_grass.py"
   },
   "lawn_01": {
-   "file": "assets/lawn_01.glb",
-   "bytes": 901836,
+   "file": "assets/lawn_01.gltf",
+   "bytes": 1546804,
    "category": "ground",
    "label": "lawn",
    "short": "lawn",
@@ -661,7 +835,7 @@
    "facts": [
     [
      "面积",
-     "22613.58 m²"
+     "23430.27 m²"
     ],
     [
      "材质",
@@ -676,8 +850,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "lawn_02": {
-   "file": "assets/lawn_02.glb",
-   "bytes": 781468,
+   "file": "assets/lawn_02.gltf",
+   "bytes": 1124328,
    "category": "ground",
    "label": "lawn",
    "short": "lawn",
@@ -702,8 +876,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "lawn_03": {
-   "file": "assets/lawn_03.glb",
-   "bytes": 781092,
+   "file": "assets/lawn_03.gltf",
+   "bytes": 1123224,
    "category": "ground",
    "label": "lawn",
    "short": "lawn",
@@ -728,8 +902,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "lawn_04": {
-   "file": "assets/lawn_04.glb",
-   "bytes": 778060,
+   "file": "assets/lawn_04.gltf",
+   "bytes": 1119448,
    "category": "ground",
    "label": "lawn",
    "short": "lawn",
@@ -754,8 +928,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_01": {
-   "file": "assets/path_01.glb",
-   "bytes": 530840,
+   "file": "assets/path_01.gltf",
+   "bytes": 533240,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -765,7 +939,7 @@
    "facts": [
     [
      "面积",
-     "522.31 m²"
+     "828.65 m²"
     ],
     [
      "材质",
@@ -780,8 +954,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_02": {
-   "file": "assets/path_02.glb",
-   "bytes": 527452,
+   "file": "assets/path_02.gltf",
+   "bytes": 525664,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -791,7 +965,7 @@
    "facts": [
     [
      "面积",
-     "262.38 m²"
+     "66.99 m²"
     ],
     [
      "材质",
@@ -806,8 +980,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_03": {
-   "file": "assets/path_03.glb",
-   "bytes": 525580,
+   "file": "assets/path_03.gltf",
+   "bytes": 525352,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -817,7 +991,7 @@
    "facts": [
     [
      "面积",
-     "71.49 m²"
+     "59.14 m²"
     ],
     [
      "材质",
@@ -832,8 +1006,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_04": {
-   "file": "assets/path_04.glb",
-   "bytes": 525232,
+   "file": "assets/path_04.gltf",
+   "bytes": 525352,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -843,7 +1017,7 @@
    "facts": [
     [
      "面积",
-     "41.19 m²"
+     "48.76 m²"
     ],
     [
      "材质",
@@ -858,8 +1032,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_05": {
-   "file": "assets/path_05.glb",
-   "bytes": 525784,
+   "file": "assets/path_05.gltf",
+   "bytes": 525304,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -869,7 +1043,7 @@
    "facts": [
     [
      "面积",
-     "38.12 m²"
+     "34.01 m²"
     ],
     [
      "材质",
@@ -884,8 +1058,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_06": {
-   "file": "assets/path_06.glb",
-   "bytes": 524980,
+   "file": "assets/path_06.gltf",
+   "bytes": 525736,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -895,7 +1069,7 @@
    "facts": [
     [
      "面积",
-     "24.69 m²"
+     "31.7 m²"
     ],
     [
      "材质",
@@ -910,8 +1084,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_07": {
-   "file": "assets/path_07.glb",
-   "bytes": 524836,
+   "file": "assets/path_07.gltf",
+   "bytes": 524896,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -936,8 +1110,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_08": {
-   "file": "assets/path_08.glb",
-   "bytes": 524932,
+   "file": "assets/path_08.gltf",
+   "bytes": 525024,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -947,7 +1121,7 @@
    "facts": [
     [
      "面积",
-     "14.65 m²"
+     "19.38 m²"
     ],
     [
      "材质",
@@ -962,8 +1136,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_09": {
-   "file": "assets/path_09.glb",
-   "bytes": 524768,
+   "file": "assets/path_09.gltf",
+   "bytes": 525008,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -973,7 +1147,7 @@
    "facts": [
     [
      "面积",
-     "4.65 m²"
+     "17.5 m²"
     ],
     [
      "材质",
@@ -988,8 +1162,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "path_10": {
-   "file": "assets/path_10.glb",
-   "bytes": 524644,
+   "file": "assets/path_10.gltf",
+   "bytes": 524816,
    "category": "ground",
    "label": "path",
    "short": "path",
@@ -999,7 +1173,7 @@
    "facts": [
     [
      "面积",
-     "2.61 m²"
+     "10.62 m²"
     ],
     [
      "材质",
@@ -1013,35 +1187,9 @@
    ],
    "generator": "cg/ground/build_ground.py"
   },
-  "path_11": {
-   "file": "assets/path_11.glb",
-   "bytes": 524652,
-   "category": "ground",
-   "label": "path",
-   "short": "path",
-   "pivot": "region centroid at median ground height, +Z up, metres",
-   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
-   "inferred": [],
-   "facts": [
-    [
-     "面积",
-     "2.17 m²"
-    ],
-    [
-     "材质",
-     "path_concrete"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_11/path_11_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_11/path_11_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/path_11/path_11_research.json"
-   ],
-   "generator": "cg/ground/build_ground.py"
-  },
   "plaza_01": {
-   "file": "assets/plaza_01.glb",
-   "bytes": 261368,
+   "file": "assets/plaza_01.gltf",
+   "bytes": 260124,
    "category": "ground",
    "label": "plaza",
    "short": "plaza",
@@ -1051,7 +1199,7 @@
    "facts": [
     [
      "面积",
-     "9937.63 m²"
+     "9672.92 m²"
     ],
     [
      "材质",
@@ -1066,8 +1214,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "plaza_02": {
-   "file": "assets/plaza_02.glb",
-   "bytes": 206676,
+   "file": "assets/plaza_02.gltf",
+   "bytes": 209436,
    "category": "ground",
    "label": "plaza",
    "short": "plaza",
@@ -1077,7 +1225,7 @@
    "facts": [
     [
      "面积",
-     "15.64 m²"
+     "178.76 m²"
     ],
     [
      "材质",
@@ -1088,32 +1236,6 @@
     "server:/root/real2sim/scene-20261113/agent-b/assets/ground/plaza_02/plaza_02_research.blend",
     "server:/root/real2sim/scene-20261113/agent-b/assets/ground/plaza_02/plaza_02_research.glb",
     "server:/root/real2sim/scene-20261113/agent-b/assets/ground/plaza_02/plaza_02_research.json"
-   ],
-   "generator": "cg/ground/build_ground.py"
-  },
-  "plaza_03": {
-   "file": "assets/plaza_03.glb",
-   "bytes": 206516,
-   "category": "ground",
-   "label": "plaza",
-   "short": "plaza",
-   "pivot": "region centroid at median ground height, +Z up, metres",
-   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
-   "inferred": [],
-   "facts": [
-    [
-     "面积",
-     "6.1 m²"
-    ],
-    [
-     "材质",
-     "paving"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/plaza_03/plaza_03_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/plaza_03/plaza_03_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/plaza_03/plaza_03_research.json"
    ],
    "generator": "cg/ground/build_ground.py"
   },
@@ -1163,7 +1285,7 @@
   },
   "prop_lamp_street": {
    "file": "assets/prop_lamp_street.glb",
-   "bytes": 4276,
+   "bytes": 5788,
    "category": "prop",
    "label": "prop_lamp_street",
    "short": "prop",
@@ -1173,7 +1295,11 @@
    "facts": [
     [
      "height_m",
-     "6.41"
+     "6.12"
+    ],
+    [
+     "dims_note",
+     "grey CCTV / sign pole (video frame 700); asset id kept for stability"
     ]
    ],
    "research_files": [
@@ -1206,8 +1332,8 @@
    "generator": "cg/props/gen_props.py"
   },
   "road_01": {
-   "file": "assets/road_01.glb",
-   "bytes": 694836,
+   "file": "assets/road_01.gltf",
+   "bytes": 410068,
    "category": "ground",
    "label": "road",
    "short": "road",
@@ -1217,7 +1343,7 @@
    "facts": [
     [
      "面积",
-     "1327.31 m²"
+     "1345.73 m²"
     ],
     [
      "材质",
@@ -1232,8 +1358,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "road_02": {
-   "file": "assets/road_02.glb",
-   "bytes": 691152,
+   "file": "assets/road_02.gltf",
+   "bytes": 406288,
    "category": "ground",
    "label": "road",
    "short": "road",
@@ -1258,8 +1384,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "road_03": {
-   "file": "assets/road_03.glb",
-   "bytes": 689048,
+   "file": "assets/road_03.gltf",
+   "bytes": 404184,
    "category": "ground",
    "label": "road",
    "short": "road",
@@ -1284,8 +1410,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "road_04": {
-   "file": "assets/road_04.glb",
-   "bytes": 688484,
+   "file": "assets/road_04.gltf",
+   "bytes": 403520,
    "category": "ground",
    "label": "road",
    "short": "road",
@@ -1295,7 +1421,7 @@
    "facts": [
     [
      "面积",
-     "31.79 m²"
+     "31.96 m²"
     ],
     [
      "材质",
@@ -1310,8 +1436,34 @@
    "generator": "cg/ground/build_ground.py"
   },
   "road_05": {
-   "file": "assets/road_05.glb",
-   "bytes": 688216,
+   "file": "assets/road_05.gltf",
+   "bytes": 403232,
+   "category": "ground",
+   "label": "road",
+   "short": "road",
+   "pivot": "region centroid at median ground height, +Z up, metres",
+   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
+   "inferred": [],
+   "facts": [
+    [
+     "面积",
+     "21.43 m²"
+    ],
+    [
+     "材质",
+     "asphalt"
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_05/road_05_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_05/road_05_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_05/road_05_research.json"
+   ],
+   "generator": "cg/ground/build_ground.py"
+  },
+  "road_06": {
+   "file": "assets/road_06.gltf",
+   "bytes": 403352,
    "category": "ground",
    "label": "road",
    "short": "road",
@@ -1329,32 +1481,6 @@
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_05/road_05_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_05/road_05_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_05/road_05_research.json"
-   ],
-   "generator": "cg/ground/build_ground.py"
-  },
-  "road_06": {
-   "file": "assets/road_06.glb",
-   "bytes": 688028,
-   "category": "ground",
-   "label": "road",
-   "short": "road",
-   "pivot": "region centroid at median ground height, +Z up, metres",
-   "provenance": "outline from SAM3-labelled dense reconstruction rasterised at 0.1 m; heights smoothed 3.0 m",
-   "inferred": [],
-   "facts": [
-    [
-     "面积",
-     "10.83 m²"
-    ],
-    [
-     "材质",
-     "asphalt"
-    ]
-   ],
-   "research_files": [
     "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_06/road_06_research.blend",
     "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_06/road_06_research.glb",
     "server:/root/real2sim/scene-20261113/agent-b/assets/ground/road_06/road_06_research.json"
@@ -1362,8 +1488,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "road_markings": {
-   "file": "assets/road_markings.glb",
-   "bytes": 14308,
+   "file": "assets/road_markings.gltf",
+   "bytes": 14476,
    "category": "ground",
    "label": "markings",
    "short": "markings",
@@ -1388,8 +1514,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "sidewalk_01": {
-   "file": "assets/sidewalk_01.glb",
-   "bytes": 587216,
+   "file": "assets/sidewalk_01.gltf",
+   "bytes": 330016,
    "category": "ground",
    "label": "sidewalk",
    "short": "sidewalk",
@@ -1399,11 +1525,11 @@
    "facts": [
     [
      "面积",
-     "496.27 m²"
+     "502.85 m²"
     ],
     [
      "材质",
-     "curb"
+     "sidewalk"
     ]
    ],
    "research_files": [
@@ -1414,8 +1540,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "sidewalk_02": {
-   "file": "assets/sidewalk_02.glb",
-   "bytes": 585332,
+   "file": "assets/sidewalk_02.gltf",
+   "bytes": 328184,
    "category": "ground",
    "label": "sidewalk",
    "short": "sidewalk",
@@ -1425,11 +1551,11 @@
    "facts": [
     [
      "面积",
-     "326.44 m²"
+     "331.18 m²"
     ],
     [
      "材质",
-     "curb"
+     "sidewalk"
     ]
    ],
    "research_files": [
@@ -1440,8 +1566,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "sidewalk_03": {
-   "file": "assets/sidewalk_03.glb",
-   "bytes": 576004,
+   "file": "assets/sidewalk_03.gltf",
+   "bytes": 318484,
    "category": "ground",
    "label": "sidewalk",
    "short": "sidewalk",
@@ -1455,7 +1581,7 @@
     ],
     [
      "材质",
-     "curb"
+     "sidewalk"
     ]
    ],
    "research_files": [
@@ -1466,8 +1592,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "terrain_base": {
-   "file": "assets/terrain_base.glb",
-   "bytes": 1064532,
+   "file": "assets/terrain_base.gltf",
+   "bytes": 1449052,
    "category": "ground",
    "label": "base",
    "short": "base",
@@ -1494,8 +1620,8 @@
    "generator": "cg/ground/build_ground.py"
   },
   "terrain_far": {
-   "file": "assets/terrain_far.glb",
-   "bytes": 18848,
+   "file": "assets/terrain_far.gltf",
+   "bytes": 18836,
    "category": "ground",
    "label": "far",
    "short": "far",
@@ -1523,7 +1649,7 @@
   },
   "tree_00_broadleaf": {
    "file": "assets/tree_00_broadleaf.glb",
-   "bytes": 399968,
+   "bytes": 403584,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -1547,11 +1673,11 @@
     ],
     [
      "生成",
-     "seed 1000 · 节点 650 · 叶卡 911"
+     "seed 1000 · 节点 665 · 叶卡 913"
     ],
     [
      "参考帧",
-     "00032.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1563,7 +1689,7 @@
   },
   "tree_01_purple_plum": {
    "file": "assets/tree_01_purple_plum.glb",
-   "bytes": 418560,
+   "bytes": 436124,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1579,7 +1705,7 @@
    "facts": [
     [
      "实测树高",
-     "9.77 m（silhouette_median）"
+     "9.87 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -1587,11 +1713,11 @@
     ],
     [
      "生成",
-     "seed 1001 · 节点 1371 · 叶卡 1574"
+     "seed 1001 · 节点 1480 · 叶卡 1652"
     ],
     [
      "参考帧",
-     "00025.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1603,7 +1729,7 @@
   },
   "tree_02_purple_plum": {
    "file": "assets/tree_02_purple_plum.glb",
-   "bytes": 527572,
+   "bytes": 519672,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1627,11 +1753,11 @@
     ],
     [
      "生成",
-     "seed 1002 · 节点 2171 · 叶卡 2008"
+     "seed 1002 · 节点 2124 · 叶卡 1972"
     ],
     [
      "参考帧",
-     "00025.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1643,7 +1769,7 @@
   },
   "tree_03_purple_plum": {
    "file": "assets/tree_03_purple_plum.glb",
-   "bytes": 1036088,
+   "bytes": 1034012,
    "category": "tree",
    "label": "purple-leaf small tree (Prunus cerasifera 'Atropurpurea'-like; inferred)",
    "short": "purple_plum",
@@ -1667,11 +1793,11 @@
     ],
     [
      "生成",
-     "seed 1003 · 节点 4140 · 叶卡 7498"
+     "seed 1003 · 节点 4084 · 叶卡 7630"
     ],
     [
      "参考帧",
-     "00025.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1683,7 +1809,7 @@
   },
   "tree_04_ginkgo_young": {
    "file": "assets/tree_04_ginkgo_young.glb",
-   "bytes": 486904,
+   "bytes": 480088,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1707,11 +1833,11 @@
     ],
     [
      "生成",
-     "seed 1004 · 节点 1724 · 叶卡 666"
+     "seed 1004 · 节点 1674 · 叶卡 659"
     ],
     [
      "参考帧",
-     "00771.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1723,7 +1849,7 @@
   },
   "tree_05_ginkgo_young": {
    "file": "assets/tree_05_ginkgo_young.glb",
-   "bytes": 406872,
+   "bytes": 405012,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1747,11 +1873,11 @@
     ],
     [
      "生成",
-     "seed 1005 · 节点 1219 · 叶卡 515"
+     "seed 1005 · 节点 1197 · 叶卡 517"
     ],
     [
      "参考帧",
-     "00767.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1763,7 +1889,7 @@
   },
   "tree_06_ginkgo_young": {
    "file": "assets/tree_06_ginkgo_young.glb",
-   "bytes": 407256,
+   "bytes": 398956,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1787,11 +1913,11 @@
     ],
     [
      "生成",
-     "seed 1006 · 节点 1167 · 叶卡 272"
+     "seed 1006 · 节点 1156 · 叶卡 232"
     ],
     [
      "参考帧",
-     "00755.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1803,47 +1929,7 @@
   },
   "tree_07_ginkgo_young": {
    "file": "assets/tree_07_ginkgo_young.glb",
-   "bytes": 462296,
-   "category": "tree",
-   "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
-   "short": "ginkgo_young",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "6.84 m（blend_depth_silhouette）"
-    ],
-    [
-     "物种/习性（推断）",
-     "young ginkgo-like, sparse columnar, yellowing (inferred)"
-    ],
-    [
-     "生成",
-     "seed 1007 · 节点 1733 · 叶卡 989"
-    ],
-    [
-     "参考帧",
-     "00753.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_08_ginkgo_young": {
-   "file": "assets/tree_08_ginkgo_young.glb",
-   "bytes": 538136,
+   "bytes": 531344,
    "category": "tree",
    "label": "young ginkgo-like, sparse columnar, yellowing (inferred)",
    "short": "ginkgo_young",
@@ -1867,23 +1953,23 @@
     ],
     [
      "生成",
-     "seed 1008 · 节点 2291 · 叶卡 1076"
+     "seed 1007 · 节点 2302 · 叶卡 971"
     ],
     [
      "参考帧",
-     "00743.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_09_red_maple": {
-   "file": "assets/tree_09_red_maple.glb",
-   "bytes": 243936,
+  "tree_08_red_maple": {
+   "file": "assets/tree_08_red_maple.glb",
+   "bytes": 291452,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1907,11 +1993,51 @@
     ],
     [
      "生成",
-     "seed 1009 · 节点 260 · 叶卡 773"
+     "seed 1008 · 节点 342 · 叶卡 1426"
     ],
     [
      "参考帧",
-     "00651.jpg"
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_08_red_maple/tree_08_red_maple_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_08_red_maple/tree_08_red_maple_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_08_red_maple/tree_08_red_maple_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_09_red_maple": {
+   "file": "assets/tree_09_red_maple.glb",
+   "bytes": 406440,
+   "category": "tree",
+   "label": "red-leaf maple (Acer, autumn crimson; inferred)",
+   "short": "red_maple",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "6.51 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "red-leaf maple (Acer, autumn crimson; inferred)"
+    ],
+    [
+     "生成",
+     "seed 1009 · 节点 1208 · 叶卡 1973"
+    ],
+    [
+     "参考帧",
+     null
     ]
    ],
    "research_files": [
@@ -1923,7 +2049,7 @@
   },
   "tree_10_red_maple": {
    "file": "assets/tree_10_red_maple.glb",
-   "bytes": 349108,
+   "bytes": 309232,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1939,7 +2065,7 @@
    "facts": [
     [
      "实测树高",
-     "6.72 m（silhouette_median）"
+     "6.3 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -1947,11 +2073,11 @@
     ],
     [
      "生成",
-     "seed 1010 · 节点 933 · 叶卡 1398"
+     "seed 1010 · 节点 665 · 叶卡 1154"
     ],
     [
      "参考帧",
-     "00648.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -1963,7 +2089,7 @@
   },
   "tree_11_red_maple": {
    "file": "assets/tree_11_red_maple.glb",
-   "bytes": 303696,
+   "bytes": 580324,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -1979,7 +2105,7 @@
    "facts": [
     [
      "实测树高",
-     "6.09 m（silhouette_median）"
+     "5.61 m（blend_depth_silhouette）"
     ],
     [
      "物种/习性（推断）",
@@ -1987,11 +2113,11 @@
     ],
     [
      "生成",
-     "seed 1011 · 节点 636 · 叶卡 1130"
+     "seed 1011 · 节点 1888 · 叶卡 3988"
     ],
     [
      "参考帧",
-     "00649.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -2003,47 +2129,7 @@
   },
   "tree_12_red_maple": {
    "file": "assets/tree_12_red_maple.glb",
-   "bytes": 584076,
-   "category": "tree",
-   "label": "red-leaf maple (Acer, autumn crimson; inferred)",
-   "short": "red_maple",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "5.65 m（blend_depth_silhouette）"
-    ],
-    [
-     "物种/习性（推断）",
-     "red-leaf maple (Acer, autumn crimson; inferred)"
-    ],
-    [
-     "生成",
-     "seed 1012 · 节点 1896 · 叶卡 4064"
-    ],
-    [
-     "参考帧",
-     "00643.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_12_red_maple/tree_12_red_maple_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_12_red_maple/tree_12_red_maple_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_12_red_maple/tree_12_red_maple_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_13_red_maple": {
-   "file": "assets/tree_13_red_maple.glb",
-   "bytes": 616532,
+   "bytes": 590144,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2067,23 +2153,23 @@
     ],
     [
      "生成",
-     "seed 1013 · 节点 2060 · 叶卡 4202"
+     "seed 1012 · 节点 2004 · 叶卡 3832"
     ],
     [
      "参考帧",
-     "00642.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_13_red_maple/tree_13_red_maple_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_13_red_maple/tree_13_red_maple_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_13_red_maple/tree_13_red_maple_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_12_red_maple/tree_12_red_maple_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_12_red_maple/tree_12_red_maple_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_12_red_maple/tree_12_red_maple_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_14_red_maple": {
-   "file": "assets/tree_14_red_maple.glb",
-   "bytes": 499740,
+  "tree_13_red_maple": {
+   "file": "assets/tree_13_red_maple.glb",
+   "bytes": 560716,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2107,11 +2193,51 @@
     ],
     [
      "生成",
-     "seed 1014 · 节点 1408 · 叶卡 3185"
+     "seed 1013 · 节点 1662 · 叶卡 3818"
     ],
     [
      "参考帧",
-     "00630.jpg"
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_13_red_maple/tree_13_red_maple_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_13_red_maple/tree_13_red_maple_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_13_red_maple/tree_13_red_maple_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_14_red_maple": {
+   "file": "assets/tree_14_red_maple.glb",
+   "bytes": 662696,
+   "category": "tree",
+   "label": "red-leaf maple (Acer, autumn crimson; inferred)",
+   "short": "red_maple",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "7.45 m（blend_depth_silhouette）"
+    ],
+    [
+     "物种/习性（推断）",
+     "red-leaf maple (Acer, autumn crimson; inferred)"
+    ],
+    [
+     "生成",
+     "seed 1014 · 节点 2277 · 叶卡 4631"
+    ],
+    [
+     "参考帧",
+     null
     ]
    ],
    "research_files": [
@@ -2123,7 +2249,7 @@
   },
   "tree_15_red_maple": {
    "file": "assets/tree_15_red_maple.glb",
-   "bytes": 722596,
+   "bytes": 542816,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2139,7 +2265,7 @@
    "facts": [
     [
      "实测树高",
-     "7.43 m（blend_depth_silhouette）"
+     "7.35 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -2147,11 +2273,11 @@
     ],
     [
      "生成",
-     "seed 1015 · 节点 2562 · 叶卡 5229"
+     "seed 1015 · 节点 1592 · 叶卡 3586"
     ],
     [
      "参考帧",
-     "00630.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -2163,7 +2289,7 @@
   },
   "tree_16_red_maple": {
    "file": "assets/tree_16_red_maple.glb",
-   "bytes": 527044,
+   "bytes": 492112,
    "category": "tree",
    "label": "red-leaf maple (Acer, autumn crimson; inferred)",
    "short": "red_maple",
@@ -2179,7 +2305,7 @@
    "facts": [
     [
      "实测树高",
-     "7.14 m（silhouette_median）"
+     "7.88 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -2187,11 +2313,11 @@
     ],
     [
      "生成",
-     "seed 1016 · 节点 1545 · 叶卡 3392"
+     "seed 1016 · 节点 1569 · 叶卡 2760"
     ],
     [
      "参考帧",
-     "00633.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -2201,89 +2327,9 @@
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_17_red_maple": {
-   "file": "assets/tree_17_red_maple.glb",
-   "bytes": 464420,
-   "category": "tree",
-   "label": "red-leaf maple (Acer, autumn crimson; inferred)",
-   "short": "red_maple",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "8.09 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "red-leaf maple (Acer, autumn crimson; inferred)"
-    ],
-    [
-     "生成",
-     "seed 1017 · 节点 1510 · 叶卡 2309"
-    ],
-    [
-     "参考帧",
-     "00623.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_17_red_maple/tree_17_red_maple_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_17_red_maple/tree_17_red_maple_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_17_red_maple/tree_17_red_maple_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_18_red_maple": {
-   "file": "assets/tree_18_red_maple.glb",
-   "bytes": 528380,
-   "category": "tree",
-   "label": "red-leaf maple (Acer, autumn crimson; inferred)",
-   "short": "red_maple",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "6.09 m（blend_depth_silhouette）"
-    ],
-    [
-     "物种/习性（推断）",
-     "red-leaf maple (Acer, autumn crimson; inferred)"
-    ],
-    [
-     "生成",
-     "seed 1018 · 节点 1690 · 叶卡 3389"
-    ],
-    [
-     "参考帧",
-     "00613.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_18_red_maple/tree_18_red_maple_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_18_red_maple/tree_18_red_maple_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_18_red_maple/tree_18_red_maple_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_19_broadleaf": {
-   "file": "assets/tree_19_broadleaf.glb",
-   "bytes": 437920,
+  "tree_17_broadleaf": {
+   "file": "assets/tree_17_broadleaf.glb",
+   "bytes": 447652,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2307,26 +2353,186 @@
     ],
     [
      "生成",
-     "seed 1019 · 节点 882 · 叶卡 1087"
+     "seed 1017 · 节点 866 · 叶卡 1280"
     ],
     [
      "参考帧",
-     "00610.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_17_broadleaf/tree_17_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_17_broadleaf/tree_17_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_17_broadleaf/tree_17_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_18_camphor": {
+   "file": "assets/tree_18_camphor.glb",
+   "bytes": 822848,
+   "category": "tree",
+   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
+   "short": "camphor",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "10.99 m（blend_depth_silhouette）"
+    ],
+    [
+     "物种/习性（推断）",
+     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1018 · 节点 3104 · 叶卡 3538"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_18_camphor/tree_18_camphor_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_18_camphor/tree_18_camphor_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_18_camphor/tree_18_camphor_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_19_camphor": {
+   "file": "assets/tree_19_camphor.glb",
+   "bytes": 836020,
+   "category": "tree",
+   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
+   "short": "camphor",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "9.1 m（blend_depth_silhouette）"
+    ],
+    [
+     "物种/习性（推断）",
+     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1019 · 节点 3480 · 叶卡 3443"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_19_camphor/tree_19_camphor_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_19_camphor/tree_19_camphor_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_19_camphor/tree_19_camphor_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
   "tree_20_camphor": {
    "file": "assets/tree_20_camphor.glb",
-   "bytes": 871520,
+   "bytes": 716148,
    "category": "tree",
    "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
    "short": "camphor",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "7.36 m（blend_depth_silhouette）"
+    ],
+    [
+     "物种/习性（推断）",
+     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1020 · 节点 2872 · 叶卡 2902"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_20_camphor/tree_20_camphor_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_20_camphor/tree_20_camphor_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_20_camphor/tree_20_camphor_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_21_camphor": {
+   "file": "assets/tree_21_camphor.glb",
+   "bytes": 675844,
+   "category": "tree",
+   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
+   "short": "camphor",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "12.61 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1021 · 节点 2480 · 叶卡 1875"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_21_camphor/tree_21_camphor_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_21_camphor/tree_21_camphor_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_21_camphor/tree_21_camphor_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_22_broadleaf": {
+   "file": "assets/tree_22_broadleaf.glb",
+   "bytes": 680232,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
    "pivot": "root collar (ground contact), +Z up, metres",
    "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
    "inferred": [
@@ -2343,30 +2549,30 @@
     ],
     [
      "物种/习性（推断）",
-     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
     ],
     [
      "生成",
-     "seed 1020 · 节点 3516 · 叶卡 3295"
+     "seed 1022 · 节点 1853 · 叶卡 3161"
     ],
     [
      "参考帧",
-     "00599.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_20_camphor/tree_20_camphor_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_20_camphor/tree_20_camphor_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_20_camphor/tree_20_camphor_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_22_broadleaf/tree_22_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_22_broadleaf/tree_22_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_22_broadleaf/tree_22_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_21_camphor": {
-   "file": "assets/tree_21_camphor.glb",
-   "bytes": 835488,
+  "tree_23_broadleaf": {
+   "file": "assets/tree_23_broadleaf.glb",
+   "bytes": 685836,
    "category": "tree",
-   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
-   "short": "camphor",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
    "pivot": "root collar (ground contact), +Z up, metres",
    "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
    "inferred": [
@@ -2379,191 +2585,31 @@
    "facts": [
     [
      "实测树高",
-     "9.16 m（blend_depth_silhouette）"
+     "13.13 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
-     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
     ],
     [
      "生成",
-     "seed 1021 · 节点 3450 · 叶卡 3458"
+     "seed 1023 · 节点 1844 · 叶卡 3253"
     ],
     [
      "参考帧",
-     "00598.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_21_camphor/tree_21_camphor_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_21_camphor/tree_21_camphor_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_21_camphor/tree_21_camphor_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_22_camphor": {
-   "file": "assets/tree_22_camphor.glb",
-   "bytes": 697968,
-   "category": "tree",
-   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
-   "short": "camphor",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "12.5 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "evergreen broadleaf, dense dome (camphor-like, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1022 · 节点 2617 · 叶卡 2042"
-    ],
-    [
-     "参考帧",
-     "00596.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_22_camphor/tree_22_camphor_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_22_camphor/tree_22_camphor_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_22_camphor/tree_22_camphor_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_23_camphor": {
-   "file": "assets/tree_23_camphor.glb",
-   "bytes": 707040,
-   "category": "tree",
-   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
-   "short": "camphor",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "7.35 m（blend_depth_silhouette）"
-    ],
-    [
-     "物种/习性（推断）",
-     "evergreen broadleaf, dense dome (camphor-like, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1023 · 节点 2884 · 叶卡 2786"
-    ],
-    [
-     "参考帧",
-     "00600.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_23_camphor/tree_23_camphor_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_23_camphor/tree_23_camphor_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_23_camphor/tree_23_camphor_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_23_broadleaf/tree_23_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_23_broadleaf/tree_23_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_23_broadleaf/tree_23_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
   "tree_24_broadleaf": {
    "file": "assets/tree_24_broadleaf.glb",
-   "bytes": 690696,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "13.03 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1024 · 节点 1918 · 叶卡 3193"
-    ],
-    [
-     "参考帧",
-     "00578.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_25_broadleaf": {
-   "file": "assets/tree_25_broadleaf.glb",
-   "bytes": 684184,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "13.24 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1025 · 节点 1852 · 叶卡 3170"
-    ],
-    [
-     "参考帧",
-     "00552.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_26_broadleaf": {
-   "file": "assets/tree_26_broadleaf.glb",
-   "bytes": 943208,
+   "bytes": 971396,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2587,11 +2633,91 @@
     ],
     [
      "生成",
-     "seed 1026 · 节点 2718 · 叶卡 5915"
+     "seed 1024 · 节点 3030 · 叶卡 5887"
     ],
     [
      "参考帧",
-     "00555.jpg"
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_25_broadleaf": {
+   "file": "assets/tree_25_broadleaf.glb",
+   "bytes": 506440,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "10.92 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1025 · 节点 1120 · 叶卡 1780"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_26_broadleaf": {
+   "file": "assets/tree_26_broadleaf.glb",
+   "bytes": 469836,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "10.92 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1026 · 节点 975 · 叶卡 1452"
+    ],
+    [
+     "参考帧",
+     null
     ]
    ],
    "research_files": [
@@ -2603,7 +2729,7 @@
   },
   "tree_27_broadleaf": {
    "file": "assets/tree_27_broadleaf.glb",
-   "bytes": 562632,
+   "bytes": 542148,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2619,7 +2745,7 @@
    "facts": [
     [
      "实测树高",
-     "6.34 m（blend_depth_silhouette）"
+     "8.55 m（blend_depth_silhouette）"
     ],
     [
      "物种/习性（推断）",
@@ -2627,11 +2753,11 @@
     ],
     [
      "生成",
-     "seed 1027 · 节点 1451 · 叶卡 2681"
+     "seed 1027 · 节点 1156 · 叶卡 2611"
     ],
     [
      "参考帧",
-     "00544.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -2643,7 +2769,7 @@
   },
   "tree_28_broadleaf": {
    "file": "assets/tree_28_broadleaf.glb",
-   "bytes": 495312,
+   "bytes": 440464,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2667,11 +2793,11 @@
     ],
     [
      "生成",
-     "seed 1028 · 节点 1100 · 叶卡 1697"
+     "seed 1028 · 节点 888 · 叶卡 1140"
     ],
     [
      "参考帧",
-     "00530.jpg"
+     null
     ]
    ],
    "research_files": [
@@ -2683,127 +2809,7 @@
   },
   "tree_29_broadleaf": {
    "file": "assets/tree_29_broadleaf.glb",
-   "bytes": 533656,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "10.92 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1029 · 节点 1235 · 叶卡 2069"
-    ],
-    [
-     "参考帧",
-     "00525.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_30_broadleaf": {
-   "file": "assets/tree_30_broadleaf.glb",
-   "bytes": 576196,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "9.98 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1030 · 节点 1385 · 叶卡 2613"
-    ],
-    [
-     "参考帧",
-     "00511.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_31_broadleaf": {
-   "file": "assets/tree_31_broadleaf.glb",
-   "bytes": 414344,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "10.08 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1031 · 节点 781 · 叶卡 940"
-    ],
-    [
-     "参考帧",
-     "00507.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_32_broadleaf": {
-   "file": "assets/tree_32_broadleaf.glb",
-   "bytes": 508384,
+   "bytes": 495752,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2827,23 +2833,23 @@
     ],
     [
      "生成",
-     "seed 1032 · 节点 1142 · 叶卡 1902"
+     "seed 1029 · 节点 1098 · 叶卡 1797"
     ],
     [
      "参考帧",
-     "00498.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_33_broadleaf": {
-   "file": "assets/tree_33_broadleaf.glb",
-   "bytes": 448988,
+  "tree_30_broadleaf": {
+   "file": "assets/tree_30_broadleaf.glb",
+   "bytes": 439020,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2867,23 +2873,23 @@
     ],
     [
      "生成",
-     "seed 1033 · 节点 915 · 叶卡 1311"
+     "seed 1030 · 节点 882 · 叶卡 1249"
     ],
     [
      "参考帧",
-     "00502.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_34_broadleaf": {
-   "file": "assets/tree_34_broadleaf.glb",
-   "bytes": 701372,
+  "tree_31_broadleaf": {
+   "file": "assets/tree_31_broadleaf.glb",
+   "bytes": 721472,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -2907,11 +2913,131 @@
     ],
     [
      "生成",
-     "seed 1034 · 节点 1712 · 叶卡 4032"
+     "seed 1031 · 节点 1855 · 叶卡 4114"
     ],
     [
      "参考帧",
-     "00480.jpg"
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_32_broadleaf": {
+   "file": "assets/tree_32_broadleaf.glb",
+   "bytes": 572916,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "10.71 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1032 · 节点 1338 · 叶卡 2596"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_33_broadleaf": {
+   "file": "assets/tree_33_broadleaf.glb",
+   "bytes": 578036,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "10.71 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1033 · 节点 1595 · 叶卡 2185"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_34_broadleaf": {
+   "file": "assets/tree_34_broadleaf.glb",
+   "bytes": 529796,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "6.41 m（blend_depth_silhouette）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1034 · 节点 1314 · 叶卡 2300"
+    ],
+    [
+     "参考帧",
+     null
     ]
    ],
    "research_files": [
@@ -2923,127 +3049,7 @@
   },
   "tree_35_broadleaf": {
    "file": "assets/tree_35_broadleaf.glb",
-   "bytes": 584804,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "10.71 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1035 · 节点 1396 · 叶卡 2681"
-    ],
-    [
-     "参考帧",
-     "00476.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_36_broadleaf": {
-   "file": "assets/tree_36_broadleaf.glb",
-   "bytes": 539848,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "10.71 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1036 · 节点 1425 · 叶卡 1854"
-    ],
-    [
-     "参考帧",
-     "00464.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_37_broadleaf": {
-   "file": "assets/tree_37_broadleaf.glb",
-   "bytes": 521172,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "6.31 m（blend_depth_silhouette）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1037 · 节点 1283 · 叶卡 2220"
-    ],
-    [
-     "参考帧",
-     "00456.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_38_broadleaf": {
-   "file": "assets/tree_38_broadleaf.glb",
-   "bytes": 504372,
+   "bytes": 506712,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3067,23 +3073,23 @@
     ],
     [
      "生成",
-     "seed 1038 · 节点 1037 · 叶卡 1638"
+     "seed 1035 · 节点 1082 · 叶卡 1613"
     ],
     [
      "参考帧",
-     "00448.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_39_broadleaf": {
-   "file": "assets/tree_39_broadleaf.glb",
-   "bytes": 296804,
+  "tree_36_broadleaf": {
+   "file": "assets/tree_36_broadleaf.glb",
+   "bytes": 300336,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3107,23 +3113,23 @@
     ],
     [
      "生成",
-     "seed 1039 · 节点 191 · 叶卡 203"
+     "seed 1036 · 节点 212 · 叶卡 203"
     ],
     [
      "参考帧",
-     "00440.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_40_broadleaf": {
-   "file": "assets/tree_40_broadleaf.glb",
-   "bytes": 870076,
+  "tree_37_broadleaf": {
+   "file": "assets/tree_37_broadleaf.glb",
+   "bytes": 868680,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3147,23 +3153,23 @@
     ],
     [
      "生成",
-     "seed 1040 · 节点 2420 · 叶卡 5345"
+     "seed 1037 · 节点 2424 · 叶卡 5290"
     ],
     [
      "参考帧",
-     "00433.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_41_broadleaf": {
-   "file": "assets/tree_41_broadleaf.glb",
-   "bytes": 829920,
+  "tree_38_broadleaf": {
+   "file": "assets/tree_38_broadleaf.glb",
+   "bytes": 751712,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3187,23 +3193,23 @@
     ],
     [
      "生成",
-     "seed 1041 · 节点 2392 · 叶卡 4832"
+     "seed 1038 · 节点 2104 · 叶卡 4017"
     ],
     [
      "参考帧",
-     "00412.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_42_broadleaf": {
-   "file": "assets/tree_42_broadleaf.glb",
-   "bytes": 617536,
+  "tree_39_broadleaf": {
+   "file": "assets/tree_39_broadleaf.glb",
+   "bytes": 604644,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3227,23 +3233,23 @@
     ],
     [
      "生成",
-     "seed 1042 · 节点 1586 · 叶卡 3054"
+     "seed 1039 · 节点 1540 · 叶卡 2925"
     ],
     [
      "参考帧",
-     "00414.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_43_broadleaf": {
-   "file": "assets/tree_43_broadleaf.glb",
-   "bytes": 669940,
+  "tree_40_broadleaf": {
+   "file": "assets/tree_40_broadleaf.glb",
+   "bytes": 646100,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3267,23 +3273,23 @@
     ],
     [
      "生成",
-     "seed 1043 · 节点 1890 · 叶卡 3138"
+     "seed 1040 · 节点 1818 · 叶卡 2834"
     ],
     [
      "参考帧",
-     "00392.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_44_broadleaf": {
-   "file": "assets/tree_44_broadleaf.glb",
-   "bytes": 499532,
+  "tree_41_broadleaf": {
+   "file": "assets/tree_41_broadleaf.glb",
+   "bytes": 499628,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3307,23 +3313,23 @@
     ],
     [
      "生成",
-     "seed 1044 · 节点 1059 · 叶卡 1815"
+     "seed 1041 · 节点 1029 · 叶卡 1867"
     ],
     [
      "参考帧",
-     "00360.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_45_broadleaf": {
-   "file": "assets/tree_45_broadleaf.glb",
-   "bytes": 576484,
+  "tree_42_broadleaf": {
+   "file": "assets/tree_42_broadleaf.glb",
+   "bytes": 551852,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3347,23 +3353,23 @@
     ],
     [
      "生成",
-     "seed 1045 · 节点 1266 · 叶卡 2483"
+     "seed 1042 · 节点 1140 · 叶卡 2345"
     ],
     [
      "参考帧",
-     "00332.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_46_broadleaf": {
-   "file": "assets/tree_46_broadleaf.glb",
-   "bytes": 535072,
+  "tree_43_broadleaf": {
+   "file": "assets/tree_43_broadleaf.glb",
+   "bytes": 531660,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3379,7 +3385,7 @@
    "facts": [
     [
      "实测树高",
-     "12.18 m（silhouette_median）"
+     "11.97 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -3387,23 +3393,23 @@
     ],
     [
      "生成",
-     "seed 1046 · 节点 1279 · 叶卡 1823"
+     "seed 1043 · 节点 1294 · 叶卡 1755"
     ],
     [
      "参考帧",
-     "00306.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_47_broadleaf": {
-   "file": "assets/tree_47_broadleaf.glb",
-   "bytes": 292956,
+  "tree_44_broadleaf": {
+   "file": "assets/tree_44_broadleaf.glb",
+   "bytes": 292420,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3419,7 +3425,7 @@
    "facts": [
     [
      "实测树高",
-     "6.25 m（blend_depth_silhouette）"
+     "6.08 m（blend_depth_silhouette）"
     ],
     [
      "物种/习性（推断）",
@@ -3427,23 +3433,23 @@
     ],
     [
      "生成",
-     "seed 1047 · 节点 182 · 叶卡 240"
+     "seed 1044 · 节点 174 · 叶卡 235"
     ],
     [
      "参考帧",
-     "00298.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_48_broadleaf": {
-   "file": "assets/tree_48_broadleaf.glb",
-   "bytes": 776020,
+  "tree_45_broadleaf": {
+   "file": "assets/tree_45_broadleaf.glb",
+   "bytes": 782768,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3467,23 +3473,23 @@
     ],
     [
      "生成",
-     "seed 1048 · 节点 2130 · 叶卡 4489"
+     "seed 1045 · 节点 2215 · 叶卡 4390"
     ],
     [
      "参考帧",
-     "00290.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_49_broadleaf": {
-   "file": "assets/tree_49_broadleaf.glb",
-   "bytes": 633256,
+  "tree_46_broadleaf": {
+   "file": "assets/tree_46_broadleaf.glb",
+   "bytes": 583736,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3499,7 +3505,7 @@
    "facts": [
     [
      "实测树高",
-     "11.55 m（silhouette_median）"
+     "11.13 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -3507,23 +3513,23 @@
     ],
     [
      "生成",
-     "seed 1049 · 节点 1821 · 叶卡 2601"
+     "seed 1046 · 节点 1625 · 叶卡 2213"
     ],
     [
      "参考帧",
-     "00278.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_50_broadleaf": {
-   "file": "assets/tree_50_broadleaf.glb",
-   "bytes": 533228,
+  "tree_47_broadleaf": {
+   "file": "assets/tree_47_broadleaf.glb",
+   "bytes": 552816,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3547,23 +3553,23 @@
     ],
     [
      "生成",
-     "seed 1050 · 节点 1299 · 叶卡 1667"
+     "seed 1047 · 节点 1358 · 叶卡 1814"
     ],
     [
      "参考帧",
-     "00263.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_51_broadleaf": {
-   "file": "assets/tree_51_broadleaf.glb",
-   "bytes": 349220,
+  "tree_48_broadleaf": {
+   "file": "assets/tree_48_broadleaf.glb",
+   "bytes": 489204,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3579,7 +3585,7 @@
    "facts": [
     [
      "实测树高",
-     "8.3 m（silhouette_median）"
+     "10.5 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -3587,263 +3593,23 @@
     ],
     [
      "生成",
-     "seed 1051 · 节点 397 · 叶卡 686"
+     "seed 1048 · 节点 1006 · 叶卡 1746"
     ],
     [
      "参考帧",
-     "00252.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_52_broadleaf": {
-   "file": "assets/tree_52_broadleaf.glb",
-   "bytes": 577448,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "8.61 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1052 · 节点 1397 · 叶卡 2750"
-    ],
-    [
-     "参考帧",
-     "00248.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_53_camphor": {
-   "file": "assets/tree_53_camphor.glb",
-   "bytes": 1030004,
-   "category": "tree",
-   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
-   "short": "camphor",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "12.39 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "evergreen broadleaf, dense dome (camphor-like, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1053 · 节点 4099 · 叶卡 4817"
-    ],
-    [
-     "参考帧",
-     "00202.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_53_camphor/tree_53_camphor_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_53_camphor/tree_53_camphor_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_53_camphor/tree_53_camphor_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_54_camphor": {
-   "file": "assets/tree_54_camphor.glb",
-   "bytes": 726088,
-   "category": "tree",
-   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
-   "short": "camphor",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "11.34 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "evergreen broadleaf, dense dome (camphor-like, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1054 · 节点 2673 · 叶卡 2552"
-    ],
-    [
-     "参考帧",
-     "00204.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_54_camphor/tree_54_camphor_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_54_camphor/tree_54_camphor_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_54_camphor/tree_54_camphor_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_55_broadleaf": {
-   "file": "assets/tree_55_broadleaf.glb",
-   "bytes": 477304,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "12.39 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1055 · 节点 912 · 叶卡 1570"
-    ],
-    [
-     "参考帧",
-     "00182.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_56_broadleaf": {
-   "file": "assets/tree_56_broadleaf.glb",
-   "bytes": 1048868,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "14.5 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1056 · 节点 2936 · 叶卡 7384"
-    ],
-    [
-     "参考帧",
-     "00172.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_57_broadleaf": {
-   "file": "assets/tree_57_broadleaf.glb",
-   "bytes": 833876,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "13.87 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1057 · 节点 2556 · 叶卡 4480"
-    ],
-    [
-     "参考帧",
-     "00157.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_58_broadleaf": {
-   "file": "assets/tree_58_broadleaf.glb",
-   "bytes": 393188,
+  "tree_49_broadleaf": {
+   "file": "assets/tree_49_broadleaf.glb",
+   "bytes": 589564,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3867,23 +3633,103 @@
     ],
     [
      "生成",
-     "seed 1058 · 节点 629 · 叶卡 981"
+     "seed 1049 · 节点 1448 · 叶卡 2858"
     ],
     [
      "参考帧",
-     "00160.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_59_broadleaf": {
-   "file": "assets/tree_59_broadleaf.glb",
-   "bytes": 651972,
+  "tree_50_camphor": {
+   "file": "assets/tree_50_camphor.glb",
+   "bytes": 1052176,
+   "category": "tree",
+   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
+   "short": "camphor",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "12.39 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1050 · 节点 4239 · 叶卡 4992"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_50_camphor/tree_50_camphor_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_50_camphor/tree_50_camphor_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_50_camphor/tree_50_camphor_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_51_camphor": {
+   "file": "assets/tree_51_camphor.glb",
+   "bytes": 741172,
+   "category": "tree",
+   "label": "evergreen broadleaf, dense dome (camphor-like, inferred)",
+   "short": "camphor",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "11.34 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "evergreen broadleaf, dense dome (camphor-like, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1051 · 节点 2745 · 叶卡 2651"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_51_camphor/tree_51_camphor_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_51_camphor/tree_51_camphor_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_51_camphor/tree_51_camphor_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_52_broadleaf": {
+   "file": "assets/tree_52_broadleaf.glb",
+   "bytes": 496704,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3907,23 +3753,183 @@
     ],
     [
      "生成",
-     "seed 1059 · 节点 1779 · 叶卡 2874"
+     "seed 1052 · 节点 1059 · 叶卡 1660"
     ],
     [
      "参考帧",
-     "00147.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_60_broadleaf": {
-   "file": "assets/tree_60_broadleaf.glb",
-   "bytes": 506600,
+  "tree_53_broadleaf": {
+   "file": "assets/tree_53_broadleaf.glb",
+   "bytes": 1031932,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "15.13 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1053 · 节点 3111 · 叶卡 6653"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_53_broadleaf/tree_53_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_53_broadleaf/tree_53_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_53_broadleaf/tree_53_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_54_broadleaf": {
+   "file": "assets/tree_54_broadleaf.glb",
+   "bytes": 852840,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "13.87 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1054 · 节点 2574 · 叶卡 4698"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_54_broadleaf/tree_54_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_54_broadleaf/tree_54_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_54_broadleaf/tree_54_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_55_broadleaf": {
+   "file": "assets/tree_55_broadleaf.glb",
+   "bytes": 408404,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "9.03 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1055 · 节点 652 · 叶卡 1186"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_56_broadleaf": {
+   "file": "assets/tree_56_broadleaf.glb",
+   "bytes": 644660,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "12.57 m（blend_depth_silhouette）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1056 · 节点 1668 · 叶卡 2994"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_57_broadleaf": {
+   "file": "assets/tree_57_broadleaf.glb",
+   "bytes": 517560,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3947,23 +3953,23 @@
     ],
     [
      "生成",
-     "seed 1060 · 节点 1171 · 叶卡 1745"
+     "seed 1057 · 节点 1271 · 叶卡 1761"
     ],
     [
      "参考帧",
-     "00156.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_61_broadleaf": {
-   "file": "assets/tree_61_broadleaf.glb",
-   "bytes": 501952,
+  "tree_58_broadleaf": {
+   "file": "assets/tree_58_broadleaf.glb",
+   "bytes": 483548,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -3979,7 +3985,7 @@
    "facts": [
     [
      "实测树高",
-     "10.71 m（silhouette_median）"
+     "11.03 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -3987,63 +3993,23 @@
     ],
     [
      "生成",
-     "seed 1061 · 节点 1207 · 叶卡 1552"
+     "seed 1058 · 节点 1101 · 叶卡 1412"
     ],
     [
      "参考帧",
-     "00152.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_62_broadleaf": {
-   "file": "assets/tree_62_broadleaf.glb",
-   "bytes": 455740,
-   "category": "tree",
-   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
-   "short": "broadleaf",
-   "pivot": "root collar (ground contact), +Z up, metres",
-   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
-   "inferred": [
-    "species/habit (visual inference)",
-    "branch topology (space colonisation, seeded)",
-    "leaf shape & size (species preset)",
-    "bark texture",
-    "unseen crown sides (profile bins filled from neighbours)"
-   ],
-   "facts": [
-    [
-     "实测树高",
-     "10.71 m（silhouette_median）"
-    ],
-    [
-     "物种/习性（推断）",
-     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
-    ],
-    [
-     "生成",
-     "seed 1062 · 节点 963 · 叶卡 1309"
-    ],
-    [
-     "参考帧",
-     "00147.jpg"
-    ]
-   ],
-   "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.json"
-   ],
-   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
-  },
-  "tree_63_broadleaf": {
-   "file": "assets/tree_63_broadleaf.glb",
-   "bytes": 729524,
+  "tree_59_broadleaf": {
+   "file": "assets/tree_59_broadleaf.glb",
+   "bytes": 452500,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4067,23 +4033,23 @@
     ],
     [
      "生成",
-     "seed 1063 · 节点 2162 · 叶卡 3727"
+     "seed 1059 · 节点 955 · 叶卡 1244"
     ],
     [
      "参考帧",
-     "00144.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_64_broadleaf": {
-   "file": "assets/tree_64_broadleaf.glb",
-   "bytes": 520048,
+  "tree_60_broadleaf": {
+   "file": "assets/tree_60_broadleaf.glb",
+   "bytes": 672348,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4099,7 +4065,7 @@
    "facts": [
     [
      "实测树高",
-     "9.45 m（silhouette_median）"
+     "10.92 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -4107,23 +4073,23 @@
     ],
     [
      "生成",
-     "seed 1064 · 节点 1120 · 叶卡 2149"
+     "seed 1060 · 节点 1969 · 叶卡 3092"
     ],
     [
      "参考帧",
-     "00130.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_65_broadleaf": {
-   "file": "assets/tree_65_broadleaf.glb",
-   "bytes": 358628,
+  "tree_61_broadleaf": {
+   "file": "assets/tree_61_broadleaf.glb",
+   "bytes": 530376,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4139,7 +4105,7 @@
    "facts": [
     [
      "实测树高",
-     "7.35 m（silhouette_median）"
+     "9.66 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -4147,23 +4113,63 @@
     ],
     [
      "生成",
-     "seed 1065 · 节点 471 · 叶卡 751"
+     "seed 1061 · 节点 1144 · 叶卡 2258"
     ],
     [
      "参考帧",
-     "00135.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_66_broadleaf": {
-   "file": "assets/tree_66_broadleaf.glb",
-   "bytes": 899136,
+  "tree_62_broadleaf": {
+   "file": "assets/tree_62_broadleaf.glb",
+   "bytes": 375260,
+   "category": "tree",
+   "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
+   "short": "broadleaf",
+   "pivot": "root collar (ground contact), +Z up, metres",
+   "provenance": "position/height/crown envelope/colour measured from video reconstruction; branching, leaves and bark are generated (not recovered from video)",
+   "inferred": [
+    "species/habit (visual inference)",
+    "branch topology (space colonisation, seeded)",
+    "leaf shape & size (species preset)",
+    "bark texture",
+    "unseen crown sides (profile bins filled from neighbours)"
+   ],
+   "facts": [
+    [
+     "实测树高",
+     "7.56 m（silhouette_median）"
+    ],
+    [
+     "物种/习性（推断）",
+     "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)"
+    ],
+    [
+     "生成",
+     "seed 1062 · 节点 550 · 叶卡 863"
+    ],
+    [
+     "参考帧",
+     null
+    ]
+   ],
+   "research_files": [
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.json"
+   ],
+   "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
+  },
+  "tree_63_broadleaf": {
+   "file": "assets/tree_63_broadleaf.glb",
+   "bytes": 937760,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4187,23 +4193,23 @@
     ],
     [
      "生成",
-     "seed 1066 · 节点 2727 · 叶卡 5605"
+     "seed 1063 · 节点 2760 · 叶卡 6134"
     ],
     [
      "参考帧",
-     "00096.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_67_broadleaf": {
-   "file": "assets/tree_67_broadleaf.glb",
-   "bytes": 475420,
+  "tree_64_broadleaf": {
+   "file": "assets/tree_64_broadleaf.glb",
+   "bytes": 485900,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4227,23 +4233,23 @@
     ],
     [
      "生成",
-     "seed 1067 · 节点 1058 · 叶卡 1560"
+     "seed 1064 · 节点 1110 · 叶卡 1614"
     ],
     [
      "参考帧",
-     "00001.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_68_broadleaf": {
-   "file": "assets/tree_68_broadleaf.glb",
-   "bytes": 426772,
+  "tree_65_broadleaf": {
+   "file": "assets/tree_65_broadleaf.glb",
+   "bytes": 425316,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4259,7 +4265,7 @@
    "facts": [
     [
      "实测树高",
-     "11.34 m（silhouette_median）"
+     "11.24 m（silhouette_median）"
     ],
     [
      "物种/习性（推断）",
@@ -4267,23 +4273,23 @@
     ],
     [
      "生成",
-     "seed 1068 · 节点 763 · 叶卡 1113"
+     "seed 1065 · 节点 758 · 叶卡 1105"
     ],
     [
      "参考帧",
-     "00011.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   },
-  "tree_69_broadleaf": {
-   "file": "assets/tree_69_broadleaf.glb",
-   "bytes": 624464,
+  "tree_66_broadleaf": {
+   "file": "assets/tree_66_broadleaf.glb",
+   "bytes": 620868,
    "category": "tree",
    "label": "deciduous broadleaf, open crown (ash / goldenrain-like habit, inferred)",
    "short": "broadleaf",
@@ -4307,17 +4313,17 @@
     ],
     [
      "生成",
-     "seed 1069 · 节点 1523 · 叶卡 2936"
+     "seed 1066 · 节点 1568 · 叶卡 2766"
     ],
     [
      "参考帧",
-     "00031.jpg"
+     null
     ]
    ],
    "research_files": [
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.blend",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.glb",
-    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.json"
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.blend",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.glb",
+    "server:/root/real2sim/scene-20261113/agent-b/assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.json"
    ],
    "generator": "cg/trees/treegen.py (space colonisation + pipe model)"
   }
@@ -4329,9 +4335,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    129.999,
-    -0.537,
-    76.644
+    131.601,
+    -0.305,
+    75.984
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4392,9 +4398,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    97.091,
-    -0.386,
-    -71.74
+    98.197,
+    -0.375,
+    -72.106
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4410,6 +4416,27 @@
   {
    "instance_id": "inst_road_05",
    "asset_id": "road_05",
+   "category": "ground",
+   "parent": "grp_ground",
+   "position_gltf": [
+    223.071,
+    -0.082,
+    83.372
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_road_06",
+   "asset_id": "road_06",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
@@ -4429,35 +4456,14 @@
    ]
   },
   {
-   "instance_id": "inst_road_06",
-   "asset_id": "road_06",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position_gltf": [
-    217.405,
-    -0.227,
-    84.905
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
    "instance_id": "inst_curb_01",
    "asset_id": "curb_01",
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    128.751,
-    -0.365,
-    79.447
+    130.354,
+    -0.232,
+    78.787
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4476,9 +4482,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    131.274,
-    -0.419,
-    73.778
+    132.874,
+    -0.228,
+    73.12
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4581,9 +4587,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    264.745,
-    -0.001,
-    14.677
+    270.471,
+    0.147,
+    12.885
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4623,9 +4629,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    135.026,
-    -0.383,
-    -98.667
+    137.01,
+    -0.327,
+    -99.337
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4665,9 +4671,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    265.843,
-    -0.049,
-    6.136
+    271.455,
+    0.101,
+    4.283
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4686,9 +4692,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    265.633,
-    -0.041,
-    8.546
+    271.228,
+    0.113,
+    6.835
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4707,9 +4713,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    122.879,
-    -0.106,
-    -9.371
+    125.159,
+    0.012,
+    -8.644
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4728,30 +4734,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    207.126,
-    -0.22,
-    85.527
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_plaza_03",
-   "asset_id": "plaza_03",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position_gltf": [
-    170.149,
-    -0.424,
-    93.557
+    51.049,
+    -0.117,
+    -10.335
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4770,9 +4755,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    228.203,
-    -0.085,
-    -70.02
+    191.391,
+    -0.084,
+    -83.996
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4791,9 +4776,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    128.287,
-    -0.278,
-    -90.96
+    263.023,
+    0.037,
+    -14.461
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4812,9 +4797,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    258.879,
-    -0.109,
-    -12.841
+    261.947,
+    0.061,
+    -36.746
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4833,9 +4818,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    254.761,
-    0.135,
-    30.236
+    56.48,
+    0.004,
+    -13.824
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4854,9 +4839,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    100.432,
-    -0.231,
-    -70.439
+    259.905,
+    0.356,
+    28.162
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4875,9 +4860,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    237.705,
-    -0.034,
-    60.598
+    101.855,
+    -0.196,
+    -69.695
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4917,9 +4902,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    205.886,
-    -0.148,
-    82.758
+    244.106,
+    0.159,
+    57.903
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4938,9 +4923,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    170.566,
-    -0.362,
-    91.815
+    213.341,
+    0.042,
+    80.636
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -4959,30 +4944,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    83.869,
-    -0.912,
-    45.843
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_path_11",
-   "asset_id": "path_11",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position_gltf": [
-    248.33,
-    0.033,
-    -11.628
+    178.433,
+    -0.162,
+    90.108
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5001,9 +4965,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    183.771,
-    0.346,
-    -5.122
+    186.645,
+    0.492,
+    -5.992
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5023,7 +4987,7 @@
    "parent": "grp_ground",
    "position_gltf": [
     32.482,
-    0.856,
+    0.821,
     13.661
    ],
    "rotation_gltf_euler_deg": [
@@ -5044,7 +5008,7 @@
    "parent": "grp_ground",
    "position_gltf": [
     37.087,
-    0.336,
+    0.346,
     -5.326
    ],
    "rotation_gltf_euler_deg": [
@@ -5065,7 +5029,7 @@
    "parent": "grp_ground",
    "position_gltf": [
     11.903,
-    0.532,
+    0.534,
     6.845
    ],
    "rotation_gltf_euler_deg": [
@@ -5085,9 +5049,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    128.282,
-    -0.351,
-    80.501
+    129.885,
+    -0.128,
+    79.841
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5106,9 +5070,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    131.617,
-    -0.35,
-    73.008
+    133.217,
+    -0.164,
+    72.349
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5148,9 +5112,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    167.13,
-    -0.26,
-    -5.67
+    170.9,
+    -0.128,
+    -6.74
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5169,9 +5133,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position_gltf": [
-    167.13,
-    -0.534,
-    -5.67
+    170.9,
+    -0.436,
+    -6.74
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5232,9 +5196,9 @@
    "category": "building",
    "parent": "grp_buildings",
    "position_gltf": [
-    152.742,
-    0.124,
-    182.395
+    99.693,
+    0.206,
+    181.718
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5253,9 +5217,9 @@
    "category": "building",
    "parent": "grp_buildings",
    "position_gltf": [
-    97.646,
-    0.124,
-    123.701
+    156.693,
+    0.206,
+    181.718
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5274,9 +5238,30 @@
    "category": "building",
    "parent": "grp_buildings",
    "position_gltf": [
-    76.804,
-    0.124,
-    106.457
+    106.082,
+    0.206,
+    123.407
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_bldg_far_04",
+   "asset_id": "bldg_far_04",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position_gltf": [
+    82.714,
+    0.206,
+    105.046
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5295,9 +5280,9 @@
    "category": "building",
    "parent": "grp_buildings",
    "position_gltf": [
-    106.259,
+    106.983,
     -0.534,
-    1.131
+    0.684
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5337,9 +5322,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    31.3239,
-    0.5644,
-    9.07
+    31.3232,
+    0.5439,
+    9.0698
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5358,9 +5343,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    38.4063,
-    0.7078,
-    9.9886
+    38.4064,
+    0.7197,
+    9.9887
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5380,7 +5365,7 @@
    "parent": "grp_trees",
    "position_gltf": [
     47.8531,
-    0.7533,
+    0.7568,
     11.934
    ],
    "rotation_gltf_euler_deg": [
@@ -5401,7 +5386,7 @@
    "parent": "grp_trees",
    "position_gltf": [
     95.6891,
-    -0.4994,
+    -0.4981,
     52.6045
    ],
    "rotation_gltf_euler_deg": [
@@ -5421,9 +5406,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    98.2362,
-    -0.3883,
-    58.2674
+    98.2376,
+    -0.3867,
+    58.2749
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5442,9 +5427,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    108.5439,
-    -0.1537,
-    61.8305
+    108.5736,
+    -0.1527,
+    61.7005
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5463,9 +5448,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    110.1029,
-    -0.1406,
-    72.0672
+    114.5764,
+    -0.0342,
+    66.9291
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5479,14 +5464,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_08_ginkgo_young",
-   "asset_id": "tree_08_ginkgo_young",
+   "instance_id": "inst_tree_08_red_maple",
+   "asset_id": "tree_08_red_maple",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    114.5743,
-    -0.0336,
-    66.9257
+    185.5062,
+    0.1941,
+    83.6981
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5505,9 +5490,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    177.7627,
-    -0.013,
-    86.3211
+    183.7605,
+    0.473,
+    76.0827
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5526,9 +5511,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    175.7816,
-    0.2739,
-    78.7026
+    187.2715,
+    0.2638,
+    82.9585
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5547,9 +5532,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    179.4442,
-    0.0543,
-    85.5559
+    186.4062,
+    0.677,
+    71.4422
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5568,9 +5553,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    178.5622,
-    0.4805,
-    74.0737
+    188.8298,
+    0.6501,
+    74.1987
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5589,9 +5574,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    181.0366,
-    0.4423,
-    76.8383
+    195.0706,
+    0.6563,
+    72.7641
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5610,9 +5595,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    187.3842,
-    0.4517,
-    75.3158
+    194.1632,
+    0.708,
+    70.4031
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5631,9 +5616,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    186.3953,
-    0.5172,
-    72.9328
+    201.4023,
+    0.2841,
+    82.2381
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5652,9 +5637,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    193.7665,
-    0.0902,
-    84.7457
+    203.7287,
+    0.4061,
+    76.5593
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5668,14 +5653,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_17_red_maple",
-   "asset_id": "tree_17_red_maple",
+   "instance_id": "inst_tree_17_broadleaf",
+   "asset_id": "tree_17_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    196.1854,
-    0.2055,
-    79.0049
+    216.9046,
+    0.1147,
+    78.8119
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5689,14 +5674,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_18_red_maple",
-   "asset_id": "tree_18_red_maple",
+   "instance_id": "inst_tree_18_camphor",
+   "asset_id": "tree_18_camphor",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    210.584,
-    -0.1794,
-    82.9491
+    210.6319,
+    0.4773,
+    64.5718
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5710,14 +5695,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_19_broadleaf",
-   "asset_id": "tree_19_broadleaf",
+   "instance_id": "inst_tree_19_camphor",
+   "asset_id": "tree_19_camphor",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    209.6306,
-    -0.0729,
-    81.2162
+    214.1451,
+    0.6634,
+    65.4037
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5736,9 +5721,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    203.3721,
-    0.2875,
-    66.984
+    230.0413,
+    0.0601,
+    75.2584
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5757,9 +5742,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    207.0986,
-    0.4369,
-    67.755
+    224.3644,
+    0.5315,
+    69.1716
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5773,14 +5758,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_22_camphor",
-   "asset_id": "tree_22_camphor",
+   "instance_id": "inst_tree_22_broadleaf",
+   "asset_id": "tree_22_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    217.3582,
-    0.38,
-    71.4891
+    235.482,
+    0.4166,
+    66.1392
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5794,14 +5779,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_23_camphor",
-   "asset_id": "tree_23_camphor",
+   "instance_id": "inst_tree_23_broadleaf",
+   "asset_id": "tree_23_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    223.0931,
-    -0.1343,
-    77.5626
+    248.3839,
+    0.2624,
+    51.2542
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5820,9 +5805,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    228.643,
-    0.2303,
-    68.4038
+    239.014,
+    0.3927,
+    44.6335
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5841,9 +5826,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    241.9238,
-    0.0908,
-    53.4022
+    257.5589,
+    0.5877,
+    35.2297
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5862,9 +5847,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    232.5452,
-    0.2186,
-    46.7744
+    252.5546,
+    0.6757,
+    32.8738
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5883,9 +5868,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    251.3264,
-    -0.0217,
-    47.0127
+    256.5722,
+    0.4116,
+    24.4366
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5904,9 +5889,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    251.5141,
-    0.4197,
-    37.2491
+    256.8411,
+    0.4433,
+    21.9226
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5925,9 +5910,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    246.5481,
-    0.5249,
-    34.8925
+    249.2714,
+    0.7222,
+    18.079
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5946,9 +5931,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    250.693,
-    0.2433,
-    26.384
+    263.2889,
+    0.3232,
+    17.352
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5967,9 +5952,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    250.9507,
-    0.2815,
-    23.8793
+    260.9732,
+    0.3678,
+    2.3164
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -5988,9 +5973,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    243.3313,
-    0.5722,
-    20.0465
+    265.3688,
+    0.3006,
+    -2.466
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6009,9 +5994,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    257.5644,
-    0.1653,
-    19.2553
+    253.0863,
+    0.3113,
+    -5.4273
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6030,9 +6015,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    255.4921,
-    0.2176,
-    4.1429
+    269.0399,
+    0.0116,
+    -21.1278
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6051,9 +6036,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    260.0016,
-    0.1535,
-    -0.6752
+    263.5808,
+    0.2145,
+    -26.9755
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6072,9 +6057,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    247.7516,
-    0.1794,
-    -3.6431
+    263.3425,
+    0.1617,
+    -31.4306
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6093,9 +6078,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    263.9779,
-    -0.1248,
-    -19.4508
+    251.0709,
+    0.368,
+    -29.8894
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6114,9 +6099,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    258.628,
-    0.0715,
-    -25.3421
+    243.7199,
+    0.5158,
+    -42.3909
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6135,9 +6120,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    258.6293,
-    0.0141,
-    -29.9032
+    254.1363,
+    0.2046,
+    -48.5286
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6156,9 +6141,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    246.2707,
-    0.2392,
-    -28.2845
+    241.0832,
+    0.4394,
+    -59.8309
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6177,9 +6162,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    239.1697,
-    0.4118,
-    -40.8846
+    227.6628,
+    0.1725,
+    -79.4261
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6198,9 +6183,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    249.6925,
-    0.0797,
-    -47.0352
+    208.8479,
+    0.1001,
+    -91.654
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6219,9 +6204,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    236.9814,
-    0.317,
-    -58.45
+    196.4913,
+    0.0503,
+    -85.7186
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6240,9 +6225,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    223.9639,
-    0.0768,
-    -78.1936
+    188.3301,
+    -0.2971,
+    -101.0969
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6261,9 +6246,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    205.5901,
-    -0.0053,
-    -90.5736
+    185.3023,
+    -0.069,
+    -98.0101
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6282,9 +6267,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    193.3776,
-    -0.0288,
-    -84.6824
+    178.0264,
+    0.3741,
+    -90.2138
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6303,9 +6288,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    185.5104,
-    -0.3798,
-    -100.1626
+    169.8762,
+    0.0628,
+    -99.6099
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6324,9 +6309,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    182.506,
-    -0.1508,
-    -97.0781
+    154.6181,
+    -0.0215,
+    -99.1773
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6345,9 +6330,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    175.3702,
-    0.3014,
-    -89.3413
+    151.2312,
+    -0.0022,
+    -98.3146
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6361,14 +6346,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_50_broadleaf",
-   "asset_id": "tree_50_broadleaf",
+   "instance_id": "inst_tree_50_camphor",
+   "asset_id": "tree_50_camphor",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    167.38,
-    -0.0153,
-    -98.7795
+    128.0887,
+    0.2553,
+    -79.9053
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6382,14 +6367,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_51_broadleaf",
-   "asset_id": "tree_51_broadleaf",
+   "instance_id": "inst_tree_51_camphor",
+   "asset_id": "tree_51_camphor",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    152.3238,
-    -0.0934,
-    -98.4295
+    127.1304,
+    0.1552,
+    -82.4291
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6408,9 +6393,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    149.0828,
-    -0.0822,
-    -97.605
+    110.4653,
+    0.1732,
+    -79.7628
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6424,14 +6409,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_53_camphor",
-   "asset_id": "tree_53_camphor",
+   "instance_id": "inst_tree_53_broadleaf",
+   "asset_id": "tree_53_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    126.4543,
-    0.2115,
-    -79.3553
+    108.0151,
+    0.1741,
+    -68.843
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6445,14 +6430,14 @@
    ]
   },
   {
-   "instance_id": "inst_tree_54_camphor",
-   "asset_id": "tree_54_camphor",
+   "instance_id": "inst_tree_54_broadleaf",
+   "asset_id": "tree_54_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    125.491,
-    0.1222,
-    -81.8863
+    95.7991,
+    -0.134,
+    -65.796
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6471,9 +6456,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    109.1183,
-    0.1293,
-    -79.3073
+    91.7854,
+    -0.3598,
+    -68.1286
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6492,9 +6477,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    106.8082,
-    0.1396,
-    -68.4515
+    101.6485,
+    0.3014,
+    -56.5156
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6513,9 +6498,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    94.8103,
-    -0.1787,
-    -65.4762
+    92.1345,
+    -0.0993,
+    -63.8668
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6534,9 +6519,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    90.906,
-    -0.3865,
-    -67.8442
+    90.889,
+    -0.0243,
+    -62.1443
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6555,9 +6540,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    101.4554,
-    0.3111,
-    -56.2506
+    88.4827,
+    -0.047,
+    -59.5555
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6576,9 +6561,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    91.4224,
-    -0.1308,
-    -63.627
+    90.9656,
+    0.2999,
+    -57.0031
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6597,9 +6582,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    90.3196,
-    -0.0311,
-    -61.9628
+    86.8687,
+    0.1672,
+    -55.3775
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6618,9 +6603,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    87.9818,
-    -0.0459,
-    -59.3865
+    82.1519,
+    -0.2155,
+    -54.7991
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6639,9 +6624,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    90.4939,
-    0.2792,
-    -56.8438
+    75.1881,
+    0.1807,
+    -26.6754
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6660,9 +6645,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    86.1452,
-    0.1429,
-    -55.1345
+    18.4212,
+    0.2321,
+    -7.8044
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6681,9 +6666,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    81.5339,
-    -0.2455,
-    -54.5805
+    25.6558,
+    0.3432,
+    -6.4563
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6702,72 +6687,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position_gltf": [
-    75.1437,
-    0.1855,
-    -26.6597
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_tree_67_broadleaf",
-   "asset_id": "tree_67_broadleaf",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position_gltf": [
-    18.4212,
-    0.2353,
-    -7.8044
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_tree_68_broadleaf",
-   "asset_id": "tree_68_broadleaf",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position_gltf": [
-    25.6541,
-    0.3314,
-    -6.4559
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_tree_69_broadleaf",
-   "asset_id": "tree_69_broadleaf",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position_gltf": [
-    32.6101,
-    0.3632,
-    -5.2706
+    32.6216,
+    0.3654,
+    -5.2814
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6786,9 +6708,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    139.745,
-    -0.555,
-    89.391
+    148.437,
+    -0.316,
+    86.602
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6807,34 +6729,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    219.702,
-    -0.04,
-    83.834
+    226.896,
+    0.151,
+    81.44
    ],
    "rotation_gltf_euler_deg": [
     0,
-    30.4,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_01",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position_gltf": [
-    124.423,
-    0.114,
-    79.212
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0.0,
+    32.4,
     0
    ],
    "scale": [
@@ -6851,11 +6752,32 @@
    "position_gltf": [
     61.919,
     -0.02,
-    -18.041
+    -18.043
    ],
    "rotation_gltf_euler_deg": [
     0,
-    263.3,
+    264.1,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_01",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position_gltf": [
+    124.443,
+    0.114,
+    79.144
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0.0,
     0
    ],
    "scale": [
@@ -6871,8 +6793,8 @@
    "parent": "grp_props",
    "position_gltf": [
     137.17,
-    0.019,
-    83.472
+    0.068,
+    83.48
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6891,9 +6813,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    141.859,
-    -0.481,
-    90.643
+    160.208,
+    -0.335,
+    90.399
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6912,13 +6834,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    265.049,
-    -0.16,
-    -19.173
+    270.174,
+    -0.019,
+    -20.835
    ],
    "rotation_gltf_euler_deg": [
     0,
-    97.9,
+    98.1,
     0
    ],
    "scale": [
@@ -6933,9 +6855,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    151.791,
-    -0.561,
-    93.187
+    203.803,
+    -0.133,
+    88.002
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6954,9 +6876,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    196.184,
-    -0.335,
-    90.529
+    171.792,
+    -0.349,
+    91.711
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6975,9 +6897,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    163.578,
-    -0.571,
-    94.427
+    76.022,
+    -0.345,
+    -43.668
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -6996,9 +6918,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    75.562,
-    -0.359,
-    -43.517
+    191.342,
+    -0.18,
+    90.624
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7017,9 +6939,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    183.483,
-    -0.391,
-    93.226
+    229.926,
+    0.06,
+    75.281
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7038,9 +6960,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    222.856,
-    -0.132,
-    77.622
+    270.424,
+    0.049,
+    4.426
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7059,9 +6981,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    110.048,
+    110.059,
     -0.149,
-    72.199
+    72.17
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7080,30 +7002,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    264.884,
-    -0.102,
-    6.27
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0.0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_12",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position_gltf": [
-    81.368,
-    -0.253,
-    -54.599
+    82.067,
+    -0.232,
+    -54.824
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7122,13 +7023,34 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    127.44,
-    -0.287,
-    -89.707
+    129.188,
+    -0.231,
+    -90.284
    ],
    "rotation_gltf_euler_deg": [
     0,
-    205.3,
+    206.5,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_12",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position_gltf": [
+    271.021,
+    0.049,
+    -7.443
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0.0,
     0
    ],
    "scale": [
@@ -7143,9 +7065,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    265.681,
-    -0.096,
-    -5.665
+    267.774,
+    0.127,
+    19.803
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7164,9 +7086,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    261.949,
-    -0.033,
-    21.74
+    149.787,
+    -0.138,
+    -99.995
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7185,9 +7107,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    147.577,
-    -0.201,
-    -99.274
+    238.414,
+    0.169,
+    67.319
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7206,9 +7128,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    231.557,
-    -0.012,
-    69.583
+    252.609,
+    -0.001,
+    52.927
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7227,9 +7149,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    246.147,
-    -0.177,
-    55.073
+    162.978,
+    -0.196,
+    -103.047
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7248,9 +7170,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    160.517,
-    -0.263,
-    -102.243
+    269.041,
+    0.004,
+    -21.174
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7269,9 +7191,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    263.936,
-    -0.132,
-    -19.478
+    262.742,
+    0.229,
+    35.245
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7290,30 +7212,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    256.616,
-    0.059,
-    37.274
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0.0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_21",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position_gltf": [
-    218.138,
-    -0.095,
-    -87.772
+    221.672,
+    0.003,
+    -88.954
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7332,13 +7233,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    171.762,
-    -0.178,
-    91.33
+    179.795,
+    -0.012,
+    88.658
    ],
    "rotation_gltf_euler_deg": [
     0,
-    2.7,
+    5.3,
     0
    ],
    "scale": [
@@ -7348,14 +7249,14 @@
    ]
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_22",
+   "instance_id": "inst_prop_lamp_lawn_21",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    251.417,
-    -0.031,
-    47.016
+    257.772,
+    0.141,
+    44.917
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7374,13 +7275,34 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    239.155,
-    0.036,
-    -63.731
+    243.211,
+    0.169,
+    -65.075
    ],
    "rotation_gltf_euler_deg": [
     0,
     128.9,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_22",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position_gltf": [
+    98.541,
+    -0.359,
+    63.82
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0.0,
     0
    ],
    "scale": [
@@ -7395,9 +7317,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    98.54,
-    -0.359,
-    63.818
+    218.104,
+    0.01,
+    80.665
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7416,9 +7338,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    228.392,
-    -0.1,
-    -79.297
+    232.17,
+    0.003,
+    -80.557
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7437,9 +7359,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    210.818,
-    -0.187,
-    83.08
+    92.439,
+    -0.349,
+    -68.251
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7458,9 +7380,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    91.396,
-    -0.381,
-    -67.921
+    104.437,
+    -0.227,
+    -79.059
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7479,9 +7401,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    103.131,
-    -0.261,
-    -78.636
+    261.083,
+    -0.086,
+    -45.207
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7500,9 +7422,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    256.454,
-    -0.213,
-    -43.682
+    132.712,
+    -0.22,
+    -90.221
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7521,34 +7443,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    130.877,
-    -0.27,
-    -89.64
+    174.916,
+    -0.052,
+    -103.264
    ],
    "rotation_gltf_euler_deg": [
     0,
     0.0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_prop_planter_04",
-   "asset_id": "prop_planter",
-   "category": "prop",
-   "parent": "grp_props",
-   "position_gltf": [
-    65.488,
-    0.025,
-    -17.568
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    263.3,
     0
    ],
    "scale": [
@@ -7563,9 +7464,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    172.257,
-    -0.125,
-    -102.396
+    70.66,
+    -0.083,
+    -27.444
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7584,9 +7485,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    203.313,
-    -0.183,
-    -95.195
+    206.565,
+    -0.098,
+    -96.28
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7600,18 +7501,18 @@
    ]
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_32",
-   "asset_id": "prop_lamp_lawn",
+   "instance_id": "inst_prop_planter_04",
+   "asset_id": "prop_planter",
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    70.521,
-    -0.084,
-    -27.395
+    65.473,
+    0.025,
+    -17.562
    ],
    "rotation_gltf_euler_deg": [
     0,
-    0.0,
+    264.1,
     0
    ],
    "scale": [
@@ -7626,13 +7527,34 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    55.487,
-    -0.038,
-    -19.289
+    119.5,
+    -0.116,
+    70.833
    ],
    "rotation_gltf_euler_deg": [
     0,
-    263.0,
+    -33.5,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_32",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position_gltf": [
+    188.323,
+    -0.302,
+    -101.192
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0.0,
     0
    ],
    "scale": [
@@ -7647,13 +7569,34 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    119.502,
-    -0.135,
-    70.834
+    55.49,
+    -0.038,
+    -19.251
    ],
    "rotation_gltf_euler_deg": [
     0,
-    -31.9,
+    263.8,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_prop_planter_07",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position_gltf": [
+    212.502,
+    -0.008,
+    78.968
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    25.9,
     0
    ],
    "scale": [
@@ -7668,9 +7611,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    185.415,
-    -0.385,
-    -100.236
+    120.342,
+    -0.141,
+    -83.116
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7689,34 +7632,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    118.755,
-    -0.185,
-    -82.603
+    253.296,
+    0.172,
+    -53.145
    ],
    "rotation_gltf_euler_deg": [
     0,
     0.0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_prop_planter_07",
-   "asset_id": "prop_planter",
-   "category": "prop",
-   "parent": "grp_props",
-   "position_gltf": [
-    205.134,
-    -0.18,
-    81.417
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    23.6,
     0
    ],
    "scale": [
@@ -7731,9 +7653,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    248.933,
-    0.046,
-    -51.687
+    263.618,
+    0.134,
+    -31.769
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7752,9 +7674,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    258.801,
-    0.0,
-    -30.143
+    245.453,
+    0.211,
+    -57.692
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7773,9 +7695,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    241.196,
-    0.095,
-    -56.281
+    238.634,
+    0.187,
+    -65.791
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7794,30 +7716,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    234.61,
-    0.074,
-    -64.445
-   ],
-   "rotation_gltf_euler_deg": [
-    0,
-    0.0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ]
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_39",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position_gltf": [
-    86.632,
+    86.637,
     -0.915,
-    48.749
+    48.758
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7836,13 +7737,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    89.338,
+    89.398,
     -0.954,
-    44.626
+    44.645
    ],
    "rotation_gltf_euler_deg": [
     0,
-    -57.1,
+    -57.8,
     0
    ],
    "scale": [
@@ -7857,13 +7758,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    90.495,
-    -0.88,
-    42.196
+    90.482,
+    -0.885,
+    42.213
    ],
    "rotation_gltf_euler_deg": [
     0,
-    -58.0,
+    -58.7,
     0
    ],
    "scale": [
@@ -7878,13 +7779,34 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    41.84,
+    41.891,
     0.419,
-    -3.275
+    -3.271
    ],
    "rotation_gltf_euler_deg": [
     0,
-    -88.9,
+    -88.5,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_39",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position_gltf": [
+    50.738,
+    0.78,
+    12.122
+   ],
+   "rotation_gltf_euler_deg": [
+    0,
+    0.0,
     0
    ],
    "scale": [
@@ -7899,9 +7821,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    50.725,
-    0.78,
-    12.113
+    78.569,
+    0.18,
+    -22.735
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7920,9 +7842,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    78.689,
-    0.179,
-    -22.799
+    95.444,
+    -0.791,
+    48.18
    ],
    "rotation_gltf_euler_deg": [
     0,
@@ -7941,13 +7863,13 @@
    "category": "prop",
    "parent": "grp_props",
    "position_gltf": [
-    91.934,
-    -0.9,
-    39.191
+    91.89,
+    -0.899,
+    39.309
    ],
    "rotation_gltf_euler_deg": [
     0,
-    -59.2,
+    -59.8,
     0
    ],
    "scale": [
@@ -8010,9 +7932,9 @@
    "frame": "00140",
    "image": "refs/00140.jpg",
    "position_gltf": [
-    75.2537,
-    1.4042,
-    -57.8333
+    75.9745,
+    1.4236,
+    -58.0723
    ],
    "quaternion_gltf": [
     -0.054896,
@@ -8026,9 +7948,9 @@
    "frame": "00190",
    "image": "refs/00190.jpg",
    "position_gltf": [
-    101.0849,
-    1.3665,
-    -86.9073
+    102.4753,
+    1.4039,
+    -87.3683
    ],
    "quaternion_gltf": [
     -0.053395,
@@ -8042,9 +7964,9 @@
    "frame": "00240",
    "image": "refs/00240.jpg",
    "position_gltf": [
-    138.3629,
-    1.349,
-    -105.842
+    140.4625,
+    1.4054,
+    -106.538
    ],
    "quaternion_gltf": [
     -0.058696,
@@ -8058,9 +7980,9 @@
    "frame": "00290",
    "image": "refs/00290.jpg",
    "position_gltf": [
-    176.6834,
-    1.5512,
-    -109.9608
+    179.4419,
+    1.6253,
+    -110.8753
    ],
    "quaternion_gltf": [
     -0.030061,
@@ -8074,9 +7996,9 @@
    "frame": "00340",
    "image": "refs/00340.jpg",
    "position_gltf": [
-    213.9072,
-    1.6076,
-    -99.828
+    217.3313,
+    1.6996,
+    -100.9631
    ],
    "quaternion_gltf": [
     0.015264,
@@ -8090,9 +8012,9 @@
    "frame": "00390",
    "image": "refs/00390.jpg",
    "position_gltf": [
-    247.4201,
-    1.7015,
-    -74.2525
+    251.5577,
+    1.8127,
+    -75.6242
    ],
    "quaternion_gltf": [
     0.002556,
@@ -8106,9 +8028,9 @@
    "frame": "00440",
    "image": "refs/00440.jpg",
    "position_gltf": [
-    267.3594,
-    1.5905,
-    -36.4735
+    272.2225,
+    1.7211,
+    -38.0857
    ],
    "quaternion_gltf": [
     0.010385,
@@ -8122,9 +8044,9 @@
    "frame": "00490",
    "image": "refs/00490.jpg",
    "position_gltf": [
-    270.2959,
-    1.643,
-    5.3507
+    275.8746,
+    1.7928,
+    3.5012
    ],
    "quaternion_gltf": [
     0.007292,
@@ -8138,9 +8060,9 @@
    "frame": "00540",
    "image": "refs/00540.jpg",
    "position_gltf": [
-    260.6815,
-    1.72,
-    44.4357
+    266.9442,
+    1.8882,
+    42.3595
    ],
    "quaternion_gltf": [
     -0.023947,
@@ -8154,9 +8076,9 @@
    "frame": "00590",
    "image": "refs/00590.jpg",
    "position_gltf": [
-    234.3402,
-    1.5817,
-    75.2063
+    241.2928,
+    1.7684,
+    72.9015
    ],
    "quaternion_gltf": [
     -0.010763,
@@ -8170,9 +8092,9 @@
    "frame": "00640",
    "image": "refs/00640.jpg",
    "position_gltf": [
-    196.5973,
-    1.2285,
-    94.8939
+    204.2768,
+    1.4348,
+    92.348
    ],
    "quaternion_gltf": [
     -0.055057,
@@ -8186,9 +8108,9 @@
    "frame": "00690",
    "image": "refs/00690.jpg",
    "position_gltf": [
-    153.4875,
-    1.0494,
-    97.215
+    161.9072,
+    1.2755,
+    94.4238
    ],
    "quaternion_gltf": [
     -0.028974,
@@ -8249,14 +8171,53 @@
  ],
  "totals": {
   "assets": 124,
-  "instances": 173,
-  "bytes": 67770048
+  "instances": 169,
+  "bytes": 64133556
  },
  "notes": [
   "Scale is estimated (camera height + crosswalk), about +-5 %.",
   "Species are visual inferences, not botanical identification.",
   "Branching, leaves and bark are generated by code; positions, heights, crown envelopes and colours are measured from the video.",
   "Unobserved areas (inner lawn, far road half, building backs, rotunda far side) are conservatively inferred and flagged per asset.",
-  "Web edition uses twig-card foliage (LOD); research edition (individual leaves, .blend sources) stays on the server."
- ]
+  "Web edition uses twig-card foliage (LOD); research edition (individual leaves, .blend sources) stays on the server.",
+  "Agent 2 grass_v1 refined web assets, 2026-11-14"
+ ],
+ "grass": {
+  "tufts": [
+   {
+    "asset_id": "grass_tuft_01",
+    "file": "assets/grass_tuft_01.gltf",
+    "kind": "turf"
+   },
+   {
+    "asset_id": "grass_tuft_02",
+    "file": "assets/grass_tuft_02.gltf",
+    "kind": "turf"
+   },
+   {
+    "asset_id": "grass_tuft_03",
+    "file": "assets/grass_tuft_03.gltf",
+    "kind": "turf"
+   },
+   {
+    "asset_id": "grass_tuft_04",
+    "file": "assets/grass_tuft_04.gltf",
+    "kind": "turf_dry"
+   }
+  ],
+  "params": {
+   "_doc": "runtime, seeded instancing in the web viewer: cells of cell_m around the camera",
+   "cell_m": 8.0,
+   "near_m": 16.0,
+   "near_per_m2": 85,
+   "far_m": 44.0,
+   "far_per_m2": 20,
+   "far_scale": 1.7,
+   "max_instances": 260000
+  },
+  "seed": 20261114,
+  "vertex_tint_gain": 1.35,
+  "web_gain": 0.8,
+  "note": "tufts are instanced at runtime (seeded, deterministic) over the lawn meshes; the research scene stores explicit instance buffers (scene.json: scatters)"
+ }
 }

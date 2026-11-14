@@ -1,9 +1,0 @@
-# Agent B: heavy/derived data stays on the server
-*.blend
-*.blend1
-*.parts.npz
-*_research.glb
-envs/
-cache/
-runs/
-frames/
