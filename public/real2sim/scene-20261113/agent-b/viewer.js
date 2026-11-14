@@ -102,7 +102,7 @@ function select(id, focus) {
   $('info-body').innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join(''); $('info').classList.remove('hidden');
   renderList(); if (focus) frame(box.box);
 }
-function frame(b) { exitCam(); const c = b.getCenter(new THREE.Vector3()); const s = b.getSize(new THREE.Vector3()).length();
+function frame(b) { const c = b.getCenter(new THREE.Vector3()); const s = b.getSize(new THREE.Vector3()).length();
   exitCam(); controls.target.copy(c); const dir = camera.position.clone().sub(controls.target).normalize(); if (dir.y < 0.15) dir.y = 0.35; dir.normalize();
   camera.position.copy(c).addScaledVector(dir, Math.max(s * 1.3, 8)); controls.update(); }
 $('info-close').onclick = () => select(null);
@@ -127,65 +127,26 @@ const camBox = $('cams');
 manifest.reference_views.forEach((v, i) => { const b = document.createElement('button'); b.title = `视频帧 ${v.frame}`; b.innerHTML = `<img loading="lazy" src="${url(v.image)}" alt="frame ${v.frame}">`; b.onclick = () => enterCam(i); camBox.appendChild(b); });
 function enterCam(i) {
   camIdx = (i + manifest.reference_views.length) % manifest.reference_views.length; const v = manifest.reference_views[camIdx];
-  controls.enabled = false; camera.position.fromArray(v.position_gltf); camera.quaternion.fromArray(v.quaternion_gltf).normalize();
+  controls.enabled = false; camera.position.fromArray(v.position_gltf); camera.quaternion.fromArray(v.quaternion_gltf);
   camera.fov = K.vfov_deg; camera.updateProjectionMatrix();
   $('refimg').src = url(v.image); $('refwrap').classList.remove('hidden'); $('campanel').classList.remove('hidden');
-  $('camtitle').textContent = `实拍机位 · 帧 ${v.frame}`; applyOverlay(); resize(); updateTriad(camIdx);
+  $('camtitle').textContent = `实拍机位 · 帧 ${v.frame}`; applyOverlay(); resize(); updateTriad(v);
 }
-// Use one selected frame for the preview and the enlarged comparison.
-const triad = $('triad');
-const triadLarge = $('triad-large');
-const triadDialog = $('triad-dialog');
-const views = manifest.reference_views;
-let triadIndex = Math.floor(views.length / 2);
-for (const container of [triad, triadLarge]) {
-  container.append($('triad-images').content.cloneNode(true));
-  for (const img of container.querySelectorAll('img[data-image]')) {
-    const fallback = container.querySelector(`[data-fallback="${img.dataset.image}"]`);
-    if (fallback) img.addEventListener('error', () => {
-      img.hidden = true;
-      fallback.hidden = false;
-    });
-  }
+// three-way strip: video frame | Agent A (only if its page publishes a matching render) | Agent B Cycles render
+async function updateTriad(v) {
+  $('triad-ref').src = url(v.image);
+  if (v.cg_render) $('triad-b').src = url(v.cg_render);
+  const a = $('triad-a'); const aUrl = new URL(`../agent-a/renders/${v.frame}.jpg`, BASE).href;
+  let ok = false; try { ok = (await fetch(aUrl, { method: 'HEAD' })).ok; } catch { ok = false; }
+  if (ok) { a.src = aUrl; a.style.display = ''; $('triad-a-cap').textContent = 'Agent A'; const p = a.parentElement.querySelector('.pending'); if (p) p.remove(); }
+  else { a.style.display = 'none'; if (!a.parentElement.querySelector('.pending')) { const d = document.createElement('div'); d.className = 'pending'; d.textContent = 'Agent A：待接入（同机位结果由 Agent A 主控页提供）'; a.parentElement.prepend(d); } }
 }
-function showTriadImages(container, view) {
-  const sources = {
-    ref: url(view.image),
-    a: new URL(`../agent-a/renders/${view.frame}.jpg`, BASE).href,
-    b: view.cg_render && url(view.cg_render),
-  };
-  for (const img of container.querySelectorAll('img[data-image]')) {
-    const source = sources[img.dataset.image];
-    const fallback = container.querySelector(`[data-fallback="${img.dataset.image}"]`);
-    img.hidden = !source;
-    if (fallback) fallback.hidden = Boolean(source);
-    if (source) img.src = source;
-    else img.removeAttribute('src');
-  }
-}
-function updateTriad(index) {
-  triadIndex = index;
-  const view = views[index];
-  $('triad-frame').textContent = `帧 ${view.frame}`;
-  $('triad-title').textContent = `三方对比 · 帧 ${view.frame}`;
-  showTriadImages(triad, view);
-  if (triadDialog.open) showTriadImages(triadLarge, view);
-}
-$('triad-open').onclick = () => {
-  triadDialog.showModal();
-  showTriadImages(triadLarge, views[triadIndex]);
-};
-$('triad-prev').onclick = () => enterCam(triadIndex - 1);
-$('triad-next').onclick = () => enterCam(triadIndex + 1);
 function exitCam() { if (camIdx < 0) return; camIdx = -1; controls.enabled = true; camera.fov = 55; $('refwrap').classList.add('hidden'); $('campanel').classList.add('hidden');
   const f = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion); controls.target.copy(camera.position).addScaledVector(f, 20); controls.update(); resize(); }
 function applyOverlay() { $('refimg').style.opacity = $('refopacity').value; }
 $('refopacity').addEventListener('input', applyOverlay);
 $('btn-exitcam').onclick = exitCam; $('btn-prevcam').onclick = () => enterCam(camIdx - 1); $('btn-nextcam').onclick = () => enterCam(camIdx + 1);
-if (views.length) {
-  updateTriad(triadIndex);
-  $('triad-open').disabled = false;
-}
+if (manifest.reference_views.length) updateTriad(manifest.reference_views[Math.floor(manifest.reference_views.length / 2)]);
 function overview() { exitCam(); controls.target.copy(center); camera.position.copy(center).add(new THREE.Vector3(-150, 140, 160)); controls.update(); }
 $('btn-overview').onclick = overview;
 // ---------- resize / loop ----------
@@ -195,7 +156,81 @@ function resize() {
   const img = $('refimg'); img.style.height = h + 'px'; img.style.width = (h * (K.width / K.fx) / (K.height / K.fy)) + 'px';
 }
 new ResizeObserver(resize).observe(canvas); resize(); overview();
-renderer.setAnimationLoop(() => { if (controls.enabled) controls.update(); renderer.render(scene, camera); });
+renderer.setAnimationLoop((t) => { controls.update(); updateGrass(t); renderer.render(scene, camera); });
+// ---------- grass: seeded runtime instancing of the tuft assets over the lawn meshes ----------
+// Tuft geometry = independent assets (assets/grass_tuft_NN.glb). Instances are generated per 8 m cell around the camera from
+// the lawn triangles (area-weighted, seeded by the cell id => deterministic), tinted by the lawn vertex colours (measured patchiness).
+const GR = manifest.grass; const grass = { cells: new Map(), queue: [], tufts: [], quality: localStorage.getItem('agentb-grass') || 'high', count: 0 };
+const grassU = { uGrassCam: { value: new THREE.Vector3() }, uGrassFar: { value: 40 }, uTime: { value: 0 } };
+function mulberry(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function floatAttr(attr, n, mat) { const out = new Float32Array(attr.count * n); const v = new THREE.Vector3();
+  for (let i = 0; i < attr.count; i++) { if (mat) { v.fromBufferAttribute(attr, i).applyMatrix4(mat); out[i * 3] = v.x; out[i * 3 + 1] = v.y; out[i * 3 + 2] = v.z; } else for (let k = 0; k < n; k++) out[i * n + k] = attr.getComponent(i, k); }
+  return out; }
+async function initGrass() {
+  if (!GR) return;
+  const mat = new THREE.MeshStandardMaterial({ vertexColors: true, side: THREE.DoubleSide, roughness: 0.85, metalness: 0, color: new THREE.Color().setScalar(GR.web_gain ?? 1) });
+  mat.onBeforeCompile = (sh) => { Object.assign(sh.uniforms, grassU);
+    sh.vertexShader = 'uniform vec3 uGrassCam; uniform float uGrassFar; uniform float uTime;\n' + sh.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
+      #ifdef USE_INSTANCING
+        vec4 gip = modelMatrix * instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0);
+        float gd = distance(gip.xz, uGrassCam.xz);
+        transformed *= 1.0 - smoothstep(uGrassFar * 0.72, uGrassFar, gd);
+        float gw = transformed.y * 0.11;
+        transformed.x += sin(uTime * 1.6 + gip.x * 0.9 + gip.z * 1.3) * gw; transformed.z += cos(uTime * 1.3 + gip.x * 1.1 - gip.z * 0.7) * gw;
+      #endif`); };
+  for (const t of GR.tufts) {
+    const g = await loader.loadAsync(url(t.file)); g.scene.updateMatrixWorld(true); let m; g.scene.traverse((o) => { if (o.isMesh) m = o; });
+    const geo = new THREE.BufferGeometry(); const pos = floatAttr(m.geometry.attributes.position, 3, m.matrixWorld);
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); const c = m.geometry.attributes.color;
+    const col = new Float32Array(c.count * 3); for (let i = 0; i < c.count; i++) { col[i * 3] = c.getX(i); col[i * 3 + 1] = c.getY(i); col[i * 3 + 2] = c.getZ(i); }
+    geo.setAttribute('color', new THREE.BufferAttribute(col, 3)); geo.setIndex(m.geometry.index ? Array.from(m.geometry.index.array) : null);
+    // soft, mostly-up normals: blades take the lighting of the lawn they stand on (no black back faces)
+    const nor = new Float32Array(pos.length); for (let i = 0; i < pos.length; i += 3) { const x = pos[i], z = pos[i + 2]; const l = Math.hypot(x, z) + 1e-5; const k = 0.45;
+      const nx = x / l * k, nz = z / l * k, inv = 1 / Math.hypot(nx, 1, nz); nor[i] = nx * inv; nor[i + 1] = inv; nor[i + 2] = nz * inv; }
+    geo.setAttribute('normal', new THREE.BufferAttribute(nor, 3)); grass.tufts.push({ geo, kind: t.kind });
+  }
+  grass.mat = mat; grass.turf = grass.tufts.map((t, i) => [t, i]).filter(([t]) => t.kind === 'turf').map(([, i]) => i);
+  grass.dry = grass.tufts.findIndex((t) => t.kind === 'turf_dry'); grass.group = new THREE.Group(); grass.group.name = 'grass_scatter'; scene.add(grass.group);
+  // bin lawn triangles (world space) into cells
+  const C = GR.params.cell_m; const K = GR.vertex_tint_gain ?? 1; const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(); grass.tris = new Map();
+  for (const [, rec] of instances) { if (manifest.assets[rec.inst.asset_id].short !== 'lawn') continue; rec.root.updateMatrixWorld(true);
+    rec.root.traverse((o) => { if (!o.isMesh || !/lawn/.test(o.material.name) || /sides/.test(o.name)) return; const p = o.geometry.attributes.position, col = o.geometry.attributes.color, ix = o.geometry.index; if (!ix) return;
+      for (let i = 0; i < ix.count; i += 3) { const i0 = ix.getX(i), i1 = ix.getX(i + 1), i2 = ix.getX(i + 2);
+        a.fromBufferAttribute(p, i0).applyMatrix4(o.matrixWorld); b.fromBufferAttribute(p, i1).applyMatrix4(o.matrixWorld); c.fromBufferAttribute(p, i2).applyMatrix4(o.matrixWorld);
+        const area = b.clone().sub(a).cross(c.clone().sub(a)).length() / 2; const nyv = Math.abs(b.clone().sub(a).cross(c.clone().sub(a)).normalize().y); if (nyv < 0.5) continue;
+        const key = Math.floor((a.x + b.x + c.x) / 3 / C) + ',' + Math.floor((a.z + b.z + c.z) / 3 / C); let arr = grass.tris.get(key); if (!arr) { arr = []; grass.tris.set(key, arr); }
+        const t = col ? [(col.getX(i0) + col.getX(i1) + col.getX(i2)) / 3 * K, (col.getY(i0) + col.getY(i1) + col.getY(i2)) / 3 * K, (col.getZ(i0) + col.getZ(i1) + col.getZ(i2)) / 3 * K] : [1, 1, 1];
+        arr.push(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z, area, t[0], t[1], t[2]); } }); }
+  grass.ready = true;
+}
+function buildCell(key, tier) {
+  const P = GR.params; const q = grass.quality === 'high' ? 1 : 0.45; const dens = (tier === 0 ? P.near_per_m2 : P.far_per_m2) * q, scl = tier === 0 ? 1 : P.far_scale;
+  const tr = grass.tris.get(key); const [kx, kz] = key.split(',').map(Number); const rnd = mulberry((kx * 73856093) ^ (kz * 19349663) ^ (tier * 83492791) ^ GR.seed);
+  const per = grass.tufts.map(() => ({ m: [], c: [] })); const M = new THREE.Matrix4(), Q = new THREE.Quaternion(), S = new THREE.Vector3(), T = new THREE.Vector3(), up = new THREE.Vector3(0, 1, 0);
+  for (let i = 0; i < tr.length; i += 13) { const f = tr[i + 9] * dens; let n = Math.floor(f); if (rnd() < f - n) n++;
+    for (let j = 0; j < n; j++) { let u = rnd(), v = rnd(); if (u + v > 1) { u = 1 - u; v = 1 - v; } const w = 1 - u - v;
+      T.set(tr[i] * w + tr[i + 3] * u + tr[i + 6] * v, tr[i + 1] * w + tr[i + 4] * u + tr[i + 7] * v, tr[i + 2] * w + tr[i + 5] * u + tr[i + 8] * v);
+      const yel = tr[i + 10] / Math.max(tr[i + 11], 1e-3); const pd = Math.min(0.55, Math.max(0.02, 0.05 + (yel - 1) * 1.6));
+      const vi = grass.dry >= 0 && rnd() < pd ? grass.dry : grass.turf[Math.floor(rnd() * grass.turf.length)]; const s = scl * (0.8 + 0.45 * rnd()), jit = 0.86 + 0.28 * rnd();
+      Q.setFromAxisAngle(up, rnd() * Math.PI * 2); S.setScalar(s); M.compose(T, Q, S); per[vi].m.push(...M.elements); per[vi].c.push(tr[i + 10] * jit, tr[i + 11] * jit, tr[i + 12] * jit); } }
+  const meshes = []; per.forEach((p, vi) => { const n = p.c.length / 3; if (!n) return; const im = new THREE.InstancedMesh(grass.tufts[vi].geo, grass.mat, n);
+    im.instanceMatrix.array.set(p.m); im.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(p.c), 3); im.receiveShadow = true; im.castShadow = false;
+    im.computeBoundingSphere(); im.userData.grass = true; im.raycast = () => {}; grass.group.add(im); meshes.push(im); grass.count += n; });
+  return { tier, meshes };
+}
+function dropCell(key) { const c = grass.cells.get(key); if (!c) return; for (const m of c.meshes) { grass.group.remove(m); grass.count -= m.count; m.dispose(); } grass.cells.delete(key); }
+let grassTick = 0;
+function updateGrass(t) {
+  if (!grass.ready) return; const P = GR.params; grassU.uTime.value = t / 1000; grassU.uGrassCam.value.copy(camera.position); grassU.uGrassFar.value = P.far_m;
+  const off = grass.quality === 'off' || camera.position.y > 70; grass.group.visible = !off; if (off) return;
+  if (grassTick++ % 6 === 0) { const C = P.cell_m; const want = new Map(); const cx = camera.position.x, cz = camera.position.z; const R = Math.ceil((P.far_m + C) / C);
+    for (let ix = -R; ix <= R; ix++) for (let iz = -R; iz <= R; iz++) { const kx = Math.floor(cx / C) + ix, kz = Math.floor(cz / C) + iz; const key = kx + ',' + kz; if (!grass.tris.has(key)) continue;
+      const d = Math.hypot((kx + 0.5) * C - cx, (kz + 0.5) * C - cz); if (d > P.far_m + C * 0.75) continue; want.set(key, [d < P.near_m + C * 0.5 ? 0 : 1, d]); }
+    for (const key of [...grass.cells.keys()]) { const w = want.get(key); if (!w || w[0] !== grass.cells.get(key).tier) dropCell(key); }
+    grass.queue = [...want].filter(([k]) => !grass.cells.has(k)).sort((p, q) => p[1][1] - q[1][1]); }
+  for (let n = 0; n < 2 && grass.queue.length; n++) { const [key, [tier]] = grass.queue.shift(); if (grass.count > P.max_instances && tier === 1) continue; grass.cells.set(key, buildCell(key, tier)); }
+}
+const gq = $('grassq'); if (gq) { gq.value = grass.quality; gq.addEventListener('change', () => { grass.quality = gq.value; localStorage.setItem('agentb-grass', gq.value); for (const k of [...grass.cells.keys()]) dropCell(k); }); }
 // ---------- progressive load: ground, buildings, props, trees ----------
 const order = ['ground', 'building', 'prop', 'tree'];
 const todo = [...manifest.instances].sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category));
@@ -206,5 +241,6 @@ const queue = [...todo]; const workers = Array.from({ length: 6 }, async () => {
     done++; status(`已加载 ${done}/${todo.length} 个资产实例 · ${manifest.agent_label}`); }
 });
 await Promise.all(workers); renderList();
+try { await initGrass(); } catch (e) { console.warn('grass init failed', e); }
 status(`已加载 ${done} 个实例（${Object.keys(manifest.assets).length} 个独立资产）· ${((performance.now() - t0) / 1000).toFixed(1)} s · ${manifest.agent_label} · 视频 SHA-256 ${manifest.source_video.sha256.slice(0, 12)}…`);
-window.__agentb = { scene, instances, manifest, ready: true };
+window.__agentb = { scene, instances, manifest, grass, ready: true };

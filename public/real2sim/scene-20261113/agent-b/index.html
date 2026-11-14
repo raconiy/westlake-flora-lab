@@ -11,9 +11,8 @@
       "three/addons/": "./vendor/jsm/"
     }}
   </script>
-  <link rel="stylesheet" href="./style.css?v=matched-a">
-  <script type="module" src="./viewer.js?v=matched-a"></script>
-  <script type="module" src="./refine.js?v=refine-02"></script>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./viewer.js"></script>
 </head>
 <body>
   <div id="app">
@@ -21,6 +20,7 @@
       <div class="brand"><b>Agent B</b><span>Claude Opus 5.5 · 视频 → 可编辑 CG 场景</span></div>
       <div class="status" id="status" role="status" aria-live="polite">正在读取场景清单…</div>
       <div class="bar-actions">
+        <label class="gq" title="草叶几何（实例化草簇）密度">草叶 <select id="grassq"><option value="high">高</option><option value="med">中</option><option value="off">关</option></select></label>
         <button id="btn-overview" title="总览">总览</button>
         <button id="btn-showall" title="显示全部资产">显示全部</button>
         <button id="btn-panel" title="资产面板" aria-expanded="true">资产面板</button>
@@ -41,12 +41,12 @@
           <div id="cams" class="cams"></div>
         </section>
         <section>
-          <div class="row">
-            <h2>三方对比 · <span id="triad-frame"></span></h2>
-            <button id="triad-open" type="button" disabled>放大对比</button>
+          <h2>三方对比 · 当前机位</h2>
+          <div id="triad" class="triad">
+            <figure><img id="triad-ref" alt="原始视频参考帧"><figcaption>原始视频</figcaption></figure>
+            <figure><img id="triad-a" alt="Agent A"><figcaption id="triad-a-cap">Agent A</figcaption></figure>
+            <figure><img id="triad-b" alt="Agent B 同机位离线渲染"><figcaption>Agent B（Cycles）</figcaption></figure>
           </div>
-          <div id="triad" class="triad" aria-label="当前帧三方对比"></div>
-          <p class="note">Agent A 使用同一视频机位，场景坐标为近似配准。</p>
         </section>
         <section>
           <h2>评估证据</h2>
@@ -56,6 +56,8 @@
             <a href="./evidence/novel_orbit.mp4" target="_blank" rel="noreferrer">新视角：环绕</a>
             <a href="./evidence/novel_inner.mp4" target="_blank" rel="noreferrer">新视角：内圈步行</a>
             <a href="./evidence/asset_details.jpg" target="_blank" rel="noreferrer">资产细节</a>
+            <a href="./evidence/agent_a_vs_b_architecture.jpg" target="_blank" rel="noreferrer">Agent A / B 建筑对照</a>
+            <a href="./evidence/agent_a_vs_b_comparison.json" target="_blank" rel="noreferrer">A / B 比较报告</a>
             <a href="./manifest.json" target="_blank" rel="noreferrer">manifest</a>
             <a href="./scene.json" target="_blank" rel="noreferrer">场景配置</a>
           </div>
@@ -77,30 +79,5 @@
       </div>
     </main>
   </div>
-  <template id="triad-images">
-    <figure><img data-image="ref" alt="去畸变实拍帧"><figcaption>实拍</figcaption></figure>
-    <figure>
-      <img data-image="a" alt="Agent A 近似配准渲染">
-      <span data-fallback="a" class="pending" hidden>此帧暂无 Agent A 渲染</span>
-      <figcaption>Agent A（近似配准）</figcaption>
-    </figure>
-    <figure>
-      <img data-image="b" alt="Agent B 同机位离线渲染">
-      <span data-fallback="b" class="pending" hidden>此帧暂无 Agent B 渲染</span>
-      <figcaption>Agent B（Cycles）</figcaption>
-    </figure>
-  </template>
-  <dialog id="triad-dialog" aria-labelledby="triad-title">
-    <div class="row triad-dialog-bar">
-      <h2 id="triad-title" aria-live="polite"></h2>
-      <div class="row">
-        <button id="triad-prev" type="button">上一帧</button>
-        <button id="triad-next" type="button">下一帧</button>
-        <form method="dialog"><button autofocus>关闭</button></form>
-      </div>
-    </div>
-    <div id="triad-large" class="triad"></div>
-    <p class="note">Agent A 使用同一视频机位，场景坐标为近似配准。</p>
-  </dialog>
 </body>
 </html>

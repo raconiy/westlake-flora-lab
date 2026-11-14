@@ -93,9 +93,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    130.012,
-    -76.645,
-    -0.537
+    131.601,
+    -75.984,
+    -0.305
    ],
    "rotation_euler_deg": [
     0,
@@ -149,9 +149,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    58.653,
-    -14.686,
-    -0.658
+    58.633,
+    -14.703,
+    -0.655
    ],
    "rotation_euler_deg": [
     0,
@@ -177,9 +177,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    97.091,
-    71.74,
-    -0.386
+    98.197,
+    72.106,
+    -0.375
    ],
    "rotation_euler_deg": [
     0,
@@ -205,9 +205,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    55.802,
-    0.564,
-    -0.227
+    223.071,
+    -83.372,
+    -0.082
    ],
    "rotation_euler_deg": [
     0,
@@ -233,8 +233,8 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    217.405,
-    -84.905,
+    55.802,
+    0.564,
     -0.227
    ],
    "rotation_euler_deg": [
@@ -261,9 +261,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    128.765,
-    -79.448,
-    -0.374
+    130.354,
+    -78.787,
+    -0.232
    ],
    "rotation_euler_deg": [
     0,
@@ -289,9 +289,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    131.288,
-    -73.78,
-    -0.398
+    132.874,
+    -73.12,
+    -0.228
    ],
    "rotation_euler_deg": [
     0,
@@ -373,9 +373,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    61.691,
-    -11.746,
-    -0.755
+    55.318,
+    -15.653,
+    -0.121
    ],
    "rotation_euler_deg": [
     0,
@@ -401,9 +401,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    55.339,
-    -15.637,
-    -0.123
+    35.72,
+    -7.939,
+    0.743
    ],
    "rotation_euler_deg": [
     0,
@@ -429,9 +429,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    35.72,
-    -7.939,
-    0.743
+    270.471,
+    -12.885,
+    0.147
    ],
    "rotation_euler_deg": [
     0,
@@ -457,9 +457,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    264.745,
-    -14.677,
-    -0.001
+    62.102,
+    -13.708,
+    -0.742
    ],
    "rotation_euler_deg": [
     0,
@@ -485,9 +485,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    62.122,
-    -13.692,
-    -0.746
+    137.01,
+    99.337,
+    -0.327
    ],
    "rotation_euler_deg": [
     0,
@@ -513,9 +513,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    135.026,
-    98.667,
-    -0.383
+    29.831,
+    -7.841,
+    0.611
    ],
    "rotation_euler_deg": [
     0,
@@ -541,9 +541,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    60.079,
-    -3.347,
-    -0.143
+    271.455,
+    -4.283,
+    0.101
    ],
    "rotation_euler_deg": [
     0,
@@ -569,9 +569,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    29.831,
-    -7.841,
-    0.611
+    271.228,
+    -6.835,
+    0.113
    ],
    "rotation_euler_deg": [
     0,
@@ -592,70 +592,14 @@
    }
   },
   {
-   "instance_id": "inst_curb_13",
-   "asset_id": "curb_13",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position": [
-    265.843,
-    -6.136,
-    -0.049
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/ground/curb_13/curb_13_research.blend",
-    "research_glb": "assets/ground/curb_13/curb_13_research.glb",
-    "web_blend": "assets/ground/curb_13/curb_13_web.blend",
-    "web_gltf": "assets/web/curb_13.gltf",
-    "source_json": "assets/ground/curb_13/curb_13_research.json"
-   }
-  },
-  {
-   "instance_id": "inst_curb_14",
-   "asset_id": "curb_14",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position": [
-    265.633,
-    -8.546,
-    -0.041
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/ground/curb_14/curb_14_research.blend",
-    "research_glb": "assets/ground/curb_14/curb_14_research.glb",
-    "web_blend": "assets/ground/curb_14/curb_14_web.blend",
-    "web_gltf": "assets/web/curb_14.gltf",
-    "source_json": "assets/ground/curb_14/curb_14_research.json"
-   }
-  },
-  {
    "instance_id": "inst_plaza_01",
    "asset_id": "plaza_01",
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    123.615,
-    10.622,
-    -0.1
+    125.159,
+    8.644,
+    0.012
    ],
    "rotation_euler_deg": [
     0,
@@ -681,9 +625,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    207.126,
-    -85.527,
-    -0.22
+    51.049,
+    10.335,
+    -0.117
    ],
    "rotation_euler_deg": [
     0,
@@ -704,42 +648,14 @@
    }
   },
   {
-   "instance_id": "inst_plaza_03",
-   "asset_id": "plaza_03",
-   "category": "ground",
-   "parent": "grp_ground",
-   "position": [
-    170.149,
-    -93.557,
-    -0.424
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/ground/plaza_03/plaza_03_research.blend",
-    "research_glb": "assets/ground/plaza_03/plaza_03_research.glb",
-    "web_blend": "assets/ground/plaza_03/plaza_03_web.blend",
-    "web_gltf": "assets/web/plaza_03.gltf",
-    "source_json": "assets/ground/plaza_03/plaza_03_research.json"
-   }
-  },
-  {
    "instance_id": "inst_path_01",
    "asset_id": "path_01",
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    228.187,
-    70.024,
-    -0.086
+    191.391,
+    83.996,
+    -0.084
    ],
    "rotation_euler_deg": [
     0,
@@ -765,9 +681,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    128.289,
-    90.976,
-    -0.279
+    263.023,
+    14.461,
+    0.037
    ],
    "rotation_euler_deg": [
     0,
@@ -793,9 +709,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    258.879,
-    12.841,
-    -0.109
+    261.947,
+    36.746,
+    0.061
    ],
    "rotation_euler_deg": [
     0,
@@ -821,9 +737,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    82.596,
-    -40.828,
-    -0.891
+    56.48,
+    13.824,
+    0.004
    ],
    "rotation_euler_deg": [
     0,
@@ -849,9 +765,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    254.761,
-    -30.236,
-    0.135
+    259.905,
+    -28.162,
+    0.356
    ],
    "rotation_euler_deg": [
     0,
@@ -877,9 +793,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    100.432,
-    70.439,
-    -0.231
+    101.855,
+    69.695,
+    -0.196
    ],
    "rotation_euler_deg": [
     0,
@@ -905,9 +821,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    237.705,
-    -60.598,
-    -0.034
+    62.803,
+    -13.591,
+    -0.765
    ],
    "rotation_euler_deg": [
     0,
@@ -933,9 +849,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    205.886,
-    -82.758,
-    -0.148
+    244.106,
+    -57.903,
+    0.159
    ],
    "rotation_euler_deg": [
     0,
@@ -961,9 +877,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    170.566,
-    -91.815,
-    -0.362
+    213.341,
+    -80.636,
+    0.042
    ],
    "rotation_euler_deg": [
     0,
@@ -989,9 +905,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    248.33,
-    11.628,
-    0.033
+    178.433,
+    -90.108,
+    -0.162
    ],
    "rotation_euler_deg": [
     0,
@@ -1017,9 +933,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    180.761,
-    4.995,
-    -0.155
+    186.645,
+    5.992,
+    0.492
    ],
    "rotation_euler_deg": [
     0,
@@ -1047,7 +963,7 @@
    "position": [
     32.482,
     -13.661,
-    0.856
+    0.821
    ],
    "rotation_euler_deg": [
     0,
@@ -1075,7 +991,7 @@
    "position": [
     37.087,
     5.326,
-    0.336
+    0.346
    ],
    "rotation_euler_deg": [
     0,
@@ -1103,7 +1019,7 @@
    "position": [
     11.903,
     -6.845,
-    0.532
+    0.534
    ],
    "rotation_euler_deg": [
     0,
@@ -1129,9 +1045,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    128.295,
-    -80.502,
-    -0.353
+    129.885,
+    -79.841,
+    -0.128
    ],
    "rotation_euler_deg": [
     0,
@@ -1157,9 +1073,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    131.631,
-    -73.009,
-    -0.349
+    133.217,
+    -72.349,
+    -0.164
    ],
    "rotation_euler_deg": [
     0,
@@ -1185,9 +1101,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    54.073,
-    -16.0,
-    0.169
+    54.052,
+    -16.016,
+    0.162
    ],
    "rotation_euler_deg": [
     0,
@@ -1213,9 +1129,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    167.13,
-    5.67,
-    -0.26
+    170.9,
+    6.74,
+    -0.128
    ],
    "rotation_euler_deg": [
     0,
@@ -1241,9 +1157,9 @@
    "category": "ground",
    "parent": "grp_ground",
    "position": [
-    167.13,
-    5.67,
-    -0.534
+    170.9,
+    6.74,
+    -0.436
    ],
    "rotation_euler_deg": [
     0,
@@ -1292,14 +1208,42 @@
    }
   },
   {
+   "instance_id": "inst_bldg_academic_block",
+   "asset_id": "bldg_academic_block",
+   "category": "building",
+   "parent": "grp_buildings",
+   "position": [
+    0.0,
+    130.0,
+    0.0
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/buildings/bldg_academic_block/bldg_academic_block_research.blend",
+    "research_glb": "assets/buildings/bldg_academic_block/bldg_academic_block_research.glb",
+    "web_blend": "assets/buildings/bldg_academic_block/bldg_academic_block_web.blend",
+    "web_gltf": "assets/web/bldg_academic_block.gltf",
+    "source_json": "assets/buildings/bldg_academic_block/bldg_academic_block_research.json"
+   }
+  },
+  {
    "instance_id": "inst_bldg_far_01",
    "asset_id": "bldg_far_01",
    "category": "building",
    "parent": "grp_buildings",
    "position": [
-    152.742,
-    -182.395,
-    0.124
+    99.693,
+    -181.718,
+    0.206
    ],
    "rotation_euler_deg": [
     0,
@@ -1325,9 +1269,9 @@
    "category": "building",
    "parent": "grp_buildings",
    "position": [
-    97.646,
-    -123.701,
-    0.124
+    156.693,
+    -181.718,
+    0.206
    ],
    "rotation_euler_deg": [
     0,
@@ -1353,9 +1297,9 @@
    "category": "building",
    "parent": "grp_buildings",
    "position": [
-    76.804,
-    -106.457,
-    0.124
+    106.082,
+    -123.407,
+    0.206
    ],
    "rotation_euler_deg": [
     0,
@@ -1376,14 +1320,14 @@
    }
   },
   {
-   "instance_id": "inst_bldg_near_01",
-   "asset_id": "bldg_near_01",
+   "instance_id": "inst_bldg_far_04",
+   "asset_id": "bldg_far_04",
    "category": "building",
    "parent": "grp_buildings",
    "position": [
-    49.961,
-    28.282,
-    -0.378
+    82.714,
+    -105.046,
+    0.206
    ],
    "rotation_euler_deg": [
     0,
@@ -1396,11 +1340,11 @@
     1
    ],
    "files": {
-    "research_blend": "assets/buildings/bldg_near_01/bldg_near_01_research.blend",
-    "research_glb": "assets/buildings/bldg_near_01/bldg_near_01_research.glb",
-    "web_blend": "assets/buildings/bldg_near_01/bldg_near_01_web.blend",
-    "web_gltf": "assets/web/bldg_near_01.gltf",
-    "source_json": "assets/buildings/bldg_near_01/bldg_near_01_research.json"
+    "research_blend": "assets/buildings/bldg_far_04/bldg_far_04_research.blend",
+    "research_glb": "assets/buildings/bldg_far_04/bldg_far_04_research.glb",
+    "web_blend": "assets/buildings/bldg_far_04/bldg_far_04_web.blend",
+    "web_gltf": "assets/web/bldg_far_04.gltf",
+    "source_json": "assets/buildings/bldg_far_04/bldg_far_04_research.json"
    }
   },
   {
@@ -1409,8 +1353,8 @@
    "category": "building",
    "parent": "grp_buildings",
    "position": [
-    106.259,
-    -1.131,
+    106.983,
+    -0.684,
     -0.534
    ],
    "rotation_euler_deg": [
@@ -1439,7 +1383,7 @@
    "position": [
     41.72037124633789,
     4.341140270233154,
-    0.446480929851532
+    0.4465421736240387
    ],
    "rotation_euler_deg": [
     0,
@@ -1467,9 +1411,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    31.32388687133789,
-    -9.070048332214355,
-    0.5643749237060547
+    31.32322120666504,
+    -9.06977653503418,
+    0.5439081788063049
    ],
    "rotation_euler_deg": [
     0,
@@ -1489,7 +1433,7 @@
     "source_json": "assets/trees/tree_01_purple_plum/tree_01_purple_plum_research.json"
    },
    "species_preset": "purple_plum",
-   "height_m": 9.77
+   "height_m": 9.87
   },
   {
    "instance_id": "inst_tree_02_purple_plum",
@@ -1497,9 +1441,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    38.40626525878906,
-    -9.988578796386719,
-    0.7078492045402527
+    38.40635299682617,
+    -9.988675117492676,
+    0.719742476940155
    ],
    "rotation_euler_deg": [
     0,
@@ -1529,7 +1473,7 @@
    "position": [
     47.8531494140625,
     -11.934036254882812,
-    0.7532951235771179
+    0.7568475008010864
    ],
    "rotation_euler_deg": [
     0,
@@ -1558,8 +1502,8 @@
    "parent": "grp_trees",
    "position": [
     95.68910217285156,
-    -52.604469299316406,
-    -0.4993615448474884
+    -52.60453414916992,
+    -0.49813660979270935
    ],
    "rotation_euler_deg": [
     0,
@@ -1587,9 +1531,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    98.23619842529297,
-    -58.26738357543945,
-    -0.3883056044578552
+    98.23757934570312,
+    -58.27494812011719,
+    -0.38665351271629333
    ],
    "rotation_euler_deg": [
     0,
@@ -1617,9 +1561,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    108.54389953613281,
-    -61.83046340942383,
-    -0.15366655588150024
+    108.57361602783203,
+    -61.70048141479492,
+    -0.15271446108818054
    ],
    "rotation_euler_deg": [
     0,
@@ -1647,9 +1591,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    110.10285186767578,
-    -72.06718444824219,
-    -0.14063557982444763
+    114.57640075683594,
+    -66.9290542602539,
+    -0.03421930968761444
    ],
    "rotation_euler_deg": [
     0,
@@ -1669,17 +1613,17 @@
     "source_json": "assets/trees/tree_07_ginkgo_young/tree_07_ginkgo_young_research.json"
    },
    "species_preset": "ginkgo_young",
-   "height_m": 6.84
+   "height_m": 10.92
   },
   {
-   "instance_id": "inst_tree_08_ginkgo_young",
-   "asset_id": "tree_08_ginkgo_young",
+   "instance_id": "inst_tree_08_red_maple",
+   "asset_id": "tree_08_red_maple",
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    114.57429504394531,
-    -66.92572784423828,
-    -0.033621013164520264
+    185.50624084472656,
+    -83.69805145263672,
+    0.1940528303384781
    ],
    "rotation_euler_deg": [
     0,
@@ -1692,14 +1636,14 @@
     1
    ],
    "files": {
-    "research_blend": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.blend",
-    "research_glb": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.glb",
-    "web_blend": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_web.blend",
-    "web_gltf": "assets/web/tree_08_ginkgo_young.gltf",
-    "source_json": "assets/trees/tree_08_ginkgo_young/tree_08_ginkgo_young_research.json"
+    "research_blend": "assets/trees/tree_08_red_maple/tree_08_red_maple_research.blend",
+    "research_glb": "assets/trees/tree_08_red_maple/tree_08_red_maple_research.glb",
+    "web_blend": "assets/trees/tree_08_red_maple/tree_08_red_maple_web.blend",
+    "web_gltf": "assets/web/tree_08_red_maple.gltf",
+    "source_json": "assets/trees/tree_08_red_maple/tree_08_red_maple_research.json"
    },
-   "species_preset": "ginkgo_young",
-   "height_m": 10.92
+   "species_preset": "red_maple",
+   "height_m": 3.99
   },
   {
    "instance_id": "inst_tree_09_red_maple",
@@ -1707,9 +1651,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    177.76266479492188,
-    -86.32107543945312,
-    -0.012987155467271805
+    183.7604522705078,
+    -76.08265686035156,
+    0.47300058603286743
    ],
    "rotation_euler_deg": [
     0,
@@ -1729,7 +1673,7 @@
     "source_json": "assets/trees/tree_09_red_maple/tree_09_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 3.99
+   "height_m": 6.51
   },
   {
    "instance_id": "inst_tree_10_red_maple",
@@ -1737,9 +1681,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    175.7815704345703,
-    -78.70263671875,
-    0.273864209651947
+    187.27146911621094,
+    -82.95851135253906,
+    0.263799250125885
    ],
    "rotation_euler_deg": [
     0,
@@ -1759,7 +1703,7 @@
     "source_json": "assets/trees/tree_10_red_maple/tree_10_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 6.72
+   "height_m": 6.3
   },
   {
    "instance_id": "inst_tree_11_red_maple",
@@ -1767,9 +1711,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    179.44424438476562,
-    -85.5559310913086,
-    0.05434936657547951
+    186.40618896484375,
+    -71.44216918945312,
+    0.6770193576812744
    ],
    "rotation_euler_deg": [
     0,
@@ -1789,7 +1733,7 @@
     "source_json": "assets/trees/tree_11_red_maple/tree_11_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 6.09
+   "height_m": 5.61
   },
   {
    "instance_id": "inst_tree_12_red_maple",
@@ -1797,9 +1741,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    178.56219482421875,
-    -74.07372283935547,
-    0.48054492473602295
+    188.829833984375,
+    -74.19872283935547,
+    0.6501277089118958
    ],
    "rotation_euler_deg": [
     0,
@@ -1819,7 +1763,7 @@
     "source_json": "assets/trees/tree_12_red_maple/tree_12_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 5.65
+   "height_m": 7.35
   },
   {
    "instance_id": "inst_tree_13_red_maple",
@@ -1827,9 +1771,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    181.03656005859375,
-    -76.83828735351562,
-    0.4423369765281677
+    195.07061767578125,
+    -72.76411437988281,
+    0.6562638282775879
    ],
    "rotation_euler_deg": [
     0,
@@ -1849,7 +1793,7 @@
     "source_json": "assets/trees/tree_13_red_maple/tree_13_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 7.35
+   "height_m": 6.98
   },
   {
    "instance_id": "inst_tree_14_red_maple",
@@ -1857,9 +1801,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    187.3842010498047,
-    -75.31578063964844,
-    0.45168164372444153
+    194.16319274902344,
+    -70.40310668945312,
+    0.7080003619194031
    ],
    "rotation_euler_deg": [
     0,
@@ -1879,7 +1823,7 @@
     "source_json": "assets/trees/tree_14_red_maple/tree_14_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 6.98
+   "height_m": 7.45
   },
   {
    "instance_id": "inst_tree_15_red_maple",
@@ -1887,9 +1831,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    186.395263671875,
-    -72.93284606933594,
-    0.5172314643859863
+    201.40228271484375,
+    -82.2381362915039,
+    0.28410854935646057
    ],
    "rotation_euler_deg": [
     0,
@@ -1909,7 +1853,7 @@
     "source_json": "assets/trees/tree_15_red_maple/tree_15_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 7.43
+   "height_m": 7.35
   },
   {
    "instance_id": "inst_tree_16_red_maple",
@@ -1917,9 +1861,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    193.7664794921875,
-    -84.74571228027344,
-    0.09023726731538773
+    203.72866821289062,
+    -76.559326171875,
+    0.4061129093170166
    ],
    "rotation_euler_deg": [
     0,
@@ -1939,17 +1883,17 @@
     "source_json": "assets/trees/tree_16_red_maple/tree_16_red_maple_research.json"
    },
    "species_preset": "red_maple",
-   "height_m": 7.14
+   "height_m": 7.88
   },
   {
-   "instance_id": "inst_tree_17_red_maple",
-   "asset_id": "tree_17_red_maple",
+   "instance_id": "inst_tree_17_broadleaf",
+   "asset_id": "tree_17_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    196.18544006347656,
-    -79.00491333007812,
-    0.20545810461044312
+    216.90457153320312,
+    -78.8119125366211,
+    0.11465965211391449
    ],
    "rotation_euler_deg": [
     0,
@@ -1962,74 +1906,74 @@
     1
    ],
    "files": {
-    "research_blend": "assets/trees/tree_17_red_maple/tree_17_red_maple_research.blend",
-    "research_glb": "assets/trees/tree_17_red_maple/tree_17_red_maple_research.glb",
-    "web_blend": "assets/trees/tree_17_red_maple/tree_17_red_maple_web.blend",
-    "web_gltf": "assets/web/tree_17_red_maple.gltf",
-    "source_json": "assets/trees/tree_17_red_maple/tree_17_red_maple_research.json"
-   },
-   "species_preset": "red_maple",
-   "height_m": 8.09
-  },
-  {
-   "instance_id": "inst_tree_18_red_maple",
-   "asset_id": "tree_18_red_maple",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position": [
-    210.583984375,
-    -82.94914245605469,
-    -0.179396852850914
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/trees/tree_18_red_maple/tree_18_red_maple_research.blend",
-    "research_glb": "assets/trees/tree_18_red_maple/tree_18_red_maple_research.glb",
-    "web_blend": "assets/trees/tree_18_red_maple/tree_18_red_maple_web.blend",
-    "web_gltf": "assets/web/tree_18_red_maple.gltf",
-    "source_json": "assets/trees/tree_18_red_maple/tree_18_red_maple_research.json"
-   },
-   "species_preset": "red_maple",
-   "height_m": 6.09
-  },
-  {
-   "instance_id": "inst_tree_19_broadleaf",
-   "asset_id": "tree_19_broadleaf",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position": [
-    209.6305694580078,
-    -81.2162094116211,
-    -0.0728619396686554
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.blend",
-    "research_glb": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.glb",
-    "web_blend": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_web.blend",
-    "web_gltf": "assets/web/tree_19_broadleaf.gltf",
-    "source_json": "assets/trees/tree_19_broadleaf/tree_19_broadleaf_research.json"
+    "research_blend": "assets/trees/tree_17_broadleaf/tree_17_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_17_broadleaf/tree_17_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_17_broadleaf/tree_17_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_17_broadleaf.gltf",
+    "source_json": "assets/trees/tree_17_broadleaf/tree_17_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
    "height_m": 11.13
+  },
+  {
+   "instance_id": "inst_tree_18_camphor",
+   "asset_id": "tree_18_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    210.63194274902344,
+    -64.57183074951172,
+    0.47731372714042664
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_18_camphor/tree_18_camphor_research.blend",
+    "research_glb": "assets/trees/tree_18_camphor/tree_18_camphor_research.glb",
+    "web_blend": "assets/trees/tree_18_camphor/tree_18_camphor_web.blend",
+    "web_gltf": "assets/web/tree_18_camphor.gltf",
+    "source_json": "assets/trees/tree_18_camphor/tree_18_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 10.99
+  },
+  {
+   "instance_id": "inst_tree_19_camphor",
+   "asset_id": "tree_19_camphor",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    214.14511108398438,
+    -65.40372467041016,
+    0.6633988618850708
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_19_camphor/tree_19_camphor_research.blend",
+    "research_glb": "assets/trees/tree_19_camphor/tree_19_camphor_research.glb",
+    "web_blend": "assets/trees/tree_19_camphor/tree_19_camphor_web.blend",
+    "web_gltf": "assets/web/tree_19_camphor.gltf",
+    "source_json": "assets/trees/tree_19_camphor/tree_19_camphor_research.json"
+   },
+   "species_preset": "camphor",
+   "height_m": 9.1
   },
   {
    "instance_id": "inst_tree_20_camphor",
@@ -2037,9 +1981,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    203.37213134765625,
-    -66.98396301269531,
-    0.28749948740005493
+    230.04132080078125,
+    -75.25837707519531,
+    0.06005929037928581
    ],
    "rotation_euler_deg": [
     0,
@@ -2059,7 +2003,7 @@
     "source_json": "assets/trees/tree_20_camphor/tree_20_camphor_research.json"
    },
    "species_preset": "camphor",
-   "height_m": 12.82
+   "height_m": 7.36
   },
   {
    "instance_id": "inst_tree_21_camphor",
@@ -2067,9 +2011,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    207.09864807128906,
-    -67.7550277709961,
-    0.4368976950645447
+    224.36441040039062,
+    -69.17160034179688,
+    0.5314615368843079
    ],
    "rotation_euler_deg": [
     0,
@@ -2089,17 +2033,17 @@
     "source_json": "assets/trees/tree_21_camphor/tree_21_camphor_research.json"
    },
    "species_preset": "camphor",
-   "height_m": 9.16
+   "height_m": 12.61
   },
   {
-   "instance_id": "inst_tree_22_camphor",
-   "asset_id": "tree_22_camphor",
+   "instance_id": "inst_tree_22_broadleaf",
+   "asset_id": "tree_22_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    217.35818481445312,
-    -71.4891357421875,
-    0.38004034757614136
+    235.48202514648438,
+    -66.13922882080078,
+    0.416605144739151
    ],
    "rotation_euler_deg": [
     0,
@@ -2112,24 +2056,24 @@
     1
    ],
    "files": {
-    "research_blend": "assets/trees/tree_22_camphor/tree_22_camphor_research.blend",
-    "research_glb": "assets/trees/tree_22_camphor/tree_22_camphor_research.glb",
-    "web_blend": "assets/trees/tree_22_camphor/tree_22_camphor_web.blend",
-    "web_gltf": "assets/web/tree_22_camphor.gltf",
-    "source_json": "assets/trees/tree_22_camphor/tree_22_camphor_research.json"
+    "research_blend": "assets/trees/tree_22_broadleaf/tree_22_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_22_broadleaf/tree_22_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_22_broadleaf/tree_22_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_22_broadleaf.gltf",
+    "source_json": "assets/trees/tree_22_broadleaf/tree_22_broadleaf_research.json"
    },
-   "species_preset": "camphor",
-   "height_m": 12.5
+   "species_preset": "broadleaf",
+   "height_m": 12.82
   },
   {
-   "instance_id": "inst_tree_23_camphor",
-   "asset_id": "tree_23_camphor",
+   "instance_id": "inst_tree_23_broadleaf",
+   "asset_id": "tree_23_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    223.0930938720703,
-    -77.56263732910156,
-    -0.13433220982551575
+    248.38388061523438,
+    -51.25419235229492,
+    0.26241862773895264
    ],
    "rotation_euler_deg": [
     0,
@@ -2142,14 +2086,14 @@
     1
    ],
    "files": {
-    "research_blend": "assets/trees/tree_23_camphor/tree_23_camphor_research.blend",
-    "research_glb": "assets/trees/tree_23_camphor/tree_23_camphor_research.glb",
-    "web_blend": "assets/trees/tree_23_camphor/tree_23_camphor_web.blend",
-    "web_gltf": "assets/web/tree_23_camphor.gltf",
-    "source_json": "assets/trees/tree_23_camphor/tree_23_camphor_research.json"
+    "research_blend": "assets/trees/tree_23_broadleaf/tree_23_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_23_broadleaf/tree_23_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_23_broadleaf/tree_23_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_23_broadleaf.gltf",
+    "source_json": "assets/trees/tree_23_broadleaf/tree_23_broadleaf_research.json"
    },
-   "species_preset": "camphor",
-   "height_m": 7.35
+   "species_preset": "broadleaf",
+   "height_m": 13.13
   },
   {
    "instance_id": "inst_tree_24_broadleaf",
@@ -2157,9 +2101,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    228.64303588867188,
-    -68.40381622314453,
-    0.2302737683057785
+    239.01397705078125,
+    -44.633487701416016,
+    0.3927300274372101
    ],
    "rotation_euler_deg": [
     0,
@@ -2179,7 +2123,7 @@
     "source_json": "assets/trees/tree_24_broadleaf/tree_24_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 13.03
+   "height_m": 14.08
   },
   {
    "instance_id": "inst_tree_25_broadleaf",
@@ -2187,9 +2131,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    241.923828125,
-    -53.40222930908203,
-    0.09082090109586716
+    257.5589294433594,
+    -35.229736328125,
+    0.5876915454864502
    ],
    "rotation_euler_deg": [
     0,
@@ -2209,7 +2153,7 @@
     "source_json": "assets/trees/tree_25_broadleaf/tree_25_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 13.24
+   "height_m": 10.92
   },
   {
    "instance_id": "inst_tree_26_broadleaf",
@@ -2217,9 +2161,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    232.54515075683594,
-    -46.7744140625,
-    0.218634694814682
+    252.55459594726562,
+    -32.87384796142578,
+    0.6756787300109863
    ],
    "rotation_euler_deg": [
     0,
@@ -2239,7 +2183,7 @@
     "source_json": "assets/trees/tree_26_broadleaf/tree_26_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 14.08
+   "height_m": 10.92
   },
   {
    "instance_id": "inst_tree_27_broadleaf",
@@ -2247,9 +2191,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    251.32635498046875,
-    -47.01268768310547,
-    -0.021701611578464508
+    256.57220458984375,
+    -24.436553955078125,
+    0.41159313917160034
    ],
    "rotation_euler_deg": [
     0,
@@ -2269,7 +2213,7 @@
     "source_json": "assets/trees/tree_27_broadleaf/tree_27_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 6.34
+   "height_m": 8.55
   },
   {
    "instance_id": "inst_tree_28_broadleaf",
@@ -2277,9 +2221,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    251.51414489746094,
-    -37.24910354614258,
-    0.41973140835762024
+    256.841064453125,
+    -21.922607421875,
+    0.4432772099971771
    ],
    "rotation_euler_deg": [
     0,
@@ -2307,9 +2251,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    246.54808044433594,
-    -34.892539978027344,
-    0.5249016880989075
+    249.27139282226562,
+    -18.078983306884766,
+    0.7221646308898926
    ],
    "rotation_euler_deg": [
     0,
@@ -2329,7 +2273,7 @@
     "source_json": "assets/trees/tree_29_broadleaf/tree_29_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.92
+   "height_m": 9.45
   },
   {
    "instance_id": "inst_tree_30_broadleaf",
@@ -2337,9 +2281,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    250.6929931640625,
-    -26.38400650024414,
-    0.243258997797966
+    263.2889404296875,
+    -17.3520450592041,
+    0.32315534353256226
    ],
    "rotation_euler_deg": [
     0,
@@ -2359,7 +2303,7 @@
     "source_json": "assets/trees/tree_30_broadleaf/tree_30_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 9.98
+   "height_m": 9.87
   },
   {
    "instance_id": "inst_tree_31_broadleaf",
@@ -2367,9 +2311,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    250.95074462890625,
-    -23.879316329956055,
-    0.2815147936344147
+    260.9732360839844,
+    -2.3163657188415527,
+    0.36779049038887024
    ],
    "rotation_euler_deg": [
     0,
@@ -2389,7 +2333,7 @@
     "source_json": "assets/trees/tree_31_broadleaf/tree_31_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.08
+   "height_m": 10.63
   },
   {
    "instance_id": "inst_tree_32_broadleaf",
@@ -2397,9 +2341,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    243.33131408691406,
-    -20.04648208618164,
-    0.5721944570541382
+    265.3687744140625,
+    2.4659783840179443,
+    0.30062898993492126
    ],
    "rotation_euler_deg": [
     0,
@@ -2419,7 +2363,7 @@
     "source_json": "assets/trees/tree_32_broadleaf/tree_32_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 9.45
+   "height_m": 10.71
   },
   {
    "instance_id": "inst_tree_33_broadleaf",
@@ -2427,9 +2371,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    257.56439208984375,
-    -19.255258560180664,
-    0.16526669263839722
+    253.08628845214844,
+    5.427282810211182,
+    0.31128281354904175
    ],
    "rotation_euler_deg": [
     0,
@@ -2449,7 +2393,7 @@
     "source_json": "assets/trees/tree_33_broadleaf/tree_33_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 9.87
+   "height_m": 10.71
   },
   {
    "instance_id": "inst_tree_34_broadleaf",
@@ -2457,9 +2401,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    255.4920654296875,
-    -4.142900466918945,
-    0.21758456528186798
+    269.0399475097656,
+    21.12779998779297,
+    0.011615807190537453
    ],
    "rotation_euler_deg": [
     0,
@@ -2479,7 +2423,7 @@
     "source_json": "assets/trees/tree_34_broadleaf/tree_34_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.63
+   "height_m": 6.41
   },
   {
    "instance_id": "inst_tree_35_broadleaf",
@@ -2487,9 +2431,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    260.0015869140625,
-    0.6751713752746582,
-    0.1535438746213913
+    263.580810546875,
+    26.975481033325195,
+    0.21453067660331726
    ],
    "rotation_euler_deg": [
     0,
@@ -2509,7 +2453,7 @@
     "source_json": "assets/trees/tree_35_broadleaf/tree_35_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.71
+   "height_m": 13.34
   },
   {
    "instance_id": "inst_tree_36_broadleaf",
@@ -2517,9 +2461,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    247.75155639648438,
-    3.643106460571289,
-    0.1794322282075882
+    263.34246826171875,
+    31.430618286132812,
+    0.16168642044067383
    ],
    "rotation_euler_deg": [
     0,
@@ -2539,7 +2483,7 @@
     "source_json": "assets/trees/tree_36_broadleaf/tree_36_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.71
+   "height_m": 10.29
   },
   {
    "instance_id": "inst_tree_37_broadleaf",
@@ -2547,9 +2491,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    263.9779052734375,
-    19.450824737548828,
-    -0.1247536689043045
+    251.07086181640625,
+    29.889373779296875,
+    0.36802229285240173
    ],
    "rotation_euler_deg": [
     0,
@@ -2569,7 +2513,7 @@
     "source_json": "assets/trees/tree_37_broadleaf/tree_37_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 6.31
+   "height_m": 13.24
   },
   {
    "instance_id": "inst_tree_38_broadleaf",
@@ -2577,9 +2521,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    258.6279602050781,
-    25.34210968017578,
-    0.0714554563164711
+    243.7199249267578,
+    42.39094543457031,
+    0.5158231258392334
    ],
    "rotation_euler_deg": [
     0,
@@ -2599,7 +2543,7 @@
     "source_json": "assets/trees/tree_38_broadleaf/tree_38_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 13.34
+   "height_m": 12.61
   },
   {
    "instance_id": "inst_tree_39_broadleaf",
@@ -2607,9 +2551,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    258.62933349609375,
-    29.903202056884766,
-    0.014109496027231216
+    254.13633728027344,
+    48.528602600097656,
+    0.20462559163570404
    ],
    "rotation_euler_deg": [
     0,
@@ -2629,7 +2573,7 @@
     "source_json": "assets/trees/tree_39_broadleaf/tree_39_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.29
+   "height_m": 9.24
   },
   {
    "instance_id": "inst_tree_40_broadleaf",
@@ -2637,9 +2581,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    246.27072143554688,
-    28.284454345703125,
-    0.23924733698368073
+    241.08322143554688,
+    59.830867767333984,
+    0.4393739700317383
    ],
    "rotation_euler_deg": [
     0,
@@ -2659,7 +2603,7 @@
     "source_json": "assets/trees/tree_40_broadleaf/tree_40_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 13.24
+   "height_m": 11.76
   },
   {
    "instance_id": "inst_tree_41_broadleaf",
@@ -2667,9 +2611,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    239.16970825195312,
-    40.88457107543945,
-    0.41178709268569946
+    227.6627655029297,
+    79.4261245727539,
+    0.17250384390354156
    ],
    "rotation_euler_deg": [
     0,
@@ -2689,7 +2633,7 @@
     "source_json": "assets/trees/tree_41_broadleaf/tree_41_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 12.61
+   "height_m": 10.71
   },
   {
    "instance_id": "inst_tree_42_broadleaf",
@@ -2697,9 +2641,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    249.69253540039062,
-    47.0351676940918,
-    0.07969623059034348
+    208.84791564941406,
+    91.65399169921875,
+    0.10012508928775787
    ],
    "rotation_euler_deg": [
     0,
@@ -2719,7 +2663,7 @@
     "source_json": "assets/trees/tree_42_broadleaf/tree_42_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 9.24
+   "height_m": 12.61
   },
   {
    "instance_id": "inst_tree_43_broadleaf",
@@ -2727,9 +2671,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    236.9814453125,
-    58.44995880126953,
-    0.31697848439216614
+    196.4913330078125,
+    85.71855926513672,
+    0.05029141902923584
    ],
    "rotation_euler_deg": [
     0,
@@ -2749,7 +2693,7 @@
     "source_json": "assets/trees/tree_43_broadleaf/tree_43_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 11.76
+   "height_m": 11.97
   },
   {
    "instance_id": "inst_tree_44_broadleaf",
@@ -2757,9 +2701,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    223.96385192871094,
-    78.19361877441406,
-    0.07682672142982483
+    188.33013916015625,
+    101.096923828125,
+    -0.2971000671386719
    ],
    "rotation_euler_deg": [
     0,
@@ -2779,7 +2723,7 @@
     "source_json": "assets/trees/tree_44_broadleaf/tree_44_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.71
+   "height_m": 6.08
   },
   {
    "instance_id": "inst_tree_45_broadleaf",
@@ -2787,9 +2731,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    205.5901336669922,
-    90.57360076904297,
-    -0.005267869681119919
+    185.30227661132812,
+    98.01007843017578,
+    -0.06898575276136398
    ],
    "rotation_euler_deg": [
     0,
@@ -2809,7 +2753,7 @@
     "source_json": "assets/trees/tree_45_broadleaf/tree_45_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 12.61
+   "height_m": 11.76
   },
   {
    "instance_id": "inst_tree_46_broadleaf",
@@ -2817,9 +2761,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    193.37762451171875,
-    84.68238067626953,
-    -0.028842147439718246
+    178.0264129638672,
+    90.21383666992188,
+    0.37410417199134827
    ],
    "rotation_euler_deg": [
     0,
@@ -2839,7 +2783,7 @@
     "source_json": "assets/trees/tree_46_broadleaf/tree_46_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 12.18
+   "height_m": 11.13
   },
   {
    "instance_id": "inst_tree_47_broadleaf",
@@ -2847,9 +2791,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    185.51043701171875,
-    100.16259765625,
-    -0.37976986169815063
+    169.87615966796875,
+    99.60990905761719,
+    0.06280981004238129
    ],
    "rotation_euler_deg": [
     0,
@@ -2869,7 +2813,7 @@
     "source_json": "assets/trees/tree_47_broadleaf/tree_47_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 6.25
+   "height_m": 14.29
   },
   {
    "instance_id": "inst_tree_48_broadleaf",
@@ -2877,9 +2821,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    182.50601196289062,
-    97.07811737060547,
-    -0.15080027282238007
+    154.61810302734375,
+    99.17732238769531,
+    -0.021510470658540726
    ],
    "rotation_euler_deg": [
     0,
@@ -2899,7 +2843,7 @@
     "source_json": "assets/trees/tree_48_broadleaf/tree_48_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 11.76
+   "height_m": 10.5
   },
   {
    "instance_id": "inst_tree_49_broadleaf",
@@ -2907,9 +2851,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    175.37020874023438,
-    89.34127807617188,
-    0.3013663589954376
+    151.23118591308594,
+    98.31458282470703,
+    -0.0021939061116427183
    ],
    "rotation_euler_deg": [
     0,
@@ -2929,17 +2873,17 @@
     "source_json": "assets/trees/tree_49_broadleaf/tree_49_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 11.55
+   "height_m": 9.03
   },
   {
-   "instance_id": "inst_tree_50_broadleaf",
-   "asset_id": "tree_50_broadleaf",
+   "instance_id": "inst_tree_50_camphor",
+   "asset_id": "tree_50_camphor",
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    167.37997436523438,
-    98.77946472167969,
-    -0.015310979448258877
+    128.0887451171875,
+    79.90525817871094,
+    0.2553345561027527
    ],
    "rotation_euler_deg": [
     0,
@@ -2952,24 +2896,24 @@
     1
    ],
    "files": {
-    "research_blend": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.blend",
-    "research_glb": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.glb",
-    "web_blend": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_web.blend",
-    "web_gltf": "assets/web/tree_50_broadleaf.gltf",
-    "source_json": "assets/trees/tree_50_broadleaf/tree_50_broadleaf_research.json"
+    "research_blend": "assets/trees/tree_50_camphor/tree_50_camphor_research.blend",
+    "research_glb": "assets/trees/tree_50_camphor/tree_50_camphor_research.glb",
+    "web_blend": "assets/trees/tree_50_camphor/tree_50_camphor_web.blend",
+    "web_gltf": "assets/web/tree_50_camphor.gltf",
+    "source_json": "assets/trees/tree_50_camphor/tree_50_camphor_research.json"
    },
-   "species_preset": "broadleaf",
-   "height_m": 14.29
+   "species_preset": "camphor",
+   "height_m": 12.39
   },
   {
-   "instance_id": "inst_tree_51_broadleaf",
-   "asset_id": "tree_51_broadleaf",
+   "instance_id": "inst_tree_51_camphor",
+   "asset_id": "tree_51_camphor",
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    152.32382202148438,
-    98.42945098876953,
-    -0.09339617937803268
+    127.13035583496094,
+    82.42913818359375,
+    0.1552017480134964
    ],
    "rotation_euler_deg": [
     0,
@@ -2982,14 +2926,14 @@
     1
    ],
    "files": {
-    "research_blend": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.blend",
-    "research_glb": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.glb",
-    "web_blend": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_web.blend",
-    "web_gltf": "assets/web/tree_51_broadleaf.gltf",
-    "source_json": "assets/trees/tree_51_broadleaf/tree_51_broadleaf_research.json"
+    "research_blend": "assets/trees/tree_51_camphor/tree_51_camphor_research.blend",
+    "research_glb": "assets/trees/tree_51_camphor/tree_51_camphor_research.glb",
+    "web_blend": "assets/trees/tree_51_camphor/tree_51_camphor_web.blend",
+    "web_gltf": "assets/web/tree_51_camphor.gltf",
+    "source_json": "assets/trees/tree_51_camphor/tree_51_camphor_research.json"
    },
-   "species_preset": "broadleaf",
-   "height_m": 8.3
+   "species_preset": "camphor",
+   "height_m": 11.34
   },
   {
    "instance_id": "inst_tree_52_broadleaf",
@@ -2997,9 +2941,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    149.08282470703125,
-    97.60503387451172,
-    -0.08219698816537857
+    110.46526336669922,
+    79.7627944946289,
+    0.17324897646903992
    ],
    "rotation_euler_deg": [
     0,
@@ -3019,47 +2963,17 @@
     "source_json": "assets/trees/tree_52_broadleaf/tree_52_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 8.61
-  },
-  {
-   "instance_id": "inst_tree_53_camphor",
-   "asset_id": "tree_53_camphor",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position": [
-    126.45433044433594,
-    79.35533905029297,
-    0.21153120696544647
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/trees/tree_53_camphor/tree_53_camphor_research.blend",
-    "research_glb": "assets/trees/tree_53_camphor/tree_53_camphor_research.glb",
-    "web_blend": "assets/trees/tree_53_camphor/tree_53_camphor_web.blend",
-    "web_gltf": "assets/web/tree_53_camphor.gltf",
-    "source_json": "assets/trees/tree_53_camphor/tree_53_camphor_research.json"
-   },
-   "species_preset": "camphor",
    "height_m": 12.39
   },
   {
-   "instance_id": "inst_tree_54_camphor",
-   "asset_id": "tree_54_camphor",
+   "instance_id": "inst_tree_53_broadleaf",
+   "asset_id": "tree_53_broadleaf",
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    125.49095916748047,
-    81.88628387451172,
-    0.12220857292413712
+    108.01512145996094,
+    68.84304809570312,
+    0.1740538477897644
    ],
    "rotation_euler_deg": [
     0,
@@ -3072,14 +2986,44 @@
     1
    ],
    "files": {
-    "research_blend": "assets/trees/tree_54_camphor/tree_54_camphor_research.blend",
-    "research_glb": "assets/trees/tree_54_camphor/tree_54_camphor_research.glb",
-    "web_blend": "assets/trees/tree_54_camphor/tree_54_camphor_web.blend",
-    "web_gltf": "assets/web/tree_54_camphor.gltf",
-    "source_json": "assets/trees/tree_54_camphor/tree_54_camphor_research.json"
+    "research_blend": "assets/trees/tree_53_broadleaf/tree_53_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_53_broadleaf/tree_53_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_53_broadleaf/tree_53_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_53_broadleaf.gltf",
+    "source_json": "assets/trees/tree_53_broadleaf/tree_53_broadleaf_research.json"
    },
-   "species_preset": "camphor",
-   "height_m": 11.34
+   "species_preset": "broadleaf",
+   "height_m": 15.13
+  },
+  {
+   "instance_id": "inst_tree_54_broadleaf",
+   "asset_id": "tree_54_broadleaf",
+   "category": "tree",
+   "parent": "grp_trees",
+   "position": [
+    95.79907989501953,
+    65.7959976196289,
+    -0.13403455913066864
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/trees/tree_54_broadleaf/tree_54_broadleaf_research.blend",
+    "research_glb": "assets/trees/tree_54_broadleaf/tree_54_broadleaf_research.glb",
+    "web_blend": "assets/trees/tree_54_broadleaf/tree_54_broadleaf_web.blend",
+    "web_gltf": "assets/web/tree_54_broadleaf.gltf",
+    "source_json": "assets/trees/tree_54_broadleaf/tree_54_broadleaf_research.json"
+   },
+   "species_preset": "broadleaf",
+   "height_m": 13.87
   },
   {
    "instance_id": "inst_tree_55_broadleaf",
@@ -3087,9 +3031,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    109.11830139160156,
-    79.30730438232422,
-    0.1293153613805771
+    91.78543853759766,
+    68.12862396240234,
+    -0.35979846119880676
    ],
    "rotation_euler_deg": [
     0,
@@ -3109,7 +3053,7 @@
     "source_json": "assets/trees/tree_55_broadleaf/tree_55_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 12.39
+   "height_m": 9.03
   },
   {
    "instance_id": "inst_tree_56_broadleaf",
@@ -3117,9 +3061,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    106.80824279785156,
-    68.45149230957031,
-    0.13957175612449646
+    101.64854431152344,
+    56.51557159423828,
+    0.30136924982070923
    ],
    "rotation_euler_deg": [
     0,
@@ -3139,7 +3083,7 @@
     "source_json": "assets/trees/tree_56_broadleaf/tree_56_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 14.5
+   "height_m": 12.57
   },
   {
    "instance_id": "inst_tree_57_broadleaf",
@@ -3147,9 +3091,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    94.81034851074219,
-    65.47618103027344,
-    -0.17872749269008636
+    92.1345443725586,
+    63.866817474365234,
+    -0.09931580722332001
    ],
    "rotation_euler_deg": [
     0,
@@ -3169,7 +3113,7 @@
     "source_json": "assets/trees/tree_57_broadleaf/tree_57_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 13.87
+   "height_m": 10.71
   },
   {
    "instance_id": "inst_tree_58_broadleaf",
@@ -3177,9 +3121,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    90.906005859375,
-    67.84420013427734,
-    -0.38653162121772766
+    90.8890380859375,
+    62.144264221191406,
+    -0.024266481399536133
    ],
    "rotation_euler_deg": [
     0,
@@ -3199,7 +3143,7 @@
     "source_json": "assets/trees/tree_58_broadleaf/tree_58_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 9.03
+   "height_m": 11.03
   },
   {
    "instance_id": "inst_tree_59_broadleaf",
@@ -3207,9 +3151,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    101.45537567138672,
-    56.25055694580078,
-    0.31105828285217285
+    88.48268127441406,
+    59.55548095703125,
+    -0.04700728878378868
    ],
    "rotation_euler_deg": [
     0,
@@ -3229,7 +3173,7 @@
     "source_json": "assets/trees/tree_59_broadleaf/tree_59_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 12.39
+   "height_m": 10.92
   },
   {
    "instance_id": "inst_tree_60_broadleaf",
@@ -3237,9 +3181,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    91.42237854003906,
-    63.62696838378906,
-    -0.13081513345241547
+    90.96559143066406,
+    57.00313949584961,
+    0.299871027469635
    ],
    "rotation_euler_deg": [
     0,
@@ -3259,7 +3203,7 @@
     "source_json": "assets/trees/tree_60_broadleaf/tree_60_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.71
+   "height_m": 10.92
   },
   {
    "instance_id": "inst_tree_61_broadleaf",
@@ -3267,9 +3211,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    90.31964874267578,
-    61.96276092529297,
-    -0.031078051775693893
+    86.8686752319336,
+    55.37749099731445,
+    0.16720229387283325
    ],
    "rotation_euler_deg": [
     0,
@@ -3289,7 +3233,7 @@
     "source_json": "assets/trees/tree_61_broadleaf/tree_61_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.71
+   "height_m": 9.66
   },
   {
    "instance_id": "inst_tree_62_broadleaf",
@@ -3297,9 +3241,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    87.98184204101562,
-    59.386531829833984,
-    -0.04590515419840813
+    82.15191650390625,
+    54.799102783203125,
+    -0.2155110388994217
    ],
    "rotation_euler_deg": [
     0,
@@ -3319,7 +3263,7 @@
     "source_json": "assets/trees/tree_62_broadleaf/tree_62_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.71
+   "height_m": 7.56
   },
   {
    "instance_id": "inst_tree_63_broadleaf",
@@ -3327,9 +3271,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    90.49385070800781,
-    56.84381866455078,
-    0.27924853563308716
+    75.18812561035156,
+    26.67538833618164,
+    0.18073095381259918
    ],
    "rotation_euler_deg": [
     0,
@@ -3349,7 +3293,7 @@
     "source_json": "assets/trees/tree_63_broadleaf/tree_63_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 10.92
+   "height_m": 11.76
   },
   {
    "instance_id": "inst_tree_64_broadleaf",
@@ -3357,9 +3301,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    86.14519500732422,
-    55.134498596191406,
-    0.14287680387496948
+    18.421232223510742,
+    7.804438591003418,
+    0.23207610845565796
    ],
    "rotation_euler_deg": [
     0,
@@ -3379,7 +3323,7 @@
     "source_json": "assets/trees/tree_64_broadleaf/tree_64_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 9.45
+   "height_m": 9.56
   },
   {
    "instance_id": "inst_tree_65_broadleaf",
@@ -3387,9 +3331,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    81.53390502929688,
-    54.58052062988281,
-    -0.24547457695007324
+    25.655805587768555,
+    6.456298828125,
+    0.34319716691970825
    ],
    "rotation_euler_deg": [
     0,
@@ -3409,7 +3353,7 @@
     "source_json": "assets/trees/tree_65_broadleaf/tree_65_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 7.35
+   "height_m": 11.24
   },
   {
    "instance_id": "inst_tree_66_broadleaf",
@@ -3417,9 +3361,9 @@
    "category": "tree",
    "parent": "grp_trees",
    "position": [
-    75.14372253417969,
-    26.65967559814453,
-    0.1855202466249466
+    32.62160110473633,
+    5.281416416168213,
+    0.3653537333011627
    ],
    "rotation_euler_deg": [
     0,
@@ -3439,96 +3383,6 @@
     "source_json": "assets/trees/tree_66_broadleaf/tree_66_broadleaf_research.json"
    },
    "species_preset": "broadleaf",
-   "height_m": 11.76
-  },
-  {
-   "instance_id": "inst_tree_67_broadleaf",
-   "asset_id": "tree_67_broadleaf",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position": [
-    18.421232223510742,
-    7.804438591003418,
-    0.2353111207485199
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.blend",
-    "research_glb": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.glb",
-    "web_blend": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_web.blend",
-    "web_gltf": "assets/web/tree_67_broadleaf.gltf",
-    "source_json": "assets/trees/tree_67_broadleaf/tree_67_broadleaf_research.json"
-   },
-   "species_preset": "broadleaf",
-   "height_m": 9.56
-  },
-  {
-   "instance_id": "inst_tree_68_broadleaf",
-   "asset_id": "tree_68_broadleaf",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position": [
-    25.65411376953125,
-    6.455910682678223,
-    0.33138591051101685
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.blend",
-    "research_glb": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.glb",
-    "web_blend": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_web.blend",
-    "web_gltf": "assets/web/tree_68_broadleaf.gltf",
-    "source_json": "assets/trees/tree_68_broadleaf/tree_68_broadleaf_research.json"
-   },
-   "species_preset": "broadleaf",
-   "height_m": 11.34
-  },
-  {
-   "instance_id": "inst_tree_69_broadleaf",
-   "asset_id": "tree_69_broadleaf",
-   "category": "tree",
-   "parent": "grp_trees",
-   "position": [
-    32.61008071899414,
-    5.270612716674805,
-    0.36318644881248474
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.blend",
-    "research_glb": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.glb",
-    "web_blend": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_web.blend",
-    "web_gltf": "assets/web/tree_69_broadleaf.gltf",
-    "source_json": "assets/trees/tree_69_broadleaf/tree_69_broadleaf_research.json"
-   },
-   "species_preset": "broadleaf",
    "height_m": 11.87
   },
   {
@@ -3537,9 +3391,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    139.745,
-    -89.391,
-    -0.555
+    148.437,
+    -86.602,
+    -0.316
    ],
    "rotation_euler_deg": [
     0,
@@ -3560,8 +3414,8 @@
    },
    "evidence": {
     "n_frames": 9,
-    "n_points": 16694,
-    "measured_height": 6.41,
+    "n_points": 23726,
+    "measured_height": 6.12,
     "sample_frames": [
      698,
      699,
@@ -3581,14 +3435,14 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    219.702,
-    -83.834,
-    -0.04
+    226.896,
+    -81.44,
+    0.151
    ],
    "rotation_euler_deg": [
     0,
     0,
-    30.4
+    32.4
    ],
    "scale": [
     1,
@@ -3604,7 +3458,7 @@
    },
    "evidence": {
     "n_frames": 6,
-    "n_points": 10390,
+    "n_points": 10284,
     "measured_height": 0.45,
     "sample_frames": [
      605,
@@ -3617,13 +3471,55 @@
    }
   },
   {
+   "instance_id": "inst_prop_planter_02",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    61.919,
+    18.043,
+    -0.02
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    264.1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 20,
+    "n_points": 6790,
+    "measured_height": 0.58,
+    "sample_frames": [
+     68,
+     72,
+     75,
+     78,
+     81,
+     84,
+     87
+    ]
+   }
+  },
+  {
    "instance_id": "inst_prop_lamp_lawn_01",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    124.423,
-    -79.212,
+    124.443,
+    -79.144,
     0.114
    ],
    "rotation_euler_deg": [
@@ -3645,8 +3541,8 @@
    },
    "evidence": {
     "n_frames": 12,
-    "n_points": 7880,
-    "measured_height": 3.58,
+    "n_points": 6759,
+    "measured_height": 3.6,
     "sample_frames": [
      725,
      727,
@@ -3658,56 +3554,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_planter_02",
-   "asset_id": "prop_planter",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    61.919,
-    18.041,
-    -0.02
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    263.3
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
-    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
-    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
-    "web_gltf": "assets/web/prop_planter.gltf",
-    "source_json": "assets/props/prop_planter/prop_planter_research.json"
-   },
-   "evidence": {
-    "n_frames": 20,
-    "n_points": 6911,
-    "measured_height": 0.57,
-    "sample_frames": [
-     68,
-     72,
-     75,
-     78,
-     81,
-     84,
-     87
-    ]
-   }
-  },
-  {
    "instance_id": "inst_prop_lamp_lawn_02",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
     137.17,
-    -83.472,
-    0.019
+    -83.48,
+    0.068
    ],
    "rotation_euler_deg": [
     0,
@@ -3728,8 +3582,8 @@
    },
    "evidence": {
     "n_frames": 6,
-    "n_points": 6594,
-    "measured_height": 3.87,
+    "n_points": 6749,
+    "measured_height": 3.82,
     "sample_frames": [
      715,
      716,
@@ -3746,140 +3600,8 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    141.859,
-    -90.643,
-    -0.481
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 5,
-    "n_points": 6538,
-    "measured_height": 3.93,
-    "sample_frames": [
-     699,
-     700,
-     701,
-     702,
-     703
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_bin_01",
-   "asset_id": "prop_bin",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    265.049,
-    19.173,
-    -0.16
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    97.9
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_bin/prop_bin_research.blend",
-    "research_glb": "assets/props/prop_bin/prop_bin_research.glb",
-    "web_blend": "assets/props/prop_bin/prop_bin_web.blend",
-    "web_gltf": "assets/web/prop_bin.gltf",
-    "source_json": "assets/props/prop_bin/prop_bin_research.json"
-   },
-   "evidence": {
-    "n_frames": 11,
-    "n_points": 6013,
-    "measured_height": 0.9,
-    "sample_frames": [
-     452,
-     453,
-     454,
-     455,
-     456,
-     457,
-     458,
-     459,
-     460,
-     461,
-     462
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_04",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    151.791,
-    -93.187,
-    -0.561
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 11,
-    "n_points": 5885,
-    "measured_height": 3.68,
-    "sample_frames": [
-     682,
-     683,
-     684,
-     685,
-     686,
-     687,
-     688,
-     689,
-     690,
-     691,
-     692
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_05",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    196.184,
-    -90.529,
+    160.208,
+    -90.399,
     -0.335
    ],
    "rotation_euler_deg": [
@@ -3901,31 +3623,77 @@
    },
    "evidence": {
     "n_frames": 10,
-    "n_points": 5094,
-    "measured_height": 3.74,
+    "n_points": 5815,
+    "measured_height": 3.68,
     "sample_frames": [
-     630,
-     631,
-     632,
-     633,
-     634,
-     635,
-     636,
-     637,
-     638,
-     639
+     682,
+     684,
+     685,
+     686,
+     687,
+     688,
+     689,
+     690,
+     691,
+     692
     ]
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_06",
+   "instance_id": "inst_prop_bin_01",
+   "asset_id": "prop_bin",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    270.174,
+    20.835,
+    -0.019
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    98.1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_bin/prop_bin_research.blend",
+    "research_glb": "assets/props/prop_bin/prop_bin_research.glb",
+    "web_blend": "assets/props/prop_bin/prop_bin_web.blend",
+    "web_gltf": "assets/web/prop_bin.gltf",
+    "source_json": "assets/props/prop_bin/prop_bin_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 5532,
+    "measured_height": 0.89,
+    "sample_frames": [
+     452,
+     453,
+     454,
+     455,
+     456,
+     457,
+     458,
+     459,
+     460,
+     461,
+     462
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_04",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    163.578,
-    -94.427,
-    -0.571
+    203.803,
+    -88.002,
+    -0.133
    ],
    "rotation_euler_deg": [
     0,
@@ -3946,7 +3714,52 @@
    },
    "evidence": {
     "n_frames": 10,
-    "n_points": 4805,
+    "n_points": 5073,
+    "measured_height": 3.74,
+    "sample_frames": [
+     630,
+     631,
+     632,
+     633,
+     634,
+     635,
+     636,
+     637,
+     638,
+     639
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_05",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    171.792,
+    -91.711,
+    -0.349
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 10,
+    "n_points": 4869,
     "measured_height": 3.58,
     "sample_frames": [
      669,
@@ -3963,14 +3776,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_07",
+   "instance_id": "inst_prop_lamp_lawn_06",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    75.562,
-    43.517,
-    -0.359
+    76.022,
+    43.668,
+    -0.345
    ],
    "rotation_euler_deg": [
     0,
@@ -3991,7 +3804,7 @@
    },
    "evidence": {
     "n_frames": 17,
-    "n_points": 4631,
+    "n_points": 4669,
     "measured_height": 3.94,
     "sample_frames": [
      106,
@@ -4007,14 +3820,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_08",
+   "instance_id": "inst_prop_lamp_lawn_07",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    183.483,
-    -93.226,
-    -0.391
+    191.342,
+    -90.624,
+    -0.18
    ],
    "rotation_euler_deg": [
     0,
@@ -4035,7 +3848,7 @@
    },
    "evidence": {
     "n_frames": 8,
-    "n_points": 4625,
+    "n_points": 4629,
     "measured_height": 3.52,
     "sample_frames": [
      647,
@@ -4050,14 +3863,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_09",
+   "instance_id": "inst_prop_lamp_lawn_08",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    222.856,
-    -77.622,
-    -0.132
+    229.926,
+    -75.281,
+    0.06
    ],
    "rotation_euler_deg": [
     0,
@@ -4078,7 +3891,7 @@
    },
    "evidence": {
     "n_frames": 13,
-    "n_points": 4278,
+    "n_points": 4212,
     "measured_height": 3.5,
     "sample_frames": [
      588,
@@ -4092,13 +3905,54 @@
    }
   },
   {
+   "instance_id": "inst_prop_lamp_lawn_09",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    270.424,
+    -4.426,
+    0.049
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 12,
+    "n_points": 4111,
+    "measured_height": 3.66,
+    "sample_frames": [
+     481,
+     483,
+     485,
+     487,
+     489,
+     491
+    ]
+   }
+  },
+  {
    "instance_id": "inst_prop_lamp_lawn_10",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    110.048,
-    -72.199,
+    110.059,
+    -72.17,
     -0.149
    ],
    "rotation_euler_deg": [
@@ -4120,8 +3974,8 @@
    },
    "evidence": {
     "n_frames": 12,
-    "n_points": 4220,
-    "measured_height": 3.53,
+    "n_points": 3883,
+    "measured_height": 3.55,
     "sample_frames": [
      742,
      744,
@@ -4138,50 +3992,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    264.884,
-    -6.27,
-    -0.102
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 12,
-    "n_points": 4033,
-    "measured_height": 3.66,
-    "sample_frames": [
-     481,
-     483,
-     485,
-     487,
-     489,
-     491
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_12",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    81.368,
-    54.599,
-    -0.253
+    82.067,
+    54.824,
+    -0.232
    ],
    "rotation_euler_deg": [
     0,
@@ -4202,8 +4015,8 @@
    },
    "evidence": {
     "n_frames": 26,
-    "n_points": 3728,
-    "measured_height": 3.66,
+    "n_points": 3722,
+    "measured_height": 3.65,
     "sample_frames": [
      111,
      115,
@@ -4221,14 +4034,14 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    127.44,
-    89.707,
-    -0.287
+    129.188,
+    90.284,
+    -0.231
    ],
    "rotation_euler_deg": [
     0,
     0,
-    205.3
+    206.5
    ],
    "scale": [
     1,
@@ -4244,8 +4057,8 @@
    },
    "evidence": {
     "n_frames": 23,
-    "n_points": 3623,
-    "measured_height": 0.85,
+    "n_points": 3614,
+    "measured_height": 0.84,
     "sample_frames": [
      202,
      205,
@@ -4259,14 +4072,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_13",
+   "instance_id": "inst_prop_lamp_lawn_12",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    265.681,
-    5.665,
-    -0.096
+    271.021,
+    7.443,
+    0.049
    ],
    "rotation_euler_deg": [
     0,
@@ -4287,7 +4100,7 @@
    },
    "evidence": {
     "n_frames": 13,
-    "n_points": 3393,
+    "n_points": 3371,
     "measured_height": 3.57,
     "sample_frames": [
      465,
@@ -4301,14 +4114,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_14",
+   "instance_id": "inst_prop_lamp_lawn_13",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    261.949,
-    -21.74,
-    -0.033
+    267.774,
+    -19.803,
+    0.127
    ],
    "rotation_euler_deg": [
     0,
@@ -4329,7 +4142,7 @@
    },
    "evidence": {
     "n_frames": 12,
-    "n_points": 3008,
+    "n_points": 3068,
     "measured_height": 3.78,
     "sample_frames": [
      500,
@@ -4342,14 +4155,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_15",
+   "instance_id": "inst_prop_lamp_lawn_14",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    147.577,
-    99.274,
-    -0.201
+    149.787,
+    99.995,
+    -0.138
    ],
    "rotation_euler_deg": [
     0,
@@ -4370,7 +4183,7 @@
    },
    "evidence": {
     "n_frames": 17,
-    "n_points": 2989,
+    "n_points": 3001,
     "measured_height": 3.72,
     "sample_frames": [
      237,
@@ -4386,14 +4199,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_16",
+   "instance_id": "inst_prop_lamp_lawn_15",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    231.557,
-    -69.583,
-    -0.012
+    238.414,
+    -67.319,
+    0.169
    ],
    "rotation_euler_deg": [
     0,
@@ -4414,7 +4227,7 @@
    },
    "evidence": {
     "n_frames": 22,
-    "n_points": 2962,
+    "n_points": 2949,
     "measured_height": 3.47,
     "sample_frames": [
      567,
@@ -4429,14 +4242,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_17",
+   "instance_id": "inst_prop_lamp_lawn_16",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    246.147,
-    -55.073,
-    -0.177
+    252.609,
+    -52.927,
+    -0.001
    ],
    "rotation_euler_deg": [
     0,
@@ -4457,8 +4270,8 @@
    },
    "evidence": {
     "n_frames": 17,
-    "n_points": 2850,
-    "measured_height": 3.74,
+    "n_points": 2872,
+    "measured_height": 3.75,
     "sample_frames": [
      545,
      547,
@@ -4473,14 +4286,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_18",
+   "instance_id": "inst_prop_lamp_lawn_17",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    160.517,
-    102.243,
-    -0.263
+    162.978,
+    103.047,
+    -0.196
    ],
    "rotation_euler_deg": [
     0,
@@ -4501,8 +4314,8 @@
    },
    "evidence": {
     "n_frames": 17,
-    "n_points": 2800,
-    "measured_height": 3.65,
+    "n_points": 2829,
+    "measured_height": 3.66,
     "sample_frames": [
      256,
      258,
@@ -4517,14 +4330,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_19",
+   "instance_id": "inst_prop_lamp_lawn_18",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    263.936,
-    19.478,
-    -0.132
+    269.041,
+    21.174,
+    0.004
    ],
    "rotation_euler_deg": [
     0,
@@ -4545,7 +4358,7 @@
    },
    "evidence": {
     "n_frames": 10,
-    "n_points": 2785,
+    "n_points": 2818,
     "measured_height": 3.76,
     "sample_frames": [
      451,
@@ -4562,14 +4375,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_20",
+   "instance_id": "inst_prop_lamp_lawn_19",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    256.616,
-    -37.274,
-    0.059
+    262.742,
+    -35.245,
+    0.229
    ],
    "rotation_euler_deg": [
     0,
@@ -4590,8 +4403,8 @@
    },
    "evidence": {
     "n_frames": 13,
-    "n_points": 2730,
-    "measured_height": 3.51,
+    "n_points": 2737,
+    "measured_height": 3.5,
     "sample_frames": [
      523,
      525,
@@ -4604,14 +4417,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_21",
+   "instance_id": "inst_prop_lamp_lawn_20",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    218.138,
-    87.772,
-    -0.095
+    221.672,
+    88.954,
+    0.003
    ],
    "rotation_euler_deg": [
     0,
@@ -4632,7 +4445,7 @@
    },
    "evidence": {
     "n_frames": 14,
-    "n_points": 2627,
+    "n_points": 2658,
     "measured_height": 3.56,
     "sample_frames": [
      341,
@@ -4651,14 +4464,14 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    171.762,
-    -91.33,
-    -0.178
+    179.795,
+    -88.658,
+    -0.012
    ],
    "rotation_euler_deg": [
     0,
     0,
-    2.7
+    5.3
    ],
    "scale": [
     1,
@@ -4674,8 +4487,8 @@
    },
    "evidence": {
     "n_frames": 19,
-    "n_points": 2427,
-    "measured_height": 0.13,
+    "n_points": 2442,
+    "measured_height": 0.18,
     "sample_frames": [
      650,
      653,
@@ -4688,14 +4501,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_22",
+   "instance_id": "inst_prop_lamp_lawn_21",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    251.417,
-    -47.016,
-    -0.031
+    257.772,
+    -44.917,
+    0.141
    ],
    "rotation_euler_deg": [
     0,
@@ -4716,7 +4529,7 @@
    },
    "evidence": {
     "n_frames": 13,
-    "n_points": 2379,
+    "n_points": 2312,
     "measured_height": 3.64,
     "sample_frames": [
      535,
@@ -4735,9 +4548,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    239.155,
-    63.731,
-    0.036
+    243.211,
+    65.075,
+    0.169
    ],
    "rotation_euler_deg": [
     0,
@@ -4758,8 +4571,8 @@
    },
    "evidence": {
     "n_frames": 23,
-    "n_points": 2254,
-    "measured_height": 0.74,
+    "n_points": 2296,
+    "measured_height": 0.71,
     "sample_frames": [
      373,
      376,
@@ -4773,13 +4586,13 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_23",
+   "instance_id": "inst_prop_lamp_lawn_22",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    98.54,
-    -63.818,
+    98.541,
+    -63.82,
     -0.359
    ],
    "rotation_euler_deg": [
@@ -4801,8 +4614,8 @@
    },
    "evidence": {
     "n_frames": 11,
-    "n_points": 2182,
-    "measured_height": 3.55,
+    "n_points": 2155,
+    "measured_height": 3.54,
     "sample_frames": [
      759,
      760,
@@ -4819,14 +4632,56 @@
    }
   },
   {
+   "instance_id": "inst_prop_lamp_lawn_23",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    218.104,
+    -80.665,
+    0.01
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 2120,
+    "measured_height": 3.63,
+    "sample_frames": [
+     602,
+     607,
+     609,
+     611,
+     614,
+     616,
+     618
+    ]
+   }
+  },
+  {
    "instance_id": "inst_prop_lamp_lawn_24",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    228.392,
-    79.297,
-    -0.1
+    232.17,
+    80.557,
+    0.003
    ],
    "rotation_euler_deg": [
     0,
@@ -4847,7 +4702,7 @@
    },
    "evidence": {
     "n_frames": 13,
-    "n_points": 2061,
+    "n_points": 2090,
     "measured_height": 3.57,
     "sample_frames": [
      357,
@@ -4866,784 +4721,9 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    210.818,
-    -83.08,
-    -0.187
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 14,
-    "n_points": 2046,
-    "measured_height": 3.63,
-    "sample_frames": [
-     602,
-     607,
-     609,
-     611,
-     614,
-     616,
-     618
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_26",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    91.396,
-    67.921,
-    -0.381
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 17,
-    "n_points": 2039,
-    "measured_height": 3.76,
-    "sample_frames": [
-     113,
-     154,
-     156,
-     158,
-     160,
-     162,
-     164,
-     166,
-     168
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_27",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    103.131,
-    78.636,
-    -0.261
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 14,
-    "n_points": 2034,
-    "measured_height": 3.61,
-    "sample_frames": [
-     173,
-     177,
-     179,
-     181,
-     183,
-     185,
-     187
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_28",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    256.454,
-    43.682,
-    -0.213
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 14,
-    "n_points": 2017,
-    "measured_height": 3.91,
-    "sample_frames": [
-     416,
-     418,
-     420,
-     423,
-     425,
-     427,
-     429
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_29",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    130.877,
-    89.64,
-    -0.27
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 25,
-    "n_points": 1907,
-    "measured_height": 3.69,
-    "sample_frames": [
-     203,
-     207,
-     211,
-     215,
-     219,
-     223,
-     227
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_planter_04",
-   "asset_id": "prop_planter",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    65.488,
-    17.568,
-    0.025
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    263.3
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
-    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
-    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
-    "web_gltf": "assets/web/prop_planter.gltf",
-    "source_json": "assets/props/prop_planter/prop_planter_research.json"
-   },
-   "evidence": {
-    "n_frames": 21,
-    "n_points": 1851,
-    "measured_height": 0.39,
-    "sample_frames": [
-     66,
-     69,
-     72,
-     75,
-     78,
-     81,
-     84
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_30",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    172.257,
-    102.396,
-    -0.125
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 11,
-    "n_points": 1848,
-    "measured_height": 3.57,
-    "sample_frames": [
-     275,
-     276,
-     277,
-     278,
-     279,
-     280,
-     281,
-     282,
-     283,
-     284,
-     285
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_31",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    203.313,
-    95.195,
-    -0.183
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 14,
-    "n_points": 1823,
-    "measured_height": 3.56,
-    "sample_frames": [
-     317,
-     320,
-     324,
-     326,
-     328,
-     330,
-     332
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_32",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    70.521,
-    27.395,
-    -0.084
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 21,
-    "n_points": 1722,
-    "measured_height": 3.9,
-    "sample_frames": [
-     71,
-     80,
-     83,
-     87,
-     92,
-     95,
-     98
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_planter_05",
-   "asset_id": "prop_planter",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    55.487,
-    19.289,
-    -0.038
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    263.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
-    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
-    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
-    "web_gltf": "assets/web/prop_planter.gltf",
-    "source_json": "assets/props/prop_planter/prop_planter_research.json"
-   },
-   "evidence": {
-    "n_frames": 10,
-    "n_points": 1650,
-    "measured_height": 0.66,
-    "sample_frames": [
-     70,
-     71,
-     72,
-     73,
-     74,
-     75,
-     76,
-     77,
-     78,
-     79
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_planter_06",
-   "asset_id": "prop_planter",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    119.502,
-    -70.834,
-    -0.135
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    -31.9
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
-    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
-    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
-    "web_gltf": "assets/web/prop_planter.gltf",
-    "source_json": "assets/props/prop_planter/prop_planter_research.json"
-   },
-   "evidence": {
-    "n_frames": 21,
-    "n_points": 1526,
-    "measured_height": 0.27,
-    "sample_frames": [
-     723,
-     727,
-     730,
-     733,
-     736,
-     739,
-     742
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_33",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    185.415,
-    100.236,
-    -0.385
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 11,
-    "n_points": 1522,
-    "measured_height": 3.68,
-    "sample_frames": [
-     290,
-     291,
-     296,
-     297,
-     298,
-     299,
-     300,
-     301,
-     302,
-     303,
-     304
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_34",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    118.755,
-    82.603,
-    -0.185
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 19,
-    "n_points": 1329,
-    "measured_height": 3.63,
-    "sample_frames": [
-     191,
-     196,
-     199,
-     202,
-     205,
-     208,
-     211
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_planter_07",
-   "asset_id": "prop_planter",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    205.134,
-    -81.417,
-    -0.18
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    23.6
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
-    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
-    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
-    "web_gltf": "assets/web/prop_planter.gltf",
-    "source_json": "assets/props/prop_planter/prop_planter_research.json"
-   },
-   "evidence": {
-    "n_frames": 19,
-    "n_points": 1157,
-    "measured_height": 0.37,
-    "sample_frames": [
-     606,
-     609,
-     614,
-     617,
-     620,
-     623,
-     626
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_35",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    248.933,
-    51.687,
-    0.046
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 17,
-    "n_points": 926,
-    "measured_height": 3.57,
-    "sample_frames": [
-     395,
-     398,
-     402,
-     404,
-     406,
-     409,
-     412,
-     414,
-     416
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_36",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    258.801,
-    30.143,
-    -0.0
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 11,
-    "n_points": 770,
-    "measured_height": 3.51,
-    "sample_frames": [
-     433,
-     434,
-     435,
-     436,
-     437,
-     438,
-     439,
-     441,
-     442,
-     443,
-     449
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_37",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    241.196,
-    56.281,
-    0.095
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 26,
-    "n_points": 647,
-    "measured_height": 3.5,
-    "sample_frames": [
-     381,
-     385,
-     391,
-     395,
-     399,
-     403,
-     408
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_38",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    234.61,
-    64.445,
-    0.074
-   ],
-   "rotation_euler_deg": [
-    0,
-    0,
-    0.0
-   ],
-   "scale": [
-    1,
-    1,
-    1
-   ],
-   "files": {
-    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
-    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
-    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
-    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
-    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
-   },
-   "evidence": {
-    "n_frames": 20,
-    "n_points": 641,
-    "measured_height": 3.51,
-    "sample_frames": [
-     362,
-     365,
-     380,
-     383,
-     386,
-     389,
-     393
-    ]
-   }
-  },
-  {
-   "instance_id": "inst_prop_lamp_lawn_39",
-   "asset_id": "prop_lamp_lawn",
-   "category": "prop",
-   "parent": "grp_props",
-   "position": [
-    86.632,
-    -48.749,
-    -0.915
+    92.439,
+    68.251,
+    -0.349
    ],
    "rotation_euler_deg": [
     0,
@@ -5664,17 +4744,746 @@
    },
    "evidence": {
     "n_frames": 16,
-    "n_points": 540,
-    "measured_height": 3.28,
+    "n_points": 2036,
+    "measured_height": 3.76,
+    "sample_frames": [
+     117,
+     155,
+     157,
+     159,
+     161,
+     163,
+     165,
+     167
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_26",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    104.437,
+    79.059,
+    -0.227
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 2024,
+    "measured_height": 3.61,
+    "sample_frames": [
+     173,
+     177,
+     179,
+     181,
+     183,
+     185,
+     187
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_27",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    261.083,
+    45.207,
+    -0.086
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 2010,
+    "measured_height": 3.88,
+    "sample_frames": [
+     416,
+     418,
+     420,
+     423,
+     425,
+     427,
+     429
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_28",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    132.712,
+    90.221,
+    -0.22
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 25,
+    "n_points": 1857,
+    "measured_height": 3.69,
+    "sample_frames": [
+     203,
+     207,
+     211,
+     215,
+     219,
+     223,
+     227
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_29",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    174.916,
+    103.264,
+    -0.052
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 1793,
+    "measured_height": 3.58,
+    "sample_frames": [
+     275,
+     276,
+     277,
+     278,
+     279,
+     280,
+     281,
+     282,
+     283,
+     284,
+     285
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_30",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    70.66,
+    27.444,
+    -0.083
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 21,
+    "n_points": 1792,
+    "measured_height": 3.91,
+    "sample_frames": [
+     71,
+     80,
+     83,
+     87,
+     92,
+     95,
+     98
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_31",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    206.565,
+    96.28,
+    -0.098
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 14,
+    "n_points": 1792,
+    "measured_height": 3.56,
+    "sample_frames": [
+     317,
+     320,
+     324,
+     326,
+     328,
+     330,
+     332
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_04",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    65.473,
+    17.562,
+    0.025
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    264.1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 21,
+    "n_points": 1782,
+    "measured_height": 0.38,
+    "sample_frames": [
+     66,
+     69,
+     72,
+     75,
+     78,
+     81,
+     84
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_05",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    119.5,
+    -70.833,
+    -0.116
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    -33.5
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 21,
+    "n_points": 1611,
+    "measured_height": 0.25,
+    "sample_frames": [
+     723,
+     727,
+     730,
+     733,
+     736,
+     739,
+     742
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_32",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    188.323,
+    101.192,
+    -0.302
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 1541,
+    "measured_height": 3.68,
+    "sample_frames": [
+     290,
+     291,
+     296,
+     297,
+     298,
+     299,
+     300,
+     301,
+     302,
+     303,
+     304
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_06",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    55.49,
+    19.251,
+    -0.038
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    263.8
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 10,
+    "n_points": 1497,
+    "measured_height": 0.66,
+    "sample_frames": [
+     70,
+     71,
+     72,
+     73,
+     74,
+     75,
+     76,
+     77,
+     78,
+     79
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_planter_07",
+   "asset_id": "prop_planter",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    212.502,
+    -78.968,
+    -0.008
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    25.9
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_planter/prop_planter_research.blend",
+    "research_glb": "assets/props/prop_planter/prop_planter_research.glb",
+    "web_blend": "assets/props/prop_planter/prop_planter_web.blend",
+    "web_gltf": "assets/web/prop_planter.gltf",
+    "source_json": "assets/props/prop_planter/prop_planter_research.json"
+   },
+   "evidence": {
+    "n_frames": 19,
+    "n_points": 1290,
+    "measured_height": 0.39,
+    "sample_frames": [
+     606,
+     609,
+     614,
+     617,
+     620,
+     623,
+     626
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_33",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    120.342,
+    83.116,
+    -0.141
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 18,
+    "n_points": 1244,
+    "measured_height": 3.63,
+    "sample_frames": [
+     192,
+     197,
+     200,
+     203,
+     206,
+     209
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_34",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    253.296,
+    53.145,
+    0.172
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 17,
+    "n_points": 902,
+    "measured_height": 3.57,
+    "sample_frames": [
+     395,
+     398,
+     402,
+     404,
+     406,
+     409,
+     412,
+     414,
+     416
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_35",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    263.618,
+    31.769,
+    0.134
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 11,
+    "n_points": 746,
+    "measured_height": 3.49,
+    "sample_frames": [
+     433,
+     434,
+     435,
+     436,
+     437,
+     438,
+     439,
+     441,
+     442,
+     443,
+     449
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_36",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    245.453,
+    57.692,
+    0.211
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 26,
+    "n_points": 706,
+    "measured_height": 3.5,
+    "sample_frames": [
+     381,
+     385,
+     391,
+     395,
+     399,
+     403,
+     408
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_37",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    238.634,
+    65.791,
+    0.187
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 20,
+    "n_points": 697,
+    "measured_height": 3.51,
+    "sample_frames": [
+     362,
+     365,
+     380,
+     383,
+     386,
+     389,
+     393
+    ]
+   }
+  },
+  {
+   "instance_id": "inst_prop_lamp_lawn_38",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    86.637,
+    -48.758,
+    -0.915
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 18,
+    "n_points": 551,
+    "measured_height": 3.26,
     "sample_frames": [
      763,
-     766,
+     767,
      774,
-     779,
-     782,
+     781,
      784,
-     786,
-     788
+     787
     ]
    }
   },
@@ -5684,14 +5493,14 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    89.338,
-    -44.626,
+    89.398,
+    -44.645,
     -0.954
    ],
    "rotation_euler_deg": [
     0,
     0,
-    -57.1
+    -57.8
    ],
    "scale": [
     1,
@@ -5730,14 +5539,14 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    90.495,
-    -42.196,
-    -0.88
+    90.482,
+    -42.213,
+    -0.885
    ],
    "rotation_euler_deg": [
     0,
     0,
-    -58.0
+    -58.7
    ],
    "scale": [
     1,
@@ -5752,10 +5561,11 @@
     "source_json": "assets/props/prop_planter/prop_planter_research.json"
    },
    "evidence": {
-    "n_frames": 8,
-    "n_points": 235,
+    "n_frames": 9,
+    "n_points": 242,
     "measured_height": 0.75,
     "sample_frames": [
+     767,
      769,
      774,
      776,
@@ -5773,14 +5583,14 @@
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    41.84,
-    3.275,
+    41.891,
+    3.271,
     0.419
    ],
    "rotation_euler_deg": [
     0,
     0,
-    -88.9
+    -88.5
    ],
    "scale": [
     1,
@@ -5796,8 +5606,8 @@
    },
    "evidence": {
     "n_frames": 3,
-    "n_points": 228,
-    "measured_height": 0.68,
+    "n_points": 195,
+    "measured_height": 0.73,
     "sample_frames": [
      38,
      41,
@@ -5806,13 +5616,13 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_40",
+   "instance_id": "inst_prop_lamp_lawn_39",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    50.725,
-    -12.113,
+    50.738,
+    -12.122,
     0.78
    ],
    "rotation_euler_deg": [
@@ -5834,8 +5644,8 @@
    },
    "evidence": {
     "n_frames": 7,
-    "n_points": 118,
-    "measured_height": 3.6,
+    "n_points": 121,
+    "measured_height": 3.52,
     "sample_frames": [
      31,
      33,
@@ -5848,14 +5658,14 @@
    }
   },
   {
-   "instance_id": "inst_prop_lamp_lawn_41",
+   "instance_id": "inst_prop_lamp_lawn_40",
    "asset_id": "prop_lamp_lawn",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    78.689,
-    22.799,
-    0.179
+    78.569,
+    22.735,
+    0.18
    ],
    "rotation_euler_deg": [
     0,
@@ -5875,11 +5685,10 @@
     "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
    },
    "evidence": {
-    "n_frames": 10,
-    "n_points": 106,
-    "measured_height": 3.75,
+    "n_frames": 9,
+    "n_points": 61,
+    "measured_height": 3.72,
     "sample_frames": [
-     72,
      79,
      80,
      81,
@@ -5893,19 +5702,58 @@
    }
   },
   {
+   "instance_id": "inst_prop_lamp_lawn_41",
+   "asset_id": "prop_lamp_lawn",
+   "category": "prop",
+   "parent": "grp_props",
+   "position": [
+    95.444,
+    -48.18,
+    -0.791
+   ],
+   "rotation_euler_deg": [
+    0,
+    0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "files": {
+    "research_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.blend",
+    "research_glb": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.glb",
+    "web_blend": "assets/props/prop_lamp_lawn/prop_lamp_lawn_web.blend",
+    "web_gltf": "assets/web/prop_lamp_lawn.gltf",
+    "source_json": "assets/props/prop_lamp_lawn/prop_lamp_lawn_research.json"
+   },
+   "evidence": {
+    "n_frames": 4,
+    "n_points": 58,
+    "measured_height": 3.9,
+    "sample_frames": [
+     776,
+     780,
+     782,
+     783
+    ]
+   }
+  },
+  {
    "instance_id": "inst_prop_planter_11",
    "asset_id": "prop_planter",
    "category": "prop",
    "parent": "grp_props",
    "position": [
-    91.934,
-    -39.191,
-    -0.9
+    91.89,
+    -39.309,
+    -0.899
    ],
    "rotation_euler_deg": [
     0,
     0,
-    -59.2
+    -59.8
    ],
    "scale": [
     1,
@@ -5922,7 +5770,7 @@
    "evidence": {
     "n_frames": 5,
     "n_points": 40,
-    "measured_height": 0.7,
+    "measured_height": 0.68,
     "sample_frames": [
      774,
      777,
@@ -5930,6 +5778,220 @@
      782,
      783
     ]
+   }
+  }
+ ],
+ "scatters": [
+  {
+   "scatter_id": "scatter_grass_lawn_01",
+   "parent_instance": "inst_lawn_01",
+   "asset_ids": [
+    "grass_tuft_01",
+    "grass_tuft_02",
+    "grass_tuft_03",
+    "grass_tuft_04",
+    "grass_tuft_05",
+    "grass_tuft_06"
+   ],
+   "file": "assets/grass/scatter/lawn_01_grass.npz",
+   "count": 1972997,
+   "fringe_count": 13881,
+   "seed": 20262114,
+   "params": {
+    "_doc": "density field for the research (Cycles) scene: full density near the walked camera path, thinning with distance; beyond far_m the baked blade texture carries the look",
+    "near_m": 11.0,
+    "near_per_m2": 230,
+    "mid_m": 28.0,
+    "mid_per_m2": 70,
+    "mid_scale": 1.5,
+    "far_m": 55.0,
+    "far_per_m2": 14,
+    "far_scale": 2.2,
+    "fringe_per_m": 26,
+    "fringe_inset_m": [
+     -0.015,
+     0.07
+    ],
+    "fringe_max_dist_m": 40.0
+   },
+   "generator": "cg/grass/scatter_grass.py",
+   "frame": "positions local to the parent lawn pivot (metres, +Z up); rotz radians; uniform scale; variant = index into asset_ids",
+   "note": "instances are generated (seeded) — not individually measured; density follows distance to the walked camera path"
+  },
+  {
+   "scatter_id": "scatter_grass_lawn_02",
+   "parent_instance": "inst_lawn_02",
+   "asset_ids": [
+    "grass_tuft_01",
+    "grass_tuft_02",
+    "grass_tuft_03",
+    "grass_tuft_04",
+    "grass_tuft_05",
+    "grass_tuft_06"
+   ],
+   "file": "assets/grass/scatter/lawn_02_grass.npz",
+   "count": 30961,
+   "fringe_count": 378,
+   "seed": 20263114,
+   "params": {
+    "_doc": "density field for the research (Cycles) scene: full density near the walked camera path, thinning with distance; beyond far_m the baked blade texture carries the look",
+    "near_m": 11.0,
+    "near_per_m2": 230,
+    "mid_m": 28.0,
+    "mid_per_m2": 70,
+    "mid_scale": 1.5,
+    "far_m": 55.0,
+    "far_per_m2": 14,
+    "far_scale": 2.2,
+    "fringe_per_m": 26,
+    "fringe_inset_m": [
+     -0.015,
+     0.07
+    ],
+    "fringe_max_dist_m": 40.0
+   },
+   "generator": "cg/grass/scatter_grass.py",
+   "frame": "positions local to the parent lawn pivot (metres, +Z up); rotz radians; uniform scale; variant = index into asset_ids",
+   "note": "instances are generated (seeded) — not individually measured; density follows distance to the walked camera path"
+  },
+  {
+   "scatter_id": "scatter_grass_lawn_03",
+   "parent_instance": "inst_lawn_03",
+   "asset_ids": [
+    "grass_tuft_01",
+    "grass_tuft_02",
+    "grass_tuft_03",
+    "grass_tuft_04",
+    "grass_tuft_05",
+    "grass_tuft_06"
+   ],
+   "file": "assets/grass/scatter/lawn_03_grass.npz",
+   "count": 21423,
+   "fringe_count": 686,
+   "seed": 20264114,
+   "params": {
+    "_doc": "density field for the research (Cycles) scene: full density near the walked camera path, thinning with distance; beyond far_m the baked blade texture carries the look",
+    "near_m": 11.0,
+    "near_per_m2": 230,
+    "mid_m": 28.0,
+    "mid_per_m2": 70,
+    "mid_scale": 1.5,
+    "far_m": 55.0,
+    "far_per_m2": 14,
+    "far_scale": 2.2,
+    "fringe_per_m": 26,
+    "fringe_inset_m": [
+     -0.015,
+     0.07
+    ],
+    "fringe_max_dist_m": 40.0
+   },
+   "generator": "cg/grass/scatter_grass.py",
+   "frame": "positions local to the parent lawn pivot (metres, +Z up); rotz radians; uniform scale; variant = index into asset_ids",
+   "note": "instances are generated (seeded) — not individually measured; density follows distance to the walked camera path"
+  },
+  {
+   "scatter_id": "scatter_grass_lawn_04",
+   "parent_instance": "inst_lawn_04",
+   "asset_ids": [
+    "grass_tuft_01",
+    "grass_tuft_02",
+    "grass_tuft_03",
+    "grass_tuft_04",
+    "grass_tuft_05",
+    "grass_tuft_06"
+   ],
+   "file": "assets/grass/scatter/lawn_04_grass.npz",
+   "count": 5987,
+   "fringe_count": 168,
+   "seed": 20265114,
+   "params": {
+    "_doc": "density field for the research (Cycles) scene: full density near the walked camera path, thinning with distance; beyond far_m the baked blade texture carries the look",
+    "near_m": 11.0,
+    "near_per_m2": 230,
+    "mid_m": 28.0,
+    "mid_per_m2": 70,
+    "mid_scale": 1.5,
+    "far_m": 55.0,
+    "far_per_m2": 14,
+    "far_scale": 2.2,
+    "fringe_per_m": 26,
+    "fringe_inset_m": [
+     -0.015,
+     0.07
+    ],
+    "fringe_max_dist_m": 40.0
+   },
+   "generator": "cg/grass/scatter_grass.py",
+   "frame": "positions local to the parent lawn pivot (metres, +Z up); rotz radians; uniform scale; variant = index into asset_ids",
+   "note": "instances are generated (seeded) — not individually measured; density follows distance to the walked camera path"
+  }
+ ],
+ "scatter_assets": [
+  {
+   "asset_id": "grass_tuft_01",
+   "kind": "turf",
+   "files": {
+    "research_blend": "assets/grass/grass_tuft_01/grass_tuft_01_research.blend",
+    "research_glb": "assets/grass/grass_tuft_01/grass_tuft_01_research.glb",
+    "web_blend": "assets/grass/grass_tuft_01/grass_tuft_01_web.blend",
+    "web_gltf": "assets/web/grass_tuft_01.gltf",
+    "source_json": "assets/grass/grass_tuft_01/grass_tuft_01_research.json"
+   }
+  },
+  {
+   "asset_id": "grass_tuft_02",
+   "kind": "turf",
+   "files": {
+    "research_blend": "assets/grass/grass_tuft_02/grass_tuft_02_research.blend",
+    "research_glb": "assets/grass/grass_tuft_02/grass_tuft_02_research.glb",
+    "web_blend": "assets/grass/grass_tuft_02/grass_tuft_02_web.blend",
+    "web_gltf": "assets/web/grass_tuft_02.gltf",
+    "source_json": "assets/grass/grass_tuft_02/grass_tuft_02_research.json"
+   }
+  },
+  {
+   "asset_id": "grass_tuft_03",
+   "kind": "turf",
+   "files": {
+    "research_blend": "assets/grass/grass_tuft_03/grass_tuft_03_research.blend",
+    "research_glb": "assets/grass/grass_tuft_03/grass_tuft_03_research.glb",
+    "web_blend": "assets/grass/grass_tuft_03/grass_tuft_03_web.blend",
+    "web_gltf": "assets/web/grass_tuft_03.gltf",
+    "source_json": "assets/grass/grass_tuft_03/grass_tuft_03_research.json"
+   }
+  },
+  {
+   "asset_id": "grass_tuft_04",
+   "kind": "turf_dry",
+   "files": {
+    "research_blend": "assets/grass/grass_tuft_04/grass_tuft_04_research.blend",
+    "research_glb": "assets/grass/grass_tuft_04/grass_tuft_04_research.glb",
+    "web_blend": "assets/grass/grass_tuft_04/grass_tuft_04_web.blend",
+    "web_gltf": "assets/web/grass_tuft_04.gltf",
+    "source_json": "assets/grass/grass_tuft_04/grass_tuft_04_research.json"
+   }
+  },
+  {
+   "asset_id": "grass_tuft_05",
+   "kind": "fringe",
+   "files": {
+    "research_blend": "assets/grass/grass_tuft_05/grass_tuft_05_research.blend",
+    "research_glb": "assets/grass/grass_tuft_05/grass_tuft_05_research.glb",
+    "web_blend": "assets/grass/grass_tuft_05/grass_tuft_05_web.blend",
+    "web_gltf": "assets/web/grass_tuft_05.gltf",
+    "source_json": "assets/grass/grass_tuft_05/grass_tuft_05_research.json"
+   }
+  },
+  {
+   "asset_id": "grass_tuft_06",
+   "kind": "fringe",
+   "files": {
+    "research_blend": "assets/grass/grass_tuft_06/grass_tuft_06_research.blend",
+    "research_glb": "assets/grass/grass_tuft_06/grass_tuft_06_research.glb",
+    "web_blend": "assets/grass/grass_tuft_06/grass_tuft_06_web.blend",
+    "web_gltf": "assets/web/grass_tuft_06.gltf",
+    "source_json": "assets/grass/grass_tuft_06/grass_tuft_06_research.json"
    }
   }
  ],
