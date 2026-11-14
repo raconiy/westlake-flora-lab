@@ -3,7 +3,7 @@
   "scene_id": "scene-20261113",
   "agent_id": "agent-a",
   "title": "环绕实拍 · 独立CG资产场景",
-  "status": "appearance-refined-v3",
+  "status": "appearance-refined-v3-full-scene",
   "source": {
     "duration": 286.325,
     "width": 544,
@@ -1309,7 +1309,8 @@
     "由实拍视频参考生成的可编辑CG资产；当前布局与尺度为目视估计。",
     "建筑、每株植物、地面与设施独立管理，可下载和重新装配。",
     "原视频544×960；未观察区域和微观材质包含工程补全。",
-    "外观优先；碰撞与物理仿真尚未接入。"
+    "外观优先；碰撞与物理仿真尚未接入。",
+    "网页 GLB 使用完整场景基底，并叠加 v3 树冠层、草簇和远景推断建筑；未再用 hide_render 标志裁掉原场景资产。"
   ],
   "simulation_video": {
     "file": "agent-a-sim-same-duration-preview.mp4",
@@ -1337,15 +1338,16 @@
   },
   "scene_blend": "scene-blend.zip",
   "refined_scene": {
-    "version": "v3",
+    "version": "v3-full-scene",
     "glb": "scene.glb",
     "blend_package": "scene-blend.zip",
-    "glb_sha256": "132300d1fb5eae3f4aaf95fa85b7ff15af001f73aab0e04caac72fa256982787",
+    "glb_sha256": "e7a6a912966bea02ebcd13a6d590614dee10cc7243db8c6fd23953fdb7ea8c5d",
     "qa_views": [
       "renders/refined-ref260.png",
       "renders/refined-ref270.png"
     ],
-    "receipt": "refine/refinement-receipt.json"
+    "receipt": "refine/refinement-receipt.json",
+    "export_note": "Full authored scene retained; refine layers appended as independent glTF roots. The refine source blend and receipt remain available in scene-blend.zip and refine/."
   },
   "refined_asset_sources": [
     {
