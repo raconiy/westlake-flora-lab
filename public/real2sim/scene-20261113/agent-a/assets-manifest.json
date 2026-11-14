@@ -1338,16 +1338,16 @@
   },
   "scene_blend": "scene-blend.zip",
   "refined_scene": {
-    "version": "v3-full-scene",
+    "version": "v3-full-scene-refined-core",
     "glb": "scene.glb",
     "blend_package": "scene-blend.zip",
-    "glb_sha256": "e7a6a912966bea02ebcd13a6d590614dee10cc7243db8c6fd23953fdb7ea8c5d",
+    "glb_sha256": "b3a5531fe27c009e0a6c20314c53b1f0e46bb79e85971b39887c8e5c64326285",
     "qa_views": [
       "renders/refined-ref260.png",
       "renders/refined-ref270.png"
     ],
     "receipt": "refine/refinement-receipt.json",
-    "export_note": "Full authored scene retained; refine layers appended as independent glTF roots. The refine source blend and receipt remain available in scene-blend.zip and refine/."
+    "export_note": "Complete authored vegetation, facilities and secondary academic wing retained; refined PBR ground, paving and main colonnade roots replace the old core. The visual-only sky shell is excluded from viewer roots so framing remains stable."
   },
   "refined_asset_sources": [
     {
@@ -1370,5 +1370,30 @@
       "editable": true,
       "inferred": true
     }
-  ]
+  ],
+  "scene_composition": {
+    "base_scene": "server-produced complete authored scene",
+    "refined_core": [
+      "Observed_road",
+      "Observed_paving",
+      "Observed_lawn",
+      "Observed_forecourt",
+      "main colonnade component roots"
+    ],
+    "retained_base": [
+      "trees",
+      "shrubs",
+      "lamps",
+      "bins_signs",
+      "ARCH_WestAcademic"
+    ],
+    "refine_layers": [
+      "secondary canopy",
+      "grass tufts",
+      "inferred distant academic wing"
+    ],
+    "excluded_from_viewer_roots": [
+      "ObservedSky_VisualOnly"
+    ]
+  }
 }
