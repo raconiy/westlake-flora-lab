@@ -1,0 +1,2933 @@
+{
+  "config": "/root/real2sim/scene-20261113/agent-a/revision2/integration/final-selection.json",
+  "asset_sources": [
+    {
+      "id": "mainhall",
+      "source_blend": "/root/real2sim/scene-20261113/agent-a/revision2/mainhall-v9/selected/mainhall-clean-phototextured.blend",
+      "sha256": "cbea89ecf0fe0fa91f305528091d9a065955a74ac74af49523710843ac3da842",
+      "objects": 45
+    },
+    {
+      "id": "ground",
+      "source_blend": "/root/real2sim/scene-20261113/agent-a/revision2/ground-assets-v3/observed-ground.blend",
+      "sha256": "1998a170a1eca774356f8c3d504ba0a12eb6a35f513a3a7ace95ad83ddb0a9b7",
+      "objects": 4
+    },
+    {
+      "id": "facilities",
+      "source_blend": "/root/real2sim/scene-20261113/agent-a/revision2/facilities-v3/final/facilities.blend",
+      "sha256": "f44dcb0beffac5ec66401a0f17f504d344ee919f44798e5e90b9dab1bb566cb7",
+      "objects": 16
+    },
+    {
+      "id": "forecourt-tree",
+      "source_blend": "/root/real2sim/scene-20261113/agent-a/revision2/forecourt-tree/source-tree.blend",
+      "sha256": "e786ebf729fb04abe022dbea188f0a7857a167bdb0d76cc6d79704516aee4d28",
+      "objects": 15
+    },
+    {
+      "id": "sky",
+      "source_blend": "/root/real2sim/scene-20261113/agent-a/revision2/sky-environment/sky.blend",
+      "sha256": "a5673a7e84640dc12364fcee0d78574d5f70d8f38fe700e80d6ad04b7454d6ba",
+      "objects": 1
+    }
+  ],
+  "objects": [
+    {
+      "id": "UpperScreen_Clean_PhotoSurface",
+      "asset": "mainhall",
+      "vertices": 6878,
+      "polygons": 13752,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "UpperFins_Optional_HiddenLOD",
+      "asset": "mainhall",
+      "vertices": 1520,
+      "polygons": 2280,
+      "hidden_render": true,
+      "transform": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "Soffit_Continuous_InferredSlab",
+      "asset": "mainhall",
+      "vertices": 5430,
+      "polygons": 10856,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "RoofTransition_Inferred",
+      "asset": "mainhall",
+      "vertices": 15008,
+      "polygons": 29904,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_08",
+      "asset": "mainhall",
+      "vertices": 3503,
+      "polygons": 6997,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_07",
+      "asset": "mainhall",
+      "vertices": 3778,
+      "polygons": 7552,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_06",
+      "asset": "mainhall",
+      "vertices": 3482,
+      "polygons": 6960,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_05",
+      "asset": "mainhall",
+      "vertices": 3730,
+      "polygons": 7456,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_04",
+      "asset": "mainhall",
+      "vertices": 3778,
+      "polygons": 7552,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_03",
+      "asset": "mainhall",
+      "vertices": 3446,
+      "polygons": 6888,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_02",
+      "asset": "mainhall",
+      "vertices": 3762,
+      "polygons": 7520,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedColumn_01",
+      "asset": "mainhall",
+      "vertices": 3730,
+      "polygons": 7456,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "MVSColumn_06",
+      "asset": "mainhall",
+      "vertices": 3730,
+      "polygons": 7456,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "MVSColumn_05",
+      "asset": "mainhall",
+      "vertices": 3730,
+      "polygons": 7456,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "MVSColumn_04",
+      "asset": "mainhall",
+      "vertices": 3730,
+      "polygons": 7456,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "MVSColumn_03",
+      "asset": "mainhall",
+      "vertices": 3730,
+      "polygons": 7456,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "MVSColumn_02",
+      "asset": "mainhall",
+      "vertices": 3450,
+      "polygons": 6896,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "MVSColumn_01",
+      "asset": "mainhall",
+      "vertices": 3450,
+      "polygons": 6896,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_13",
+      "asset": "mainhall",
+      "vertices": 161,
+      "polygons": 288,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_12",
+      "asset": "mainhall",
+      "vertices": 199,
+      "polygons": 360,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_11",
+      "asset": "mainhall",
+      "vertices": 161,
+      "polygons": 288,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_10",
+      "asset": "mainhall",
+      "vertices": 199,
+      "polygons": 360,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_09",
+      "asset": "mainhall",
+      "vertices": 161,
+      "polygons": 288,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_08",
+      "asset": "mainhall",
+      "vertices": 275,
+      "polygons": 504,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_07",
+      "asset": "mainhall",
+      "vertices": 199,
+      "polygons": 360,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_06",
+      "asset": "mainhall",
+      "vertices": 199,
+      "polygons": 360,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_05",
+      "asset": "mainhall",
+      "vertices": 121,
+      "polygons": 216,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_04",
+      "asset": "mainhall",
+      "vertices": 237,
+      "polygons": 432,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_03",
+      "asset": "mainhall",
+      "vertices": 237,
+      "polygons": 432,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_02",
+      "asset": "mainhall",
+      "vertices": 275,
+      "polygons": 504,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "HeaderBand_01",
+      "asset": "mainhall",
+      "vertices": 693,
+      "polygons": 1296,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_13",
+      "asset": "mainhall",
+      "vertices": 489,
+      "polygons": 928,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_12",
+      "asset": "mainhall",
+      "vertices": 607,
+      "polygons": 1160,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_11",
+      "asset": "mainhall",
+      "vertices": 489,
+      "polygons": 928,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_10",
+      "asset": "mainhall",
+      "vertices": 607,
+      "polygons": 1160,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_09",
+      "asset": "mainhall",
+      "vertices": 489,
+      "polygons": 928,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_08",
+      "asset": "mainhall",
+      "vertices": 843,
+      "polygons": 1624,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_07",
+      "asset": "mainhall",
+      "vertices": 607,
+      "polygons": 1160,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_06",
+      "asset": "mainhall",
+      "vertices": 607,
+      "polygons": 1160,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_05",
+      "asset": "mainhall",
+      "vertices": 353,
+      "polygons": 664,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_04",
+      "asset": "mainhall",
+      "vertices": 725,
+      "polygons": 1392,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_03",
+      "asset": "mainhall",
+      "vertices": 725,
+      "polygons": 1392,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_02",
+      "asset": "mainhall",
+      "vertices": 843,
+      "polygons": 1624,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GlazingBay_01",
+      "asset": "mainhall",
+      "vertices": 2141,
+      "polygons": 4176,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "EaveBand_ObservedArc",
+      "asset": "mainhall",
+      "vertices": 2257,
+      "polygons": 4500,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Observed_road",
+      "asset": "ground",
+      "vertices": 1426,
+      "polygons": 1422,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          3.173084259033203
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.26957324147224426
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Observed_paving",
+      "asset": "ground",
+      "vertices": 3990,
+      "polygons": 3980,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          2.9160940647125244
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.6975136995315552
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Observed_lawn",
+      "asset": "ground",
+      "vertices": 34813,
+      "polygons": 61888,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.9036790728569031
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.6343519687652588
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.002943200757727027
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Observed_forecourt",
+      "asset": "ground",
+      "vertices": 284,
+      "polygons": 282,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          3.824467897415161
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.8600239753723145
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0007243674481287599
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Lamp_Translucent_Upper_Sleeve",
+      "asset": "facilities",
+      "vertices": 96,
+      "polygons": 50,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.699999988079071,
+          0.0,
+          0.0,
+          0.6812613010406494
+        ],
+        [
+          0.0,
+          0.699999988079071,
+          0.0,
+          -0.31756332516670227
+        ],
+        [
+          0.0,
+          0.0,
+          0.6000000238418579,
+          0.3764064311981201
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Lamp_Pole",
+      "asset": "facilities",
+      "vertices": 64,
+      "polygons": 34,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.47999998927116394,
+          0.0,
+          0.0,
+          0.6795991659164429
+        ],
+        [
+          0.0,
+          0.47999998927116394,
+          0.0,
+          -0.3192965090274811
+        ],
+        [
+          0.0,
+          0.0,
+          1.0485074520111084,
+          0.1792970597743988
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Lamp_Head_Neck",
+      "asset": "facilities",
+      "vertices": 48,
+      "polygons": 26,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.47999998927116394,
+          0.0,
+          0.0,
+          0.6814253926277161
+        ],
+        [
+          0.0,
+          0.47999998927116394,
+          0.0,
+          -0.3173922002315521
+        ],
+        [
+          0.0,
+          0.0,
+          0.949999988079071,
+          0.3958675265312195
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Lamp_Foot_Collar",
+      "asset": "facilities",
+      "vertices": 64,
+      "polygons": 34,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.31200000643730164,
+          0.0,
+          0.0,
+          0.6781512498855591
+        ],
+        [
+          0.0,
+          0.31200000643730164,
+          0.0,
+          -0.32080626487731934
+        ],
+        [
+          0.0,
+          0.0,
+          0.949999988079071,
+          0.007594580762088299
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Lamp_Elliptical_Shallow_Dark_Top",
+      "asset": "facilities",
+      "vertices": 354,
+      "polygons": 384,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.5740000009536743,
+          0.0,
+          0.0,
+          0.6815800070762634
+        ],
+        [
+          0.0,
+          0.7700000405311584,
+          0.0,
+          -0.3172309696674347
+        ],
+        [
+          0.0,
+          0.0,
+          0.7599999904632568,
+          0.414204478263855
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GroundLight_Top_Shadow_Gasket",
+      "asset": "facilities",
+      "vertices": 8,
+      "polygons": 6,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.550000011920929,
+          0.0,
+          0.0,
+          0.819572925567627
+        ],
+        [
+          0.0,
+          0.550000011920929,
+          0.0,
+          -1.413131833076477
+        ],
+        [
+          0.0,
+          0.0,
+          0.6700000166893005,
+          0.04489000141620636
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GroundLight_Square_Body",
+      "asset": "facilities",
+      "vertices": 8,
+      "polygons": 6,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.550000011920929,
+          0.0,
+          0.0,
+          0.819572925567627
+        ],
+        [
+          0.0,
+          0.550000011920929,
+          0.0,
+          -1.413131833076477
+        ],
+        [
+          0.0,
+          0.0,
+          0.6700000166893005,
+          0.02345000021159649
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "GroundLight_Frosted_Top",
+      "asset": "facilities",
+      "vertices": 8,
+      "polygons": 6,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.550000011920929,
+          0.0,
+          0.0,
+          0.819572925567627
+        ],
+        [
+          0.0,
+          0.550000011920929,
+          0.0,
+          -1.413131833076477
+        ],
+        [
+          0.0,
+          0.0,
+          0.6700000166893005,
+          0.048239998519420624
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_Top_Cap",
+      "asset": "facilities",
+      "vertices": 48,
+      "polygons": 26,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.5299999713897705,
+          0.0,
+          0.0,
+          0.8052948713302612
+        ],
+        [
+          0.0,
+          0.5299999713897705,
+          0.0,
+          -0.8151397705078125
+        ],
+        [
+          0.0,
+          0.0,
+          0.5299999713897705,
+          0.038689985871315
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_SideOutlet_02",
+      "asset": "facilities",
+      "vertices": 48,
+      "polygons": 26,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.0075235809199512005,
+          -0.0626971647143364,
+          -0.526224672794342,
+          0.7957548499107361
+        ],
+        [
+          -0.0626971647143364,
+          0.522476315498352,
+          -0.06314695626497269,
+          -0.8162845969200134
+        ],
+        [
+          0.526224672794342,
+          0.06314695626497269,
+          -7.806561086454167e-08,
+          0.02331998571753502
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_SideOutlet_01",
+      "asset": "facilities",
+      "vertices": 48,
+      "polygons": 26,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.013229227624833584,
+          -0.08268330991268158,
+          0.523343563079834,
+          0.8148348331451416
+        ],
+        [
+          -0.08268330991268158,
+          0.5167706608772278,
+          0.08373495936393738,
+          -0.8136133551597595
+        ],
+        [
+          -0.523343563079834,
+          -0.08373495936393738,
+          -9.953206614454757e-08,
+          0.02331998571753502
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_SideCap_02",
+      "asset": "facilities",
+      "vertices": 48,
+      "polygons": 26,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.0075235809199512005,
+          -0.0626971647143364,
+          -0.526224672794342,
+          0.7862148880958557
+        ],
+        [
+          -0.0626971647143364,
+          0.522476315498352,
+          -0.06314695626497269,
+          -0.8174293637275696
+        ],
+        [
+          0.526224672794342,
+          0.06314695626497269,
+          -7.806561086454167e-08,
+          0.02331998571753502
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_SideCap_01",
+      "asset": "facilities",
+      "vertices": 48,
+      "polygons": 26,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.013229227624833584,
+          -0.08268330991268158,
+          0.523343563079834,
+          0.8243748545646667
+        ],
+        [
+          -0.08268330991268158,
+          0.5167706608772278,
+          0.08373495936393738,
+          -0.8120869398117065
+        ],
+        [
+          -0.523343563079834,
+          -0.08373495936393738,
+          -9.953206614454757e-08,
+          0.02331998571753502
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_Red_Domed_Cap",
+      "asset": "facilities",
+      "vertices": 354,
+      "polygons": 384,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.5299999713897705,
+          0.0,
+          0.0,
+          0.8052948713302612
+        ],
+        [
+          0.0,
+          0.5299999713897705,
+          0.0,
+          -0.8151397705078125
+        ],
+        [
+          0.0,
+          0.0,
+          0.5299999713897705,
+          0.031799983233213425
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_Red_Body",
+      "asset": "facilities",
+      "vertices": 64,
+      "polygons": 34,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.5299999713897705,
+          0.0,
+          0.0,
+          0.8052948713302612
+        ],
+        [
+          0.0,
+          0.5299999713897705,
+          0.0,
+          -0.8151397705078125
+        ],
+        [
+          0.0,
+          0.0,
+          0.5299999713897705,
+          0.015369984321296215
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "FireHydrant_Cap_Neck",
+      "asset": "facilities",
+      "vertices": 48,
+      "polygons": 26,
+      "hidden_render": false,
+      "transform": [
+        [
+          0.5299999713897705,
+          0.0,
+          0.0,
+          0.8052948713302612
+        ],
+        [
+          0.0,
+          0.5299999713897705,
+          0.0,
+          -0.8151397705078125
+        ],
+        [
+          0.0,
+          0.0,
+          0.5299999713897705,
+          0.02649998478591442
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_right_upright",
+      "asset": "forecourt-tree",
+      "vertices": 330,
+      "polygons": 316,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_right_twig",
+      "asset": "forecourt-tree",
+      "vertices": 150,
+      "polygons": 136,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_right_middle",
+      "asset": "forecourt-tree",
+      "vertices": 330,
+      "polygons": 316,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_right_low",
+      "asset": "forecourt-tree",
+      "vertices": 210,
+      "polygons": 196,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_main_trunk",
+      "asset": "forecourt-tree",
+      "vertices": 630,
+      "polygons": 616,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_left_upright",
+      "asset": "forecourt-tree",
+      "vertices": 390,
+      "polygons": 376,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_left_twig",
+      "asset": "forecourt-tree",
+      "vertices": 210,
+      "polygons": 196,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_left_middle",
+      "asset": "forecourt-tree",
+      "vertices": 390,
+      "polygons": 376,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_left_low",
+      "asset": "forecourt-tree",
+      "vertices": 330,
+      "polygons": 316,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_central_fork",
+      "asset": "forecourt-tree",
+      "vertices": 330,
+      "polygons": 316,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_apex_right",
+      "asset": "forecourt-tree",
+      "vertices": 150,
+      "polygons": 136,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Wood_apex_left",
+      "asset": "forecourt-tree",
+      "vertices": 150,
+      "polygons": 136,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Foliage_upper",
+      "asset": "forecourt-tree",
+      "vertices": 3276,
+      "polygons": 819,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Foliage_middle",
+      "asset": "forecourt-tree",
+      "vertices": 6688,
+      "polygons": 1672,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "Foliage_lower",
+      "asset": "forecourt-tree",
+      "vertices": 296,
+      "polygons": 74,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "ObservedSky_VisualOnly",
+      "asset": "sky",
+      "vertices": 18719,
+      "polygons": 18432,
+      "hidden_render": false,
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "coordinate_frame": "shared local Z-up; exported glTF standard Y-up",
+  "status": "review",
+  "reference_views": [
+    {
+      "id": "ref260",
+      "width": 544,
+      "height": 960,
+      "K": [
+        [
+          550.0,
+          0.0,
+          272.0
+        ],
+        [
+          0.0,
+          550.0,
+          480.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "time_seconds": 259.9835,
+      "camera_to_world_blender_zup": [
+        [
+          -0.690976561144846,
+          0.0699798619264295,
+          -0.719481904479328,
+          -0.009968737527878968
+        ],
+        [
+          -0.7205085588312304,
+          0.013833534046151622,
+          0.6933080484075872,
+          -0.0031483386612565223
+        ],
+        [
+          0.05847057892125007,
+          0.9974524812042684,
+          0.04086244168013022,
+          0.19150234230651975
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_to_world_web_gltf_yup": [
+        [
+          -0.690976561144846,
+          0.0699798619264295,
+          -0.719481904479328,
+          -0.009968737527878968
+        ],
+        [
+          0.05847057892125007,
+          0.9974524812042684,
+          0.04086244168013022,
+          0.19150234230651975
+        ],
+        [
+          0.7205085588312304,
+          -0.013833534046151622,
+          -0.6933080484075872,
+          0.0031483386612565223
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "real_image": "/root/real2sim/scene-20261113/agent-a/revision2/gsplat-training-local/dataset/images/frame_0060.jpg"
+    },
+    {
+      "id": "ref270",
+      "width": 544,
+      "height": 960,
+      "K": [
+        [
+          550.0,
+          0.0,
+          272.0
+        ],
+        [
+          0.0,
+          550.0,
+          480.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "time_seconds": 269.9835,
+      "camera_to_world_blender_zup": [
+        [
+          -0.6912883933122057,
+          0.04275760445910543,
+          -0.721312792436643,
+          3.359773700691532
+        ],
+        [
+          -0.7213073673732993,
+          -0.10003026054719413,
+          0.6853536523196331,
+          0.07964263705371721
+        ],
+        [
+          -0.042849026182975425,
+          0.9940652565278493,
+          0.09999113320385734,
+          0.1988925248518834
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_to_world_web_gltf_yup": [
+        [
+          -0.6912883933122057,
+          0.04275760445910543,
+          -0.721312792436643,
+          3.359773700691532
+        ],
+        [
+          -0.042849026182975425,
+          0.9940652565278493,
+          0.09999113320385734,
+          0.1988925248518834
+        ],
+        [
+          0.7213073673732993,
+          0.10003026054719413,
+          -0.6853536523196331,
+          -0.07964263705371721
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "real_image": "/root/real2sim/scene-20261113/agent-a/revision2/gsplat-training-local/dataset/images/frame_0110.jpg"
+    }
+  ],
+  "web_material_conversion": {
+    "file": "/root/real2sim/scene-20261113/agent-a/revision2/integration/final-scene/appearance-scene.glb",
+    "converted_materials": [
+      "Actual source photo atlas | original lighting baked",
+      "UpperScreen_Clean_PhotoSurface_measured_unseen_color",
+      "Soffit_Continuous_InferredSlab_measured_unseen_color",
+      "RoofTransition_Inferred_measured_unseen_color",
+      "ObservedColumn_08_measured_unseen_color",
+      "ObservedColumn_07_measured_unseen_color",
+      "ObservedColumn_06_measured_unseen_color",
+      "ObservedColumn_05_measured_unseen_color",
+      "ObservedColumn_04_measured_unseen_color",
+      "ObservedColumn_03_measured_unseen_color",
+      "ObservedColumn_02_measured_unseen_color",
+      "ObservedColumn_01_measured_unseen_color",
+      "MVSColumn_06_measured_unseen_color",
+      "MVSColumn_05_measured_unseen_color",
+      "MVSColumn_04_measured_unseen_color",
+      "MVSColumn_03_measured_unseen_color",
+      "MVSColumn_02_measured_unseen_color",
+      "MVSColumn_01_measured_unseen_color",
+      "HeaderBand_06_measured_unseen_color",
+      "HeaderBand_03_measured_unseen_color",
+      "HeaderBand_02_measured_unseen_color",
+      "HeaderBand_01_measured_unseen_color",
+      "GlazingBay_06_measured_unseen_color",
+      "GlazingBay_03_measured_unseen_color",
+      "GlazingBay_02_measured_unseen_color",
+      "GlazingBay_01_measured_unseen_color",
+      "EaveBand_ObservedArc_measured_unseen_color",
+      "Observed_road_RealAtlas",
+      "Observed_paving_RealAtlas",
+      "Observed_lawn_RealAtlas",
+      "Observed_forecourt_RealAtlas",
+      "Lamp_Translucent_Upper_Sleeve_SourceAppearance",
+      "Lamp_Pole_SourceAppearance",
+      "Lamp_Head_Neck_SourceAppearance",
+      "Lamp_Foot_Collar_SourceAppearance",
+      "Lamp_Elliptical_Shallow_Dark_Top_SourceAppearance",
+      "GroundLight_Top_Shadow_Gasket_SourceAppearance",
+      "GroundLight_Square_Body_SourceAppearance",
+      "GroundLight_Frosted_Top_SourceAppearance",
+      "FireHydrant_Top_Cap_SourceAppearance",
+      "FireHydrant_SideOutlet_02_SourceAppearance",
+      "FireHydrant_SideOutlet_01_SourceAppearance",
+      "FireHydrant_SideCap_02_SourceAppearance",
+      "FireHydrant_SideCap_01_SourceAppearance",
+      "FireHydrant_Red_Domed_Cap_SourceAppearance",
+      "FireHydrant_Red_Body_SourceAppearance",
+      "FireHydrant_Cap_Neck_SourceAppearance",
+      "ObservedSky_Unlit_DoubleSided"
+    ],
+    "notes": [],
+    "binary_payload_unchanged": true,
+    "sha256": "47cf51e8ecbc8a2f4e1622a027c2adfc4c4034d9c3a77ea281d5d6f42561ecef",
+    "bytes": 21828656
+  },
+  "exports": {
+    "appearance-scene.blend": {
+      "bytes": 30265140,
+      "sha256": "7dbcec44f2095b4807ed084a9df55aa9a0470768646b59d9f236fb7f663cfb8a"
+    },
+    "appearance-scene.glb": {
+      "bytes": 21828656,
+      "sha256": "47cf51e8ecbc8a2f4e1622a027c2adfc4c4034d9c3a77ea281d5d6f42561ecef"
+    }
+  }
+}

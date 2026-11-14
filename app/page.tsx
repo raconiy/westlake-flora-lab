@@ -29,7 +29,7 @@ function readSavedWorkspace():{scenario:Scenario;versions:Version[];bridge:strin
  }catch{return defaults;}
 }
 const comparisonOptions = [
- {agent:'agent-a', hash:'#comparison', label:'Agent A'},
+ {agent:'agent-a', hash:'#comparison', label:'Agent A · 第二版'},
  {agent:'agent-b', hash:'#comparison-b', label:'Agent B · Opus 5.5'},
 ] as const;
 

@@ -75,13 +75,20 @@
           <div class="reference-heading"><div><p class="eyebrow">REAL-WORLD REFERENCE</p><h2 id="reference-heading">实拍参考</h2></div><span class="reference-tag">原始输入</span></div>
           <div class="reference-media" id="reference-media"><video id="reference-video" controls playsinline preload="metadata" poster="./reference-poster.jpg" aria-label="实拍参考视频"><source src="./reference.mp4" type="video/mp4"></video><img id="reference-fallback" src="./reference-poster.jpg" alt="实拍参考画面" hidden><div class="reference-empty" id="reference-empty" hidden><svg class="icon"><use href="#i-play"/></svg><span>参考画面暂不可用</span></div></div>
           <p class="video-error" id="video-error" role="status" hidden></p>
-          <div class="reference-details"><div class="source-meta"><span id="source-size">544 × 960</span><span id="source-duration">实拍视频</span></div><p class="reference-copy">观察建筑轮廓、铺地与绿化关系。拖动视频进度条，手动选择参考画面。</p><label class="local-file-button" for="local-video"><svg class="icon"><use href="#i-play"/></svg>使用本地参考视频<input id="local-video" type="file" accept="video/*"></label><p class="local-file-note" id="local-file-note">仅在此浏览器播放，不上传文件。</p><button class="revert-video text-button" id="revert-video" type="button" hidden>恢复原始参考</button></div>
-          <div class="alignment-note"><span class="note-symbol">i</span><div><strong>人工对照 · 自由视角</strong><p>当前未提供相机标定。两侧独立浏览，不代表同机位或逐帧同步。</p><button type="button" disabled title="需要真实参考相机标定数据后才能启用">同帧叠加 <span>待标定</span></button></div></div>
+          <div class="reference-details"><div class="source-meta"><span id="source-size">544 × 960</span><span id="source-duration">实拍视频</span></div><p class="reference-copy">观察建筑轮廓、铺地与绿化关系。拖动视频进度条，手动选择参考画面。</p><label class="local-file-button" for="local-video"><svg class="icon"><use href="#i-play"/></svg>使用本地参考视频<input id="local-video" type="file" accept="video/*"></label><p class="local-file-note" id="local-file-note">仅在此浏览器播放，不上传文件。</p><section class="simulation-video-card" aria-labelledby="simulation-video-heading">
+            <p class="eyebrow">AGENT A SIMULATION DELIVERY</p>
+            <h3 id="simulation-video-heading">同长度仿真渲染</h3>
+            <video controls playsinline preload="metadata" poster="./renders/overview.jpg" aria-label="Agent A 同长度仿真渲染视频">
+              <source src="./agent-a-sim-same-duration-preview.mp4" type="video/mp4">
+            </video>
+            <p>外观 refine v3 · 544 × 960 · 30 fps · 286.325 s。使用 ref260/ref270 局部锚点平滑往返；断开的注册片段不作精确姿态恢复声明。</p>
+          </section><button class="revert-video text-button" id="revert-video" type="button" hidden>恢复原始参考</button></div>
+          <div class="alignment-note"><span class="note-symbol">i</span><div><strong>局部标定 · 推断漫游</strong><p>当前未提供相机标定。两侧独立浏览，不代表同机位或逐帧同步。</p><button type="button" disabled title="需要真实参考相机标定数据后才能启用">同帧叠加 <span>待标定</span></button></div></div>
         </aside>
       </div>
 
       <section class="study-footer" aria-label="场景说明"><div class="scope-notes"><span class="scope-pill">外观优先</span><span>布局为估计重建</span><span class="footer-divider"></span><span>输入 <strong id="footer-input">544 × 960</strong></span></div><p id="scene-status" role="status">正在准备场景</p><button class="notes-button" id="toggle-notes" type="button" aria-expanded="false" aria-controls="scene-notes">重建说明 <span aria-hidden="true">＋</span></button></section>
-      <section class="scene-notes" id="scene-notes" hidden><div><p class="eyebrow">RECONSTRUCTION NOTES</p><h2>从实拍到可浏览的场景</h2><p>以可见外观、空间层次及建筑与植被关系为重点。尺度、遮挡区域和布局依据画面估计；当前不包含物理仿真，也不声明像素级一致。</p></div><div><a href="./registration-evidence.jpg" target="_blank" rel="noopener">查看视频相机求解记录</a><p>357 / 358 帧注册为两个独立片段；当前 CG 尚未完成坐标对齐。</p></div><ul id="manifest-notes"><li>具体资产与预设视角由场景清单提供。</li></ul></section>
+      <section class="scene-notes" id="scene-notes" hidden><div><p class="eyebrow">RECONSTRUCTION NOTES</p><h2>从实拍到可浏览的场景</h2><p>以可见外观、空间层次及建筑与植被关系为重点。尺度、遮挡区域和布局依据画面估计；当前不包含物理仿真，也不声明像素级一致。</p></div><div><a href="./registration-evidence.jpg" target="_blank" rel="noopener">查看视频相机求解记录</a><p>已使用 ref260/ref270 作为局部相机锚点；断开注册片段之间的完整全局路径仍属于推断。</p></div><ul id="manifest-notes"><li>具体资产与预设视角由场景清单提供。</li></ul></section>
     </main>
     <footer class="page-footer"><span>REAL2SIM <span class="footer-divider"></span> ENVIRONMENT RECONSTRUCTION</span><span>实拍观察 / 场景重建 / 交互检查</span></footer>
   </div>

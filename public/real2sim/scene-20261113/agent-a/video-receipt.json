@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "agent_id": "agent-a",
+  "artifact": "agent-a-sim-same-duration-preview.mp4",
+  "source_video": "/root/real2sim/scene-20261113/inputs/6e5f00262487a188cd7673340a61fbcd581644d800090dc1050cd7e962275248/video.mp4",
+  "source_duration_seconds": 286.325,
+  "output_duration_seconds": 286.325,
+  "source_timebase_fps": 30,
+  "output_timebase_fps": 30,
+  "resolution": [
+    544,
+    960
+  ],
+  "sample_fps": 2.0,
+  "sample_count": 573,
+  "render_engine": "BLENDER_EEVEE",
+  "camera_path": "anchored_ref260_ref270_cycle",
+  "camera_registration_note": "The available registration contains disconnected COLMAP components; this preview is time-aligned and duration-matched, but its camera path is inferred and is not claimed as exact pose recovery.",
+  "scene_bbox_min": [
+    -0.9069367051124573,
+    -6.9418559074401855,
+    0.0
+  ],
+  "scene_bbox_max": [
+    15.558786392211914,
+    1.6831070184707642,
+    2.378624200820923
+  ],
+  "blend": "/root/real2sim/scene-20261113/agent-a/revision3/refine-appearance-v1/appearance-scene-refined.blend",
+  "cameras_json": "/root/real2sim/scene-20261113/agent-a/agents/registration/cameras_140_relaxed.json",
+  "render_backend": "Blender EEVEE + ffmpeg"
+}

@@ -3,7 +3,7 @@
   "scene_id": "scene-20261113",
   "agent_id": "agent-a",
   "title": "环绕实拍 · 独立CG资产场景",
-  "status": "appearance-prototype",
+  "status": "appearance-refined-v3",
   "source": {
     "duration": 286.325,
     "width": 544,
@@ -1310,5 +1310,63 @@
     "建筑、每株植物、地面与设施独立管理，可下载和重新装配。",
     "原视频544×960；未观察区域和微观材质包含工程补全。",
     "外观优先；碰撞与物理仿真尚未接入。"
+  ],
+  "simulation_video": {
+    "file": "agent-a-sim-same-duration-preview.mp4",
+    "duration_seconds": 286.325,
+    "fps": 30,
+    "resolution": [
+      544,
+      960
+    ],
+    "sample_fps": 2,
+    "interpolation": false,
+    "camera_path": "anchored_ref260_ref270_cycle",
+    "status": "server-rendered-refined-time-aligned",
+    "note": "Final-scene render anchored to solved ref260/ref270 poses and smoothly cycled between them. Disconnected COLMAP components mean this is an inferred time-aligned path, not exact pose recovery.",
+    "receipt": "video-receipt.json",
+    "artifact_sha256": "2274408a8a86a9308e76a9da4105513f04689fd9fa3ded3eec43882187d1c3a8"
+  },
+  "final_scene": {
+    "blend": "server:revision2/integration/final-scene/appearance-scene.blend",
+    "glb": "server:revision2/integration/final-scene/appearance-scene.glb",
+    "review_views": [
+      "renders/agent-a-final-ref260.png",
+      "renders/agent-a-final-ref270.png"
+    ]
+  },
+  "scene_blend": "scene-blend.zip",
+  "refined_scene": {
+    "version": "v3",
+    "glb": "scene.glb",
+    "blend_package": "scene-blend.zip",
+    "glb_sha256": "132300d1fb5eae3f4aaf95fa85b7ff15af001f73aab0e04caac72fa256982787",
+    "qa_views": [
+      "renders/refined-ref260.png",
+      "renders/refined-ref270.png"
+    ],
+    "receipt": "refine/refinement-receipt.json"
+  },
+  "refined_asset_sources": [
+    {
+      "asset_id": "plant.forecourt_tree.canopy_refinement.v2",
+      "file": "refine/tree-canopy-refinement.blend",
+      "role": "secondary canopy layers",
+      "editable": true
+    },
+    {
+      "asset_id": "ground.grass_tuft.instance.v2",
+      "file": "refine/ground-grass-tufts.blend",
+      "role": "deterministic lawn tuft instances",
+      "seed": 20261114,
+      "editable": true
+    },
+    {
+      "asset_id": "building.distant_academic.inferred.v1",
+      "file": "refine/distant-academic-wing-inferred.blend",
+      "role": "low-contrast inferred distant building",
+      "editable": true,
+      "inferred": true
+    }
   ]
 }
