@@ -51,7 +51,7 @@ function ComparisonScene(){
   syncAgent();
   return ()=>window.removeEventListener('hashchange',syncAgent);
  },[]);
- const source=`${import.meta.env.BASE_URL}real2sim/scene-20261113/${agent}/${agent==='agent-a'?'v2/index.html':'index.html'}`;
+ const source=`${import.meta.env.BASE_URL}real2sim/scene-20261113/${agent}/index.html`;
  return <section aria-label="新场景对比" style={{width:'100%',minWidth:0}}>
   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:'12px',flexWrap:'wrap',marginBottom:'16px'}}>
    <div className="comparison-switch" role="group" aria-label="选择重建结果">
