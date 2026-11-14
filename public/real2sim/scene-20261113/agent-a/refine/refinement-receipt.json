@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "agent_id": "agent-a",
+  "input": "/root/real2sim/scene-20261113/agent-a/revision2/integration/final-scene/appearance-scene.blend",
+  "output": "/root/real2sim/scene-20261113/agent-a/revision3/refine-appearance-v1",
+  "seed": 20261114,
+  "refinements": [
+    {
+      "material": "Actual source photo atlas | original lighting baked",
+      "type": "image_pbr_micro_breakup"
+    },
+    {
+      "material": "Observed_forecourt_RealAtlas",
+      "type": "image_pbr_micro_breakup"
+    },
+    {
+      "material": "Observed_lawn_RealAtlas",
+      "type": "image_pbr_micro_breakup"
+    },
+    {
+      "material": "Observed_paving_RealAtlas",
+      "type": "image_pbr_micro_breakup"
+    },
+    {
+      "material": "Observed_road_RealAtlas",
+      "type": "image_pbr_micro_breakup"
+    },
+    {
+      "material": "GlazingBay_01_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_02_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_03_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_04_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_05_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_06_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_07_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_08_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_09_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_10_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_11_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_12_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "GlazingBay_13_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "glazing"
+    },
+    {
+      "material": "HeaderBand_01_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_02_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_03_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_04_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_05_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_06_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_07_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_08_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_09_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_10_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_11_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_12_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "HeaderBand_13_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "headerband"
+    },
+    {
+      "material": "MVSColumn_01_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "MVSColumn_02_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "MVSColumn_03_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "MVSColumn_04_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "MVSColumn_05_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "MVSColumn_06_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_01_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_02_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_03_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_04_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_05_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_06_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_07_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "ObservedColumn_08_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "column"
+    },
+    {
+      "material": "RoofTransition_Inferred_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "rooftransition"
+    },
+    {
+      "material": "Soffit_Continuous_InferredSlab_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "soffit"
+    },
+    {
+      "material": "UpperScreen_Clean_PhotoSurface_measured_unseen_color",
+      "type": "inferred_part_pbr",
+      "token": "upperscreen"
+    },
+    {
+      "type": "secondary_canopy_layers",
+      "source_layers": [
+        "Foliage_upper",
+        "Foliage_middle",
+        "Foliage_lower"
+      ],
+      "instances": 6,
+      "seed": 20261114
+    },
+    {
+      "type": "grass_tuft_instances",
+      "instances": 28,
+      "seed": 20261114
+    }
+  ],
+  "inferred_assets": [
+    {
+      "asset_id": "building.distant_academic.inferred.v1",
+      "collection": "inferred-distant-academic-wing-v1",
+      "placement_note": "Placed behind the observed main hall using conservative low-contrast massing; not directly visible in all source views."
+    }
+  ],
+  "qa": [
+    "/root/real2sim/scene-20261113/agent-a/revision3/refine-appearance-v1/qa/ref260.png",
+    "/root/real2sim/scene-20261113/agent-a/revision3/refine-appearance-v1/qa/ref270.png"
+  ],
+  "exports": {
+    "appearance-scene-refined.blend": {
+      "bytes": 31558104,
+      "sha256": "012acafd740fea4169666798278b581b566783118dc634375f276569322e885e"
+    },
+    "appearance-scene-refined.glb": {
+      "bytes": 21904464,
+      "sha256": "132300d1fb5eae3f4aaf95fa85b7ff15af001f73aab0e04caac72fa256982787"
+    }
+  }
+}

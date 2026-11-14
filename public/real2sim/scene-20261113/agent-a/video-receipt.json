@@ -23,10 +23,10 @@
   ],
   "scene_bbox_max": [
     15.558786392211914,
-    0.07119601964950562,
+    1.6831070184707642,
     2.378624200820923
   ],
-  "blend": "/root/real2sim/scene-20261113/agent-a/revision2/integration/final-scene/appearance-scene.blend",
+  "blend": "/root/real2sim/scene-20261113/agent-a/revision3/refine-appearance-v1/appearance-scene-refined.blend",
   "cameras_json": "/root/real2sim/scene-20261113/agent-a/agents/registration/cameras_140_relaxed.json",
   "render_backend": "Blender EEVEE + ffmpeg"
 }
