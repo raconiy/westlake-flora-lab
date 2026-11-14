@@ -4,9 +4,11 @@
 The original refine export intentionally selected render-visible meshes. The
 source scene also contains authored vegetation and site assets whose Blender
 render flags are disabled, so that filter is unsafe for the web deliverable.
-This publisher keeps the complete pre-refine scene and appends only the refine
-layers that are independent additions: secondary canopy, grass tufts and the
-inferred distant wing. It preserves both GLB buffer payloads and remaps all
+This publisher keeps the complete pre-refine vegetation/facilities, replaces
+the old core ground and main colonnade roots with the refined PBR meshes, and
+adds the refined tree canopy, grass tufts and inferred distant wing. The
+large visual-only sky shell is excluded from scene roots so it cannot distort
+the viewer's framing. It preserves both GLB buffer payloads and remaps all
 standard glTF indices, including Draco buffer views.
 """
 from __future__ import annotations
@@ -143,14 +145,17 @@ def merge(base_path: Path, refine_path: Path, output_path: Path):
         if "children" in node:
             node["children"] = [child + base_nodes for child in node["children"]]
 
-    # Keep the full authored scene roots. Append only the independent refine
-    # layers so the old main building and site are never silently discarded.
+    # Replace only the old core roots. The old scene's authored vegetation,
+    # lamps, facilities and secondary academic wing remain in the scene.
+    replaced_roots = {"central_lawn", "stone_plaza", "asphalt_road", "paths", "ARCH_MainColonnade"}
+    base_roots = [
+        root for root in base.get("scenes", [{"nodes": []}])[0].get("nodes", [])
+        if str(base.get("nodes", [])[root].get("name", "")) not in replaced_roots
+    ]
     refine_roots = []
     for index, node in enumerate(refined.get("nodes", [])):
         name = str(node.get("name", ""))
-        if name.startswith("Foliage_") and "_secondary_" in name:
-            refine_roots.append(base_nodes + index)
-        elif name.startswith("GrassTuft_") or name.startswith("DistantWing_"):
+        if name != "ObservedSky_VisualOnly":
             refine_roots.append(base_nodes + index)
     if not refine_roots:
         raise ValueError("no refine layer roots found")
@@ -160,7 +165,7 @@ def merge(base_path: Path, refine_path: Path, output_path: Path):
     output["buffers"][0]["byteLength"] = binary_offset + len(refine_bin)
     output["scene"] = 0
     output["scenes"] = copy.deepcopy(base.get("scenes", [{"nodes": []}]))
-    output["scenes"][0]["nodes"] = list(output["scenes"][0].get("nodes", [])) + refine_roots
+    output["scenes"][0]["nodes"] = base_roots + refine_roots
 
     array_keys = (
         "accessors", "bufferViews", "materials", "meshes", "nodes", "images",
